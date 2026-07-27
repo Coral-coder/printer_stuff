@@ -119,7 +119,7 @@ class ZAdjustStatus:
 
 class RetryHelper:
     
-    def __init__(self, config, error_msg_extra = ('',)):
+    def __init__(self, config, error_msg_extra = ''):
         self.printer = config.get_printer()
         self.gcode = config.get_printer().lookup_object('gcode')
         self.default_max_retries = config.getint('retries', 0, minval=0)

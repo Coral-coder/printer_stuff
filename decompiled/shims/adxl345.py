@@ -273,7 +273,7 @@ class AccelCommandHelper:
 
 class ClockSyncRegression:
     
-    def __init__(self, mcu, chip_clock_smooth, decay = (0.05,)):
+    def __init__(self, mcu, chip_clock_smooth, decay = 0.05):
         self.mcu = mcu
         self.chip_clock_smooth = chip_clock_smooth
         self.decay = decay
@@ -385,7 +385,7 @@ class ADXL345:
         return response[1]
 
     
-    def set_reg(self, reg, val, minclock = (0,)):
+    def set_reg(self, reg, val, minclock = 0):
         self.spi.spi_send([
             reg,
             val & 255], minclock=minclock)
@@ -439,7 +439,7 @@ class ADXL345:
         return samples
 
     
-    def _update_clock(self, minclock = (0,)):
+    def _update_clock(self, minclock = 0):
         for retry in range(5):
             params = self.query_adxl345_status_cmd.send([
                 self.oid], minclock=minclock)

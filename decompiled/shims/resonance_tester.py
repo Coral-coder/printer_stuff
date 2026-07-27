@@ -19,7 +19,7 @@ from subprocess import call
 
 class TestAxis:
     
-    def __init__(self, axis, vib_dir = (None, None)):
+    def __init__(self, axis = None, vib_dir = None):
         if axis is None:
             self._name = 'axis=%.3f,%.3f' % (vib_dir[0], vib_dir[1])
         else:
@@ -178,7 +178,7 @@ class ResonanceTester:
         self.accel_chips = [ (chip_axis, self.printer.lookup_object(chip_name)) for chip_axis, chip_name in (self.accel_chip_names) ]
 
     
-    def _run_test(self, gcmd, axes, helper, raw_name_suffix, accel_chips, test_point = (None, None, None)):
+    def _run_test(self, gcmd, axes, helper, raw_name_suffix = None, accel_chips = None, test_point = None):
         toolhead = self.printer.lookup_object('toolhead')
         calibration_data = { axis: None for axis in (axes) }
         self.test.prepare_test(gcmd)
@@ -359,7 +359,7 @@ class ResonanceTester:
         return name_suffix.replace('-', '').replace('_', '').isalnum()
 
     
-    def get_filename(self, base, name_suffix, axis, point, chip_name = (None, None, None)):
+    def get_filename(self, base, name_suffix, axis = None, point = None, chip_name = None):
         name = base
         if axis:
             name += '_' + axis.get_name()
@@ -371,7 +371,7 @@ class ResonanceTester:
         return os.path.join('/tmp', name + '.csv')
 
     
-    def save_calibration_data(self, base_name, name_suffix, shaper_calibrate, axis, calibration_data, all_shapers, point = (None, None)):
+    def save_calibration_data(self, base_name, name_suffix, shaper_calibrate, axis, calibration_data, all_shapers = None, point = None):
         output = self.get_filename(base_name, name_suffix, axis, point)
         shaper_calibrate.save_calibration_data(output, calibration_data, all_shapers)
         return output

@@ -1,8 +1,36 @@
 diff --git a/ASTNode.h b/ASTNode.h
-index 98760db..67899e2 100644
+index 98760db..430cd22 100644
 --- a/ASTNode.h
 +++ b/ASTNode.h
-@@ -647,16 +647,26 @@ public:
+@@ -315,8 +315,9 @@ class ASTImport : public ASTNode {
+ public:
+     typedef std::list<PycRef<ASTStore>> list_t;
+ 
+-    ASTImport(PycRef<ASTNode> name, PycRef<ASTNode> fromlist)
+-        : ASTNode(NODE_IMPORT), m_name(std::move(name)), m_fromlist(std::move(fromlist)) { }
++    ASTImport(PycRef<ASTNode> name, PycRef<ASTNode> fromlist, int level = 0)
++        : ASTNode(NODE_IMPORT), m_name(std::move(name)),
++          m_fromlist(std::move(fromlist)), m_level(level) { }
+ 
+     PycRef<ASTNode> name() const { return m_name; }
+     list_t stores() const { return m_stores; }
+@@ -324,11 +325,15 @@ public:
+ 
+     PycRef<ASTNode> fromlist() const { return m_fromlist; }
+ 
++    /* Number of leading dots for a relative import (0 == absolute). */
++    int level() const { return m_level; }
++
+ private:
+     PycRef<ASTNode> m_name;
+     list_t m_stores;
+ 
+     PycRef<ASTNode> m_fromlist;
++    int m_level;
+ };
+ 
+ 
+@@ -647,16 +652,26 @@ public:
      ASTComprehension(PycRef<ASTNode> result)
          : ASTNode(NODE_COMPREHENSION), m_result(std::move(result)) { }
  
@@ -30,7 +58,7 @@ index 98760db..67899e2 100644
  };
  
 diff --git a/ASTree.cpp b/ASTree.cpp
-index f837152..7fae658 100644
+index f837152..2d68794 100644
 --- a/ASTree.cpp
 +++ b/ASTree.cpp
 @@ -73,6 +73,35 @@ static void CheckIfExpr(FastStack& stack, PycRef<ASTBlock> curblock)
@@ -84,7 +112,34 @@ index f837152..7fae658 100644
                  } else {
                      PycRef<ASTBlock> top = blocks.top();
                      end = top->end(); // block end position from SETUP_LOOP
-@@ -1120,6 +1155,48 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1095,9 +1130,23 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+             } else {
+                 PycRef<ASTNode> fromlist = stack.top();
+                 stack.pop();
+-                if (mod->verCompare(2, 5) >= 0)
+-                    stack.pop();    // Level -- we don't care
+-                stack.push(new ASTImport(new ASTName(code->getName(operand)), fromlist));
++                int importLevel = 0;
++                if (mod->verCompare(2, 5) >= 0) {
++                    /* The level (number of leading dots for a relative import)
++                     * is pushed just below the fromlist. Capture it so the
++                     * printer can emit `from .mod import ...` rather than
++                     * silently turning a relative import into an absolute one. */
++                    PycRef<ASTNode> levelNode = stack.top();
++                    stack.pop();
++                    if (levelNode.type() == ASTNode::NODE_OBJECT) {
++                        PycRef<PycObject> lv = levelNode.cast<ASTObject>()->object();
++                        if (lv->type() == PycObject::TYPE_INT ||
++                                lv->type() == PycObject::TYPE_LONG)
++                            importLevel = lv.cast<PycInt>()->value();
++                    }
++                }
++                stack.push(new ASTImport(new ASTName(code->getName(operand)),
++                                         fromlist, importLevel));
+             }
+             break;
+         case Pyc::IMPORT_FROM_A:
+@@ -1120,6 +1169,48 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  stack.push(new ASTCompare(left, right, operand ? ASTCompare::CMP_IS_NOT : ASTCompare::CMP_IS));
              }
              break;
@@ -133,7 +188,7 @@ index f837152..7fae658 100644
          case Pyc::JUMP_IF_FALSE_A:
          case Pyc::JUMP_IF_TRUE_A:
          case Pyc::JUMP_IF_FALSE_OR_POP_A:
-@@ -1507,6 +1584,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1507,6 +1598,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  }
              }
              break;
@@ -224,7 +279,7 @@ index f837152..7fae658 100644
          case Pyc::SET_UPDATE_A:
              {
                  PycRef<ASTNode> rhs = stack.top();
-@@ -1585,7 +1746,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1585,7 +1760,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              stack.push(new ASTLoadBuildClass(new PycObject()));
              break;
          case Pyc::LOAD_CLOSURE_A:
@@ -238,7 +293,7 @@ index f837152..7fae658 100644
              break;
          case Pyc::LOAD_CONST_A:
              {
-@@ -1662,15 +1828,36 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1662,15 +1842,57 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  }
  
                  ASTFunction::defarg_t defArgs, kwDefArgs;
@@ -267,8 +322,29 @@ index f837152..7fae658 100644
 +                        stack.pop();
 +                    }
 +                    if (operand & 0x01) {        // positional defaults tuple
-+                        defArgs.push_front(stack.top());
++                        /* 3.6+ pushes ALL positional defaults as ONE tuple
++                         * (const tuple, or BUILD_TUPLE for non-const values).
++                         * Unpack it into individual defaults so each maps to
++                         * one parameter -- otherwise a lone default `x=v` was
++                         * rendered as `x=(v,)`, and multiple defaults collapsed
++                         * onto the last parameter. */
++                        PycRef<ASTNode> defs = stack.top();
 +                        stack.pop();
++                        if (defs.type() == ASTNode::NODE_OBJECT) {
++                            PycRef<PycObject> obj = defs.cast<ASTObject>()->object();
++                            if (obj->type() == PycObject::TYPE_TUPLE ||
++                                    obj->type() == PycObject::TYPE_SMALL_TUPLE) {
++                                for (const auto& it : obj.cast<PycTuple>()->values())
++                                    defArgs.push_back(new ASTObject(it));
++                            } else {
++                                defArgs.push_back(defs);
++                            }
++                        } else if (defs.type() == ASTNode::NODE_TUPLE) {
++                            for (const auto& it : defs.cast<ASTTuple>()->values())
++                                defArgs.push_back(it);
++                        } else {
++                            defArgs.push_back(defs);
++                        }
 +                    }
 +                } else {
 +                    const int defCount = operand & 0xFF;
@@ -284,7 +360,7 @@ index f837152..7fae658 100644
                  }
                  stack.push(new ASTFunction(fun_code, defArgs, kwDefArgs));
              }
-@@ -1686,7 +1873,38 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1686,7 +1908,38 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  }
  
                  if (curblock->blktype() == ASTBlock::BLK_WITH) {
@@ -324,7 +400,7 @@ index f837152..7fae658 100644
                      break;
                  }
  
-@@ -1819,6 +2037,14 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1819,6 +2072,14 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
          case Pyc::POP_TOP:
              {
                  PycRef<ASTNode> value = stack.top();
@@ -339,7 +415,7 @@ index f837152..7fae658 100644
                  stack.pop();
  
                  if (!curblock->inited()) {
-@@ -1940,6 +2166,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1940,6 +2201,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              {
                  PycRef<ASTNode> value = stack.top();
                  stack.pop();
@@ -356,7 +432,7 @@ index f837152..7fae658 100644
                  curblock->append(new ASTReturn(value));
  
                  if ((curblock->blktype() == ASTBlock::BLK_IF
-@@ -1954,7 +2190,41 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1954,7 +2225,41 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                      curblock = blocks.top();
                      curblock->append(prev.cast<ASTNode>());
  
@@ -399,7 +475,7 @@ index f837152..7fae658 100644
                  }
              }
              break;
-@@ -2018,13 +2288,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2018,13 +2323,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              // Ignore
              break;
          case Pyc::SETUP_WITH_A:
@@ -417,7 +493,7 @@ index f837152..7fae658 100644
          case Pyc::BEFORE_WITH:
              /* Python 3.11: setup for with block; ignore. */
              break;
-@@ -2075,7 +2348,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2075,7 +2383,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              break;
          case Pyc::SETUP_FINALLY_A:
              {
@@ -434,7 +510,7 @@ index f837152..7fae658 100644
                  blocks.push(next.cast<ASTBlock>());
                  curblock = blocks.top();
  
-@@ -2578,7 +2859,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2578,7 +2894,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              {
                  PycRef<ASTNode> value = stack.top();
                  stack.pop();
@@ -451,7 +527,7 @@ index f837152..7fae658 100644
              }
              break;
          case Pyc::SETUP_ANNOTATIONS:
-@@ -3052,7 +3341,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3052,7 +3376,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
          {
              PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
  
@@ -466,7 +542,7 @@ index f837152..7fae658 100644
              print_src(comp->result(), mod, pyc_output);
  
              for (const auto& gen : comp->generators()) {
-@@ -3065,7 +3360,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3065,7 +3395,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                      print_src(gen->condition(), mod, pyc_output);
                  }
              }
@@ -475,7 +551,7 @@ index f837152..7fae658 100644
          }
          break;
      case ASTNode::NODE_MAP:
-@@ -3079,9 +3374,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3079,9 +3409,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                  else
                      pyc_output << ",\n";
                  start_line(cur_indent, pyc_output);
@@ -494,6 +570,24 @@ index f837152..7fae658 100644
                  first = false;
              }
              cur_indent--;
+@@ -3259,6 +3595,8 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+                 ASTImport::list_t stores = import->stores();
+ 
+                 pyc_output << "from ";
++                for (int i = 0; i < import->level(); ++i)
++                    pyc_output << ".";
+                 if (import->name().type() == ASTNode::NODE_IMPORT)
+                     print_src(import->name().cast<ASTImport>()->name(), mod, pyc_output);
+                 else
+@@ -3438,6 +3776,8 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+                     PycRef<PycObject> fromlist = import->fromlist().cast<ASTObject>()->object();
+                     if (fromlist != Pyc_None) {
+                         pyc_output << "from ";
++                        for (int i = 0; i < import->level(); ++i)
++                            pyc_output << ".";
+                         if (import->name().type() == ASTNode::NODE_IMPORT)
+                             print_src(import->name().cast<ASTImport>()->name(), mod, pyc_output);
+                         else
 diff --git a/bytecode.cpp b/bytecode.cpp
 index 6bee279..d8a9564 100644
 --- a/bytecode.cpp

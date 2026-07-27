@@ -155,7 +155,7 @@ class MS32008Error(Exception):
     pass
 
 
-def load_config_prefix(config, name, default = (None,)):
+def load_config_prefix(config, name, default = None):
     
     try:
         pass
@@ -450,7 +450,7 @@ class MS32008:
             r])
 
     
-    def init_chip(self, default_pps, default_step_fraction_div, default_current = (400, 10, 120)):
+    def init_chip(self, default_pps = 400, default_step_fraction_div = 10, default_current = 120):
         '''
         Configure the chip with defaults similar to Init_MS32008() from control.c
         This writes the reg0 defaults, clears events, config channels, sets PPS/stepnum/current
@@ -474,7 +474,7 @@ class MS32008:
         stepnum = int(pps / default_step_fraction_div)
 
     
-    def move_channel(self, ch, pps, steps, dir_cw = (True,)):
+    def move_channel(self, ch, pps, steps, dir_cw = True):
         '''
         High-level move: set pps, stepnum, dir, then issue conf_load to start.
         This mirrors how control.c sets registers then calls CHxConfLoad.

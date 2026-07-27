@@ -4,7 +4,7 @@
 import os
 import json
 import logging
-from base_info import base_dir
+from .base_info import base_dir
 
 class PrintStats:
     
@@ -55,7 +55,7 @@ class PrintStats:
         self.filename = filename
 
     
-    def note_start(self, info_path = ('',)):
+    def note_start(self, info_path = ''):
         curtime = self.reactor.monotonic()
         gc_status = self.gcode_move.get_status(curtime)
         ret = { }
@@ -119,7 +119,7 @@ class PrintStats:
         self._note_finish('cancelled')
 
     
-    def _note_finish(self, state, error_message = ('',)):
+    def _note_finish(self, state, error_message = ''):
         if self.print_start_time is None:
             return None
         self.state = state

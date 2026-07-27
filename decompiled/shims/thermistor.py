@@ -14,7 +14,7 @@ class Thermistor:
         self.c1 = self.c2 = self.c3 = 0.0
 
     
-    def setup_coefficients(self, t1, r1, t2, r2, t3, r3, name = ('',)):
+    def setup_coefficients(self, t1, r1, t2, r2, t3, r3, name = ''):
         inv_t1 = 1.0 / (t1 - KELVIN_TO_CELSIUS)
         inv_t2 = 1.0 / (t2 - KELVIN_TO_CELSIUS)
         inv_t3 = 1.0 / (t3 - KELVIN_TO_CELSIUS)

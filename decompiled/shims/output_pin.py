@@ -74,7 +74,7 @@ class PrinterOutputPin:
             'value': self.last_value }
 
     
-    def _set_pin(self, print_time, value, cycle_time, is_resend = (False,)):
+    def _set_pin(self, print_time, value, cycle_time, is_resend = False):
         if not value == self.last_value and cycle_time == self.last_cycle_time and is_resend:
             return None
         print_time = max(print_time, self.last_print_time + PIN_MIN_TIME)

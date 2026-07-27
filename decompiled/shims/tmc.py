@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/tmc.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: tmc.pyc (Python 3.9)
 
@@ -11,7 +20,7 @@ def ffs(mask):
 
 class FieldHelper:
     
-    def __init__(self, all_fields, signed_fields, field_formatters, registers = ([], { }, None)):
+    def __init__(self, all_fields, signed_fields = [], field_formatters = { }, registers = None):
         self.all_fields = all_fields
         self.signed_fields = { sf: 1 for sf in (signed_fields) }
         self.field_formatters = field_formatters
@@ -21,11 +30,11 @@ class FieldHelper:
         self.field_to_register = { f: r for r, fields in (self.all_fields.items()) for f in fields }
 
     
-    def lookup_register(self, field_name, default = (None,)):
+    def lookup_register(self, field_name, default = None):
         return self.field_to_register.get(field_name, default)
 
     
-    def get_field(self, field_name, reg_value, reg_name = (None, None)):
+    def get_field(self, field_name, reg_value = None, reg_name = None):
         if reg_name is None:
             reg_name = self.field_to_register[field_name]
         if reg_value is None:
@@ -37,7 +46,7 @@ class FieldHelper:
         return field_value
 
     
-    def set_field(self, field_name, field_value, reg_value, reg_name = (None, None)):
+    def set_field(self, field_name, field_value, reg_value = None, reg_name = None):
         if reg_name is None:
             reg_name = self.field_to_register[field_name]
         if reg_value is None:
@@ -140,7 +149,7 @@ class TMCErrorCheck:
                     return None
 
     
-    def _query_register(self, reg_info, try_clear = (False,)):
+    def _query_register(self, reg_info, try_clear = False):
         (last_value, reg_name, mask, err_mask, cs_actual_mask) = reg_info
         cleared_flags = 0
         count = 0
@@ -241,7 +250,7 @@ class TMCErrorCheck:
         return False
 
     
-    def get_status(self, eventtime = (None,)):
+    def get_status(self, eventtime = None):
         if self.check_timer is None:
             return {
                 'drv_status': None }
@@ -285,7 +294,7 @@ class TMCCommandHelper:
         gcode.register_mux_command('SET_TMC_CURRENT', 'STEPPER', self.name, self.cmd_SET_TMC_CURRENT, desc=self.cmd_SET_TMC_CURRENT_help)
 
     
-    def _init_registers(self, print_time = (None,)):
+    def _init_registers(self, print_time = None):
         name_parts = self.config.get_name().split()
         logging.info('hys: name_parts: %s' % name_parts)
         for reg_name, val in self.fields.registers.items():
@@ -295,7 +304,7 @@ class TMCCommandHelper:
             self.mcu_tmc.set_register(reg_name, val, print_time)
 
     
-    def TMC2262_PLL_init(self, val, print_time = (None,)):
+    def TMC2262_PLL_init(self, val, print_time = None):
         logging.info('hys: TMC2262_PLL_init start')
         logging.info('hys: set PLL val -- 0x%x' % val)
         commit_mask = self.mcu_tmc.fields.all_fields['PLL']['commit']
@@ -381,4 +390,5 @@ class TMCCommandHelper:
             (prev_cur, prev_hold_cur, req_hold_cur, max_cur) = ch.get_current()
         if prev_hold_cur is None:
             gcmd.respond_info('Run Current: %0.2fA' % (prev_cur,))
-      
+        else:
+         

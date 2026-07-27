@@ -111,7 +111,7 @@ class PrinterProbe:
         return self.mcu_probe
 
     
-    def get_lift_speed(self, gcmd = (None,)):
+    def get_lift_speed(self, gcmd = None):
         if gcmd is not None:
             return gcmd.get_float('LIFT_SPEED', self.lift_speed, above=0.0)
         return self.lift_speed
@@ -121,7 +121,7 @@ class PrinterProbe:
         return (self.x_offset, self.y_offset, self.z_offset)
 
     
-    def _probe(self, speed, max_z_dist = (None,)):
+    def _probe(self, speed, max_z_dist = None):
         toolhead = self.printer.lookup_object('toolhead')
         curtime = self.printer.get_reactor().monotonic()
         if 'z' not in toolhead.get_status(curtime)['homed_axes']:
@@ -431,7 +431,7 @@ class ProbeEndstopWrapper:
 
 class ProbePointsHelper:
     
-    def __init__(self, config, finalize_callback, default_points = (None,)):
+    def __init__(self, config, finalize_callback, default_points = None):
         self.printer = config.get_printer()
         self.finalize_callback = finalize_callback
         self.probe_points = default_points

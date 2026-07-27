@@ -68,13 +68,13 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/input_shaper.py` | high | 99.0% |  |
 | `shims/pause_resume.py` | high | 98.9% |  |
 | `shims/tmc_uart.py` | high | 98.7% |  |
+| `shims/buttons.py` | high | 98.6% |  |
 | `shims/display_status.py` | high | 98.6% |  |
 | `shims/manual_probe.py` | high | 98.6% |  |
 | `shims/tuning_tower.py` | high | 98.6% |  |
-| `shims/buttons.py` | high | 98.4% |  |
 | `shims/exclude_object.py` | high | 98.4% |  |
 | `shims/output_pin.py` | high | 98.4% |  |
-| `shims/adc_temperature.py` | high | 97.9% |  |
+| `shims/adc_temperature.py` | high | 98.0% |  |
 | `shims/z_thermal_adjust.py` | high | 97.9% |  |
 | `shims/z_tilt.py` | high | 97.9% |  |
 | `shims/thermistor.py` | high | 97.2% |  |
@@ -108,7 +108,7 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/prtouch.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/resonance_tester.py` | broken | — | compile-failed: PyCompileError: Sorry: IndentationError: unexpected un |
 | `shims/shaper_calibrate.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
-| `shims/tmc.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
+| `shims/tmc.py` | broken | — | compile-failed: PyCompileError: Sorry: IndentationError: expected an i |
 | `shims/tmc2130.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/tmc2208.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/tmc2262.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |

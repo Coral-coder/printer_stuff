@@ -146,7 +146,7 @@ class InputShaper:
         self._update_input_shaping(error=self.printer.config_error)
 
     
-    def _update_input_shaping(self, error = (None,)):
+    def _update_input_shaping(self, error = None):
         self.toolhead.flush_step_generation()
         new_delay = max([ s.get_step_generation_window() for s in (self.shapers) ])
         self.toolhead.note_step_generation_scan_time(new_delay, old_delay=self.old_delay)

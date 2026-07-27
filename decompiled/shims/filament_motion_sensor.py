@@ -27,7 +27,7 @@ class EncoderSensor:
         self.printer.register_event_handler('idle_timeout:idle', self._handle_not_printing)
 
     
-    def _update_filament_runout_pos(self, eventtime = (None,)):
+    def _update_filament_runout_pos(self, eventtime = None):
         if eventtime is None:
             eventtime = self.reactor.monotonic()
         self.filament_runout_pos = self._get_extruder_pos(eventtime) + self.detection_length
@@ -48,7 +48,7 @@ class EncoderSensor:
         self.reactor.update_timer(self._extruder_pos_update_timer, self.reactor.NEVER)
 
     
-    def _get_extruder_pos(self, eventtime = (None,)):
+    def _get_extruder_pos(self, eventtime = None):
         if eventtime is None:
             eventtime = self.reactor.monotonic()
         print_time = self.estimated_print_time(eventtime)

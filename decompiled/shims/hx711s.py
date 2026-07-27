@@ -101,7 +101,7 @@ class HX711S:
                 del self.all_vals[i][0]
 
     
-    def query_start(self, pi_count, cycle_count, del_dirty, show_msg, is_ck_con = (False, False, False)):
+    def query_start(self, pi_count, cycle_count, del_dirty = False, show_msg = False, is_ck_con = False):
         if self.is_shutdown and self.is_timeout:
             pass
         if cycle_count != 0:
@@ -153,7 +153,7 @@ class HX711S:
         pass
 
     
-    def read_base(self, cnt, max_hold, reset_zero = (True,)):
+    def read_base(self, cnt, max_hold, reset_zero = True):
         avgs = [
             0,
             0,

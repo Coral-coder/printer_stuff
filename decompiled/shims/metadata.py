@@ -34,7 +34,7 @@ def log_to_stderr(msg):
     sys.stderr.flush()
 
 
-def _regex_find_floats(pattern, data, strict = (False,)):
+def _regex_find_floats(pattern, data, strict = False):
     fptrn = '\\d+\\.\\d*' if strict else '\\d+\\.?\\d*'
     matches = re.findall(pattern, data)
     if matches:
@@ -163,21 +163,21 @@ class BaseSlicer(object):
         self.size = fsize
 
     
-    def _parse_min_float(self, pattern, data, strict = (False,)):
+    def _parse_min_float(self, pattern, data, strict = False):
         result = _regex_find_floats(pattern, data, strict)
         if result:
             return min(result)
         return None
 
     
-    def _parse_max_float(self, pattern, data, strict = (False,)):
+    def _parse_max_float(self, pattern, data, strict = False):
         result = _regex_find_floats(pattern, data, strict)
         if result:
             return max(result)
         return None
 
     
-    def _check_has_objects(self, data, pattern = (None,)):
+    def _check_has_objects(self, data, pattern = None):
         match = re.search('\\n((DEFINE_OBJECT)|(EXCLUDE_OBJECT_DEFINE)) NAME=', data)
         if match is not None:
             fname = os.path.basename(self.path)

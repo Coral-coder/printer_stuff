@@ -42,14 +42,14 @@ class pca9685_pwm:
         self._max_duration = max_duration
 
     
-    def setup_cycle_time(self, cycle_time, hardware_pwm = (False,)):
+    def setup_cycle_time(self, cycle_time, hardware_pwm = False):
         if hardware_pwm:
             raise pins.error('{"code":"key216", "msg": "pca9685 does not support hardware_pwm parameter" "values": []}')
         if cycle_time != self._cycle_time:
             logging.info('Ignoring pca9685 cycle time of %.6f (using %.6f)', cycle_time, self._cycle_time)
 
     
-    def setup_start_value(self, start_value, shutdown_value, is_static = (False,)):
+    def setup_start_value(self, start_value, shutdown_value, is_static = False):
         if is_static and start_value != shutdown_value:
             raise pins.error('{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}')
         if self._invert:
@@ -74,7 +74,7 @@ class pca9685_pwm:
         self._set_cmd = self._mcu.lookup_command('queue_pca9685_out oid=%c clock=%u value=%hu', cq=cmd_queue)
 
     
-    def set_pwm(self, print_time, value, cycle_time = (None,)):
+    def set_pwm(self, print_time, value, cycle_time = None):
         clock = self._mcu.print_time_to_clock(print_time)
         if self._invert:
             value = 1.0 - value
@@ -156,7 +156,7 @@ class servo_pwm:
             return None
 
     
-    def setup_cycle_time(self, cycle_time, hardware_pwm = (False,)):
+    def setup_cycle_time(self, cycle_time, hardware_pwm = False):
         self.mcu_pwm.setup_cycle_time(cycle_time, True)
 
 

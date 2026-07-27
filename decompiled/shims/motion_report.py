@@ -16,7 +16,7 @@ API_UPDATE_INTERVAL = 0.5
 
 class APIDumpHelper:
     
-    def __init__(self, printer, data_cb, startstop_cb, update_interval = (None, API_UPDATE_INTERVAL)):
+    def __init__(self, printer, data_cb, startstop_cb = None, update_interval = API_UPDATE_INTERVAL):
         self.printer = printer
         self.data_cb = data_cb
         if startstop_cb is None:

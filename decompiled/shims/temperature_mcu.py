@@ -126,7 +126,7 @@ class PrinterTemperatureMCU:
         self.base_temperature = self.calc_base(25.0, 0.2181818181818182)
 
     
-    def config_samd21(self, addr = (8413232,)):
+    def config_samd21(self, addr = 8413232):
         
         def get1v(val):
             if val & 128:
@@ -159,7 +159,7 @@ class PrinterTemperatureMCU:
         self.base_temperature = self.calc_base(25.0, 0.23030303030303031)
 
     
-    def config_stm32f4(self, addr1, addr2 = (536836652, 536836654)):
+    def config_stm32f4(self, addr1 = 536836652, addr2 = 536836654):
         cal_adc_30 = self.read16(addr1) / 4095.0
         cal_adc_110 = self.read16(addr2) / 4095.0
         self.slope = 8e+01 / (cal_adc_110 - cal_adc_30)

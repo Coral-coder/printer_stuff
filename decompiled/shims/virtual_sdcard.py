@@ -18,7 +18,7 @@ import time
 import re
 import threading
 import copy
-from base_info import base_dir, system_info_instance
+from .base_info import base_dir, system_info_instance
 VALID_GCODE_EXTS = [
     'gcode',
     'g',
@@ -62,7 +62,7 @@ MAINTENANCE_ITEM = {
         'cfs_desiccant': {
             'cur_value': 0 } } }
 
-def capture(end_print, frame = (False, 15)):
+def capture(end_print = False, frame = 15):
     import subprocess
     python_path = '/usr/share/klippy-env/bin/python'
     cmd_path = '/usr/share/klipper/klippy/extras/photograph.py'
@@ -219,7 +219,7 @@ class VirtualSD:
 
 
     
-    def calculate_filament_weight(self, filament_used, filament_diameter, filament_density = (1.75, 0.00125)):
+    def calculate_filament_weight(self, filament_used, filament_diameter = 1.75, filament_density = 0.00125):
         import math
         radius = filament_diameter / 2
         volume = math.pi * radius ** 2 * filament_used
@@ -298,7 +298,7 @@ class VirtualSD:
 
 
     
-    def update_maintenance_item(self, update_cut_used, update_filament_used, filament_used, variable_update, update_item_name, variable_update_obj, reset_value = (False, False, 0, False, '', '', 0)):
+    def update_maintenance_item(self, update_cut_used = False, update_filament_used = False, filament_used = 0, variable_update = False, update_item_name = '', variable_update_obj = '', reset_value = 0):
         interval = 60
         with self.lock:
             if not os.path.exists(self.maintenance_item_path):
@@ -345,7 +345,7 @@ class VirtualSD:
 
 
     
-    def check_item(self, result, interval, update_cut_used, update_filament_used, filament_used, max_value = (0, 0x38D7EA4C67FFF)):
+    def check_item(self, result, interval, update_cut_used, update_filament_used, filament_used = 0, max_value = 0x38D7EA4C67FFF):
         if update_cut_used:
             if result['calibrate']['cut_calibration']['cur_value'] < max_value:
                 result['calibrate']['cut_calibration']['cur_value'] += 1
@@ -528,7 +528,7 @@ class VirtualSD:
         return (True, 'sd_pos=%d' % (self.file_position,))
 
     
-    def get_file_list(self, check_subdirs = (False,)):
+    def get_file_list(self, check_subdirs = False):
         if check_subdirs:
             flist = []
             for root, dirs, files in os.walk(self.sdcard_dirname, followlinks=True):
@@ -722,12 +722,12 @@ class VirtualSD:
         self.gcode.respond_info('shwo gcode flush para: %s' % flush_para)
 
     
-    def load_gcode_metadata(self, file_path = ('',)):
+    def load_gcode_metadata(self, file_path = ''):
         self.gcode_metadata = self.get_print_file_metadata(file_path)
         logging.info('gcode_metadata: %s' % self.gcode_metadata)
 
     
-    def record_print_history(self, file_path = ('',)):
+    def record_print_history(self, file_path = ''):
         
         try:
             if os.path.exists(file_path):
@@ -773,7 +773,7 @@ class VirtualSD:
 
 
     
-    def update_print_history_info(self, only_update_status, state, error_msg = (False, '', '')):
+    def update_print_history_info(self, only_update_status = False, state = '', error_msg = ''):
         if self.print_id:
             ret = { }
             
@@ -868,7 +868,7 @@ class VirtualSD:
         self._load_file(gcmd, filename)
 
     
-    def _load_file(self, gcmd, filename, check_subdirs = (False,)):
+    def _load_file(self, gcmd, filename, check_subdirs = False):
         files = self.get_file_list(check_subdirs)
         flist = [ f[0] for f in (files) ]
         files_by_lower = { fname.lower(): fname for fname, fsize in (files) }
@@ -1185,7 +1185,7 @@ class VirtualSD:
 
 
     
-    def get_print_file_metadata(self, filename, filepath = ('',)):
+    def get_print_file_metadata(self, filename, filepath = ''):
         check_output = check_output
         import subprocess
         if not filepath:
@@ -1211,7 +1211,7 @@ class VirtualSD:
 
 
     
-    def get_file_layer_count(self, filename, metadata_info = (None,)):
+    def get_file_layer_count(self, filename, metadata_info = None):
         filename = filename.split('/')[-1]
         import math
         layer_count = 0

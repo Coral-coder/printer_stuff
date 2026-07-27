@@ -77,7 +77,7 @@ class ForceMove:
             toolhead.dwell(STALL_TIME)
 
     
-    def manual_move(self, stepper, dist, speed, accel = (0.0,)):
+    def manual_move(self, stepper, dist, speed, accel = 0.0):
         toolhead = self.printer.lookup_object('toolhead')
         toolhead.flush_step_generation()
         prev_sk = stepper.set_stepper_kinematics(self.stepper_kinematics)

@@ -166,7 +166,7 @@ class GCodeMove:
             self.base_position[axis] = self.homing_position[axis]
 
     
-    def set_move_transform(self, transform, force = (False,)):
+    def set_move_transform(self, transform, force = False):
         if not self.move_transform is not None and force:
             raise self.printer.config_error('G-Code move transform already specified')
         old_transform = self.move_transform
@@ -192,7 +192,7 @@ class GCodeMove:
         return self.speed_factor * 6e+01
 
     
-    def get_status(self, eventtime = (None,)):
+    def get_status(self, eventtime = None):
         move_position = self._get_gcode_position()
         return {
             'speed_factor': self._get_gcode_speed_override(),
@@ -503,4 +503,4 @@ class GCodeMove:
             self.move_with_transform(self.last_position, speed)
 
     
-    def recordPrintFileName(self, path, file_name
+    def recordPrintFileName(self, path, file_name, fan_

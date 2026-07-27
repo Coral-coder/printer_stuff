@@ -159,7 +159,7 @@ class ExcludeObject:
         return self.initial_extrusion_moves == 0
 
     
-    def get_status(self, eventtime = (None,)):
+    def get_status(self, eventtime = None):
         status = {
             'objects': self.objects,
             'excluded_objects': self.excluded_objects,

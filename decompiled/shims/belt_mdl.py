@@ -2,7 +2,7 @@
 # File: belt_mdl.pyc (Python 3.9)
 
 import numpy as np
-from box_wrapper import BoxAction
+from .box_wrapper import BoxAction
 
 class COM:
     

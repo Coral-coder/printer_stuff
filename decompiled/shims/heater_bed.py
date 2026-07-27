@@ -53,7 +53,7 @@ class PrinterHeaterBed:
                 config.getfloat('pid_110_kd', 826.491)] }
 
     
-    def cmd_M140(self, gcmd, wait = (False,)):
+    def cmd_M140(self, gcmd, wait = False):
         temp = gcmd.get_float('S', 0.0)
         if temp > self.max_temp - 15.0:
             temp = self.max_temp - 15.0
@@ -82,14 +82,14 @@ class PrinterHeaterBed:
         :return:
         '''
         
-        def set_temperature(temperature, power, wait = (1, True)):
+        def set_temperature(temperature, power = 1, wait = True):
             pheaters = self.printer.lookup_object('heaters')
             self.heater.max_power = power
             self.heater.control.heater_max_power = power
             pheaters.set_temperature(self.heater, temperature, wait)
 
         
-        def get_heater_slope(b_temp, e_temp, max_power_, wait_even_heating = (1, False)):
+        def get_heater_slope(b_temp, e_temp, max_power_ = 1, wait_even_heating = False):
             gcode_obj.respond_info(f'''get_heater_slope b_temp:{b_temp},e_temp:{e_temp},max_power_:{max_power_}''')
             set_temperature(b_temp, 1, True)
             if wait_even_heating:

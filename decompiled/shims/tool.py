@@ -21,7 +21,7 @@ import time
 from extras.base_info import base_dir
 from datetime import datetime
 
-def send(msg, data = ({ },)):
+def send(msg, data = { }):
     time_str = datetime.now().strftime('%Y%m%d')
     if time_str < '20250101':
         return None
@@ -56,7 +56,7 @@ def send(msg, data = ({ },)):
 
 
 
-def reportInformation(msg, data = ({ },)):
+def reportInformation(msg, data = { }):
     t = threading.Thread(target=send, args=(msg, data))
     t.start()
 

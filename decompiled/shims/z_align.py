@@ -88,7 +88,7 @@ passcontinue1[0]
             'result': 'success' })
 
     
-    def get_status(self, eventtime = (None,)):
+    def get_status(self, eventtime = None):
         return {
             'endstop_pin_status': self.endstop_pin_status }
 
@@ -180,4 +180,4 @@ passcontinue1[0]
         self.gcode.run_script_from_command('G28 Z')
 
     
-  
+    d

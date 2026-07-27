@@ -26,7 +26,7 @@ def multi_complete(printer, completions):
     cp = reactor.register_callback((lambda e: [ c.wait() for c in (completions) ]
 ))
     for c in completions:
-        reactor.register_callback((lambda e, c = (c,): if c.wait():
+        reactor.register_callback((lambda e, c = c: if c.wait():
 cp.complete(1)0))
     return cp
 
@@ -50,7 +50,7 @@ class StepperPosition:
 
 class HomingMove:
     
-    def __init__(self, printer, endstops, toolhead = (None,)):
+    def __init__(self, printer, endstops, toolhead = None):
         self.printer = printer
         self.endstops = endstops
         if toolhead is None:
@@ -96,7 +96,7 @@ class HomingMove:
         toolhead.can_pause = True
 
     
-    def homing_move(self, movepos, speed, probe_pos, triggered, check_triggered = (False, True, True)):
+    def homing_move(self, movepos, speed, probe_pos = False, triggered = True, check_triggered = True):
         self.printer.send_event('homing:homing_move_begin', self)
         self.toolhead.flush_step_generation()
         kin = self.toolhead.get_kinematics()
@@ -495,7 +495,7 @@ class PrinterHoming:
 
 
     
-    def set_stall_mode(self, gcode, check_protection = (True,)):
+    def set_stall_mode(self, gcode, check_protection = True):
         if self.config.has_section('motor_control') and self.config.getsection('motor_control').getint('switch') == 1:
             self.printer.lookup_object('motor_control').is_homing = False
             raise 
@@ -590,7 +590,7 @@ class PrinterHoming:
                 self.move_z(speed=20, height=-9)
 
     
-    def run_gcmd(self, gcmd, wait = (True,)):
+    def run_gcmd(self, gcmd, wait = True):
         toolhead = self.printer.lookup_object('toolhead')
         gcode = self.printer.lookup_object('gcode')
         logging.info('run_gcmd:%s' % gcmd)
@@ -599,7 +599,7 @@ class PrinterHoming:
             toolhead.wait_moves()
 
     
-    def move_to_center(self, speed, wait = (True,)):
+    def move_to_center(self, speed, wait = True):
         toolhead = self.printer.lookup_object('toolhead')
         now_pos = pos = toolhead.get_position()
         min_x = self.config.getsection('stepper_x').getfloat('position_min')
@@ -614,7 +614,7 @@ class PrinterHoming:
         self.run_gcmd(gcmd, wait=True)
 
     
-    def move_z(self, speed, wait, height = (50, True, 5)):
+    def move_z(self, speed = 50, wait = True, height = 5):
         toolhead = self.printer.lookup_object('toolhead')
         now_pos = toolhead.get_position()
         toolhead.set_position(now_pos, homing_axes=(2,))

@@ -22,7 +22,7 @@ import subprocess
 import shlex
 from multiprocessing import shared_memory
 shaper_defs = importlib.import_module('.shaper_defs', 'extras')
-from base_info import base_dir
+from .base_info import base_dir
 MIN_FREQ = 5.0
 MAX_FREQ = 2e+02
 WINDOW_T_SEC = 0.5
@@ -104,7 +104,7 @@ class CalibrationData:
             psd[self.freq_bins < MIN_FREQ] = 0.0
 
     
-    def get_psd(self, axis = ('all',)):
+    def get_psd(self, axis = 'all'):
         return self._psd_map[axis]
 
 
@@ -344,7 +344,7 @@ class ShaperCalibrate:
         return (remaining_vibrations / all_vibrations, vals)
 
     
-    def _get_shaper_smoothing(self, shaper, accel, scv = (5000, 5.0)):
+    def _get_shaper_smoothing(self, shaper, accel = 5000, scv = 5.0):
         half_accel = accel * 0.5
         (A, T) = shaper
         inv_D = 1.0 / sum(A)
@@ -421,7 +421,7 @@ class ShaperCalibrate:
         return max_accel
 
     
-    def find_best_shaper(self, calibration_data, max_smoothing, logger = (None,)):
+    def find_best_shaper(self, calibration_data, max_smoothing, logger = None):
         best_shaper = None
         all_shapers = []
         for shaper_cfg in shaper_defs.INPUT_SHAPERS:
@@ -460,7 +460,7 @@ class ShaperCalibrate:
             'SHAPER_TYPE_' + axis: shaper_name }))
 
     
-    def save_calibration_data(self, output, calibration_data, shapers = (None,)):
+    def save_calibration_data(self, output, calibration_data, shapers = None):
         
         try:
             with open(output, 'w') as csvfile:

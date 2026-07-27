@@ -568,7 +568,7 @@ AD8497 = [
     (1360, 6.671),
     (1380, 6.754)]
 
-def calc_pt100(base = (1e+02,)):
+def calc_pt100(base = 1e+02):
     (A, B) = (0.0039083, -5.775e-07)
     return [ (float(t), base * (1.0 + A * t + B * t * t)) for t in (range(0, 500, 10)) ]
 
@@ -591,11 +591,11 @@ def load_config(config):
     pheaters = config.get_printer().load_object(config, 'heaters')
     for sensor_type, params in DefaultVoltageSensors:
         
-        func = lambda config, params = (params,): PrinterADCtoTemperature(config, LinearVoltage(config, params))
+        func = lambda config, params = params: PrinterADCtoTemperature(config, LinearVoltage(config, params))
         pheaters.add_sensor_factory(sensor_type, func)
     for sensor_type, params in DefaultResistanceSensors:
         
-        func = lambda config, params = (params,): PrinterADCtoTemperature(config, LinearResistance(config, params))
+        func = lambda config, params = params: PrinterADCtoTemperature(config, LinearResistance(config, params))
         pheaters.add_sensor_factory(sensor_type, func)
 
 

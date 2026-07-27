@@ -434,7 +434,7 @@ class PrinterHeaters:
         self.sensor_factories[sensor_type] = sensor_factory
 
     
-    def setup_heater(self, config, gcode_id = (None,)):
+    def setup_heater(self, config, gcode_id = None):
         heater_name = config.get_name().split()[-1]
         if heater_name in self.heaters:
             raise config.error('Heater %s already registered' % (heater_name,))
@@ -466,7 +466,7 @@ class PrinterHeaters:
         return self.sensor_factories[sensor_type](config)
 
     
-    def register_sensor(self, config, psensor, gcode_id = (None,)):
+    def register_sensor(self, config, psensor, gcode_id = None):
         self.available_sensors.append(config.get_name())
         if gcode_id is None:
             gcode_id = config.get('gcode_id', None)
@@ -485,7 +485,7 @@ class PrinterHeaters:
             'bed_temperature_wait': self.bed_temperature_wait }
 
     
-    def turn_off_all_heaters(self, print_time = (0.0,)):
+    def turn_off_all_heaters(self, print_time = 0.0):
         for heater in self.heaters.values():
             heater.set_temp(0.0)
 
@@ -548,7 +548,7 @@ class PrinterHeaters:
             self.extruder_temperature_wait = False
 
     
-    def set_temperature(self, heater, temp, wait = (False,)):
+    def set_temperature(self, heater, temp, wait = False):
         toolhead = self.printer.lookup_object('toolhead')
         toolhead.register_lookahead_callback((lambda pt: pass))
         if self.config.has_section('gcode_macro product_param'):

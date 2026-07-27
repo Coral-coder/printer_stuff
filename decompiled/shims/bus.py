@@ -30,7 +30,7 @@ def resolve_bus_name(mcu, param, bus):
 
 class MCU_SPI:
     
-    def __init__(self, mcu, bus, pin, mode, speed, sw_pins, cs_active_high = (None, False)):
+    def __init__(self, mcu, bus, pin, mode, speed, sw_pins = None, cs_active_high = False):
         self.mcu = mcu
         self.bus = bus
         self.oid = mcu.create_oid()
@@ -74,7 +74,7 @@ class MCU_SPI:
         self.spi_transfer_cmd = self.mcu.lookup_query_command('spi_transfer oid=%c data=%*s', 'spi_transfer_response oid=%c response=%*s', oid=self.oid, cq=self.cmd_queue)
 
     
-    def spi_send(self, data, minclock, reqclock = (0, 0)):
+    def spi_send(self, data, minclock = 0, reqclock = 0):
         if self.spi_send_cmd is None:
             data_msg = ''.join([ '%02x' % (x,) for x in (data) ])
             self.mcu.add_config_cmd('spi_send oid=%d data=%s' % (self.oid, data_msg), is_init=True)
@@ -84,13 +84,13 @@ class MCU_SPI:
             data], minclock=minclock, reqclock=reqclock)
 
     
-    def spi_transfer(self, data, minclock, reqclock = (0, 0)):
+    def spi_transfer(self, data, minclock = 0, reqclock = 0):
         return self.spi_transfer_cmd.send([
             self.oid,
             data], minclock=minclock, reqclock=reqclock)
 
     
-    def spi_transfer_with_preface(self, preface_data, data, minclock, reqclock = (0, 0)):
+    def spi_transfer_with_preface(self, preface_data, data, minclock = 0, reqclock = 0):
         return self.spi_transfer_cmd.send_with_preface(self.spi_send_cmd, [
             self.oid,
             preface_data], [
@@ -99,7 +99,7 @@ class MCU_SPI:
 
 
 
-def MCU_SPI_from_config(config, mode, pin_option, default_speed, share_type, cs_active_high = ('cs_pin', 100000, None, False)):
+def MCU_SPI_from_config(config, mode, pin_option = 'cs_pin', default_speed = 100000, share_type = None, cs_active_high = False):
     ppins = config.get_printer().lookup_object('pins')
     cs_pin = config.get(pin_option)
     cs_pin_params = ppins.lookup_pin(cs_pin, share_type=share_type)
@@ -125,7 +125,7 @@ def MCU_SPI_from_config(config, mode, pin_option, default_speed, share_type, cs_
 
 class MCU_I2C:
     
-    def __init__(self, mcu, bus, addr, speed, sw_pins = (None,)):
+    def __init__(self, mcu, bus, addr, speed, sw_pins = None):
         self.mcu = mcu
         self.bus = bus
         self.i2c_address = addr
@@ -172,7 +172,7 @@ class MCU_I2C:
         self.i2c_read_cmd = self.mcu.lookup_query_command('i2c_read oid=%c reg=%*s read_len=%u', 'i2c_read_response oid=%c response=%*s', oid=self.oid, cq=self.cmd_queue)
 
     
-    def i2c_write(self, data, minclock, reqclock = (0, 0)):
+    def i2c_write(self, data, minclock = 0, reqclock = 0):
         if self.i2c_write_cmd is None:
             data_msg = ''.join([ '%02x' % (x,) for x in (data) ])
             self.mcu.add_config_cmd('i2c_write oid=%d data=%s' % (self.oid, data_msg), is_init=True)
@@ -182,13 +182,13 @@ class MCU_I2C:
             data], minclock=minclock, reqclock=reqclock)
 
     
-    def i2c_write_wait_ack(self, data, minclock, reqclock = (0, 0)):
+    def i2c_write_wait_ack(self, data, minclock = 0, reqclock = 0):
         self.i2c_write_cmd.send_wait_ack([
             self.oid,
             data], minclock=minclock, reqclock=reqclock)
 
     
-    def i2c_read(self, write, read_len, retry = (True,)):
+    def i2c_read(self, write, read_len, retry = True):
         return self.i2c_read_cmd.send([
             self.oid,
             write,
@@ -196,7 +196,7 @@ class MCU_I2C:
 
 
 
-def MCU_I2C_from_config(config, default_addr, default_speed = (None, 100000)):
+def MCU_I2C_from_config(config, default_addr = None, default_speed = 100000):
     printer = config.get_printer()
     i2c_mcu = mcu.get_printer_mcu(printer, config.get('i2c_mcu', 'mcu'))
     speed = config.getint('i2c_speed', default_speed, minval=100000)
@@ -218,7 +218,7 @@ def MCU_I2C_from_config(config, default_addr, default_speed = (None, 100000)):
 
 class MCU_bus_digital_out:
     
-    def __init__(self, mcu, pin_desc, cmd_queue, value = (None, 0)):
+    def __init__(self, mcu, pin_desc, cmd_queue = None, value = 0):
         self.mcu = mcu
         self.oid = mcu.create_oid()
         ppins = mcu.get_printer().lookup_object('pins')
@@ -249,7 +249,7 @@ class MCU_bus_digital_out:
         self.update_pin_cmd = self.mcu.lookup_command('update_digital_out oid=%c value=%c', cq=self.cmd_queue)
 
     
-    def update_digital_out(self, value, minclock, reqclock = (0, 0)):
+    def update_digital_out(self, value, minclock = 0, reqclock = 0):
         if self.update_pin_cmd is None:
             self.mcu.add_config_cmd('update_digital_out oid=%c value=%c' % (self.oid, not (not value)))
             return None

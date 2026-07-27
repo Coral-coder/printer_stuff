@@ -185,7 +185,7 @@ class PRTouchEndstopWrapper:
         pass
 
     
-    def home_start(self, print_time, sample_time, sample_count, rest_time, triggered = (True,)):
+    def home_start(self, print_time, sample_time, sample_count, rest_time, triggered = True):
         return True
 
     
@@ -203,7 +203,7 @@ class PRTouchEndstopWrapper:
         return not (self.obj.dirzctl.is_timeout)
 
     
-    def _ck_g28ed(self, is_precision = (True,)):
+    def _ck_g28ed(self, is_precision = True):
         for i in range(3):
             if self.obj.kin.limits[i][0] > self.obj.kin.limits[i][1]:
                 self.obj.gcode.run_script_from_command('G28')
@@ -211,7 +211,7 @@ class PRTouchEndstopWrapper:
             return None
 
     
-    def _move(self, pos, speed, wait = (True,)):
+    def _move(self, pos, speed, wait = True):
         if not self.obj.hx711s.is_shutdown and self.obj.hx711s.is_timeout and self.obj.dirzctl.is_shutdown and self.obj.dirzctl.is_timeout:
             self.obj.gcode.run_script_from_command('G1 F%d X%.3f Y%.3f Z%.3f' % (speed * 60, pos[0], pos[1], pos[2]) if len(pos) >= 3 else 'G1 F%d X%.3f Y%.3f' % (speed * 60, pos[0], pos[1]))
             if wait:
@@ -292,7 +292,7 @@ class PRTouchEndstopWrapper:
             return True
 
     
-    def _set_hot_temps(self, temp, fan_spd, wait, err = (False, 5)):
+    def _set_hot_temps(self, temp, fan_spd, wait = False, err = 5):
         self.obj.pheaters.set_temperature(self.obj.heater_hot, temp, False)
         self.obj.gcode.run_script_from_command('M106 P0 S%d' % fan_spd)
         self.obj.gcode.run_script_from_command('M106 P2 S%d' % fan_spd)
@@ -301,7 +301,7 @@ class PRTouchEndstopWrapper:
             continue
 
     
-    def _set_bed_temps(self, temp, wait, err = (False, 5)):
+    def _set_bed_temps(self, temp, wait = False, err = 5):
         self.obj.pheaters.set_temperature(self.obj.heater_bed, temp, False)
         if wait and self.ck_sys_sta() and abs(self.obj.heater_bed.target_temp - self.obj.heater_bed.smoothed_temp) > err and self.obj.heater_bed.target_temp > 0:
             self.obj.hx711s.delay_s(0.1)
@@ -314,7 +314,7 @@ class PRTouchEndstopWrapper:
             self.obj.gcode.respond_info(msg)
 
     
-    def pnt_array(self, title, ary, lent = (32,)):
+    def pnt_array(self, title, ary, lent = 32):
         logging.info('[%s] %s', title, str(ary))
         if self.cfg.show_msg:
             st = title + ' ['
@@ -358,7 +358,7 @@ class PRTouchEndstopWrapper:
         ss.close()
 
     
-    def get_best_rdy_z(self, rdy_x, rdy_y, base_pos = (None,)):
+    def get_best_rdy_z(self, rdy_x, rdy_y, base_pos = None):
         if not base_pos:
             base_pos = self.val.rdy_pos
         p_left = [
@@ -610,7 +610,7 @@ class PRTouchEndstopWrapper:
         self.obj.bed_mesh.set_mesh(mesh)
 
     
-    def check_bed_mesh(self, auto_g29 = (True,)):
+    def check_bed_mesh(self, auto_g29 = True):
         (min_x, min_y) = self.obj.bed_mesh.bmc.mesh_min
         (max_x, max_y) = self.obj.bed_mesh.bmc.mesh_max
         self.val.rdy_pos = [
@@ -722,7 +722,7 @@ class PRTouchEndstopWrapper:
         return (up_min_cnt if up_min_cnt >= 0 else 0, up_all_cnt, True)
 
     
-    def probe_by_step(self, rdy_pos, speed_mm, min_dis_mm, min_hold, max_hold, up_after = (True,)):
+    def probe_by_step(self, rdy_pos, speed_mm, min_dis_mm, min_hold, max_hold, up_after = True):
         self.obj.hx711s.read_base(int(self.cfg.base_count / 2), max_hold)
         step_cnt = int(min_dis_mm / (self.obj.dirzctl.steppers[0].get_step_dist() * self.obj.dirzctl.step_base))
         step_us = int((min_dis_mm / speed_mm) * 1000 * 1000 / step_cnt)

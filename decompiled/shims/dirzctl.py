@@ -71,7 +71,7 @@ class DirZCtl:
         return (self.all_params, self.all_params[0]['tick'] if len(self.all_params) > 0 else 0)
 
     
-    def check_and_run(self, direct, step_us, step_cnt, wait_finish, is_ck_con = (True, False)):
+    def check_and_run(self, direct, step_us, step_cnt, wait_finish = True, is_ck_con = False):
         if self.is_shutdown and self.is_timeout:
             pass
         if step_cnt != 0:

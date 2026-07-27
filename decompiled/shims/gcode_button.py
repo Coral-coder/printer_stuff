@@ -43,7 +43,7 @@ class GCodeButton:
 
 
     
-    def get_status(self, eventtime = (None,)):
+    def get_status(self, eventtime = None):
         if self.last_state:
             return {
                 'state': 'PRESSED' }

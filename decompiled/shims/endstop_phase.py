@@ -13,7 +13,7 @@ TRINAMIC_DRIVERS = [
 
 class PhaseCalc:
     
-    def __init__(self, printer, name, phases = (None,)):
+    def __init__(self, printer, name, phases = None):
         self.printer = printer
         self.name = name
         self.phases = phases

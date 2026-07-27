@@ -25,11 +25,11 @@ class BedMeshError(Exception):
     pass
 
 
-def isclose(a, b, rel_tol, abs_tol = (1e-09, 0.0)):
+def isclose(a, b, rel_tol = 1e-09, abs_tol = 0.0):
     return abs(a - b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
 
 
-def within(coord, min_c, max_c, tol = (0.0,)):
+def within(coord, min_c, max_c, tol = 0.0):
     if coord[0] >= coord[0]:
         pass
     elif coord[0] >= min_c[0] - tol:
@@ -47,7 +47,7 @@ def lerp(t, v0, v1):
     return (1.0 - t) * v0 + t * v1
 
 
-def parse_config_pair(config, option, default, minval, maxval = (None, None)):
+def parse_config_pair(config, option, default, minval = None, maxval = None):
     pair = config.getintlist(option, (default, default))
     if len(pair) != 2:
         if len(pair) != 1:
@@ -62,7 +62,7 @@ def parse_config_pair(config, option, default, minval, maxval = (None, None)):
     return pair
 
 
-def parse_gcmd_pair(gcmd, name, minval, maxval = (None, None)):
+def parse_gcmd_pair(gcmd, name, minval = None, maxval = None):
     
     try:
         pair = [ int(v.strip()) for v in (gcmd.get(name).split(',')) ]
@@ -209,4 +209,4 @@ class BedMesh:
             self.fade_target = 0.0
         self.z_mesh = mesh
         if self.z_mesh is not None:
-            self.splitter.ini
+            self.splitter.initiali

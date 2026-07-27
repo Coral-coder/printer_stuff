@@ -62,7 +62,7 @@ class ManualStepper:
             0.0])
 
     
-    def do_move(self, movepos, speed, accel, sync = (True,)):
+    def do_move(self, movepos, speed, accel, sync = True):
         self.sync_print_time()
         cp = self.rail.get_commanded_position()
         dist = movepos - cp
@@ -125,7 +125,7 @@ class ManualStepper:
             0.0]
 
     
-    def set_position(self, newpos, homing_axes = ((),)):
+    def set_position(self, newpos, homing_axes = ()):
         self.do_set_position(newpos[0])
 
     

@@ -59,7 +59,7 @@ class PrinterNeoPixel:
             color_data[cdidx] = int(led_state[lidx][cidx] * 255.0 + 0.5)
 
     
-    def send_data(self, print_time = (None,)):
+    def send_data(self, print_time = None):
         old_data = self.old_color_data
         new_data = self.color_data
         if new_data == old_data:
@@ -107,7 +107,7 @@ i,
         self.printer.get_reactor().register_callback(reactor_bgfunc)
 
     
-    def get_status(self, eventtime = (None,)):
+    def get_status(self, eventtime = None):
         return self.led_helper.get_status(eventtime)
 
 

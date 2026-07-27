@@ -182,7 +182,7 @@ class MCU_TMC_uart_bitbang:
         return self._decode_read(reg, params['read'])
 
     
-    def reg_write(self, instance_id, addr, reg, val, print_time = (None,)):
+    def reg_write(self, instance_id, addr, reg, val, print_time = None):
         minclock = 0
         if print_time is not None:
             minclock = self.mcu.print_time_to_clock(print_time)
@@ -218,7 +218,7 @@ def lookup_tmc_uart_bitbang(config, max_addr):
 
 class MCU_TMC_uart:
     
-    def __init__(self, config, name_to_reg, fields, max_addr = (0,)):
+    def __init__(self, config, name_to_reg, fields, max_addr = 0):
         self.printer = config.get_printer()
         self.name = config.get_name().split()[-1]
         self.name_to_reg = name_to_reg
@@ -250,7 +250,7 @@ class MCU_TMC_uart:
         self._do_get_register(reg_name)
 
     
-    def set_register(self, reg_name, val, print_time = (None,)):
+    def set_register(self, reg_name, val, print_time = None):
         reg = self.name_to_reg[reg_name]
         if self.printer.get_start_args().get('debugoutput') is not None:
             return None

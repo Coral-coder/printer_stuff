@@ -18,7 +18,7 @@ import jinja2
 
 class GetStatusWrapper:
     
-    def __init__(self, printer, eventtime = (None,)):
+    def __init__(self, printer, eventtime = None):
         self.printer = printer
         self.eventtime = eventtime
         self.cache = { }
@@ -94,7 +94,7 @@ class TemplateWrapper:
 
 
     
-    def render(self, context = (None,)):
+    def render(self, context = None):
         if context is None:
             context = self.create_template_context()
         
@@ -118,7 +118,7 @@ class TemplateWrapper:
 
 
     
-    def run_gcode_from_command(self, context = (None,)):
+    def run_gcode_from_command(self, context = None):
         self.gcode.run_script_from_command(self.render(context))
 
 
@@ -130,7 +130,7 @@ class PrinterGCodeMacro:
         self.env = jinja2.Environment('{%', '%}', '{', '}')
 
     
-    def load_template(self, config, option, default = (None,)):
+    def load_template(self, config, option, default = None):
         name = '%s:%s' % (config.get_name(), option)
         if default is None:
             script = config.get(option)
@@ -139,7 +139,7 @@ class PrinterGCodeMacro:
         return TemplateWrapper(self.printer, self.env, name, script)
 
     
-    def _action_emergency_stop(self, msg = ('action_emergency_stop',)):
+    def _action_emergency_stop(self, msg = 'action_emergency_stop'):
         self.printer.invoke_shutdown('{"code":"key170", "msg": "Shutdown due to %s", "values": ["%s"]}' % (msg, msg))
         return ''
 
@@ -164,7 +164,7 @@ class PrinterGCodeMacro:
         return ''
 
     
-    def create_template_context(self, eventtime = (None,)):
+    def create_template_context(self, eventtime = None):
         return {
             'printer': GetStatusWrapper(self.printer, eventtime),
             'action_emergency_stop': self._action_emergency_stop,

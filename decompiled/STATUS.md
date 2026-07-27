@@ -1,9 +1,9 @@
 # Decompilation status
 
 - Modules: **105**
-- Clean (ast-valid, no known defects): **80**
+- Clean (ast-valid, no known defects): **79**
 - Ast-valid but flagged (`None(...)` dropped builtin -- see disasm): **3**
-- Partial (did not fully round-trip -- see disasm): **22**
+- Partial (did not fully round-trip -- see disasm): **23**
 
 | module | status | lines |
 |--------|--------|-------|
@@ -24,6 +24,7 @@
 | `ms3200x.pyc` | partial | 564 |
 | `probe.pyc` | partial | 537 |
 | `resonance_tester.pyc` | partial | 375 |
+| `tmc.pyc` | partial | 385 |
 | `tmc2208.pyc` | partial | 247 |
 | `tmc2262.pyc` | partial | 639 |
 | `tool.pyc` | partial | 78 |
@@ -105,7 +106,6 @@
 | `temperature_mcu.pyc` | clean | 224 |
 | `temperature_sensor.pyc` | clean | 49 |
 | `thermistor.pyc` | clean | 127 |
-| `tmc.pyc` | clean | 384 |
 | `tmc2209.pyc` | clean | 77 |
 | `tsl1401cl_filament_width_sensor.pyc` | clean | 124 |
 | `tuning_tower.pyc` | clean | 113 |

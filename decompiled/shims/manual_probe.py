@@ -178,7 +178,7 @@ class ManualProbeHelper:
 
 
     
-    def report_z_status(self, warn_no_change, prev_pos = (False, None)):
+    def report_z_status(self, warn_no_change = False, prev_pos = None):
         kin_pos = self.get_kinematics_pos()
         z_pos = kin_pos[2]
         if warn_no_change and z_pos == prev_pos:

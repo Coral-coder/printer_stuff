@@ -60,7 +60,7 @@ class MCU_buttons:
             new_count])
         self.ack_count += new_count
         for nb in new_buttons:
-            self.reactor.register_async_callback((lambda e, s, b = (self, nb): s.handle_button(e, b)))
+            self.reactor.register_async_callback((lambda e, s = self, b = nb: s.handle_button(e, b)))
 
     
     def handle_button(self, eventtime, button):
@@ -136,7 +136,7 @@ class MCU_ADC_buttons:
     
     def call_button(self, button, state):
         (minval, maxval, callback) = self.buttons[button]
-        self.reactor.register_async_callback((lambda e, cb, s = (callback, state): cb(e, s)))
+        self.reactor.register_async_callback((lambda e, cb = callback, s = state: cb(e, s)))
 
 
 
@@ -199,7 +199,7 @@ class PrinterButtons:
     
     def register_adc_button_push(self, pin, min_val, max_val, pullup, callback):
         
-        def helper(eventtime, state, callback = (callback,)):
+        def helper(eventtime, state, callback = callback):
             if state:
                 callback(eventtime)
 
@@ -238,7 +238,7 @@ class PrinterButtons:
     
     def register_button_push(self, pin, callback):
         
-        def helper(eventtime, state, callback = (callback,)):
+        def helper(eventtime, state, callback = callback):
             if state:
                 callback(eventtime)
 
