@@ -1,0 +1,2964 @@
+tmc2262.pyc (Python 3.9)
+[Code]
+    File Name: /extras/tmc2262.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 66
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'math'
+        'logging'
+        ''
+        'bus'
+        'tmc'
+        'tmc2130'
+        'Registers'
+        'ReadRegisters'
+        'Fields'
+        'SignedFields'
+        'FieldFormatters'
+        'MAX_CURRENT'
+        'TMC2262CurrentHelper'
+        'TMC2262PLLHelper'
+        'TMC2262'
+        'load_config_prefix'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'bus'
+            'tmc'
+            'tmc2130'
+        )
+        2
+        3
+        4
+        10
+        11
+        16
+        17
+        18
+        19
+        20
+        21
+        22
+        23
+        24
+        25
+        26
+        52
+        53
+        56
+        57
+        58
+        59
+        60
+        61
+        64
+        65
+        66
+        67
+        68
+        69
+        70
+        71
+        72
+        73
+        74
+        75
+        76
+        77
+        78
+        79
+        80
+        81
+        82
+        83
+        88
+        89
+        90
+        96
+        97
+        98
+        99
+        100
+        101
+        102
+        103
+        104
+        105
+        106
+        107
+        108
+        109
+        111
+        112
+        (
+            'GCONF'
+            'GSTAT'
+            'DIAG_CONF'
+            'DIAG_DAC_CONF'
+            'IOIN'
+            'DRV_CONF'
+            'PLL'
+            'IHOLD_IRUN'
+            'TPOWERDOWN'
+            'TSTEP'
+            'TPWMTHRS'
+            'TCOOLTHRS'
+            'THIGH'
+            'TSGP_LOW_VEL_THRS'
+            'T_RCOIL_MEAS'
+            'TUDCSTEP'
+            'UDC_CONF'
+            'STEPS_LOST'
+            'SW_MODE'
+            'SG_SEQ_STOP_STAT'
+            'ENCMODE'
+            'X_ENC'
+            'ENC_CONST'
+            'ENC_STATUS'
+            'ENC_LATCH'
+            'ENC_DEVIATION'
+            'CURRENT_PI_REG'
+            'ANGLE_PI_REG'
+            'CUR_ANGLE_LIMIT'
+            'ANGLE_LOWER_LIMIT'
+            'CUR_ANGLE_MEAS'
+            'PI_RESULTS'
+            'COIL_INDUCT'
+            'R_COIL'
+            'R_COIL_USER'
+            'SGP_CONF'
+            'SGP_IND_2_3'
+            'SGP_IND_0_1'
+            'INDUCTANCE_VOLTAGE'
+            'SGP_BEMF'
+            'COOLSTEPPLUS_CONF'
+            'COOLSTEPPLUS_PI_REG'
+            'COOLSTEPPLUS_PI_DOWN'
+            'COOLSTEPPLUS_RESERVE_CONF'
+            'COOLSTEPPLUS_LOAD_RESERVE'
+            'TSTEP_VELOCITY'
+            'ADC_VSUPPLY_TEMP'
+            'ADC_I'
+            'OTW_OV_VTH'
+            'MSLUT0'
+            'MSLUT1'
+            'MSLUT2'
+            'MSLUT3'
+            'MSLUT4'
+            'MSLUT5'
+            'MSLUT6'
+            'MSLUT7'
+            'MSLUTSEL'
+            'MSLUTSTART'
+            'MSCNT'
+            'MSCURACT'
+            'CHOPCONF'
+            'COOLCONF'
+            'DRV_STATUS'
+            'PWMCONF'
+        )
+        8
+        32
+        3840
+        512
+        0x80000000
+        (
+            'fast_standstill'
+            'en_pwm_mode'
+            'multistep_filt'
+            'shaft'
+            'small_hysteresis'
+            'stop_enable'
+            'direct_mode'
+            'length_steppulse'
+            'OV_nN'
+            'step_dir'
+        )
+        'GCONF'
+        (
+            'reset'
+            'drv_err'
+            'uv_cp'
+            'register_reset'
+            'vm_uvlo'
+            'vccio_uv'
+        )
+        'GSTAT'
+        128
+        256
+        1024
+        2048
+        4096
+        8192
+        16384
+        32768
+        65536
+        131072
+        262144
+        524288
+        1048576
+        2097152
+        4194304
+        8388608
+        16777216
+        33554432
+        268435456
+        536870912
+        1073741824
+        (
+            'do0_error'
+            'do0_otpw'
+            'do0_stall'
+            'do0_index'
+            'do0_step'
+            'do0_dir'
+            'do0_xcomp'
+            'do0_ov'
+            'do0_dcustep'
+            'do0_ev_stop_ref'
+            'do0_ev_stop_sg'
+            'do0_ev_pos_reached'
+            'do0_ev_n_deviation'
+            'do1_error'
+            'do1_otpw'
+            'do1_stall'
+            'do1_index'
+            'do1_step'
+            'do1_dir'
+            'do1_xcomp'
+            'do1_ov'
+            'do1_dcustep'
+            'do1_ev_stop_ref'
+            'do1_ev_stop_sg'
+            'do1_ev_pos_reached'
+            'do1_ev_n_deviation'
+            'do0_nOD_PP'
+            'do0_invPP'
+            'do1_nOD_PP'
+            'do1_invPP'
+        )
+        'DIAG_CONF'
+        496
+        2031616
+        (
+            'do0_scope_en'
+            'do0_scope_sel'
+            'do1_scope_en'
+            'do1_scope_sel'
+        )
+        'DIAG_DAC_CONF'
+        196608
+        (
+            'refl'
+            'refr'
+            'encb'
+            'enca'
+            'drv_enn'
+            'encn'
+            'ext_res_det'
+            'ext_clk'
+            'silicon_rv'
+        )
+        'IOIN'
+        12
+        48
+        (
+            'current_range'
+            'current_range_scale'
+            'slope_control'
+        )
+        'DRV_CONF'
+        992
+        (
+            'commit'
+            'ext_not_int'
+            'clk_sys_sel'
+            'adc_clk_ena'
+            'clock_divider'
+            'clk_fsm_ena'
+            'clk_1mo_tmo'
+            'clk_loss'
+            'clk_is_stuck'
+            'pll_lock_loss'
+        )
+        'PLL'
+        255
+        65280
+        4128768
+        251658240
+        (
+            'ihold'
+            'irun'
+            'iholddelay'
+            'irundelay'
+        )
+        'IHOLD_IRUN'
+        'tpowerdown'
+        'TPOWERDOWN'
+        'tstep'
+        1048575
+        'TSTEP'
+        'tpwmthrs'
+        'TPWMTHRS'
+        'tcoolthrs'
+        'TCOOLTHRS'
+        'thigh'
+        'THIGH'
+        'TSGP_LOW_VEL_THRS'
+        'T_RCOIL_MEAS'
+        'TUDCSTEP'
+        15
+        240
+        (
+            'DECEL_THRS'
+            'ACCEL_THRS'
+            'udc_enable'
+        )
+        'UDC_CONF'
+        'STEPS_LOST'
+        (
+            'stop_l_enable'
+            'stop_r_enable'
+            'pol_stop_l'
+            'pol_stop_r'
+            'swap_lr'
+            'latch_l_active'
+            'latch_l_inactive'
+            'latch_r_active'
+            'latch_r_inactive'
+            'en_latch_encoder'
+            'sg_stop'
+            'en_softstop'
+            'en_virtual_stio_l'
+            'en_virtual_stio_r'
+            'virtual_stop_enc'
+            'hard_stop_clr_cur_int'
+        )
+        'SW_MODE'
+        (
+            'status_stop_l'
+            'status_stop_r'
+            'status_latch_l'
+            'status_latch_r'
+            'event_latch_l'
+            'event_latch_r'
+            'event_stop_sg'
+            'event_pos_reached'
+            'velocity_reached'
+            'position_reached'
+            'vzero'
+            't_zerowait_active'
+            'second_move'
+            'status_sg'
+            'status_virtual_stop_r'
+            'status_virtual_stop_l'
+        )
+        'SG_SEQ_STOP_STAT'
+        192
+        28672
+        16711680
+        805306368
+        (
+            'pol_A'
+            'pol_B'
+            'pol_N'
+            'ignore_AB'
+            'clr_cont'
+            'clr_once'
+            'pos_neg_edge'
+            'clr_enc_x'
+            'latch_x_act'
+            'enc_sel_decimal'
+            'nBEMF_ABN_SEL'
+            'bemf_hyst'
+            'BEMF_BLANK_TIME'
+            'BEMF_FILTER_SEL'
+        )
+        'ENCMODE'
+        'X_ENC'
+        0xFFFFFFFF
+        'ENC_CONST'
+        (
+            'n_event'
+            'deviation_wam'
+        )
+        'ENC_STATUS'
+        'ENC_LATCH'
+        'ENC_DEVIATION'
+        4095
+        268369920
+        (
+            'cur_p'
+            'cur_i'
+        )
+        'CURRENT_PI_REG'
+        (
+            'angle_p'
+            'angle_i'
+        )
+        'ANGLE_PI_REG'
+        1023
+        67043328
+        (
+            'ANGLE_PI_LIMIT'
+            'angle_pi_int_pos_clip'
+            'angle_pi_int_neg_clip'
+            'angle_pi_pos_clip'
+            'angle_pi_neg_clip'
+            'CUR_PI_LIMIT'
+            'cur_pi_int_pos_clip'
+            'cur_pi_int_neg_clip'
+            'cur_pi_pos_clip'
+            'cur_pi_neg_clip'
+        )
+        'CUR_ANGLE_LIMIT'
+        (
+            'ANGLE_LOWER_I_LIMIT'
+            'ANGLE_ERROR'
+        )
+        'ANGLE_LOWER_LIMIT'
+        (
+            'AMPL_MEAS'
+            'ANGLE_MEAS'
+        )
+        'CUR_ANGLE_MEAS'
+        8191
+        50266112
+        (
+            'PWM_CALC'
+            'ANGLE_CORR_CAL'
+        )
+        'PI_RESULTS'
+        32767
+        (
+            'coil_induct'
+            'rcoil_manual'
+            'rcoil_thermal_coupling'
+        )
+        'COIL_INDUCT'
+        (
+            'R_COIL_AUTO_B'
+            'R_COIL_AUTO_A'
+        )
+        'R_COIL'
+        (
+            'R_COIL_USER_B'
+            'R_COIL_USER_A'
+        )
+        'R_COIL_USER'
+        31
+        (
+            'SGP_THRS'
+            'sgp_filt_en'
+            'sgp_low_vel_freeze'
+            'sgp_clear_cur_pi'
+            'SGP_LOW_VEL_SLOPE'
+            'SGP_LOW_VEL_CNTS'
+        )
+        'SGP_CONF'
+        (
+            'SGP_IND_2'
+            'SGP_IND_3'
+        )
+        'SGP_IND_2_3'
+        (
+            'SGP_IND_0'
+            'SGP_IND_1'
+        )
+        'SGP_IND_0_1'
+        (
+            'UL_B'
+            'UL_B'
+        )
+        'INDUCTANCE_VOLTAGE'
+        (
+            'SGP_RAW'
+            'SGP_ABS'
+        )
+        'SGP_BEMF'
+        (
+            'COOL_CUR_DIV'
+            'load_filt_en'
+        )
+        'COOLSTEPPLUS_CONF'
+        (
+            'COOLSTEP_P'
+            'COOLSTEP_I'
+        )
+        'COOLSTEPPLUS_PI_REG'
+        (
+            'COOL_PI_DOWN_LIMIT'
+            'COOL_PI_OFF_SPEED'
+        )
+        'COOLSTEPPLUS_PI_DOWN'
+        (
+            'SGP_RESULT'
+            'COOLSTEP_LOAD_RESERVE'
+        )
+        'COOLSTEPPLUS_LOAD_RESERVE'
+        'TSTEP_VELOCITY'
+        8388607
+        511
+        33488896
+        (
+            'ADC_VSUPPLY'
+            'ADC_TEMP'
+        )
+        'ADC_VSUPPLY_TEMP'
+        (
+            'ADC_I_A'
+            'ADC_I_B'
+        )
+        'ADC_I'
+        (
+            'OVERVOLTAGE_VTH'
+            'OVERTEMPPREWARNING'
+        )
+        'OTW_OV_VTH'
+        'mslut0'
+        'MSLUT0'
+        'mslut1'
+        'MSLUT1'
+        'mslut2'
+        'MSLUT2'
+        'mslut3'
+        'MSLUT3'
+        'mslut4'
+        'MSLUT4'
+        'mslut5'
+        'MSLUT5'
+        'mslut6'
+        'MSLUT6'
+        'mslut7'
+        'MSLUT7'
+        0xFF000000
+        (
+            'w0'
+            'w1'
+            'w2'
+            'w3'
+            'x1'
+            'x2'
+            'x3'
+        )
+        'MSLUTSEL'
+        (
+            'start_sin'
+            'start_sin90'
+            'offset_sin90'
+        )
+        'MSLUTSTART'
+        'mscnt'
+        'MSCNT'
+        (
+            'cur_a'
+            'cur_b'
+        )
+        'MSCURACT'
+        1920
+        98304
+        15728640
+        (
+            'toff'
+            'hstrt'
+            'hend'
+            'fd3'
+            'disfdcc'
+            'chm'
+            'tbl'
+            'tpfd'
+            'mres'
+            'intpol'
+            'dedge'
+        )
+        'CHOPCONF'
+        57344
+        8323072
+        (
+            'semin'
+            'seup'
+            'semax'
+            'sedn'
+            'seimin'
+            'sgt'
+            'thigh_sg_off'
+            'sfilt'
+        )
+        'COOLCONF'
+        67108864
+        134217728
+        (
+            'sg_result'
+            'seq_stopped'
+            'ov'
+            's2vsa'
+            's2vsb'
+            'stealth'
+            'cs_actual'
+            'stallguard'
+            'ot'
+            'otpw'
+            's2ga'
+            's2gb'
+            'ola'
+            'olb'
+            'stst'
+        )
+        'DRV_STATUS'
+        (
+            'pwm_freq'
+            'freewheel'
+            'ol_thrsh'
+            'sd_on_meas_lo'
+            'sd_on_meas_hi'
+        )
+        'PWMCONF'
+        (
+            'cur_a'
+            'cur_b'
+            'sgt'
+            'pwm_scale_auto'
+        )
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(Reverse)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(Reverse)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        '<lambda>'
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(Reset)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(Reset)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(ErrorShutdown!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(ErrorShutdown!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(Undervoltage!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(Undervoltage!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '%d(%dusteps)'
+                256
+            [Disassembly]
+                0       LOAD_CONST                      1: '%d(%dusteps)'
+                2       LOAD_FAST                       0: v
+                4       LOAD_CONST                      2: 256
+                6       LOAD_FAST                       0: v
+                8       BINARY_RSHIFT                   
+                10      BUILD_TUPLE                     2
+                12      BINARY_MODULO                   
+                14      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(OvertempWarning!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(OvertempWarning!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(OvertempError!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(OvertempError!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(ShortToGND_A!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(ShortToGND_A!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(ShortToGND_B!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(ShortToGND_B!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(OpenLoad_A!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(OpenLoad_A!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(OpenLoad_B!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(OpenLoad_B!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '%d'
+                '0(Reset?)'
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               12
+                4       LOAD_CONST                      1: '%d'
+                6       LOAD_FAST                       0: v
+                8       BINARY_MODULO                   
+                10      RETURN_VALUE                    
+                12      LOAD_CONST                      2: '0(Reset?)'
+                14      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(ShortToSupply_A!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(ShortToSupply_A!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(ShortToSupply_B!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(ShortToSupply_B!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        (
+            'shaft'
+            'reset'
+            'drv_err'
+            'uv_cp'
+            'mres'
+            'otpw'
+            'ot'
+            's2ga'
+            's2gb'
+            'ola'
+            'olb'
+            'cs_actual'
+            's2vsa'
+            's2vsb'
+        )
+        4.24
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: TMC2262CurrentHelper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                '_calc_current_bits'
+                '_calc_current'
+                '_calc_current_from_field'
+                'get_current'
+                'set_current'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'TMC2262CurrentHelper'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 10
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'get_name'
+                        'split'
+                        'name'
+                        'mcu_tmc'
+                        'get_fields'
+                        'fields'
+                        'getint'
+                        'current_range'
+                        'current_range_scale'
+                        'float'
+                        'math'
+                        'sqrt'
+                        'IFS_current_RMS'
+                        'getfloat'
+                        'req_hold_current'
+                        '_calc_current'
+                        'set_field'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'mcu_tmc'
+                        'Rref'
+                        'Kifs_values'
+                        'CRS_values'
+                        'run_current'
+                        'hold_current'
+                        'irun'
+                        'ihold'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        -1
+                        'current_range'
+                        0
+                        3
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'current_range_scale'
+                        1
+                        'rref'
+                        12000
+                        60000
+                        18000
+                        36000
+                        54000
+                        72000
+                        (
+                            0
+                            1
+                            2
+                            3
+                        )
+                        1
+                        0.75
+                        0.5
+                        0.25
+                        (
+                            3
+                            2
+                            1
+                            0
+                        )
+                        2
+                        'run_current'
+                        0
+                        (
+                            'above'
+                            'maxval'
+                        )
+                        'hold_current'
+                        'ihold'
+                        'irun'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_METHOD                     2: get_name
+                        14      CALL_METHOD                     0
+                        16      LOAD_METHOD                     3: split
+                        18      CALL_METHOD                     0
+                        20      LOAD_CONST                      1: -1
+                        22      BINARY_SUBSCR                   
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: name
+                        28      LOAD_FAST                       2: mcu_tmc
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      5: mcu_tmc
+                        34      LOAD_FAST                       2: mcu_tmc
+                        36      LOAD_METHOD                     6: get_fields
+                        38      CALL_METHOD                     0
+                        40      LOAD_FAST                       0: self
+                        42      STORE_ATTR                      7: fields
+                        44      LOAD_FAST                       1: config
+                        46      LOAD_ATTR                       8: getint
+                        48      LOAD_CONST                      2: 'current_range'
+                        50      LOAD_CONST                      3: 0
+                        52      LOAD_CONST                      3: 0
+                        54      LOAD_CONST                      4: 3
+                        56      LOAD_CONST                      5: ('minval', 'maxval')
+                        58      CALL_FUNCTION_KW                4
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      9: current_range
+                        64      LOAD_FAST                       1: config
+                        66      LOAD_ATTR                       8: getint
+                        68      LOAD_CONST                      6: 'current_range_scale'
+                        70      LOAD_CONST                      3: 0
+                        72      LOAD_CONST                      3: 0
+                        74      LOAD_CONST                      4: 3
+                        76      LOAD_CONST                      5: ('minval', 'maxval')
+                        78      CALL_FUNCTION_KW                4
+                        80      LOAD_FAST                       0: self
+                        82      STORE_ATTR                      10: current_range_scale
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       9: current_range
+                        88      LOAD_CONST                      7: 1
+                        90      COMPARE_OP                      5 (>=)
+                        92      POP_JUMP_IF_FALSE               100
+                        94      LOAD_CONST                      4: 3
+                        96      LOAD_FAST                       0: self
+                        98      STORE_ATTR                      10: current_range_scale
+                        100     LOAD_FAST                       1: config
+                        102     LOAD_ATTR                       8: getint
+                        104     LOAD_CONST                      8: 'rref'
+                        106     LOAD_CONST                      9: 12000
+                        108     LOAD_CONST                      9: 12000
+                        110     LOAD_CONST                      10: 60000
+                        112     LOAD_CONST                      5: ('minval', 'maxval')
+                        114     CALL_FUNCTION_KW                4
+                        116     STORE_FAST                      3: Rref
+                        118     LOAD_CONST                      11: 18000
+                        120     LOAD_CONST                      12: 36000
+                        122     LOAD_CONST                      13: 54000
+                        124     LOAD_CONST                      14: 72000
+                        126     LOAD_CONST                      15: (0, 1, 2, 3)
+                        128     BUILD_CONST_KEY_MAP             4
+                        130     STORE_FAST                      4: Kifs_values
+                        132     LOAD_CONST                      16: 1
+                        134     LOAD_CONST                      17: 0.75
+                        136     LOAD_CONST                      18: 0.5
+                        138     LOAD_CONST                      19: 0.25
+                        140     LOAD_CONST                      20: (3, 2, 1, 0)
+                        142     BUILD_CONST_KEY_MAP             4
+                        144     STORE_FAST                      5: CRS_values
+                        146     LOAD_GLOBAL                     11: float
+                        148     LOAD_FAST                       5: CRS_values
+                        150     LOAD_FAST                       0: self
+                        152     LOAD_ATTR                       10: current_range_scale
+                        154     BINARY_SUBSCR                   
+                        156     LOAD_FAST                       4: Kifs_values
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       9: current_range
+                        162     BINARY_SUBSCR                   
+                        164     BINARY_MULTIPLY                 
+                        166     CALL_FUNCTION                   1
+                        168     LOAD_FAST                       3: Rref
+                        170     BINARY_TRUE_DIVIDE              
+                        172     LOAD_GLOBAL                     12: math
+                        174     LOAD_METHOD                     13: sqrt
+                        176     LOAD_CONST                      21: 2
+                        178     CALL_METHOD                     1
+                        180     BINARY_TRUE_DIVIDE              
+                        182     LOAD_FAST                       0: self
+                        184     STORE_ATTR                      14: IFS_current_RMS
+                        186     LOAD_FAST                       1: config
+                        188     LOAD_ATTR                       15: getfloat
+                        190     LOAD_CONST                      22: 'run_current'
+                        192     LOAD_CONST                      23: 0
+                        194     LOAD_FAST                       0: self
+                        196     LOAD_ATTR                       14: IFS_current_RMS
+                        198     LOAD_CONST                      24: ('above', 'maxval')
+                        200     CALL_FUNCTION_KW                3
+                        202     STORE_FAST                      6: run_current
+                        204     LOAD_FAST                       1: config
+                        206     LOAD_ATTR                       15: getfloat
+                        208     LOAD_CONST                      25: 'hold_current'
+                        210     LOAD_FAST                       0: self
+                        212     LOAD_ATTR                       14: IFS_current_RMS
+                        214     LOAD_CONST                      23: 0
+                        216     LOAD_FAST                       0: self
+                        218     LOAD_ATTR                       14: IFS_current_RMS
+                        220     LOAD_CONST                      24: ('above', 'maxval')
+                        222     CALL_FUNCTION_KW                4
+                        224     STORE_FAST                      7: hold_current
+                        226     LOAD_FAST                       7: hold_current
+                        228     LOAD_FAST                       0: self
+                        230     STORE_ATTR                      16: req_hold_current
+                        232     LOAD_FAST                       0: self
+                        234     LOAD_METHOD                     17: _calc_current
+                        236     LOAD_FAST                       6: run_current
+                        238     LOAD_FAST                       7: hold_current
+                        240     CALL_METHOD                     2
+                        242     UNPACK_SEQUENCE                 2
+                        244     STORE_FAST                      8: irun
+                        246     STORE_FAST                      9: ihold
+                        248     LOAD_FAST                       0: self
+                        250     LOAD_ATTR                       7: fields
+                        252     LOAD_METHOD                     18: set_field
+                        254     LOAD_CONST                      26: 'ihold'
+                        256     LOAD_FAST                       9: ihold
+                        258     CALL_METHOD                     2
+                        260     POP_TOP                         
+                        262     LOAD_FAST                       0: self
+                        264     LOAD_ATTR                       7: fields
+                        266     LOAD_METHOD                     18: set_field
+                        268     LOAD_CONST                      27: 'irun'
+                        270     LOAD_FAST                       8: irun
+                        272     CALL_METHOD                     2
+                        274     POP_TOP                         
+                        276     LOAD_FAST                       0: self
+                        278     LOAD_ATTR                       7: fields
+                        280     LOAD_METHOD                     18: set_field
+                        282     LOAD_CONST                      2: 'current_range'
+                        284     LOAD_FAST                       0: self
+                        286     LOAD_ATTR                       9: current_range
+                        288     CALL_METHOD                     2
+                        290     POP_TOP                         
+                        292     LOAD_FAST                       0: self
+                        294     LOAD_ATTR                       7: fields
+                        296     LOAD_METHOD                     18: set_field
+                        298     LOAD_CONST                      6: 'current_range_scale'
+                        300     LOAD_FAST                       0: self
+                        302     LOAD_ATTR                       10: current_range_scale
+                        304     CALL_METHOD                     2
+                        306     POP_TOP                         
+                        308     LOAD_CONST                      0: None
+                        310     RETURN_VALUE                    
+                'TMC2262CurrentHelper.__init__'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: _calc_current_bits
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'int'
+                        'MAX_CURRENT'
+                        'current_range'
+                        'current_range_scale'
+                        'max'
+                        'min'
+                    [Var Names]
+                        'self'
+                        'current'
+                        'cs'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        250
+                        4
+                        1
+                        0.5
+                        0
+                        255
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: int
+                        2       LOAD_FAST                       1: current
+                        4       LOAD_CONST                      1: 250
+                        6       BINARY_MULTIPLY                 
+                        8       LOAD_GLOBAL                     1: MAX_CURRENT
+                        10      BINARY_TRUE_DIVIDE              
+                        12      LOAD_CONST                      2: 4
+                        14      BINARY_MULTIPLY                 
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: current_range
+                        20      LOAD_CONST                      3: 1
+                        22      BINARY_ADD                      
+                        24      BINARY_TRUE_DIVIDE              
+                        26      LOAD_CONST                      2: 4
+                        28      BINARY_MULTIPLY                 
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       3: current_range_scale
+                        34      LOAD_CONST                      3: 1
+                        36      BINARY_ADD                      
+                        38      BINARY_TRUE_DIVIDE              
+                        40      LOAD_CONST                      4: 0.5
+                        42      BINARY_ADD                      
+                        44      CALL_FUNCTION                   1
+                        46      STORE_FAST                      2: cs
+                        48      LOAD_GLOBAL                     4: max
+                        50      LOAD_CONST                      5: 0
+                        52      LOAD_GLOBAL                     5: min
+                        54      LOAD_CONST                      6: 255
+                        56      LOAD_FAST                       2: cs
+                        58      CALL_FUNCTION                   2
+                        60      CALL_FUNCTION                   2
+                        62      RETURN_VALUE                    
+                'TMC2262CurrentHelper._calc_current_bits'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: _calc_current
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_calc_current_bits'
+                        'min'
+                    [Var Names]
+                        'self'
+                        'run_current'
+                        'hold_current'
+                        'irun'
+                        'ihold'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _calc_current_bits
+                        4       LOAD_FAST                       1: run_current
+                        6       CALL_METHOD                     1
+                        8       STORE_FAST                      3: irun
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_METHOD                     0: _calc_current_bits
+                        14      LOAD_GLOBAL                     1: min
+                        16      LOAD_FAST                       2: hold_current
+                        18      LOAD_FAST                       1: run_current
+                        20      CALL_FUNCTION                   2
+                        22      CALL_METHOD                     1
+                        24      STORE_FAST                      4: ihold
+                        26      LOAD_FAST                       3: irun
+                        28      LOAD_FAST                       4: ihold
+                        30      BUILD_TUPLE                     2
+                        32      RETURN_VALUE                    
+                'TMC2262CurrentHelper._calc_current'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: _calc_current_from_field
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fields'
+                        'get_field'
+                        'MAX_CURRENT'
+                    [Var Names]
+                        'self'
+                        'field_name'
+                        'current_range'
+                        'current_range_scale'
+                        'bits'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'current_range'
+                        'current_range_scale'
+                        1
+                        4
+                        250
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: fields
+                        4       LOAD_METHOD                     1: get_field
+                        6       LOAD_CONST                      1: 'current_range'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: current_range
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: fields
+                        16      LOAD_METHOD                     1: get_field
+                        18      LOAD_CONST                      2: 'current_range_scale'
+                        20      CALL_METHOD                     1
+                        22      STORE_FAST                      3: current_range_scale
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       0: fields
+                        28      LOAD_METHOD                     1: get_field
+                        30      LOAD_FAST                       1: field_name
+                        32      CALL_METHOD                     1
+                        34      STORE_FAST                      4: bits
+                        36      LOAD_GLOBAL                     2: MAX_CURRENT
+                        38      LOAD_FAST                       2: current_range
+                        40      LOAD_CONST                      3: 1
+                        42      BINARY_ADD                      
+                        44      BINARY_MULTIPLY                 
+                        46      LOAD_CONST                      4: 4
+                        48      BINARY_TRUE_DIVIDE              
+                        50      LOAD_FAST                       3: current_range_scale
+                        52      LOAD_CONST                      3: 1
+                        54      BINARY_ADD                      
+                        56      BINARY_MULTIPLY                 
+                        58      LOAD_CONST                      4: 4
+                        60      BINARY_TRUE_DIVIDE              
+                        62      LOAD_FAST                       4: bits
+                        64      BINARY_MULTIPLY                 
+                        66      LOAD_CONST                      5: 250
+                        68      BINARY_TRUE_DIVIDE              
+                        70      RETURN_VALUE                    
+                'TMC2262CurrentHelper._calc_current_from_field'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: get_current
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_calc_current_from_field'
+                        'req_hold_current'
+                        'IFS_current_RMS'
+                    [Var Names]
+                        'self'
+                        'run_current'
+                        'hold_current'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'irun'
+                        'ihold'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _calc_current_from_field
+                        4       LOAD_CONST                      1: 'irun'
+                        6       CALL_METHOD                     1
+                        8       STORE_FAST                      1: run_current
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_METHOD                     0: _calc_current_from_field
+                        14      LOAD_CONST                      2: 'ihold'
+                        16      CALL_METHOD                     1
+                        18      STORE_FAST                      2: hold_current
+                        20      LOAD_FAST                       1: run_current
+                        22      LOAD_FAST                       2: hold_current
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       1: req_hold_current
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       2: IFS_current_RMS
+                        32      BUILD_TUPLE                     4
+                        34      RETURN_VALUE                    
+                'TMC2262CurrentHelper.get_current'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: set_current
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_calc_current'
+                        'logging'
+                        'info'
+                        'fields'
+                        'set_field'
+                        'mcu_tmc'
+                        'set_register'
+                    [Var Names]
+                        'self'
+                        'run_current'
+                        'hold_current'
+                        'print_time'
+                        'irun'
+                        'ihold'
+                        'val'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'hys: irun = %s, ihold = %s'
+                        'ihold'
+                        'irun'
+                        'IHOLD_IRUN'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _calc_current
+                        4       LOAD_FAST                       1: run_current
+                        6       LOAD_FAST                       2: hold_current
+                        8       CALL_METHOD                     2
+                        10      UNPACK_SEQUENCE                 2
+                        12      STORE_FAST                      4: irun
+                        14      STORE_FAST                      5: ihold
+                        16      LOAD_GLOBAL                     1: logging
+                        18      LOAD_METHOD                     2: info
+                        20      LOAD_CONST                      1: 'hys: irun = %s, ihold = %s'
+                        22      LOAD_FAST                       4: irun
+                        24      LOAD_FAST                       5: ihold
+                        26      BUILD_TUPLE                     2
+                        28      BINARY_MODULO                   
+                        30      CALL_METHOD                     1
+                        32      POP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       3: fields
+                        38      LOAD_METHOD                     4: set_field
+                        40      LOAD_CONST                      2: 'ihold'
+                        42      LOAD_FAST                       5: ihold
+                        44      CALL_METHOD                     2
+                        46      POP_TOP                         
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       3: fields
+                        52      LOAD_METHOD                     4: set_field
+                        54      LOAD_CONST                      3: 'irun'
+                        56      LOAD_FAST                       4: irun
+                        58      CALL_METHOD                     2
+                        60      STORE_FAST                      6: val
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       5: mcu_tmc
+                        66      LOAD_METHOD                     6: set_register
+                        68      LOAD_CONST                      4: 'IHOLD_IRUN'
+                        70      LOAD_FAST                       6: val
+                        72      LOAD_FAST                       3: print_time
+                        74      CALL_METHOD                     3
+                        76      POP_TOP                         
+                        78      LOAD_CONST                      0: None
+                        80      RETURN_VALUE                    
+                'TMC2262CurrentHelper.set_current'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'TMC2262CurrentHelper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'TMC2262CurrentHelper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> _calc_current_bits
+                18      LOAD_CONST                      4: 'TMC2262CurrentHelper._calc_current_bits'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: _calc_current_bits
+                24      LOAD_CONST                      5: <CODE> _calc_current
+                26      LOAD_CONST                      6: 'TMC2262CurrentHelper._calc_current'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: _calc_current
+                32      LOAD_CONST                      7: <CODE> _calc_current_from_field
+                34      LOAD_CONST                      8: 'TMC2262CurrentHelper._calc_current_from_field'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _calc_current_from_field
+                40      LOAD_CONST                      9: <CODE> get_current
+                42      LOAD_CONST                      10: 'TMC2262CurrentHelper.get_current'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: get_current
+                48      LOAD_CONST                      11: <CODE> set_current
+                50      LOAD_CONST                      12: 'TMC2262CurrentHelper.set_current'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: set_current
+                56      LOAD_CONST                      13: None
+                58      RETURN_VALUE                    
+        'TMC2262CurrentHelper'
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: TMC2262PLLHelper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                '_calc_clock_divider'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'TMC2262PLLHelper'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'getboolean'
+                        'logging'
+                        'info'
+                        'getfloat'
+                        'tmc_frequency'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'ext_clk_set'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'driver_EXT_NOT_INT'
+                        False
+                        'driver_EXT_NOT_INT: %s'
+                        'tmc_frequency'
+                        1.6e+07
+                        1e+06
+                        3.2e+07
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: getboolean
+                        4       LOAD_CONST                      1: 'driver_EXT_NOT_INT'
+                        6       LOAD_CONST                      2: False
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: ext_clk_set
+                        12      LOAD_GLOBAL                     1: logging
+                        14      LOAD_METHOD                     2: info
+                        16      LOAD_CONST                      3: 'driver_EXT_NOT_INT: %s'
+                        18      LOAD_FAST                       2: ext_clk_set
+                        20      BINARY_MODULO                   
+                        22      CALL_METHOD                     1
+                        24      POP_TOP                         
+                        26      LOAD_FAST                       1: config
+                        28      LOAD_ATTR                       3: getfloat
+                        30      LOAD_CONST                      4: 'tmc_frequency'
+                        32      LOAD_CONST                      5: 1.6e+07
+                        34      LOAD_CONST                      6: 1e+06
+                        36      LOAD_CONST                      7: 3.2e+07
+                        38      LOAD_CONST                      8: ('minval', 'maxval')
+                        40      CALL_FUNCTION_KW                4
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      4: tmc_frequency
+                        46      LOAD_FAST                       2: ext_clk_set
+                        48      POP_JUMP_IF_TRUE                56
+                        50      LOAD_CONST                      5: 1.6e+07
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      4: tmc_frequency
+                        56      LOAD_CONST                      0: None
+                        58      RETURN_VALUE                    
+                'TMC2262PLLHelper.__init__'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: _calc_clock_divider
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'int'
+                        'tmc_frequency'
+                        'logging'
+                        'info'
+                    [Var Names]
+                        'self'
+                        'clock_divider'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1000000
+                        1
+                        0.5
+                        'hys: clock_divider = 0x%x'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: int
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       1: tmc_frequency
+                        6       LOAD_CONST                      1: 1000000
+                        8       BINARY_TRUE_DIVIDE              
+                        10      LOAD_CONST                      2: 1
+                        12      BINARY_SUBTRACT                 
+                        14      LOAD_CONST                      3: 0.5
+                        16      BINARY_ADD                      
+                        18      CALL_FUNCTION                   1
+                        20      STORE_FAST                      1: clock_divider
+                        22      LOAD_GLOBAL                     2: logging
+                        24      LOAD_METHOD                     3: info
+                        26      LOAD_CONST                      4: 'hys: clock_divider = 0x%x'
+                        28      LOAD_FAST                       1: clock_divider
+                        30      BINARY_MODULO                   
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_FAST                       1: clock_divider
+                        38      RETURN_VALUE                    
+                'TMC2262PLLHelper._calc_clock_divider'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'TMC2262PLLHelper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'TMC2262PLLHelper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> _calc_clock_divider
+                18      LOAD_CONST                      4: 'TMC2262PLLHelper._calc_clock_divider'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: _calc_clock_divider
+                24      LOAD_CONST                      5: None
+                26      RETURN_VALUE                    
+        'TMC2262PLLHelper'
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: TMC2262
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'TMC2262'
+                [Code]
+                    File Name: /extras/tmc2262.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'tmc'
+                        'FieldHelper'
+                        'Fields'
+                        'SignedFields'
+                        'FieldFormatters'
+                        'fields'
+                        'set_config_field'
+                        'TMC2262PLLHelper'
+                        'tmc_frequency'
+                        '_calc_clock_divider'
+                        'tmc2130'
+                        'MCU_TMC_SPI'
+                        'Registers'
+                        'mcu_tmc'
+                        'TMCVirtualPinHelper'
+                        'TMC2262CurrentHelper'
+                        'TMCCommandHelper'
+                        'TMCMicrostepHelper'
+                        'setup_register_dump'
+                        'ReadRegisters'
+                        'get_phase_offset'
+                        'get_status'
+                        'TMCWaveTableHelper'
+                        'TMCStealthchopHelper'
+                        'TMCVcoolthrsHelper'
+                        'getint'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'set_config_field'
+                        'PLL_helper'
+                        'current_helper'
+                        'cmdhelper'
+                        'coil_induct'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'small_hysteresis'
+                        True
+                        'en_pwm_mode'
+                        'multistep_filt'
+                        'step_dir'
+                        'ext_not_int'
+                        False
+                        'clock_divider'
+                        'toff'
+                        3
+                        'hstrt'
+                        5
+                        'hend'
+                        2
+                        'fd3'
+                        0
+                        'disfdcc'
+                        'chm'
+                        'tbl'
+                        'tpfd'
+                        4
+                        'intpol'
+                        1
+                        'dedge'
+                        'semin'
+                        'seup'
+                        'semax'
+                        'sedn'
+                        'seimin'
+                        'sgt'
+                        'sfilt'
+                        'iholddelay'
+                        7
+                        'irundelay'
+                        'pwm_freq'
+                        'freewheel'
+                        'tpowerdown'
+                        10
+                        'drv_enn'
+                        'slope_control'
+                        'cur_p'
+                        550
+                        'cur_i'
+                        137
+                        'angle_p'
+                        200
+                        'angle_i'
+                        50
+                        'coil_induct'
+                        0
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: tmc
+                        2       LOAD_METHOD                     1: FieldHelper
+                        4       LOAD_GLOBAL                     2: Fields
+                        6       LOAD_GLOBAL                     3: SignedFields
+                        8       LOAD_GLOBAL                     4: FieldFormatters
+                        10      CALL_METHOD                     3
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      5: fields
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       5: fields
+                        20      LOAD_ATTR                       6: set_config_field
+                        22      STORE_FAST                      2: set_config_field
+                        24      LOAD_FAST                       2: set_config_field
+                        26      LOAD_FAST                       1: config
+                        28      LOAD_CONST                      1: 'small_hysteresis'
+                        30      LOAD_CONST                      2: True
+                        32      CALL_FUNCTION                   3
+                        34      POP_TOP                         
+                        36      LOAD_FAST                       2: set_config_field
+                        38      LOAD_FAST                       1: config
+                        40      LOAD_CONST                      3: 'en_pwm_mode'
+                        42      LOAD_CONST                      2: True
+                        44      CALL_FUNCTION                   3
+                        46      POP_TOP                         
+                        48      LOAD_FAST                       2: set_config_field
+                        50      LOAD_FAST                       1: config
+                        52      LOAD_CONST                      4: 'multistep_filt'
+                        54      LOAD_CONST                      2: True
+                        56      CALL_FUNCTION                   3
+                        58      POP_TOP                         
+                        60      LOAD_FAST                       2: set_config_field
+                        62      LOAD_FAST                       1: config
+                        64      LOAD_CONST                      5: 'step_dir'
+                        66      LOAD_CONST                      2: True
+                        68      CALL_FUNCTION                   3
+                        70      POP_TOP                         
+                        72      LOAD_FAST                       2: set_config_field
+                        74      LOAD_FAST                       1: config
+                        76      LOAD_CONST                      6: 'ext_not_int'
+                        78      LOAD_CONST                      7: False
+                        80      CALL_FUNCTION                   3
+                        82      POP_TOP                         
+                        84      LOAD_GLOBAL                     7: TMC2262PLLHelper
+                        86      LOAD_FAST                       1: config
+                        88      CALL_FUNCTION                   1
+                        90      STORE_FAST                      3: PLL_helper
+                        92      LOAD_FAST                       3: PLL_helper
+                        94      LOAD_ATTR                       8: tmc_frequency
+                        96      LOAD_FAST                       0: self
+                        98      STORE_ATTR                      8: tmc_frequency
+                        100     LOAD_FAST                       2: set_config_field
+                        102     LOAD_FAST                       1: config
+                        104     LOAD_CONST                      8: 'clock_divider'
+                        106     LOAD_FAST                       3: PLL_helper
+                        108     LOAD_METHOD                     9: _calc_clock_divider
+                        110     CALL_METHOD                     0
+                        112     CALL_FUNCTION                   3
+                        114     POP_TOP                         
+                        116     LOAD_GLOBAL                     10: tmc2130
+                        118     LOAD_METHOD                     11: MCU_TMC_SPI
+                        120     LOAD_FAST                       1: config
+                        122     LOAD_GLOBAL                     12: Registers
+                        124     LOAD_FAST                       0: self
+                        126     LOAD_ATTR                       5: fields
+                        128     CALL_METHOD                     3
+                        130     LOAD_FAST                       0: self
+                        132     STORE_ATTR                      13: mcu_tmc
+                        134     LOAD_GLOBAL                     0: tmc
+                        136     LOAD_METHOD                     14: TMCVirtualPinHelper
+                        138     LOAD_FAST                       1: config
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       13: mcu_tmc
+                        144     CALL_METHOD                     2
+                        146     POP_TOP                         
+                        148     LOAD_GLOBAL                     15: TMC2262CurrentHelper
+                        150     LOAD_FAST                       1: config
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       13: mcu_tmc
+                        156     CALL_FUNCTION                   2
+                        158     STORE_FAST                      4: current_helper
+                        160     LOAD_GLOBAL                     0: tmc
+                        162     LOAD_METHOD                     16: TMCCommandHelper
+                        164     LOAD_FAST                       1: config
+                        166     LOAD_FAST                       0: self
+                        168     LOAD_ATTR                       13: mcu_tmc
+                        170     LOAD_FAST                       4: current_helper
+                        172     CALL_METHOD                     3
+                        174     STORE_FAST                      5: cmdhelper
+                        176     LOAD_GLOBAL                     0: tmc
+                        178     LOAD_METHOD                     17: TMCMicrostepHelper
+                        180     LOAD_FAST                       1: config
+                        182     LOAD_FAST                       0: self
+                        184     LOAD_ATTR                       13: mcu_tmc
+                        186     CALL_METHOD                     2
+                        188     POP_TOP                         
+                        190     LOAD_FAST                       5: cmdhelper
+                        192     LOAD_METHOD                     18: setup_register_dump
+                        194     LOAD_GLOBAL                     19: ReadRegisters
+                        196     CALL_METHOD                     1
+                        198     POP_TOP                         
+                        200     LOAD_FAST                       5: cmdhelper
+                        202     LOAD_ATTR                       20: get_phase_offset
+                        204     LOAD_FAST                       0: self
+                        206     STORE_ATTR                      20: get_phase_offset
+                        208     LOAD_FAST                       5: cmdhelper
+                        210     LOAD_ATTR                       21: get_status
+                        212     LOAD_FAST                       0: self
+                        214     STORE_ATTR                      21: get_status
+                        216     LOAD_GLOBAL                     0: tmc
+                        218     LOAD_METHOD                     22: TMCWaveTableHelper
+                        220     LOAD_FAST                       1: config
+                        222     LOAD_FAST                       0: self
+                        224     LOAD_ATTR                       13: mcu_tmc
+                        226     CALL_METHOD                     2
+                        228     POP_TOP                         
+                        230     LOAD_GLOBAL                     0: tmc
+                        232     LOAD_METHOD                     23: TMCStealthchopHelper
+                        234     LOAD_FAST                       1: config
+                        236     LOAD_FAST                       0: self
+                        238     LOAD_ATTR                       13: mcu_tmc
+                        240     LOAD_FAST                       0: self
+                        242     LOAD_ATTR                       8: tmc_frequency
+                        244     CALL_METHOD                     3
+                        246     POP_TOP                         
+                        248     LOAD_GLOBAL                     0: tmc
+                        250     LOAD_METHOD                     24: TMCVcoolthrsHelper
+                        252     LOAD_FAST                       1: config
+                        254     LOAD_FAST                       0: self
+                        256     LOAD_ATTR                       13: mcu_tmc
+                        258     LOAD_FAST                       0: self
+                        260     LOAD_ATTR                       8: tmc_frequency
+                        262     CALL_METHOD                     3
+                        264     POP_TOP                         
+                        266     LOAD_FAST                       2: set_config_field
+                        268     LOAD_FAST                       1: config
+                        270     LOAD_CONST                      9: 'toff'
+                        272     LOAD_CONST                      10: 3
+                        274     CALL_FUNCTION                   3
+                        276     POP_TOP                         
+                        278     LOAD_FAST                       2: set_config_field
+                        280     LOAD_FAST                       1: config
+                        282     LOAD_CONST                      11: 'hstrt'
+                        284     LOAD_CONST                      12: 5
+                        286     CALL_FUNCTION                   3
+                        288     POP_TOP                         
+                        290     LOAD_FAST                       2: set_config_field
+                        292     LOAD_FAST                       1: config
+                        294     LOAD_CONST                      13: 'hend'
+                        296     LOAD_CONST                      14: 2
+                        298     CALL_FUNCTION                   3
+                        300     POP_TOP                         
+                        302     LOAD_FAST                       2: set_config_field
+                        304     LOAD_FAST                       1: config
+                        306     LOAD_CONST                      15: 'fd3'
+                        308     LOAD_CONST                      16: 0
+                        310     CALL_FUNCTION                   3
+                        312     POP_TOP                         
+                        314     LOAD_FAST                       2: set_config_field
+                        316     LOAD_FAST                       1: config
+                        318     LOAD_CONST                      17: 'disfdcc'
+                        320     LOAD_CONST                      16: 0
+                        322     CALL_FUNCTION                   3
+                        324     POP_TOP                         
+                        326     LOAD_FAST                       2: set_config_field
+                        328     LOAD_FAST                       1: config
+                        330     LOAD_CONST                      18: 'chm'
+                        332     LOAD_CONST                      16: 0
+                        334     CALL_FUNCTION                   3
+                        336     POP_TOP                         
+                        338     LOAD_FAST                       2: set_config_field
+                        340     LOAD_FAST                       1: config
+                        342     LOAD_CONST                      19: 'tbl'
+                        344     LOAD_CONST                      14: 2
+                        346     CALL_FUNCTION                   3
+                        348     POP_TOP                         
+                        350     LOAD_FAST                       2: set_config_field
+                        352     LOAD_FAST                       1: config
+                        354     LOAD_CONST                      20: 'tpfd'
+                        356     LOAD_CONST                      21: 4
+                        358     CALL_FUNCTION                   3
+                        360     POP_TOP                         
+                        362     LOAD_FAST                       2: set_config_field
+                        364     LOAD_FAST                       1: config
+                        366     LOAD_CONST                      22: 'intpol'
+                        368     LOAD_CONST                      23: 1
+                        370     CALL_FUNCTION                   3
+                        372     POP_TOP                         
+                        374     LOAD_FAST                       2: set_config_field
+                        376     LOAD_FAST                       1: config
+                        378     LOAD_CONST                      24: 'dedge'
+                        380     LOAD_CONST                      16: 0
+                        382     CALL_FUNCTION                   3
+                        384     POP_TOP                         
+                        386     LOAD_FAST                       2: set_config_field
+                        388     LOAD_FAST                       1: config
+                        390     LOAD_CONST                      25: 'semin'
+                        392     LOAD_CONST                      16: 0
+                        394     CALL_FUNCTION                   3
+                        396     POP_TOP                         
+                        398     LOAD_FAST                       2: set_config_field
+                        400     LOAD_FAST                       1: config
+                        402     LOAD_CONST                      26: 'seup'
+                        404     LOAD_CONST                      16: 0
+                        406     CALL_FUNCTION                   3
+                        408     POP_TOP                         
+                        410     LOAD_FAST                       2: set_config_field
+                        412     LOAD_FAST                       1: config
+                        414     LOAD_CONST                      27: 'semax'
+                        416     LOAD_CONST                      16: 0
+                        418     CALL_FUNCTION                   3
+                        420     POP_TOP                         
+                        422     LOAD_FAST                       2: set_config_field
+                        424     LOAD_FAST                       1: config
+                        426     LOAD_CONST                      28: 'sedn'
+                        428     LOAD_CONST                      16: 0
+                        430     CALL_FUNCTION                   3
+                        432     POP_TOP                         
+                        434     LOAD_FAST                       2: set_config_field
+                        436     LOAD_FAST                       1: config
+                        438     LOAD_CONST                      29: 'seimin'
+                        440     LOAD_CONST                      16: 0
+                        442     CALL_FUNCTION                   3
+                        444     POP_TOP                         
+                        446     LOAD_FAST                       2: set_config_field
+                        448     LOAD_FAST                       1: config
+                        450     LOAD_CONST                      30: 'sgt'
+                        452     LOAD_CONST                      16: 0
+                        454     CALL_FUNCTION                   3
+                        456     POP_TOP                         
+                        458     LOAD_FAST                       2: set_config_field
+                        460     LOAD_FAST                       1: config
+                        462     LOAD_CONST                      31: 'sfilt'
+                        464     LOAD_CONST                      16: 0
+                        466     CALL_FUNCTION                   3
+                        468     POP_TOP                         
+                        470     LOAD_FAST                       2: set_config_field
+                        472     LOAD_FAST                       1: config
+                        474     LOAD_CONST                      32: 'iholddelay'
+                        476     LOAD_CONST                      33: 7
+                        478     CALL_FUNCTION                   3
+                        480     POP_TOP                         
+                        482     LOAD_FAST                       2: set_config_field
+                        484     LOAD_FAST                       1: config
+                        486     LOAD_CONST                      34: 'irundelay'
+                        488     LOAD_CONST                      21: 4
+                        490     CALL_FUNCTION                   3
+                        492     POP_TOP                         
+                        494     LOAD_FAST                       2: set_config_field
+                        496     LOAD_FAST                       1: config
+                        498     LOAD_CONST                      35: 'pwm_freq'
+                        500     LOAD_CONST                      16: 0
+                        502     CALL_FUNCTION                   3
+                        504     POP_TOP                         
+                        506     LOAD_FAST                       2: set_config_field
+                        508     LOAD_FAST                       1: config
+                        510     LOAD_CONST                      36: 'freewheel'
+                        512     LOAD_CONST                      16: 0
+                        514     CALL_FUNCTION                   3
+                        516     POP_TOP                         
+                        518     LOAD_FAST                       2: set_config_field
+                        520     LOAD_FAST                       1: config
+                        522     LOAD_CONST                      37: 'tpowerdown'
+                        524     LOAD_CONST                      38: 10
+                        526     CALL_FUNCTION                   3
+                        528     POP_TOP                         
+                        530     LOAD_FAST                       2: set_config_field
+                        532     LOAD_FAST                       1: config
+                        534     LOAD_CONST                      39: 'drv_enn'
+                        536     LOAD_CONST                      7: False
+                        538     CALL_FUNCTION                   3
+                        540     POP_TOP                         
+                        542     LOAD_FAST                       2: set_config_field
+                        544     LOAD_FAST                       1: config
+                        546     LOAD_CONST                      40: 'slope_control'
+                        548     LOAD_CONST                      10: 3
+                        550     CALL_FUNCTION                   3
+                        552     POP_TOP                         
+                        554     LOAD_FAST                       2: set_config_field
+                        556     LOAD_FAST                       1: config
+                        558     LOAD_CONST                      41: 'cur_p'
+                        560     LOAD_CONST                      42: 550
+                        562     CALL_FUNCTION                   3
+                        564     POP_TOP                         
+                        566     LOAD_FAST                       2: set_config_field
+                        568     LOAD_FAST                       1: config
+                        570     LOAD_CONST                      43: 'cur_i'
+                        572     LOAD_CONST                      44: 137
+                        574     CALL_FUNCTION                   3
+                        576     POP_TOP                         
+                        578     LOAD_FAST                       2: set_config_field
+                        580     LOAD_FAST                       1: config
+                        582     LOAD_CONST                      45: 'angle_p'
+                        584     LOAD_CONST                      46: 200
+                        586     CALL_FUNCTION                   3
+                        588     POP_TOP                         
+                        590     LOAD_FAST                       2: set_config_field
+                        592     LOAD_FAST                       1: config
+                        594     LOAD_CONST                      47: 'angle_i'
+                        596     LOAD_CONST                      48: 50
+                        598     CALL_FUNCTION                   3
+                        600     POP_TOP                         
+                        602     LOAD_FAST                       1: config
+                        604     LOAD_METHOD                     25: getint
+                        606     LOAD_CONST                      49: 'coil_induct'
+                        608     LOAD_CONST                      50: 0
+                        610     CALL_METHOD                     2
+                        612     STORE_FAST                      6: coil_induct
+                        614     LOAD_FAST                       6: coil_induct
+                        616     POP_JUMP_IF_FALSE               632
+                        620     LOAD_FAST                       2: set_config_field
+                        622     LOAD_FAST                       1: config
+                        624     LOAD_CONST                      49: 'coil_induct'
+                        626     LOAD_FAST                       6: coil_induct
+                        628     CALL_FUNCTION                   3
+                        630     POP_TOP                         
+                        632     LOAD_CONST                      0: None
+                        634     RETURN_VALUE                    
+                'TMC2262.__init__'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'TMC2262'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'TMC2262.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: None
+                18      RETURN_VALUE                    
+        'TMC2262'
+        [Code]
+            File Name: /extras/tmc2262.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'TMC2262'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: TMC2262
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: math
+        6       STORE_NAME                      0: math
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: logging
+        14      STORE_NAME                      1: logging
+        16      LOAD_CONST                      2: 1
+        18      LOAD_CONST                      3: ('bus', 'tmc', 'tmc2130')
+        20      IMPORT_NAME                     2: 
+        22      IMPORT_FROM                     3: bus
+        24      STORE_NAME                      3: bus
+        26      IMPORT_FROM                     4: tmc
+        28      STORE_NAME                      4: tmc
+        30      IMPORT_FROM                     5: tmc2130
+        32      STORE_NAME                      5: tmc2130
+        34      POP_TOP                         
+        36      LOAD_CONST                      0: 0
+        38      LOAD_CONST                      2: 1
+        40      LOAD_CONST                      4: 2
+        42      LOAD_CONST                      5: 3
+        44      LOAD_CONST                      6: 4
+        46      LOAD_CONST                      7: 10
+        48      LOAD_CONST                      8: 11
+        50      LOAD_CONST                      9: 16
+        52      LOAD_CONST                      10: 17
+        54      LOAD_CONST                      11: 18
+        56      LOAD_CONST                      12: 19
+        58      LOAD_CONST                      13: 20
+        60      LOAD_CONST                      14: 21
+        62      LOAD_CONST                      15: 22
+        64      LOAD_CONST                      16: 23
+        66      LOAD_CONST                      17: 24
+        68      LOAD_CONST                      18: 25
+        70      LOAD_CONST                      19: 26
+        72      LOAD_CONST                      20: 52
+        74      LOAD_CONST                      21: 53
+        76      LOAD_CONST                      22: 56
+        78      LOAD_CONST                      23: 57
+        80      LOAD_CONST                      24: 58
+        82      LOAD_CONST                      25: 59
+        84      LOAD_CONST                      26: 60
+        86      LOAD_CONST                      27: 61
+        88      LOAD_CONST                      28: 64
+        90      LOAD_CONST                      29: 65
+        92      LOAD_CONST                      30: 66
+        94      LOAD_CONST                      31: 67
+        96      LOAD_CONST                      32: 68
+        98      LOAD_CONST                      33: 69
+        100     LOAD_CONST                      34: 70
+        102     LOAD_CONST                      35: 71
+        104     LOAD_CONST                      36: 72
+        106     LOAD_CONST                      37: 73
+        108     LOAD_CONST                      38: 74
+        110     LOAD_CONST                      39: 75
+        112     LOAD_CONST                      40: 76
+        114     LOAD_CONST                      41: 77
+        116     LOAD_CONST                      42: 78
+        118     LOAD_CONST                      43: 79
+        120     LOAD_CONST                      44: 80
+        122     LOAD_CONST                      45: 81
+        124     LOAD_CONST                      46: 82
+        126     LOAD_CONST                      47: 83
+        128     LOAD_CONST                      48: 88
+        130     LOAD_CONST                      49: 89
+        132     LOAD_CONST                      50: 90
+        134     LOAD_CONST                      51: 96
+        136     LOAD_CONST                      52: 97
+        138     LOAD_CONST                      53: 98
+        140     LOAD_CONST                      54: 99
+        142     LOAD_CONST                      55: 100
+        144     LOAD_CONST                      56: 101
+        146     LOAD_CONST                      57: 102
+        148     LOAD_CONST                      58: 103
+        150     LOAD_CONST                      59: 104
+        152     LOAD_CONST                      60: 105
+        154     LOAD_CONST                      61: 106
+        156     LOAD_CONST                      62: 107
+        158     LOAD_CONST                      63: 108
+        160     LOAD_CONST                      64: 109
+        162     LOAD_CONST                      65: 111
+        164     LOAD_CONST                      66: 112
+        166     LOAD_CONST                      67: ('GCONF', 'GSTAT', 'DIAG_CONF', 'DIAG_DAC_CONF', 'IOIN', 'DRV_CONF', 'PLL', 'IHOLD_IRUN', 'TPOWERDOWN', 'TSTEP', 'TPWMTHRS', 'TCOOLTHRS', 'THIGH', 'TSGP_LOW_VEL_THRS', 'T_RCOIL_MEAS', 'TUDCSTEP', 'UDC_CONF', 'STEPS_LOST', 'SW_MODE', 'SG_SEQ_STOP_STAT', 'ENCMODE', 'X_ENC', 'ENC_CONST', 'ENC_STATUS', 'ENC_LATCH', 'ENC_DEVIATION', 'CURRENT_PI_REG', 'ANGLE_PI_REG', 'CUR_ANGLE_LIMIT', 'ANGLE_LOWER_LIMIT', 'CUR_ANGLE_MEAS', 'PI_RESULTS', 'COIL_INDUCT', 'R_COIL', 'R_COIL_USER', 'SGP_CONF', 'SGP_IND_2_3', 'SGP_IND_0_1', 'INDUCTANCE_VOLTAGE', 'SGP_BEMF', 'COOLSTEPPLUS_CONF', 'COOLSTEPPLUS_PI_REG', 'COOLSTEPPLUS_PI_DOWN', 'COOLSTEPPLUS_RESERVE_CONF', 'COOLSTEPPLUS_LOAD_RESERVE', 'TSTEP_VELOCITY', 'ADC_VSUPPLY_TEMP', 'ADC_I', 'OTW_OV_VTH', 'MSLUT0', 'MSLUT1', 'MSLUT2', 'MSLUT3', 'MSLUT4', 'MSLUT5', 'MSLUT6', 'MSLUT7', 'MSLUTSEL', 'MSLUTSTART', 'MSCNT', 'MSCURACT', 'CHOPCONF', 'COOLCONF', 'DRV_STATUS', 'PWMCONF')
+        168     BUILD_CONST_KEY_MAP             65
+        170     STORE_NAME                      6: Registers
+        172     BUILD_LIST                      0
+        174     LOAD_CONST                      67: ('GCONF', 'GSTAT', 'DIAG_CONF', 'DIAG_DAC_CONF', 'IOIN', 'DRV_CONF', 'PLL', 'IHOLD_IRUN', 'TPOWERDOWN', 'TSTEP', 'TPWMTHRS', 'TCOOLTHRS', 'THIGH', 'TSGP_LOW_VEL_THRS', 'T_RCOIL_MEAS', 'TUDCSTEP', 'UDC_CONF', 'STEPS_LOST', 'SW_MODE', 'SG_SEQ_STOP_STAT', 'ENCMODE', 'X_ENC', 'ENC_CONST', 'ENC_STATUS', 'ENC_LATCH', 'ENC_DEVIATION', 'CURRENT_PI_REG', 'ANGLE_PI_REG', 'CUR_ANGLE_LIMIT', 'ANGLE_LOWER_LIMIT', 'CUR_ANGLE_MEAS', 'PI_RESULTS', 'COIL_INDUCT', 'R_COIL', 'R_COIL_USER', 'SGP_CONF', 'SGP_IND_2_3', 'SGP_IND_0_1', 'INDUCTANCE_VOLTAGE', 'SGP_BEMF', 'COOLSTEPPLUS_CONF', 'COOLSTEPPLUS_PI_REG', 'COOLSTEPPLUS_PI_DOWN', 'COOLSTEPPLUS_RESERVE_CONF', 'COOLSTEPPLUS_LOAD_RESERVE', 'TSTEP_VELOCITY', 'ADC_VSUPPLY_TEMP', 'ADC_I', 'OTW_OV_VTH', 'MSLUT0', 'MSLUT1', 'MSLUT2', 'MSLUT3', 'MSLUT4', 'MSLUT5', 'MSLUT6', 'MSLUT7', 'MSLUTSEL', 'MSLUTSTART', 'MSCNT', 'MSCURACT', 'CHOPCONF', 'COOLCONF', 'DRV_STATUS', 'PWMCONF')
+        176     LIST_EXTEND                     1
+        178     STORE_NAME                      7: ReadRegisters
+        180     BUILD_MAP                       0
+        182     STORE_NAME                      8: Fields
+        184     LOAD_CONST                      2: 1
+        186     LOAD_CONST                      4: 2
+        188     LOAD_CONST                      6: 4
+        190     LOAD_CONST                      68: 8
+        192     LOAD_CONST                      9: 16
+        194     LOAD_CONST                      69: 32
+        196     LOAD_CONST                      28: 64
+        198     LOAD_CONST                      70: 3840
+        200     LOAD_CONST                      71: 512
+        202     LOAD_CONST                      72: 0x80000000
+        204     LOAD_CONST                      73: ('fast_standstill', 'en_pwm_mode', 'multistep_filt', 'shaft', 'small_hysteresis', 'stop_enable', 'direct_mode', 'length_steppulse', 'OV_nN', 'step_dir')
+        206     BUILD_CONST_KEY_MAP             10
+        208     LOAD_NAME                       8: Fields
+        210     LOAD_CONST                      74: 'GCONF'
+        212     STORE_SUBSCR                    
+        214     LOAD_CONST                      2: 1
+        216     LOAD_CONST                      4: 2
+        218     LOAD_CONST                      6: 4
+        220     LOAD_CONST                      68: 8
+        222     LOAD_CONST                      9: 16
+        224     LOAD_CONST                      69: 32
+        226     LOAD_CONST                      75: ('reset', 'drv_err', 'uv_cp', 'register_reset', 'vm_uvlo', 'vccio_uv')
+        228     BUILD_CONST_KEY_MAP             6
+        230     LOAD_NAME                       8: Fields
+        232     LOAD_CONST                      76: 'GSTAT'
+        234     STORE_SUBSCR                    
+        236     LOAD_CONST                      2: 1
+        238     LOAD_CONST                      4: 2
+        240     LOAD_CONST                      6: 4
+        242     LOAD_CONST                      68: 8
+        244     LOAD_CONST                      9: 16
+        246     LOAD_CONST                      69: 32
+        248     LOAD_CONST                      28: 64
+        250     LOAD_CONST                      77: 128
+        252     LOAD_CONST                      78: 256
+        254     LOAD_CONST                      71: 512
+        256     LOAD_CONST                      79: 1024
+        258     LOAD_CONST                      80: 2048
+        260     LOAD_CONST                      81: 4096
+        262     LOAD_CONST                      82: 8192
+        264     LOAD_CONST                      83: 16384
+        266     LOAD_CONST                      84: 32768
+        268     LOAD_CONST                      85: 65536
+        270     LOAD_CONST                      86: 131072
+        272     LOAD_CONST                      87: 262144
+        274     LOAD_CONST                      88: 524288
+        276     LOAD_CONST                      89: 1048576
+        278     LOAD_CONST                      90: 2097152
+        280     LOAD_CONST                      91: 4194304
+        282     LOAD_CONST                      92: 8388608
+        284     LOAD_CONST                      93: 16777216
+        286     LOAD_CONST                      94: 33554432
+        288     LOAD_CONST                      95: 268435456
+        290     LOAD_CONST                      96: 536870912
+        292     LOAD_CONST                      97: 1073741824
+        294     LOAD_CONST                      72: 0x80000000
+        296     LOAD_CONST                      98: ('do0_error', 'do0_otpw', 'do0_stall', 'do0_index', 'do0_step', 'do0_dir', 'do0_xcomp', 'do0_ov', 'do0_dcustep', 'do0_ev_stop_ref', 'do0_ev_stop_sg', 'do0_ev_pos_reached', 'do0_ev_n_deviation', 'do1_error', 'do1_otpw', 'do1_stall', 'do1_index', 'do1_step', 'do1_dir', 'do1_xcomp', 'do1_ov', 'do1_dcustep', 'do1_ev_stop_ref', 'do1_ev_stop_sg', 'do1_ev_pos_reached', 'do1_ev_n_deviation', 'do0_nOD_PP', 'do0_invPP', 'do1_nOD_PP', 'do1_invPP')
+        298     BUILD_CONST_KEY_MAP             30
+        300     LOAD_NAME                       8: Fields
+        302     LOAD_CONST                      99: 'DIAG_CONF'
+        304     STORE_SUBSCR                    
+        306     LOAD_CONST                      2: 1
+        308     LOAD_CONST                      100: 496
+        310     LOAD_CONST                      81: 4096
+        312     LOAD_CONST                      101: 2031616
+        314     LOAD_CONST                      102: ('do0_scope_en', 'do0_scope_sel', 'do1_scope_en', 'do1_scope_sel')
+        316     BUILD_CONST_KEY_MAP             4
+        318     LOAD_NAME                       8: Fields
+        320     LOAD_CONST                      103: 'DIAG_DAC_CONF'
+        322     STORE_SUBSCR                    
+        324     LOAD_CONST                      2: 1
+        326     LOAD_CONST                      4: 2
+        328     LOAD_CONST                      6: 4
+        330     LOAD_CONST                      68: 8
+        332     LOAD_CONST                      9: 16
+        334     LOAD_CONST                      69: 32
+        336     LOAD_CONST                      82: 8192
+        338     LOAD_CONST                      83: 16384
+        340     LOAD_CONST                      104: 196608
+        342     LOAD_CONST                      105: ('refl', 'refr', 'encb', 'enca', 'drv_enn', 'encn', 'ext_res_det', 'ext_clk', 'silicon_rv')
+        344     BUILD_CONST_KEY_MAP             9
+        346     LOAD_NAME                       8: Fields
+        348     LOAD_CONST                      106: 'IOIN'
+        350     STORE_SUBSCR                    
+        352     LOAD_CONST                      5: 3
+        354     LOAD_CONST                      107: 12
+        356     LOAD_CONST                      108: 48
+        358     LOAD_CONST                      109: ('current_range', 'current_range_scale', 'slope_control')
+        360     BUILD_CONST_KEY_MAP             3
+        362     LOAD_NAME                       8: Fields
+        364     LOAD_CONST                      110: 'DRV_CONF'
+        366     STORE_SUBSCR                    
+        368     LOAD_CONST                      2: 1
+        370     LOAD_CONST                      4: 2
+        372     LOAD_CONST                      6: 4
+        374     LOAD_CONST                      17: 24
+        376     LOAD_CONST                      111: 992
+        378     LOAD_CONST                      79: 1024
+        380     LOAD_CONST                      81: 4096
+        382     LOAD_CONST                      82: 8192
+        384     LOAD_CONST                      83: 16384
+        386     LOAD_CONST                      84: 32768
+        388     LOAD_CONST                      112: ('commit', 'ext_not_int', 'clk_sys_sel', 'adc_clk_ena', 'clock_divider', 'clk_fsm_ena', 'clk_1mo_tmo', 'clk_loss', 'clk_is_stuck', 'pll_lock_loss')
+        390     BUILD_CONST_KEY_MAP             10
+        392     LOAD_NAME                       8: Fields
+        394     LOAD_CONST                      113: 'PLL'
+        396     STORE_SUBSCR                    
+        398     LOAD_CONST                      114: 255
+        400     LOAD_CONST                      115: 65280
+        402     LOAD_CONST                      116: 4128768
+        404     LOAD_CONST                      117: 251658240
+        406     LOAD_CONST                      118: ('ihold', 'irun', 'iholddelay', 'irundelay')
+        408     BUILD_CONST_KEY_MAP             4
+        410     LOAD_NAME                       8: Fields
+        412     LOAD_CONST                      119: 'IHOLD_IRUN'
+        414     STORE_SUBSCR                    
+        416     LOAD_CONST                      120: 'tpowerdown'
+        418     LOAD_CONST                      114: 255
+        420     BUILD_MAP                       1
+        422     LOAD_NAME                       8: Fields
+        424     LOAD_CONST                      121: 'TPOWERDOWN'
+        426     STORE_SUBSCR                    
+        428     LOAD_CONST                      122: 'tstep'
+        430     LOAD_CONST                      123: 1048575
+        432     BUILD_MAP                       1
+        434     LOAD_NAME                       8: Fields
+        436     LOAD_CONST                      124: 'TSTEP'
+        438     STORE_SUBSCR                    
+        440     LOAD_CONST                      125: 'tpwmthrs'
+        442     LOAD_CONST                      123: 1048575
+        444     BUILD_MAP                       1
+        446     LOAD_NAME                       8: Fields
+        448     LOAD_CONST                      126: 'TPWMTHRS'
+        450     STORE_SUBSCR                    
+        452     LOAD_CONST                      127: 'tcoolthrs'
+        454     LOAD_CONST                      123: 1048575
+        456     BUILD_MAP                       1
+        458     LOAD_NAME                       8: Fields
+        460     LOAD_CONST                      128: 'TCOOLTHRS'
+        462     STORE_SUBSCR                    
+        464     LOAD_CONST                      129: 'thigh'
+        466     LOAD_CONST                      123: 1048575
+        468     BUILD_MAP                       1
+        470     LOAD_NAME                       8: Fields
+        472     LOAD_CONST                      130: 'THIGH'
+        474     STORE_SUBSCR                    
+        476     LOAD_CONST                      131: 'TSGP_LOW_VEL_THRS'
+        478     LOAD_CONST                      123: 1048575
+        480     BUILD_MAP                       1
+        482     LOAD_NAME                       8: Fields
+        484     LOAD_CONST                      131: 'TSGP_LOW_VEL_THRS'
+        486     STORE_SUBSCR                    
+        488     LOAD_CONST                      132: 'T_RCOIL_MEAS'
+        490     LOAD_CONST                      123: 1048575
+        492     BUILD_MAP                       1
+        494     LOAD_NAME                       8: Fields
+        496     LOAD_CONST                      132: 'T_RCOIL_MEAS'
+        498     STORE_SUBSCR                    
+        500     LOAD_CONST                      133: 'TUDCSTEP'
+        502     LOAD_CONST                      123: 1048575
+        504     BUILD_MAP                       1
+        506     LOAD_NAME                       8: Fields
+        508     LOAD_CONST                      133: 'TUDCSTEP'
+        510     STORE_SUBSCR                    
+        512     LOAD_CONST                      134: 15
+        514     LOAD_CONST                      135: 240
+        516     LOAD_CONST                      78: 256
+        518     LOAD_CONST                      136: ('DECEL_THRS', 'ACCEL_THRS', 'udc_enable')
+        520     BUILD_CONST_KEY_MAP             3
+        522     LOAD_NAME                       8: Fields
+        524     LOAD_CONST                      137: 'UDC_CONF'
+        526     STORE_SUBSCR                    
+        528     LOAD_CONST                      138: 'STEPS_LOST'
+        530     LOAD_CONST                      123: 1048575
+        532     BUILD_MAP                       1
+        534     LOAD_NAME                       8: Fields
+        536     LOAD_CONST                      138: 'STEPS_LOST'
+        538     STORE_SUBSCR                    
+        540     LOAD_CONST                      2: 1
+        542     LOAD_CONST                      4: 2
+        544     LOAD_CONST                      6: 4
+        546     LOAD_CONST                      68: 8
+        548     LOAD_CONST                      9: 16
+        550     LOAD_CONST                      69: 32
+        552     LOAD_CONST                      28: 64
+        554     LOAD_CONST                      77: 128
+        556     LOAD_CONST                      78: 256
+        558     LOAD_CONST                      71: 512
+        560     LOAD_CONST                      79: 1024
+        562     LOAD_CONST                      80: 2048
+        564     LOAD_CONST                      81: 4096
+        566     LOAD_CONST                      82: 8192
+        568     LOAD_CONST                      83: 16384
+        570     LOAD_CONST                      84: 32768
+        572     LOAD_CONST                      139: ('stop_l_enable', 'stop_r_enable', 'pol_stop_l', 'pol_stop_r', 'swap_lr', 'latch_l_active', 'latch_l_inactive', 'latch_r_active', 'latch_r_inactive', 'en_latch_encoder', 'sg_stop', 'en_softstop', 'en_virtual_stio_l', 'en_virtual_stio_r', 'virtual_stop_enc', 'hard_stop_clr_cur_int')
+        574     BUILD_CONST_KEY_MAP             16
+        576     LOAD_NAME                       8: Fields
+        578     LOAD_CONST                      140: 'SW_MODE'
+        580     STORE_SUBSCR                    
+        582     LOAD_CONST                      2: 1
+        584     LOAD_CONST                      4: 2
+        586     LOAD_CONST                      6: 4
+        588     LOAD_CONST                      68: 8
+        590     LOAD_CONST                      9: 16
+        592     LOAD_CONST                      69: 32
+        594     LOAD_CONST                      28: 64
+        596     LOAD_CONST                      77: 128
+        598     LOAD_CONST                      78: 256
+        600     LOAD_CONST                      71: 512
+        602     LOAD_CONST                      79: 1024
+        604     LOAD_CONST                      80: 2048
+        606     LOAD_CONST                      81: 4096
+        608     LOAD_CONST                      82: 8192
+        610     LOAD_CONST                      83: 16384
+        612     LOAD_CONST                      84: 32768
+        614     LOAD_CONST                      141: ('status_stop_l', 'status_stop_r', 'status_latch_l', 'status_latch_r', 'event_latch_l', 'event_latch_r', 'event_stop_sg', 'event_pos_reached', 'velocity_reached', 'position_reached', 'vzero', 't_zerowait_active', 'second_move', 'status_sg', 'status_virtual_stop_r', 'status_virtual_stop_l')
+        616     BUILD_CONST_KEY_MAP             16
+        618     LOAD_NAME                       8: Fields
+        620     LOAD_CONST                      142: 'SG_SEQ_STOP_STAT'
+        622     STORE_SUBSCR                    
+        624     LOAD_CONST                      2: 1
+        626     LOAD_CONST                      4: 2
+        628     LOAD_CONST                      6: 4
+        630     LOAD_CONST                      68: 8
+        632     LOAD_CONST                      9: 16
+        634     LOAD_CONST                      69: 32
+        636     LOAD_CONST                      143: 192
+        638     LOAD_CONST                      78: 256
+        640     LOAD_CONST                      71: 512
+        642     LOAD_CONST                      79: 1024
+        644     LOAD_CONST                      80: 2048
+        646     LOAD_CONST                      144: 28672
+        648     LOAD_CONST                      145: 16711680
+        650     LOAD_CONST                      146: 805306368
+        652     LOAD_CONST                      147: ('pol_A', 'pol_B', 'pol_N', 'ignore_AB', 'clr_cont', 'clr_once', 'pos_neg_edge', 'clr_enc_x', 'latch_x_act', 'enc_sel_decimal', 'nBEMF_ABN_SEL', 'bemf_hyst', 'BEMF_BLANK_TIME', 'BEMF_FILTER_SEL')
+        654     BUILD_CONST_KEY_MAP             14
+        656     LOAD_NAME                       8: Fields
+        658     LOAD_CONST                      148: 'ENCMODE'
+        660     STORE_SUBSCR                    
+        662     LOAD_CONST                      149: 'X_ENC'
+        664     LOAD_CONST                      150: 0xFFFFFFFF
+        666     BUILD_MAP                       1
+        668     LOAD_NAME                       8: Fields
+        670     LOAD_CONST                      149: 'X_ENC'
+        672     STORE_SUBSCR                    
+        674     LOAD_CONST                      151: 'ENC_CONST'
+        676     LOAD_CONST                      150: 0xFFFFFFFF
+        678     BUILD_MAP                       1
+        680     LOAD_NAME                       8: Fields
+        682     LOAD_CONST                      151: 'ENC_CONST'
+        684     STORE_SUBSCR                    
+        686     LOAD_CONST                      2: 1
+        688     LOAD_CONST                      4: 2
+        690     LOAD_CONST                      152: ('n_event', 'deviation_wam')
+        692     BUILD_CONST_KEY_MAP             2
+        694     LOAD_NAME                       8: Fields
+        696     LOAD_CONST                      153: 'ENC_STATUS'
+        698     STORE_SUBSCR                    
+        700     LOAD_CONST                      154: 'ENC_LATCH'
+        702     LOAD_CONST                      150: 0xFFFFFFFF
+        704     BUILD_MAP                       1
+        706     LOAD_NAME                       8: Fields
+        708     LOAD_CONST                      154: 'ENC_LATCH'
+        710     STORE_SUBSCR                    
+        712     LOAD_CONST                      155: 'ENC_DEVIATION'
+        714     LOAD_CONST                      123: 1048575
+        716     BUILD_MAP                       1
+        718     LOAD_NAME                       8: Fields
+        720     LOAD_CONST                      155: 'ENC_DEVIATION'
+        722     STORE_SUBSCR                    
+        724     LOAD_CONST                      156: 4095
+        726     LOAD_CONST                      157: 268369920
+        728     LOAD_CONST                      158: ('cur_p', 'cur_i')
+        730     BUILD_CONST_KEY_MAP             2
+        732     LOAD_NAME                       8: Fields
+        734     LOAD_CONST                      159: 'CURRENT_PI_REG'
+        736     STORE_SUBSCR                    
+        738     LOAD_CONST                      156: 4095
+        740     LOAD_CONST                      157: 268369920
+        742     LOAD_CONST                      160: ('angle_p', 'angle_i')
+        744     BUILD_CONST_KEY_MAP             2
+        746     LOAD_NAME                       8: Fields
+        748     LOAD_CONST                      161: 'ANGLE_PI_REG'
+        750     STORE_SUBSCR                    
+        752     LOAD_CONST                      162: 1023
+        754     LOAD_CONST                      81: 4096
+        756     LOAD_CONST                      82: 8192
+        758     LOAD_CONST                      83: 16384
+        760     LOAD_CONST                      84: 32768
+        762     LOAD_CONST                      163: 67043328
+        764     LOAD_CONST                      95: 268435456
+        766     LOAD_CONST                      96: 536870912
+        768     LOAD_CONST                      97: 1073741824
+        770     LOAD_CONST                      72: 0x80000000
+        772     LOAD_CONST                      164: ('ANGLE_PI_LIMIT', 'angle_pi_int_pos_clip', 'angle_pi_int_neg_clip', 'angle_pi_pos_clip', 'angle_pi_neg_clip', 'CUR_PI_LIMIT', 'cur_pi_int_pos_clip', 'cur_pi_int_neg_clip', 'cur_pi_pos_clip', 'cur_pi_neg_clip')
+        774     BUILD_CONST_KEY_MAP             10
+        776     LOAD_NAME                       8: Fields
+        778     LOAD_CONST                      165: 'CUR_ANGLE_LIMIT'
+        780     STORE_SUBSCR                    
+        782     LOAD_CONST                      162: 1023
+        784     LOAD_CONST                      163: 67043328
+        786     LOAD_CONST                      166: ('ANGLE_LOWER_I_LIMIT', 'ANGLE_ERROR')
+        788     BUILD_CONST_KEY_MAP             2
+        790     LOAD_NAME                       8: Fields
+        792     LOAD_CONST                      167: 'ANGLE_LOWER_LIMIT'
+        794     STORE_SUBSCR                    
+        796     LOAD_CONST                      156: 4095
+        798     LOAD_CONST                      157: 268369920
+        800     LOAD_CONST                      168: ('AMPL_MEAS', 'ANGLE_MEAS')
+        802     BUILD_CONST_KEY_MAP             2
+        804     LOAD_NAME                       8: Fields
+        806     LOAD_CONST                      169: 'CUR_ANGLE_MEAS'
+        808     STORE_SUBSCR                    
+        810     LOAD_CONST                      170: 8191
+        812     LOAD_CONST                      171: 50266112
+        814     LOAD_CONST                      172: ('PWM_CALC', 'ANGLE_CORR_CAL')
+        816     BUILD_CONST_KEY_MAP             2
+        818     LOAD_NAME                       8: Fields
+        820     LOAD_CONST                      173: 'PI_RESULTS'
+        822     STORE_SUBSCR                    
+        824     LOAD_CONST                      174: 32767
+        826     LOAD_CONST                      85: 65536
+        828     LOAD_CONST                      86: 131072
+        830     LOAD_CONST                      175: ('coil_induct', 'rcoil_manual', 'rcoil_thermal_coupling')
+        832     BUILD_CONST_KEY_MAP             3
+        834     LOAD_NAME                       8: Fields
+        836     LOAD_CONST                      176: 'COIL_INDUCT'
+        838     STORE_SUBSCR                    
+        840     LOAD_CONST                      156: 4095
+        842     LOAD_CONST                      157: 268369920
+        844     LOAD_CONST                      177: ('R_COIL_AUTO_B', 'R_COIL_AUTO_A')
+        846     BUILD_CONST_KEY_MAP             2
+        848     LOAD_NAME                       8: Fields
+        850     LOAD_CONST                      178: 'R_COIL'
+        852     STORE_SUBSCR                    
+        854     LOAD_CONST                      156: 4095
+        856     LOAD_CONST                      157: 268369920
+        858     LOAD_CONST                      179: ('R_COIL_USER_B', 'R_COIL_USER_A')
+        860     BUILD_CONST_KEY_MAP             2
+        862     LOAD_NAME                       8: Fields
+        864     LOAD_CONST                      180: 'R_COIL_USER'
+        866     STORE_SUBSCR                    
+        868     LOAD_CONST                      181: 31
+        870     LOAD_CONST                      81: 4096
+        872     LOAD_CONST                      82: 8192
+        874     LOAD_CONST                      83: 16384
+        876     LOAD_CONST                      145: 16711680
+        878     LOAD_CONST                      146: 805306368
+        880     LOAD_CONST                      182: ('SGP_THRS', 'sgp_filt_en', 'sgp_low_vel_freeze', 'sgp_clear_cur_pi', 'SGP_LOW_VEL_SLOPE', 'SGP_LOW_VEL_CNTS')
+        882     BUILD_CONST_KEY_MAP             6
+        884     LOAD_NAME                       8: Fields
+        886     LOAD_CONST                      183: 'SGP_CONF'
+        888     STORE_SUBSCR                    
+        890     LOAD_CONST                      162: 1023
+        892     LOAD_CONST                      163: 67043328
+        894     LOAD_CONST                      184: ('SGP_IND_2', 'SGP_IND_3')
+        896     BUILD_CONST_KEY_MAP             2
+        898     LOAD_NAME                       8: Fields
+        900     LOAD_CONST                      185: 'SGP_IND_2_3'
+        902     STORE_SUBSCR                    
+        904     LOAD_CONST                      162: 1023
+        906     LOAD_CONST                      163: 67043328
+        908     LOAD_CONST                      186: ('SGP_IND_0', 'SGP_IND_1')
+        910     BUILD_CONST_KEY_MAP             2
+        912     LOAD_NAME                       8: Fields
+        914     LOAD_CONST                      187: 'SGP_IND_0_1'
+        916     STORE_SUBSCR                    
+        918     LOAD_CONST                      156: 4095
+        920     LOAD_CONST                      157: 268369920
+        922     LOAD_CONST                      188: ('UL_B', 'UL_B')
+        924     BUILD_CONST_KEY_MAP             2
+        926     LOAD_NAME                       8: Fields
+        928     LOAD_CONST                      189: 'INDUCTANCE_VOLTAGE'
+        930     STORE_SUBSCR                    
+        932     LOAD_CONST                      162: 1023
+        934     LOAD_CONST                      157: 268369920
+        936     LOAD_CONST                      190: ('SGP_RAW', 'SGP_ABS')
+        938     BUILD_CONST_KEY_MAP             2
+        940     LOAD_NAME                       8: Fields
+        942     LOAD_CONST                      191: 'SGP_BEMF'
+        944     STORE_SUBSCR                    
+        946     LOAD_CONST                      134: 15
+        948     LOAD_CONST                      9: 16
+        950     LOAD_CONST                      192: ('COOL_CUR_DIV', 'load_filt_en')
+        952     BUILD_CONST_KEY_MAP             2
+        954     LOAD_NAME                       8: Fields
+        956     LOAD_CONST                      193: 'COOLSTEPPLUS_CONF'
+        958     STORE_SUBSCR                    
+        960     LOAD_CONST                      156: 4095
+        962     LOAD_CONST                      116: 4128768
+        964     LOAD_CONST                      194: ('COOLSTEP_P', 'COOLSTEP_I')
+        966     BUILD_CONST_KEY_MAP             2
+        968     LOAD_NAME                       8: Fields
+        970     LOAD_CONST                      195: 'COOLSTEPPLUS_PI_REG'
+        972     STORE_SUBSCR                    
+        974     LOAD_CONST                      156: 4095
+        976     LOAD_CONST                      157: 268369920
+        978     LOAD_CONST                      196: ('COOL_PI_DOWN_LIMIT', 'COOL_PI_OFF_SPEED')
+        980     BUILD_CONST_KEY_MAP             2
+        982     LOAD_NAME                       8: Fields
+        984     LOAD_CONST                      197: 'COOLSTEPPLUS_PI_DOWN'
+        986     STORE_SUBSCR                    
+        988     LOAD_CONST                      162: 1023
+        990     LOAD_CONST                      157: 268369920
+        992     LOAD_CONST                      198: ('SGP_RESULT', 'COOLSTEP_LOAD_RESERVE')
+        994     BUILD_CONST_KEY_MAP             2
+        996     LOAD_NAME                       8: Fields
+        998     LOAD_CONST                      199: 'COOLSTEPPLUS_LOAD_RESERVE'
+        1000    STORE_SUBSCR                    
+        1002    LOAD_CONST                      200: 'TSTEP_VELOCITY'
+        1004    LOAD_CONST                      201: 8388607
+        1006    BUILD_MAP                       1
+        1008    LOAD_NAME                       8: Fields
+        1010    LOAD_CONST                      200: 'TSTEP_VELOCITY'
+        1012    STORE_SUBSCR                    
+        1014    LOAD_CONST                      202: 511
+        1016    LOAD_CONST                      203: 33488896
+        1018    LOAD_CONST                      204: ('ADC_VSUPPLY', 'ADC_TEMP')
+        1020    BUILD_CONST_KEY_MAP             2
+        1022    LOAD_NAME                       8: Fields
+        1024    LOAD_CONST                      205: 'ADC_VSUPPLY_TEMP'
+        1026    STORE_SUBSCR                    
+        1028    LOAD_CONST                      156: 4095
+        1030    LOAD_CONST                      157: 268369920
+        1032    LOAD_CONST                      206: ('ADC_I_A', 'ADC_I_B')
+        1034    BUILD_CONST_KEY_MAP             2
+        1036    LOAD_NAME                       8: Fields
+        1038    LOAD_CONST                      207: 'ADC_I'
+        1040    STORE_SUBSCR                    
+        1042    LOAD_CONST                      202: 511
+        1044    LOAD_CONST                      203: 33488896
+        1046    LOAD_CONST                      208: ('OVERVOLTAGE_VTH', 'OVERTEMPPREWARNING')
+        1048    BUILD_CONST_KEY_MAP             2
+        1050    LOAD_NAME                       8: Fields
+        1052    LOAD_CONST                      209: 'OTW_OV_VTH'
+        1054    STORE_SUBSCR                    
+        1056    LOAD_CONST                      210: 'mslut0'
+        1058    LOAD_CONST                      150: 0xFFFFFFFF
+        1060    BUILD_MAP                       1
+        1062    LOAD_NAME                       8: Fields
+        1064    LOAD_CONST                      211: 'MSLUT0'
+        1066    STORE_SUBSCR                    
+        1068    LOAD_CONST                      212: 'mslut1'
+        1070    LOAD_CONST                      150: 0xFFFFFFFF
+        1072    BUILD_MAP                       1
+        1074    LOAD_NAME                       8: Fields
+        1076    LOAD_CONST                      213: 'MSLUT1'
+        1078    STORE_SUBSCR                    
+        1080    LOAD_CONST                      214: 'mslut2'
+        1082    LOAD_CONST                      150: 0xFFFFFFFF
+        1084    BUILD_MAP                       1
+        1086    LOAD_NAME                       8: Fields
+        1088    LOAD_CONST                      215: 'MSLUT2'
+        1090    STORE_SUBSCR                    
+        1092    LOAD_CONST                      216: 'mslut3'
+        1094    LOAD_CONST                      150: 0xFFFFFFFF
+        1096    BUILD_MAP                       1
+        1098    LOAD_NAME                       8: Fields
+        1100    LOAD_CONST                      217: 'MSLUT3'
+        1102    STORE_SUBSCR                    
+        1104    LOAD_CONST                      218: 'mslut4'
+        1106    LOAD_CONST                      150: 0xFFFFFFFF
+        1108    BUILD_MAP                       1
+        1110    LOAD_NAME                       8: Fields
+        1112    LOAD_CONST                      219: 'MSLUT4'
+        1114    STORE_SUBSCR                    
+        1116    LOAD_CONST                      220: 'mslut5'
+        1118    LOAD_CONST                      150: 0xFFFFFFFF
+        1120    BUILD_MAP                       1
+        1122    LOAD_NAME                       8: Fields
+        1124    LOAD_CONST                      221: 'MSLUT5'
+        1126    STORE_SUBSCR                    
+        1128    LOAD_CONST                      222: 'mslut6'
+        1130    LOAD_CONST                      150: 0xFFFFFFFF
+        1132    BUILD_MAP                       1
+        1134    LOAD_NAME                       8: Fields
+        1136    LOAD_CONST                      223: 'MSLUT6'
+        1138    STORE_SUBSCR                    
+        1140    LOAD_CONST                      224: 'mslut7'
+        1142    LOAD_CONST                      150: 0xFFFFFFFF
+        1144    BUILD_MAP                       1
+        1146    LOAD_NAME                       8: Fields
+        1148    LOAD_CONST                      225: 'MSLUT7'
+        1150    STORE_SUBSCR                    
+        1152    LOAD_CONST                      5: 3
+        1154    LOAD_CONST                      107: 12
+        1156    LOAD_CONST                      108: 48
+        1158    LOAD_CONST                      143: 192
+        1160    LOAD_CONST                      115: 65280
+        1162    LOAD_CONST                      145: 16711680
+        1164    LOAD_CONST                      226: 0xFF000000
+        1166    LOAD_CONST                      227: ('w0', 'w1', 'w2', 'w3', 'x1', 'x2', 'x3')
+        1168    BUILD_CONST_KEY_MAP             7
+        1170    LOAD_NAME                       8: Fields
+        1172    LOAD_CONST                      228: 'MSLUTSEL'
+        1174    STORE_SUBSCR                    
+        1176    LOAD_CONST                      114: 255
+        1178    LOAD_CONST                      145: 16711680
+        1180    LOAD_CONST                      226: 0xFF000000
+        1182    LOAD_CONST                      229: ('start_sin', 'start_sin90', 'offset_sin90')
+        1184    BUILD_CONST_KEY_MAP             3
+        1186    LOAD_NAME                       8: Fields
+        1188    LOAD_CONST                      230: 'MSLUTSTART'
+        1190    STORE_SUBSCR                    
+        1192    LOAD_CONST                      231: 'mscnt'
+        1194    LOAD_CONST                      162: 1023
+        1196    BUILD_MAP                       1
+        1198    LOAD_NAME                       8: Fields
+        1200    LOAD_CONST                      232: 'MSCNT'
+        1202    STORE_SUBSCR                    
+        1204    LOAD_CONST                      202: 511
+        1206    LOAD_CONST                      203: 33488896
+        1208    LOAD_CONST                      233: ('cur_a', 'cur_b')
+        1210    BUILD_CONST_KEY_MAP             2
+        1212    LOAD_NAME                       8: Fields
+        1214    LOAD_CONST                      234: 'MSCURACT'
+        1216    STORE_SUBSCR                    
+        1218    LOAD_CONST                      134: 15
+        1220    LOAD_CONST                      66: 112
+        1222    LOAD_CONST                      235: 1920
+        1224    LOAD_CONST                      80: 2048
+        1226    LOAD_CONST                      81: 4096
+        1228    LOAD_CONST                      83: 16384
+        1230    LOAD_CONST                      236: 98304
+        1232    LOAD_CONST                      237: 15728640
+        1234    LOAD_CONST                      117: 251658240
+        1236    LOAD_CONST                      95: 268435456
+        1238    LOAD_CONST                      96: 536870912
+        1240    LOAD_CONST                      238: ('toff', 'hstrt', 'hend', 'fd3', 'disfdcc', 'chm', 'tbl', 'tpfd', 'mres', 'intpol', 'dedge')
+        1242    BUILD_CONST_KEY_MAP             11
+        1244    LOAD_NAME                       8: Fields
+        1246    LOAD_CONST                      239: 'CHOPCONF'
+        1248    STORE_SUBSCR                    
+        1250    LOAD_CONST                      134: 15
+        1252    LOAD_CONST                      51: 96
+        1254    LOAD_CONST                      70: 3840
+        1256    LOAD_CONST                      240: 57344
+        1258    LOAD_CONST                      84: 32768
+        1260    LOAD_CONST                      241: 8323072
+        1262    LOAD_CONST                      92: 8388608
+        1264    LOAD_CONST                      93: 16777216
+        1266    LOAD_CONST                      242: ('semin', 'seup', 'semax', 'sedn', 'seimin', 'sgt', 'thigh_sg_off', 'sfilt')
+        1268    BUILD_CONST_KEY_MAP             8
+        1270    LOAD_NAME                       8: Fields
+        1272    LOAD_CONST                      243: 'COOLCONF'
+        1274    STORE_SUBSCR                    
+        1276    LOAD_CONST                      162: 1023
+        1278    LOAD_CONST                      79: 1024
+        1280    LOAD_CONST                      80: 2048
+        1282    LOAD_CONST                      81: 4096
+        1284    LOAD_CONST                      82: 8192
+        1286    LOAD_CONST                      83: 16384
+        1288    LOAD_CONST                      145: 16711680
+        1290    LOAD_CONST                      93: 16777216
+        1292    LOAD_CONST                      94: 33554432
+        1294    LOAD_CONST                      244: 67108864
+        1296    LOAD_CONST                      245: 134217728
+        1298    LOAD_CONST                      95: 268435456
+        1300    LOAD_CONST                      96: 536870912
+        1302    LOAD_CONST                      97: 1073741824
+        1304    LOAD_CONST                      72: 0x80000000
+        1306    LOAD_CONST                      246: ('sg_result', 'seq_stopped', 'ov', 's2vsa', 's2vsb', 'stealth', 'cs_actual', 'stallguard', 'ot', 'otpw', 's2ga', 's2gb', 'ola', 'olb', 'stst')
+        1308    BUILD_CONST_KEY_MAP             15
+        1310    LOAD_NAME                       8: Fields
+        1312    LOAD_CONST                      247: 'DRV_STATUS'
+        1314    STORE_SUBSCR                    
+        1316    LOAD_CONST                      134: 15
+        1318    LOAD_CONST                      108: 48
+        1320    LOAD_CONST                      143: 192
+        1322    LOAD_CONST                      81: 4096
+        1324    LOAD_CONST                      85: 65536
+        1326    LOAD_CONST                      248: ('pwm_freq', 'freewheel', 'ol_thrsh', 'sd_on_meas_lo', 'sd_on_meas_hi')
+        1328    BUILD_CONST_KEY_MAP             5
+        1330    LOAD_NAME                       8: Fields
+        1332    LOAD_CONST                      249: 'PWMCONF'
+        1334    STORE_SUBSCR                    
+        1336    BUILD_LIST                      0
+        1338    LOAD_CONST                      250: ('cur_a', 'cur_b', 'sgt', 'pwm_scale_auto')
+        1340    LIST_EXTEND                     1
+        1342    STORE_NAME                      9: SignedFields
+        1344    LOAD_CONST                      251: <CODE> <lambda>
+        1346    LOAD_CONST                      252: '<lambda>'
+        1348    MAKE_FUNCTION                   0
+        1350    LOAD_CONST                      253: <CODE> <lambda>
+        1352    LOAD_CONST                      252: '<lambda>'
+        1354    MAKE_FUNCTION                   0
+        1356    LOAD_CONST                      254: <CODE> <lambda>
+        1358    LOAD_CONST                      252: '<lambda>'
+        1360    MAKE_FUNCTION                   0
+        1362    LOAD_CONST                      255: <CODE> <lambda>
+        1364    LOAD_CONST                      252: '<lambda>'
+        1366    MAKE_FUNCTION                   0
+        1368    LOAD_CONST                      256: <CODE> <lambda>
+        1372    LOAD_CONST                      252: '<lambda>'
+        1374    MAKE_FUNCTION                   0
+        1376    LOAD_CONST                      257: <CODE> <lambda>
+        1380    LOAD_CONST                      252: '<lambda>'
+        1382    MAKE_FUNCTION                   0
+        1384    LOAD_CONST                      258: <CODE> <lambda>
+        1388    LOAD_CONST                      252: '<lambda>'
+        1390    MAKE_FUNCTION                   0
+        1392    LOAD_CONST                      259: <CODE> <lambda>
+        1396    LOAD_CONST                      252: '<lambda>'
+        1398    MAKE_FUNCTION                   0
+        1400    LOAD_CONST                      260: <CODE> <lambda>
+        1404    LOAD_CONST                      252: '<lambda>'
+        1406    MAKE_FUNCTION                   0
+        1408    LOAD_CONST                      261: <CODE> <lambda>
+        1412    LOAD_CONST                      252: '<lambda>'
+        1414    MAKE_FUNCTION                   0
+        1416    LOAD_CONST                      262: <CODE> <lambda>
+        1420    LOAD_CONST                      252: '<lambda>'
+        1422    MAKE_FUNCTION                   0
+        1424    LOAD_CONST                      263: <CODE> <lambda>
+        1428    LOAD_CONST                      252: '<lambda>'
+        1430    MAKE_FUNCTION                   0
+        1432    LOAD_CONST                      264: <CODE> <lambda>
+        1436    LOAD_CONST                      252: '<lambda>'
+        1438    MAKE_FUNCTION                   0
+        1440    LOAD_CONST                      265: <CODE> <lambda>
+        1444    LOAD_CONST                      252: '<lambda>'
+        1446    MAKE_FUNCTION                   0
+        1448    LOAD_CONST                      266: ('shaft', 'reset', 'drv_err', 'uv_cp', 'mres', 'otpw', 'ot', 's2ga', 's2gb', 'ola', 'olb', 'cs_actual', 's2vsa', 's2vsb')
+        1452    BUILD_CONST_KEY_MAP             14
+        1454    STORE_NAME                      10: FieldFormatters
+        1456    LOAD_CONST                      267: 4.24
+        1460    STORE_NAME                      11: MAX_CURRENT
+        1462    LOAD_BUILD_CLASS                
+        1464    LOAD_CONST                      268: <CODE> TMC2262CurrentHelper
+        1468    LOAD_CONST                      269: 'TMC2262CurrentHelper'
+        1472    MAKE_FUNCTION                   0
+        1474    LOAD_CONST                      269: 'TMC2262CurrentHelper'
+        1478    CALL_FUNCTION                   2
+        1480    STORE_NAME                      12: TMC2262CurrentHelper
+        1482    LOAD_BUILD_CLASS                
+        1484    LOAD_CONST                      270: <CODE> TMC2262PLLHelper
+        1488    LOAD_CONST                      271: 'TMC2262PLLHelper'
+        1492    MAKE_FUNCTION                   0
+        1494    LOAD_CONST                      271: 'TMC2262PLLHelper'
+        1498    CALL_FUNCTION                   2
+        1500    STORE_NAME                      13: TMC2262PLLHelper
+        1502    LOAD_BUILD_CLASS                
+        1504    LOAD_CONST                      272: <CODE> TMC2262
+        1508    LOAD_CONST                      273: 'TMC2262'
+        1512    MAKE_FUNCTION                   0
+        1514    LOAD_CONST                      273: 'TMC2262'
+        1518    CALL_FUNCTION                   2
+        1520    STORE_NAME                      14: TMC2262
+        1522    LOAD_CONST                      274: <CODE> load_config_prefix
+        1526    LOAD_CONST                      275: 'load_config_prefix'
+        1530    MAKE_FUNCTION                   0
+        1532    STORE_NAME                      15: load_config_prefix
+        1534    LOAD_CONST                      1: None
+        1536    RETURN_VALUE                    

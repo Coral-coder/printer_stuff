@@ -76,7 +76,64 @@ class PauseResume:
         response = {
             'file_state': False,
             'eeprom_state': False }
-    # WARNING: Decompyle incomplete
+        if os.path.exists(self.v_sd.print_file_name_path):
+            
+            try:
+                with open(self.v_sd.print_file_name_path, 'r') as f:
+                    data = f.read()
+                    logging.info('[print_file_name_path] POWER_LOSS_DATA: \n %s', data)
+                    if len(data) == 0:
+                        logging.error('%s f.read()==None read fail!!!' % self.v_sd.print_file_name_path)
+                    response['file_state'] = True if json.loads(data) else False
+                    None(None, None, None)
+                with None:
+                    if not None:
+                        pass
+            except Exception:
+                err = None
+                
+                try:
+                    os.remove(self.v_sd.print_file_name_path)
+                    bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
+                    if bl24c16f:
+                        self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+                    logging.exception(err)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                power_loss_switch = False
+                if os.path.exists(self.v_sd.user_print_refer_path):
+                    with open(self.v_sd.user_print_refer_path, 'r') as f:
+                        data = json.loads(f.read())
+                        logging.info('[user_print_refer_path] POWER_LOSS_DATA: \n %s', data)
+                        power_loss_switch = data.get('power_loss', { }).get('switch', False)
+                        None(None, None, None)
+                    with None:
+                        if not None:
+                            pass
+
+
+        bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
+        eepromState = bl24c16f.checkEepromFirstEnable() if power_loss_switch and bl24c16f else True
+        self.gcode.run_script('EEPROM_DEBUG_READ ADDR=0 SIZE=56')
+        logging.info('power_loss_switch is %s, bl24c16f is %s, eepromState is %s', power_loss_switch, bl24c16f, eepromState)
+        if not eepromState:
+            response['eeprom_state'] = True
+        print_stats = self.printer.lookup_object('print_stats', None)
+        logging.info('print_stats.state is %s', print_stats.state)
+        if response['file_state'] == True and response['eeprom_state'] == True and print_stats and print_stats.state == 'standby':
+            print_stats.power_loss = 1
+        if print_stats and print_stats.state != 'standby':
+            response['file_state'] = False
+            response['eeprom_state'] = False
+            logging.info('current printer state:%s' % print_stats.state)
+        if os.path.exists(self.gcode.exclude_object_info):
+            if response['file_state'] == False or response['eeprom_state'] == False:
+                os.remove(self.gcode.exclude_object_info)
+        web_request.send(response)
+        return response
 
     
     def _handle_cancel_continue_print_request(self, web_request):

@@ -37,7 +37,56 @@ class ZAdjustHelper:
         msg = 'Making the following Z adjustments:\n%s' % ('\n'.join(stepstrs),)
         gcode.respond_info(msg)
         z_tilt = self.printer.lookup_object('z_tilt')
-    # WARNING: Decompyle incomplete
+        for s, a in zip(self.z_steppers, adjustments):
+            if s.get_name() == 'stepper_z':
+                z_tilt.stepper_z_adjustment += a
+                continue
+            if s.get_name() == 'stepper_z1':
+                z_tilt.stepper_z1_adjustment += a
+                continue
+                gcode.respond_info('stepper_z_adjustment:%s stepper_z1_adjustment:%s' % (z_tilt.stepper_z_adjustment, z_tilt.stepper_z1_adjustment))
+                toolhead.flush_step_generation()
+                for s in self.z_steppers:
+                    s.set_trapq(None)
+                positions = [ (-a, s) for a, s in (zip(adjustments, self.z_steppers)) ]
+                positions.sort(key=(lambda k: k[0]))
+                (first_stepper_offset, first_stepper) = positions[0]
+                z_low = curpos[2] - first_stepper_offset
+                for i in range(len(positions) - 1):
+                    (stepper_offset, stepper) = positions[i]
+                    (next_stepper_offset, next_stepper) = positions[i + 1]
+                    toolhead.flush_step_generation()
+                    stepper.set_trapq(toolhead.get_trapq())
+                    curpos[2] = z_low + next_stepper_offset
+                    
+                    try:
+                        toolhead.move(curpos, speed)
+                        toolhead.set_position(curpos)
+                    except Exception:
+                        z_tilt
+                        err = z_tilt
+                        z_tilt
+                        
+                        try:
+                            logging.exception('ZAdjustHelper adjust_steppers')
+                            toolhead.flush_step_generation()
+                            for s in self.z_steppers:
+                                s.set_trapq(toolhead.get_trapq())
+                            err_msg = '{"code":"key348", "msg":"toolhead.move(%s, %s) ZAdjustHelper adjust_steppers error:%s", "values":[]}' % (str(curpos), speed, str(err))
+                            raise gcode.error(err_msg)
+                        finally:
+                            err = None
+                            del err
+                        err = None
+                        del err
+                        continue
+                        (last_stepper_offset, last_stepper) = positions[-1]
+                        last_stepper.set_trapq(toolhead.get_trapq())
+                        curpos[2] += first_stepper_offset
+                        toolhead.set_position(curpos)
+                        return None
+
+
 
 
 
@@ -180,7 +229,33 @@ class ZTilt:
         import json
         stepper_z_adjustment = -10
         stepper_z1_adjustment = -10
-    # WARNING: Decompyle incomplete
+        if os.path.exists(self.stepper_adjustment_path):
+            result = { }
+            with open(self.stepper_adjustment_path, 'r') as f:
+                
+                try:
+                    result = json.loads(f.read())
+                    stepper_z_adjustment = result.get('stepper_z_adjustment', -10)
+                    stepper_z1_adjustment = result.get('stepper_z1_adjustment', -10)
+                except Exception:
+                    err = None
+                    
+                    try:
+                        logging.exception(err)
+                    finally:
+                        err = None
+                        del err
+                    err = None
+                    del err
+                    with None:
+                        if not None:
+                            pass
+
+
+        if stepper_z_adjustment != -10 and stepper_z1_adjustment != -10:
+            return [
+                stepper_z_adjustment,
+                stepper_z1_adjustment]
 
     
     def probe_finalize(self, offsets, positions):

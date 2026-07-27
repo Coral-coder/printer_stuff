@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/ms3200x.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: ms3200x.pyc (Python 3.9)
 
@@ -147,8 +156,13 @@ class MS32008Error(Exception):
 
 
 def load_config_prefix(config, name, default = (None,)):
-    pass
-# WARNING: Decompyle incomplete
+    
+    try:
+        pass
+    return None
+    except Exception:
+        return None
+
 
 
 class MS32008:
@@ -171,8 +185,16 @@ class MS32008:
         hold on 
         NOTE: i2c fd
         '''
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            i2c = bus.MCU_I2C_from_config(config, default_addr=i2c_addr)
+            if hasattr(i2c, 'i2c_write') and hasattr(i2c, 'i2c_read'):
+                pass
+        return None
+        except Exception:
+            pass
+
+        raise MS32008Error(f'''Could not find I2C bus object for \'{i2c_addr}\' - adjust i2c_bus in config''')
 
     
     def _i2c_write_reg(self, reg, data):

@@ -1,0 +1,2001 @@
+lis2dw.pyc (Python 3.9)
+[Code]
+    File Name: /extras/lis2dw.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 4
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'time'
+        'collections'
+        'threading'
+        'multiprocessing'
+        'os'
+        ''
+        'bus'
+        'motion_report'
+        'adxl345'
+        'REG_LIS2DW_WHO_AM_I_ADDR'
+        'REG_LIS2DW_CTRL_REG1_ADDR'
+        'REG_LIS2DW_CTRL_REG2_ADDR'
+        'REG_LIS2DW_CTRL_REG3_ADDR'
+        'REG_LIS2DW_CTRL_REG6_ADDR'
+        'REG_LIS2DW_STATUS_REG_ADDR'
+        'REG_LIS2DW_OUT_XL_ADDR'
+        'REG_LIS2DW_OUT_XH_ADDR'
+        'REG_LIS2DW_OUT_YL_ADDR'
+        'REG_LIS2DW_OUT_YH_ADDR'
+        'REG_LIS2DW_OUT_ZL_ADDR'
+        'REG_LIS2DW_OUT_ZH_ADDR'
+        'REG_LIS2DW_FIFO_CTRL'
+        'REG_LIS2DW_FIFO_SAMPLES'
+        'REG_MOD_READ'
+        'LIS2DW_DEV_ID'
+        'FREEFALL_ACCEL'
+        'SCALE'
+        'namedtuple'
+        'Accel_Measurement'
+        'MIN_MSG_TIME'
+        'BYTES_PER_SAMPLE'
+        'SAMPLES_PER_BLOCK'
+        'LIS2DW'
+        'load_config'
+        'load_config_prefix'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'bus'
+            'motion_report'
+            'adxl345'
+        )
+        15
+        32
+        33
+        34
+        37
+        39
+        40
+        41
+        42
+        43
+        44
+        45
+        46
+        47
+        128
+        68
+        9.80665
+        1.952
+        4
+        'Accel_Measurement'
+        (
+            'time'
+            'accel_x'
+            'accel_y'
+            'accel_z'
+        )
+        0.1
+        6
+        8
+        [Code]
+            File Name: /extras/lis2dw.py
+            Object Name: LIS2DW
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                '_build_config'
+                'read_reg'
+                'set_reg'
+                'is_measuring'
+                '_handle_lis2dw_data'
+                '_extract_samples'
+                '_update_clock'
+                '_start_measurements'
+                '_finish_measurements'
+                '_api_update'
+                '_api_startstop'
+                '_handle_dump_lis2dw'
+                'start_internal_client'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'LIS2DW'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 7
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'adxl345'
+                        'AccelCommandHelper'
+                        'query_rate'
+                        'SCALE'
+                        'getlist'
+                        'any'
+                        'error'
+                        'axes_map'
+                        'data_rate'
+                        'threading'
+                        'Lock'
+                        'lock'
+                        'raw_samples'
+                        'bus'
+                        'MCU_SPI_from_config'
+                        'spi'
+                        'get_mcu'
+                        'mcu'
+                        'create_oid'
+                        'oid'
+                        'query_lis2dw_cmd'
+                        'query_lis2dw_end_cmd'
+                        'query_lis2dw_status_cmd'
+                        'add_config_cmd'
+                        'get_oid'
+                        'register_config_callback'
+                        '_build_config'
+                        'register_response'
+                        '_handle_lis2dw_data'
+                        'last_sequence'
+                        'max_query_duration'
+                        'last_limit_count'
+                        'last_error_count'
+                        'ClockSyncRegression'
+                        'clock_sync'
+                        'motion_report'
+                        'APIDumpHelper'
+                        '_api_update'
+                        '_api_startstop'
+                        'api_dump'
+                        'get_name'
+                        'split'
+                        'name'
+                        'lookup_object'
+                        'register_mux_endpoint'
+                        '_handle_dump_lis2dw'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'axes_map'
+                        'mcu'
+                        'oid'
+                        'wh'
+                    [Free Vars]
+                    [Cell Vars]
+                        'am'
+                    [Constants]
+                        None
+                        0
+                        1
+                        2
+                        (
+                            'x'
+                            'y'
+                            'z'
+                            '-x'
+                            '-y'
+                            '-z'
+                        )
+                        'axes_map'
+                        (
+                            'x'
+                            'y'
+                            'z'
+                        )
+                        3
+                        (
+                            'count'
+                        )
+                        [Code]
+                            File Name: /extras/lis2dw.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'a'
+                            [Free Vars]
+                                'am'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: a
+                                8       LOAD_FAST                       1: a
+                                10      LOAD_DEREF                      0: am
+                                12      CONTAINS_OP                     1 (not in)
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                        'LIS2DW.__init__.<locals>.<listcomp>'
+                        'Invalid lis2dw axes_map parameter'
+                        [Code]
+                            File Name: /extras/lis2dw.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'strip'
+                            [Var Names]
+                                '.0'
+                                'a'
+                            [Free Vars]
+                                'am'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        16 (to 22)
+                                6       STORE_FAST                      1: a
+                                8       LOAD_DEREF                      0: am
+                                10      LOAD_FAST                       1: a
+                                12      LOAD_METHOD                     0: strip
+                                14      CALL_METHOD                     0
+                                16      BINARY_SUBSCR                   
+                                18      LIST_APPEND                     2
+                                20      JUMP_ABSOLUTE                   4
+                                22      RETURN_VALUE                    
+                        1600
+                        5000000
+                        (
+                            'default_speed'
+                        )
+                        'config_lis2dw oid=%d spi_oid=%d'
+                        'query_lis2dw oid=%d clock=0 rest_ticks=0'
+                        True
+                        (
+                            'on_restart'
+                        )
+                        'lis2dw_data'
+                        640
+                        0.1
+                        -1
+                        'webhooks'
+                        'lis2dw/dump_lis2dw'
+                        'sensor'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_GLOBAL                     2: adxl345
+                        12      LOAD_METHOD                     3: AccelCommandHelper
+                        14      LOAD_FAST                       1: config
+                        16      LOAD_FAST                       0: self
+                        18      CALL_METHOD                     2
+                        20      POP_TOP                         
+                        22      LOAD_CONST                      1: 0
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: query_rate
+                        28      LOAD_CONST                      1: 0
+                        30      LOAD_GLOBAL                     5: SCALE
+                        32      BUILD_TUPLE                     2
+                        34      LOAD_CONST                      2: 1
+                        36      LOAD_GLOBAL                     5: SCALE
+                        38      BUILD_TUPLE                     2
+                        40      LOAD_CONST                      3: 2
+                        42      LOAD_GLOBAL                     5: SCALE
+                        44      BUILD_TUPLE                     2
+                        46      LOAD_CONST                      1: 0
+                        48      LOAD_GLOBAL                     5: SCALE
+                        50      UNARY_NEGATIVE                  
+                        52      BUILD_TUPLE                     2
+                        54      LOAD_CONST                      2: 1
+                        56      LOAD_GLOBAL                     5: SCALE
+                        58      UNARY_NEGATIVE                  
+                        60      BUILD_TUPLE                     2
+                        62      LOAD_CONST                      3: 2
+                        64      LOAD_GLOBAL                     5: SCALE
+                        66      UNARY_NEGATIVE                  
+                        68      BUILD_TUPLE                     2
+                        70      LOAD_CONST                      4: ('x', 'y', 'z', '-x', '-y', '-z')
+                        72      BUILD_CONST_KEY_MAP             6
+                        74      STORE_DEREF                     0: am
+                        76      LOAD_FAST                       1: config
+                        78      LOAD_ATTR                       6: getlist
+                        80      LOAD_CONST                      5: 'axes_map'
+                        82      LOAD_CONST                      6: ('x', 'y', 'z')
+                        84      LOAD_CONST                      7: 3
+                        86      LOAD_CONST                      8: ('count',)
+                        88      CALL_FUNCTION_KW                3
+                        90      STORE_FAST                      2: axes_map
+                        92      LOAD_GLOBAL                     7: any
+                        94      LOAD_CLOSURE                    0: am
+                        96      BUILD_TUPLE                     1
+                        98      LOAD_CONST                      9: <CODE> <listcomp>
+                        100     LOAD_CONST                      10: 'LIS2DW.__init__.<locals>.<listcomp>'
+                        102     MAKE_FUNCTION                   8
+                        104     LOAD_FAST                       2: axes_map
+                        106     GET_ITER                        
+                        108     CALL_FUNCTION                   1
+                        110     CALL_FUNCTION                   1
+                        112     POP_JUMP_IF_FALSE               124
+                        114     LOAD_FAST                       1: config
+                        116     LOAD_METHOD                     8: error
+                        118     LOAD_CONST                      11: 'Invalid lis2dw axes_map parameter'
+                        120     CALL_METHOD                     1
+                        122     RAISE_VARARGS                   1
+                        124     LOAD_CLOSURE                    0: am
+                        126     BUILD_TUPLE                     1
+                        128     LOAD_CONST                      12: <CODE> <listcomp>
+                        130     LOAD_CONST                      10: 'LIS2DW.__init__.<locals>.<listcomp>'
+                        132     MAKE_FUNCTION                   8
+                        134     LOAD_FAST                       2: axes_map
+                        136     GET_ITER                        
+                        138     CALL_FUNCTION                   1
+                        140     LOAD_FAST                       0: self
+                        142     STORE_ATTR                      9: axes_map
+                        144     LOAD_CONST                      13: 1600
+                        146     LOAD_FAST                       0: self
+                        148     STORE_ATTR                      10: data_rate
+                        150     LOAD_GLOBAL                     11: threading
+                        152     LOAD_METHOD                     12: Lock
+                        154     CALL_METHOD                     0
+                        156     LOAD_FAST                       0: self
+                        158     STORE_ATTR                      13: lock
+                        160     BUILD_LIST                      0
+                        162     LOAD_FAST                       0: self
+                        164     STORE_ATTR                      14: raw_samples
+                        166     LOAD_GLOBAL                     15: bus
+                        168     LOAD_ATTR                       16: MCU_SPI_from_config
+                        170     LOAD_FAST                       1: config
+                        172     LOAD_CONST                      7: 3
+                        174     LOAD_CONST                      14: 5000000
+                        176     LOAD_CONST                      15: ('default_speed',)
+                        178     CALL_FUNCTION_KW                3
+                        180     LOAD_FAST                       0: self
+                        182     STORE_ATTR                      17: spi
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       17: spi
+                        188     LOAD_METHOD                     18: get_mcu
+                        190     CALL_METHOD                     0
+                        192     DUP_TOP                         
+                        194     LOAD_FAST                       0: self
+                        196     STORE_ATTR                      19: mcu
+                        198     STORE_FAST                      3: mcu
+                        200     LOAD_FAST                       3: mcu
+                        202     LOAD_METHOD                     20: create_oid
+                        204     CALL_METHOD                     0
+                        206     DUP_TOP                         
+                        208     LOAD_FAST                       0: self
+                        210     STORE_ATTR                      21: oid
+                        212     STORE_FAST                      4: oid
+                        214     LOAD_CONST                      0: None
+                        216     DUP_TOP                         
+                        218     LOAD_FAST                       0: self
+                        220     STORE_ATTR                      22: query_lis2dw_cmd
+                        222     LOAD_FAST                       0: self
+                        224     STORE_ATTR                      23: query_lis2dw_end_cmd
+                        226     LOAD_CONST                      0: None
+                        228     LOAD_FAST                       0: self
+                        230     STORE_ATTR                      24: query_lis2dw_status_cmd
+                        232     LOAD_FAST                       3: mcu
+                        234     LOAD_METHOD                     25: add_config_cmd
+                        236     LOAD_CONST                      16: 'config_lis2dw oid=%d spi_oid=%d'
+                        238     LOAD_FAST                       4: oid
+                        240     LOAD_FAST                       0: self
+                        242     LOAD_ATTR                       17: spi
+                        244     LOAD_METHOD                     26: get_oid
+                        246     CALL_METHOD                     0
+                        248     BUILD_TUPLE                     2
+                        250     BINARY_MODULO                   
+                        252     CALL_METHOD                     1
+                        254     POP_TOP                         
+                        256     LOAD_FAST                       3: mcu
+                        258     LOAD_ATTR                       25: add_config_cmd
+                        260     LOAD_CONST                      17: 'query_lis2dw oid=%d clock=0 rest_ticks=0'
+                        262     LOAD_FAST                       4: oid
+                        264     BUILD_TUPLE                     1
+                        266     BINARY_MODULO                   
+                        268     LOAD_CONST                      18: True
+                        270     LOAD_CONST                      19: ('on_restart',)
+                        272     CALL_FUNCTION_KW                2
+                        274     POP_TOP                         
+                        276     LOAD_FAST                       3: mcu
+                        278     LOAD_METHOD                     27: register_config_callback
+                        280     LOAD_FAST                       0: self
+                        282     LOAD_ATTR                       28: _build_config
+                        284     CALL_METHOD                     1
+                        286     POP_TOP                         
+                        288     LOAD_FAST                       3: mcu
+                        290     LOAD_METHOD                     29: register_response
+                        292     LOAD_FAST                       0: self
+                        294     LOAD_ATTR                       30: _handle_lis2dw_data
+                        296     LOAD_CONST                      20: 'lis2dw_data'
+                        298     LOAD_FAST                       4: oid
+                        300     CALL_METHOD                     3
+                        302     POP_TOP                         
+                        304     LOAD_CONST                      1: 0
+                        306     DUP_TOP                         
+                        308     LOAD_FAST                       0: self
+                        310     STORE_ATTR                      31: last_sequence
+                        312     LOAD_FAST                       0: self
+                        314     STORE_ATTR                      32: max_query_duration
+                        316     LOAD_CONST                      1: 0
+                        318     DUP_TOP                         
+                        320     LOAD_FAST                       0: self
+                        322     STORE_ATTR                      33: last_limit_count
+                        324     LOAD_FAST                       0: self
+                        326     STORE_ATTR                      34: last_error_count
+                        328     LOAD_GLOBAL                     2: adxl345
+                        330     LOAD_METHOD                     35: ClockSyncRegression
+                        332     LOAD_FAST                       0: self
+                        334     LOAD_ATTR                       19: mcu
+                        336     LOAD_CONST                      21: 640
+                        338     CALL_METHOD                     2
+                        340     LOAD_FAST                       0: self
+                        342     STORE_ATTR                      36: clock_sync
+                        344     LOAD_GLOBAL                     37: motion_report
+                        346     LOAD_METHOD                     38: APIDumpHelper
+                        348     LOAD_FAST                       0: self
+                        350     LOAD_ATTR                       1: printer
+                        352     LOAD_FAST                       0: self
+                        354     LOAD_ATTR                       39: _api_update
+                        356     LOAD_FAST                       0: self
+                        358     LOAD_ATTR                       40: _api_startstop
+                        360     LOAD_CONST                      22: 0.1
+                        362     CALL_METHOD                     4
+                        364     LOAD_FAST                       0: self
+                        366     STORE_ATTR                      41: api_dump
+                        368     LOAD_FAST                       1: config
+                        370     LOAD_METHOD                     42: get_name
+                        372     CALL_METHOD                     0
+                        374     LOAD_METHOD                     43: split
+                        376     CALL_METHOD                     0
+                        378     LOAD_CONST                      23: -1
+                        380     BINARY_SUBSCR                   
+                        382     LOAD_FAST                       0: self
+                        384     STORE_ATTR                      44: name
+                        386     LOAD_FAST                       0: self
+                        388     LOAD_ATTR                       1: printer
+                        390     LOAD_METHOD                     45: lookup_object
+                        392     LOAD_CONST                      24: 'webhooks'
+                        394     CALL_METHOD                     1
+                        396     STORE_FAST                      5: wh
+                        398     LOAD_FAST                       5: wh
+                        400     LOAD_METHOD                     46: register_mux_endpoint
+                        402     LOAD_CONST                      25: 'lis2dw/dump_lis2dw'
+                        404     LOAD_CONST                      26: 'sensor'
+                        406     LOAD_FAST                       0: self
+                        408     LOAD_ATTR                       44: name
+                        410     LOAD_FAST                       0: self
+                        412     LOAD_ATTR                       47: _handle_dump_lis2dw
+                        414     CALL_METHOD                     4
+                        416     POP_TOP                         
+                        418     LOAD_CONST                      0: None
+                        420     RETURN_VALUE                    
+                'LIS2DW.__init__'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'spi'
+                        'get_command_queue'
+                        'mcu'
+                        'lookup_command'
+                        'query_lis2dw_cmd'
+                        'lookup_query_command'
+                        'oid'
+                        'query_lis2dw_end_cmd'
+                        'query_lis2dw_status_cmd'
+                    [Var Names]
+                        'self'
+                        'cmdqueue'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'query_lis2dw oid=%c clock=%u rest_ticks=%u'
+                        (
+                            'cq'
+                        )
+                        'lis2dw_status oid=%c clock=%u query_ticks=%u next_sequence=%hu buffered=%c fifo=%c limit_count=%hu'
+                        (
+                            'oid'
+                            'cq'
+                        )
+                        'query_lis2dw_status oid=%c'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: spi
+                        4       LOAD_METHOD                     1: get_command_queue
+                        6       CALL_METHOD                     0
+                        8       STORE_FAST                      1: cmdqueue
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       2: mcu
+                        14      LOAD_ATTR                       3: lookup_command
+                        16      LOAD_CONST                      1: 'query_lis2dw oid=%c clock=%u rest_ticks=%u'
+                        18      LOAD_FAST                       1: cmdqueue
+                        20      LOAD_CONST                      2: ('cq',)
+                        22      CALL_FUNCTION_KW                2
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: query_lis2dw_cmd
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       2: mcu
+                        32      LOAD_ATTR                       5: lookup_query_command
+                        34      LOAD_CONST                      1: 'query_lis2dw oid=%c clock=%u rest_ticks=%u'
+                        36      LOAD_CONST                      3: 'lis2dw_status oid=%c clock=%u query_ticks=%u next_sequence=%hu buffered=%c fifo=%c limit_count=%hu'
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       6: oid
+                        42      LOAD_FAST                       1: cmdqueue
+                        44      LOAD_CONST                      4: ('oid', 'cq')
+                        46      CALL_FUNCTION_KW                4
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      7: query_lis2dw_end_cmd
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       2: mcu
+                        56      LOAD_ATTR                       5: lookup_query_command
+                        58      LOAD_CONST                      5: 'query_lis2dw_status oid=%c'
+                        60      LOAD_CONST                      3: 'lis2dw_status oid=%c clock=%u query_ticks=%u next_sequence=%hu buffered=%c fifo=%c limit_count=%hu'
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       6: oid
+                        66      LOAD_FAST                       1: cmdqueue
+                        68      LOAD_CONST                      4: ('oid', 'cq')
+                        70      CALL_FUNCTION_KW                4
+                        72      LOAD_FAST                       0: self
+                        74      STORE_ATTR                      8: query_lis2dw_status_cmd
+                        76      LOAD_CONST                      0: None
+                        78      RETURN_VALUE                    
+                'LIS2DW._build_config'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: read_reg
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'spi'
+                        'spi_transfer'
+                        'REG_MOD_READ'
+                        'bytearray'
+                    [Var Names]
+                        'self'
+                        'reg'
+                        'params'
+                        'response'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'response'
+                        1
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: spi
+                        4       LOAD_METHOD                     1: spi_transfer
+                        6       LOAD_FAST                       1: reg
+                        8       LOAD_GLOBAL                     2: REG_MOD_READ
+                        10      BINARY_OR                       
+                        12      LOAD_CONST                      1: 0
+                        14      BUILD_LIST                      2
+                        16      CALL_METHOD                     1
+                        18      STORE_FAST                      2: params
+                        20      LOAD_GLOBAL                     3: bytearray
+                        22      LOAD_FAST                       2: params
+                        24      LOAD_CONST                      2: 'response'
+                        26      BINARY_SUBSCR                   
+                        28      CALL_FUNCTION                   1
+                        30      STORE_FAST                      3: response
+                        32      LOAD_FAST                       3: response
+                        34      LOAD_CONST                      3: 1
+                        36      BINARY_SUBSCR                   
+                        38      RETURN_VALUE                    
+                'LIS2DW.read_reg'
+                0
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: set_reg
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'spi'
+                        'spi_send'
+                        'read_reg'
+                        'printer'
+                        'command_error'
+                    [Var Names]
+                        'self'
+                        'reg'
+                        'val'
+                        'minclock'
+                        'stored_val'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        255
+                        (
+                            'minclock'
+                        )
+                        'Failed to set LIS2DW register [0x%x] to 0x%x: got 0x%x. This is generally indicative of connection problems (e.g. faulty wiring) or a faulty lis2dw chip.'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: spi
+                        4       LOAD_ATTR                       1: spi_send
+                        6       LOAD_FAST                       1: reg
+                        8       LOAD_FAST                       2: val
+                        10      LOAD_CONST                      1: 255
+                        12      BINARY_AND                      
+                        14      BUILD_LIST                      2
+                        16      LOAD_FAST                       3: minclock
+                        18      LOAD_CONST                      2: ('minclock',)
+                        20      CALL_FUNCTION_KW                2
+                        22      POP_TOP                         
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_METHOD                     2: read_reg
+                        28      LOAD_FAST                       1: reg
+                        30      CALL_METHOD                     1
+                        32      STORE_FAST                      4: stored_val
+                        34      LOAD_FAST                       4: stored_val
+                        36      LOAD_FAST                       2: val
+                        38      COMPARE_OP                      3 (!=)
+                        40      POP_JUMP_IF_FALSE               64
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       3: printer
+                        46      LOAD_METHOD                     4: command_error
+                        48      LOAD_CONST                      3: 'Failed to set LIS2DW register [0x%x] to 0x%x: got 0x%x. This is generally indicative of connection problems (e.g. faulty wiring) or a faulty lis2dw chip.'
+                        50      LOAD_FAST                       1: reg
+                        52      LOAD_FAST                       2: val
+                        54      LOAD_FAST                       4: stored_val
+                        56      BUILD_TUPLE                     3
+                        58      BINARY_MODULO                   
+                        60      CALL_METHOD                     1
+                        62      RAISE_VARARGS                   1
+                        64      LOAD_CONST                      0: None
+                        66      RETURN_VALUE                    
+                'LIS2DW.set_reg'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: is_measuring
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'query_rate'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: query_rate
+                        4       LOAD_CONST                      1: 0
+                        6       COMPARE_OP                      4 (>)
+                        8       RETURN_VALUE                    
+                'LIS2DW.is_measuring'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _handle_lis2dw_data
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'lock'
+                        'raw_samples'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: lock
+                        4       SETUP_WITH                      28 (to 34)
+                        6       POP_TOP                         
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: raw_samples
+                        12      LOAD_METHOD                     2: append
+                        14      LOAD_FAST                       1: params
+                        16      CALL_METHOD                     1
+                        18      POP_TOP                         
+                        20      POP_BLOCK                       
+                        22      LOAD_CONST                      0: None
+                        24      DUP_TOP                         
+                        26      DUP_TOP                         
+                        28      CALL_FUNCTION                   3
+                        30      POP_TOP                         
+                        32      JUMP_FORWARD                    16 (to 50)
+                        34      WITH_EXCEPT_START               
+                        36      POP_JUMP_IF_TRUE                40
+                        38      RERAISE                         
+                        40      POP_TOP                         
+                        42      POP_TOP                         
+                        44      POP_TOP                         
+                        46      POP_EXCEPT                      
+                        48      POP_TOP                         
+                        50      LOAD_CONST                      0: None
+                        52      RETURN_VALUE                    
+                'LIS2DW._handle_lis2dw_data'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _extract_samples
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 35
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'axes_map'
+                        'last_sequence'
+                        'clock_sync'
+                        'get_time_translation'
+                        'len'
+                        'SAMPLES_PER_BLOCK'
+                        'bytearray'
+                        'range'
+                        'BYTES_PER_SAMPLE'
+                        'round'
+                        'set_last_chip_clock'
+                    [Var Names]
+                        'self'
+                        'raw_samples'
+                        'x_pos'
+                        'x_scale'
+                        'y_pos'
+                        'y_scale'
+                        'z_pos'
+                        'z_scale'
+                        'last_sequence'
+                        'time_base'
+                        'chip_base'
+                        'inv_freq'
+                        'count'
+                        'seq'
+                        'samples'
+                        'params'
+                        'seq_diff'
+                        'd'
+                        'msg_cdiff'
+                        'i'
+                        'd_xyz'
+                        'xlow'
+                        'xhigh'
+                        'ylow'
+                        'yhigh'
+                        'zlow'
+                        'zhigh'
+                        'rx'
+                        'ry'
+                        'rz'
+                        'raw_xyz'
+                        'x'
+                        'y'
+                        'z'
+                        'ptime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'sequence'
+                        65535
+                        32768
+                        1
+                        'data'
+                        8
+                        128
+                        9
+                        6
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: axes_map
+                        4       UNPACK_SEQUENCE                 3
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      2: x_pos
+                        10      STORE_FAST                      3: x_scale
+                        12      UNPACK_SEQUENCE                 2
+                        14      STORE_FAST                      4: y_pos
+                        16      STORE_FAST                      5: y_scale
+                        18      UNPACK_SEQUENCE                 2
+                        20      STORE_FAST                      6: z_pos
+                        22      STORE_FAST                      7: z_scale
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       1: last_sequence
+                        28      STORE_FAST                      8: last_sequence
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       2: clock_sync
+                        34      LOAD_METHOD                     3: get_time_translation
+                        36      CALL_METHOD                     0
+                        38      UNPACK_SEQUENCE                 3
+                        40      STORE_FAST                      9: time_base
+                        42      STORE_FAST                      10: chip_base
+                        44      STORE_FAST                      11: inv_freq
+                        46      LOAD_CONST                      1: 0
+                        48      DUP_TOP                         
+                        50      STORE_FAST                      12: count
+                        52      STORE_FAST                      13: seq
+                        54      LOAD_CONST                      0: None
+                        56      BUILD_LIST                      1
+                        58      LOAD_GLOBAL                     4: len
+                        60      LOAD_FAST                       1: raw_samples
+                        62      CALL_FUNCTION                   1
+                        64      LOAD_GLOBAL                     5: SAMPLES_PER_BLOCK
+                        66      BINARY_MULTIPLY                 
+                        68      BINARY_MULTIPLY                 
+                        70      STORE_FAST                      14: samples
+                        72      LOAD_FAST                       1: raw_samples
+                        74      GET_ITER                        
+                        76      FOR_ITER                        312 (to 392)
+                        80      STORE_FAST                      15: params
+                        82      LOAD_FAST                       8: last_sequence
+                        84      LOAD_FAST                       15: params
+                        86      LOAD_CONST                      2: 'sequence'
+                        88      BINARY_SUBSCR                   
+                        90      BINARY_SUBTRACT                 
+                        92      LOAD_CONST                      3: 65535
+                        94      BINARY_AND                      
+                        96      STORE_FAST                      16: seq_diff
+                        98      LOAD_FAST                       16: seq_diff
+                        100     LOAD_FAST                       16: seq_diff
+                        102     LOAD_CONST                      4: 32768
+                        104     BINARY_AND                      
+                        106     LOAD_CONST                      5: 1
+                        108     BINARY_LSHIFT                   
+                        110     INPLACE_SUBTRACT                
+                        112     STORE_FAST                      16: seq_diff
+                        114     LOAD_FAST                       8: last_sequence
+                        116     LOAD_FAST                       16: seq_diff
+                        118     BINARY_SUBTRACT                 
+                        120     STORE_FAST                      13: seq
+                        122     LOAD_GLOBAL                     6: bytearray
+                        124     LOAD_FAST                       15: params
+                        126     LOAD_CONST                      6: 'data'
+                        128     BINARY_SUBSCR                   
+                        130     CALL_FUNCTION                   1
+                        132     STORE_FAST                      17: d
+                        134     LOAD_FAST                       13: seq
+                        136     LOAD_GLOBAL                     5: SAMPLES_PER_BLOCK
+                        138     BINARY_MULTIPLY                 
+                        140     LOAD_FAST                       10: chip_base
+                        142     BINARY_SUBTRACT                 
+                        144     STORE_FAST                      18: msg_cdiff
+                        146     LOAD_GLOBAL                     7: range
+                        148     LOAD_GLOBAL                     4: len
+                        150     LOAD_FAST                       17: d
+                        152     CALL_FUNCTION                   1
+                        154     LOAD_GLOBAL                     8: BYTES_PER_SAMPLE
+                        156     BINARY_FLOOR_DIVIDE             
+                        158     CALL_FUNCTION                   1
+                        160     GET_ITER                        
+                        162     FOR_ITER                        226 (to 390)
+                        164     STORE_FAST                      19: i
+                        166     LOAD_FAST                       17: d
+                        168     LOAD_FAST                       19: i
+                        170     LOAD_GLOBAL                     8: BYTES_PER_SAMPLE
+                        172     BINARY_MULTIPLY                 
+                        174     LOAD_FAST                       19: i
+                        176     LOAD_CONST                      5: 1
+                        178     BINARY_ADD                      
+                        180     LOAD_GLOBAL                     8: BYTES_PER_SAMPLE
+                        182     BINARY_MULTIPLY                 
+                        184     BUILD_SLICE                     2
+                        186     BINARY_SUBSCR                   
+                        188     STORE_FAST                      20: d_xyz
+                        190     LOAD_FAST                       20: d_xyz
+                        192     UNPACK_SEQUENCE                 6
+                        194     STORE_FAST                      21: xlow
+                        196     STORE_FAST                      22: xhigh
+                        198     STORE_FAST                      23: ylow
+                        200     STORE_FAST                      24: yhigh
+                        202     STORE_FAST                      25: zlow
+                        204     STORE_FAST                      26: zhigh
+                        206     LOAD_FAST                       22: xhigh
+                        208     LOAD_CONST                      7: 8
+                        210     BINARY_LSHIFT                   
+                        212     LOAD_FAST                       21: xlow
+                        214     BINARY_OR                       
+                        216     LOAD_FAST                       22: xhigh
+                        218     LOAD_CONST                      8: 128
+                        220     BINARY_AND                      
+                        222     LOAD_CONST                      9: 9
+                        224     BINARY_LSHIFT                   
+                        226     BINARY_SUBTRACT                 
+                        228     STORE_FAST                      27: rx
+                        230     LOAD_FAST                       24: yhigh
+                        232     LOAD_CONST                      7: 8
+                        234     BINARY_LSHIFT                   
+                        236     LOAD_FAST                       23: ylow
+                        238     BINARY_OR                       
+                        240     LOAD_FAST                       24: yhigh
+                        242     LOAD_CONST                      8: 128
+                        244     BINARY_AND                      
+                        246     LOAD_CONST                      9: 9
+                        248     BINARY_LSHIFT                   
+                        250     BINARY_SUBTRACT                 
+                        252     STORE_FAST                      28: ry
+                        254     LOAD_FAST                       26: zhigh
+                        256     LOAD_CONST                      7: 8
+                        258     BINARY_LSHIFT                   
+                        260     LOAD_FAST                       25: zlow
+                        262     BINARY_OR                       
+                        264     LOAD_FAST                       26: zhigh
+                        266     LOAD_CONST                      8: 128
+                        268     BINARY_AND                      
+                        270     LOAD_CONST                      9: 9
+                        272     BINARY_LSHIFT                   
+                        274     BINARY_SUBTRACT                 
+                        276     STORE_FAST                      29: rz
+                        278     LOAD_FAST                       27: rx
+                        280     LOAD_FAST                       28: ry
+                        282     LOAD_FAST                       29: rz
+                        284     BUILD_TUPLE                     3
+                        286     STORE_FAST                      30: raw_xyz
+                        288     LOAD_GLOBAL                     9: round
+                        290     LOAD_FAST                       30: raw_xyz
+                        292     LOAD_FAST                       2: x_pos
+                        294     BINARY_SUBSCR                   
+                        296     LOAD_FAST                       3: x_scale
+                        298     BINARY_MULTIPLY                 
+                        300     LOAD_CONST                      10: 6
+                        302     CALL_FUNCTION                   2
+                        304     STORE_FAST                      31: x
+                        306     LOAD_GLOBAL                     9: round
+                        308     LOAD_FAST                       30: raw_xyz
+                        310     LOAD_FAST                       4: y_pos
+                        312     BINARY_SUBSCR                   
+                        314     LOAD_FAST                       5: y_scale
+                        316     BINARY_MULTIPLY                 
+                        318     LOAD_CONST                      10: 6
+                        320     CALL_FUNCTION                   2
+                        322     STORE_FAST                      32: y
+                        324     LOAD_GLOBAL                     9: round
+                        326     LOAD_FAST                       30: raw_xyz
+                        328     LOAD_FAST                       6: z_pos
+                        330     BINARY_SUBSCR                   
+                        332     LOAD_FAST                       7: z_scale
+                        334     BINARY_MULTIPLY                 
+                        336     LOAD_CONST                      10: 6
+                        338     CALL_FUNCTION                   2
+                        340     STORE_FAST                      33: z
+                        342     LOAD_GLOBAL                     9: round
+                        344     LOAD_FAST                       9: time_base
+                        346     LOAD_FAST                       18: msg_cdiff
+                        348     LOAD_FAST                       19: i
+                        350     BINARY_ADD                      
+                        352     LOAD_FAST                       11: inv_freq
+                        354     BINARY_MULTIPLY                 
+                        356     BINARY_ADD                      
+                        358     LOAD_CONST                      10: 6
+                        360     CALL_FUNCTION                   2
+                        362     STORE_FAST                      34: ptime
+                        364     LOAD_FAST                       34: ptime
+                        366     LOAD_FAST                       31: x
+                        368     LOAD_FAST                       32: y
+                        370     LOAD_FAST                       33: z
+                        372     BUILD_TUPLE                     4
+                        374     LOAD_FAST                       14: samples
+                        376     LOAD_FAST                       12: count
+                        378     STORE_SUBSCR                    
+                        380     LOAD_FAST                       12: count
+                        382     LOAD_CONST                      5: 1
+                        384     INPLACE_ADD                     
+                        386     STORE_FAST                      12: count
+                        388     JUMP_ABSOLUTE                   162
+                        390     JUMP_ABSOLUTE                   76
+                        392     LOAD_FAST                       0: self
+                        394     LOAD_ATTR                       2: clock_sync
+                        396     LOAD_METHOD                     10: set_last_chip_clock
+                        398     LOAD_FAST                       13: seq
+                        400     LOAD_GLOBAL                     5: SAMPLES_PER_BLOCK
+                        402     BINARY_MULTIPLY                 
+                        404     LOAD_FAST                       19: i
+                        406     BINARY_ADD                      
+                        408     CALL_METHOD                     1
+                        410     POP_TOP                         
+                        412     LOAD_FAST                       14: samples
+                        414     LOAD_FAST                       12: count
+                        416     LOAD_CONST                      0: None
+                        418     BUILD_SLICE                     2
+                        420     DELETE_SUBSCR                   
+                        422     LOAD_FAST                       14: samples
+                        424     RETURN_VALUE                    
+                'LIS2DW._extract_samples'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _update_clock
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 12
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'range'
+                        'query_lis2dw_status_cmd'
+                        'send'
+                        'oid'
+                        'printer'
+                        'command_error'
+                        'mcu'
+                        'clock32_to_clock64'
+                        'last_sequence'
+                        'last_limit_count'
+                        'max_query_duration'
+                        'max'
+                        'seconds_to_clock'
+                        'SAMPLES_PER_BLOCK'
+                        'BYTES_PER_SAMPLE'
+                        'clock_sync'
+                        'update'
+                    [Var Names]
+                        'self'
+                        'minclock'
+                        'retry'
+                        'params'
+                        'fifo'
+                        'mcu_clock'
+                        'sequence'
+                        'buffered'
+                        'limit_count'
+                        'duration'
+                        'msg_count'
+                        'chip_clock'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        5
+                        (
+                            'minclock'
+                        )
+                        'fifo'
+                        31
+                        32
+                        'Unable to query lis2dw fifo'
+                        'clock'
+                        -65536
+                        'next_sequence'
+                        65536
+                        'buffered'
+                        'limit_count'
+                        'query_ticks'
+                        2
+                        5e-06
+                        1
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: range
+                        2       LOAD_CONST                      1: 5
+                        4       CALL_FUNCTION                   1
+                        6       GET_ITER                        
+                        8       FOR_ITER                        48 (to 58)
+                        10      STORE_FAST                      2: retry
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: query_lis2dw_status_cmd
+                        16      LOAD_ATTR                       2: send
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: oid
+                        22      BUILD_LIST                      1
+                        24      LOAD_FAST                       1: minclock
+                        26      LOAD_CONST                      2: ('minclock',)
+                        28      CALL_FUNCTION_KW                2
+                        30      STORE_FAST                      3: params
+                        32      LOAD_FAST                       3: params
+                        34      LOAD_CONST                      3: 'fifo'
+                        36      BINARY_SUBSCR                   
+                        38      LOAD_CONST                      4: 31
+                        40      BINARY_AND                      
+                        42      STORE_FAST                      4: fifo
+                        44      LOAD_FAST                       4: fifo
+                        46      LOAD_CONST                      5: 32
+                        48      COMPARE_OP                      1 (<=)
+                        50      POP_JUMP_IF_FALSE               8
+                        52      POP_TOP                         
+                        54      JUMP_ABSOLUTE                   70
+                        56      JUMP_ABSOLUTE                   8
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       4: printer
+                        62      LOAD_METHOD                     5: command_error
+                        64      LOAD_CONST                      6: 'Unable to query lis2dw fifo'
+                        66      CALL_METHOD                     1
+                        68      RAISE_VARARGS                   1
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       6: mcu
+                        74      LOAD_METHOD                     7: clock32_to_clock64
+                        76      LOAD_FAST                       3: params
+                        78      LOAD_CONST                      7: 'clock'
+                        80      BINARY_SUBSCR                   
+                        82      CALL_METHOD                     1
+                        84      STORE_FAST                      5: mcu_clock
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       8: last_sequence
+                        90      LOAD_CONST                      8: -65536
+                        92      BINARY_AND                      
+                        94      LOAD_FAST                       3: params
+                        96      LOAD_CONST                      9: 'next_sequence'
+                        98      BINARY_SUBSCR                   
+                        100     BINARY_OR                       
+                        102     STORE_FAST                      6: sequence
+                        104     LOAD_FAST                       6: sequence
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       8: last_sequence
+                        110     COMPARE_OP                      0 (<)
+                        112     POP_JUMP_IF_FALSE               122
+                        114     LOAD_FAST                       6: sequence
+                        116     LOAD_CONST                      10: 65536
+                        118     INPLACE_ADD                     
+                        120     STORE_FAST                      6: sequence
+                        122     LOAD_FAST                       6: sequence
+                        124     LOAD_FAST                       0: self
+                        126     STORE_ATTR                      8: last_sequence
+                        128     LOAD_FAST                       3: params
+                        130     LOAD_CONST                      11: 'buffered'
+                        132     BINARY_SUBSCR                   
+                        134     STORE_FAST                      7: buffered
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       9: last_limit_count
+                        140     LOAD_CONST                      8: -65536
+                        142     BINARY_AND                      
+                        144     LOAD_FAST                       3: params
+                        146     LOAD_CONST                      12: 'limit_count'
+                        148     BINARY_SUBSCR                   
+                        150     BINARY_OR                       
+                        152     STORE_FAST                      8: limit_count
+                        154     LOAD_FAST                       8: limit_count
+                        156     LOAD_FAST                       0: self
+                        158     LOAD_ATTR                       9: last_limit_count
+                        160     COMPARE_OP                      0 (<)
+                        162     POP_JUMP_IF_FALSE               172
+                        164     LOAD_FAST                       8: limit_count
+                        166     LOAD_CONST                      10: 65536
+                        168     INPLACE_ADD                     
+                        170     STORE_FAST                      8: limit_count
+                        172     LOAD_FAST                       8: limit_count
+                        174     LOAD_FAST                       0: self
+                        176     STORE_ATTR                      9: last_limit_count
+                        178     LOAD_FAST                       3: params
+                        180     LOAD_CONST                      13: 'query_ticks'
+                        182     BINARY_SUBSCR                   
+                        184     STORE_FAST                      9: duration
+                        186     LOAD_FAST                       9: duration
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       10: max_query_duration
+                        192     COMPARE_OP                      4 (>)
+                        194     POP_JUMP_IF_FALSE               226
+                        196     LOAD_GLOBAL                     11: max
+                        198     LOAD_CONST                      14: 2
+                        200     LOAD_FAST                       0: self
+                        202     LOAD_ATTR                       10: max_query_duration
+                        204     BINARY_MULTIPLY                 
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       6: mcu
+                        210     LOAD_METHOD                     12: seconds_to_clock
+                        212     LOAD_CONST                      15: 5e-06
+                        214     CALL_METHOD                     1
+                        216     CALL_FUNCTION                   2
+                        218     LOAD_FAST                       0: self
+                        220     STORE_ATTR                      10: max_query_duration
+                        222     LOAD_CONST                      0: None
+                        224     RETURN_VALUE                    
+                        226     LOAD_CONST                      14: 2
+                        228     LOAD_FAST                       9: duration
+                        230     BINARY_MULTIPLY                 
+                        232     LOAD_FAST                       0: self
+                        234     STORE_ATTR                      10: max_query_duration
+                        236     LOAD_FAST                       6: sequence
+                        238     LOAD_GLOBAL                     13: SAMPLES_PER_BLOCK
+                        240     BINARY_MULTIPLY                 
+                        242     LOAD_FAST                       7: buffered
+                        244     LOAD_GLOBAL                     14: BYTES_PER_SAMPLE
+                        246     BINARY_FLOOR_DIVIDE             
+                        248     BINARY_ADD                      
+                        250     LOAD_FAST                       4: fifo
+                        252     BINARY_ADD                      
+                        254     STORE_FAST                      10: msg_count
+                        256     LOAD_FAST                       10: msg_count
+                        258     LOAD_CONST                      16: 1
+                        260     BINARY_ADD                      
+                        262     STORE_FAST                      11: chip_clock
+                        264     LOAD_FAST                       0: self
+                        266     LOAD_ATTR                       15: clock_sync
+                        268     LOAD_METHOD                     16: update
+                        270     LOAD_FAST                       5: mcu_clock
+                        272     LOAD_FAST                       9: duration
+                        274     LOAD_CONST                      14: 2
+                        276     BINARY_FLOOR_DIVIDE             
+                        278     BINARY_ADD                      
+                        280     LOAD_FAST                       11: chip_clock
+                        282     CALL_METHOD                     2
+                        284     POP_TOP                         
+                        286     LOAD_CONST                      0: None
+                        288     RETURN_VALUE                    
+                'LIS2DW._update_clock'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _start_measurements
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_measuring'
+                        'read_reg'
+                        'REG_LIS2DW_WHO_AM_I_ADDR'
+                        'logging'
+                        'info'
+                        'LIS2DW_DEV_ID'
+                        'printer'
+                        'command_error'
+                        'set_reg'
+                        'REG_LIS2DW_CTRL_REG6_ADDR'
+                        'REG_LIS2DW_FIFO_CTRL'
+                        'REG_LIS2DW_CTRL_REG1_ADDR'
+                        'lock'
+                        'raw_samples'
+                        'get_reactor'
+                        'monotonic'
+                        'mcu'
+                        'estimated_print_time'
+                        'MIN_MSG_TIME'
+                        'print_time_to_clock'
+                        'seconds_to_clock'
+                        'data_rate'
+                        'query_rate'
+                        'query_lis2dw_cmd'
+                        'send'
+                        'oid'
+                        'name'
+                        'last_sequence'
+                        'last_limit_count'
+                        'last_error_count'
+                        'clock_sync'
+                        'reset'
+                        'max_query_duration'
+                        '_update_clock'
+                    [Var Names]
+                        'self'
+                        'dev_id'
+                        'systime'
+                        'print_time'
+                        'reqclock'
+                        'rest_ticks'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'lis2dw_dev_id: %x'
+                        'Invalid lis2dw id (got %x vs %x).\nThis is generally indicative of connection problems\n(e.g. faulty wiring) or a faulty lis2dw chip.'
+                        52
+                        192
+                        148
+                        4
+                        (
+                            'reqclock'
+                        )
+                        "LIS2DW starting '%s' measurements"
+                        0
+                        0x80000000
+                        (
+                            'minclock'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: is_measuring
+                        4       CALL_METHOD                     0
+                        6       POP_JUMP_IF_FALSE               12
+                        8       LOAD_CONST                      0: None
+                        10      RETURN_VALUE                    
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_METHOD                     1: read_reg
+                        16      LOAD_GLOBAL                     2: REG_LIS2DW_WHO_AM_I_ADDR
+                        18      CALL_METHOD                     1
+                        20      STORE_FAST                      1: dev_id
+                        22      LOAD_GLOBAL                     3: logging
+                        24      LOAD_METHOD                     4: info
+                        26      LOAD_CONST                      1: 'lis2dw_dev_id: %x'
+                        28      LOAD_FAST                       1: dev_id
+                        30      CALL_METHOD                     2
+                        32      POP_TOP                         
+                        34      LOAD_FAST                       1: dev_id
+                        36      LOAD_GLOBAL                     5: LIS2DW_DEV_ID
+                        38      COMPARE_OP                      3 (!=)
+                        40      POP_JUMP_IF_FALSE               62
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       6: printer
+                        46      LOAD_METHOD                     7: command_error
+                        48      LOAD_CONST                      2: 'Invalid lis2dw id (got %x vs %x).\nThis is generally indicative of connection problems\n(e.g. faulty wiring) or a faulty lis2dw chip.'
+                        50      LOAD_FAST                       1: dev_id
+                        52      LOAD_GLOBAL                     5: LIS2DW_DEV_ID
+                        54      BUILD_TUPLE                     2
+                        56      BINARY_MODULO                   
+                        58      CALL_METHOD                     1
+                        60      RAISE_VARARGS                   1
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_METHOD                     8: set_reg
+                        66      LOAD_GLOBAL                     9: REG_LIS2DW_CTRL_REG6_ADDR
+                        68      LOAD_CONST                      3: 52
+                        70      CALL_METHOD                     2
+                        72      POP_TOP                         
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_METHOD                     8: set_reg
+                        78      LOAD_GLOBAL                     10: REG_LIS2DW_FIFO_CTRL
+                        80      LOAD_CONST                      4: 192
+                        82      CALL_METHOD                     2
+                        84      POP_TOP                         
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_METHOD                     8: set_reg
+                        90      LOAD_GLOBAL                     11: REG_LIS2DW_CTRL_REG1_ADDR
+                        92      LOAD_CONST                      5: 148
+                        94      CALL_METHOD                     2
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       12: lock
+                        102     SETUP_WITH                      22 (to 126)
+                        104     POP_TOP                         
+                        106     BUILD_LIST                      0
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      13: raw_samples
+                        112     POP_BLOCK                       
+                        114     LOAD_CONST                      0: None
+                        116     DUP_TOP                         
+                        118     DUP_TOP                         
+                        120     CALL_FUNCTION                   3
+                        122     POP_TOP                         
+                        124     JUMP_FORWARD                    16 (to 142)
+                        126     WITH_EXCEPT_START               
+                        128     POP_JUMP_IF_TRUE                132
+                        130     RERAISE                         
+                        132     POP_TOP                         
+                        134     POP_TOP                         
+                        136     POP_TOP                         
+                        138     POP_EXCEPT                      
+                        140     POP_TOP                         
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       6: printer
+                        146     LOAD_METHOD                     14: get_reactor
+                        148     CALL_METHOD                     0
+                        150     LOAD_METHOD                     15: monotonic
+                        152     CALL_METHOD                     0
+                        154     STORE_FAST                      2: systime
+                        156     LOAD_FAST                       0: self
+                        158     LOAD_ATTR                       16: mcu
+                        160     LOAD_METHOD                     17: estimated_print_time
+                        162     LOAD_FAST                       2: systime
+                        164     CALL_METHOD                     1
+                        166     LOAD_GLOBAL                     18: MIN_MSG_TIME
+                        168     BINARY_ADD                      
+                        170     STORE_FAST                      3: print_time
+                        172     LOAD_FAST                       0: self
+                        174     LOAD_ATTR                       16: mcu
+                        176     LOAD_METHOD                     19: print_time_to_clock
+                        178     LOAD_FAST                       3: print_time
+                        180     CALL_METHOD                     1
+                        182     STORE_FAST                      4: reqclock
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       16: mcu
+                        188     LOAD_METHOD                     20: seconds_to_clock
+                        190     LOAD_CONST                      6: 4
+                        192     LOAD_FAST                       0: self
+                        194     LOAD_ATTR                       21: data_rate
+                        196     BINARY_TRUE_DIVIDE              
+                        198     CALL_METHOD                     1
+                        200     STORE_FAST                      5: rest_ticks
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       21: data_rate
+                        206     LOAD_FAST                       0: self
+                        208     STORE_ATTR                      22: query_rate
+                        210     LOAD_FAST                       0: self
+                        212     LOAD_ATTR                       23: query_lis2dw_cmd
+                        214     LOAD_ATTR                       24: send
+                        216     LOAD_FAST                       0: self
+                        218     LOAD_ATTR                       25: oid
+                        220     LOAD_FAST                       4: reqclock
+                        222     LOAD_FAST                       5: rest_ticks
+                        224     BUILD_LIST                      3
+                        226     LOAD_FAST                       4: reqclock
+                        228     LOAD_CONST                      7: ('reqclock',)
+                        230     CALL_FUNCTION_KW                2
+                        232     POP_TOP                         
+                        234     LOAD_GLOBAL                     3: logging
+                        236     LOAD_METHOD                     4: info
+                        238     LOAD_CONST                      8: "LIS2DW starting '%s' measurements"
+                        240     LOAD_FAST                       0: self
+                        242     LOAD_ATTR                       26: name
+                        244     CALL_METHOD                     2
+                        246     POP_TOP                         
+                        248     LOAD_CONST                      9: 0
+                        250     LOAD_FAST                       0: self
+                        252     STORE_ATTR                      27: last_sequence
+                        254     LOAD_CONST                      9: 0
+                        256     DUP_TOP                         
+                        258     LOAD_FAST                       0: self
+                        260     STORE_ATTR                      28: last_limit_count
+                        262     LOAD_FAST                       0: self
+                        264     STORE_ATTR                      29: last_error_count
+                        266     LOAD_FAST                       0: self
+                        268     LOAD_ATTR                       30: clock_sync
+                        270     LOAD_METHOD                     31: reset
+                        272     LOAD_FAST                       4: reqclock
+                        274     LOAD_CONST                      9: 0
+                        276     CALL_METHOD                     2
+                        278     POP_TOP                         
+                        280     LOAD_CONST                      10: 0x80000000
+                        282     LOAD_FAST                       0: self
+                        284     STORE_ATTR                      32: max_query_duration
+                        286     LOAD_FAST                       0: self
+                        288     LOAD_ATTR                       33: _update_clock
+                        290     LOAD_FAST                       4: reqclock
+                        292     LOAD_CONST                      11: ('minclock',)
+                        294     CALL_FUNCTION_KW                1
+                        296     POP_TOP                         
+                        298     LOAD_CONST                      10: 0x80000000
+                        300     LOAD_FAST                       0: self
+                        302     STORE_ATTR                      32: max_query_duration
+                        304     LOAD_CONST                      0: None
+                        306     RETURN_VALUE                    
+                'LIS2DW._start_measurements'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _finish_measurements
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_measuring'
+                        'query_lis2dw_end_cmd'
+                        'send'
+                        'oid'
+                        'query_rate'
+                        'lock'
+                        'raw_samples'
+                        'logging'
+                        'info'
+                        'name'
+                        'set_reg'
+                        'REG_LIS2DW_FIFO_CTRL'
+                    [Var Names]
+                        'self'
+                        'params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        "LIS2DW finished '%s' measurements"
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: is_measuring
+                        4       CALL_METHOD                     0
+                        6       POP_JUMP_IF_TRUE                12
+                        8       LOAD_CONST                      0: None
+                        10      RETURN_VALUE                    
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: query_lis2dw_end_cmd
+                        16      LOAD_METHOD                     2: send
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: oid
+                        22      LOAD_CONST                      1: 0
+                        24      LOAD_CONST                      1: 0
+                        26      BUILD_LIST                      3
+                        28      CALL_METHOD                     1
+                        30      STORE_FAST                      1: params
+                        32      LOAD_CONST                      1: 0
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      4: query_rate
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       5: lock
+                        42      SETUP_WITH                      22 (to 66)
+                        44      POP_TOP                         
+                        46      BUILD_LIST                      0
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      6: raw_samples
+                        52      POP_BLOCK                       
+                        54      LOAD_CONST                      0: None
+                        56      DUP_TOP                         
+                        58      DUP_TOP                         
+                        60      CALL_FUNCTION                   3
+                        62      POP_TOP                         
+                        64      JUMP_FORWARD                    16 (to 82)
+                        66      WITH_EXCEPT_START               
+                        68      POP_JUMP_IF_TRUE                72
+                        70      RERAISE                         
+                        72      POP_TOP                         
+                        74      POP_TOP                         
+                        76      POP_TOP                         
+                        78      POP_EXCEPT                      
+                        80      POP_TOP                         
+                        82      LOAD_GLOBAL                     7: logging
+                        84      LOAD_METHOD                     8: info
+                        86      LOAD_CONST                      2: "LIS2DW finished '%s' measurements"
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       9: name
+                        92      CALL_METHOD                     2
+                        94      POP_TOP                         
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_METHOD                     10: set_reg
+                        100     LOAD_GLOBAL                     11: REG_LIS2DW_FIFO_CTRL
+                        102     LOAD_CONST                      1: 0
+                        104     CALL_METHOD                     2
+                        106     POP_TOP                         
+                        108     LOAD_CONST                      0: None
+                        110     RETURN_VALUE                    
+                'LIS2DW._finish_measurements'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _api_update
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_update_clock'
+                        'lock'
+                        'raw_samples'
+                        '_extract_samples'
+                        'last_error_count'
+                        'last_limit_count'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'raw_samples'
+                        'samples'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'data'
+                            'errors'
+                            'overflows'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _update_clock
+                        4       CALL_METHOD                     0
+                        6       POP_TOP                         
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: lock
+                        12      SETUP_WITH                      28 (to 42)
+                        14      POP_TOP                         
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: raw_samples
+                        20      STORE_FAST                      2: raw_samples
+                        22      BUILD_LIST                      0
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      2: raw_samples
+                        28      POP_BLOCK                       
+                        30      LOAD_CONST                      0: None
+                        32      DUP_TOP                         
+                        34      DUP_TOP                         
+                        36      CALL_FUNCTION                   3
+                        38      POP_TOP                         
+                        40      JUMP_FORWARD                    16 (to 58)
+                        42      WITH_EXCEPT_START               
+                        44      POP_JUMP_IF_TRUE                48
+                        46      RERAISE                         
+                        48      POP_TOP                         
+                        50      POP_TOP                         
+                        52      POP_TOP                         
+                        54      POP_EXCEPT                      
+                        56      POP_TOP                         
+                        58      LOAD_FAST                       2: raw_samples
+                        60      POP_JUMP_IF_TRUE                66
+                        62      BUILD_MAP                       0
+                        64      RETURN_VALUE                    
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_METHOD                     3: _extract_samples
+                        70      LOAD_FAST                       2: raw_samples
+                        72      CALL_METHOD                     1
+                        74      STORE_FAST                      3: samples
+                        76      LOAD_FAST                       3: samples
+                        78      POP_JUMP_IF_TRUE                84
+                        80      BUILD_MAP                       0
+                        82      RETURN_VALUE                    
+                        84      LOAD_FAST                       3: samples
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       4: last_error_count
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       5: last_limit_count
+                        94      LOAD_CONST                      1: ('data', 'errors', 'overflows')
+                        96      BUILD_CONST_KEY_MAP             3
+                        98      RETURN_VALUE                    
+                'LIS2DW._api_update'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _api_startstop
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_start_measurements'
+                        '_finish_measurements'
+                    [Var Names]
+                        'self'
+                        'is_start'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: is_start
+                        2       POP_JUMP_IF_FALSE               14
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_METHOD                     0: _start_measurements
+                        8       CALL_METHOD                     0
+                        10      POP_TOP                         
+                        12      JUMP_FORWARD                    8 (to 22)
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_METHOD                     1: _finish_measurements
+                        18      CALL_METHOD                     0
+                        20      POP_TOP                         
+                        22      LOAD_CONST                      0: None
+                        24      RETURN_VALUE                    
+                'LIS2DW._api_startstop'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: _handle_dump_lis2dw
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'api_dump'
+                        'add_client'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'hdr'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'time'
+                            'x_acceleration'
+                            'y_acceleration'
+                            'z_acceleration'
+                        )
+                        'header'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: api_dump
+                        4       LOAD_METHOD                     1: add_client
+                        6       LOAD_FAST                       1: web_request
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      1: ('time', 'x_acceleration', 'y_acceleration', 'z_acceleration')
+                        14      STORE_FAST                      2: hdr
+                        16      LOAD_FAST                       1: web_request
+                        18      LOAD_METHOD                     2: send
+                        20      LOAD_CONST                      2: 'header'
+                        22      LOAD_FAST                       2: hdr
+                        24      BUILD_MAP                       1
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                'LIS2DW._handle_dump_lis2dw'
+                [Code]
+                    File Name: /extras/lis2dw.py
+                    Object Name: start_internal_client
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'api_dump'
+                        'add_internal_client'
+                        'adxl345'
+                        'AccelQueryHelper'
+                        'printer'
+                    [Var Names]
+                        'self'
+                        'cconn'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: api_dump
+                        4       LOAD_METHOD                     1: add_internal_client
+                        6       CALL_METHOD                     0
+                        8       STORE_FAST                      1: cconn
+                        10      LOAD_GLOBAL                     2: adxl345
+                        12      LOAD_METHOD                     3: AccelQueryHelper
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       4: printer
+                        18      LOAD_FAST                       1: cconn
+                        20      CALL_METHOD                     2
+                        22      RETURN_VALUE                    
+                'LIS2DW.start_internal_client'
+                None
+                (
+                    0
+                )
+                (
+                    0
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'LIS2DW'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'LIS2DW.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> _build_config
+                18      LOAD_CONST                      4: 'LIS2DW._build_config'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: _build_config
+                24      LOAD_CONST                      5: <CODE> read_reg
+                26      LOAD_CONST                      6: 'LIS2DW.read_reg'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: read_reg
+                32      LOAD_CONST                      31: (0,)
+                34      LOAD_CONST                      8: <CODE> set_reg
+                36      LOAD_CONST                      9: 'LIS2DW.set_reg'
+                38      MAKE_FUNCTION                   1
+                40      STORE_NAME                      6: set_reg
+                42      LOAD_CONST                      10: <CODE> is_measuring
+                44      LOAD_CONST                      11: 'LIS2DW.is_measuring'
+                46      MAKE_FUNCTION                   0
+                48      STORE_NAME                      7: is_measuring
+                50      LOAD_CONST                      12: <CODE> _handle_lis2dw_data
+                52      LOAD_CONST                      13: 'LIS2DW._handle_lis2dw_data'
+                54      MAKE_FUNCTION                   0
+                56      STORE_NAME                      8: _handle_lis2dw_data
+                58      LOAD_CONST                      14: <CODE> _extract_samples
+                60      LOAD_CONST                      15: 'LIS2DW._extract_samples'
+                62      MAKE_FUNCTION                   0
+                64      STORE_NAME                      9: _extract_samples
+                66      LOAD_CONST                      32: (0,)
+                68      LOAD_CONST                      16: <CODE> _update_clock
+                70      LOAD_CONST                      17: 'LIS2DW._update_clock'
+                72      MAKE_FUNCTION                   1
+                74      STORE_NAME                      10: _update_clock
+                76      LOAD_CONST                      18: <CODE> _start_measurements
+                78      LOAD_CONST                      19: 'LIS2DW._start_measurements'
+                80      MAKE_FUNCTION                   0
+                82      STORE_NAME                      11: _start_measurements
+                84      LOAD_CONST                      20: <CODE> _finish_measurements
+                86      LOAD_CONST                      21: 'LIS2DW._finish_measurements'
+                88      MAKE_FUNCTION                   0
+                90      STORE_NAME                      12: _finish_measurements
+                92      LOAD_CONST                      22: <CODE> _api_update
+                94      LOAD_CONST                      23: 'LIS2DW._api_update'
+                96      MAKE_FUNCTION                   0
+                98      STORE_NAME                      13: _api_update
+                100     LOAD_CONST                      24: <CODE> _api_startstop
+                102     LOAD_CONST                      25: 'LIS2DW._api_startstop'
+                104     MAKE_FUNCTION                   0
+                106     STORE_NAME                      14: _api_startstop
+                108     LOAD_CONST                      26: <CODE> _handle_dump_lis2dw
+                110     LOAD_CONST                      27: 'LIS2DW._handle_dump_lis2dw'
+                112     MAKE_FUNCTION                   0
+                114     STORE_NAME                      15: _handle_dump_lis2dw
+                116     LOAD_CONST                      28: <CODE> start_internal_client
+                118     LOAD_CONST                      29: 'LIS2DW.start_internal_client'
+                120     MAKE_FUNCTION                   0
+                122     STORE_NAME                      16: start_internal_client
+                124     LOAD_CONST                      30: None
+                126     RETURN_VALUE                    
+        'LIS2DW'
+        [Code]
+            File Name: /extras/lis2dw.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'LIS2DW'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: LIS2DW
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+        [Code]
+            File Name: /extras/lis2dw.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'LIS2DW'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: LIS2DW
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: time
+        14      STORE_NAME                      1: time
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: collections
+        22      STORE_NAME                      2: collections
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      1: None
+        28      IMPORT_NAME                     3: threading
+        30      STORE_NAME                      3: threading
+        32      LOAD_CONST                      0: 0
+        34      LOAD_CONST                      1: None
+        36      IMPORT_NAME                     4: multiprocessing
+        38      STORE_NAME                      4: multiprocessing
+        40      LOAD_CONST                      0: 0
+        42      LOAD_CONST                      1: None
+        44      IMPORT_NAME                     5: os
+        46      STORE_NAME                      5: os
+        48      LOAD_CONST                      2: 1
+        50      LOAD_CONST                      3: ('bus', 'motion_report', 'adxl345')
+        52      IMPORT_NAME                     6: 
+        54      IMPORT_FROM                     7: bus
+        56      STORE_NAME                      7: bus
+        58      IMPORT_FROM                     8: motion_report
+        60      STORE_NAME                      8: motion_report
+        62      IMPORT_FROM                     9: adxl345
+        64      STORE_NAME                      9: adxl345
+        66      POP_TOP                         
+        68      LOAD_CONST                      4: 15
+        70      STORE_NAME                      10: REG_LIS2DW_WHO_AM_I_ADDR
+        72      LOAD_CONST                      5: 32
+        74      STORE_NAME                      11: REG_LIS2DW_CTRL_REG1_ADDR
+        76      LOAD_CONST                      6: 33
+        78      STORE_NAME                      12: REG_LIS2DW_CTRL_REG2_ADDR
+        80      LOAD_CONST                      7: 34
+        82      STORE_NAME                      13: REG_LIS2DW_CTRL_REG3_ADDR
+        84      LOAD_CONST                      8: 37
+        86      STORE_NAME                      14: REG_LIS2DW_CTRL_REG6_ADDR
+        88      LOAD_CONST                      9: 39
+        90      STORE_NAME                      15: REG_LIS2DW_STATUS_REG_ADDR
+        92      LOAD_CONST                      10: 40
+        94      STORE_NAME                      16: REG_LIS2DW_OUT_XL_ADDR
+        96      LOAD_CONST                      11: 41
+        98      STORE_NAME                      17: REG_LIS2DW_OUT_XH_ADDR
+        100     LOAD_CONST                      12: 42
+        102     STORE_NAME                      18: REG_LIS2DW_OUT_YL_ADDR
+        104     LOAD_CONST                      13: 43
+        106     STORE_NAME                      19: REG_LIS2DW_OUT_YH_ADDR
+        108     LOAD_CONST                      14: 44
+        110     STORE_NAME                      20: REG_LIS2DW_OUT_ZL_ADDR
+        112     LOAD_CONST                      15: 45
+        114     STORE_NAME                      21: REG_LIS2DW_OUT_ZH_ADDR
+        116     LOAD_CONST                      16: 46
+        118     STORE_NAME                      22: REG_LIS2DW_FIFO_CTRL
+        120     LOAD_CONST                      17: 47
+        122     STORE_NAME                      23: REG_LIS2DW_FIFO_SAMPLES
+        124     LOAD_CONST                      18: 128
+        126     STORE_NAME                      24: REG_MOD_READ
+        128     LOAD_CONST                      19: 68
+        130     STORE_NAME                      25: LIS2DW_DEV_ID
+        132     LOAD_CONST                      20: 9.80665
+        134     STORE_NAME                      26: FREEFALL_ACCEL
+        136     LOAD_NAME                       26: FREEFALL_ACCEL
+        138     LOAD_CONST                      21: 1.952
+        140     BINARY_MULTIPLY                 
+        142     LOAD_CONST                      22: 4
+        144     BINARY_TRUE_DIVIDE              
+        146     STORE_NAME                      27: SCALE
+        148     LOAD_NAME                       2: collections
+        150     LOAD_METHOD                     28: namedtuple
+        152     LOAD_CONST                      23: 'Accel_Measurement'
+        154     LOAD_CONST                      24: ('time', 'accel_x', 'accel_y', 'accel_z')
+        156     CALL_METHOD                     2
+        158     STORE_NAME                      29: Accel_Measurement
+        160     LOAD_CONST                      25: 0.1
+        162     STORE_NAME                      30: MIN_MSG_TIME
+        164     LOAD_CONST                      26: 6
+        166     STORE_NAME                      31: BYTES_PER_SAMPLE
+        168     LOAD_CONST                      27: 8
+        170     STORE_NAME                      32: SAMPLES_PER_BLOCK
+        172     LOAD_BUILD_CLASS                
+        174     LOAD_CONST                      28: <CODE> LIS2DW
+        176     LOAD_CONST                      29: 'LIS2DW'
+        178     MAKE_FUNCTION                   0
+        180     LOAD_CONST                      29: 'LIS2DW'
+        182     CALL_FUNCTION                   2
+        184     STORE_NAME                      33: LIS2DW
+        186     LOAD_CONST                      30: <CODE> load_config
+        188     LOAD_CONST                      31: 'load_config'
+        190     MAKE_FUNCTION                   0
+        192     STORE_NAME                      34: load_config
+        194     LOAD_CONST                      32: <CODE> load_config_prefix
+        196     LOAD_CONST                      33: 'load_config_prefix'
+        198     MAKE_FUNCTION                   0
+        200     STORE_NAME                      35: load_config_prefix
+        202     LOAD_CONST                      1: None
+        204     RETURN_VALUE                    

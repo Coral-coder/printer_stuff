@@ -1,0 +1,530 @@
+sdcard_loop.pyc (Python 3.9)
+[Code]
+    File Name: /extras/sdcard_loop.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'SDCardLoop'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/sdcard_loop.py
+            Object Name: SDCardLoop
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'cmd_SDCARD_LOOP_BEGIN_help'
+                'cmd_SDCARD_LOOP_BEGIN'
+                'cmd_SDCARD_LOOP_END_help'
+                'cmd_SDCARD_LOOP_END'
+                'cmd_SDCARD_LOOP_DESIST_help'
+                'cmd_SDCARD_LOOP_DESIST'
+                'loop_begin'
+                'loop_end'
+                'loop_desist'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'SDCardLoop'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'load_object'
+                        'sdcard'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_SDCARD_LOOP_BEGIN'
+                        'cmd_SDCARD_LOOP_BEGIN_help'
+                        'cmd_SDCARD_LOOP_END'
+                        'cmd_SDCARD_LOOP_END_help'
+                        'cmd_SDCARD_LOOP_DESIST'
+                        'cmd_SDCARD_LOOP_DESIST_help'
+                        'loop_stack'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'printer'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'virtual_sdcard'
+                        'gcode'
+                        'SDCARD_LOOP_BEGIN'
+                        (
+                            'desc'
+                        )
+                        'SDCARD_LOOP_END'
+                        'SDCARD_LOOP_DESIST'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      2: printer
+                        8       LOAD_FAST                       2: printer
+                        10      LOAD_METHOD                     1: load_object
+                        12      LOAD_FAST                       1: config
+                        14      LOAD_CONST                      1: 'virtual_sdcard'
+                        16      CALL_METHOD                     2
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      2: sdcard
+                        22      LOAD_FAST                       2: printer
+                        24      LOAD_METHOD                     3: lookup_object
+                        26      LOAD_CONST                      2: 'gcode'
+                        28      CALL_METHOD                     1
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      4: gcode
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       4: gcode
+                        38      LOAD_ATTR                       5: register_command
+                        40      LOAD_CONST                      3: 'SDCARD_LOOP_BEGIN'
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       6: cmd_SDCARD_LOOP_BEGIN
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       7: cmd_SDCARD_LOOP_BEGIN_help
+                        50      LOAD_CONST                      4: ('desc',)
+                        52      CALL_FUNCTION_KW                3
+                        54      POP_TOP                         
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       4: gcode
+                        60      LOAD_ATTR                       5: register_command
+                        62      LOAD_CONST                      5: 'SDCARD_LOOP_END'
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       8: cmd_SDCARD_LOOP_END
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       9: cmd_SDCARD_LOOP_END_help
+                        72      LOAD_CONST                      4: ('desc',)
+                        74      CALL_FUNCTION_KW                3
+                        76      POP_TOP                         
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       4: gcode
+                        82      LOAD_ATTR                       5: register_command
+                        84      LOAD_CONST                      6: 'SDCARD_LOOP_DESIST'
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       10: cmd_SDCARD_LOOP_DESIST
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       11: cmd_SDCARD_LOOP_DESIST_help
+                        94      LOAD_CONST                      4: ('desc',)
+                        96      CALL_FUNCTION_KW                3
+                        98      POP_TOP                         
+                        100     BUILD_LIST                      0
+                        102     LOAD_FAST                       0: self
+                        104     STORE_ATTR                      12: loop_stack
+                        106     LOAD_CONST                      0: None
+                        108     RETURN_VALUE                    
+                'SDCardLoop.__init__'
+                'Begins a looped section in the SD file.'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: cmd_SDCARD_LOOP_BEGIN
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_int'
+                        'loop_begin'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'count'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'COUNT'
+                        0
+                        (
+                            'minval'
+                        )
+                        '{"code":"key176", "msg": "Only permitted in SD file.", "values": []}'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_int
+                        4       LOAD_CONST                      1: 'COUNT'
+                        6       LOAD_CONST                      2: 0
+                        8       LOAD_CONST                      3: ('minval',)
+                        10      CALL_FUNCTION_KW                2
+                        12      STORE_FAST                      2: count
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_METHOD                     1: loop_begin
+                        18      LOAD_FAST                       2: count
+                        20      CALL_METHOD                     1
+                        22      POP_JUMP_IF_TRUE                34
+                        24      LOAD_FAST                       1: gcmd
+                        26      LOAD_METHOD                     2: error
+                        28      LOAD_CONST                      4: '{"code":"key176", "msg": "Only permitted in SD file.", "values": []}'
+                        30      CALL_METHOD                     1
+                        32      RAISE_VARARGS                   1
+                        34      LOAD_CONST                      0: None
+                        36      RETURN_VALUE                    
+                'SDCardLoop.cmd_SDCARD_LOOP_BEGIN'
+                'Ends a looped section in the SD file.'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: cmd_SDCARD_LOOP_END
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'loop_end'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key176", "msg": "Only permitted in SD file.", "values": []}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: loop_end
+                        4       CALL_METHOD                     0
+                        6       POP_JUMP_IF_TRUE                18
+                        8       LOAD_FAST                       1: gcmd
+                        10      LOAD_METHOD                     1: error
+                        12      LOAD_CONST                      1: '{"code":"key176", "msg": "Only permitted in SD file.", "values": []}'
+                        14      CALL_METHOD                     1
+                        16      RAISE_VARARGS                   1
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                'SDCardLoop.cmd_SDCARD_LOOP_END'
+                'Stops iterating the current loop stack.'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: cmd_SDCARD_LOOP_DESIST
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'loop_desist'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key177", "msg": "Only permitted outside of a SD file..", "values": []}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: loop_desist
+                        4       CALL_METHOD                     0
+                        6       POP_JUMP_IF_TRUE                18
+                        8       LOAD_FAST                       1: gcmd
+                        10      LOAD_METHOD                     1: error
+                        12      LOAD_CONST                      1: '{"code":"key177", "msg": "Only permitted outside of a SD file..", "values": []}'
+                        14      CALL_METHOD                     1
+                        16      RAISE_VARARGS                   1
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                'SDCardLoop.cmd_SDCARD_LOOP_DESIST'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: loop_begin
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'sdcard'
+                        'is_cmd_from_sd'
+                        'loop_stack'
+                        'append'
+                        'get_file_position'
+                    [Var Names]
+                        'self'
+                        'count'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: sdcard
+                        4       LOAD_METHOD                     1: is_cmd_from_sd
+                        6       CALL_METHOD                     0
+                        8       POP_JUMP_IF_TRUE                14
+                        10      LOAD_CONST                      1: False
+                        12      RETURN_VALUE                    
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: loop_stack
+                        18      LOAD_METHOD                     3: append
+                        20      LOAD_FAST                       1: count
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       0: sdcard
+                        26      LOAD_METHOD                     4: get_file_position
+                        28      CALL_METHOD                     0
+                        30      BUILD_TUPLE                     2
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_CONST                      2: True
+                        38      RETURN_VALUE                    
+                'SDCardLoop.loop_begin'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: loop_end
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'sdcard'
+                        'is_cmd_from_sd'
+                        'len'
+                        'loop_stack'
+                        'pop'
+                        'set_file_position'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'count'
+                        'position'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        0
+                        True
+                        1
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: sdcard
+                        4       LOAD_METHOD                     1: is_cmd_from_sd
+                        6       CALL_METHOD                     0
+                        8       POP_JUMP_IF_TRUE                14
+                        10      LOAD_CONST                      1: False
+                        12      RETURN_VALUE                    
+                        14      LOAD_GLOBAL                     2: len
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       3: loop_stack
+                        20      CALL_FUNCTION                   1
+                        22      LOAD_CONST                      2: 0
+                        24      COMPARE_OP                      2 (==)
+                        26      POP_JUMP_IF_FALSE               32
+                        28      LOAD_CONST                      3: True
+                        30      RETURN_VALUE                    
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       3: loop_stack
+                        36      LOAD_METHOD                     4: pop
+                        38      CALL_METHOD                     0
+                        40      UNPACK_SEQUENCE                 2
+                        42      STORE_FAST                      1: count
+                        44      STORE_FAST                      2: position
+                        46      LOAD_FAST                       1: count
+                        48      LOAD_CONST                      2: 0
+                        50      COMPARE_OP                      2 (==)
+                        52      POP_JUMP_IF_FALSE               84
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       0: sdcard
+                        58      LOAD_METHOD                     5: set_file_position
+                        60      LOAD_FAST                       2: position
+                        62      CALL_METHOD                     1
+                        64      POP_TOP                         
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       3: loop_stack
+                        70      LOAD_METHOD                     6: append
+                        72      LOAD_CONST                      2: 0
+                        74      LOAD_FAST                       2: position
+                        76      BUILD_TUPLE                     2
+                        78      CALL_METHOD                     1
+                        80      POP_TOP                         
+                        82      JUMP_FORWARD                    42 (to 126)
+                        84      LOAD_FAST                       1: count
+                        86      LOAD_CONST                      4: 1
+                        88      COMPARE_OP                      2 (==)
+                        90      POP_JUMP_IF_FALSE               94
+                        92      JUMP_FORWARD                    32 (to 126)
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       0: sdcard
+                        98      LOAD_METHOD                     5: set_file_position
+                        100     LOAD_FAST                       2: position
+                        102     CALL_METHOD                     1
+                        104     POP_TOP                         
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       3: loop_stack
+                        110     LOAD_METHOD                     6: append
+                        112     LOAD_FAST                       1: count
+                        114     LOAD_CONST                      4: 1
+                        116     BINARY_SUBTRACT                 
+                        118     LOAD_FAST                       2: position
+                        120     BUILD_TUPLE                     2
+                        122     CALL_METHOD                     1
+                        124     POP_TOP                         
+                        126     LOAD_CONST                      3: True
+                        128     RETURN_VALUE                    
+                'SDCardLoop.loop_end'
+                [Code]
+                    File Name: /extras/sdcard_loop.py
+                    Object Name: loop_desist
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'sdcard'
+                        'is_cmd_from_sd'
+                        'logging'
+                        'info'
+                        'loop_stack'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        'Desisting existing SD loops'
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: sdcard
+                        4       LOAD_METHOD                     1: is_cmd_from_sd
+                        6       CALL_METHOD                     0
+                        8       POP_JUMP_IF_FALSE               14
+                        10      LOAD_CONST                      1: False
+                        12      RETURN_VALUE                    
+                        14      LOAD_GLOBAL                     2: logging
+                        16      LOAD_METHOD                     3: info
+                        18      LOAD_CONST                      2: 'Desisting existing SD loops'
+                        20      CALL_METHOD                     1
+                        22      POP_TOP                         
+                        24      BUILD_LIST                      0
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      4: loop_stack
+                        30      LOAD_CONST                      3: True
+                        32      RETURN_VALUE                    
+                'SDCardLoop.loop_desist'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'SDCardLoop'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'SDCardLoop.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: 'Begins a looped section in the SD file.'
+                18      STORE_NAME                      4: cmd_SDCARD_LOOP_BEGIN_help
+                20      LOAD_CONST                      4: <CODE> cmd_SDCARD_LOOP_BEGIN
+                22      LOAD_CONST                      5: 'SDCardLoop.cmd_SDCARD_LOOP_BEGIN'
+                24      MAKE_FUNCTION                   0
+                26      STORE_NAME                      5: cmd_SDCARD_LOOP_BEGIN
+                28      LOAD_CONST                      6: 'Ends a looped section in the SD file.'
+                30      STORE_NAME                      6: cmd_SDCARD_LOOP_END_help
+                32      LOAD_CONST                      7: <CODE> cmd_SDCARD_LOOP_END
+                34      LOAD_CONST                      8: 'SDCardLoop.cmd_SDCARD_LOOP_END'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      7: cmd_SDCARD_LOOP_END
+                40      LOAD_CONST                      9: 'Stops iterating the current loop stack.'
+                42      STORE_NAME                      8: cmd_SDCARD_LOOP_DESIST_help
+                44      LOAD_CONST                      10: <CODE> cmd_SDCARD_LOOP_DESIST
+                46      LOAD_CONST                      11: 'SDCardLoop.cmd_SDCARD_LOOP_DESIST'
+                48      MAKE_FUNCTION                   0
+                50      STORE_NAME                      9: cmd_SDCARD_LOOP_DESIST
+                52      LOAD_CONST                      12: <CODE> loop_begin
+                54      LOAD_CONST                      13: 'SDCardLoop.loop_begin'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      10: loop_begin
+                60      LOAD_CONST                      14: <CODE> loop_end
+                62      LOAD_CONST                      15: 'SDCardLoop.loop_end'
+                64      MAKE_FUNCTION                   0
+                66      STORE_NAME                      11: loop_end
+                68      LOAD_CONST                      16: <CODE> loop_desist
+                70      LOAD_CONST                      17: 'SDCardLoop.loop_desist'
+                72      MAKE_FUNCTION                   0
+                74      STORE_NAME                      12: loop_desist
+                76      LOAD_CONST                      18: None
+                78      RETURN_VALUE                    
+        'SDCardLoop'
+        [Code]
+            File Name: /extras/sdcard_loop.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'SDCardLoop'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: SDCardLoop
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_BUILD_CLASS                
+        10      LOAD_CONST                      2: <CODE> SDCardLoop
+        12      LOAD_CONST                      3: 'SDCardLoop'
+        14      MAKE_FUNCTION                   0
+        16      LOAD_CONST                      3: 'SDCardLoop'
+        18      CALL_FUNCTION                   2
+        20      STORE_NAME                      1: SDCardLoop
+        22      LOAD_CONST                      4: <CODE> load_config
+        24      LOAD_CONST                      5: 'load_config'
+        26      MAKE_FUNCTION                   0
+        28      STORE_NAME                      2: load_config
+        30      LOAD_CONST                      1: None
+        32      RETURN_VALUE                    

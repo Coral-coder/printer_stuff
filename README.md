@@ -10,71 +10,88 @@ shipped as **compiled artifacts** rather than source:
 - Microcontroller firmware blobs (`fw/**/*.bin`)
 
 The task for this branch is to **disassemble those compiled artifacts back to source
-code and republish** the recovered source. This document tracks live progress so
-downstream can see exactly what is done, what is in flight, and what is not
-recoverable.
+code and republish** the recovered source. This document tracks status so downstream
+can see exactly what is done and what is not recoverable.
 
-> Status is regenerated from `decompiled/_report.json` on each push.
+> Regenerate everything with `tools/decompile.py` (Python) + `tools/pycdc-3.9-opcodes.patch`
+> (the decompiler patch). Per-module status: [`decompiled/STATUS.md`](decompiled/STATUS.md).
 
 ## Payload inventory (what was pushed to `main`)
 
 | Area | Contents | Nature | Recoverable to source? |
 |------|----------|--------|------------------------|
-| `config/**/*.cfg` | Klipper configs for each model | already plain text | n/a (already source) |
-| `fw/**/*.bin` | MCU firmware (belt/motor/nozzle/rfid/bed/cfs/mcu) | stripped microcontroller binaries | no (not source-level) |
+| `config/**/*.cfg` | Klipper configs per model | already plain text | n/a (already source) |
+| `fw/**/*.bin` | MCU firmware (belt/motor/nozzle/rfid/bed/cfs/mcu) | stripped ARM Cortex-M binaries | no |
 | `proprietary/shims/*.pyc` | 105 Klipper `extras` modules | **Python 3.9 bytecode** | **yes — primary target** |
-| `proprietary/shims/*.py` | `prtouch*`, and loader stubs | already source | n/a |
-| `proprietary/so/*.cpython-39.so` | Cython extension modules | native machine code | no (only stubs/symbols) |
-| `proprietary/chelper/*.so`, `*.o` | compiled C helper | native machine code | header already present |
+| `proprietary/shims/*.py` | `prtouch*`, loader stubs | already source | n/a |
+| `proprietary/so/*.cpython-39.so` | Cython extension modules | ARM machine code | no (API surface documented) |
+| `proprietary/chelper/*.so`, `*.o` | compiled C helper | ARM machine code | header already present |
 
 The `.pyc` headers were lightly tampered (bogus source-size field, year-2028 compile
 timestamps) but the bytecode itself is standard, un-remapped CPython 3.9.
 
+## Results
+
+### Python bytecode → source (`decompiled/`)
+
+All **105** modules were run through the decompiler; **70** reconstruct to valid Python:
+
+| Category | Count | Meaning |
+|----------|------:|---------|
+| **clean** | 57 | ast-valid, no known defects |
+| **flagged** | 13 | ast-valid, but pycdc dropped a called builtin, rendered `None(...)` — see disasm |
+| **partial** | 35 | did not fully round-trip; best-effort source + a `# PARTIAL` header |
+
+Every non-clean module also gets a ground-truth bytecode disassembly under
+[`decompiled/_disasm/`](decompiled/_disasm) so the exact logic is always recoverable
+by hand. Full per-module table: [`decompiled/STATUS.md`](decompiled/STATUS.md);
+machine-readable detail: `decompiled/_report.json`.
+
+The 35 partials are blocked by decompiler control-flow bugs that go beyond the opcode
+support added here (misplaced `return` inside `try`, generator expressions with a
+dropped builtin, exception-variable cleanup that doesn't collapse, a couple of
+functions the decompiler bails on entirely). These are documented, not silently
+shipped as if complete.
+
+### Native artifacts (not decompilable)
+
+The Cython `.so`, the C helper, and the MCU `.bin` firmware are machine code and cannot
+be turned back into faithful source. Their type, size, exported symbols and embedded
+identifiers (which document the API surface — command names, class/method names) are
+catalogued in [`proprietary/NATIVE_ARTIFACTS.md`](proprietary/NATIVE_ARTIFACTS.md).
+
+## Method
+
+1. `decompyle3` / `uncompyle6` ship no Python-3.9 grammar, so the engine is
+   **pycdc (Decompyle++)**, built from source.
+2. pycdc's ASTree lacked several 3.9 opcodes; `tools/pycdc-3.9-opcodes.patch`
+   (against pycdc `b428976`) adds them:
+   - `MAP_ADD` (dict comprehensions) + `<dictcomp>`/`<setcomp>` recognition
+   - `DICT_MERGE` / `DICT_UPDATE`, `CALL_FUNCTION_EX` (`f(*a, **kw)`), `LIST_TO_TUPLE`
+   - `JUMP_IF_NOT_EXC_MATCH` (3.9 `try/except`), plus a `SETUP_FINALLY` look-ahead so
+     3.9 try/except is not mis-rendered as `try/finally` (no exception table before 3.11)
+3. `tools/decompile.py` runs pycdc over every `.pyc` and applies mechanically-safe,
+   `ast`-validated repairs to pycdc's known rendering quirks:
+   - `f(a, b, **('k1','k2'))` → `f(a, k1=b, k2=c)` (keyword-name tuples)
+   - `from  import x` → `from . import x` (relative imports)
+   - `(lambda .0=None: [...])(it)` → `[... for ... in it]` (comprehensions)
+
 ## Progress by step
 
-- [x] **1. Monitor the empty repo for a push** — detected content on `main` (commit `61ebddc`).
-- [x] **2. Identify the payload** — Klipper 3.9 `.pyc`, Cython `.so`, C, and MCU `.bin`.
-- [x] **3. Stand up a 3.9-capable decompiler** — `decompyle3`/`uncompyle6` don't support 3.9
-      (no p39 grammar); built **pycdc (Decompyle++)** from source as the engine.
-- [x] **4. First-pass decompile of all 105 `.pyc`** — into `decompiled/` mirroring the layout.
-- [x] **5. Repair systematic pycdc artifacts (pure post-processing)**:
-  - keyword args `f(a, b, **('k1','k2'))` → `f(a, k1=b, k2=c)`
-  - relative imports `from  import x` → `from . import x`
-  - comprehensions `(lambda .0=None: [...])(it)` → real `[... for ... in it]`
-- [~] **6. Patch pycdc for missing 3.9 opcodes** *(in progress)* — implemented and
-      building: `MAP_ADD` (dict comprehensions), `DICT_MERGE`/`DICT_UPDATE`,
-      `CALL_FUNCTION_EX` (`f(*a, **kw)`), `LIST_TO_TUPLE`. The patch lives at
-      [`tools/pycdc-3.9-opcodes.patch`](tools/pycdc-3.9-opcodes.patch) (against pycdc
-      `b428976`). **Still to do:** `JUMP_IF_NOT_EXC_MATCH` (`try/except`) — the last
-      remaining blocker, affecting all 34 files below.
-- [ ] **7. Document non-decompilable native artifacts** (`.so` / `.o` / `.bin`) with
-      symbol/strings summaries and honest recoverability notes.
-- [ ] **8. Final republish** with the complete recovered source tree.
+- [x] 1. Monitor the empty repo — detected content on `main` (`61ebddc`).
+- [x] 2. Identify the payload (Klipper 3.9 `.pyc`, Cython `.so`, C, MCU `.bin`).
+- [x] 3. Stand up a 3.9-capable decompiler (built + patched pycdc).
+- [x] 4. Decompile all 105 `.pyc` into a mirrored `decompiled/` tree.
+- [x] 5. Repair systematic pycdc artifacts (kwargs, imports, comprehensions).
+- [x] 6. Patch pycdc for missing 3.9 opcodes (dict-comp, call-ex, **try/except**, …).
+- [x] 7. Document non-decompilable native artifacts + ship disassembly for imperfect modules.
+- [x] 8. Republish to `main`.
 
-## Decompilation results (current)
-
-**71 / 105** modules recovered to syntactically valid Python (`ast.parse`-clean).
-The remaining **34** are **all** blocked by 3.9 `try/except`, which pycdc does not yet
-reconstruct (`JUMP_IF_NOT_EXC_MATCH`, plus dropped-handler partial renders):
-
-| Blocker | Files | Notes |
-|---------|-------|-------|
-| `try/except` (`JUMP_IF_NOT_EXC_MATCH` + dropped-handler renders) | 34 | next patch target |
-
-Per-file machine-readable detail lives in [`decompiled/_report.json`](decompiled/_report.json).
-
-### Known limitations (honest caveats)
+## Known limitations (honest caveats)
 
 - Decompiled source is a **faithful reconstruction, not the original file** — comments,
-  original formatting, and some local variable names are not preserved by compilation.
-- pycdc occasionally drops a called name, rendering `max(a, b)` as `None(a, b)`; these
-  spots are flagged in the report (`none_calls`) and cross-checkable against
-  `pycdas` disassembly. They parse but must be reviewed before running.
-- `.so` / `.o` / `.bin` artifacts are native code; only the `.pyc` set is genuinely
-  recoverable to source.
-
-## Reproducing
-
-The decompiler is built from [zrax/pycdc](https://github.com/zrax/pycdc); the
-post-processing/repair pipeline is applied on top. Full method and the exact repair
-transforms are described above and in the pipeline script kept with this branch.
+  original formatting, and some local names are lost at compile time.
+- **flagged** modules parse but contain `None(...)` where a builtin name was dropped by
+  the decompiler; verify against the paired `_disasm/*.txt` before running.
+- **partial** modules will not import as-is; use them alongside their disassembly.
+- `.so` / `.o` / `.bin` are machine code — only the `.pyc` set is recoverable to source.

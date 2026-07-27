@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/exclude_object.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: exclude_object.pyc (Python 3.9)
 
@@ -233,7 +242,48 @@ obj['name'] == name):
         name = gcmd.get('NAME', '').upper()
         if reset:
             self._reset_file()
-    # WARNING: Decompyle incomplete
+        elif name:
+            parameters = gcmd.get_command_parameters().copy()
+            parameters.pop('NAME')
+            center = parameters.pop('CENTER', None)
+            polygon = parameters.pop('POLYGON', None)
+            obj = {
+                'name': name.upper() }
+            obj.update(parameters)
+            if center != None:
+                
+                try:
+                    obj['center'] = json.loads('[%s]' % center)
+                except Exception:
+                    err = None
+                    
+                    try:
+                        logging.exception(err)
+                    finally:
+                        err = None
+                        del err
+                    err = None
+                    del err
+                    if polygon != None:
+                        
+                        try:
+                            obj['polygon'] = json.loads(polygon)
+                        except Exception:
+                            err = None
+                            
+                            try:
+                                logging.exception(err)
+                            finally:
+                                err = None
+                                del err
+                            err = None
+                            del err
+                            self._list_objects(gcmd)
+                            return None
+
+
+
+
 
     
     def _add_object_definition(self, definition):

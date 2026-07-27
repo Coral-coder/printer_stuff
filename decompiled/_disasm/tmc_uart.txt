@@ -1,0 +1,2346 @@
+tmc_uart.pyc (Python 3.9)
+[Code]
+    File Name: /extras/tmc_uart.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'MCU_analog_mux'
+        'PrinterTMCUartMutexes'
+        'lookup_tmc_uart_mutex'
+        'TMC_BAUD_RATE'
+        'TMC_BAUD_RATE_AVR'
+        'MCU_TMC_uart_bitbang'
+        'lookup_tmc_uart_bitbang'
+        'MCU_TMC_uart'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/tmc_uart.py
+            Object Name: MCU_analog_mux
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'build_config'
+                'get_instance_id'
+                'activate'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'MCU_analog_mux'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: __init__
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 6
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'mcu'
+                        'cmd_queue'
+                        'get_printer'
+                        'lookup_object'
+                        'oids'
+                        'pins'
+                        'tuple'
+                        'pin_values'
+                        'zip'
+                        'add_config_cmd'
+                        'update_pin_cmd'
+                        'register_config_callback'
+                        'build_config'
+                    [Var Names]
+                        'self'
+                        'mcu'
+                        'cmd_queue'
+                        'select_pins_desc'
+                        'select_pin_params'
+                        'oid'
+                        'pin'
+                    [Free Vars]
+                    [Cell Vars]
+                        'ppins'
+                        'self'
+                    [Constants]
+                        None
+                        'pins'
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'lookup_pin'
+                            [Var Names]
+                                '.0'
+                                'spd'
+                            [Free Vars]
+                                'ppins'
+                            [Cell Vars]
+                            [Constants]
+                                True
+                                (
+                                    'can_invert'
+                                )
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: spd
+                                8       LOAD_DEREF                      0: ppins
+                                10      LOAD_ATTR                       0: lookup_pin
+                                12      LOAD_FAST                       1: spd
+                                14      LOAD_CONST                      0: True
+                                16      LOAD_CONST                      1: ('can_invert',)
+                                18      CALL_FUNCTION_KW                2
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'MCU_analog_mux.__init__.<locals>.<listcomp>'
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'mcu'
+                                'create_oid'
+                            [Var Names]
+                                '.0'
+                                'pp'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        14 (to 20)
+                                6       STORE_FAST                      1: pp
+                                8       LOAD_DEREF                      0: self
+                                10      LOAD_ATTR                       0: mcu
+                                12      LOAD_METHOD                     1: create_oid
+                                14      CALL_METHOD                     0
+                                16      LIST_APPEND                     2
+                                18      JUMP_ABSOLUTE                   4
+                                20      RETURN_VALUE                    
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'pp'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                'pin'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: pp
+                                8       LOAD_FAST                       1: pp
+                                10      LOAD_CONST                      0: 'pin'
+                                12      BINARY_SUBSCR                   
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 3
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'pp'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                -1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        8 (to 14)
+                                6       STORE_FAST                      1: pp
+                                8       LOAD_CONST                      0: -1
+                                10      LIST_APPEND                     2
+                                12      JUMP_ABSOLUTE                   4
+                                14      RETURN_VALUE                    
+                        'config_digital_out oid=%d pin=%s value=0 default_value=0 max_duration=0'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: mcu
+                        2       LOAD_DEREF                      1: self
+                        4       STORE_ATTR                      0: mcu
+                        6       LOAD_FAST                       2: cmd_queue
+                        8       LOAD_DEREF                      1: self
+                        10      STORE_ATTR                      1: cmd_queue
+                        12      LOAD_FAST                       1: mcu
+                        14      LOAD_METHOD                     2: get_printer
+                        16      CALL_METHOD                     0
+                        18      LOAD_METHOD                     3: lookup_object
+                        20      LOAD_CONST                      1: 'pins'
+                        22      CALL_METHOD                     1
+                        24      STORE_DEREF                     0: ppins
+                        26      LOAD_CLOSURE                    0: ppins
+                        28      BUILD_TUPLE                     1
+                        30      LOAD_CONST                      2: <CODE> <listcomp>
+                        32      LOAD_CONST                      3: 'MCU_analog_mux.__init__.<locals>.<listcomp>'
+                        34      MAKE_FUNCTION                   8
+                        36      LOAD_FAST                       3: select_pins_desc
+                        38      GET_ITER                        
+                        40      CALL_FUNCTION                   1
+                        42      STORE_FAST                      4: select_pin_params
+                        44      LOAD_CLOSURE                    1: self
+                        46      BUILD_TUPLE                     1
+                        48      LOAD_CONST                      4: <CODE> <listcomp>
+                        50      LOAD_CONST                      3: 'MCU_analog_mux.__init__.<locals>.<listcomp>'
+                        52      MAKE_FUNCTION                   8
+                        54      LOAD_FAST                       4: select_pin_params
+                        56      GET_ITER                        
+                        58      CALL_FUNCTION                   1
+                        60      LOAD_DEREF                      1: self
+                        62      STORE_ATTR                      4: oids
+                        64      LOAD_CONST                      5: <CODE> <listcomp>
+                        66      LOAD_CONST                      3: 'MCU_analog_mux.__init__.<locals>.<listcomp>'
+                        68      MAKE_FUNCTION                   0
+                        70      LOAD_FAST                       4: select_pin_params
+                        72      GET_ITER                        
+                        74      CALL_FUNCTION                   1
+                        76      LOAD_DEREF                      1: self
+                        78      STORE_ATTR                      5: pins
+                        80      LOAD_GLOBAL                     6: tuple
+                        82      LOAD_CONST                      6: <CODE> <listcomp>
+                        84      LOAD_CONST                      3: 'MCU_analog_mux.__init__.<locals>.<listcomp>'
+                        86      MAKE_FUNCTION                   0
+                        88      LOAD_FAST                       4: select_pin_params
+                        90      GET_ITER                        
+                        92      CALL_FUNCTION                   1
+                        94      CALL_FUNCTION                   1
+                        96      LOAD_DEREF                      1: self
+                        98      STORE_ATTR                      7: pin_values
+                        100     LOAD_GLOBAL                     8: zip
+                        102     LOAD_DEREF                      1: self
+                        104     LOAD_ATTR                       4: oids
+                        106     LOAD_DEREF                      1: self
+                        108     LOAD_ATTR                       5: pins
+                        110     CALL_FUNCTION                   2
+                        112     GET_ITER                        
+                        114     FOR_ITER                        28 (to 144)
+                        116     UNPACK_SEQUENCE                 2
+                        118     STORE_FAST                      5: oid
+                        120     STORE_FAST                      6: pin
+                        122     LOAD_DEREF                      1: self
+                        124     LOAD_ATTR                       0: mcu
+                        126     LOAD_METHOD                     9: add_config_cmd
+                        128     LOAD_CONST                      7: 'config_digital_out oid=%d pin=%s value=0 default_value=0 max_duration=0'
+                        130     LOAD_FAST                       5: oid
+                        132     LOAD_FAST                       6: pin
+                        134     BUILD_TUPLE                     2
+                        136     BINARY_MODULO                   
+                        138     CALL_METHOD                     1
+                        140     POP_TOP                         
+                        142     JUMP_ABSOLUTE                   114
+                        144     LOAD_CONST                      0: None
+                        146     LOAD_DEREF                      1: self
+                        148     STORE_ATTR                      10: update_pin_cmd
+                        150     LOAD_DEREF                      1: self
+                        152     LOAD_ATTR                       0: mcu
+                        154     LOAD_METHOD                     11: register_config_callback
+                        156     LOAD_DEREF                      1: self
+                        158     LOAD_ATTR                       12: build_config
+                        160     CALL_METHOD                     1
+                        162     POP_TOP                         
+                        164     LOAD_CONST                      0: None
+                        166     RETURN_VALUE                    
+                'MCU_analog_mux.__init__'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu'
+                        'lookup_command'
+                        'cmd_queue'
+                        'update_pin_cmd'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'update_digital_out oid=%c value=%c'
+                        (
+                            'cq'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu
+                        4       LOAD_ATTR                       1: lookup_command
+                        6       LOAD_CONST                      1: 'update_digital_out oid=%c value=%c'
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: cmd_queue
+                        12      LOAD_CONST                      2: ('cq',)
+                        14      CALL_FUNCTION_KW                2
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      3: update_pin_cmd
+                        20      LOAD_CONST                      0: None
+                        22      RETURN_VALUE                    
+                'MCU_analog_mux.build_config'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: get_instance_id
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 4
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'mcu'
+                        'get_printer'
+                        'lookup_object'
+                        'config_error'
+                        'pins'
+                        'tuple'
+                    [Var Names]
+                        'self'
+                        'select_pins_desc'
+                        'select_pin_params'
+                        'pin_params'
+                        'pins'
+                    [Free Vars]
+                    [Cell Vars]
+                        'ppins'
+                    [Constants]
+                        None
+                        'pins'
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'parse_pin'
+                            [Var Names]
+                                '.0'
+                                'spd'
+                            [Free Vars]
+                                'ppins'
+                            [Cell Vars]
+                            [Constants]
+                                True
+                                (
+                                    'can_invert'
+                                )
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: spd
+                                8       LOAD_DEREF                      0: ppins
+                                10      LOAD_ATTR                       0: parse_pin
+                                12      LOAD_FAST                       1: spd
+                                14      LOAD_CONST                      0: True
+                                16      LOAD_CONST                      1: ('can_invert',)
+                                18      CALL_FUNCTION_KW                2
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'MCU_analog_mux.get_instance_id.<locals>.<listcomp>'
+                        'chip'
+                        'TMC mux pins must be on the same mcu'
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'pp'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                'pin'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: pp
+                                8       LOAD_FAST                       1: pp
+                                10      LOAD_CONST                      0: 'pin'
+                                12      BINARY_SUBSCR                   
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                        'All TMC mux instances must use identical pins'
+                        [Code]
+                            File Name: /extras/tmc_uart.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'pp'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                'invert'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        14 (to 20)
+                                6       STORE_FAST                      1: pp
+                                8       LOAD_FAST                       1: pp
+                                10      LOAD_CONST                      0: 'invert'
+                                12      BINARY_SUBSCR                   
+                                14      UNARY_NOT                       
+                                16      LIST_APPEND                     2
+                                18      JUMP_ABSOLUTE                   4
+                                20      RETURN_VALUE                    
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu
+                        4       LOAD_METHOD                     1: get_printer
+                        6       CALL_METHOD                     0
+                        8       LOAD_METHOD                     2: lookup_object
+                        10      LOAD_CONST                      1: 'pins'
+                        12      CALL_METHOD                     1
+                        14      STORE_DEREF                     0: ppins
+                        16      LOAD_CLOSURE                    0: ppins
+                        18      BUILD_TUPLE                     1
+                        20      LOAD_CONST                      2: <CODE> <listcomp>
+                        22      LOAD_CONST                      3: 'MCU_analog_mux.get_instance_id.<locals>.<listcomp>'
+                        24      MAKE_FUNCTION                   8
+                        26      LOAD_FAST                       1: select_pins_desc
+                        28      GET_ITER                        
+                        30      CALL_FUNCTION                   1
+                        32      STORE_FAST                      2: select_pin_params
+                        34      LOAD_FAST                       2: select_pin_params
+                        36      GET_ITER                        
+                        38      FOR_ITER                        34 (to 74)
+                        40      STORE_FAST                      3: pin_params
+                        42      LOAD_FAST                       3: pin_params
+                        44      LOAD_CONST                      4: 'chip'
+                        46      BINARY_SUBSCR                   
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       0: mcu
+                        52      COMPARE_OP                      3 (!=)
+                        54      POP_JUMP_IF_FALSE               38
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       0: mcu
+                        60      LOAD_METHOD                     1: get_printer
+                        62      CALL_METHOD                     0
+                        64      LOAD_METHOD                     3: config_error
+                        66      LOAD_CONST                      5: 'TMC mux pins must be on the same mcu'
+                        68      CALL_METHOD                     1
+                        70      RAISE_VARARGS                   1
+                        72      JUMP_ABSOLUTE                   38
+                        74      LOAD_CONST                      6: <CODE> <listcomp>
+                        76      LOAD_CONST                      3: 'MCU_analog_mux.get_instance_id.<locals>.<listcomp>'
+                        78      MAKE_FUNCTION                   0
+                        80      LOAD_FAST                       2: select_pin_params
+                        82      GET_ITER                        
+                        84      CALL_FUNCTION                   1
+                        86      STORE_FAST                      4: pins
+                        88      LOAD_FAST                       4: pins
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       4: pins
+                        94      COMPARE_OP                      3 (!=)
+                        96      POP_JUMP_IF_FALSE               114
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       0: mcu
+                        102     LOAD_METHOD                     1: get_printer
+                        104     CALL_METHOD                     0
+                        106     LOAD_METHOD                     3: config_error
+                        108     LOAD_CONST                      7: 'All TMC mux instances must use identical pins'
+                        110     CALL_METHOD                     1
+                        112     RAISE_VARARGS                   1
+                        114     LOAD_GLOBAL                     5: tuple
+                        116     LOAD_CONST                      8: <CODE> <listcomp>
+                        118     LOAD_CONST                      3: 'MCU_analog_mux.get_instance_id.<locals>.<listcomp>'
+                        120     MAKE_FUNCTION                   0
+                        122     LOAD_FAST                       2: select_pin_params
+                        124     GET_ITER                        
+                        126     CALL_FUNCTION                   1
+                        128     CALL_FUNCTION                   1
+                        130     RETURN_VALUE                    
+                'MCU_analog_mux.get_instance_id'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: activate
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'zip'
+                        'oids'
+                        'pin_values'
+                        'update_pin_cmd'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'instance_id'
+                        'oid'
+                        'old'
+                        'new'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: zip
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       1: oids
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       2: pin_values
+                        10      LOAD_FAST                       1: instance_id
+                        12      CALL_FUNCTION                   3
+                        14      GET_ITER                        
+                        16      FOR_ITER                        34 (to 52)
+                        18      UNPACK_SEQUENCE                 3
+                        20      STORE_FAST                      2: oid
+                        22      STORE_FAST                      3: old
+                        24      STORE_FAST                      4: new
+                        26      LOAD_FAST                       3: old
+                        28      LOAD_FAST                       4: new
+                        30      COMPARE_OP                      3 (!=)
+                        32      POP_JUMP_IF_FALSE               16
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       3: update_pin_cmd
+                        38      LOAD_METHOD                     4: send
+                        40      LOAD_FAST                       2: oid
+                        42      LOAD_FAST                       4: new
+                        44      BUILD_LIST                      2
+                        46      CALL_METHOD                     1
+                        48      POP_TOP                         
+                        50      JUMP_ABSOLUTE                   16
+                        52      LOAD_FAST                       1: instance_id
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      2: pin_values
+                        58      LOAD_CONST                      0: None
+                        60      RETURN_VALUE                    
+                'MCU_analog_mux.activate'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'MCU_analog_mux'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'MCU_analog_mux.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> build_config
+                18      LOAD_CONST                      4: 'MCU_analog_mux.build_config'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: build_config
+                24      LOAD_CONST                      5: <CODE> get_instance_id
+                26      LOAD_CONST                      6: 'MCU_analog_mux.get_instance_id'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: get_instance_id
+                32      LOAD_CONST                      7: <CODE> activate
+                34      LOAD_CONST                      8: 'MCU_analog_mux.activate'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: activate
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'MCU_analog_mux'
+        [Code]
+            File Name: /extras/tmc_uart.py
+            Object Name: PrinterTMCUartMutexes
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterTMCUartMutexes'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: __init__
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu_to_mutex'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       BUILD_MAP                       0
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: mcu_to_mutex
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'PrinterTMCUartMutexes.__init__'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterTMCUartMutexes'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterTMCUartMutexes.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: None
+                18      RETURN_VALUE                    
+        'PrinterTMCUartMutexes'
+        [Code]
+            File Name: /extras/tmc_uart.py
+            Object Name: lookup_tmc_uart_mutex
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 4
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'get_printer'
+                'lookup_object'
+                'PrinterTMCUartMutexes'
+                'add_object'
+                'mcu_to_mutex'
+                'get'
+                'get_reactor'
+                'mutex'
+            [Var Names]
+                'mcu'
+                'printer'
+                'pmutexes'
+                'mutex'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                'tmc_uart'
+            [Disassembly]
+                0       LOAD_FAST                       0: mcu
+                2       LOAD_METHOD                     0: get_printer
+                4       CALL_METHOD                     0
+                6       STORE_FAST                      1: printer
+                8       LOAD_FAST                       1: printer
+                10      LOAD_METHOD                     1: lookup_object
+                12      LOAD_CONST                      1: 'tmc_uart'
+                14      LOAD_CONST                      0: None
+                16      CALL_METHOD                     2
+                18      STORE_FAST                      2: pmutexes
+                20      LOAD_FAST                       2: pmutexes
+                22      LOAD_CONST                      0: None
+                24      IS_OP                           0 (is)
+                26      POP_JUMP_IF_FALSE               46
+                28      LOAD_GLOBAL                     2: PrinterTMCUartMutexes
+                30      CALL_FUNCTION                   0
+                32      STORE_FAST                      2: pmutexes
+                34      LOAD_FAST                       1: printer
+                36      LOAD_METHOD                     3: add_object
+                38      LOAD_CONST                      1: 'tmc_uart'
+                40      LOAD_FAST                       2: pmutexes
+                42      CALL_METHOD                     2
+                44      POP_TOP                         
+                46      LOAD_FAST                       2: pmutexes
+                48      LOAD_ATTR                       4: mcu_to_mutex
+                50      LOAD_METHOD                     5: get
+                52      LOAD_FAST                       0: mcu
+                54      CALL_METHOD                     1
+                56      STORE_FAST                      3: mutex
+                58      LOAD_FAST                       3: mutex
+                60      LOAD_CONST                      0: None
+                62      IS_OP                           0 (is)
+                64      POP_JUMP_IF_FALSE               88
+                66      LOAD_FAST                       1: printer
+                68      LOAD_METHOD                     6: get_reactor
+                70      CALL_METHOD                     0
+                72      LOAD_METHOD                     7: mutex
+                74      CALL_METHOD                     0
+                76      STORE_FAST                      3: mutex
+                78      LOAD_FAST                       3: mutex
+                80      LOAD_FAST                       2: pmutexes
+                82      LOAD_ATTR                       4: mcu_to_mutex
+                84      LOAD_FAST                       0: mcu
+                86      STORE_SUBSCR                    
+                88      LOAD_FAST                       3: mutex
+                90      RETURN_VALUE                    
+        'lookup_tmc_uart_mutex'
+        40000
+        9000
+        [Code]
+            File Name: /extras/tmc_uart.py
+            Object Name: MCU_TMC_uart_bitbang
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'build_config'
+                'register_instance'
+                '_calc_crc8'
+                '_add_serial_bits'
+                '_encode_read'
+                '_encode_write'
+                '_decode_read'
+                'reg_read'
+                'reg_write'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'MCU_TMC_uart_bitbang'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: __init__
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu'
+                        'lookup_tmc_uart_mutex'
+                        'mutex'
+                        'pullup'
+                        'rx_pin'
+                        'tx_pin'
+                        'create_oid'
+                        'oid'
+                        'alloc_command_queue'
+                        'cmd_queue'
+                        'analog_mux'
+                        'MCU_analog_mux'
+                        'instances'
+                        'tmcuart_send_cmd'
+                        'register_config_callback'
+                        'build_config'
+                    [Var Names]
+                        'self'
+                        'rx_pin_params'
+                        'tx_pin_params'
+                        'select_pins_desc'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'chip'
+                        'pullup'
+                        'pin'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: rx_pin_params
+                        2       LOAD_CONST                      1: 'chip'
+                        4       BINARY_SUBSCR                   
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      0: mcu
+                        10      LOAD_GLOBAL                     1: lookup_tmc_uart_mutex
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: mcu
+                        16      CALL_FUNCTION                   1
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      2: mutex
+                        22      LOAD_FAST                       1: rx_pin_params
+                        24      LOAD_CONST                      2: 'pullup'
+                        26      BINARY_SUBSCR                   
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      3: pullup
+                        32      LOAD_FAST                       1: rx_pin_params
+                        34      LOAD_CONST                      3: 'pin'
+                        36      BINARY_SUBSCR                   
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      4: rx_pin
+                        42      LOAD_FAST                       2: tx_pin_params
+                        44      LOAD_CONST                      3: 'pin'
+                        46      BINARY_SUBSCR                   
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      5: tx_pin
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       0: mcu
+                        56      LOAD_METHOD                     6: create_oid
+                        58      CALL_METHOD                     0
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      7: oid
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       0: mcu
+                        68      LOAD_METHOD                     8: alloc_command_queue
+                        70      CALL_METHOD                     0
+                        72      LOAD_FAST                       0: self
+                        74      STORE_ATTR                      9: cmd_queue
+                        76      LOAD_CONST                      0: None
+                        78      LOAD_FAST                       0: self
+                        80      STORE_ATTR                      10: analog_mux
+                        82      LOAD_FAST                       3: select_pins_desc
+                        84      LOAD_CONST                      0: None
+                        86      IS_OP                           1 (is not)
+                        88      POP_JUMP_IF_FALSE               108
+                        90      LOAD_GLOBAL                     11: MCU_analog_mux
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       0: mcu
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       9: cmd_queue
+                        100     LOAD_FAST                       3: select_pins_desc
+                        102     CALL_FUNCTION                   3
+                        104     LOAD_FAST                       0: self
+                        106     STORE_ATTR                      10: analog_mux
+                        108     BUILD_MAP                       0
+                        110     LOAD_FAST                       0: self
+                        112     STORE_ATTR                      12: instances
+                        114     LOAD_CONST                      0: None
+                        116     LOAD_FAST                       0: self
+                        118     STORE_ATTR                      13: tmcuart_send_cmd
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       0: mcu
+                        124     LOAD_METHOD                     14: register_config_callback
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       15: build_config
+                        130     CALL_METHOD                     1
+                        132     POP_TOP                         
+                        134     LOAD_CONST                      0: None
+                        136     RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang.__init__'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'TMC_BAUD_RATE'
+                        'mcu'
+                        'get_constants'
+                        'get'
+                        'startswith'
+                        'TMC_BAUD_RATE_AVR'
+                        'seconds_to_clock'
+                        'add_config_cmd'
+                        'oid'
+                        'rx_pin'
+                        'pullup'
+                        'tx_pin'
+                        'lookup_query_command'
+                        'cmd_queue'
+                        'tmcuart_send_cmd'
+                    [Var Names]
+                        'self'
+                        'baud'
+                        'mcu_type'
+                        'bit_ticks'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'MCU'
+                        ''
+                        'atmega'
+                        'at90usb'
+                        1
+                        'config_tmcuart oid=%d rx_pin=%s pull_up=%d tx_pin=%s bit_time=%d'
+                        'tmcuart_send oid=%c write=%*s read=%c'
+                        'tmcuart_response oid=%c read=%*s'
+                        True
+                        (
+                            'oid'
+                            'cq'
+                            'is_async'
+                        )
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: TMC_BAUD_RATE
+                        2       STORE_FAST                      1: baud
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: mcu
+                        8       LOAD_METHOD                     2: get_constants
+                        10      CALL_METHOD                     0
+                        12      LOAD_METHOD                     3: get
+                        14      LOAD_CONST                      1: 'MCU'
+                        16      LOAD_CONST                      2: ''
+                        18      CALL_METHOD                     2
+                        20      STORE_FAST                      2: mcu_type
+                        22      LOAD_FAST                       2: mcu_type
+                        24      LOAD_METHOD                     4: startswith
+                        26      LOAD_CONST                      3: 'atmega'
+                        28      CALL_METHOD                     1
+                        30      POP_JUMP_IF_TRUE                42
+                        32      LOAD_FAST                       2: mcu_type
+                        34      LOAD_METHOD                     4: startswith
+                        36      LOAD_CONST                      4: 'at90usb'
+                        38      CALL_METHOD                     1
+                        40      POP_JUMP_IF_FALSE               46
+                        42      LOAD_GLOBAL                     5: TMC_BAUD_RATE_AVR
+                        44      STORE_FAST                      1: baud
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       1: mcu
+                        50      LOAD_METHOD                     6: seconds_to_clock
+                        52      LOAD_CONST                      5: 1
+                        54      LOAD_FAST                       1: baud
+                        56      BINARY_TRUE_DIVIDE              
+                        58      CALL_METHOD                     1
+                        60      STORE_FAST                      3: bit_ticks
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       1: mcu
+                        66      LOAD_METHOD                     7: add_config_cmd
+                        68      LOAD_CONST                      6: 'config_tmcuart oid=%d rx_pin=%s pull_up=%d tx_pin=%s bit_time=%d'
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       8: oid
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_ATTR                       9: rx_pin
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       10: pullup
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       11: tx_pin
+                        86      LOAD_FAST                       3: bit_ticks
+                        88      BUILD_TUPLE                     5
+                        90      BINARY_MODULO                   
+                        92      CALL_METHOD                     1
+                        94      POP_TOP                         
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       1: mcu
+                        100     LOAD_ATTR                       12: lookup_query_command
+                        102     LOAD_CONST                      7: 'tmcuart_send oid=%c write=%*s read=%c'
+                        104     LOAD_CONST                      8: 'tmcuart_response oid=%c read=%*s'
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       8: oid
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       13: cmd_queue
+                        114     LOAD_CONST                      9: True
+                        116     LOAD_CONST                      10: ('oid', 'cq', 'is_async')
+                        118     CALL_FUNCTION_KW                5
+                        120     LOAD_FAST                       0: self
+                        122     STORE_ATTR                      14: tmcuart_send_cmd
+                        124     LOAD_CONST                      0: None
+                        126     RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang.build_config'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: register_instance
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'rx_pin'
+                        'tx_pin'
+                        'analog_mux'
+                        'mcu'
+                        'get_printer'
+                        'config_error'
+                        'get_instance_id'
+                        'instances'
+                    [Var Names]
+                        'self'
+                        'rx_pin_params'
+                        'tx_pin_params'
+                        'select_pins_desc'
+                        'addr'
+                        'instance_id'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'pin'
+                        'Shared TMC uarts must use the same pins'
+                        'Shared TMC uarts need unique address or select_pins polarity'
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       1: rx_pin_params
+                        2       LOAD_CONST                      1: 'pin'
+                        4       BINARY_SUBSCR                   
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       0: rx_pin
+                        10      COMPARE_OP                      3 (!=)
+                        12      POP_JUMP_IF_TRUE                46
+                        14      LOAD_FAST                       2: tx_pin_params
+                        16      LOAD_CONST                      1: 'pin'
+                        18      BINARY_SUBSCR                   
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       1: tx_pin
+                        24      COMPARE_OP                      3 (!=)
+                        26      POP_JUMP_IF_TRUE                46
+                        28      LOAD_FAST                       3: select_pins_desc
+                        30      LOAD_CONST                      0: None
+                        32      IS_OP                           0 (is)
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       2: analog_mux
+                        38      LOAD_CONST                      0: None
+                        40      IS_OP                           0 (is)
+                        42      COMPARE_OP                      3 (!=)
+                        44      POP_JUMP_IF_FALSE               62
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       3: mcu
+                        50      LOAD_METHOD                     4: get_printer
+                        52      CALL_METHOD                     0
+                        54      LOAD_METHOD                     5: config_error
+                        56      LOAD_CONST                      2: 'Shared TMC uarts must use the same pins'
+                        58      CALL_METHOD                     1
+                        60      RAISE_VARARGS                   1
+                        62      LOAD_CONST                      0: None
+                        64      STORE_FAST                      5: instance_id
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       2: analog_mux
+                        70      LOAD_CONST                      0: None
+                        72      IS_OP                           1 (is not)
+                        74      POP_JUMP_IF_FALSE               88
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       2: analog_mux
+                        80      LOAD_METHOD                     6: get_instance_id
+                        82      LOAD_FAST                       3: select_pins_desc
+                        84      CALL_METHOD                     1
+                        86      STORE_FAST                      5: instance_id
+                        88      LOAD_FAST                       5: instance_id
+                        90      LOAD_FAST                       4: addr
+                        92      BUILD_TUPLE                     2
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       7: instances
+                        98      CONTAINS_OP                     0 (in)
+                        100     POP_JUMP_IF_FALSE               118
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       3: mcu
+                        106     LOAD_METHOD                     4: get_printer
+                        108     CALL_METHOD                     0
+                        110     LOAD_METHOD                     5: config_error
+                        112     LOAD_CONST                      3: 'Shared TMC uarts need unique address or select_pins polarity'
+                        114     CALL_METHOD                     1
+                        116     RAISE_VARARGS                   1
+                        118     LOAD_CONST                      4: True
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       7: instances
+                        124     LOAD_FAST                       5: instance_id
+                        126     LOAD_FAST                       4: addr
+                        128     BUILD_TUPLE                     2
+                        130     STORE_SUBSCR                    
+                        132     LOAD_FAST                       5: instance_id
+                        134     RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang.register_instance'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: _calc_crc8
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'range'
+                    [Var Names]
+                        'self'
+                        'data'
+                        'crc'
+                        'b'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        8
+                        7
+                        1
+                        255
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       STORE_FAST                      2: crc
+                        4       LOAD_FAST                       1: data
+                        6       GET_ITER                        
+                        8       FOR_ITER                        72 (to 82)
+                        10      STORE_FAST                      3: b
+                        12      LOAD_GLOBAL                     0: range
+                        14      LOAD_CONST                      2: 8
+                        16      CALL_FUNCTION                   1
+                        18      GET_ITER                        
+                        20      FOR_ITER                        58 (to 80)
+                        22      STORE_FAST                      4: i
+                        24      LOAD_FAST                       2: crc
+                        26      LOAD_CONST                      3: 7
+                        28      BINARY_RSHIFT                   
+                        30      LOAD_FAST                       3: b
+                        32      LOAD_CONST                      4: 1
+                        34      BINARY_AND                      
+                        36      BINARY_XOR                      
+                        38      POP_JUMP_IF_FALSE               54
+                        40      LOAD_FAST                       2: crc
+                        42      LOAD_CONST                      4: 1
+                        44      BINARY_LSHIFT                   
+                        46      LOAD_CONST                      3: 7
+                        48      BINARY_XOR                      
+                        50      STORE_FAST                      2: crc
+                        52      JUMP_FORWARD                    8 (to 62)
+                        54      LOAD_FAST                       2: crc
+                        56      LOAD_CONST                      4: 1
+                        58      BINARY_LSHIFT                   
+                        60      STORE_FAST                      2: crc
+                        62      LOAD_FAST                       2: crc
+                        64      LOAD_CONST                      5: 255
+                        66      INPLACE_AND                     
+                        68      STORE_FAST                      2: crc
+                        70      LOAD_FAST                       3: b
+                        72      LOAD_CONST                      4: 1
+                        74      INPLACE_RSHIFT                  
+                        76      STORE_FAST                      3: b
+                        78      JUMP_ABSOLUTE                   20
+                        80      JUMP_ABSOLUTE                   8
+                        82      LOAD_FAST                       2: crc
+                        84      RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang._calc_crc8'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: _add_serial_bits
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'bytearray'
+                        'range'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'data'
+                        'out'
+                        'pos'
+                        'd'
+                        'b'
+                        'res'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1
+                        512
+                        10
+                        7
+                        8
+                        255
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       STORE_FAST                      2: out
+                        4       LOAD_CONST                      1: 0
+                        6       STORE_FAST                      3: pos
+                        8       LOAD_FAST                       1: data
+                        10      GET_ITER                        
+                        12      FOR_ITER                        36 (to 50)
+                        14      STORE_FAST                      4: d
+                        16      LOAD_FAST                       4: d
+                        18      LOAD_CONST                      2: 1
+                        20      BINARY_LSHIFT                   
+                        22      LOAD_CONST                      3: 512
+                        24      BINARY_OR                       
+                        26      STORE_FAST                      5: b
+                        28      LOAD_FAST                       2: out
+                        30      LOAD_FAST                       5: b
+                        32      LOAD_FAST                       3: pos
+                        34      BINARY_LSHIFT                   
+                        36      INPLACE_OR                      
+                        38      STORE_FAST                      2: out
+                        40      LOAD_FAST                       3: pos
+                        42      LOAD_CONST                      4: 10
+                        44      INPLACE_ADD                     
+                        46      STORE_FAST                      3: pos
+                        48      JUMP_ABSOLUTE                   12
+                        50      LOAD_GLOBAL                     0: bytearray
+                        52      CALL_FUNCTION                   0
+                        54      STORE_FAST                      6: res
+                        56      LOAD_GLOBAL                     1: range
+                        58      LOAD_FAST                       3: pos
+                        60      LOAD_CONST                      5: 7
+                        62      BINARY_ADD                      
+                        64      LOAD_CONST                      6: 8
+                        66      BINARY_FLOOR_DIVIDE             
+                        68      CALL_FUNCTION                   1
+                        70      GET_ITER                        
+                        72      FOR_ITER                        26 (to 100)
+                        74      STORE_FAST                      7: i
+                        76      LOAD_FAST                       6: res
+                        78      LOAD_METHOD                     2: append
+                        80      LOAD_FAST                       2: out
+                        82      LOAD_FAST                       7: i
+                        84      LOAD_CONST                      6: 8
+                        86      BINARY_MULTIPLY                 
+                        88      BINARY_RSHIFT                   
+                        90      LOAD_CONST                      7: 255
+                        92      BINARY_AND                      
+                        94      CALL_METHOD                     1
+                        96      POP_TOP                         
+                        98      JUMP_ABSOLUTE                   72
+                        100     LOAD_FAST                       6: res
+                        102     RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang._add_serial_bits'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: _encode_read
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'bytearray'
+                        'append'
+                        '_calc_crc8'
+                        '_add_serial_bits'
+                    [Var Names]
+                        'self'
+                        'sync'
+                        'addr'
+                        'reg'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: bytearray
+                        2       LOAD_FAST                       1: sync
+                        4       LOAD_FAST                       2: addr
+                        6       LOAD_FAST                       3: reg
+                        8       BUILD_LIST                      3
+                        10      CALL_FUNCTION                   1
+                        12      STORE_FAST                      4: msg
+                        14      LOAD_FAST                       4: msg
+                        16      LOAD_METHOD                     1: append
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_METHOD                     2: _calc_crc8
+                        22      LOAD_FAST                       4: msg
+                        24      CALL_METHOD                     1
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_METHOD                     3: _add_serial_bits
+                        34      LOAD_FAST                       4: msg
+                        36      CALL_METHOD                     1
+                        38      RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang._encode_read'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: _encode_write
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 9
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'bytearray'
+                        'append'
+                        '_calc_crc8'
+                        '_add_serial_bits'
+                    [Var Names]
+                        'self'
+                        'sync'
+                        'addr'
+                        'reg'
+                        'val'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        24
+                        255
+                        16
+                        8
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: bytearray
+                        2       LOAD_FAST                       1: sync
+                        4       LOAD_FAST                       2: addr
+                        6       LOAD_FAST                       3: reg
+                        8       LOAD_FAST                       4: val
+                        10      LOAD_CONST                      1: 24
+                        12      BINARY_RSHIFT                   
+                        14      LOAD_CONST                      2: 255
+                        16      BINARY_AND                      
+                        18      LOAD_FAST                       4: val
+                        20      LOAD_CONST                      3: 16
+                        22      BINARY_RSHIFT                   
+                        24      LOAD_CONST                      2: 255
+                        26      BINARY_AND                      
+                        28      LOAD_FAST                       4: val
+                        30      LOAD_CONST                      4: 8
+                        32      BINARY_RSHIFT                   
+                        34      LOAD_CONST                      2: 255
+                        36      BINARY_AND                      
+                        38      LOAD_FAST                       4: val
+                        40      LOAD_CONST                      2: 255
+                        42      BINARY_AND                      
+                        44      BUILD_LIST                      7
+                        46      CALL_FUNCTION                   1
+                        48      STORE_FAST                      5: msg
+                        50      LOAD_FAST                       5: msg
+                        52      LOAD_METHOD                     1: append
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_METHOD                     2: _calc_crc8
+                        58      LOAD_FAST                       5: msg
+                        60      CALL_METHOD                     1
+                        62      CALL_METHOD                     1
+                        64      POP_TOP                         
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_METHOD                     3: _add_serial_bits
+                        70      LOAD_FAST                       5: msg
+                        72      CALL_METHOD                     1
+                        74      RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang._encode_write'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: _decode_read
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'len'
+                        'bytearray'
+                        '_encode_write'
+                    [Var Names]
+                        'self'
+                        'reg'
+                        'data'
+                        'mval'
+                        'pos'
+                        'd'
+                        'val'
+                        'encoded_data'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        10
+                        0
+                        8
+                        31
+                        255
+                        24
+                        41
+                        16
+                        51
+                        61
+                        5
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: len
+                        2       LOAD_FAST                       2: data
+                        4       CALL_FUNCTION                   1
+                        6       LOAD_CONST                      1: 10
+                        8       COMPARE_OP                      3 (!=)
+                        10      POP_JUMP_IF_FALSE               16
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                        16      LOAD_CONST                      2: 0
+                        18      DUP_TOP                         
+                        20      STORE_FAST                      3: mval
+                        22      STORE_FAST                      4: pos
+                        24      LOAD_GLOBAL                     1: bytearray
+                        26      LOAD_FAST                       2: data
+                        28      CALL_FUNCTION                   1
+                        30      GET_ITER                        
+                        32      FOR_ITER                        24 (to 58)
+                        34      STORE_FAST                      5: d
+                        36      LOAD_FAST                       3: mval
+                        38      LOAD_FAST                       5: d
+                        40      LOAD_FAST                       4: pos
+                        42      BINARY_LSHIFT                   
+                        44      INPLACE_OR                      
+                        46      STORE_FAST                      3: mval
+                        48      LOAD_FAST                       4: pos
+                        50      LOAD_CONST                      3: 8
+                        52      INPLACE_ADD                     
+                        54      STORE_FAST                      4: pos
+                        56      JUMP_ABSOLUTE                   32
+                        58      LOAD_FAST                       3: mval
+                        60      LOAD_CONST                      4: 31
+                        62      BINARY_RSHIFT                   
+                        64      LOAD_CONST                      5: 255
+                        66      BINARY_AND                      
+                        68      LOAD_CONST                      6: 24
+                        70      BINARY_LSHIFT                   
+                        72      LOAD_FAST                       3: mval
+                        74      LOAD_CONST                      7: 41
+                        76      BINARY_RSHIFT                   
+                        78      LOAD_CONST                      5: 255
+                        80      BINARY_AND                      
+                        82      LOAD_CONST                      8: 16
+                        84      BINARY_LSHIFT                   
+                        86      BINARY_OR                       
+                        88      LOAD_FAST                       3: mval
+                        90      LOAD_CONST                      9: 51
+                        92      BINARY_RSHIFT                   
+                        94      LOAD_CONST                      5: 255
+                        96      BINARY_AND                      
+                        98      LOAD_CONST                      3: 8
+                        100     BINARY_LSHIFT                   
+                        102     BINARY_OR                       
+                        104     LOAD_FAST                       3: mval
+                        106     LOAD_CONST                      10: 61
+                        108     BINARY_RSHIFT                   
+                        110     LOAD_CONST                      5: 255
+                        112     BINARY_AND                      
+                        114     BINARY_OR                       
+                        116     STORE_FAST                      6: val
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_METHOD                     2: _encode_write
+                        122     LOAD_CONST                      11: 5
+                        124     LOAD_CONST                      5: 255
+                        126     LOAD_FAST                       1: reg
+                        128     LOAD_FAST                       6: val
+                        130     CALL_METHOD                     4
+                        132     STORE_FAST                      7: encoded_data
+                        134     LOAD_FAST                       2: data
+                        136     LOAD_FAST                       7: encoded_data
+                        138     COMPARE_OP                      3 (!=)
+                        140     POP_JUMP_IF_FALSE               146
+                        142     LOAD_CONST                      0: None
+                        144     RETURN_VALUE                    
+                        146     LOAD_FAST                       6: val
+                        148     RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang._decode_read'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: reg_read
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'analog_mux'
+                        'activate'
+                        '_encode_read'
+                        'tmcuart_send_cmd'
+                        'send'
+                        'oid'
+                        '_decode_read'
+                    [Var Names]
+                        'self'
+                        'instance_id'
+                        'addr'
+                        'reg'
+                        'msg'
+                        'params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        245
+                        10
+                        'read'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: analog_mux
+                        4       LOAD_CONST                      0: None
+                        6       IS_OP                           1 (is not)
+                        8       POP_JUMP_IF_FALSE               22
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: analog_mux
+                        14      LOAD_METHOD                     1: activate
+                        16      LOAD_FAST                       1: instance_id
+                        18      CALL_METHOD                     1
+                        20      POP_TOP                         
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_METHOD                     2: _encode_read
+                        26      LOAD_CONST                      1: 245
+                        28      LOAD_FAST                       2: addr
+                        30      LOAD_FAST                       3: reg
+                        32      CALL_METHOD                     3
+                        34      STORE_FAST                      4: msg
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       3: tmcuart_send_cmd
+                        40      LOAD_METHOD                     4: send
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       5: oid
+                        46      LOAD_FAST                       4: msg
+                        48      LOAD_CONST                      2: 10
+                        50      BUILD_LIST                      3
+                        52      CALL_METHOD                     1
+                        54      STORE_FAST                      5: params
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_METHOD                     6: _decode_read
+                        60      LOAD_FAST                       3: reg
+                        62      LOAD_FAST                       5: params
+                        64      LOAD_CONST                      3: 'read'
+                        66      BINARY_SUBSCR                   
+                        68      CALL_METHOD                     2
+                        70      RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang.reg_read'
+                None
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: reg_write
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu'
+                        'print_time_to_clock'
+                        'analog_mux'
+                        'activate'
+                        '_encode_write'
+                        'tmcuart_send_cmd'
+                        'send'
+                        'oid'
+                    [Var Names]
+                        'self'
+                        'instance_id'
+                        'addr'
+                        'reg'
+                        'val'
+                        'print_time'
+                        'minclock'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        245
+                        128
+                        (
+                            'minclock'
+                        )
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       STORE_FAST                      6: minclock
+                        4       LOAD_FAST                       5: print_time
+                        6       LOAD_CONST                      0: None
+                        8       IS_OP                           1 (is not)
+                        10      POP_JUMP_IF_FALSE               24
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: mcu
+                        16      LOAD_METHOD                     1: print_time_to_clock
+                        18      LOAD_FAST                       5: print_time
+                        20      CALL_METHOD                     1
+                        22      STORE_FAST                      6: minclock
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       2: analog_mux
+                        28      LOAD_CONST                      0: None
+                        30      IS_OP                           1 (is not)
+                        32      POP_JUMP_IF_FALSE               46
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       2: analog_mux
+                        38      LOAD_METHOD                     3: activate
+                        40      LOAD_FAST                       1: instance_id
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_METHOD                     4: _encode_write
+                        50      LOAD_CONST                      2: 245
+                        52      LOAD_FAST                       2: addr
+                        54      LOAD_FAST                       3: reg
+                        56      LOAD_CONST                      3: 128
+                        58      BINARY_OR                       
+                        60      LOAD_FAST                       4: val
+                        62      CALL_METHOD                     4
+                        64      STORE_FAST                      7: msg
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       5: tmcuart_send_cmd
+                        70      LOAD_ATTR                       6: send
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       7: oid
+                        76      LOAD_FAST                       7: msg
+                        78      LOAD_CONST                      1: 0
+                        80      BUILD_LIST                      3
+                        82      LOAD_FAST                       6: minclock
+                        84      LOAD_CONST                      4: ('minclock',)
+                        86      CALL_FUNCTION_KW                2
+                        88      POP_TOP                         
+                        90      LOAD_CONST                      0: None
+                        92      RETURN_VALUE                    
+                'MCU_TMC_uart_bitbang.reg_write'
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'MCU_TMC_uart_bitbang'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'MCU_TMC_uart_bitbang.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> build_config
+                18      LOAD_CONST                      4: 'MCU_TMC_uart_bitbang.build_config'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: build_config
+                24      LOAD_CONST                      5: <CODE> register_instance
+                26      LOAD_CONST                      6: 'MCU_TMC_uart_bitbang.register_instance'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: register_instance
+                32      LOAD_CONST                      7: <CODE> _calc_crc8
+                34      LOAD_CONST                      8: 'MCU_TMC_uart_bitbang._calc_crc8'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _calc_crc8
+                40      LOAD_CONST                      9: <CODE> _add_serial_bits
+                42      LOAD_CONST                      10: 'MCU_TMC_uart_bitbang._add_serial_bits'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _add_serial_bits
+                48      LOAD_CONST                      11: <CODE> _encode_read
+                50      LOAD_CONST                      12: 'MCU_TMC_uart_bitbang._encode_read'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: _encode_read
+                56      LOAD_CONST                      13: <CODE> _encode_write
+                58      LOAD_CONST                      14: 'MCU_TMC_uart_bitbang._encode_write'
+                60      MAKE_FUNCTION                   0
+                62      STORE_NAME                      9: _encode_write
+                64      LOAD_CONST                      15: <CODE> _decode_read
+                66      LOAD_CONST                      16: 'MCU_TMC_uart_bitbang._decode_read'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      10: _decode_read
+                72      LOAD_CONST                      17: <CODE> reg_read
+                74      LOAD_CONST                      18: 'MCU_TMC_uart_bitbang.reg_read'
+                76      MAKE_FUNCTION                   0
+                78      STORE_NAME                      11: reg_read
+                80      LOAD_CONST                      22: (None,)
+                82      LOAD_CONST                      20: <CODE> reg_write
+                84      LOAD_CONST                      21: 'MCU_TMC_uart_bitbang.reg_write'
+                86      MAKE_FUNCTION                   1
+                88      STORE_NAME                      12: reg_write
+                90      LOAD_CONST                      19: None
+                92      RETURN_VALUE                    
+        'MCU_TMC_uart_bitbang'
+        [Code]
+            File Name: /extras/tmc_uart.py
+            Object Name: lookup_tmc_uart_bitbang
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 10
+            Stack Size: 6
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'get_printer'
+                'lookup_object'
+                'lookup_pin'
+                'get'
+                'error'
+                'getlist'
+                'getint'
+                'MCU_TMC_uart_bitbang'
+                'register_instance'
+            [Var Names]
+                'config'
+                'max_addr'
+                'ppins'
+                'rx_pin_params'
+                'tx_pin_desc'
+                'tx_pin_params'
+                'select_pins_desc'
+                'addr'
+                'mcu_uart'
+                'instance_id'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                'pins'
+                'uart_pin'
+                True
+                'tmc_uart_rx'
+                (
+                    'can_pullup'
+                    'share_type'
+                )
+                'tx_pin'
+                'tmc_uart_tx'
+                (
+                    'share_type'
+                )
+                'chip'
+                'TMC uart rx and tx pins must be on the same mcu'
+                'select_pins'
+                'uart_address'
+                0
+                (
+                    'minval'
+                    'maxval'
+                )
+                'class'
+            [Disassembly]
+                0       LOAD_FAST                       0: config
+                2       LOAD_METHOD                     0: get_printer
+                4       CALL_METHOD                     0
+                6       LOAD_METHOD                     1: lookup_object
+                8       LOAD_CONST                      1: 'pins'
+                10      CALL_METHOD                     1
+                12      STORE_FAST                      2: ppins
+                14      LOAD_FAST                       2: ppins
+                16      LOAD_ATTR                       2: lookup_pin
+                18      LOAD_FAST                       0: config
+                20      LOAD_METHOD                     3: get
+                22      LOAD_CONST                      2: 'uart_pin'
+                24      CALL_METHOD                     1
+                26      LOAD_CONST                      3: True
+                28      LOAD_CONST                      4: 'tmc_uart_rx'
+                30      LOAD_CONST                      5: ('can_pullup', 'share_type')
+                32      CALL_FUNCTION_KW                3
+                34      STORE_FAST                      3: rx_pin_params
+                36      LOAD_FAST                       0: config
+                38      LOAD_METHOD                     3: get
+                40      LOAD_CONST                      6: 'tx_pin'
+                42      LOAD_CONST                      0: None
+                44      CALL_METHOD                     2
+                46      STORE_FAST                      4: tx_pin_desc
+                48      LOAD_FAST                       4: tx_pin_desc
+                50      LOAD_CONST                      0: None
+                52      IS_OP                           0 (is)
+                54      POP_JUMP_IF_FALSE               62
+                56      LOAD_FAST                       3: rx_pin_params
+                58      STORE_FAST                      5: tx_pin_params
+                60      JUMP_FORWARD                    14 (to 76)
+                62      LOAD_FAST                       2: ppins
+                64      LOAD_ATTR                       2: lookup_pin
+                66      LOAD_FAST                       4: tx_pin_desc
+                68      LOAD_CONST                      7: 'tmc_uart_tx'
+                70      LOAD_CONST                      8: ('share_type',)
+                72      CALL_FUNCTION_KW                2
+                74      STORE_FAST                      5: tx_pin_params
+                76      LOAD_FAST                       3: rx_pin_params
+                78      LOAD_CONST                      9: 'chip'
+                80      BINARY_SUBSCR                   
+                82      LOAD_FAST                       5: tx_pin_params
+                84      LOAD_CONST                      9: 'chip'
+                86      BINARY_SUBSCR                   
+                88      IS_OP                           1 (is not)
+                90      POP_JUMP_IF_FALSE               102
+                92      LOAD_FAST                       2: ppins
+                94      LOAD_METHOD                     4: error
+                96      LOAD_CONST                      10: 'TMC uart rx and tx pins must be on the same mcu'
+                98      CALL_METHOD                     1
+                100     RAISE_VARARGS                   1
+                102     LOAD_FAST                       0: config
+                104     LOAD_METHOD                     5: getlist
+                106     LOAD_CONST                      11: 'select_pins'
+                108     LOAD_CONST                      0: None
+                110     CALL_METHOD                     2
+                112     STORE_FAST                      6: select_pins_desc
+                114     LOAD_FAST                       0: config
+                116     LOAD_ATTR                       6: getint
+                118     LOAD_CONST                      12: 'uart_address'
+                120     LOAD_CONST                      13: 0
+                122     LOAD_CONST                      13: 0
+                124     LOAD_FAST                       1: max_addr
+                126     LOAD_CONST                      14: ('minval', 'maxval')
+                128     CALL_FUNCTION_KW                4
+                130     STORE_FAST                      7: addr
+                132     LOAD_FAST                       3: rx_pin_params
+                134     LOAD_METHOD                     3: get
+                136     LOAD_CONST                      15: 'class'
+                138     CALL_METHOD                     1
+                140     STORE_FAST                      8: mcu_uart
+                142     LOAD_FAST                       8: mcu_uart
+                144     LOAD_CONST                      0: None
+                146     IS_OP                           0 (is)
+                148     POP_JUMP_IF_FALSE               170
+                150     LOAD_GLOBAL                     7: MCU_TMC_uart_bitbang
+                152     LOAD_FAST                       3: rx_pin_params
+                154     LOAD_FAST                       5: tx_pin_params
+                156     LOAD_FAST                       6: select_pins_desc
+                158     CALL_FUNCTION                   3
+                160     STORE_FAST                      8: mcu_uart
+                162     LOAD_FAST                       8: mcu_uart
+                164     LOAD_FAST                       3: rx_pin_params
+                166     LOAD_CONST                      15: 'class'
+                168     STORE_SUBSCR                    
+                170     LOAD_FAST                       8: mcu_uart
+                172     LOAD_METHOD                     8: register_instance
+                174     LOAD_FAST                       3: rx_pin_params
+                176     LOAD_FAST                       5: tx_pin_params
+                178     LOAD_FAST                       6: select_pins_desc
+                180     LOAD_FAST                       7: addr
+                182     CALL_METHOD                     4
+                184     STORE_FAST                      9: instance_id
+                186     LOAD_FAST                       9: instance_id
+                188     LOAD_FAST                       7: addr
+                190     LOAD_FAST                       8: mcu_uart
+                192     BUILD_TUPLE                     3
+                194     RETURN_VALUE                    
+        'lookup_tmc_uart_bitbang'
+        [Code]
+            File Name: /extras/tmc_uart.py
+            Object Name: MCU_TMC_uart
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_fields'
+                '_do_get_register'
+                'get_register'
+                'set_register'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'MCU_TMC_uart'
+                0
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: __init__
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'get_name'
+                        'split'
+                        'name'
+                        'name_to_reg'
+                        'fields'
+                        'ifcnt'
+                        'lookup_tmc_uart_bitbang'
+                        'instance_id'
+                        'addr'
+                        'mcu_uart'
+                        'mutex'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'name_to_reg'
+                        'fields'
+                        'max_addr'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        -1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_METHOD                     2: get_name
+                        14      CALL_METHOD                     0
+                        16      LOAD_METHOD                     3: split
+                        18      CALL_METHOD                     0
+                        20      LOAD_CONST                      1: -1
+                        22      BINARY_SUBSCR                   
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: name
+                        28      LOAD_FAST                       2: name_to_reg
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      5: name_to_reg
+                        34      LOAD_FAST                       3: fields
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      6: fields
+                        40      LOAD_CONST                      0: None
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      7: ifcnt
+                        46      LOAD_GLOBAL                     8: lookup_tmc_uart_bitbang
+                        48      LOAD_FAST                       1: config
+                        50      LOAD_FAST                       4: max_addr
+                        52      CALL_FUNCTION                   2
+                        54      UNPACK_SEQUENCE                 3
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      9: instance_id
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      10: addr
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      11: mcu_uart
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       11: mcu_uart
+                        72      LOAD_ATTR                       12: mutex
+                        74      LOAD_FAST                       0: self
+                        76      STORE_ATTR                      12: mutex
+                        78      LOAD_CONST                      0: None
+                        80      RETURN_VALUE                    
+                'MCU_TMC_uart.__init__'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: get_fields
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fields'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: fields
+                        4       RETURN_VALUE                    
+                'MCU_TMC_uart.get_fields'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: _do_get_register
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'name_to_reg'
+                        'printer'
+                        'get_start_args'
+                        'get'
+                        'range'
+                        'mcu_uart'
+                        'reg_read'
+                        'instance_id'
+                        'addr'
+                        'command_error'
+                        'name'
+                    [Var Names]
+                        'self'
+                        'reg_name'
+                        'reg'
+                        'retry'
+                        'val'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'debugoutput'
+                        0
+                        5
+                        "Unable to read tmc uart '%s' register %s"
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: name_to_reg
+                        4       LOAD_FAST                       1: reg_name
+                        6       BINARY_SUBSCR                   
+                        8       STORE_FAST                      2: reg
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: get_start_args
+                        16      CALL_METHOD                     0
+                        18      LOAD_METHOD                     3: get
+                        20      LOAD_CONST                      1: 'debugoutput'
+                        22      CALL_METHOD                     1
+                        24      LOAD_CONST                      0: None
+                        26      IS_OP                           1 (is not)
+                        28      POP_JUMP_IF_FALSE               34
+                        30      LOAD_CONST                      2: 0
+                        32      RETURN_VALUE                    
+                        34      LOAD_GLOBAL                     4: range
+                        36      LOAD_CONST                      3: 5
+                        38      CALL_FUNCTION                   1
+                        40      GET_ITER                        
+                        42      FOR_ITER                        40 (to 84)
+                        44      STORE_FAST                      3: retry
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       5: mcu_uart
+                        50      LOAD_METHOD                     6: reg_read
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       7: instance_id
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       8: addr
+                        60      LOAD_FAST                       2: reg
+                        62      CALL_METHOD                     3
+                        64      STORE_FAST                      4: val
+                        66      LOAD_FAST                       4: val
+                        68      LOAD_CONST                      0: None
+                        70      IS_OP                           1 (is not)
+                        72      POP_JUMP_IF_FALSE               42
+                        74      LOAD_FAST                       4: val
+                        76      ROT_TWO                         
+                        78      POP_TOP                         
+                        80      RETURN_VALUE                    
+                        82      JUMP_ABSOLUTE                   42
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       1: printer
+                        88      LOAD_METHOD                     9: command_error
+                        90      LOAD_CONST                      4: "Unable to read tmc uart '%s' register %s"
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       10: name
+                        96      LOAD_FAST                       1: reg_name
+                        98      BUILD_TUPLE                     2
+                        100     BINARY_MODULO                   
+                        102     CALL_METHOD                     1
+                        104     RAISE_VARARGS                   1
+                        106     LOAD_CONST                      0: None
+                        108     RETURN_VALUE                    
+                'MCU_TMC_uart._do_get_register'
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: get_register
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mutex'
+                        '_do_get_register'
+                    [Var Names]
+                        'self'
+                        'reg_name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mutex
+                        4       SETUP_WITH                      26 (to 32)
+                        6       POP_TOP                         
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_METHOD                     1: _do_get_register
+                        12      LOAD_FAST                       1: reg_name
+                        14      CALL_METHOD                     1
+                        16      POP_BLOCK                       
+                        18      ROT_TWO                         
+                        20      LOAD_CONST                      0: None
+                        22      DUP_TOP                         
+                        24      DUP_TOP                         
+                        26      CALL_FUNCTION                   3
+                        28      POP_TOP                         
+                        30      RETURN_VALUE                    
+                        32      WITH_EXCEPT_START               
+                        34      POP_JUMP_IF_TRUE                38
+                        36      RERAISE                         
+                        38      POP_TOP                         
+                        40      POP_TOP                         
+                        42      POP_TOP                         
+                        44      POP_EXCEPT                      
+                        46      POP_TOP                         
+                        48      LOAD_CONST                      0: None
+                        50      RETURN_VALUE                    
+                'MCU_TMC_uart.get_register'
+                None
+                [Code]
+                    File Name: /extras/tmc_uart.py
+                    Object Name: set_register
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 9
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'name_to_reg'
+                        'printer'
+                        'get_start_args'
+                        'get'
+                        'mutex'
+                        'range'
+                        'ifcnt'
+                        '_do_get_register'
+                        'mcu_uart'
+                        'reg_write'
+                        'instance_id'
+                        'addr'
+                        'command_error'
+                        'name'
+                    [Var Names]
+                        'self'
+                        'reg_name'
+                        'val'
+                        'print_time'
+                        'reg'
+                        'retry'
+                        'ifcnt'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'debugoutput'
+                        5
+                        'IFCNT'
+                        1
+                        255
+                        '{"code":"key570", "msg":"Unable to write tmc uart \'%s\' register %s"}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: name_to_reg
+                        4       LOAD_FAST                       1: reg_name
+                        6       BINARY_SUBSCR                   
+                        8       STORE_FAST                      4: reg
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: get_start_args
+                        16      CALL_METHOD                     0
+                        18      LOAD_METHOD                     3: get
+                        20      LOAD_CONST                      1: 'debugoutput'
+                        22      CALL_METHOD                     1
+                        24      LOAD_CONST                      0: None
+                        26      IS_OP                           1 (is not)
+                        28      POP_JUMP_IF_FALSE               34
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       4: mutex
+                        38      SETUP_WITH                      132 (to 172)
+                        40      POP_TOP                         
+                        42      LOAD_GLOBAL                     5: range
+                        44      LOAD_CONST                      2: 5
+                        46      CALL_FUNCTION                   1
+                        48      GET_ITER                        
+                        50      FOR_ITER                        106 (to 158)
+                        52      STORE_FAST                      5: retry
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       6: ifcnt
+                        58      STORE_FAST                      6: ifcnt
+                        60      LOAD_FAST                       6: ifcnt
+                        62      LOAD_CONST                      0: None
+                        64      IS_OP                           0 (is)
+                        66      POP_JUMP_IF_FALSE               84
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_METHOD                     7: _do_get_register
+                        72      LOAD_CONST                      3: 'IFCNT'
+                        74      CALL_METHOD                     1
+                        76      DUP_TOP                         
+                        78      LOAD_FAST                       0: self
+                        80      STORE_ATTR                      6: ifcnt
+                        82      STORE_FAST                      6: ifcnt
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       8: mcu_uart
+                        88      LOAD_METHOD                     9: reg_write
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       10: instance_id
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       11: addr
+                        98      LOAD_FAST                       4: reg
+                        100     LOAD_FAST                       2: val
+                        102     LOAD_FAST                       3: print_time
+                        104     CALL_METHOD                     5
+                        106     POP_TOP                         
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_METHOD                     7: _do_get_register
+                        112     LOAD_CONST                      3: 'IFCNT'
+                        114     CALL_METHOD                     1
+                        116     LOAD_FAST                       0: self
+                        118     STORE_ATTR                      6: ifcnt
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       6: ifcnt
+                        124     LOAD_FAST                       6: ifcnt
+                        126     LOAD_CONST                      4: 1
+                        128     BINARY_ADD                      
+                        130     LOAD_CONST                      5: 255
+                        132     BINARY_AND                      
+                        134     COMPARE_OP                      2 (==)
+                        136     POP_JUMP_IF_FALSE               50
+                        138     POP_TOP                         
+                        140     POP_BLOCK                       
+                        142     LOAD_CONST                      0: None
+                        144     DUP_TOP                         
+                        146     DUP_TOP                         
+                        148     CALL_FUNCTION                   3
+                        150     POP_TOP                         
+                        152     LOAD_CONST                      0: None
+                        154     RETURN_VALUE                    
+                        156     JUMP_ABSOLUTE                   50
+                        158     POP_BLOCK                       
+                        160     LOAD_CONST                      0: None
+                        162     DUP_TOP                         
+                        164     DUP_TOP                         
+                        166     CALL_FUNCTION                   3
+                        168     POP_TOP                         
+                        170     JUMP_FORWARD                    16 (to 188)
+                        172     WITH_EXCEPT_START               
+                        174     POP_JUMP_IF_TRUE                178
+                        176     RERAISE                         
+                        178     POP_TOP                         
+                        180     POP_TOP                         
+                        182     POP_TOP                         
+                        184     POP_EXCEPT                      
+                        186     POP_TOP                         
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       1: printer
+                        192     LOAD_METHOD                     12: command_error
+                        194     LOAD_CONST                      6: '{"code":"key570", "msg":"Unable to write tmc uart \'%s\' register %s"}'
+                        196     LOAD_FAST                       0: self
+                        198     LOAD_ATTR                       13: name
+                        200     LOAD_FAST                       1: reg_name
+                        202     BUILD_TUPLE                     2
+                        204     BINARY_MODULO                   
+                        206     CALL_METHOD                     1
+                        208     RAISE_VARARGS                   1
+                        210     LOAD_CONST                      0: None
+                        212     RETURN_VALUE                    
+                'MCU_TMC_uart.set_register'
+                (
+                    0
+                )
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'MCU_TMC_uart'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      13: (0,)
+                10      LOAD_CONST                      2: <CODE> __init__
+                12      LOAD_CONST                      3: 'MCU_TMC_uart.__init__'
+                14      MAKE_FUNCTION                   1
+                16      STORE_NAME                      3: __init__
+                18      LOAD_CONST                      4: <CODE> get_fields
+                20      LOAD_CONST                      5: 'MCU_TMC_uart.get_fields'
+                22      MAKE_FUNCTION                   0
+                24      STORE_NAME                      4: get_fields
+                26      LOAD_CONST                      6: <CODE> _do_get_register
+                28      LOAD_CONST                      7: 'MCU_TMC_uart._do_get_register'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: _do_get_register
+                34      LOAD_CONST                      8: <CODE> get_register
+                36      LOAD_CONST                      9: 'MCU_TMC_uart.get_register'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: get_register
+                42      LOAD_CONST                      14: (None,)
+                44      LOAD_CONST                      11: <CODE> set_register
+                46      LOAD_CONST                      12: 'MCU_TMC_uart.set_register'
+                48      MAKE_FUNCTION                   1
+                50      STORE_NAME                      7: set_register
+                52      LOAD_CONST                      10: None
+                54      RETURN_VALUE                    
+        'MCU_TMC_uart'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_BUILD_CLASS                
+        10      LOAD_CONST                      2: <CODE> MCU_analog_mux
+        12      LOAD_CONST                      3: 'MCU_analog_mux'
+        14      MAKE_FUNCTION                   0
+        16      LOAD_CONST                      3: 'MCU_analog_mux'
+        18      CALL_FUNCTION                   2
+        20      STORE_NAME                      1: MCU_analog_mux
+        22      LOAD_BUILD_CLASS                
+        24      LOAD_CONST                      4: <CODE> PrinterTMCUartMutexes
+        26      LOAD_CONST                      5: 'PrinterTMCUartMutexes'
+        28      MAKE_FUNCTION                   0
+        30      LOAD_CONST                      5: 'PrinterTMCUartMutexes'
+        32      CALL_FUNCTION                   2
+        34      STORE_NAME                      2: PrinterTMCUartMutexes
+        36      LOAD_CONST                      6: <CODE> lookup_tmc_uart_mutex
+        38      LOAD_CONST                      7: 'lookup_tmc_uart_mutex'
+        40      MAKE_FUNCTION                   0
+        42      STORE_NAME                      3: lookup_tmc_uart_mutex
+        44      LOAD_CONST                      8: 40000
+        46      STORE_NAME                      4: TMC_BAUD_RATE
+        48      LOAD_CONST                      9: 9000
+        50      STORE_NAME                      5: TMC_BAUD_RATE_AVR
+        52      LOAD_BUILD_CLASS                
+        54      LOAD_CONST                      10: <CODE> MCU_TMC_uart_bitbang
+        56      LOAD_CONST                      11: 'MCU_TMC_uart_bitbang'
+        58      MAKE_FUNCTION                   0
+        60      LOAD_CONST                      11: 'MCU_TMC_uart_bitbang'
+        62      CALL_FUNCTION                   2
+        64      STORE_NAME                      6: MCU_TMC_uart_bitbang
+        66      LOAD_CONST                      12: <CODE> lookup_tmc_uart_bitbang
+        68      LOAD_CONST                      13: 'lookup_tmc_uart_bitbang'
+        70      MAKE_FUNCTION                   0
+        72      STORE_NAME                      7: lookup_tmc_uart_bitbang
+        74      LOAD_BUILD_CLASS                
+        76      LOAD_CONST                      14: <CODE> MCU_TMC_uart
+        78      LOAD_CONST                      15: 'MCU_TMC_uart'
+        80      MAKE_FUNCTION                   0
+        82      LOAD_CONST                      15: 'MCU_TMC_uart'
+        84      CALL_FUNCTION                   2
+        86      STORE_NAME                      8: MCU_TMC_uart
+        88      LOAD_CONST                      1: None
+        90      RETURN_VALUE                    

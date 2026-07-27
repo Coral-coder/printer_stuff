@@ -20,7 +20,67 @@ class PIDCalibrate:
         target = gcmd.get_float('TARGET')
         write_file = gcmd.get_int('WRITE_FILE', 0)
         pheaters = self.printer.lookup_object('heaters')
-    # WARNING: Decompyle incomplete
+        
+        try:
+            heater = pheaters.lookup_heater(heater_name)
+        except self.printer.config_error:
+            e = None
+            
+            try:
+                raise gcmd.error(str(e))
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            calibrate = ControlAutoTune(heater, target)
+            old_control = heater.set_control(calibrate)
+            
+            try:
+                pheaters.set_temperature(heater, target, True)
+            except self.printer.command_error:
+                e = None
+                
+                try:
+                    heater.set_control(old_control)
+                    raise 
+                finally:
+                    e = None
+                    del e
+                e = None
+                del e
+                if write_file:
+                    calibrate.write_file('/tmp/heattest.txt')
+
+
+
+
+        if calibrate.check_busy(0, 0, 0):
+            raise gcmd.error('{"code": "key7", "msg": "pid_calibrate interrupted"}')
+        (Kp, Ki, Kd) = calibrate.calc_final_pid()
+        logging.info('Autotune: final: Kp=%f Ki=%f Kd=%f', Kp, Ki, Kd)
+        gcmd.respond_info('PID parameters: pid_Kp=%.3f pid_Ki=%.3f pid_Kd=%.3f\nThe SAVE_CONFIG command will update the printer config file\nwith these parameters and restart the printer.' % (Kp, Ki, Kd))
+        Kp_name = 'pid_Kp'
+        Ki_name = 'pid_Ki'
+        Kd_name = 'pid_Kd'
+        PID_PARAM_BASE = 255
+        high_temp_value = self.config.getsection('extruder').getint('high_temp_value', default=280)
+        if heater_name == 'extruder' and target > high_temp_value:
+            Kp_name = 'pid_Kp_high_temp'
+            Ki_name = 'pid_Ki_high_temp'
+            Kd_name = 'pid_Kd_high_temp'
+            heater.control.pid_calibrate_Kp_ht = float('%.3f' % Kp) / PID_PARAM_BASE
+            heater.control.pid_calibrate_Ki_ht = float('%.3f' % Ki) / PID_PARAM_BASE
+            heater.control.pid_calibrate_Kd_ht = float('%.3f' % Kd) / PID_PARAM_BASE
+        elif heater_name == 'extruder' and target <= high_temp_value:
+            heater.control.pid_calibrate_Kp = float('%.3f' % Kp) / PID_PARAM_BASE
+            heater.control.pid_calibrate_Ki = float('%.3f' % Ki) / PID_PARAM_BASE
+            heater.control.pid_calibrate_Kd = float('%.3f' % Kd) / PID_PARAM_BASE
+        configfile = self.printer.lookup_object('configfile')
+        configfile.set(heater_name, 'control', 'pid')
+        configfile.set(heater_name, Kp_name, '%.3f' % (Kp,))
+        configfile.set(heater_name, Ki_name, '%.3f' % (Ki,))
+        configfile.set(heater_name, Kd_name, '%.3f' % (Kd,))
 
 
 TUNE_PID_DELTA = 5

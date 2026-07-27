@@ -51,8 +51,13 @@ class RunoutHelper:
 
     
     def _exec_gcode(self, prefix, template):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            self.gcode.run_script(prefix + template.render() + '\nM400')
+        except Exception:
+            logging.exception('Script running error')
+
+        self.min_event_systime = self.reactor.monotonic() + self.event_delay
 
     
     def note_filament_present(self, is_filament_present):

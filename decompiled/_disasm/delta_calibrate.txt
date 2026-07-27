@@ -1,0 +1,2396 @@
+delta_calibrate.pyc (Python 3.9)
+[Code]
+    File Name: /extras/delta_calibrate.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'math'
+        'logging'
+        'collections'
+        'mathutil'
+        ''
+        'probe'
+        'load_config_stable'
+        'MeasureAngles'
+        'MeasureOuterRadius'
+        'MeasureRidgeRadius'
+        'MEASURE_WEIGHT'
+        'measurements_to_distances'
+        'DeltaCalibrate'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'probe'
+        )
+        [Code]
+            File Name: /extras/delta_calibrate.py
+            Object Name: load_config_stable
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 2
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'getfloatlist'
+            [Var Names]
+                'config'
+                'option'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                3
+                (
+                    'count'
+                )
+            [Disassembly]
+                0       LOAD_FAST                       0: config
+                2       LOAD_ATTR                       0: getfloatlist
+                4       LOAD_FAST                       1: option
+                6       LOAD_CONST                      1: 3
+                8       LOAD_CONST                      2: ('count',)
+                10      CALL_FUNCTION_KW                2
+                12      RETURN_VALUE                    
+        'load_config_stable'
+        (
+            210
+            270
+            330
+            30
+            90
+            150
+        )
+        65
+        4.5
+        0.5
+        [Code]
+            File Name: /extras/delta_calibrate.py
+            Object Name: measurements_to_distances
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 18
+            Stack Size: 7
+            Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+            [Names]
+                'zip'
+                'list'
+                'map'
+                'math'
+                'radians'
+                'MeasureAngles'
+                'cos'
+                'sin'
+                'MeasureRidgeRadius'
+                'MeasureOuterRadius'
+            [Var Names]
+                'measured_params'
+                'delta_params'
+                'mp'
+                'scale'
+                'cpw'
+                'center_widths'
+                'center_dists'
+                'outer_dists'
+                'obj_angles'
+                'xy_angles'
+                'inner_pos'
+                'outer_pos'
+                'center_positions'
+                'start_pos'
+                'shifted_angles'
+                'first_pos'
+                'second_pos'
+                'outer_positions'
+            [Free Vars]
+            [Cell Vars]
+                'dp'
+                'inner_ridge'
+                'outer_center'
+                'outer_ridge'
+            [Constants]
+                None
+                'SCALE'
+                0
+                'CENTER_PILLAR_WIDTHS'
+                2
+                1
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'od'
+                        'cw'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        16 (to 22)
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      1: od
+                        10      STORE_FAST                      2: cw
+                        12      LOAD_FAST                       1: od
+                        14      LOAD_FAST                       2: cw
+                        16      BINARY_SUBTRACT                 
+                        18      LIST_APPEND                     2
+                        20      JUMP_ABSOLUTE                   4
+                        22      RETURN_VALUE                    
+                'measurements_to_distances.<locals>.<listcomp>'
+                'CENTER_DISTS'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'od'
+                        'opw'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        16 (to 22)
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      1: od
+                        10      STORE_FAST                      2: opw
+                        12      LOAD_FAST                       1: od
+                        14      LOAD_FAST                       2: opw
+                        16      BINARY_SUBTRACT                 
+                        18      LIST_APPEND                     2
+                        20      JUMP_ABSOLUTE                   4
+                        22      RETURN_VALUE                    
+                'OUTER_DISTS'
+                'OUTER_PILLAR_WIDTHS'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'ax'
+                        'ay'
+                    [Free Vars]
+                        'inner_ridge'
+                    [Cell Vars]
+                    [Constants]
+                        0
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        26 (to 32)
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      1: ax
+                        10      STORE_FAST                      2: ay
+                        12      LOAD_FAST                       1: ax
+                        14      LOAD_DEREF                      0: inner_ridge
+                        16      BINARY_MULTIPLY                 
+                        18      LOAD_FAST                       2: ay
+                        20      LOAD_DEREF                      0: inner_ridge
+                        22      BINARY_MULTIPLY                 
+                        24      LOAD_CONST                      0: 0
+                        26      BUILD_TUPLE                     3
+                        28      LIST_APPEND                     2
+                        30      JUMP_ABSOLUTE                   4
+                        32      RETURN_VALUE                    
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'ax'
+                        'ay'
+                    [Free Vars]
+                        'outer_ridge'
+                    [Cell Vars]
+                    [Constants]
+                        0
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        26 (to 32)
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      1: ax
+                        10      STORE_FAST                      2: ay
+                        12      LOAD_FAST                       1: ax
+                        14      LOAD_DEREF                      0: outer_ridge
+                        16      BINARY_MULTIPLY                 
+                        18      LOAD_FAST                       2: ay
+                        20      LOAD_DEREF                      0: outer_ridge
+                        22      BINARY_MULTIPLY                 
+                        24      LOAD_CONST                      0: 0
+                        26      BUILD_TUPLE                     3
+                        28      LIST_APPEND                     2
+                        30      JUMP_ABSOLUTE                   4
+                        32      RETURN_VALUE                    
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 7
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                        'calc_stable_position'
+                    [Var Names]
+                        '.0'
+                        'cd'
+                        'ip'
+                        'op'
+                    [Free Vars]
+                        'dp'
+                    [Cell Vars]
+                    [Constants]
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        32 (to 38)
+                        6       UNPACK_SEQUENCE                 3
+                        8       STORE_FAST                      1: cd
+                        10      STORE_FAST                      2: ip
+                        12      STORE_FAST                      3: op
+                        14      LOAD_FAST                       1: cd
+                        16      LOAD_DEREF                      0: dp
+                        18      LOAD_METHOD                     0: calc_stable_position
+                        20      LOAD_FAST                       2: ip
+                        22      CALL_METHOD                     1
+                        24      LOAD_DEREF                      0: dp
+                        26      LOAD_METHOD                     0: calc_stable_position
+                        28      LOAD_FAST                       3: op
+                        30      CALL_METHOD                     1
+                        32      BUILD_TUPLE                     3
+                        34      LIST_APPEND                     2
+                        36      JUMP_ABSOLUTE                   4
+                        38      RETURN_VALUE                    
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'ax'
+                        'ay'
+                    [Free Vars]
+                        'outer_center'
+                    [Cell Vars]
+                    [Constants]
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        24 (to 30)
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      1: ax
+                        10      STORE_FAST                      2: ay
+                        12      LOAD_FAST                       1: ax
+                        14      LOAD_DEREF                      0: outer_center
+                        16      BINARY_MULTIPLY                 
+                        18      LOAD_FAST                       2: ay
+                        20      LOAD_DEREF                      0: outer_center
+                        22      BINARY_MULTIPLY                 
+                        24      BUILD_TUPLE                     2
+                        26      LIST_APPEND                     2
+                        28      JUMP_ABSOLUTE                   4
+                        30      RETURN_VALUE                    
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'ax'
+                        'ay'
+                        'spx'
+                        'spy'
+                    [Free Vars]
+                        'inner_ridge'
+                    [Cell Vars]
+                    [Constants]
+                        0
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        42 (to 48)
+                        6       UNPACK_SEQUENCE                 2
+                        8       UNPACK_SEQUENCE                 2
+                        10      STORE_FAST                      1: ax
+                        12      STORE_FAST                      2: ay
+                        14      UNPACK_SEQUENCE                 2
+                        16      STORE_FAST                      3: spx
+                        18      STORE_FAST                      4: spy
+                        20      LOAD_FAST                       1: ax
+                        22      LOAD_DEREF                      0: inner_ridge
+                        24      BINARY_MULTIPLY                 
+                        26      LOAD_FAST                       3: spx
+                        28      BINARY_ADD                      
+                        30      LOAD_FAST                       2: ay
+                        32      LOAD_DEREF                      0: inner_ridge
+                        34      BINARY_MULTIPLY                 
+                        36      LOAD_FAST                       4: spy
+                        38      BINARY_ADD                      
+                        40      LOAD_CONST                      0: 0
+                        42      BUILD_TUPLE                     3
+                        44      LIST_APPEND                     2
+                        46      JUMP_ABSOLUTE                   4
+                        48      RETURN_VALUE                    
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                    [Var Names]
+                        '.0'
+                        'ax'
+                        'ay'
+                        'spx'
+                        'spy'
+                    [Free Vars]
+                        'outer_ridge'
+                    [Cell Vars]
+                    [Constants]
+                        0
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        42 (to 48)
+                        6       UNPACK_SEQUENCE                 2
+                        8       UNPACK_SEQUENCE                 2
+                        10      STORE_FAST                      1: ax
+                        12      STORE_FAST                      2: ay
+                        14      UNPACK_SEQUENCE                 2
+                        16      STORE_FAST                      3: spx
+                        18      STORE_FAST                      4: spy
+                        20      LOAD_FAST                       1: ax
+                        22      LOAD_DEREF                      0: outer_ridge
+                        24      BINARY_MULTIPLY                 
+                        26      LOAD_FAST                       3: spx
+                        28      BINARY_ADD                      
+                        30      LOAD_FAST                       2: ay
+                        32      LOAD_DEREF                      0: outer_ridge
+                        34      BINARY_MULTIPLY                 
+                        36      LOAD_FAST                       4: spy
+                        38      BINARY_ADD                      
+                        40      LOAD_CONST                      0: 0
+                        42      BUILD_TUPLE                     3
+                        44      LIST_APPEND                     2
+                        46      JUMP_ABSOLUTE                   4
+                        48      RETURN_VALUE                    
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: <listcomp>
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 7
+                    Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                    [Names]
+                        'calc_stable_position'
+                    [Var Names]
+                        '.0'
+                        'od'
+                        'fp'
+                        'sp'
+                    [Free Vars]
+                        'dp'
+                    [Cell Vars]
+                    [Constants]
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: .0
+                        4       FOR_ITER                        32 (to 38)
+                        6       UNPACK_SEQUENCE                 3
+                        8       STORE_FAST                      1: od
+                        10      STORE_FAST                      2: fp
+                        12      STORE_FAST                      3: sp
+                        14      LOAD_FAST                       1: od
+                        16      LOAD_DEREF                      0: dp
+                        18      LOAD_METHOD                     0: calc_stable_position
+                        20      LOAD_FAST                       2: fp
+                        22      CALL_METHOD                     1
+                        24      LOAD_DEREF                      0: dp
+                        26      LOAD_METHOD                     0: calc_stable_position
+                        28      LOAD_FAST                       3: sp
+                        30      CALL_METHOD                     1
+                        32      BUILD_TUPLE                     3
+                        34      LIST_APPEND                     2
+                        36      JUMP_ABSOLUTE                   4
+                        38      RETURN_VALUE                    
+            [Disassembly]
+                0       LOAD_FAST                       0: measured_params
+                2       STORE_FAST                      2: mp
+                4       LOAD_FAST                       1: delta_params
+                6       STORE_DEREF                     0: dp
+                8       LOAD_FAST                       2: mp
+                10      LOAD_CONST                      1: 'SCALE'
+                12      BINARY_SUBSCR                   
+                14      LOAD_CONST                      2: 0
+                16      BINARY_SUBSCR                   
+                18      STORE_FAST                      3: scale
+                20      LOAD_FAST                       2: mp
+                22      LOAD_CONST                      3: 'CENTER_PILLAR_WIDTHS'
+                24      BINARY_SUBSCR                   
+                26      STORE_FAST                      4: cpw
+                28      LOAD_FAST                       4: cpw
+                30      LOAD_CONST                      2: 0
+                32      BINARY_SUBSCR                   
+                34      LOAD_FAST                       4: cpw
+                36      LOAD_CONST                      4: 2
+                38      BINARY_SUBSCR                   
+                40      LOAD_FAST                       4: cpw
+                42      LOAD_CONST                      5: 1
+                44      BINARY_SUBSCR                   
+                46      LOAD_FAST                       4: cpw
+                48      LOAD_CONST                      2: 0
+                50      BINARY_SUBSCR                   
+                52      LOAD_FAST                       4: cpw
+                54      LOAD_CONST                      4: 2
+                56      BINARY_SUBSCR                   
+                58      LOAD_FAST                       4: cpw
+                60      LOAD_CONST                      5: 1
+                62      BINARY_SUBSCR                   
+                64      BUILD_LIST                      6
+                66      STORE_FAST                      5: center_widths
+                68      LOAD_CONST                      6: <CODE> <listcomp>
+                70      LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                72      MAKE_FUNCTION                   0
+                74      LOAD_GLOBAL                     0: zip
+                76      LOAD_FAST                       2: mp
+                78      LOAD_CONST                      8: 'CENTER_DISTS'
+                80      BINARY_SUBSCR                   
+                82      LOAD_FAST                       5: center_widths
+                84      CALL_FUNCTION                   2
+                86      GET_ITER                        
+                88      CALL_FUNCTION                   1
+                90      STORE_FAST                      6: center_dists
+                92      LOAD_CONST                      9: <CODE> <listcomp>
+                94      LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                96      MAKE_FUNCTION                   0
+                98      LOAD_GLOBAL                     0: zip
+                100     LOAD_FAST                       2: mp
+                102     LOAD_CONST                      10: 'OUTER_DISTS'
+                104     BINARY_SUBSCR                   
+                106     LOAD_FAST                       2: mp
+                108     LOAD_CONST                      11: 'OUTER_PILLAR_WIDTHS'
+                110     BINARY_SUBSCR                   
+                112     CALL_FUNCTION                   2
+                114     GET_ITER                        
+                116     CALL_FUNCTION                   1
+                118     STORE_FAST                      7: outer_dists
+                120     LOAD_GLOBAL                     1: list
+                122     LOAD_GLOBAL                     2: map
+                124     LOAD_GLOBAL                     3: math
+                126     LOAD_ATTR                       4: radians
+                128     LOAD_GLOBAL                     5: MeasureAngles
+                130     CALL_FUNCTION                   2
+                132     CALL_FUNCTION                   1
+                134     STORE_FAST                      8: obj_angles
+                136     LOAD_GLOBAL                     1: list
+                138     LOAD_GLOBAL                     0: zip
+                140     LOAD_GLOBAL                     2: map
+                142     LOAD_GLOBAL                     3: math
+                144     LOAD_ATTR                       6: cos
+                146     LOAD_FAST                       8: obj_angles
+                148     CALL_FUNCTION                   2
+                150     LOAD_GLOBAL                     2: map
+                152     LOAD_GLOBAL                     3: math
+                154     LOAD_ATTR                       7: sin
+                156     LOAD_FAST                       8: obj_angles
+                158     CALL_FUNCTION                   2
+                160     CALL_FUNCTION                   2
+                162     CALL_FUNCTION                   1
+                164     STORE_FAST                      9: xy_angles
+                166     LOAD_GLOBAL                     8: MeasureRidgeRadius
+                168     LOAD_FAST                       3: scale
+                170     BINARY_MULTIPLY                 
+                172     STORE_DEREF                     1: inner_ridge
+                174     LOAD_CLOSURE                    1: inner_ridge
+                176     BUILD_TUPLE                     1
+                178     LOAD_CONST                      12: <CODE> <listcomp>
+                180     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                182     MAKE_FUNCTION                   8
+                184     LOAD_FAST                       9: xy_angles
+                186     GET_ITER                        
+                188     CALL_FUNCTION                   1
+                190     STORE_FAST                      10: inner_pos
+                192     LOAD_GLOBAL                     9: MeasureOuterRadius
+                194     LOAD_GLOBAL                     8: MeasureRidgeRadius
+                196     BINARY_ADD                      
+                198     LOAD_FAST                       3: scale
+                200     BINARY_MULTIPLY                 
+                202     STORE_DEREF                     3: outer_ridge
+                204     LOAD_CLOSURE                    3: outer_ridge
+                206     BUILD_TUPLE                     1
+                208     LOAD_CONST                      13: <CODE> <listcomp>
+                210     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                212     MAKE_FUNCTION                   8
+                214     LOAD_FAST                       9: xy_angles
+                216     GET_ITER                        
+                218     CALL_FUNCTION                   1
+                220     STORE_FAST                      11: outer_pos
+                222     LOAD_CLOSURE                    0: dp
+                224     BUILD_TUPLE                     1
+                226     LOAD_CONST                      14: <CODE> <listcomp>
+                228     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                230     MAKE_FUNCTION                   8
+                232     LOAD_GLOBAL                     0: zip
+                234     LOAD_FAST                       6: center_dists
+                236     LOAD_FAST                       10: inner_pos
+                238     LOAD_FAST                       11: outer_pos
+                240     CALL_FUNCTION                   3
+                242     GET_ITER                        
+                244     CALL_FUNCTION                   1
+                246     STORE_FAST                      12: center_positions
+                248     LOAD_GLOBAL                     9: MeasureOuterRadius
+                250     LOAD_FAST                       3: scale
+                252     BINARY_MULTIPLY                 
+                254     STORE_DEREF                     2: outer_center
+                256     LOAD_CLOSURE                    2: outer_center
+                258     BUILD_TUPLE                     1
+                260     LOAD_CONST                      15: <CODE> <listcomp>
+                262     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                264     MAKE_FUNCTION                   8
+                266     LOAD_FAST                       9: xy_angles
+                268     GET_ITER                        
+                270     CALL_FUNCTION                   1
+                272     STORE_FAST                      13: start_pos
+                274     LOAD_FAST                       9: xy_angles
+                276     LOAD_CONST                      4: 2
+                278     LOAD_CONST                      0: None
+                280     BUILD_SLICE                     2
+                282     BINARY_SUBSCR                   
+                284     LOAD_FAST                       9: xy_angles
+                286     LOAD_CONST                      0: None
+                288     LOAD_CONST                      4: 2
+                290     BUILD_SLICE                     2
+                292     BINARY_SUBSCR                   
+                294     BINARY_ADD                      
+                296     STORE_FAST                      14: shifted_angles
+                298     LOAD_CLOSURE                    1: inner_ridge
+                300     BUILD_TUPLE                     1
+                302     LOAD_CONST                      16: <CODE> <listcomp>
+                304     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                306     MAKE_FUNCTION                   8
+                308     LOAD_GLOBAL                     0: zip
+                310     LOAD_FAST                       14: shifted_angles
+                312     LOAD_FAST                       13: start_pos
+                314     CALL_FUNCTION                   2
+                316     GET_ITER                        
+                318     CALL_FUNCTION                   1
+                320     STORE_FAST                      15: first_pos
+                322     LOAD_CLOSURE                    3: outer_ridge
+                324     BUILD_TUPLE                     1
+                326     LOAD_CONST                      17: <CODE> <listcomp>
+                328     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                330     MAKE_FUNCTION                   8
+                332     LOAD_GLOBAL                     0: zip
+                334     LOAD_FAST                       14: shifted_angles
+                336     LOAD_FAST                       13: start_pos
+                338     CALL_FUNCTION                   2
+                340     GET_ITER                        
+                342     CALL_FUNCTION                   1
+                344     STORE_FAST                      16: second_pos
+                346     LOAD_CLOSURE                    0: dp
+                348     BUILD_TUPLE                     1
+                350     LOAD_CONST                      18: <CODE> <listcomp>
+                352     LOAD_CONST                      7: 'measurements_to_distances.<locals>.<listcomp>'
+                354     MAKE_FUNCTION                   8
+                356     LOAD_GLOBAL                     0: zip
+                358     LOAD_FAST                       7: outer_dists
+                360     LOAD_FAST                       15: first_pos
+                362     LOAD_FAST                       16: second_pos
+                364     CALL_FUNCTION                   3
+                366     GET_ITER                        
+                368     CALL_FUNCTION                   1
+                370     STORE_FAST                      17: outer_positions
+                372     LOAD_FAST                       12: center_positions
+                374     LOAD_FAST                       17: outer_positions
+                376     BINARY_ADD                      
+                378     RETURN_VALUE                    
+        'measurements_to_distances'
+        [Code]
+            File Name: /extras/delta_calibrate.py
+            Object Name: DeltaCalibrate
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'handle_connect'
+                'save_state'
+                'probe_finalize'
+                'calculate_params'
+                'cmd_DELTA_CALIBRATE_help'
+                'cmd_DELTA_CALIBRATE'
+                'add_manual_height'
+                'do_extended_calibration'
+                'cmd_DELTA_ANALYZE_help'
+                'cmd_DELTA_ANALYZE'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'DeltaCalibrate'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 12
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'register_event_handler'
+                        'handle_connect'
+                        'getfloat'
+                        'range'
+                        'math'
+                        'radians'
+                        'append'
+                        'cos'
+                        'sin'
+                        'probe'
+                        'ProbePointsHelper'
+                        'probe_finalize'
+                        'probe_helper'
+                        'minimum_points'
+                        'last_probe_positions'
+                        'load_config_stable'
+                        'manual_heights'
+                        'delta_analyze_entry'
+                        'last_distances'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_DELTA_CALIBRATE'
+                        'cmd_DELTA_CALIBRATE_help'
+                        'cmd_DELTA_ANALYZE'
+                        'cmd_DELTA_ANALYZE_help'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'radius'
+                        'points'
+                        'scatter'
+                        'i'
+                        'r'
+                        'dist'
+                        'height'
+                        'height_pos'
+                        'distance_pos1'
+                        'distance_pos2'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'klippy:connect'
+                        'radius'
+                        0
+                        (
+                            'above'
+                        )
+                        (
+                            0
+                            0
+                        )
+                        (
+                            0.95
+                            0.9
+                            0.85
+                            0.7
+                            0.75
+                            0.8
+                        )
+                        6
+                        90
+                        60
+                        (
+                            'default_points'
+                        )
+                        3
+                        999
+                        'height%d'
+                        'height%d_pos'
+                        'manual_height%d'
+                        'manual_height%d_pos'
+                        'SCALE'
+                        (
+                            1
+                        )
+                        'distance%d'
+                        'distance%d_pos1'
+                        'distance%d_pos2'
+                        'gcode'
+                        'DELTA_CALIBRATE'
+                        (
+                            'desc'
+                        )
+                        'DELTA_ANALYZE'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: register_event_handler
+                        16      LOAD_CONST                      1: 'klippy:connect'
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: handle_connect
+                        22      CALL_METHOD                     2
+                        24      POP_TOP                         
+                        26      LOAD_FAST                       1: config
+                        28      LOAD_ATTR                       4: getfloat
+                        30      LOAD_CONST                      2: 'radius'
+                        32      LOAD_CONST                      3: 0
+                        34      LOAD_CONST                      4: ('above',)
+                        36      CALL_FUNCTION_KW                2
+                        38      STORE_FAST                      2: radius
+                        40      LOAD_CONST                      5: (0, 0)
+                        42      BUILD_LIST                      1
+                        44      STORE_FAST                      3: points
+                        46      BUILD_LIST                      0
+                        48      LOAD_CONST                      6: (0.95, 0.9, 0.85, 0.7, 0.75, 0.8)
+                        50      LIST_EXTEND                     1
+                        52      STORE_FAST                      4: scatter
+                        54      LOAD_GLOBAL                     5: range
+                        56      LOAD_CONST                      7: 6
+                        58      CALL_FUNCTION                   1
+                        60      GET_ITER                        
+                        62      FOR_ITER                        68 (to 132)
+                        64      STORE_FAST                      5: i
+                        66      LOAD_GLOBAL                     6: math
+                        68      LOAD_METHOD                     7: radians
+                        70      LOAD_CONST                      8: 90
+                        72      LOAD_CONST                      9: 60
+                        74      LOAD_FAST                       5: i
+                        76      BINARY_MULTIPLY                 
+                        78      BINARY_ADD                      
+                        80      CALL_METHOD                     1
+                        82      STORE_FAST                      6: r
+                        84      LOAD_FAST                       2: radius
+                        86      LOAD_FAST                       4: scatter
+                        88      LOAD_FAST                       5: i
+                        90      BINARY_SUBSCR                   
+                        92      BINARY_MULTIPLY                 
+                        94      STORE_FAST                      7: dist
+                        96      LOAD_FAST                       3: points
+                        98      LOAD_METHOD                     8: append
+                        100     LOAD_GLOBAL                     6: math
+                        102     LOAD_METHOD                     9: cos
+                        104     LOAD_FAST                       6: r
+                        106     CALL_METHOD                     1
+                        108     LOAD_FAST                       7: dist
+                        110     BINARY_MULTIPLY                 
+                        112     LOAD_GLOBAL                     6: math
+                        114     LOAD_METHOD                     10: sin
+                        116     LOAD_FAST                       6: r
+                        118     CALL_METHOD                     1
+                        120     LOAD_FAST                       7: dist
+                        122     BINARY_MULTIPLY                 
+                        124     BUILD_TUPLE                     2
+                        126     CALL_METHOD                     1
+                        128     POP_TOP                         
+                        130     JUMP_ABSOLUTE                   62
+                        132     LOAD_GLOBAL                     11: probe
+                        134     LOAD_ATTR                       12: ProbePointsHelper
+                        136     LOAD_FAST                       1: config
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       13: probe_finalize
+                        142     LOAD_FAST                       3: points
+                        144     LOAD_CONST                      10: ('default_points',)
+                        146     CALL_FUNCTION_KW                3
+                        148     LOAD_FAST                       0: self
+                        150     STORE_ATTR                      14: probe_helper
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       14: probe_helper
+                        156     LOAD_METHOD                     15: minimum_points
+                        158     LOAD_CONST                      11: 3
+                        160     CALL_METHOD                     1
+                        162     POP_TOP                         
+                        164     BUILD_LIST                      0
+                        166     LOAD_FAST                       0: self
+                        168     STORE_ATTR                      16: last_probe_positions
+                        170     LOAD_GLOBAL                     5: range
+                        172     LOAD_CONST                      12: 999
+                        174     CALL_FUNCTION                   1
+                        176     GET_ITER                        
+                        178     FOR_ITER                        66 (to 246)
+                        180     STORE_FAST                      5: i
+                        182     LOAD_FAST                       1: config
+                        184     LOAD_METHOD                     4: getfloat
+                        186     LOAD_CONST                      13: 'height%d'
+                        188     LOAD_FAST                       5: i
+                        190     BUILD_TUPLE                     1
+                        192     BINARY_MODULO                   
+                        194     LOAD_CONST                      0: None
+                        196     CALL_METHOD                     2
+                        198     STORE_FAST                      8: height
+                        200     LOAD_FAST                       8: height
+                        202     LOAD_CONST                      0: None
+                        204     IS_OP                           0 (is)
+                        206     POP_JUMP_IF_FALSE               212
+                        208     POP_TOP                         
+                        210     JUMP_ABSOLUTE                   246
+                        212     LOAD_GLOBAL                     17: load_config_stable
+                        214     LOAD_FAST                       1: config
+                        216     LOAD_CONST                      14: 'height%d_pos'
+                        218     LOAD_FAST                       5: i
+                        220     BUILD_TUPLE                     1
+                        222     BINARY_MODULO                   
+                        224     CALL_FUNCTION                   2
+                        226     STORE_FAST                      9: height_pos
+                        228     LOAD_FAST                       0: self
+                        230     LOAD_ATTR                       16: last_probe_positions
+                        232     LOAD_METHOD                     8: append
+                        234     LOAD_FAST                       8: height
+                        236     LOAD_FAST                       9: height_pos
+                        238     BUILD_TUPLE                     2
+                        240     CALL_METHOD                     1
+                        242     POP_TOP                         
+                        244     JUMP_ABSOLUTE                   178
+                        246     BUILD_LIST                      0
+                        248     LOAD_FAST                       0: self
+                        250     STORE_ATTR                      18: manual_heights
+                        252     LOAD_GLOBAL                     5: range
+                        254     LOAD_CONST                      12: 999
+                        256     CALL_FUNCTION                   1
+                        258     GET_ITER                        
+                        260     FOR_ITER                        72 (to 334)
+                        262     STORE_FAST                      5: i
+                        264     LOAD_FAST                       1: config
+                        266     LOAD_METHOD                     4: getfloat
+                        268     LOAD_CONST                      15: 'manual_height%d'
+                        270     LOAD_FAST                       5: i
+                        272     BUILD_TUPLE                     1
+                        274     BINARY_MODULO                   
+                        276     LOAD_CONST                      0: None
+                        278     CALL_METHOD                     2
+                        280     STORE_FAST                      8: height
+                        282     LOAD_FAST                       8: height
+                        284     LOAD_CONST                      0: None
+                        286     IS_OP                           0 (is)
+                        288     POP_JUMP_IF_FALSE               298
+                        292     POP_TOP                         
+                        294     JUMP_ABSOLUTE                   334
+                        298     LOAD_GLOBAL                     17: load_config_stable
+                        300     LOAD_FAST                       1: config
+                        302     LOAD_CONST                      16: 'manual_height%d_pos'
+                        304     LOAD_FAST                       5: i
+                        306     BUILD_TUPLE                     1
+                        308     BINARY_MODULO                   
+                        310     CALL_FUNCTION                   2
+                        312     STORE_FAST                      9: height_pos
+                        314     LOAD_FAST                       0: self
+                        316     LOAD_ATTR                       18: manual_heights
+                        318     LOAD_METHOD                     8: append
+                        320     LOAD_FAST                       8: height
+                        322     LOAD_FAST                       9: height_pos
+                        324     BUILD_TUPLE                     2
+                        326     CALL_METHOD                     1
+                        328     POP_TOP                         
+                        330     JUMP_ABSOLUTE                   260
+                        334     LOAD_CONST                      17: 'SCALE'
+                        336     LOAD_CONST                      18: (1,)
+                        338     BUILD_MAP                       1
+                        340     LOAD_FAST                       0: self
+                        342     STORE_ATTR                      19: delta_analyze_entry
+                        344     BUILD_LIST                      0
+                        346     LOAD_FAST                       0: self
+                        348     STORE_ATTR                      20: last_distances
+                        350     LOAD_GLOBAL                     5: range
+                        352     LOAD_CONST                      12: 999
+                        354     CALL_FUNCTION                   1
+                        356     GET_ITER                        
+                        358     FOR_ITER                        90 (to 450)
+                        360     STORE_FAST                      5: i
+                        362     LOAD_FAST                       1: config
+                        364     LOAD_METHOD                     4: getfloat
+                        366     LOAD_CONST                      19: 'distance%d'
+                        368     LOAD_FAST                       5: i
+                        370     BUILD_TUPLE                     1
+                        372     BINARY_MODULO                   
+                        374     LOAD_CONST                      0: None
+                        376     CALL_METHOD                     2
+                        378     STORE_FAST                      7: dist
+                        380     LOAD_FAST                       7: dist
+                        382     LOAD_CONST                      0: None
+                        384     IS_OP                           0 (is)
+                        386     POP_JUMP_IF_FALSE               396
+                        390     POP_TOP                         
+                        392     JUMP_ABSOLUTE                   450
+                        396     LOAD_GLOBAL                     17: load_config_stable
+                        398     LOAD_FAST                       1: config
+                        400     LOAD_CONST                      20: 'distance%d_pos1'
+                        402     LOAD_FAST                       5: i
+                        404     BUILD_TUPLE                     1
+                        406     BINARY_MODULO                   
+                        408     CALL_FUNCTION                   2
+                        410     STORE_FAST                      10: distance_pos1
+                        412     LOAD_GLOBAL                     17: load_config_stable
+                        414     LOAD_FAST                       1: config
+                        416     LOAD_CONST                      21: 'distance%d_pos2'
+                        418     LOAD_FAST                       5: i
+                        420     BUILD_TUPLE                     1
+                        422     BINARY_MODULO                   
+                        424     CALL_FUNCTION                   2
+                        426     STORE_FAST                      11: distance_pos2
+                        428     LOAD_FAST                       0: self
+                        430     LOAD_ATTR                       20: last_distances
+                        432     LOAD_METHOD                     8: append
+                        434     LOAD_FAST                       7: dist
+                        436     LOAD_FAST                       10: distance_pos1
+                        438     LOAD_FAST                       11: distance_pos2
+                        440     BUILD_TUPLE                     3
+                        442     CALL_METHOD                     1
+                        444     POP_TOP                         
+                        446     JUMP_ABSOLUTE                   358
+                        450     LOAD_FAST                       0: self
+                        452     LOAD_ATTR                       1: printer
+                        454     LOAD_METHOD                     21: lookup_object
+                        456     LOAD_CONST                      22: 'gcode'
+                        458     CALL_METHOD                     1
+                        460     LOAD_FAST                       0: self
+                        462     STORE_ATTR                      22: gcode
+                        464     LOAD_FAST                       0: self
+                        466     LOAD_ATTR                       22: gcode
+                        468     LOAD_ATTR                       23: register_command
+                        470     LOAD_CONST                      23: 'DELTA_CALIBRATE'
+                        472     LOAD_FAST                       0: self
+                        474     LOAD_ATTR                       24: cmd_DELTA_CALIBRATE
+                        476     LOAD_FAST                       0: self
+                        478     LOAD_ATTR                       25: cmd_DELTA_CALIBRATE_help
+                        480     LOAD_CONST                      24: ('desc',)
+                        482     CALL_FUNCTION_KW                3
+                        484     POP_TOP                         
+                        486     LOAD_FAST                       0: self
+                        488     LOAD_ATTR                       22: gcode
+                        490     LOAD_ATTR                       23: register_command
+                        492     LOAD_CONST                      25: 'DELTA_ANALYZE'
+                        494     LOAD_FAST                       0: self
+                        496     LOAD_ATTR                       26: cmd_DELTA_ANALYZE
+                        498     LOAD_FAST                       0: self
+                        500     LOAD_ATTR                       27: cmd_DELTA_ANALYZE_help
+                        502     LOAD_CONST                      24: ('desc',)
+                        504     CALL_FUNCTION_KW                3
+                        506     POP_TOP                         
+                        508     LOAD_CONST                      0: None
+                        510     RETURN_VALUE                    
+                'DeltaCalibrate.__init__'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: handle_connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_kinematics'
+                        'hasattr'
+                        'config_error'
+                    [Var Names]
+                        'self'
+                        'kin'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        'get_calibration'
+                        'Delta calibrate is only for delta printers'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      LOAD_METHOD                     2: get_kinematics
+                        12      CALL_METHOD                     0
+                        14      STORE_FAST                      1: kin
+                        16      LOAD_GLOBAL                     3: hasattr
+                        18      LOAD_FAST                       1: kin
+                        20      LOAD_CONST                      2: 'get_calibration'
+                        22      CALL_FUNCTION                   2
+                        24      POP_JUMP_IF_TRUE                38
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       0: printer
+                        30      LOAD_METHOD                     4: config_error
+                        32      LOAD_CONST                      3: 'Delta calibrate is only for delta printers'
+                        34      CALL_METHOD                     1
+                        36      RAISE_VARARGS                   1
+                        38      LOAD_CONST                      0: None
+                        40      RETURN_VALUE                    
+                'DeltaCalibrate.handle_connect'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: save_state
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 12
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'save_state'
+                        'remove_section'
+                        'enumerate'
+                        'set'
+                        'tuple'
+                        'manual_heights'
+                    [Var Names]
+                        'self'
+                        'probe_positions'
+                        'distances'
+                        'delta_params'
+                        'configfile'
+                        'section'
+                        'i'
+                        'z_offset'
+                        'spos'
+                        'dist'
+                        'spos1'
+                        'spos2'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'configfile'
+                        'delta_calibrate'
+                        'height%d'
+                        'height%d_pos'
+                        '%.3f,%.3f,%.3f'
+                        'manual_height%d'
+                        'manual_height%d_pos'
+                        'distance%d'
+                        'distance%d_pos1'
+                        'distance%d_pos2'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'configfile'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      4: configfile
+                        12      LOAD_FAST                       3: delta_params
+                        14      LOAD_METHOD                     2: save_state
+                        16      LOAD_FAST                       4: configfile
+                        18      CALL_METHOD                     1
+                        20      POP_TOP                         
+                        22      LOAD_CONST                      2: 'delta_calibrate'
+                        24      STORE_FAST                      5: section
+                        26      LOAD_FAST                       4: configfile
+                        28      LOAD_METHOD                     3: remove_section
+                        30      LOAD_FAST                       5: section
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_GLOBAL                     4: enumerate
+                        38      LOAD_FAST                       1: probe_positions
+                        40      CALL_FUNCTION                   1
+                        42      GET_ITER                        
+                        44      FOR_ITER                        60 (to 106)
+                        46      UNPACK_SEQUENCE                 2
+                        48      STORE_FAST                      6: i
+                        50      UNPACK_SEQUENCE                 2
+                        52      STORE_FAST                      7: z_offset
+                        54      STORE_FAST                      8: spos
+                        56      LOAD_FAST                       4: configfile
+                        58      LOAD_METHOD                     5: set
+                        60      LOAD_FAST                       5: section
+                        62      LOAD_CONST                      3: 'height%d'
+                        64      LOAD_FAST                       6: i
+                        66      BUILD_TUPLE                     1
+                        68      BINARY_MODULO                   
+                        70      LOAD_FAST                       7: z_offset
+                        72      CALL_METHOD                     3
+                        74      POP_TOP                         
+                        76      LOAD_FAST                       4: configfile
+                        78      LOAD_METHOD                     5: set
+                        80      LOAD_FAST                       5: section
+                        82      LOAD_CONST                      4: 'height%d_pos'
+                        84      LOAD_FAST                       6: i
+                        86      BUILD_TUPLE                     1
+                        88      BINARY_MODULO                   
+                        90      LOAD_CONST                      5: '%.3f,%.3f,%.3f'
+                        92      LOAD_GLOBAL                     6: tuple
+                        94      LOAD_FAST                       8: spos
+                        96      CALL_FUNCTION                   1
+                        98      BINARY_MODULO                   
+                        100     CALL_METHOD                     3
+                        102     POP_TOP                         
+                        104     JUMP_ABSOLUTE                   44
+                        106     LOAD_GLOBAL                     4: enumerate
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       7: manual_heights
+                        112     CALL_FUNCTION                   1
+                        114     GET_ITER                        
+                        116     FOR_ITER                        60 (to 178)
+                        118     UNPACK_SEQUENCE                 2
+                        120     STORE_FAST                      6: i
+                        122     UNPACK_SEQUENCE                 2
+                        124     STORE_FAST                      7: z_offset
+                        126     STORE_FAST                      8: spos
+                        128     LOAD_FAST                       4: configfile
+                        130     LOAD_METHOD                     5: set
+                        132     LOAD_FAST                       5: section
+                        134     LOAD_CONST                      6: 'manual_height%d'
+                        136     LOAD_FAST                       6: i
+                        138     BUILD_TUPLE                     1
+                        140     BINARY_MODULO                   
+                        142     LOAD_FAST                       7: z_offset
+                        144     CALL_METHOD                     3
+                        146     POP_TOP                         
+                        148     LOAD_FAST                       4: configfile
+                        150     LOAD_METHOD                     5: set
+                        152     LOAD_FAST                       5: section
+                        154     LOAD_CONST                      7: 'manual_height%d_pos'
+                        156     LOAD_FAST                       6: i
+                        158     BUILD_TUPLE                     1
+                        160     BINARY_MODULO                   
+                        162     LOAD_CONST                      5: '%.3f,%.3f,%.3f'
+                        164     LOAD_GLOBAL                     6: tuple
+                        166     LOAD_FAST                       8: spos
+                        168     CALL_FUNCTION                   1
+                        170     BINARY_MODULO                   
+                        172     CALL_METHOD                     3
+                        174     POP_TOP                         
+                        176     JUMP_ABSOLUTE                   116
+                        178     LOAD_GLOBAL                     4: enumerate
+                        180     LOAD_FAST                       2: distances
+                        182     CALL_FUNCTION                   1
+                        184     GET_ITER                        
+                        186     FOR_ITER                        90 (to 278)
+                        188     UNPACK_SEQUENCE                 2
+                        190     STORE_FAST                      6: i
+                        192     UNPACK_SEQUENCE                 3
+                        194     STORE_FAST                      9: dist
+                        196     STORE_FAST                      10: spos1
+                        198     STORE_FAST                      11: spos2
+                        200     LOAD_FAST                       4: configfile
+                        202     LOAD_METHOD                     5: set
+                        204     LOAD_FAST                       5: section
+                        206     LOAD_CONST                      8: 'distance%d'
+                        208     LOAD_FAST                       6: i
+                        210     BUILD_TUPLE                     1
+                        212     BINARY_MODULO                   
+                        214     LOAD_FAST                       9: dist
+                        216     CALL_METHOD                     3
+                        218     POP_TOP                         
+                        220     LOAD_FAST                       4: configfile
+                        222     LOAD_METHOD                     5: set
+                        224     LOAD_FAST                       5: section
+                        226     LOAD_CONST                      9: 'distance%d_pos1'
+                        228     LOAD_FAST                       6: i
+                        230     BUILD_TUPLE                     1
+                        232     BINARY_MODULO                   
+                        234     LOAD_CONST                      5: '%.3f,%.3f,%.3f'
+                        236     LOAD_GLOBAL                     6: tuple
+                        238     LOAD_FAST                       10: spos1
+                        240     CALL_FUNCTION                   1
+                        242     BINARY_MODULO                   
+                        244     CALL_METHOD                     3
+                        246     POP_TOP                         
+                        248     LOAD_FAST                       4: configfile
+                        250     LOAD_METHOD                     5: set
+                        252     LOAD_FAST                       5: section
+                        254     LOAD_CONST                      10: 'distance%d_pos2'
+                        256     LOAD_FAST                       6: i
+                        258     BUILD_TUPLE                     1
+                        260     BINARY_MODULO                   
+                        262     LOAD_CONST                      5: '%.3f,%.3f,%.3f'
+                        264     LOAD_GLOBAL                     6: tuple
+                        266     LOAD_FAST                       11: spos2
+                        268     CALL_FUNCTION                   1
+                        270     BINARY_MODULO                   
+                        272     CALL_METHOD                     3
+                        274     POP_TOP                         
+                        276     JUMP_ABSOLUTE                   186
+                        278     LOAD_CONST                      0: None
+                        280     RETURN_VALUE                    
+                'DeltaCalibrate.save_state'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: probe_finalize
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 4
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_kinematics'
+                        'get_calibration'
+                        'calculate_params'
+                        'last_distances'
+                    [Var Names]
+                        'self'
+                        'offsets'
+                        'positions'
+                        'kin'
+                        'probe_positions'
+                    [Free Vars]
+                    [Cell Vars]
+                        'delta_params'
+                        'z_offset'
+                    [Constants]
+                        None
+                        2
+                        'toolhead'
+                        [Code]
+                            File Name: /extras/delta_calibrate.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'calc_stable_position'
+                            [Var Names]
+                                '.0'
+                                'p'
+                            [Free Vars]
+                                'delta_params'
+                                'z_offset'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: p
+                                8       LOAD_DEREF                      1: z_offset
+                                10      LOAD_DEREF                      0: delta_params
+                                12      LOAD_METHOD                     0: calc_stable_position
+                                14      LOAD_FAST                       1: p
+                                16      CALL_METHOD                     1
+                                18      BUILD_TUPLE                     2
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'DeltaCalibrate.probe_finalize.<locals>.<listcomp>'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: offsets
+                        2       LOAD_CONST                      1: 2
+                        4       BINARY_SUBSCR                   
+                        6       STORE_DEREF                     1: z_offset
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       0: printer
+                        12      LOAD_METHOD                     1: lookup_object
+                        14      LOAD_CONST                      2: 'toolhead'
+                        16      CALL_METHOD                     1
+                        18      LOAD_METHOD                     2: get_kinematics
+                        20      CALL_METHOD                     0
+                        22      STORE_FAST                      3: kin
+                        24      LOAD_FAST                       3: kin
+                        26      LOAD_METHOD                     3: get_calibration
+                        28      CALL_METHOD                     0
+                        30      STORE_DEREF                     0: delta_params
+                        32      LOAD_CLOSURE                    0: delta_params
+                        34      LOAD_CLOSURE                    1: z_offset
+                        36      BUILD_TUPLE                     2
+                        38      LOAD_CONST                      3: <CODE> <listcomp>
+                        40      LOAD_CONST                      4: 'DeltaCalibrate.probe_finalize.<locals>.<listcomp>'
+                        42      MAKE_FUNCTION                   8
+                        44      LOAD_FAST                       2: positions
+                        46      GET_ITER                        
+                        48      CALL_FUNCTION                   1
+                        50      STORE_FAST                      4: probe_positions
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_METHOD                     4: calculate_params
+                        56      LOAD_FAST                       4: probe_positions
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       5: last_distances
+                        62      CALL_METHOD                     2
+                        64      POP_TOP                         
+                        66      LOAD_CONST                      0: None
+                        68      RETURN_VALUE                    
+                'DeltaCalibrate.probe_finalize'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: calculate_params
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 23
+                    Stack Size: 8
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'manual_heights'
+                        'printer'
+                        'lookup_object'
+                        'get_kinematics'
+                        'get_calibration'
+                        'coordinate_descent_params'
+                        'logging'
+                        'info'
+                        'len'
+                        'MEASURE_WEIGHT'
+                        'mathutil'
+                        'background_coordinate_descent'
+                        'new_calibration'
+                        'get_position_from_stable'
+                        'math'
+                        'sqrt'
+                        'save_state'
+                        'gcode'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'probe_positions'
+                        'distances'
+                        'kin'
+                        'odp'
+                        'adj_params'
+                        'params'
+                        'delta_errorfunc'
+                        'new_params'
+                        'new_delta_params'
+                        'z_offset'
+                        'spos'
+                        'dist'
+                        'spos1'
+                        'spos2'
+                        'x1'
+                        'y1'
+                        'z1'
+                        'x2'
+                        'y2'
+                        'z2'
+                        'orig_dist'
+                        'new_dist'
+                    [Free Vars]
+                    [Cell Vars]
+                        'distances'
+                        'height_positions'
+                        'orig_delta_params'
+                        'z_weight'
+                    [Constants]
+                        None
+                        'toolhead'
+                        'Calculating delta_calibrate with:\n%s\n%s\nInitial delta_calibrate parameters: %s'
+                        1
+                        [Code]
+                            File Name: /extras/delta_calibrate.py
+                            Object Name: delta_errorfunc
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 19
+                            Stack Size: 8
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'new_calibration'
+                                'get_position_from_stable'
+                                'math'
+                                'sqrt'
+                                'ValueError'
+                            [Var Names]
+                                'params'
+                                'delta_params'
+                                'getpos'
+                                'total_error'
+                                'z_offset'
+                                'stable_pos'
+                                'x'
+                                'y'
+                                'z'
+                                'dist'
+                                'stable_pos1'
+                                'stable_pos2'
+                                'x1'
+                                'y1'
+                                'z1'
+                                'x2'
+                                'y2'
+                                'z2'
+                                'd'
+                            [Free Vars]
+                                'distances'
+                                'height_positions'
+                                'orig_delta_params'
+                                'z_weight'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                0
+                                2
+                                1e+13
+                            [Disassembly]
+                                0       SETUP_FINALLY                   180 (to 182)
+                                2       LOAD_DEREF                      2: orig_delta_params
+                                4       LOAD_METHOD                     0: new_calibration
+                                6       LOAD_FAST                       0: params
+                                8       CALL_METHOD                     1
+                                10      STORE_FAST                      1: delta_params
+                                12      LOAD_FAST                       1: delta_params
+                                14      LOAD_ATTR                       1: get_position_from_stable
+                                16      STORE_FAST                      2: getpos
+                                18      LOAD_CONST                      1: 0
+                                20      STORE_FAST                      3: total_error
+                                22      LOAD_DEREF                      1: height_positions
+                                24      GET_ITER                        
+                                26      FOR_ITER                        38 (to 66)
+                                28      UNPACK_SEQUENCE                 2
+                                30      STORE_FAST                      4: z_offset
+                                32      STORE_FAST                      5: stable_pos
+                                34      LOAD_FAST                       2: getpos
+                                36      LOAD_FAST                       5: stable_pos
+                                38      CALL_FUNCTION                   1
+                                40      UNPACK_SEQUENCE                 3
+                                42      STORE_FAST                      6: x
+                                44      STORE_FAST                      7: y
+                                46      STORE_FAST                      8: z
+                                48      LOAD_FAST                       3: total_error
+                                50      LOAD_FAST                       8: z
+                                52      LOAD_FAST                       4: z_offset
+                                54      BINARY_SUBTRACT                 
+                                56      LOAD_CONST                      2: 2
+                                58      BINARY_POWER                    
+                                60      INPLACE_ADD                     
+                                62      STORE_FAST                      3: total_error
+                                64      JUMP_ABSOLUTE                   26
+                                66      LOAD_FAST                       3: total_error
+                                68      LOAD_DEREF                      3: z_weight
+                                70      INPLACE_MULTIPLY                
+                                72      STORE_FAST                      3: total_error
+                                74      LOAD_DEREF                      0: distances
+                                76      GET_ITER                        
+                                78      FOR_ITER                        96 (to 176)
+                                80      UNPACK_SEQUENCE                 3
+                                82      STORE_FAST                      9: dist
+                                84      STORE_FAST                      10: stable_pos1
+                                86      STORE_FAST                      11: stable_pos2
+                                88      LOAD_FAST                       2: getpos
+                                90      LOAD_FAST                       10: stable_pos1
+                                92      CALL_FUNCTION                   1
+                                94      UNPACK_SEQUENCE                 3
+                                96      STORE_FAST                      12: x1
+                                98      STORE_FAST                      13: y1
+                                100     STORE_FAST                      14: z1
+                                102     LOAD_FAST                       2: getpos
+                                104     LOAD_FAST                       11: stable_pos2
+                                106     CALL_FUNCTION                   1
+                                108     UNPACK_SEQUENCE                 3
+                                110     STORE_FAST                      15: x2
+                                112     STORE_FAST                      16: y2
+                                114     STORE_FAST                      17: z2
+                                116     LOAD_GLOBAL                     2: math
+                                118     LOAD_METHOD                     3: sqrt
+                                120     LOAD_FAST                       12: x1
+                                122     LOAD_FAST                       15: x2
+                                124     BINARY_SUBTRACT                 
+                                126     LOAD_CONST                      2: 2
+                                128     BINARY_POWER                    
+                                130     LOAD_FAST                       13: y1
+                                132     LOAD_FAST                       16: y2
+                                134     BINARY_SUBTRACT                 
+                                136     LOAD_CONST                      2: 2
+                                138     BINARY_POWER                    
+                                140     BINARY_ADD                      
+                                142     LOAD_FAST                       14: z1
+                                144     LOAD_FAST                       17: z2
+                                146     BINARY_SUBTRACT                 
+                                148     LOAD_CONST                      2: 2
+                                150     BINARY_POWER                    
+                                152     BINARY_ADD                      
+                                154     CALL_METHOD                     1
+                                156     STORE_FAST                      18: d
+                                158     LOAD_FAST                       3: total_error
+                                160     LOAD_FAST                       18: d
+                                162     LOAD_FAST                       9: dist
+                                164     BINARY_SUBTRACT                 
+                                166     LOAD_CONST                      2: 2
+                                168     BINARY_POWER                    
+                                170     INPLACE_ADD                     
+                                172     STORE_FAST                      3: total_error
+                                174     JUMP_ABSOLUTE                   78
+                                176     LOAD_FAST                       3: total_error
+                                178     POP_BLOCK                       
+                                180     RETURN_VALUE                    
+                                182     DUP_TOP                         
+                                184     LOAD_GLOBAL                     4: ValueError
+                                186     JUMP_IF_NOT_EXC_MATCH           200
+                                188     POP_TOP                         
+                                190     POP_TOP                         
+                                192     POP_TOP                         
+                                194     POP_EXCEPT                      
+                                196     LOAD_CONST                      3: 1e+13
+                                198     RETURN_VALUE                    
+                                200     RERAISE                         
+                                202     LOAD_CONST                      0: None
+                                204     RETURN_VALUE                    
+                        'DeltaCalibrate.calculate_params.<locals>.delta_errorfunc'
+                        'Calculated delta_calibrate parameters: %s'
+                        'height orig: %.6f new: %.6f goal: %.6f'
+                        2
+                        'distance orig: %.6f new: %.6f goal: %.6f'
+                        'The SAVE_CONFIG command will update the printer config file\nwith these parameters and restart the printer.'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: manual_heights
+                        4       LOAD_FAST                       1: probe_positions
+                        6       BINARY_ADD                      
+                        8       STORE_DEREF                     1: height_positions
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: lookup_object
+                        16      LOAD_CONST                      1: 'toolhead'
+                        18      CALL_METHOD                     1
+                        20      LOAD_METHOD                     3: get_kinematics
+                        22      CALL_METHOD                     0
+                        24      STORE_FAST                      3: kin
+                        26      LOAD_FAST                       3: kin
+                        28      LOAD_METHOD                     4: get_calibration
+                        30      CALL_METHOD                     0
+                        32      DUP_TOP                         
+                        34      STORE_DEREF                     2: orig_delta_params
+                        36      STORE_FAST                      4: odp
+                        38      LOAD_FAST                       4: odp
+                        40      LOAD_METHOD                     5: coordinate_descent_params
+                        42      LOAD_DEREF                      0: distances
+                        44      CALL_METHOD                     1
+                        46      UNPACK_SEQUENCE                 2
+                        48      STORE_FAST                      5: adj_params
+                        50      STORE_FAST                      6: params
+                        52      LOAD_GLOBAL                     6: logging
+                        54      LOAD_METHOD                     7: info
+                        56      LOAD_CONST                      2: 'Calculating delta_calibrate with:\n%s\n%s\nInitial delta_calibrate parameters: %s'
+                        58      LOAD_DEREF                      1: height_positions
+                        60      LOAD_DEREF                      0: distances
+                        62      LOAD_FAST                       6: params
+                        64      CALL_METHOD                     4
+                        66      POP_TOP                         
+                        68      LOAD_CONST                      3: 1
+                        70      STORE_DEREF                     3: z_weight
+                        72      LOAD_DEREF                      0: distances
+                        74      POP_JUMP_IF_FALSE               96
+                        76      LOAD_GLOBAL                     8: len
+                        78      LOAD_DEREF                      0: distances
+                        80      CALL_FUNCTION                   1
+                        82      LOAD_GLOBAL                     9: MEASURE_WEIGHT
+                        84      LOAD_GLOBAL                     8: len
+                        86      LOAD_FAST                       1: probe_positions
+                        88      CALL_FUNCTION                   1
+                        90      BINARY_MULTIPLY                 
+                        92      BINARY_TRUE_DIVIDE              
+                        94      STORE_DEREF                     3: z_weight
+                        96      LOAD_CLOSURE                    0: distances
+                        98      LOAD_CLOSURE                    1: height_positions
+                        100     LOAD_CLOSURE                    2: orig_delta_params
+                        102     LOAD_CLOSURE                    3: z_weight
+                        104     BUILD_TUPLE                     4
+                        106     LOAD_CONST                      4: <CODE> delta_errorfunc
+                        108     LOAD_CONST                      5: 'DeltaCalibrate.calculate_params.<locals>.delta_errorfunc'
+                        110     MAKE_FUNCTION                   8
+                        112     STORE_FAST                      7: delta_errorfunc
+                        114     LOAD_GLOBAL                     10: mathutil
+                        116     LOAD_METHOD                     11: background_coordinate_descent
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       1: printer
+                        122     LOAD_FAST                       5: adj_params
+                        124     LOAD_FAST                       6: params
+                        126     LOAD_FAST                       7: delta_errorfunc
+                        128     CALL_METHOD                     4
+                        130     STORE_FAST                      8: new_params
+                        132     LOAD_GLOBAL                     6: logging
+                        134     LOAD_METHOD                     7: info
+                        136     LOAD_CONST                      6: 'Calculated delta_calibrate parameters: %s'
+                        138     LOAD_FAST                       8: new_params
+                        140     CALL_METHOD                     2
+                        142     POP_TOP                         
+                        144     LOAD_DEREF                      2: orig_delta_params
+                        146     LOAD_METHOD                     12: new_calibration
+                        148     LOAD_FAST                       8: new_params
+                        150     CALL_METHOD                     1
+                        152     STORE_FAST                      9: new_delta_params
+                        154     LOAD_DEREF                      1: height_positions
+                        156     GET_ITER                        
+                        158     FOR_ITER                        44 (to 204)
+                        160     UNPACK_SEQUENCE                 2
+                        162     STORE_FAST                      10: z_offset
+                        164     STORE_FAST                      11: spos
+                        166     LOAD_GLOBAL                     6: logging
+                        168     LOAD_METHOD                     7: info
+                        170     LOAD_CONST                      7: 'height orig: %.6f new: %.6f goal: %.6f'
+                        172     LOAD_DEREF                      2: orig_delta_params
+                        174     LOAD_METHOD                     13: get_position_from_stable
+                        176     LOAD_FAST                       11: spos
+                        178     CALL_METHOD                     1
+                        180     LOAD_CONST                      8: 2
+                        182     BINARY_SUBSCR                   
+                        184     LOAD_FAST                       9: new_delta_params
+                        186     LOAD_METHOD                     13: get_position_from_stable
+                        188     LOAD_FAST                       11: spos
+                        190     CALL_METHOD                     1
+                        192     LOAD_CONST                      8: 2
+                        194     BINARY_SUBSCR                   
+                        196     LOAD_FAST                       10: z_offset
+                        198     CALL_METHOD                     4
+                        200     POP_TOP                         
+                        202     JUMP_ABSOLUTE                   158
+                        204     LOAD_DEREF                      0: distances
+                        206     GET_ITER                        
+                        208     FOR_ITER                        174 (to 384)
+                        210     UNPACK_SEQUENCE                 3
+                        212     STORE_FAST                      12: dist
+                        214     STORE_FAST                      13: spos1
+                        216     STORE_FAST                      14: spos2
+                        218     LOAD_DEREF                      2: orig_delta_params
+                        220     LOAD_METHOD                     13: get_position_from_stable
+                        222     LOAD_FAST                       13: spos1
+                        224     CALL_METHOD                     1
+                        226     UNPACK_SEQUENCE                 3
+                        228     STORE_FAST                      15: x1
+                        230     STORE_FAST                      16: y1
+                        232     STORE_FAST                      17: z1
+                        234     LOAD_DEREF                      2: orig_delta_params
+                        236     LOAD_METHOD                     13: get_position_from_stable
+                        238     LOAD_FAST                       14: spos2
+                        240     CALL_METHOD                     1
+                        242     UNPACK_SEQUENCE                 3
+                        244     STORE_FAST                      18: x2
+                        246     STORE_FAST                      19: y2
+                        248     STORE_FAST                      20: z2
+                        250     LOAD_GLOBAL                     14: math
+                        252     LOAD_METHOD                     15: sqrt
+                        254     LOAD_FAST                       15: x1
+                        256     LOAD_FAST                       18: x2
+                        258     BINARY_SUBTRACT                 
+                        260     LOAD_CONST                      8: 2
+                        262     BINARY_POWER                    
+                        264     LOAD_FAST                       16: y1
+                        266     LOAD_FAST                       19: y2
+                        268     BINARY_SUBTRACT                 
+                        270     LOAD_CONST                      8: 2
+                        272     BINARY_POWER                    
+                        274     BINARY_ADD                      
+                        276     LOAD_FAST                       17: z1
+                        278     LOAD_FAST                       20: z2
+                        280     BINARY_SUBTRACT                 
+                        282     LOAD_CONST                      8: 2
+                        284     BINARY_POWER                    
+                        286     BINARY_ADD                      
+                        288     CALL_METHOD                     1
+                        290     STORE_FAST                      21: orig_dist
+                        292     LOAD_FAST                       9: new_delta_params
+                        294     LOAD_METHOD                     13: get_position_from_stable
+                        296     LOAD_FAST                       13: spos1
+                        298     CALL_METHOD                     1
+                        300     UNPACK_SEQUENCE                 3
+                        302     STORE_FAST                      15: x1
+                        304     STORE_FAST                      16: y1
+                        306     STORE_FAST                      17: z1
+                        308     LOAD_FAST                       9: new_delta_params
+                        310     LOAD_METHOD                     13: get_position_from_stable
+                        312     LOAD_FAST                       14: spos2
+                        314     CALL_METHOD                     1
+                        316     UNPACK_SEQUENCE                 3
+                        318     STORE_FAST                      18: x2
+                        320     STORE_FAST                      19: y2
+                        322     STORE_FAST                      20: z2
+                        324     LOAD_GLOBAL                     14: math
+                        326     LOAD_METHOD                     15: sqrt
+                        328     LOAD_FAST                       15: x1
+                        330     LOAD_FAST                       18: x2
+                        332     BINARY_SUBTRACT                 
+                        334     LOAD_CONST                      8: 2
+                        336     BINARY_POWER                    
+                        338     LOAD_FAST                       16: y1
+                        340     LOAD_FAST                       19: y2
+                        342     BINARY_SUBTRACT                 
+                        344     LOAD_CONST                      8: 2
+                        346     BINARY_POWER                    
+                        348     BINARY_ADD                      
+                        350     LOAD_FAST                       17: z1
+                        352     LOAD_FAST                       20: z2
+                        354     BINARY_SUBTRACT                 
+                        356     LOAD_CONST                      8: 2
+                        358     BINARY_POWER                    
+                        360     BINARY_ADD                      
+                        362     CALL_METHOD                     1
+                        364     STORE_FAST                      22: new_dist
+                        366     LOAD_GLOBAL                     6: logging
+                        368     LOAD_METHOD                     7: info
+                        370     LOAD_CONST                      9: 'distance orig: %.6f new: %.6f goal: %.6f'
+                        372     LOAD_FAST                       21: orig_dist
+                        374     LOAD_FAST                       22: new_dist
+                        376     LOAD_FAST                       12: dist
+                        378     CALL_METHOD                     4
+                        380     POP_TOP                         
+                        382     JUMP_ABSOLUTE                   208
+                        384     LOAD_FAST                       0: self
+                        386     LOAD_METHOD                     16: save_state
+                        388     LOAD_FAST                       1: probe_positions
+                        390     LOAD_DEREF                      0: distances
+                        392     LOAD_FAST                       9: new_delta_params
+                        394     CALL_METHOD                     3
+                        396     POP_TOP                         
+                        398     LOAD_FAST                       0: self
+                        400     LOAD_ATTR                       17: gcode
+                        402     LOAD_METHOD                     18: respond_info
+                        404     LOAD_CONST                      10: 'The SAVE_CONFIG command will update the printer config file\nwith these parameters and restart the printer.'
+                        406     CALL_METHOD                     1
+                        408     POP_TOP                         
+                        410     LOAD_CONST                      0: None
+                        412     RETURN_VALUE                    
+                'DeltaCalibrate.calculate_params'
+                'Delta calibration script'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: cmd_DELTA_CALIBRATE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'probe_helper'
+                        'start_probe'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: probe_helper
+                        4       LOAD_METHOD                     1: start_probe
+                        6       LOAD_FAST                       1: gcmd
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'DeltaCalibrate.cmd_DELTA_CALIBRATE'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: add_manual_height
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'flush_step_generation'
+                        'get_kinematics'
+                        'get_steppers'
+                        'calc_position'
+                        'get_calibration'
+                        'tuple'
+                        'calc_stable_position'
+                        'manual_heights'
+                        'append'
+                        'gcode'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'height'
+                        'toolhead'
+                        'kin'
+                        'kin_spos'
+                        'kin_pos'
+                        'delta_params'
+                        'stable_pos'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        [Code]
+                            File Name: /extras/delta_calibrate.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'get_name'
+                                'get_commanded_position'
+                            [Var Names]
+                                '.0'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: s
+                                8       LOAD_FAST                       1: s
+                                10      LOAD_METHOD                     0: get_name
+                                12      CALL_METHOD                     0
+                                14      LOAD_FAST                       1: s
+                                16      LOAD_METHOD                     1: get_commanded_position
+                                18      CALL_METHOD                     0
+                                20      MAP_ADD                         2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'DeltaCalibrate.add_manual_height.<locals>.<dictcomp>'
+                        'Adding manual height: %.3f,%.3f,%.3f is actually z=%.3f'
+                        0
+                        1
+                        2
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: toolhead
+                        12      LOAD_FAST                       2: toolhead
+                        14      LOAD_METHOD                     2: flush_step_generation
+                        16      CALL_METHOD                     0
+                        18      POP_TOP                         
+                        20      LOAD_FAST                       2: toolhead
+                        22      LOAD_METHOD                     3: get_kinematics
+                        24      CALL_METHOD                     0
+                        26      STORE_FAST                      3: kin
+                        28      LOAD_CONST                      2: <CODE> <dictcomp>
+                        30      LOAD_CONST                      3: 'DeltaCalibrate.add_manual_height.<locals>.<dictcomp>'
+                        32      MAKE_FUNCTION                   0
+                        34      LOAD_FAST                       3: kin
+                        36      LOAD_METHOD                     4: get_steppers
+                        38      CALL_METHOD                     0
+                        40      GET_ITER                        
+                        42      CALL_FUNCTION                   1
+                        44      STORE_FAST                      4: kin_spos
+                        46      LOAD_FAST                       3: kin
+                        48      LOAD_METHOD                     5: calc_position
+                        50      LOAD_FAST                       4: kin_spos
+                        52      CALL_METHOD                     1
+                        54      STORE_FAST                      5: kin_pos
+                        56      LOAD_FAST                       3: kin
+                        58      LOAD_METHOD                     6: get_calibration
+                        60      CALL_METHOD                     0
+                        62      STORE_FAST                      6: delta_params
+                        64      LOAD_GLOBAL                     7: tuple
+                        66      LOAD_FAST                       6: delta_params
+                        68      LOAD_METHOD                     8: calc_stable_position
+                        70      LOAD_FAST                       5: kin_pos
+                        72      CALL_METHOD                     1
+                        74      CALL_FUNCTION                   1
+                        76      STORE_FAST                      7: stable_pos
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       9: manual_heights
+                        82      LOAD_METHOD                     10: append
+                        84      LOAD_FAST                       1: height
+                        86      LOAD_FAST                       7: stable_pos
+                        88      BUILD_TUPLE                     2
+                        90      CALL_METHOD                     1
+                        92      POP_TOP                         
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       11: gcode
+                        98      LOAD_METHOD                     12: respond_info
+                        100     LOAD_CONST                      4: 'Adding manual height: %.3f,%.3f,%.3f is actually z=%.3f'
+                        102     LOAD_FAST                       5: kin_pos
+                        104     LOAD_CONST                      5: 0
+                        106     BINARY_SUBSCR                   
+                        108     LOAD_FAST                       5: kin_pos
+                        110     LOAD_CONST                      6: 1
+                        112     BINARY_SUBSCR                   
+                        114     LOAD_FAST                       5: kin_pos
+                        116     LOAD_CONST                      7: 2
+                        118     BINARY_SUBSCR                   
+                        120     LOAD_FAST                       1: height
+                        122     BUILD_TUPLE                     4
+                        124     BINARY_MODULO                   
+                        126     CALL_METHOD                     1
+                        128     POP_TOP                         
+                        130     LOAD_CONST                      0: None
+                        132     RETURN_VALUE                    
+                'DeltaCalibrate.add_manual_height'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: do_extended_calibration
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'len'
+                        'delta_analyze_entry'
+                        'last_distances'
+                        'gcode'
+                        'error'
+                        'printer'
+                        'lookup_object'
+                        'get_kinematics'
+                        'get_calibration'
+                        'measurements_to_distances'
+                        'last_probe_positions'
+                        'calculate_params'
+                    [Var Names]
+                        'self'
+                        'distances'
+                        'kin'
+                        'delta_params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1
+                        5
+                        'Not all measurements provided'
+                        'toolhead'
+                        'Must run basic calibration with DELTA_CALIBRATE first'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: len
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       1: delta_analyze_entry
+                        6       CALL_FUNCTION                   1
+                        8       LOAD_CONST                      1: 1
+                        10      COMPARE_OP                      1 (<=)
+                        12      POP_JUMP_IF_FALSE               22
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: last_distances
+                        18      STORE_FAST                      1: distances
+                        20      JUMP_FORWARD                    64 (to 86)
+                        22      LOAD_GLOBAL                     0: len
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       1: delta_analyze_entry
+                        28      CALL_FUNCTION                   1
+                        30      LOAD_CONST                      2: 5
+                        32      COMPARE_OP                      0 (<)
+                        34      POP_JUMP_IF_FALSE               50
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       3: gcode
+                        40      LOAD_METHOD                     4: error
+                        42      LOAD_CONST                      3: 'Not all measurements provided'
+                        44      CALL_METHOD                     1
+                        46      RAISE_VARARGS                   1
+                        48      JUMP_FORWARD                    36 (to 86)
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       5: printer
+                        54      LOAD_METHOD                     6: lookup_object
+                        56      LOAD_CONST                      4: 'toolhead'
+                        58      CALL_METHOD                     1
+                        60      LOAD_METHOD                     7: get_kinematics
+                        62      CALL_METHOD                     0
+                        64      STORE_FAST                      2: kin
+                        66      LOAD_FAST                       2: kin
+                        68      LOAD_METHOD                     8: get_calibration
+                        70      CALL_METHOD                     0
+                        72      STORE_FAST                      3: delta_params
+                        74      LOAD_GLOBAL                     9: measurements_to_distances
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       1: delta_analyze_entry
+                        80      LOAD_FAST                       3: delta_params
+                        82      CALL_FUNCTION                   2
+                        84      STORE_FAST                      1: distances
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       10: last_probe_positions
+                        90      POP_JUMP_IF_TRUE                104
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       3: gcode
+                        96      LOAD_METHOD                     4: error
+                        98      LOAD_CONST                      5: 'Must run basic calibration with DELTA_CALIBRATE first'
+                        100     CALL_METHOD                     1
+                        102     RAISE_VARARGS                   1
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_METHOD                     11: calculate_params
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       10: last_probe_positions
+                        112     LOAD_FAST                       1: distances
+                        114     CALL_METHOD                     2
+                        116     POP_TOP                         
+                        118     LOAD_CONST                      0: None
+                        120     RETURN_VALUE                    
+                'DeltaCalibrate.do_extended_calibration'
+                'Extended delta calibration tool'
+                [Code]
+                    File Name: /extras/delta_calibrate.py
+                    Object Name: cmd_DELTA_ANALYZE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'add_manual_height'
+                        'items'
+                        'get'
+                        'list'
+                        'map'
+                        'float'
+                        'split'
+                        'error'
+                        'len'
+                        'delta_analyze_entry'
+                        'logging'
+                        'info'
+                        'do_extended_calibration'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'mheight'
+                        'args'
+                        'name'
+                        'count'
+                        'data'
+                        'parts'
+                        'action'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'MANUAL_HEIGHT'
+                        6
+                        3
+                        1
+                        (
+                            'CENTER_DISTS'
+                            'CENTER_PILLAR_WIDTHS'
+                            'OUTER_DISTS'
+                            'OUTER_PILLAR_WIDTHS'
+                            'SCALE'
+                        )
+                        ','
+                        "Unable to parse parameter '%s'"
+                        "Parameter '%s' must have %d values"
+                        'DELTA_ANALYZE %s = %s'
+                        'CALIBRATE'
+                        'extended'
+                        'Unknown calibrate action'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get_float
+                        4       LOAD_CONST                      1: 'MANUAL_HEIGHT'
+                        6       LOAD_CONST                      0: None
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: mheight
+                        12      LOAD_FAST                       2: mheight
+                        14      LOAD_CONST                      0: None
+                        16      IS_OP                           1 (is not)
+                        18      POP_JUMP_IF_FALSE               34
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_METHOD                     1: add_manual_height
+                        24      LOAD_FAST                       2: mheight
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                        34      LOAD_CONST                      2: 6
+                        36      LOAD_CONST                      3: 3
+                        38      LOAD_CONST                      2: 6
+                        40      LOAD_CONST                      2: 6
+                        42      LOAD_CONST                      4: 1
+                        44      LOAD_CONST                      5: ('CENTER_DISTS', 'CENTER_PILLAR_WIDTHS', 'OUTER_DISTS', 'OUTER_PILLAR_WIDTHS', 'SCALE')
+                        46      BUILD_CONST_KEY_MAP             5
+                        48      STORE_FAST                      3: args
+                        50      LOAD_FAST                       3: args
+                        52      LOAD_METHOD                     2: items
+                        54      CALL_METHOD                     0
+                        56      GET_ITER                        
+                        58      FOR_ITER                        138 (to 198)
+                        60      UNPACK_SEQUENCE                 2
+                        62      STORE_FAST                      4: name
+                        64      STORE_FAST                      5: count
+                        66      LOAD_FAST                       1: gcmd
+                        68      LOAD_METHOD                     3: get
+                        70      LOAD_FAST                       4: name
+                        72      LOAD_CONST                      0: None
+                        74      CALL_METHOD                     2
+                        76      STORE_FAST                      6: data
+                        78      LOAD_FAST                       6: data
+                        80      LOAD_CONST                      0: None
+                        82      IS_OP                           0 (is)
+                        84      POP_JUMP_IF_FALSE               88
+                        86      JUMP_ABSOLUTE                   58
+                        88      SETUP_FINALLY                   24 (to 114)
+                        90      LOAD_GLOBAL                     4: list
+                        92      LOAD_GLOBAL                     5: map
+                        94      LOAD_GLOBAL                     6: float
+                        96      LOAD_FAST                       6: data
+                        98      LOAD_METHOD                     7: split
+                        100     LOAD_CONST                      6: ','
+                        102     CALL_METHOD                     1
+                        104     CALL_FUNCTION                   2
+                        106     CALL_FUNCTION                   1
+                        108     STORE_FAST                      7: parts
+                        110     POP_BLOCK                       
+                        112     JUMP_FORWARD                    28 (to 142)
+                        114     POP_TOP                         
+                        116     POP_TOP                         
+                        118     POP_TOP                         
+                        120     LOAD_FAST                       1: gcmd
+                        122     LOAD_METHOD                     8: error
+                        124     LOAD_CONST                      7: "Unable to parse parameter '%s'"
+                        126     LOAD_FAST                       4: name
+                        128     BUILD_TUPLE                     1
+                        130     BINARY_MODULO                   
+                        132     CALL_METHOD                     1
+                        134     RAISE_VARARGS                   1
+                        136     POP_EXCEPT                      
+                        138     JUMP_FORWARD                    2 (to 142)
+                        140     RERAISE                         
+                        142     LOAD_GLOBAL                     9: len
+                        144     LOAD_FAST                       7: parts
+                        146     CALL_FUNCTION                   1
+                        148     LOAD_FAST                       5: count
+                        150     COMPARE_OP                      3 (!=)
+                        152     POP_JUMP_IF_FALSE               172
+                        154     LOAD_FAST                       1: gcmd
+                        156     LOAD_METHOD                     8: error
+                        158     LOAD_CONST                      8: "Parameter '%s' must have %d values"
+                        160     LOAD_FAST                       4: name
+                        162     LOAD_FAST                       5: count
+                        164     BUILD_TUPLE                     2
+                        166     BINARY_MODULO                   
+                        168     CALL_METHOD                     1
+                        170     RAISE_VARARGS                   1
+                        172     LOAD_FAST                       7: parts
+                        174     LOAD_FAST                       0: self
+                        176     LOAD_ATTR                       10: delta_analyze_entry
+                        178     LOAD_FAST                       4: name
+                        180     STORE_SUBSCR                    
+                        182     LOAD_GLOBAL                     11: logging
+                        184     LOAD_METHOD                     12: info
+                        186     LOAD_CONST                      9: 'DELTA_ANALYZE %s = %s'
+                        188     LOAD_FAST                       4: name
+                        190     LOAD_FAST                       7: parts
+                        192     CALL_METHOD                     3
+                        194     POP_TOP                         
+                        196     JUMP_ABSOLUTE                   58
+                        198     LOAD_FAST                       1: gcmd
+                        200     LOAD_METHOD                     3: get
+                        202     LOAD_CONST                      10: 'CALIBRATE'
+                        204     LOAD_CONST                      0: None
+                        206     CALL_METHOD                     2
+                        208     STORE_FAST                      8: action
+                        210     LOAD_FAST                       8: action
+                        212     LOAD_CONST                      0: None
+                        214     IS_OP                           1 (is not)
+                        216     POP_JUMP_IF_FALSE               244
+                        218     LOAD_FAST                       8: action
+                        220     LOAD_CONST                      11: 'extended'
+                        222     COMPARE_OP                      3 (!=)
+                        224     POP_JUMP_IF_FALSE               236
+                        226     LOAD_FAST                       1: gcmd
+                        228     LOAD_METHOD                     8: error
+                        230     LOAD_CONST                      12: 'Unknown calibrate action'
+                        232     CALL_METHOD                     1
+                        234     RAISE_VARARGS                   1
+                        236     LOAD_FAST                       0: self
+                        238     LOAD_METHOD                     13: do_extended_calibration
+                        240     CALL_METHOD                     0
+                        242     POP_TOP                         
+                        244     LOAD_CONST                      0: None
+                        246     RETURN_VALUE                    
+                'DeltaCalibrate.cmd_DELTA_ANALYZE'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'DeltaCalibrate'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'DeltaCalibrate.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> handle_connect
+                18      LOAD_CONST                      4: 'DeltaCalibrate.handle_connect'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: handle_connect
+                24      LOAD_CONST                      5: <CODE> save_state
+                26      LOAD_CONST                      6: 'DeltaCalibrate.save_state'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: save_state
+                32      LOAD_CONST                      7: <CODE> probe_finalize
+                34      LOAD_CONST                      8: 'DeltaCalibrate.probe_finalize'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: probe_finalize
+                40      LOAD_CONST                      9: <CODE> calculate_params
+                42      LOAD_CONST                      10: 'DeltaCalibrate.calculate_params'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: calculate_params
+                48      LOAD_CONST                      11: 'Delta calibration script'
+                50      STORE_NAME                      8: cmd_DELTA_CALIBRATE_help
+                52      LOAD_CONST                      12: <CODE> cmd_DELTA_CALIBRATE
+                54      LOAD_CONST                      13: 'DeltaCalibrate.cmd_DELTA_CALIBRATE'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      9: cmd_DELTA_CALIBRATE
+                60      LOAD_CONST                      14: <CODE> add_manual_height
+                62      LOAD_CONST                      15: 'DeltaCalibrate.add_manual_height'
+                64      MAKE_FUNCTION                   0
+                66      STORE_NAME                      10: add_manual_height
+                68      LOAD_CONST                      16: <CODE> do_extended_calibration
+                70      LOAD_CONST                      17: 'DeltaCalibrate.do_extended_calibration'
+                72      MAKE_FUNCTION                   0
+                74      STORE_NAME                      11: do_extended_calibration
+                76      LOAD_CONST                      18: 'Extended delta calibration tool'
+                78      STORE_NAME                      12: cmd_DELTA_ANALYZE_help
+                80      LOAD_CONST                      19: <CODE> cmd_DELTA_ANALYZE
+                82      LOAD_CONST                      20: 'DeltaCalibrate.cmd_DELTA_ANALYZE'
+                84      MAKE_FUNCTION                   0
+                86      STORE_NAME                      13: cmd_DELTA_ANALYZE
+                88      LOAD_CONST                      21: None
+                90      RETURN_VALUE                    
+        'DeltaCalibrate'
+        [Code]
+            File Name: /extras/delta_calibrate.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'DeltaCalibrate'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: DeltaCalibrate
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: math
+        6       STORE_NAME                      0: math
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: logging
+        14      STORE_NAME                      1: logging
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: collections
+        22      STORE_NAME                      2: collections
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      1: None
+        28      IMPORT_NAME                     3: mathutil
+        30      STORE_NAME                      3: mathutil
+        32      LOAD_CONST                      2: 1
+        34      LOAD_CONST                      3: ('probe',)
+        36      IMPORT_NAME                     4: 
+        38      IMPORT_FROM                     5: probe
+        40      STORE_NAME                      5: probe
+        42      POP_TOP                         
+        44      LOAD_CONST                      4: <CODE> load_config_stable
+        46      LOAD_CONST                      5: 'load_config_stable'
+        48      MAKE_FUNCTION                   0
+        50      STORE_NAME                      6: load_config_stable
+        52      BUILD_LIST                      0
+        54      LOAD_CONST                      6: (210, 270, 330, 30, 90, 150)
+        56      LIST_EXTEND                     1
+        58      STORE_NAME                      7: MeasureAngles
+        60      LOAD_CONST                      7: 65
+        62      STORE_NAME                      8: MeasureOuterRadius
+        64      LOAD_CONST                      8: 4.5
+        66      STORE_NAME                      9: MeasureRidgeRadius
+        68      LOAD_CONST                      9: 0.5
+        70      STORE_NAME                      10: MEASURE_WEIGHT
+        72      LOAD_CONST                      10: <CODE> measurements_to_distances
+        74      LOAD_CONST                      11: 'measurements_to_distances'
+        76      MAKE_FUNCTION                   0
+        78      STORE_NAME                      11: measurements_to_distances
+        80      LOAD_BUILD_CLASS                
+        82      LOAD_CONST                      12: <CODE> DeltaCalibrate
+        84      LOAD_CONST                      13: 'DeltaCalibrate'
+        86      MAKE_FUNCTION                   0
+        88      LOAD_CONST                      13: 'DeltaCalibrate'
+        90      CALL_FUNCTION                   2
+        92      STORE_NAME                      12: DeltaCalibrate
+        94      LOAD_CONST                      14: <CODE> load_config
+        96      LOAD_CONST                      15: 'load_config'
+        98      MAKE_FUNCTION                   0
+        100     STORE_NAME                      13: load_config
+        102     LOAD_CONST                      1: None
+        104     RETURN_VALUE                    

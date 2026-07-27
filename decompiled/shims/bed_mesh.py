@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/bed_mesh.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: bed_mesh.pyc (Python 3.9)
 
@@ -66,14 +75,13 @@ def parse_gcmd_pair(gcmd, name, minval, maxval = (None, None)):
     
     try:
         pair = [ int(v.strip()) for v in (gcmd.get(name).split(',')) ]
-    finally:
-        pass
-    raise gcmd.error("Unable to parse parameter '%s'" % (name,))
+    except:
+        raise gcmd.error("Unable to parse parameter '%s'" % (name,))
+
     if len(pair) != 2:
         if len(pair) != 1:
             raise gcmd.error("Unable to parse parameter '%s'" % (name,))
         pair = (pair[0], pair[0])
-
     if minval is not None:
         if pair[0] < minval or pair[1] < minval:
             raise gcmd.error("Parameter '%s' must have a minimum of %d" % (name, minval))
@@ -87,11 +95,10 @@ def parse_gcmd_coord(gcmd, name):
     
     try:
         (v1, v2) = [ float(v.strip()) for v in (gcmd.get(name).split(',')) ]
-    finally:
-        pass
-    raise gcmd.error("Unable to parse parameter '%s'" % (name,))
-    return (v1, v2)
+    except:
+        raise gcmd.error("Unable to parse parameter '%s'" % (name,))
 
+    return (v1, v2)
 
 
 class BedMesh:
@@ -147,7 +154,22 @@ class BedMesh:
     def _get_mesh(self, web_request):
         probed_matrix = [
             []]
-    # WARNING: Decompyle incomplete
+        
+        try:
+            probed_matrix = self.z_mesh.get_probed_matrix()
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
 
     
     def update_mesh(self, web_request):
@@ -196,13 +218,4 @@ class BedMesh:
             self.fade_target = 0
         self.z_mesh = mesh
         if self.z_mesh is not None:
-            self.splitter.initialize(mesh.info_array_addr_int, self.fade_target)
-        else:
-            self.splitter.initialize(0, self.fade_target)
-        gcode_move = self.printer.lookup_object('gcode_move')
-        gcode_move.reset_last_position()
-        self.update_status()
-
-    
-    def get_z_factor(self, z_pos):
-        if z_pos >= self._Be
+            self.splitter.initialize(mesh.info_array_addr_int, self.fade_

@@ -24,10 +24,46 @@ index 98760db..c711b2f 100644
      generator_t m_generators;
  
 diff --git a/ASTree.cpp b/ASTree.cpp
-index f837152..029cd3a 100644
+index f837152..1d52aab 100644
 --- a/ASTree.cpp
 +++ b/ASTree.cpp
-@@ -999,7 +999,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -73,6 +73,35 @@ static void CheckIfExpr(FastStack& stack, PycRef<ASTBlock> curblock)
+     stack.push(new ASTTernary(std::move(if_block), std::move(if_expr), std::move(else_expr)));
+ }
+ 
++/* Look ahead from a SETUP_FINALLY handler target and classify it as an
++ * except-handler (contains JUMP_IF_NOT_EXC_MATCH / POP_EXCEPT, or -- for a
++ * bare `except:` -- opens by popping the exception triple) versus a pure
++ * finally-handler.  Python 3.8-3.10 carry no exception table, so unlike
++ * 3.11+ there is nothing to mark try/except vs try/finally up front; without
++ * this, the try body's POP_BLOCK wrongly injects a `finally: pass` before the
++ * except clause is ever seen. */
++static bool handler_is_except(PycRef<PycCode> code, PycModule* mod, int start)
++{
++    /* bc_next may read past a truncated tail and throw; never let a lookahead
++     * crash the decompilation -- fall back to "finally" (original behaviour). */
++    try {
++        PycBuffer buf(code->code()->value(), code->code()->length());
++        int opcode = 0, operand = 0, pos = 0;
++        while (pos < start && !buf.atEof())
++            bc_next(buf, mod, opcode, operand, pos);
++        for (int i = 0; i < 16 && !buf.atEof(); ++i) {
++            bc_next(buf, mod, opcode, operand, pos);
++            if (opcode == Pyc::JUMP_IF_NOT_EXC_MATCH_A || opcode == Pyc::POP_EXCEPT)
++                return true;
++            if (i == 0 && opcode == Pyc::POP_TOP)
++                return true;
++        }
++    } catch (...) {
++        return false;
++    }
++    return false;
++}
++
+ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+ {
+     PycBuffer source(code->code()->value(), code->code()->length());
+@@ -999,7 +1028,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                      if (mod->verCompare(3, 10) >= 0)
                          end *= sizeof(uint16_t); // // BPO-27129
                      end += pos;
@@ -41,7 +77,56 @@ index f837152..029cd3a 100644
                  } else {
                      PycRef<ASTBlock> top = blocks.top();
                      end = top->end(); // block end position from SETUP_LOOP
-@@ -1507,6 +1512,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1120,6 +1154,48 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+                 stack.push(new ASTCompare(left, right, operand ? ASTCompare::CMP_IS_NOT : ASTCompare::CMP_IS));
+             }
+             break;
++        case Pyc::JUMP_IF_NOT_EXC_MATCH_A:
++            {
++                /* Python 3.9+ fuses the 3.8 exception-match sequence
++                 *   DUP_TOP; LOAD exc_type; COMPARE_OP(exc-match); POP_JUMP_IF_FALSE t
++                 * into this single opcode.  Stack at entry: [.., exc, exc_type];
++                 * pop the type and the duplicated exception, synthesise the same
++                 * CMP_EXCEPTION comparison, and open a BLK_EXCEPT exactly as the
++                 * POP_JUMP_IF_FALSE handler does (the post-match bytecode --
++                 * POP_TOP/STORE/POP_TOP -- is identical between 3.8 and 3.9). */
++                PycRef<ASTNode> exc_type = stack.top();
++                stack.pop();
++                PycRef<ASTNode> exc_val = stack.top();
++                stack.pop();
++                PycRef<ASTNode> cond = new ASTCompare(exc_val, exc_type,
++                                                      ASTCompare::CMP_EXCEPTION);
++
++                int offs = operand;
++                if (mod->verCompare(3, 10) >= 0)
++                    offs *= sizeof(uint16_t); // BPO-27129 (oparg counts instructions)
++                /* target is absolute in 3.9/3.10 -- no +pos */
++
++                /* Save the stack for the handler body, mirroring the shared
++                 * conditional-jump handler. */
++                stack_hist.push(stack);
++
++                int except_end = offs;
++                if (curblock->blktype() == ASTBlock::BLK_EXCEPT
++                        && curblock.cast<ASTCondBlock>()->cond() == NULL) {
++                    except_end = curblock->end();
++                    blocks.pop();
++                    curblock = blocks.top();
++                    stack_hist.pop();
++                }
++
++                PycRef<ASTCondBlock> ifblk = new ASTCondBlock(
++                        ASTBlock::BLK_EXCEPT, except_end,
++                        cond.cast<ASTCompare>()->right(), false);
++                ifblk->init(ASTCondBlock::PRE_POPPED);
++                blocks.push(ifblk.cast<ASTBlock>());
++                curblock = blocks.top();
++            }
++            break;
+         case Pyc::JUMP_IF_FALSE_A:
+         case Pyc::JUMP_IF_TRUE_A:
+         case Pyc::JUMP_IF_FALSE_OR_POP_A:
+@@ -1507,6 +1583,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  }
              }
              break;
@@ -132,7 +217,24 @@ index f837152..029cd3a 100644
          case Pyc::SET_UPDATE_A:
              {
                  PycRef<ASTNode> rhs = stack.top();
-@@ -3052,7 +3141,12 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -2075,7 +2235,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+             break;
+         case Pyc::SETUP_FINALLY_A:
+             {
+-                PycRef<ASTBlock> next = new ASTContainerBlock(pos+operand);
++                int handler = pos + operand;
++                PycRef<ASTContainerBlock> next;
++                if (mod->verCompare(3, 8) >= 0 && mod->verCompare(3, 11) < 0
++                        && handler_is_except(code, mod, handler)) {
++                    /* try/except (3.8-3.10 have no exception table to say so) */
++                    next = new ASTContainerBlock(0, handler);
++                } else {
++                    next = new ASTContainerBlock(handler);
++                }
+                 blocks.push(next.cast<ASTBlock>());
+                 curblock = blocks.top();
+ 
+@@ -3052,7 +3220,12 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
          {
              PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
  
@@ -146,7 +248,7 @@ index f837152..029cd3a 100644
              print_src(comp->result(), mod, pyc_output);
  
              for (const auto& gen : comp->generators()) {
-@@ -3065,7 +3159,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3065,7 +3238,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                      print_src(gen->condition(), mod, pyc_output);
                  }
              }
@@ -155,7 +257,7 @@ index f837152..029cd3a 100644
          }
          break;
      case ASTNode::NODE_MAP:
-@@ -3079,9 +3173,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3079,9 +3252,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                  else
                      pyc_output << ",\n";
                  start_line(cur_indent, pyc_output);

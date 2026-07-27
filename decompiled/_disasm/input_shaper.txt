@@ -1,0 +1,1763 @@
+input_shaper.pyc (Python 3.9)
+[Code]
+    File Name: /extras/input_shaper.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'collections'
+        'chelper'
+        ''
+        'shaper_defs'
+        'InputShaperParams'
+        'AxisInputShaper'
+        'InputShaper'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'shaper_defs'
+        )
+        [Code]
+            File Name: /extras/input_shaper.py
+            Object Name: InputShaperParams
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'update'
+                'get_shaper'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'InputShaperParams'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'axis'
+                        'shaper_defs'
+                        'INPUT_SHAPERS'
+                        'shapers'
+                        'get'
+                        'shaper_type'
+                        'error'
+                        'getfloat'
+                        'DEFAULT_DAMPING_RATIO'
+                        'damping_ratio'
+                        'shaper_freq'
+                    [Var Names]
+                        'self'
+                        'axis'
+                        'config'
+                        'shaper_type'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/input_shaper.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'name'
+                                'init_func'
+                            [Var Names]
+                                '.0'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        14 (to 20)
+                                6       STORE_FAST                      1: s
+                                8       LOAD_FAST                       1: s
+                                10      LOAD_ATTR                       0: name
+                                12      LOAD_FAST                       1: s
+                                14      LOAD_ATTR                       1: init_func
+                                16      MAP_ADD                         2
+                                18      JUMP_ABSOLUTE                   4
+                                20      RETURN_VALUE                    
+                        'InputShaperParams.__init__.<locals>.<dictcomp>'
+                        'shaper_type'
+                        'mzv'
+                        'shaper_type_'
+                        '{"code":"key24", "msg":"Unsupported shaper type: %s", "values": ["%s"]}'
+                        'damping_ratio_'
+                        0
+                        1
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'shaper_freq_'
+                        (
+                            'minval'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: axis
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: axis
+                        6       LOAD_CONST                      1: <CODE> <dictcomp>
+                        8       LOAD_CONST                      2: 'InputShaperParams.__init__.<locals>.<dictcomp>'
+                        10      MAKE_FUNCTION                   0
+                        12      LOAD_GLOBAL                     1: shaper_defs
+                        14      LOAD_ATTR                       2: INPUT_SHAPERS
+                        16      GET_ITER                        
+                        18      CALL_FUNCTION                   1
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: shapers
+                        24      LOAD_FAST                       2: config
+                        26      LOAD_METHOD                     4: get
+                        28      LOAD_CONST                      3: 'shaper_type'
+                        30      LOAD_CONST                      4: 'mzv'
+                        32      CALL_METHOD                     2
+                        34      STORE_FAST                      3: shaper_type
+                        36      LOAD_FAST                       2: config
+                        38      LOAD_METHOD                     4: get
+                        40      LOAD_CONST                      5: 'shaper_type_'
+                        42      LOAD_FAST                       1: axis
+                        44      BINARY_ADD                      
+                        46      LOAD_FAST                       3: shaper_type
+                        48      CALL_METHOD                     2
+                        50      LOAD_FAST                       0: self
+                        52      STORE_ATTR                      5: shaper_type
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       5: shaper_type
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       3: shapers
+                        62      CONTAINS_OP                     1 (not in)
+                        64      POP_JUMP_IF_FALSE               88
+                        66      LOAD_FAST                       2: config
+                        68      LOAD_METHOD                     6: error
+                        70      LOAD_CONST                      6: '{"code":"key24", "msg":"Unsupported shaper type: %s", "values": ["%s"]}'
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       5: shaper_type
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       5: shaper_type
+                        80      BUILD_TUPLE                     2
+                        82      BINARY_MODULO                   
+                        84      CALL_METHOD                     1
+                        86      RAISE_VARARGS                   1
+                        88      LOAD_FAST                       2: config
+                        90      LOAD_ATTR                       7: getfloat
+                        92      LOAD_CONST                      7: 'damping_ratio_'
+                        94      LOAD_FAST                       1: axis
+                        96      BINARY_ADD                      
+                        98      LOAD_GLOBAL                     1: shaper_defs
+                        100     LOAD_ATTR                       8: DEFAULT_DAMPING_RATIO
+                        102     LOAD_CONST                      8: 0
+                        104     LOAD_CONST                      9: 1
+                        106     LOAD_CONST                      10: ('minval', 'maxval')
+                        108     CALL_FUNCTION_KW                4
+                        110     LOAD_FAST                       0: self
+                        112     STORE_ATTR                      9: damping_ratio
+                        114     LOAD_FAST                       2: config
+                        116     LOAD_ATTR                       7: getfloat
+                        118     LOAD_CONST                      11: 'shaper_freq_'
+                        120     LOAD_FAST                       1: axis
+                        122     BINARY_ADD                      
+                        124     LOAD_CONST                      8: 0
+                        126     LOAD_CONST                      8: 0
+                        128     LOAD_CONST                      12: ('minval',)
+                        130     CALL_FUNCTION_KW                3
+                        132     LOAD_FAST                       0: self
+                        134     STORE_ATTR                      10: shaper_freq
+                        136     LOAD_CONST                      0: None
+                        138     RETURN_VALUE                    
+                'InputShaperParams.__init__'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: update
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'axis'
+                        'upper'
+                        'get_float'
+                        'damping_ratio'
+                        'shaper_freq'
+                        'get'
+                        'shaper_type'
+                        'lower'
+                        'shapers'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'axis'
+                        'shaper_type'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'DAMPING_RATIO_'
+                        0
+                        1
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'SHAPER_FREQ_'
+                        (
+                            'minval'
+                        )
+                        'SHAPER_TYPE'
+                        'SHAPER_TYPE_'
+                        '{"code":"key24", "msg":"Unsupported shaper type: %s", "values": ["%s"]}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: axis
+                        4       LOAD_METHOD                     1: upper
+                        6       CALL_METHOD                     0
+                        8       STORE_FAST                      2: axis
+                        10      LOAD_FAST                       1: gcmd
+                        12      LOAD_ATTR                       2: get_float
+                        14      LOAD_CONST                      1: 'DAMPING_RATIO_'
+                        16      LOAD_FAST                       2: axis
+                        18      BINARY_ADD                      
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: damping_ratio
+                        24      LOAD_CONST                      2: 0
+                        26      LOAD_CONST                      3: 1
+                        28      LOAD_CONST                      4: ('minval', 'maxval')
+                        30      CALL_FUNCTION_KW                4
+                        32      LOAD_FAST                       0: self
+                        34      STORE_ATTR                      3: damping_ratio
+                        36      LOAD_FAST                       1: gcmd
+                        38      LOAD_ATTR                       2: get_float
+                        40      LOAD_CONST                      5: 'SHAPER_FREQ_'
+                        42      LOAD_FAST                       2: axis
+                        44      BINARY_ADD                      
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       4: shaper_freq
+                        50      LOAD_CONST                      2: 0
+                        52      LOAD_CONST                      6: ('minval',)
+                        54      CALL_FUNCTION_KW                3
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      4: shaper_freq
+                        60      LOAD_FAST                       1: gcmd
+                        62      LOAD_METHOD                     5: get
+                        64      LOAD_CONST                      7: 'SHAPER_TYPE'
+                        66      LOAD_CONST                      0: None
+                        68      CALL_METHOD                     2
+                        70      STORE_FAST                      3: shaper_type
+                        72      LOAD_FAST                       3: shaper_type
+                        74      LOAD_CONST                      0: None
+                        76      IS_OP                           0 (is)
+                        78      POP_JUMP_IF_FALSE               98
+                        80      LOAD_FAST                       1: gcmd
+                        82      LOAD_METHOD                     5: get
+                        84      LOAD_CONST                      8: 'SHAPER_TYPE_'
+                        86      LOAD_FAST                       2: axis
+                        88      BINARY_ADD                      
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       6: shaper_type
+                        94      CALL_METHOD                     2
+                        96      STORE_FAST                      3: shaper_type
+                        98      LOAD_FAST                       3: shaper_type
+                        100     LOAD_METHOD                     7: lower
+                        102     CALL_METHOD                     0
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       8: shapers
+                        108     CONTAINS_OP                     1 (not in)
+                        110     POP_JUMP_IF_FALSE               130
+                        112     LOAD_FAST                       1: gcmd
+                        114     LOAD_METHOD                     9: error
+                        116     LOAD_CONST                      9: '{"code":"key24", "msg":"Unsupported shaper type: %s", "values": ["%s"]}'
+                        118     LOAD_FAST                       3: shaper_type
+                        120     LOAD_FAST                       3: shaper_type
+                        122     BUILD_TUPLE                     2
+                        124     BINARY_MODULO                   
+                        126     CALL_METHOD                     1
+                        128     RAISE_VARARGS                   1
+                        130     LOAD_FAST                       3: shaper_type
+                        132     LOAD_METHOD                     7: lower
+                        134     CALL_METHOD                     0
+                        136     LOAD_FAST                       0: self
+                        138     STORE_ATTR                      6: shaper_type
+                        140     LOAD_CONST                      0: None
+                        142     RETURN_VALUE                    
+                'InputShaperParams.update'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: get_shaper
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'shaper_freq'
+                        'shaper_defs'
+                        'get_none_shaper'
+                        'shapers'
+                        'shaper_type'
+                        'damping_ratio'
+                        'len'
+                    [Var Names]
+                        'self'
+                        'A'
+                        'T'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: shaper_freq
+                        4       POP_JUMP_IF_TRUE                20
+                        6       LOAD_GLOBAL                     1: shaper_defs
+                        8       LOAD_METHOD                     2: get_none_shaper
+                        10      CALL_METHOD                     0
+                        12      UNPACK_SEQUENCE                 2
+                        14      STORE_FAST                      1: A
+                        16      STORE_FAST                      2: T
+                        18      JUMP_FORWARD                    26 (to 46)
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: shapers
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       4: shaper_type
+                        28      BINARY_SUBSCR                   
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       0: shaper_freq
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       5: damping_ratio
+                        38      CALL_FUNCTION                   2
+                        40      UNPACK_SEQUENCE                 2
+                        42      STORE_FAST                      1: A
+                        44      STORE_FAST                      2: T
+                        46      LOAD_GLOBAL                     6: len
+                        48      LOAD_FAST                       1: A
+                        50      CALL_FUNCTION                   1
+                        52      LOAD_FAST                       1: A
+                        54      LOAD_FAST                       2: T
+                        56      BUILD_TUPLE                     3
+                        58      RETURN_VALUE                    
+                'InputShaperParams.get_shaper'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: get_status
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'collections'
+                        'OrderedDict'
+                        'shaper_type'
+                        'shaper_freq'
+                        'damping_ratio'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'shaper_type'
+                        'shaper_freq'
+                        '%.3f'
+                        'damping_ratio'
+                        '%.6f'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: collections
+                        2       LOAD_METHOD                     1: OrderedDict
+                        4       LOAD_CONST                      1: 'shaper_type'
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       2: shaper_type
+                        10      BUILD_TUPLE                     2
+                        12      LOAD_CONST                      2: 'shaper_freq'
+                        14      LOAD_CONST                      3: '%.3f'
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       3: shaper_freq
+                        20      BUILD_TUPLE                     1
+                        22      BINARY_MODULO                   
+                        24      BUILD_TUPLE                     2
+                        26      LOAD_CONST                      4: 'damping_ratio'
+                        28      LOAD_CONST                      5: '%.6f'
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       4: damping_ratio
+                        34      BUILD_TUPLE                     1
+                        36      BINARY_MODULO                   
+                        38      BUILD_TUPLE                     2
+                        40      BUILD_LIST                      3
+                        42      CALL_METHOD                     1
+                        44      RETURN_VALUE                    
+                'InputShaperParams.get_status'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'InputShaperParams'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'InputShaperParams.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> update
+                18      LOAD_CONST                      4: 'InputShaperParams.update'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: update
+                24      LOAD_CONST                      5: <CODE> get_shaper
+                26      LOAD_CONST                      6: 'InputShaperParams.get_shaper'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: get_shaper
+                32      LOAD_CONST                      7: <CODE> get_status
+                34      LOAD_CONST                      8: 'InputShaperParams.get_status'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: get_status
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'InputShaperParams'
+        [Code]
+            File Name: /extras/input_shaper.py
+            Object Name: AxisInputShaper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_name'
+                'get_shaper'
+                'update'
+                'set_shaper_kinematics'
+                'get_step_generation_window'
+                'disable_shaping'
+                'enable_shaping'
+                'report'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'AxisInputShaper'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'axis'
+                        'InputShaperParams'
+                        'params'
+                        'get_shaper'
+                        'n'
+                        'A'
+                        'T'
+                        'saved'
+                    [Var Names]
+                        'self'
+                        'axis'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: axis
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: axis
+                        6       LOAD_GLOBAL                     1: InputShaperParams
+                        8       LOAD_FAST                       1: axis
+                        10      LOAD_FAST                       2: config
+                        12      CALL_FUNCTION                   2
+                        14      LOAD_FAST                       0: self
+                        16      STORE_ATTR                      2: params
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       2: params
+                        22      LOAD_METHOD                     3: get_shaper
+                        24      CALL_METHOD                     0
+                        26      UNPACK_SEQUENCE                 3
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      4: n
+                        32      LOAD_FAST                       0: self
+                        34      STORE_ATTR                      5: A
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      6: T
+                        40      LOAD_CONST                      0: None
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      7: saved
+                        46      LOAD_CONST                      0: None
+                        48      RETURN_VALUE                    
+                'AxisInputShaper.__init__'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: get_name
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'axis'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'shaper_'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 'shaper_'
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: axis
+                        6       BINARY_ADD                      
+                        8       RETURN_VALUE                    
+                'AxisInputShaper.get_name'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: get_shaper
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'n'
+                        'A'
+                        'T'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: n
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: A
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: T
+                        12      BUILD_TUPLE                     3
+                        14      RETURN_VALUE                    
+                'AxisInputShaper.get_shaper'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: update
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'params'
+                        'update'
+                        'n'
+                        'A'
+                        'T'
+                        'get_shaper'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'old_n'
+                        'old_A'
+                        'old_T'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: params
+                        4       LOAD_METHOD                     1: update
+                        6       LOAD_FAST                       1: gcmd
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: n
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       3: A
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       4: T
+                        24      ROT_THREE                       
+                        26      ROT_TWO                         
+                        28      STORE_FAST                      2: old_n
+                        30      STORE_FAST                      3: old_A
+                        32      STORE_FAST                      4: old_T
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       0: params
+                        38      LOAD_METHOD                     5: get_shaper
+                        40      CALL_METHOD                     0
+                        42      UNPACK_SEQUENCE                 3
+                        44      LOAD_FAST                       0: self
+                        46      STORE_ATTR                      2: n
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      3: A
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      4: T
+                        56      LOAD_FAST                       2: old_n
+                        58      LOAD_FAST                       3: old_A
+                        60      LOAD_FAST                       4: old_T
+                        62      BUILD_TUPLE                     3
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       2: n
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       3: A
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       4: T
+                        76      BUILD_TUPLE                     3
+                        78      COMPARE_OP                      3 (!=)
+                        80      RETURN_VALUE                    
+                'AxisInputShaper.update'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: set_shaper_kinematics
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'chelper'
+                        'get_ffi'
+                        'input_shaper_set_shaper_params'
+                        'axis'
+                        'encode'
+                        'n'
+                        'A'
+                        'T'
+                        'disable_shaping'
+                    [Var Names]
+                        'self'
+                        'sk'
+                        'ffi_main'
+                        'ffi_lib'
+                        'success'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: chelper
+                        2       LOAD_METHOD                     1: get_ffi
+                        4       CALL_METHOD                     0
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      2: ffi_main
+                        10      STORE_FAST                      3: ffi_lib
+                        12      LOAD_FAST                       3: ffi_lib
+                        14      LOAD_METHOD                     2: input_shaper_set_shaper_params
+                        16      LOAD_FAST                       1: sk
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: axis
+                        22      LOAD_METHOD                     4: encode
+                        24      CALL_METHOD                     0
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       5: n
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       6: A
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       7: T
+                        38      CALL_METHOD                     5
+                        40      LOAD_CONST                      1: 0
+                        42      COMPARE_OP                      2 (==)
+                        44      STORE_FAST                      4: success
+                        46      LOAD_FAST                       4: success
+                        48      POP_JUMP_IF_TRUE                88
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_METHOD                     8: disable_shaping
+                        54      CALL_METHOD                     0
+                        56      POP_TOP                         
+                        58      LOAD_FAST                       3: ffi_lib
+                        60      LOAD_METHOD                     2: input_shaper_set_shaper_params
+                        62      LOAD_FAST                       1: sk
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       3: axis
+                        68      LOAD_METHOD                     4: encode
+                        70      CALL_METHOD                     0
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       5: n
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       6: A
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       7: T
+                        84      CALL_METHOD                     5
+                        86      POP_TOP                         
+                        88      LOAD_FAST                       4: success
+                        90      RETURN_VALUE                    
+                'AxisInputShaper.set_shaper_kinematics'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: get_step_generation_window
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'chelper'
+                        'get_ffi'
+                        'input_shaper_get_step_generation_window'
+                        'n'
+                        'A'
+                        'T'
+                    [Var Names]
+                        'self'
+                        'ffi_main'
+                        'ffi_lib'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: chelper
+                        2       LOAD_METHOD                     1: get_ffi
+                        4       CALL_METHOD                     0
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      1: ffi_main
+                        10      STORE_FAST                      2: ffi_lib
+                        12      LOAD_FAST                       2: ffi_lib
+                        14      LOAD_METHOD                     2: input_shaper_get_step_generation_window
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       3: n
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       4: A
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       5: T
+                        28      CALL_METHOD                     3
+                        30      RETURN_VALUE                    
+                'AxisInputShaper.get_step_generation_window'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: disable_shaping
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'saved'
+                        'n'
+                        'A'
+                        'T'
+                        'shaper_defs'
+                        'get_none_shaper'
+                        'len'
+                    [Var Names]
+                        'self'
+                        'A'
+                        'T'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: saved
+                        4       LOAD_CONST                      0: None
+                        6       IS_OP                           0 (is)
+                        8       POP_JUMP_IF_FALSE               34
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: n
+                        14      POP_JUMP_IF_FALSE               34
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       1: n
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       2: A
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       3: T
+                        28      BUILD_TUPLE                     3
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      0: saved
+                        34      LOAD_GLOBAL                     4: shaper_defs
+                        36      LOAD_METHOD                     5: get_none_shaper
+                        38      CALL_METHOD                     0
+                        40      UNPACK_SEQUENCE                 2
+                        42      STORE_FAST                      1: A
+                        44      STORE_FAST                      2: T
+                        46      LOAD_GLOBAL                     6: len
+                        48      LOAD_FAST                       1: A
+                        50      CALL_FUNCTION                   1
+                        52      LOAD_FAST                       1: A
+                        54      LOAD_FAST                       2: T
+                        56      ROT_THREE                       
+                        58      ROT_TWO                         
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      1: n
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      2: A
+                        68      LOAD_FAST                       0: self
+                        70      STORE_ATTR                      3: T
+                        72      LOAD_CONST                      0: None
+                        74      RETURN_VALUE                    
+                'AxisInputShaper.disable_shaping'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: enable_shaping
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'saved'
+                        'n'
+                        'A'
+                        'T'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: saved
+                        4       LOAD_CONST                      0: None
+                        6       IS_OP                           0 (is)
+                        8       POP_JUMP_IF_FALSE               14
+                        10      LOAD_CONST                      0: None
+                        12      RETURN_VALUE                    
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       0: saved
+                        18      UNPACK_SEQUENCE                 3
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      1: n
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      2: A
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      3: T
+                        32      LOAD_CONST                      0: None
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      0: saved
+                        38      LOAD_CONST                      0: None
+                        40      RETURN_VALUE                    
+                'AxisInputShaper.enable_shaping'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: report
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'join'
+                        'params'
+                        'get_status'
+                        'items'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'info'
+                    [Free Vars]
+                    [Cell Vars]
+                        'self'
+                    [Constants]
+                        None
+                        ' '
+                        [Code]
+                            File Name: /extras/input_shaper.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'axis'
+                            [Var Names]
+                                '.0'
+                                'key'
+                                'value'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                '%s_%s:%s'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        24 (to 30)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: key
+                                10      STORE_FAST                      2: value
+                                12      LOAD_CONST                      0: '%s_%s:%s'
+                                14      LOAD_FAST                       1: key
+                                16      LOAD_DEREF                      0: self
+                                18      LOAD_ATTR                       0: axis
+                                20      LOAD_FAST                       2: value
+                                22      BUILD_TUPLE                     3
+                                24      BINARY_MODULO                   
+                                26      LIST_APPEND                     2
+                                28      JUMP_ABSOLUTE                   4
+                                30      RETURN_VALUE                    
+                        'AxisInputShaper.report.<locals>.<listcomp>'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: ' '
+                        2       LOAD_METHOD                     0: join
+                        4       LOAD_CLOSURE                    0: self
+                        6       BUILD_TUPLE                     1
+                        8       LOAD_CONST                      2: <CODE> <listcomp>
+                        10      LOAD_CONST                      3: 'AxisInputShaper.report.<locals>.<listcomp>'
+                        12      MAKE_FUNCTION                   8
+                        14      LOAD_DEREF                      0: self
+                        16      LOAD_ATTR                       1: params
+                        18      LOAD_METHOD                     2: get_status
+                        20      CALL_METHOD                     0
+                        22      LOAD_METHOD                     3: items
+                        24      CALL_METHOD                     0
+                        26      GET_ITER                        
+                        28      CALL_FUNCTION                   1
+                        30      CALL_METHOD                     1
+                        32      STORE_FAST                      2: info
+                        34      LOAD_FAST                       1: gcmd
+                        36      LOAD_METHOD                     4: respond_info
+                        38      LOAD_FAST                       2: info
+                        40      CALL_METHOD                     1
+                        42      POP_TOP                         
+                        44      LOAD_CONST                      0: None
+                        46      RETURN_VALUE                    
+                'AxisInputShaper.report'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'AxisInputShaper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'AxisInputShaper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_name
+                18      LOAD_CONST                      4: 'AxisInputShaper.get_name'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_name
+                24      LOAD_CONST                      5: <CODE> get_shaper
+                26      LOAD_CONST                      6: 'AxisInputShaper.get_shaper'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: get_shaper
+                32      LOAD_CONST                      7: <CODE> update
+                34      LOAD_CONST                      8: 'AxisInputShaper.update'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: update
+                40      LOAD_CONST                      9: <CODE> set_shaper_kinematics
+                42      LOAD_CONST                      10: 'AxisInputShaper.set_shaper_kinematics'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: set_shaper_kinematics
+                48      LOAD_CONST                      11: <CODE> get_step_generation_window
+                50      LOAD_CONST                      12: 'AxisInputShaper.get_step_generation_window'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: get_step_generation_window
+                56      LOAD_CONST                      13: <CODE> disable_shaping
+                58      LOAD_CONST                      14: 'AxisInputShaper.disable_shaping'
+                60      MAKE_FUNCTION                   0
+                62      STORE_NAME                      9: disable_shaping
+                64      LOAD_CONST                      15: <CODE> enable_shaping
+                66      LOAD_CONST                      16: 'AxisInputShaper.enable_shaping'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      10: enable_shaping
+                72      LOAD_CONST                      17: <CODE> report
+                74      LOAD_CONST                      18: 'AxisInputShaper.report'
+                76      MAKE_FUNCTION                   0
+                78      STORE_NAME                      11: report
+                80      LOAD_CONST                      19: None
+                82      RETURN_VALUE                    
+        'AxisInputShaper'
+        [Code]
+            File Name: /extras/input_shaper.py
+            Object Name: InputShaper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_shapers'
+                'connect'
+                '_update_input_shaping'
+                'disable_shaping'
+                'enable_shaping'
+                'cmd_SET_INPUT_SHAPER_help'
+                'cmd_SET_INPUT_SHAPER'
+                'cmd_UPDATE_INPUT_SHAPER_help'
+                'cmd_UPDATE_INPUT_SHAPER'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'InputShaper'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'register_event_handler'
+                        'connect'
+                        'toolhead'
+                        'AxisInputShaper'
+                        'shapers'
+                        'stepper_kinematics'
+                        'orig_stepper_kinematics'
+                        'lookup_object'
+                        'register_command'
+                        'cmd_SET_INPUT_SHAPER'
+                        'cmd_SET_INPUT_SHAPER_help'
+                        'cmd_UPDATE_INPUT_SHAPER'
+                        'cmd_UPDATE_INPUT_SHAPER_help'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'gcode'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'klippy:connect'
+                        'x'
+                        'y'
+                        'gcode'
+                        'SET_INPUT_SHAPER'
+                        (
+                            'desc'
+                        )
+                        'UPDATE_INPUT_SHAPER'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: register_event_handler
+                        16      LOAD_CONST                      1: 'klippy:connect'
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: connect
+                        22      CALL_METHOD                     2
+                        24      POP_TOP                         
+                        26      LOAD_CONST                      0: None
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      4: toolhead
+                        32      LOAD_GLOBAL                     5: AxisInputShaper
+                        34      LOAD_CONST                      2: 'x'
+                        36      LOAD_FAST                       1: config
+                        38      CALL_FUNCTION                   2
+                        40      LOAD_GLOBAL                     5: AxisInputShaper
+                        42      LOAD_CONST                      3: 'y'
+                        44      LOAD_FAST                       1: config
+                        46      CALL_FUNCTION                   2
+                        48      BUILD_LIST                      2
+                        50      LOAD_FAST                       0: self
+                        52      STORE_ATTR                      6: shapers
+                        54      BUILD_LIST                      0
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      7: stepper_kinematics
+                        60      BUILD_LIST                      0
+                        62      LOAD_FAST                       0: self
+                        64      STORE_ATTR                      8: orig_stepper_kinematics
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       1: printer
+                        70      LOAD_METHOD                     9: lookup_object
+                        72      LOAD_CONST                      4: 'gcode'
+                        74      CALL_METHOD                     1
+                        76      STORE_FAST                      2: gcode
+                        78      LOAD_FAST                       2: gcode
+                        80      LOAD_ATTR                       10: register_command
+                        82      LOAD_CONST                      5: 'SET_INPUT_SHAPER'
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       11: cmd_SET_INPUT_SHAPER
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       12: cmd_SET_INPUT_SHAPER_help
+                        92      LOAD_CONST                      6: ('desc',)
+                        94      CALL_FUNCTION_KW                3
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       2: gcode
+                        100     LOAD_ATTR                       10: register_command
+                        102     LOAD_CONST                      7: 'UPDATE_INPUT_SHAPER'
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       13: cmd_UPDATE_INPUT_SHAPER
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       14: cmd_UPDATE_INPUT_SHAPER_help
+                        112     LOAD_CONST                      6: ('desc',)
+                        114     CALL_FUNCTION_KW                3
+                        116     POP_TOP                         
+                        118     LOAD_CONST                      0: None
+                        120     RETURN_VALUE                    
+                'InputShaper.__init__'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: get_shapers
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'shapers'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: shapers
+                        4       RETURN_VALUE                    
+                'InputShaper.get_shapers'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'toolhead'
+                        'get_kinematics'
+                        'chelper'
+                        'get_ffi'
+                        'get_steppers'
+                        'gc'
+                        'input_shaper_alloc'
+                        'free'
+                        'set_stepper_kinematics'
+                        'input_shaper_set_sk'
+                        'stepper_kinematics'
+                        'append'
+                        'orig_stepper_kinematics'
+                        'old_delay'
+                        '_update_input_shaping'
+                        'config_error'
+                    [Var Names]
+                        'self'
+                        'kin'
+                        'ffi_main'
+                        'ffi_lib'
+                        'steppers'
+                        's'
+                        'sk'
+                        'orig_sk'
+                        'res'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        0
+                        0
+                        (
+                            'error'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      2: toolhead
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: toolhead
+                        18      LOAD_METHOD                     3: get_kinematics
+                        20      CALL_METHOD                     0
+                        22      STORE_FAST                      1: kin
+                        24      LOAD_GLOBAL                     4: chelper
+                        26      LOAD_METHOD                     5: get_ffi
+                        28      CALL_METHOD                     0
+                        30      UNPACK_SEQUENCE                 2
+                        32      STORE_FAST                      2: ffi_main
+                        34      STORE_FAST                      3: ffi_lib
+                        36      LOAD_FAST                       1: kin
+                        38      LOAD_METHOD                     6: get_steppers
+                        40      CALL_METHOD                     0
+                        42      STORE_FAST                      4: steppers
+                        44      LOAD_FAST                       4: steppers
+                        46      GET_ITER                        
+                        48      FOR_ITER                        88 (to 138)
+                        50      STORE_FAST                      5: s
+                        52      LOAD_FAST                       2: ffi_main
+                        54      LOAD_METHOD                     7: gc
+                        56      LOAD_FAST                       3: ffi_lib
+                        58      LOAD_METHOD                     8: input_shaper_alloc
+                        60      CALL_METHOD                     0
+                        62      LOAD_FAST                       3: ffi_lib
+                        64      LOAD_ATTR                       9: free
+                        66      CALL_METHOD                     2
+                        68      STORE_FAST                      6: sk
+                        70      LOAD_FAST                       5: s
+                        72      LOAD_METHOD                     10: set_stepper_kinematics
+                        74      LOAD_FAST                       6: sk
+                        76      CALL_METHOD                     1
+                        78      STORE_FAST                      7: orig_sk
+                        80      LOAD_FAST                       3: ffi_lib
+                        82      LOAD_METHOD                     11: input_shaper_set_sk
+                        84      LOAD_FAST                       6: sk
+                        86      LOAD_FAST                       7: orig_sk
+                        88      CALL_METHOD                     2
+                        90      STORE_FAST                      8: res
+                        92      LOAD_FAST                       8: res
+                        94      LOAD_CONST                      2: 0
+                        96      COMPARE_OP                      0 (<)
+                        98      POP_JUMP_IF_FALSE               112
+                        100     LOAD_FAST                       5: s
+                        102     LOAD_METHOD                     10: set_stepper_kinematics
+                        104     LOAD_FAST                       7: orig_sk
+                        106     CALL_METHOD                     1
+                        108     POP_TOP                         
+                        110     JUMP_ABSOLUTE                   48
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       12: stepper_kinematics
+                        116     LOAD_METHOD                     13: append
+                        118     LOAD_FAST                       6: sk
+                        120     CALL_METHOD                     1
+                        122     POP_TOP                         
+                        124     LOAD_FAST                       0: self
+                        126     LOAD_ATTR                       14: orig_stepper_kinematics
+                        128     LOAD_METHOD                     13: append
+                        130     LOAD_FAST                       7: orig_sk
+                        132     CALL_METHOD                     1
+                        134     POP_TOP                         
+                        136     JUMP_ABSOLUTE                   48
+                        138     LOAD_CONST                      3: 0
+                        140     LOAD_FAST                       0: self
+                        142     STORE_ATTR                      15: old_delay
+                        144     LOAD_FAST                       0: self
+                        146     LOAD_ATTR                       16: _update_input_shaping
+                        148     LOAD_FAST                       0: self
+                        150     LOAD_ATTR                       0: printer
+                        152     LOAD_ATTR                       17: config_error
+                        154     LOAD_CONST                      4: ('error',)
+                        156     CALL_FUNCTION_KW                1
+                        158     POP_TOP                         
+                        160     LOAD_CONST                      0: None
+                        162     RETURN_VALUE                    
+                'InputShaper.connect'
+                None
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: _update_input_shaping
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'toolhead'
+                        'flush_step_generation'
+                        'max'
+                        'shapers'
+                        'note_step_generation_scan_time'
+                        'old_delay'
+                        'stepper_kinematics'
+                        'set_shaper_kinematics'
+                        'append'
+                        'printer'
+                        'command_error'
+                        'join'
+                    [Var Names]
+                        'self'
+                        'error'
+                        'new_delay'
+                        'failed'
+                        'sk'
+                        'shaper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/input_shaper.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'get_step_generation_window'
+                            [Var Names]
+                                '.0'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: s
+                                8       LOAD_FAST                       1: s
+                                10      LOAD_METHOD                     0: get_step_generation_window
+                                12      CALL_METHOD                     0
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                        'InputShaper._update_input_shaping.<locals>.<listcomp>'
+                        (
+                            'old_delay'
+                        )
+                        '{"code":"key25", "msg":"Failed to configure shaper(s) %s with given parameters", "values": ["%s"]}'
+                        ', '
+                        [Code]
+                            File Name: /extras/input_shaper.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'get_name'
+                            [Var Names]
+                                '.0'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: s
+                                8       LOAD_FAST                       1: s
+                                10      LOAD_METHOD                     0: get_name
+                                12      CALL_METHOD                     0
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: toolhead
+                        4       LOAD_METHOD                     1: flush_step_generation
+                        6       CALL_METHOD                     0
+                        8       POP_TOP                         
+                        10      LOAD_GLOBAL                     2: max
+                        12      LOAD_CONST                      1: <CODE> <listcomp>
+                        14      LOAD_CONST                      2: 'InputShaper._update_input_shaping.<locals>.<listcomp>'
+                        16      MAKE_FUNCTION                   0
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: shapers
+                        22      GET_ITER                        
+                        24      CALL_FUNCTION                   1
+                        26      CALL_FUNCTION                   1
+                        28      STORE_FAST                      2: new_delay
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       0: toolhead
+                        34      LOAD_ATTR                       4: note_step_generation_scan_time
+                        36      LOAD_FAST                       2: new_delay
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       5: old_delay
+                        42      LOAD_CONST                      3: ('old_delay',)
+                        44      CALL_FUNCTION_KW                2
+                        46      POP_TOP                         
+                        48      BUILD_LIST                      0
+                        50      STORE_FAST                      3: failed
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       6: stepper_kinematics
+                        56      GET_ITER                        
+                        58      FOR_ITER                        46 (to 106)
+                        60      STORE_FAST                      4: sk
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       3: shapers
+                        66      GET_ITER                        
+                        68      FOR_ITER                        34 (to 104)
+                        70      STORE_FAST                      5: shaper
+                        72      LOAD_FAST                       5: shaper
+                        74      LOAD_FAST                       3: failed
+                        76      CONTAINS_OP                     0 (in)
+                        78      POP_JUMP_IF_FALSE               82
+                        80      JUMP_ABSOLUTE                   68
+                        82      LOAD_FAST                       5: shaper
+                        84      LOAD_METHOD                     7: set_shaper_kinematics
+                        86      LOAD_FAST                       4: sk
+                        88      CALL_METHOD                     1
+                        90      POP_JUMP_IF_TRUE                68
+                        92      LOAD_FAST                       3: failed
+                        94      LOAD_METHOD                     8: append
+                        96      LOAD_FAST                       5: shaper
+                        98      CALL_METHOD                     1
+                        100     POP_TOP                         
+                        102     JUMP_ABSOLUTE                   68
+                        104     JUMP_ABSOLUTE                   58
+                        106     LOAD_FAST                       3: failed
+                        108     POP_JUMP_IF_FALSE               170
+                        110     LOAD_FAST                       1: error
+                        112     JUMP_IF_TRUE_OR_POP             120
+                        114     LOAD_FAST                       0: self
+                        116     LOAD_ATTR                       9: printer
+                        118     LOAD_ATTR                       10: command_error
+                        120     STORE_FAST                      1: error
+                        122     LOAD_FAST                       1: error
+                        124     LOAD_CONST                      4: '{"code":"key25", "msg":"Failed to configure shaper(s) %s with given parameters", "values": ["%s"]}'
+                        126     LOAD_CONST                      5: ', '
+                        128     LOAD_METHOD                     11: join
+                        130     LOAD_CONST                      6: <CODE> <listcomp>
+                        132     LOAD_CONST                      2: 'InputShaper._update_input_shaping.<locals>.<listcomp>'
+                        134     MAKE_FUNCTION                   0
+                        136     LOAD_FAST                       3: failed
+                        138     GET_ITER                        
+                        140     CALL_FUNCTION                   1
+                        142     CALL_METHOD                     1
+                        144     LOAD_CONST                      5: ', '
+                        146     LOAD_METHOD                     11: join
+                        148     LOAD_CONST                      6: <CODE> <listcomp>
+                        150     LOAD_CONST                      2: 'InputShaper._update_input_shaping.<locals>.<listcomp>'
+                        152     MAKE_FUNCTION                   0
+                        154     LOAD_FAST                       3: failed
+                        156     GET_ITER                        
+                        158     CALL_FUNCTION                   1
+                        160     CALL_METHOD                     1
+                        162     BUILD_TUPLE                     2
+                        164     BINARY_MODULO                   
+                        166     CALL_FUNCTION                   1
+                        168     RAISE_VARARGS                   1
+                        170     LOAD_CONST                      0: None
+                        172     RETURN_VALUE                    
+                'InputShaper._update_input_shaping'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: disable_shaping
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'shapers'
+                        'disable_shaping'
+                        '_update_input_shaping'
+                    [Var Names]
+                        'self'
+                        'shaper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: shapers
+                        4       GET_ITER                        
+                        6       FOR_ITER                        12 (to 20)
+                        8       STORE_FAST                      1: shaper
+                        10      LOAD_FAST                       1: shaper
+                        12      LOAD_METHOD                     1: disable_shaping
+                        14      CALL_METHOD                     0
+                        16      POP_TOP                         
+                        18      JUMP_ABSOLUTE                   6
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_METHOD                     2: _update_input_shaping
+                        24      CALL_METHOD                     0
+                        26      POP_TOP                         
+                        28      LOAD_CONST                      0: None
+                        30      RETURN_VALUE                    
+                'InputShaper.disable_shaping'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: enable_shaping
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'shapers'
+                        'enable_shaping'
+                        '_update_input_shaping'
+                    [Var Names]
+                        'self'
+                        'shaper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: shapers
+                        4       GET_ITER                        
+                        6       FOR_ITER                        12 (to 20)
+                        8       STORE_FAST                      1: shaper
+                        10      LOAD_FAST                       1: shaper
+                        12      LOAD_METHOD                     1: enable_shaping
+                        14      CALL_METHOD                     0
+                        16      POP_TOP                         
+                        18      JUMP_ABSOLUTE                   6
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_METHOD                     2: _update_input_shaping
+                        24      CALL_METHOD                     0
+                        26      POP_TOP                         
+                        28      LOAD_CONST                      0: None
+                        30      RETURN_VALUE                    
+                'InputShaper.enable_shaping'
+                'Set cartesian parameters for input shaper'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: cmd_SET_INPUT_SHAPER
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'shapers'
+                        'update'
+                        '_update_input_shaping'
+                        'report'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'updated'
+                        'shaper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       LOAD_CONST                      1: False
+                        2       STORE_FAST                      2: updated
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       0: shapers
+                        8       GET_ITER                        
+                        10      FOR_ITER                        18 (to 30)
+                        12      STORE_FAST                      3: shaper
+                        14      LOAD_FAST                       2: updated
+                        16      LOAD_FAST                       3: shaper
+                        18      LOAD_METHOD                     1: update
+                        20      LOAD_FAST                       1: gcmd
+                        22      CALL_METHOD                     1
+                        24      INPLACE_OR                      
+                        26      STORE_FAST                      2: updated
+                        28      JUMP_ABSOLUTE                   10
+                        30      LOAD_FAST                       2: updated
+                        32      POP_JUMP_IF_FALSE               42
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_METHOD                     2: _update_input_shaping
+                        38      CALL_METHOD                     0
+                        40      POP_TOP                         
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       0: shapers
+                        46      GET_ITER                        
+                        48      FOR_ITER                        14 (to 64)
+                        50      STORE_FAST                      3: shaper
+                        52      LOAD_FAST                       3: shaper
+                        54      LOAD_METHOD                     3: report
+                        56      LOAD_FAST                       1: gcmd
+                        58      CALL_METHOD                     1
+                        60      POP_TOP                         
+                        62      JUMP_ABSOLUTE                   48
+                        64      LOAD_CONST                      0: None
+                        66      RETURN_VALUE                    
+                'InputShaper.cmd_SET_INPUT_SHAPER'
+                'cmd_UPDATE_INPUT_SHAPER parameters for input shaper'
+                [Code]
+                    File Name: /extras/input_shaper.py
+                    Object Name: cmd_UPDATE_INPUT_SHAPER
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'connect'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: connect
+                        4       CALL_METHOD                     0
+                        6       POP_TOP                         
+                        8       LOAD_CONST                      0: None
+                        10      RETURN_VALUE                    
+                'InputShaper.cmd_UPDATE_INPUT_SHAPER'
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'InputShaper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'InputShaper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_shapers
+                18      LOAD_CONST                      4: 'InputShaper.get_shapers'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_shapers
+                24      LOAD_CONST                      5: <CODE> connect
+                26      LOAD_CONST                      6: 'InputShaper.connect'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: connect
+                32      LOAD_CONST                      20: (None,)
+                34      LOAD_CONST                      8: <CODE> _update_input_shaping
+                36      LOAD_CONST                      9: 'InputShaper._update_input_shaping'
+                38      MAKE_FUNCTION                   1
+                40      STORE_NAME                      6: _update_input_shaping
+                42      LOAD_CONST                      10: <CODE> disable_shaping
+                44      LOAD_CONST                      11: 'InputShaper.disable_shaping'
+                46      MAKE_FUNCTION                   0
+                48      STORE_NAME                      7: disable_shaping
+                50      LOAD_CONST                      12: <CODE> enable_shaping
+                52      LOAD_CONST                      13: 'InputShaper.enable_shaping'
+                54      MAKE_FUNCTION                   0
+                56      STORE_NAME                      8: enable_shaping
+                58      LOAD_CONST                      14: 'Set cartesian parameters for input shaper'
+                60      STORE_NAME                      9: cmd_SET_INPUT_SHAPER_help
+                62      LOAD_CONST                      15: <CODE> cmd_SET_INPUT_SHAPER
+                64      LOAD_CONST                      16: 'InputShaper.cmd_SET_INPUT_SHAPER'
+                66      MAKE_FUNCTION                   0
+                68      STORE_NAME                      10: cmd_SET_INPUT_SHAPER
+                70      LOAD_CONST                      17: 'cmd_UPDATE_INPUT_SHAPER parameters for input shaper'
+                72      STORE_NAME                      11: cmd_UPDATE_INPUT_SHAPER_help
+                74      LOAD_CONST                      18: <CODE> cmd_UPDATE_INPUT_SHAPER
+                76      LOAD_CONST                      19: 'InputShaper.cmd_UPDATE_INPUT_SHAPER'
+                78      MAKE_FUNCTION                   0
+                80      STORE_NAME                      12: cmd_UPDATE_INPUT_SHAPER
+                82      LOAD_CONST                      7: None
+                84      RETURN_VALUE                    
+        'InputShaper'
+        [Code]
+            File Name: /extras/input_shaper.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'InputShaper'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: InputShaper
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: collections
+        6       STORE_NAME                      0: collections
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: chelper
+        14      STORE_NAME                      1: chelper
+        16      LOAD_CONST                      2: 1
+        18      LOAD_CONST                      3: ('shaper_defs',)
+        20      IMPORT_NAME                     2: 
+        22      IMPORT_FROM                     3: shaper_defs
+        24      STORE_NAME                      3: shaper_defs
+        26      POP_TOP                         
+        28      LOAD_BUILD_CLASS                
+        30      LOAD_CONST                      4: <CODE> InputShaperParams
+        32      LOAD_CONST                      5: 'InputShaperParams'
+        34      MAKE_FUNCTION                   0
+        36      LOAD_CONST                      5: 'InputShaperParams'
+        38      CALL_FUNCTION                   2
+        40      STORE_NAME                      4: InputShaperParams
+        42      LOAD_BUILD_CLASS                
+        44      LOAD_CONST                      6: <CODE> AxisInputShaper
+        46      LOAD_CONST                      7: 'AxisInputShaper'
+        48      MAKE_FUNCTION                   0
+        50      LOAD_CONST                      7: 'AxisInputShaper'
+        52      CALL_FUNCTION                   2
+        54      STORE_NAME                      5: AxisInputShaper
+        56      LOAD_BUILD_CLASS                
+        58      LOAD_CONST                      8: <CODE> InputShaper
+        60      LOAD_CONST                      9: 'InputShaper'
+        62      MAKE_FUNCTION                   0
+        64      LOAD_CONST                      9: 'InputShaper'
+        66      CALL_FUNCTION                   2
+        68      STORE_NAME                      6: InputShaper
+        70      LOAD_CONST                      10: <CODE> load_config
+        72      LOAD_CONST                      11: 'load_config'
+        74      MAKE_FUNCTION                   0
+        76      STORE_NAME                      7: load_config
+        78      LOAD_CONST                      1: None
+        80      RETURN_VALUE                    

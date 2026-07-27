@@ -1,0 +1,1138 @@
+output_pin.pyc (Python 3.9)
+[Code]
+    File Name: /extras/output_pin.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'PIN_MIN_TIME'
+        'RESEND_HOST_TIME'
+        'MAX_SCHEDULE_TIME'
+        'logging'
+        'PrinterOutputPin'
+        'load_config_prefix'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0.1
+        0.3
+        5
+        0
+        None
+        [Code]
+            File Name: /extras/output_pin.py
+            Object Name: PrinterOutputPin
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'set_poewon'
+                'checkpwm'
+                'get_status'
+                '_set_pin'
+                'cmd_SET_PIN_help'
+                'cmd_SET_PIN'
+                '_resend_current_val'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterOutputPin'
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'config'
+                        'get_printer'
+                        'printer'
+                        'lookup_object'
+                        'getboolean'
+                        'is_pwm'
+                        'setup_pin'
+                        'get'
+                        'mcu_pin'
+                        'getfloat'
+                        'MAX_SCHEDULE_TIME'
+                        'setup_cycle_time'
+                        'scale'
+                        'last_cycle_time'
+                        'default_cycle_time'
+                        'last_print_time'
+                        'get_reactor'
+                        'reactor'
+                        'resend_timer'
+                        'resend_interval'
+                        'setup_max_duration'
+                        'last_value'
+                        'setup_start_value'
+                        'RESEND_HOST_TIME'
+                        'shutdown_value'
+                        'get_name'
+                        'split'
+                        'register_mux_command'
+                        'cmd_SET_PIN'
+                        'cmd_SET_PIN_help'
+                        'load_object'
+                        'heaters'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'ppins'
+                        'cycle_time'
+                        'hardware_pwm'
+                        'static_value'
+                        'max_mcu_duration'
+                        'pin_name'
+                        'gcode'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'pins'
+                        'pwm'
+                        False
+                        'pin'
+                        'cycle_time'
+                        0.1
+                        0
+                        (
+                            'above'
+                            'maxval'
+                        )
+                        'hardware_pwm'
+                        'scale'
+                        1
+                        (
+                            'above'
+                        )
+                        'digital_out'
+                        'static_value'
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        True
+                        'maximum_mcu_duration'
+                        0.5
+                        'value'
+                        'shutdown_value'
+                        1
+                        'gcode'
+                        'SET_PIN'
+                        'PIN'
+                        (
+                            'desc'
+                        )
+                        'heaters'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: config
+                        6       LOAD_FAST                       1: config
+                        8       LOAD_METHOD                     1: get_printer
+                        10      CALL_METHOD                     0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: printer
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: printer
+                        20      LOAD_METHOD                     3: lookup_object
+                        22      LOAD_CONST                      1: 'pins'
+                        24      CALL_METHOD                     1
+                        26      STORE_FAST                      2: ppins
+                        28      LOAD_FAST                       1: config
+                        30      LOAD_METHOD                     4: getboolean
+                        32      LOAD_CONST                      2: 'pwm'
+                        34      LOAD_CONST                      3: False
+                        36      CALL_METHOD                     2
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      5: is_pwm
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       5: is_pwm
+                        46      POP_JUMP_IF_FALSE               144
+                        48      LOAD_FAST                       2: ppins
+                        50      LOAD_METHOD                     6: setup_pin
+                        52      LOAD_CONST                      2: 'pwm'
+                        54      LOAD_FAST                       1: config
+                        56      LOAD_METHOD                     7: get
+                        58      LOAD_CONST                      4: 'pin'
+                        60      CALL_METHOD                     1
+                        62      CALL_METHOD                     2
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      8: mcu_pin
+                        68      LOAD_FAST                       1: config
+                        70      LOAD_ATTR                       9: getfloat
+                        72      LOAD_CONST                      5: 'cycle_time'
+                        74      LOAD_CONST                      6: 0.1
+                        76      LOAD_CONST                      7: 0
+                        78      LOAD_GLOBAL                     10: MAX_SCHEDULE_TIME
+                        80      LOAD_CONST                      8: ('above', 'maxval')
+                        82      CALL_FUNCTION_KW                4
+                        84      STORE_FAST                      3: cycle_time
+                        86      LOAD_FAST                       1: config
+                        88      LOAD_METHOD                     4: getboolean
+                        90      LOAD_CONST                      9: 'hardware_pwm'
+                        92      LOAD_CONST                      3: False
+                        94      CALL_METHOD                     2
+                        96      STORE_FAST                      4: hardware_pwm
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       8: mcu_pin
+                        102     LOAD_METHOD                     11: setup_cycle_time
+                        104     LOAD_FAST                       3: cycle_time
+                        106     LOAD_FAST                       4: hardware_pwm
+                        108     CALL_METHOD                     2
+                        110     POP_TOP                         
+                        112     LOAD_FAST                       1: config
+                        114     LOAD_ATTR                       9: getfloat
+                        116     LOAD_CONST                      10: 'scale'
+                        118     LOAD_CONST                      11: 1
+                        120     LOAD_CONST                      7: 0
+                        122     LOAD_CONST                      12: ('above',)
+                        124     CALL_FUNCTION_KW                3
+                        126     LOAD_FAST                       0: self
+                        128     STORE_ATTR                      12: scale
+                        130     LOAD_FAST                       3: cycle_time
+                        132     DUP_TOP                         
+                        134     LOAD_FAST                       0: self
+                        136     STORE_ATTR                      13: last_cycle_time
+                        138     LOAD_FAST                       0: self
+                        140     STORE_ATTR                      14: default_cycle_time
+                        142     JUMP_FORWARD                    38 (to 182)
+                        144     LOAD_FAST                       2: ppins
+                        146     LOAD_METHOD                     6: setup_pin
+                        148     LOAD_CONST                      13: 'digital_out'
+                        150     LOAD_FAST                       1: config
+                        152     LOAD_METHOD                     7: get
+                        154     LOAD_CONST                      4: 'pin'
+                        156     CALL_METHOD                     1
+                        158     CALL_METHOD                     2
+                        160     LOAD_FAST                       0: self
+                        162     STORE_ATTR                      8: mcu_pin
+                        164     LOAD_CONST                      11: 1
+                        166     LOAD_FAST                       0: self
+                        168     STORE_ATTR                      12: scale
+                        170     LOAD_CONST                      7: 0
+                        172     DUP_TOP                         
+                        174     LOAD_FAST                       0: self
+                        176     STORE_ATTR                      13: last_cycle_time
+                        178     LOAD_FAST                       0: self
+                        180     STORE_ATTR                      14: default_cycle_time
+                        182     LOAD_CONST                      7: 0
+                        184     LOAD_FAST                       0: self
+                        186     STORE_ATTR                      15: last_print_time
+                        188     LOAD_FAST                       1: config
+                        190     LOAD_ATTR                       9: getfloat
+                        192     LOAD_CONST                      14: 'static_value'
+                        194     LOAD_CONST                      0: None
+                        196     LOAD_CONST                      7: 0
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       12: scale
+                        202     LOAD_CONST                      15: ('minval', 'maxval')
+                        204     CALL_FUNCTION_KW                4
+                        206     STORE_FAST                      5: static_value
+                        208     LOAD_FAST                       0: self
+                        210     LOAD_ATTR                       2: printer
+                        212     LOAD_METHOD                     16: get_reactor
+                        214     CALL_METHOD                     0
+                        216     LOAD_FAST                       0: self
+                        218     STORE_ATTR                      17: reactor
+                        220     LOAD_CONST                      0: None
+                        222     LOAD_FAST                       0: self
+                        224     STORE_ATTR                      18: resend_timer
+                        226     LOAD_CONST                      7: 0
+                        228     LOAD_FAST                       0: self
+                        230     STORE_ATTR                      19: resend_interval
+                        232     LOAD_FAST                       5: static_value
+                        234     LOAD_CONST                      0: None
+                        236     IS_OP                           1 (is not)
+                        238     POP_JUMP_IF_FALSE               288
+                        242     LOAD_FAST                       0: self
+                        244     LOAD_ATTR                       8: mcu_pin
+                        246     LOAD_METHOD                     20: setup_max_duration
+                        248     LOAD_CONST                      7: 0
+                        250     CALL_METHOD                     1
+                        252     POP_TOP                         
+                        254     LOAD_FAST                       5: static_value
+                        256     LOAD_FAST                       0: self
+                        258     LOAD_ATTR                       12: scale
+                        260     BINARY_TRUE_DIVIDE              
+                        262     LOAD_FAST                       0: self
+                        264     STORE_ATTR                      21: last_value
+                        266     LOAD_FAST                       0: self
+                        268     LOAD_ATTR                       8: mcu_pin
+                        270     LOAD_METHOD                     22: setup_start_value
+                        272     LOAD_FAST                       0: self
+                        274     LOAD_ATTR                       21: last_value
+                        276     LOAD_FAST                       0: self
+                        278     LOAD_ATTR                       21: last_value
+                        280     LOAD_CONST                      16: True
+                        282     CALL_METHOD                     3
+                        284     POP_TOP                         
+                        286     JUMP_FORWARD                    188 (to 476)
+                        288     LOAD_FAST                       1: config
+                        290     LOAD_ATTR                       9: getfloat
+                        292     LOAD_CONST                      17: 'maximum_mcu_duration'
+                        294     LOAD_CONST                      7: 0
+                        296     LOAD_CONST                      18: 0.5
+                        298     LOAD_GLOBAL                     10: MAX_SCHEDULE_TIME
+                        300     LOAD_CONST                      15: ('minval', 'maxval')
+                        302     CALL_FUNCTION_KW                4
+                        304     STORE_FAST                      6: max_mcu_duration
+                        306     LOAD_FAST                       0: self
+                        308     LOAD_ATTR                       8: mcu_pin
+                        310     LOAD_METHOD                     20: setup_max_duration
+                        312     LOAD_FAST                       6: max_mcu_duration
+                        314     CALL_METHOD                     1
+                        316     POP_TOP                         
+                        318     LOAD_FAST                       6: max_mcu_duration
+                        320     POP_JUMP_IF_FALSE               334
+                        324     LOAD_FAST                       6: max_mcu_duration
+                        326     LOAD_GLOBAL                     23: RESEND_HOST_TIME
+                        328     BINARY_SUBTRACT                 
+                        330     LOAD_FAST                       0: self
+                        332     STORE_ATTR                      19: resend_interval
+                        334     LOAD_FAST                       1: config
+                        336     LOAD_ATTR                       9: getfloat
+                        338     LOAD_CONST                      19: 'value'
+                        340     LOAD_CONST                      7: 0
+                        342     LOAD_CONST                      7: 0
+                        344     LOAD_FAST                       0: self
+                        346     LOAD_ATTR                       12: scale
+                        348     LOAD_CONST                      15: ('minval', 'maxval')
+                        350     CALL_FUNCTION_KW                4
+                        352     LOAD_FAST                       0: self
+                        354     LOAD_ATTR                       12: scale
+                        356     BINARY_TRUE_DIVIDE              
+                        358     LOAD_FAST                       0: self
+                        360     STORE_ATTR                      21: last_value
+                        362     LOAD_FAST                       1: config
+                        364     LOAD_ATTR                       9: getfloat
+                        366     LOAD_CONST                      20: 'shutdown_value'
+                        368     LOAD_CONST                      7: 0
+                        370     LOAD_CONST                      7: 0
+                        372     LOAD_FAST                       0: self
+                        374     LOAD_ATTR                       12: scale
+                        376     LOAD_CONST                      15: ('minval', 'maxval')
+                        378     CALL_FUNCTION_KW                4
+                        380     LOAD_FAST                       0: self
+                        382     LOAD_ATTR                       12: scale
+                        384     BINARY_TRUE_DIVIDE              
+                        386     LOAD_FAST                       0: self
+                        388     STORE_ATTR                      24: shutdown_value
+                        390     LOAD_FAST                       0: self
+                        392     LOAD_ATTR                       8: mcu_pin
+                        394     LOAD_METHOD                     22: setup_start_value
+                        396     LOAD_FAST                       0: self
+                        398     LOAD_ATTR                       21: last_value
+                        400     LOAD_FAST                       0: self
+                        402     LOAD_ATTR                       24: shutdown_value
+                        404     CALL_METHOD                     2
+                        406     POP_TOP                         
+                        408     LOAD_FAST                       1: config
+                        410     LOAD_METHOD                     25: get_name
+                        412     CALL_METHOD                     0
+                        414     LOAD_METHOD                     26: split
+                        416     CALL_METHOD                     0
+                        418     LOAD_CONST                      21: 1
+                        420     BINARY_SUBSCR                   
+                        422     STORE_FAST                      7: pin_name
+                        424     LOAD_FAST                       0: self
+                        426     LOAD_ATTR                       2: printer
+                        428     LOAD_METHOD                     3: lookup_object
+                        430     LOAD_CONST                      22: 'gcode'
+                        432     CALL_METHOD                     1
+                        434     STORE_FAST                      8: gcode
+                        436     LOAD_FAST                       8: gcode
+                        438     LOAD_ATTR                       27: register_mux_command
+                        440     LOAD_CONST                      23: 'SET_PIN'
+                        442     LOAD_CONST                      24: 'PIN'
+                        444     LOAD_FAST                       7: pin_name
+                        446     LOAD_FAST                       0: self
+                        448     LOAD_ATTR                       28: cmd_SET_PIN
+                        450     LOAD_FAST                       0: self
+                        452     LOAD_ATTR                       29: cmd_SET_PIN_help
+                        454     LOAD_CONST                      25: ('desc',)
+                        456     CALL_FUNCTION_KW                5
+                        458     POP_TOP                         
+                        460     LOAD_FAST                       0: self
+                        462     LOAD_ATTR                       2: printer
+                        464     LOAD_METHOD                     30: load_object
+                        466     LOAD_FAST                       1: config
+                        468     LOAD_CONST                      26: 'heaters'
+                        470     CALL_METHOD                     2
+                        472     LOAD_FAST                       0: self
+                        474     STORE_ATTR                      31: heaters
+                        476     LOAD_CONST                      0: None
+                        478     RETURN_VALUE                    
+                'PrinterOutputPin.__init__'
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: set_poewon
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'scale'
+                        'default_cycle_time'
+                        'printer'
+                        'lookup_object'
+                        'register_lookahead_callback'
+                    [Var Names]
+                        'self'
+                        'value'
+                        'toolhead'
+                    [Free Vars]
+                    [Cell Vars]
+                        'cycle_time'
+                        'self'
+                        'value'
+                    [Constants]
+                        None
+                        'toolhead'
+                        [Code]
+                            File Name: /extras/output_pin.py
+                            Object Name: <lambda>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 1
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                '_set_pin'
+                            [Var Names]
+                                'print_time'
+                            [Free Vars]
+                                'cycle_time'
+                                'self'
+                                'value'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_DEREF                      1: self
+                                2       LOAD_METHOD                     0: _set_pin
+                                4       LOAD_FAST                       0: print_time
+                                6       LOAD_DEREF                      2: value
+                                8       LOAD_DEREF                      0: cycle_time
+                                10      CALL_METHOD                     3
+                                12      RETURN_VALUE                    
+                        'PrinterOutputPin.set_poewon.<locals>.<lambda>'
+                    [Disassembly]
+                        0       LOAD_DEREF                      2: value
+                        2       LOAD_DEREF                      1: self
+                        4       LOAD_ATTR                       0: scale
+                        6       INPLACE_TRUE_DIVIDE             
+                        8       STORE_DEREF                     2: value
+                        10      LOAD_DEREF                      1: self
+                        12      LOAD_ATTR                       1: default_cycle_time
+                        14      STORE_DEREF                     0: cycle_time
+                        16      LOAD_DEREF                      1: self
+                        18      LOAD_ATTR                       2: printer
+                        20      LOAD_METHOD                     3: lookup_object
+                        22      LOAD_CONST                      1: 'toolhead'
+                        24      CALL_METHOD                     1
+                        26      STORE_FAST                      2: toolhead
+                        28      LOAD_FAST                       2: toolhead
+                        30      LOAD_METHOD                     4: register_lookahead_callback
+                        32      LOAD_CLOSURE                    0: cycle_time
+                        34      LOAD_CLOSURE                    1: self
+                        36      LOAD_CLOSURE                    2: value
+                        38      BUILD_TUPLE                     3
+                        40      LOAD_CONST                      2: <CODE> <lambda>
+                        42      LOAD_CONST                      3: 'PrinterOutputPin.set_poewon.<locals>.<lambda>'
+                        44      MAKE_FUNCTION                   8
+                        46      CALL_METHOD                     1
+                        48      POP_TOP                         
+                        50      LOAD_CONST                      0: None
+                        52      RETURN_VALUE                    
+                'PrinterOutputPin.set_poewon'
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: checkpwm
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'reactor'
+                        'monotonic'
+                        'heaters'
+                        'values'
+                        'name'
+                        'check_busy'
+                        'ispweron'
+                        'target_temp'
+                        'set_poewon'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'systime'
+                        'heater'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'heater_bed'
+                        False
+                        0
+                        True
+                        1
+                        10
+                        3
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: reactor
+                        4       LOAD_METHOD                     1: monotonic
+                        6       CALL_METHOD                     0
+                        8       STORE_FAST                      2: systime
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       2: heaters
+                        14      LOAD_ATTR                       2: heaters
+                        16      LOAD_METHOD                     3: values
+                        18      CALL_METHOD                     0
+                        20      GET_ITER                        
+                        22      FOR_ITER                        110 (to 134)
+                        24      STORE_FAST                      3: heater
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       0: reactor
+                        30      LOAD_METHOD                     1: monotonic
+                        32      CALL_METHOD                     0
+                        34      STORE_FAST                      1: eventtime
+                        36      LOAD_FAST                       3: heater
+                        38      LOAD_ATTR                       4: name
+                        40      LOAD_CONST                      1: 'heater_bed'
+                        42      COMPARE_OP                      2 (==)
+                        44      POP_JUMP_IF_FALSE               22
+                        46      LOAD_FAST                       3: heater
+                        48      LOAD_METHOD                     5: check_busy
+                        50      LOAD_FAST                       1: eventtime
+                        52      CALL_METHOD                     1
+                        54      POP_JUMP_IF_FALSE               94
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       6: ispweron
+                        60      LOAD_CONST                      2: False
+                        62      COMPARE_OP                      2 (==)
+                        64      POP_JUMP_IF_FALSE               132
+                        66      LOAD_FAST                       3: heater
+                        68      LOAD_ATTR                       7: target_temp
+                        70      LOAD_CONST                      3: 0
+                        72      COMPARE_OP                      3 (!=)
+                        74      POP_JUMP_IF_FALSE               132
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_METHOD                     8: set_poewon
+                        80      LOAD_CONST                      3: 0
+                        82      CALL_METHOD                     1
+                        84      POP_TOP                         
+                        86      LOAD_CONST                      4: True
+                        88      LOAD_FAST                       0: self
+                        90      STORE_ATTR                      6: ispweron
+                        92      JUMP_ABSOLUTE                   22
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       6: ispweron
+                        98      LOAD_CONST                      4: True
+                        100     COMPARE_OP                      2 (==)
+                        102     POP_JUMP_IF_FALSE               22
+                        104     LOAD_CONST                      2: False
+                        106     LOAD_FAST                       0: self
+                        108     STORE_ATTR                      6: ispweron
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_METHOD                     8: set_poewon
+                        114     LOAD_CONST                      5: 1
+                        116     CALL_METHOD                     1
+                        118     POP_TOP                         
+                        120     LOAD_FAST                       2: systime
+                        122     LOAD_CONST                      6: 10
+                        124     BINARY_ADD                      
+                        126     ROT_TWO                         
+                        128     POP_TOP                         
+                        130     RETURN_VALUE                    
+                        132     JUMP_ABSOLUTE                   22
+                        134     LOAD_FAST                       2: systime
+                        136     LOAD_CONST                      7: 3
+                        138     BINARY_ADD                      
+                        140     RETURN_VALUE                    
+                'PrinterOutputPin.checkpwm'
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'last_value'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'value'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 'value'
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: last_value
+                        6       BUILD_MAP                       1
+                        8       RETURN_VALUE                    
+                'PrinterOutputPin.get_status'
+                False
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: _set_pin
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'last_value'
+                        'last_cycle_time'
+                        'max'
+                        'last_print_time'
+                        'PIN_MIN_TIME'
+                        'is_pwm'
+                        'mcu_pin'
+                        'set_pwm'
+                        'set_digital'
+                        'config'
+                        'get_name'
+                        'split'
+                        'startswith'
+                        'logging'
+                        'info'
+                        'resend_interval'
+                        'resend_timer'
+                        'reactor'
+                        'register_timer'
+                        '_resend_current_val'
+                        'NOW'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'value'
+                        'cycle_time'
+                        'is_resend'
+                        'pin_name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1
+                        'motor_'
+                        '_set_pin pin_name=%s value=%s'
+                    [Disassembly]
+                        0       LOAD_FAST                       2: value
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: last_value
+                        6       COMPARE_OP                      2 (==)
+                        8       POP_JUMP_IF_FALSE               28
+                        10      LOAD_FAST                       3: cycle_time
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: last_cycle_time
+                        16      COMPARE_OP                      2 (==)
+                        18      POP_JUMP_IF_FALSE               28
+                        20      LOAD_FAST                       4: is_resend
+                        22      POP_JUMP_IF_TRUE                28
+                        24      LOAD_CONST                      0: None
+                        26      RETURN_VALUE                    
+                        28      LOAD_GLOBAL                     2: max
+                        30      LOAD_FAST                       1: print_time
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       3: last_print_time
+                        36      LOAD_GLOBAL                     4: PIN_MIN_TIME
+                        38      BINARY_ADD                      
+                        40      CALL_FUNCTION                   2
+                        42      STORE_FAST                      1: print_time
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       5: is_pwm
+                        48      POP_JUMP_IF_FALSE               68
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       6: mcu_pin
+                        54      LOAD_METHOD                     7: set_pwm
+                        56      LOAD_FAST                       1: print_time
+                        58      LOAD_FAST                       2: value
+                        60      LOAD_FAST                       3: cycle_time
+                        62      CALL_METHOD                     3
+                        64      POP_TOP                         
+                        66      JUMP_FORWARD                    60 (to 128)
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       6: mcu_pin
+                        72      LOAD_METHOD                     8: set_digital
+                        74      LOAD_FAST                       1: print_time
+                        76      LOAD_FAST                       2: value
+                        78      CALL_METHOD                     2
+                        80      POP_TOP                         
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       9: config
+                        86      LOAD_METHOD                     10: get_name
+                        88      CALL_METHOD                     0
+                        90      LOAD_METHOD                     11: split
+                        92      CALL_METHOD                     0
+                        94      LOAD_CONST                      1: 1
+                        96      BINARY_SUBSCR                   
+                        98      STORE_FAST                      5: pin_name
+                        100     LOAD_FAST                       5: pin_name
+                        102     LOAD_METHOD                     12: startswith
+                        104     LOAD_CONST                      2: 'motor_'
+                        106     CALL_METHOD                     1
+                        108     POP_JUMP_IF_FALSE               128
+                        110     LOAD_GLOBAL                     13: logging
+                        112     LOAD_METHOD                     14: info
+                        114     LOAD_CONST                      3: '_set_pin pin_name=%s value=%s'
+                        116     LOAD_FAST                       5: pin_name
+                        118     LOAD_FAST                       2: value
+                        120     BUILD_TUPLE                     2
+                        122     BINARY_MODULO                   
+                        124     CALL_METHOD                     1
+                        126     POP_TOP                         
+                        128     LOAD_FAST                       2: value
+                        130     LOAD_FAST                       0: self
+                        132     STORE_ATTR                      0: last_value
+                        134     LOAD_FAST                       3: cycle_time
+                        136     LOAD_FAST                       0: self
+                        138     STORE_ATTR                      1: last_cycle_time
+                        140     LOAD_FAST                       1: print_time
+                        142     LOAD_FAST                       0: self
+                        144     STORE_ATTR                      3: last_print_time
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       15: resend_interval
+                        150     POP_JUMP_IF_FALSE               184
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       16: resend_timer
+                        156     LOAD_CONST                      0: None
+                        158     IS_OP                           0 (is)
+                        160     POP_JUMP_IF_FALSE               184
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       17: reactor
+                        166     LOAD_METHOD                     18: register_timer
+                        168     LOAD_FAST                       0: self
+                        170     LOAD_ATTR                       19: _resend_current_val
+                        172     LOAD_FAST                       0: self
+                        174     LOAD_ATTR                       17: reactor
+                        176     LOAD_ATTR                       20: NOW
+                        178     CALL_METHOD                     2
+                        180     LOAD_FAST                       0: self
+                        182     STORE_ATTR                      16: resend_timer
+                        184     LOAD_CONST                      0: None
+                        186     RETURN_VALUE                    
+                'PrinterOutputPin._set_pin'
+                'Set the value of an output pin'
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: cmd_SET_PIN
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 6
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'get_int'
+                        'get_float'
+                        'scale'
+                        'default_cycle_time'
+                        'MAX_SCHEDULE_TIME'
+                        'is_pwm'
+                        'error'
+                        'printer'
+                        'lookup_object'
+                        'logging'
+                        'info'
+                        'reactor'
+                        'monotonic'
+                        'mcu_pin'
+                        'get_mcu'
+                        'estimated_print_time'
+                        '_set_pin'
+                        'register_lookahead_callback'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'sync'
+                        'toolhead'
+                        'systime'
+                        'print_time'
+                    [Free Vars]
+                    [Cell Vars]
+                        'cycle_time'
+                        'self'
+                        'value'
+                    [Constants]
+                        None
+                        'SYNC'
+                        1
+                        0
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'VALUE'
+                        0
+                        'CYCLE_TIME'
+                        (
+                            'above'
+                            'maxval'
+                        )
+                        (
+                            0
+                            1
+                        )
+                        'Invalid pin value'
+                        'toolhead'
+                        'SET_PIN sync=1'
+                        0.1
+                        'SET_PIN sync=0'
+                        [Code]
+                            File Name: /extras/output_pin.py
+                            Object Name: <lambda>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 1
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                '_set_pin'
+                            [Var Names]
+                                'print_time'
+                            [Free Vars]
+                                'cycle_time'
+                                'self'
+                                'value'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_DEREF                      1: self
+                                2       LOAD_METHOD                     0: _set_pin
+                                4       LOAD_FAST                       0: print_time
+                                6       LOAD_DEREF                      2: value
+                                8       LOAD_DEREF                      0: cycle_time
+                                10      CALL_METHOD                     3
+                                12      RETURN_VALUE                    
+                        'PrinterOutputPin.cmd_SET_PIN.<locals>.<lambda>'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_int
+                        4       LOAD_CONST                      1: 'SYNC'
+                        6       LOAD_CONST                      2: 1
+                        8       LOAD_CONST                      3: 0
+                        10      LOAD_CONST                      2: 1
+                        12      LOAD_CONST                      4: ('minval', 'maxval')
+                        14      CALL_FUNCTION_KW                4
+                        16      STORE_FAST                      2: sync
+                        18      LOAD_FAST                       1: gcmd
+                        20      LOAD_ATTR                       1: get_float
+                        22      LOAD_CONST                      5: 'VALUE'
+                        24      LOAD_CONST                      6: 0
+                        26      LOAD_DEREF                      1: self
+                        28      LOAD_ATTR                       2: scale
+                        30      LOAD_CONST                      4: ('minval', 'maxval')
+                        32      CALL_FUNCTION_KW                3
+                        34      STORE_DEREF                     2: value
+                        36      LOAD_DEREF                      2: value
+                        38      LOAD_DEREF                      1: self
+                        40      LOAD_ATTR                       2: scale
+                        42      INPLACE_TRUE_DIVIDE             
+                        44      STORE_DEREF                     2: value
+                        46      LOAD_FAST                       1: gcmd
+                        48      LOAD_ATTR                       1: get_float
+                        50      LOAD_CONST                      7: 'CYCLE_TIME'
+                        52      LOAD_DEREF                      1: self
+                        54      LOAD_ATTR                       3: default_cycle_time
+                        56      LOAD_CONST                      6: 0
+                        58      LOAD_GLOBAL                     4: MAX_SCHEDULE_TIME
+                        60      LOAD_CONST                      8: ('above', 'maxval')
+                        62      CALL_FUNCTION_KW                4
+                        64      STORE_DEREF                     0: cycle_time
+                        66      LOAD_DEREF                      1: self
+                        68      LOAD_ATTR                       5: is_pwm
+                        70      POP_JUMP_IF_TRUE                90
+                        72      LOAD_DEREF                      2: value
+                        74      LOAD_CONST                      9: (0, 1)
+                        76      CONTAINS_OP                     1 (not in)
+                        78      POP_JUMP_IF_FALSE               90
+                        80      LOAD_FAST                       1: gcmd
+                        82      LOAD_METHOD                     6: error
+                        84      LOAD_CONST                      10: 'Invalid pin value'
+                        86      CALL_METHOD                     1
+                        88      RAISE_VARARGS                   1
+                        90      LOAD_DEREF                      1: self
+                        92      LOAD_ATTR                       7: printer
+                        94      LOAD_METHOD                     8: lookup_object
+                        96      LOAD_CONST                      11: 'toolhead'
+                        98      CALL_METHOD                     1
+                        100     STORE_FAST                      3: toolhead
+                        102     LOAD_FAST                       2: sync
+                        104     POP_JUMP_IF_FALSE               162
+                        106     LOAD_GLOBAL                     9: logging
+                        108     LOAD_METHOD                     10: info
+                        110     LOAD_CONST                      12: 'SET_PIN sync=1'
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     LOAD_DEREF                      1: self
+                        118     LOAD_ATTR                       11: reactor
+                        120     LOAD_METHOD                     12: monotonic
+                        122     CALL_METHOD                     0
+                        124     STORE_FAST                      4: systime
+                        126     LOAD_DEREF                      1: self
+                        128     LOAD_ATTR                       13: mcu_pin
+                        130     LOAD_METHOD                     14: get_mcu
+                        132     CALL_METHOD                     0
+                        134     LOAD_METHOD                     15: estimated_print_time
+                        136     LOAD_FAST                       4: systime
+                        138     CALL_METHOD                     1
+                        140     STORE_FAST                      5: print_time
+                        142     LOAD_DEREF                      1: self
+                        144     LOAD_METHOD                     16: _set_pin
+                        146     LOAD_FAST                       5: print_time
+                        148     LOAD_CONST                      13: 0.1
+                        150     BINARY_ADD                      
+                        152     LOAD_DEREF                      2: value
+                        154     LOAD_DEREF                      0: cycle_time
+                        156     CALL_METHOD                     3
+                        158     POP_TOP                         
+                        160     JUMP_FORWARD                    32 (to 194)
+                        162     LOAD_GLOBAL                     9: logging
+                        164     LOAD_METHOD                     10: info
+                        166     LOAD_CONST                      14: 'SET_PIN sync=0'
+                        168     CALL_METHOD                     1
+                        170     POP_TOP                         
+                        172     LOAD_FAST                       3: toolhead
+                        174     LOAD_METHOD                     17: register_lookahead_callback
+                        176     LOAD_CLOSURE                    0: cycle_time
+                        178     LOAD_CLOSURE                    1: self
+                        180     LOAD_CLOSURE                    2: value
+                        182     BUILD_TUPLE                     3
+                        184     LOAD_CONST                      15: <CODE> <lambda>
+                        186     LOAD_CONST                      16: 'PrinterOutputPin.cmd_SET_PIN.<locals>.<lambda>'
+                        188     MAKE_FUNCTION                   8
+                        190     CALL_METHOD                     1
+                        192     POP_TOP                         
+                        194     LOAD_CONST                      0: None
+                        196     RETURN_VALUE                    
+                'PrinterOutputPin.cmd_SET_PIN'
+                [Code]
+                    File Name: /extras/output_pin.py
+                    Object Name: _resend_current_val
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'last_value'
+                        'shutdown_value'
+                        'reactor'
+                        'unregister_timer'
+                        'resend_timer'
+                        'NEVER'
+                        'monotonic'
+                        'mcu_pin'
+                        'get_mcu'
+                        'estimated_print_time'
+                        'last_print_time'
+                        'resend_interval'
+                        '_set_pin'
+                        'PIN_MIN_TIME'
+                        'last_cycle_time'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'systime'
+                        'print_time'
+                        'time_diff'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: last_value
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: shutdown_value
+                        8       COMPARE_OP                      2 (==)
+                        10      POP_JUMP_IF_FALSE               40
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: reactor
+                        16      LOAD_METHOD                     3: unregister_timer
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       4: resend_timer
+                        22      CALL_METHOD                     1
+                        24      POP_TOP                         
+                        26      LOAD_CONST                      0: None
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      4: resend_timer
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       2: reactor
+                        36      LOAD_ATTR                       5: NEVER
+                        38      RETURN_VALUE                    
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       2: reactor
+                        44      LOAD_METHOD                     6: monotonic
+                        46      CALL_METHOD                     0
+                        48      STORE_FAST                      2: systime
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       7: mcu_pin
+                        54      LOAD_METHOD                     8: get_mcu
+                        56      CALL_METHOD                     0
+                        58      LOAD_METHOD                     9: estimated_print_time
+                        60      LOAD_FAST                       2: systime
+                        62      CALL_METHOD                     1
+                        64      STORE_FAST                      3: print_time
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       10: last_print_time
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       11: resend_interval
+                        74      BINARY_ADD                      
+                        76      LOAD_FAST                       3: print_time
+                        78      BINARY_SUBTRACT                 
+                        80      STORE_FAST                      4: time_diff
+                        82      LOAD_FAST                       4: time_diff
+                        84      LOAD_CONST                      1: 0
+                        86      COMPARE_OP                      4 (>)
+                        88      POP_JUMP_IF_FALSE               98
+                        90      LOAD_FAST                       2: systime
+                        92      LOAD_FAST                       4: time_diff
+                        94      BINARY_ADD                      
+                        96      RETURN_VALUE                    
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_METHOD                     12: _set_pin
+                        102     LOAD_FAST                       3: print_time
+                        104     LOAD_GLOBAL                     13: PIN_MIN_TIME
+                        106     BINARY_ADD                      
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       0: last_value
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       14: last_cycle_time
+                        116     LOAD_CONST                      2: True
+                        118     CALL_METHOD                     4
+                        120     POP_TOP                         
+                        122     LOAD_FAST                       2: systime
+                        124     LOAD_FAST                       0: self
+                        126     LOAD_ATTR                       11: resend_interval
+                        128     BINARY_ADD                      
+                        130     RETURN_VALUE                    
+                'PrinterOutputPin._resend_current_val'
+                None
+                (
+                    False
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterOutputPin'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterOutputPin.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> set_poewon
+                18      LOAD_CONST                      4: 'PrinterOutputPin.set_poewon'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: set_poewon
+                24      LOAD_CONST                      5: <CODE> checkpwm
+                26      LOAD_CONST                      6: 'PrinterOutputPin.checkpwm'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: checkpwm
+                32      LOAD_CONST                      7: <CODE> get_status
+                34      LOAD_CONST                      8: 'PrinterOutputPin.get_status'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: get_status
+                40      LOAD_CONST                      18: (False,)
+                42      LOAD_CONST                      10: <CODE> _set_pin
+                44      LOAD_CONST                      11: 'PrinterOutputPin._set_pin'
+                46      MAKE_FUNCTION                   1
+                48      STORE_NAME                      7: _set_pin
+                50      LOAD_CONST                      12: 'Set the value of an output pin'
+                52      STORE_NAME                      8: cmd_SET_PIN_help
+                54      LOAD_CONST                      13: <CODE> cmd_SET_PIN
+                56      LOAD_CONST                      14: 'PrinterOutputPin.cmd_SET_PIN'
+                58      MAKE_FUNCTION                   0
+                60      STORE_NAME                      9: cmd_SET_PIN
+                62      LOAD_CONST                      15: <CODE> _resend_current_val
+                64      LOAD_CONST                      16: 'PrinterOutputPin._resend_current_val'
+                66      MAKE_FUNCTION                   0
+                68      STORE_NAME                      10: _resend_current_val
+                70      LOAD_CONST                      17: None
+                72      RETURN_VALUE                    
+        'PrinterOutputPin'
+        [Code]
+            File Name: /extras/output_pin.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterOutputPin'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterOutputPin
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0.1
+        2       STORE_NAME                      0: PIN_MIN_TIME
+        4       LOAD_CONST                      1: 0.3
+        6       LOAD_NAME                       0: PIN_MIN_TIME
+        8       BINARY_ADD                      
+        10      STORE_NAME                      1: RESEND_HOST_TIME
+        12      LOAD_CONST                      2: 5
+        14      STORE_NAME                      2: MAX_SCHEDULE_TIME
+        16      LOAD_CONST                      3: 0
+        18      LOAD_CONST                      4: None
+        20      IMPORT_NAME                     3: logging
+        22      STORE_NAME                      3: logging
+        24      LOAD_BUILD_CLASS                
+        26      LOAD_CONST                      5: <CODE> PrinterOutputPin
+        28      LOAD_CONST                      6: 'PrinterOutputPin'
+        30      MAKE_FUNCTION                   0
+        32      LOAD_CONST                      6: 'PrinterOutputPin'
+        34      CALL_FUNCTION                   2
+        36      STORE_NAME                      4: PrinterOutputPin
+        38      LOAD_CONST                      7: <CODE> load_config_prefix
+        40      LOAD_CONST                      8: 'load_config_prefix'
+        42      MAKE_FUNCTION                   0
+        44      STORE_NAME                      5: load_config_prefix
+        46      LOAD_CONST                      4: None
+        48      RETURN_VALUE                    

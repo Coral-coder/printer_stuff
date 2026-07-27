@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/auto_addr_wrapper.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: auto_addr_wrapper.pyc (Python 3.9)
 
@@ -111,8 +120,25 @@ class AutoAddrWrapper:
         if self.config.get(name, None) is not None:
             
             def custom_int_parser(value):
-                pass
-            # WARNING: Decompyle incomplete
+                
+                try:
+                    if value.startswith('0x') or value.startswith('0X'):
+                        pass
+                return None
+                return int(value)
+                except ValueError:
+                    e = None
+                    
+                    try:
+                        raise ValueError(f'''Invalid literal for int with base 10 or 16: \'{value}\''''), e
+                    finally:
+                        e = None
+                        del e
+                    e = None
+                    del e
+                    return None
+
+
 
             uniids = self.config.getlists(name, seps=(',', '\n'), parser=custom_int_parser)
             if len(uniids) != dev_table_map.size:

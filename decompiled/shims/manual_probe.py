@@ -93,7 +93,22 @@ class ManualProbe:
 
 def verify_no_manual_probe(printer):
     gcode = printer.lookup_object('gcode')
-# WARNING: Decompyle incomplete
+    
+    try:
+        gcode.register_command('ACCEPT', 'dummy')
+    except printer.config_error:
+        e = None
+        
+        try:
+            raise gcode.error('Already in a manual Z probe. Use ABORT to abort it.')
+        finally:
+            e = None
+            del e
+        e = None
+        del e
+        return None
+
+
 
 Z_BOB_MINIMUM = 0.5
 BISECT_MAX = 0.2
@@ -135,7 +150,32 @@ class ManualProbeHelper:
     
     def move_z(self, z_pos):
         curpos = self.toolhead.get_position()
-    # WARNING: Decompyle incomplete
+        
+        try:
+            z_bob_pos = z_pos + Z_BOB_MINIMUM
+            if curpos[2] < z_bob_pos:
+                self.toolhead.manual_move([
+                    None,
+                    None,
+                    z_bob_pos], self.speed)
+            self.toolhead.manual_move([
+                None,
+                None,
+                z_pos], self.speed)
+        except self.printer.command_error:
+            e = None
+            
+            try:
+                self.finalize(False)
+                raise 
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
 
     
     def report_z_status(self, warn_no_change, prev_pos = (False, None)):

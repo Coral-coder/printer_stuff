@@ -1,0 +1,1058 @@
+fan.pyc (Python 3.9)
+[Code]
+    File Name: /extras/fan.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        ''
+        'pulse_counter'
+        'FAN_MIN_TIME'
+        'Fan'
+        'FanTachometer'
+        'PrinterFan'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        1
+        (
+            'pulse_counter'
+        )
+        0.1
+        [Code]
+            File Name: /extras/fan.py
+            Object Name: Fan
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_mcu'
+                'set_speed'
+                'set_speed_from_command'
+                '_handle_request_restart'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'Fan'
+                0
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'last_fan_value'
+                        'last_fan_time'
+                        'getfloat'
+                        'max_power'
+                        'kick_start_time'
+                        'off_below'
+                        'getboolean'
+                        'lookup_object'
+                        'setup_pin'
+                        'get'
+                        'mcu_fan'
+                        'setup_max_duration'
+                        'setup_cycle_time'
+                        'max'
+                        'min'
+                        'setup_start_value'
+                        'enable_pin'
+                        'FanTachometer'
+                        'tachometer'
+                        'register_event_handler'
+                        '_handle_request_restart'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'default_shutdown_speed'
+                        'cycle_time'
+                        'hardware_pwm'
+                        'shutdown_speed'
+                        'ppins'
+                        'shutdown_power'
+                        'enable_pin'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'max_power'
+                        1
+                        (
+                            'above'
+                            'maxval'
+                        )
+                        'kick_start_time'
+                        0.1
+                        (
+                            'minval'
+                        )
+                        'off_below'
+                        (
+                            'default'
+                            'minval'
+                            'maxval'
+                        )
+                        'cycle_time'
+                        0.01
+                        (
+                            'above'
+                        )
+                        'hardware_pwm'
+                        False
+                        'shutdown_speed'
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'pins'
+                        'pwm'
+                        'pin'
+                        'enable_pin'
+                        'digital_out'
+                        'gcode:request_restart'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_CONST                      1: 0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: last_fan_value
+                        16      LOAD_CONST                      1: 0
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      3: last_fan_time
+                        22      LOAD_FAST                       1: config
+                        24      LOAD_ATTR                       4: getfloat
+                        26      LOAD_CONST                      2: 'max_power'
+                        28      LOAD_CONST                      3: 1
+                        30      LOAD_CONST                      1: 0
+                        32      LOAD_CONST                      3: 1
+                        34      LOAD_CONST                      4: ('above', 'maxval')
+                        36      CALL_FUNCTION_KW                4
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      5: max_power
+                        42      LOAD_FAST                       1: config
+                        44      LOAD_ATTR                       4: getfloat
+                        46      LOAD_CONST                      5: 'kick_start_time'
+                        48      LOAD_CONST                      6: 0.1
+                        50      LOAD_CONST                      1: 0
+                        52      LOAD_CONST                      7: ('minval',)
+                        54      CALL_FUNCTION_KW                3
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      6: kick_start_time
+                        60      LOAD_FAST                       1: config
+                        62      LOAD_ATTR                       4: getfloat
+                        64      LOAD_CONST                      8: 'off_below'
+                        66      LOAD_CONST                      1: 0
+                        68      LOAD_CONST                      1: 0
+                        70      LOAD_CONST                      3: 1
+                        72      LOAD_CONST                      9: ('default', 'minval', 'maxval')
+                        74      CALL_FUNCTION_KW                4
+                        76      LOAD_FAST                       0: self
+                        78      STORE_ATTR                      7: off_below
+                        80      LOAD_FAST                       1: config
+                        82      LOAD_ATTR                       4: getfloat
+                        84      LOAD_CONST                      10: 'cycle_time'
+                        86      LOAD_CONST                      11: 0.01
+                        88      LOAD_CONST                      1: 0
+                        90      LOAD_CONST                      12: ('above',)
+                        92      CALL_FUNCTION_KW                3
+                        94      STORE_FAST                      3: cycle_time
+                        96      LOAD_FAST                       1: config
+                        98      LOAD_METHOD                     8: getboolean
+                        100     LOAD_CONST                      13: 'hardware_pwm'
+                        102     LOAD_CONST                      14: False
+                        104     CALL_METHOD                     2
+                        106     STORE_FAST                      4: hardware_pwm
+                        108     LOAD_FAST                       1: config
+                        110     LOAD_ATTR                       4: getfloat
+                        112     LOAD_CONST                      15: 'shutdown_speed'
+                        114     LOAD_FAST                       2: default_shutdown_speed
+                        116     LOAD_CONST                      1: 0
+                        118     LOAD_CONST                      3: 1
+                        120     LOAD_CONST                      16: ('minval', 'maxval')
+                        122     CALL_FUNCTION_KW                4
+                        124     STORE_FAST                      5: shutdown_speed
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       1: printer
+                        130     LOAD_METHOD                     9: lookup_object
+                        132     LOAD_CONST                      17: 'pins'
+                        134     CALL_METHOD                     1
+                        136     STORE_FAST                      6: ppins
+                        138     LOAD_FAST                       6: ppins
+                        140     LOAD_METHOD                     10: setup_pin
+                        142     LOAD_CONST                      18: 'pwm'
+                        144     LOAD_FAST                       1: config
+                        146     LOAD_METHOD                     11: get
+                        148     LOAD_CONST                      19: 'pin'
+                        150     CALL_METHOD                     1
+                        152     CALL_METHOD                     2
+                        154     LOAD_FAST                       0: self
+                        156     STORE_ATTR                      12: mcu_fan
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       12: mcu_fan
+                        162     LOAD_METHOD                     13: setup_max_duration
+                        164     LOAD_CONST                      1: 0
+                        166     CALL_METHOD                     1
+                        168     POP_TOP                         
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       12: mcu_fan
+                        174     LOAD_METHOD                     14: setup_cycle_time
+                        176     LOAD_FAST                       3: cycle_time
+                        178     LOAD_FAST                       4: hardware_pwm
+                        180     CALL_METHOD                     2
+                        182     POP_TOP                         
+                        184     LOAD_GLOBAL                     15: max
+                        186     LOAD_CONST                      1: 0
+                        188     LOAD_GLOBAL                     16: min
+                        190     LOAD_FAST                       0: self
+                        192     LOAD_ATTR                       5: max_power
+                        194     LOAD_FAST                       5: shutdown_speed
+                        196     CALL_FUNCTION                   2
+                        198     CALL_FUNCTION                   2
+                        200     STORE_FAST                      7: shutdown_power
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       12: mcu_fan
+                        206     LOAD_METHOD                     17: setup_start_value
+                        208     LOAD_CONST                      1: 0
+                        210     LOAD_FAST                       7: shutdown_power
+                        212     CALL_METHOD                     2
+                        214     POP_TOP                         
+                        216     LOAD_CONST                      0: None
+                        218     LOAD_FAST                       0: self
+                        220     STORE_ATTR                      18: enable_pin
+                        222     LOAD_FAST                       1: config
+                        224     LOAD_METHOD                     11: get
+                        226     LOAD_CONST                      20: 'enable_pin'
+                        228     LOAD_CONST                      0: None
+                        230     CALL_METHOD                     2
+                        232     STORE_FAST                      8: enable_pin
+                        234     LOAD_FAST                       8: enable_pin
+                        236     LOAD_CONST                      0: None
+                        238     IS_OP                           1 (is not)
+                        240     POP_JUMP_IF_FALSE               270
+                        244     LOAD_FAST                       6: ppins
+                        246     LOAD_METHOD                     10: setup_pin
+                        248     LOAD_CONST                      21: 'digital_out'
+                        250     LOAD_FAST                       8: enable_pin
+                        252     CALL_METHOD                     2
+                        254     LOAD_FAST                       0: self
+                        256     STORE_ATTR                      18: enable_pin
+                        258     LOAD_FAST                       0: self
+                        260     LOAD_ATTR                       18: enable_pin
+                        262     LOAD_METHOD                     13: setup_max_duration
+                        264     LOAD_CONST                      1: 0
+                        266     CALL_METHOD                     1
+                        268     POP_TOP                         
+                        270     LOAD_GLOBAL                     19: FanTachometer
+                        272     LOAD_FAST                       1: config
+                        274     CALL_FUNCTION                   1
+                        276     LOAD_FAST                       0: self
+                        278     STORE_ATTR                      20: tachometer
+                        280     LOAD_FAST                       0: self
+                        282     LOAD_ATTR                       1: printer
+                        284     LOAD_METHOD                     21: register_event_handler
+                        286     LOAD_CONST                      22: 'gcode:request_restart'
+                        288     LOAD_FAST                       0: self
+                        290     LOAD_ATTR                       22: _handle_request_restart
+                        292     CALL_METHOD                     2
+                        294     POP_TOP                         
+                        296     LOAD_CONST                      0: None
+                        298     RETURN_VALUE                    
+                'Fan.__init__'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: get_mcu
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu_fan'
+                        'get_mcu'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu_fan
+                        4       LOAD_METHOD                     1: get_mcu
+                        6       CALL_METHOD                     0
+                        8       RETURN_VALUE                    
+                'Fan.get_mcu'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: set_speed
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'off_below'
+                        'max'
+                        'min'
+                        'max_power'
+                        'last_fan_value'
+                        'last_fan_time'
+                        'FAN_MIN_TIME'
+                        'enable_pin'
+                        'set_digital'
+                        'kick_start_time'
+                        'mcu_fan'
+                        'set_pwm'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'value'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        0
+                        1
+                        0.5
+                    [Disassembly]
+                        0       LOAD_FAST                       2: value
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: off_below
+                        6       COMPARE_OP                      0 (<)
+                        8       POP_JUMP_IF_FALSE               14
+                        10      LOAD_CONST                      1: 0
+                        12      STORE_FAST                      2: value
+                        14      LOAD_GLOBAL                     1: max
+                        16      LOAD_CONST                      1: 0
+                        18      LOAD_GLOBAL                     2: min
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: max_power
+                        24      LOAD_FAST                       2: value
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       3: max_power
+                        30      BINARY_MULTIPLY                 
+                        32      CALL_FUNCTION                   2
+                        34      CALL_FUNCTION                   2
+                        36      STORE_FAST                      2: value
+                        38      LOAD_FAST                       2: value
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       4: last_fan_value
+                        44      COMPARE_OP                      2 (==)
+                        46      POP_JUMP_IF_FALSE               52
+                        48      LOAD_CONST                      0: None
+                        50      RETURN_VALUE                    
+                        52      LOAD_GLOBAL                     1: max
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       5: last_fan_time
+                        58      LOAD_GLOBAL                     6: FAN_MIN_TIME
+                        60      BINARY_ADD                      
+                        62      LOAD_FAST                       1: print_time
+                        64      CALL_FUNCTION                   2
+                        66      STORE_FAST                      1: print_time
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       7: enable_pin
+                        72      POP_JUMP_IF_FALSE               140
+                        74      LOAD_FAST                       2: value
+                        76      LOAD_CONST                      2: 0
+                        78      COMPARE_OP                      4 (>)
+                        80      POP_JUMP_IF_FALSE               108
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       4: last_fan_value
+                        86      LOAD_CONST                      2: 0
+                        88      COMPARE_OP                      2 (==)
+                        90      POP_JUMP_IF_FALSE               108
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       7: enable_pin
+                        96      LOAD_METHOD                     8: set_digital
+                        98      LOAD_FAST                       1: print_time
+                        100     LOAD_CONST                      3: 1
+                        102     CALL_METHOD                     2
+                        104     POP_TOP                         
+                        106     JUMP_FORWARD                    32 (to 140)
+                        108     LOAD_FAST                       2: value
+                        110     LOAD_CONST                      2: 0
+                        112     COMPARE_OP                      2 (==)
+                        114     POP_JUMP_IF_FALSE               140
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       4: last_fan_value
+                        120     LOAD_CONST                      2: 0
+                        122     COMPARE_OP                      4 (>)
+                        124     POP_JUMP_IF_FALSE               140
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       7: enable_pin
+                        130     LOAD_METHOD                     8: set_digital
+                        132     LOAD_FAST                       1: print_time
+                        134     LOAD_CONST                      2: 0
+                        136     CALL_METHOD                     2
+                        138     POP_TOP                         
+                        140     LOAD_FAST                       2: value
+                        142     POP_JUMP_IF_FALSE               206
+                        144     LOAD_FAST                       2: value
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       3: max_power
+                        150     COMPARE_OP                      0 (<)
+                        152     POP_JUMP_IF_FALSE               206
+                        154     LOAD_FAST                       0: self
+                        156     LOAD_ATTR                       9: kick_start_time
+                        158     POP_JUMP_IF_FALSE               206
+                        160     LOAD_FAST                       0: self
+                        162     LOAD_ATTR                       4: last_fan_value
+                        164     POP_JUMP_IF_FALSE               180
+                        166     LOAD_FAST                       2: value
+                        168     LOAD_FAST                       0: self
+                        170     LOAD_ATTR                       4: last_fan_value
+                        172     BINARY_SUBTRACT                 
+                        174     LOAD_CONST                      4: 0.5
+                        176     COMPARE_OP                      4 (>)
+                        178     POP_JUMP_IF_FALSE               206
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       10: mcu_fan
+                        184     LOAD_METHOD                     11: set_pwm
+                        186     LOAD_FAST                       1: print_time
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       3: max_power
+                        192     CALL_METHOD                     2
+                        194     POP_TOP                         
+                        196     LOAD_FAST                       1: print_time
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       9: kick_start_time
+                        202     INPLACE_ADD                     
+                        204     STORE_FAST                      1: print_time
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       10: mcu_fan
+                        210     LOAD_METHOD                     11: set_pwm
+                        212     LOAD_FAST                       1: print_time
+                        214     LOAD_FAST                       2: value
+                        216     CALL_METHOD                     2
+                        218     POP_TOP                         
+                        220     LOAD_FAST                       1: print_time
+                        222     LOAD_FAST                       0: self
+                        224     STORE_ATTR                      5: last_fan_time
+                        226     LOAD_FAST                       2: value
+                        228     LOAD_FAST                       0: self
+                        230     STORE_ATTR                      4: last_fan_value
+                        232     LOAD_CONST                      0: None
+                        234     RETURN_VALUE                    
+                'Fan.set_speed'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: set_speed_from_command
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'set_speed'
+                        'print_time'
+                    [Var Names]
+                        'self'
+                        'value'
+                        'toolhead'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: toolhead
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_METHOD                     2: set_speed
+                        16      LOAD_FAST                       2: toolhead
+                        18      LOAD_ATTR                       3: print_time
+                        20      LOAD_FAST                       1: value
+                        22      CALL_METHOD                     2
+                        24      POP_TOP                         
+                        26      LOAD_CONST                      0: None
+                        28      RETURN_VALUE                    
+                'Fan.set_speed_from_command'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: _handle_request_restart
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'set_speed'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: set_speed
+                        4       LOAD_FAST                       1: print_time
+                        6       LOAD_CONST                      1: 0
+                        8       CALL_METHOD                     2
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'Fan._handle_request_restart'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'tachometer'
+                        'get_status'
+                        'last_fan_value'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'tachometer_status'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'rpm'
+                        (
+                            'speed'
+                            'rpm'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: tachometer
+                        4       LOAD_METHOD                     1: get_status
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: tachometer_status
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: last_fan_value
+                        16      LOAD_FAST                       2: tachometer_status
+                        18      LOAD_CONST                      1: 'rpm'
+                        20      BINARY_SUBSCR                   
+                        22      LOAD_CONST                      2: ('speed', 'rpm')
+                        24      BUILD_CONST_KEY_MAP             2
+                        26      RETURN_VALUE                    
+                'Fan.get_status'
+                None
+                (
+                    0
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'Fan'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      15: (0,)
+                10      LOAD_CONST                      2: <CODE> __init__
+                12      LOAD_CONST                      3: 'Fan.__init__'
+                14      MAKE_FUNCTION                   1
+                16      STORE_NAME                      3: __init__
+                18      LOAD_CONST                      4: <CODE> get_mcu
+                20      LOAD_CONST                      5: 'Fan.get_mcu'
+                22      MAKE_FUNCTION                   0
+                24      STORE_NAME                      4: get_mcu
+                26      LOAD_CONST                      6: <CODE> set_speed
+                28      LOAD_CONST                      7: 'Fan.set_speed'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: set_speed
+                34      LOAD_CONST                      8: <CODE> set_speed_from_command
+                36      LOAD_CONST                      9: 'Fan.set_speed_from_command'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: set_speed_from_command
+                42      LOAD_CONST                      10: <CODE> _handle_request_restart
+                44      LOAD_CONST                      11: 'Fan._handle_request_restart'
+                46      MAKE_FUNCTION                   0
+                48      STORE_NAME                      7: _handle_request_restart
+                50      LOAD_CONST                      12: <CODE> get_status
+                52      LOAD_CONST                      13: 'Fan.get_status'
+                54      MAKE_FUNCTION                   0
+                56      STORE_NAME                      8: get_status
+                58      LOAD_CONST                      14: None
+                60      RETURN_VALUE                    
+        'Fan'
+        [Code]
+            File Name: /extras/fan.py
+            Object Name: FanTachometer
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'FanTachometer'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        '_freq_counter'
+                        'get'
+                        'getint'
+                        'ppr'
+                        'getfloat'
+                        'pulse_counter'
+                        'FrequencyCounter'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'printer'
+                        'pin'
+                        'poll_time'
+                        'sample_time'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'tachometer_pin'
+                        'tachometer_ppr'
+                        2
+                        1
+                        (
+                            'minval'
+                        )
+                        'tachometer_poll_interval'
+                        0.0015
+                        0
+                        (
+                            'above'
+                        )
+                        1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      2: printer
+                        8       LOAD_CONST                      0: None
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      1: _freq_counter
+                        14      LOAD_FAST                       1: config
+                        16      LOAD_METHOD                     2: get
+                        18      LOAD_CONST                      1: 'tachometer_pin'
+                        20      LOAD_CONST                      0: None
+                        22      CALL_METHOD                     2
+                        24      STORE_FAST                      3: pin
+                        26      LOAD_FAST                       3: pin
+                        28      LOAD_CONST                      0: None
+                        30      IS_OP                           1 (is not)
+                        32      POP_JUMP_IF_FALSE               90
+                        34      LOAD_FAST                       1: config
+                        36      LOAD_ATTR                       3: getint
+                        38      LOAD_CONST                      2: 'tachometer_ppr'
+                        40      LOAD_CONST                      3: 2
+                        42      LOAD_CONST                      4: 1
+                        44      LOAD_CONST                      5: ('minval',)
+                        46      CALL_FUNCTION_KW                3
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      4: ppr
+                        52      LOAD_FAST                       1: config
+                        54      LOAD_ATTR                       5: getfloat
+                        56      LOAD_CONST                      6: 'tachometer_poll_interval'
+                        58      LOAD_CONST                      7: 0.0015
+                        60      LOAD_CONST                      8: 0
+                        62      LOAD_CONST                      9: ('above',)
+                        64      CALL_FUNCTION_KW                3
+                        66      STORE_FAST                      4: poll_time
+                        68      LOAD_CONST                      10: 1
+                        70      STORE_FAST                      5: sample_time
+                        72      LOAD_GLOBAL                     6: pulse_counter
+                        74      LOAD_METHOD                     7: FrequencyCounter
+                        76      LOAD_FAST                       2: printer
+                        78      LOAD_FAST                       3: pin
+                        80      LOAD_FAST                       5: sample_time
+                        82      LOAD_FAST                       4: poll_time
+                        84      CALL_METHOD                     4
+                        86      LOAD_FAST                       0: self
+                        88      STORE_ATTR                      1: _freq_counter
+                        90      LOAD_CONST                      0: None
+                        92      RETURN_VALUE                    
+                'FanTachometer.__init__'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_freq_counter'
+                        'get_frequency'
+                        'ppr'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'rpm'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        30
+                        'rpm'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _freq_counter
+                        4       LOAD_CONST                      0: None
+                        6       IS_OP                           1 (is not)
+                        8       POP_JUMP_IF_FALSE               32
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: _freq_counter
+                        14      LOAD_METHOD                     1: get_frequency
+                        16      CALL_METHOD                     0
+                        18      LOAD_CONST                      1: 30
+                        20      BINARY_MULTIPLY                 
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: ppr
+                        26      BINARY_TRUE_DIVIDE              
+                        28      STORE_FAST                      2: rpm
+                        30      JUMP_FORWARD                    4 (to 36)
+                        32      LOAD_CONST                      0: None
+                        34      STORE_FAST                      2: rpm
+                        36      LOAD_CONST                      2: 'rpm'
+                        38      LOAD_FAST                       2: rpm
+                        40      BUILD_MAP                       1
+                        42      RETURN_VALUE                    
+                'FanTachometer.get_status'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'FanTachometer'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'FanTachometer.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_status
+                18      LOAD_CONST                      4: 'FanTachometer.get_status'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_status
+                24      LOAD_CONST                      5: None
+                26      RETURN_VALUE                    
+        'FanTachometer'
+        [Code]
+            File Name: /extras/fan.py
+            Object Name: PrinterFan
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_status'
+                'cmd_M106'
+                'cmd_M107'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterFan'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'Fan'
+                        'fan'
+                        'get_printer'
+                        'lookup_object'
+                        'register_command'
+                        'cmd_M106'
+                        'cmd_M107'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'gcode'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'M106'
+                        'M107'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: Fan
+                        2       LOAD_FAST                       1: config
+                        4       CALL_FUNCTION                   1
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: fan
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_METHOD                     2: get_printer
+                        14      CALL_METHOD                     0
+                        16      LOAD_METHOD                     3: lookup_object
+                        18      LOAD_CONST                      1: 'gcode'
+                        20      CALL_METHOD                     1
+                        22      STORE_FAST                      2: gcode
+                        24      LOAD_FAST                       2: gcode
+                        26      LOAD_METHOD                     4: register_command
+                        28      LOAD_CONST                      2: 'M106'
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       5: cmd_M106
+                        34      CALL_METHOD                     2
+                        36      POP_TOP                         
+                        38      LOAD_FAST                       2: gcode
+                        40      LOAD_METHOD                     4: register_command
+                        42      LOAD_CONST                      3: 'M107'
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       6: cmd_M107
+                        48      CALL_METHOD                     2
+                        50      POP_TOP                         
+                        52      LOAD_CONST                      0: None
+                        54      RETURN_VALUE                    
+                'PrinterFan.__init__'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fan'
+                        'get_status'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: fan
+                        4       LOAD_METHOD                     1: get_status
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_METHOD                     1
+                        10      RETURN_VALUE                    
+                'PrinterFan.get_status'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: cmd_M106
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'fan'
+                        'set_speed_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'value'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'S'
+                        255
+                        0
+                        (
+                            'minval'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_float
+                        4       LOAD_CONST                      1: 'S'
+                        6       LOAD_CONST                      2: 255
+                        8       LOAD_CONST                      3: 0
+                        10      LOAD_CONST                      4: ('minval',)
+                        12      CALL_FUNCTION_KW                3
+                        14      LOAD_CONST                      2: 255
+                        16      BINARY_TRUE_DIVIDE              
+                        18      STORE_FAST                      2: value
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       1: fan
+                        24      LOAD_METHOD                     2: set_speed_from_command
+                        26      LOAD_FAST                       2: value
+                        28      CALL_METHOD                     1
+                        30      POP_TOP                         
+                        32      LOAD_CONST                      0: None
+                        34      RETURN_VALUE                    
+                'PrinterFan.cmd_M106'
+                [Code]
+                    File Name: /extras/fan.py
+                    Object Name: cmd_M107
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fan'
+                        'set_speed_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: fan
+                        4       LOAD_METHOD                     1: set_speed_from_command
+                        6       LOAD_CONST                      1: 0
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'PrinterFan.cmd_M107'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterFan'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterFan.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_status
+                18      LOAD_CONST                      4: 'PrinterFan.get_status'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_status
+                24      LOAD_CONST                      5: <CODE> cmd_M106
+                26      LOAD_CONST                      6: 'PrinterFan.cmd_M106'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: cmd_M106
+                32      LOAD_CONST                      7: <CODE> cmd_M107
+                34      LOAD_CONST                      8: 'PrinterFan.cmd_M107'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: cmd_M107
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'PrinterFan'
+        [Code]
+            File Name: /extras/fan.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterFan'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterFan
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+        None
+    [Disassembly]
+        0       LOAD_CONST                      0: 1
+        2       LOAD_CONST                      1: ('pulse_counter',)
+        4       IMPORT_NAME                     0: 
+        6       IMPORT_FROM                     1: pulse_counter
+        8       STORE_NAME                      1: pulse_counter
+        10      POP_TOP                         
+        12      LOAD_CONST                      2: 0.1
+        14      STORE_NAME                      2: FAN_MIN_TIME
+        16      LOAD_BUILD_CLASS                
+        18      LOAD_CONST                      3: <CODE> Fan
+        20      LOAD_CONST                      4: 'Fan'
+        22      MAKE_FUNCTION                   0
+        24      LOAD_CONST                      4: 'Fan'
+        26      CALL_FUNCTION                   2
+        28      STORE_NAME                      3: Fan
+        30      LOAD_BUILD_CLASS                
+        32      LOAD_CONST                      5: <CODE> FanTachometer
+        34      LOAD_CONST                      6: 'FanTachometer'
+        36      MAKE_FUNCTION                   0
+        38      LOAD_CONST                      6: 'FanTachometer'
+        40      CALL_FUNCTION                   2
+        42      STORE_NAME                      4: FanTachometer
+        44      LOAD_BUILD_CLASS                
+        46      LOAD_CONST                      7: <CODE> PrinterFan
+        48      LOAD_CONST                      8: 'PrinterFan'
+        50      MAKE_FUNCTION                   0
+        52      LOAD_CONST                      8: 'PrinterFan'
+        54      CALL_FUNCTION                   2
+        56      STORE_NAME                      5: PrinterFan
+        58      LOAD_CONST                      9: <CODE> load_config
+        60      LOAD_CONST                      10: 'load_config'
+        62      MAKE_FUNCTION                   0
+        64      STORE_NAME                      6: load_config
+        66      LOAD_CONST                      11: None
+        68      RETURN_VALUE                    

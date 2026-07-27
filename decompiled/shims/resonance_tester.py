@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/resonance_tester.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: resonance_tester.pyc (Python 3.9)
 
@@ -51,11 +60,10 @@ def _parse_axis(gcmd, raw_axis):
     try:
         dir_x = float(dirs[0].strip())
         dir_y = float(dirs[1].strip())
-    finally:
-        pass
-    raise gcmd.error('{"code": "key305", "msg": "Unable to parse axis direction \'%s\'", "values":["%s"]}' % (raw_axis, raw_axis))
-    return TestAxis(vib_dir=(dir_x, dir_y))
+    except:
+        raise gcmd.error('{"code": "key305", "msg": "Unable to parse axis direction \'%s\'", "values":["%s"]}' % (raw_axis, raw_axis))
 
+    return TestAxis(vib_dir=(dir_x, dir_y))
 
 
 class VibrationPulseTest:
@@ -234,7 +242,45 @@ class ResonanceTester:
         axis = _parse_axis(gcmd, gcmd.get('AXIS').lower())
         accel_chips = gcmd.get('CHIPS', None)
         test_point = gcmd.get('POINT', None)
-    # WARNING: Decompyle incomplete
+        if test_point:
+            test_coords = test_point.split(',')
+            if len(test_coords) != 3:
+                raise gcmd.error("Invalid POINT parameter, must be 'x,y,z'")
+            
+            try:
+                test_point = [ float(p.strip()) for p in (test_coords) ]
+            except ValueError:
+                raise gcmd.error("Invalid POINT parameter, must be 'x,y,z' where x, y and z are valid floating point numbers")
+
+            if accel_chips:
+                parsed_chips = []
+                for chip_name in accel_chips.split(','):
+                    if 'adxl345' in chip_name:
+                        chip_lookup_name = chip_name.strip()
+                    else:
+                        chip_lookup_name = 'adxl345 ' + chip_name.strip()
+                    chip = self.printer.lookup_object(chip_lookup_name)
+                    parsed_chips.append(chip)
+        outputs = gcmd.get('OUTPUT', 'resonances').lower().split(',')
+        for output in outputs:
+            if output not in ('resonances', 'raw_data'):
+                raise gcmd.error('{"code": "key306", "msg": "Unsupported output \'%s\', only \'resonances\' and \'raw_data\' are supported", "values":["%s"]}' % (output, output))
+        if not outputs:
+            raise gcmd.error('{"code": "key307", "msg": "No output specified, at least one of \'resonances\' or \'raw_data\' must be set in OUTPUT parameter", "values":[]}')
+        name_suffix = gcmd.get('NAME', time.strftime('%Y%m%d_%H%M%S'))
+        if not self.is_valid_name_suffix(name_suffix):
+            raise gcmd.error('{"code":"key55", "msg":"Invalid NAME parameter", "values": []}')
+        csv_output = 'resonances' in outputs
+        raw_output = 'raw_data' in outputs
+        if csv_output:
+            helper = shaper_calibrate.ShaperCalibrate(self.printer)
+        else:
+            helper = None
+        data = self._run_test(gcmd, [
+            axis], helper, raw_name_suffix=name_suffix if raw_output else None, accel_chips=parsed_chips if accel_chips else None, test_point=test_point)[axis]
+        if csv_output:
+            csv_name = self.save_calibration_data('resonances', name_suffix, helper, axis, data, point=test_point)
+            gcmd.respond_info('Resonances data written to %s file' % (csv_name,))
 
     cmd_SHAPER_CALIBRATE_help = 'Simular to TEST_RESONANCES but suggest input shaper config'
     

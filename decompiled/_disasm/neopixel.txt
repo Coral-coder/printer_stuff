@@ -1,0 +1,1057 @@
+neopixel.pyc (Python 3.9)
+[Code]
+    File Name: /extras/neopixel.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'BACKGROUND_PRIORITY_CLOCK'
+        'BIT_MAX_TIME'
+        'RESET_MIN_TIME'
+        'MAX_MCU_SIZE'
+        'PrinterNeoPixel'
+        'load_config_prefix'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        0x7FFFFFFF00000000
+        4e-06
+        5e-05
+        500
+        [Code]
+            File Name: /extras/neopixel.py
+            Object Name: PrinterNeoPixel
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'build_config'
+                'update_color_data'
+                'send_data'
+                'update_leds'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterNeoPixel'
+                [Code]
+                    File Name: /extras/neopixel.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 10
+                    Stack Size: 6
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'get_reactor'
+                        'mutex'
+                        'lookup_object'
+                        'lookup_pin'
+                        'get'
+                        'mcu'
+                        'create_oid'
+                        'oid'
+                        'pin'
+                        'register_config_callback'
+                        'build_config'
+                        'neopixel_update_cmd'
+                        'neopixel_send_cmd'
+                        'getint'
+                        'getlist'
+                        'len'
+                        'error'
+                        'enumerate'
+                        'sorted'
+                        'extend'
+                        'list'
+                        'color_map'
+                        'MAX_MCU_SIZE'
+                        'load_object'
+                        'setup_helper'
+                        'update_leds'
+                        'led_helper'
+                        'bytearray'
+                        'color_data'
+                        'update_color_data'
+                        'get_status'
+                        'old_color_data'
+                        'register_event_handler'
+                        'send_data'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'printer'
+                        'ppins'
+                        'pin_params'
+                        'chain_count'
+                        'color_order'
+                        'color_indexes'
+                        'co'
+                        'pled'
+                    [Free Vars]
+                    [Cell Vars]
+                        'lidx'
+                    [Constants]
+                        None
+                        'pins'
+                        'pin'
+                        'chip'
+                        'chain_count'
+                        1
+                        (
+                            'minval'
+                        )
+                        'color_order'
+                        'GRB'
+                        0
+                        'color_order does not match chain_count'
+                        'RGB'
+                        'RGBW'
+                        "Invalid color_order '%s'"
+                        [Code]
+                            File Name: /extras/neopixel.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'index'
+                            [Var Names]
+                                '.0'
+                                'c'
+                            [Free Vars]
+                                'lidx'
+                            [Cell Vars]
+                            [Constants]
+                                'RGBW'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: c
+                                8       LOAD_DEREF                      0: lidx
+                                10      LOAD_CONST                      0: 'RGBW'
+                                12      LOAD_METHOD                     0: index
+                                14      LOAD_FAST                       1: c
+                                16      CALL_METHOD                     1
+                                18      BUILD_TUPLE                     2
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'PrinterNeoPixel.__init__.<locals>.<listcomp>'
+                        'neopixel chain too long'
+                        'led'
+                        'color_data'
+                        [Code]
+                            File Name: /extras/neopixel.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'd'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: d
+                                8       LOAD_FAST                       1: d
+                                10      LOAD_CONST                      0: 1
+                                12      BINARY_XOR                      
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                        'klippy:connect'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       DUP_TOP                         
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: printer
+                        12      STORE_FAST                      2: printer
+                        14      LOAD_FAST                       2: printer
+                        16      LOAD_METHOD                     2: get_reactor
+                        18      CALL_METHOD                     0
+                        20      LOAD_METHOD                     3: mutex
+                        22      CALL_METHOD                     0
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      3: mutex
+                        28      LOAD_FAST                       2: printer
+                        30      LOAD_METHOD                     4: lookup_object
+                        32      LOAD_CONST                      1: 'pins'
+                        34      CALL_METHOD                     1
+                        36      STORE_FAST                      3: ppins
+                        38      LOAD_FAST                       3: ppins
+                        40      LOAD_METHOD                     5: lookup_pin
+                        42      LOAD_FAST                       1: config
+                        44      LOAD_METHOD                     6: get
+                        46      LOAD_CONST                      2: 'pin'
+                        48      CALL_METHOD                     1
+                        50      CALL_METHOD                     1
+                        52      STORE_FAST                      4: pin_params
+                        54      LOAD_FAST                       4: pin_params
+                        56      LOAD_CONST                      3: 'chip'
+                        58      BINARY_SUBSCR                   
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      7: mcu
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       7: mcu
+                        68      LOAD_METHOD                     8: create_oid
+                        70      CALL_METHOD                     0
+                        72      LOAD_FAST                       0: self
+                        74      STORE_ATTR                      9: oid
+                        76      LOAD_FAST                       4: pin_params
+                        78      LOAD_CONST                      2: 'pin'
+                        80      BINARY_SUBSCR                   
+                        82      LOAD_FAST                       0: self
+                        84      STORE_ATTR                      10: pin
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       7: mcu
+                        90      LOAD_METHOD                     11: register_config_callback
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       12: build_config
+                        96      CALL_METHOD                     1
+                        98      POP_TOP                         
+                        100     LOAD_CONST                      0: None
+                        102     DUP_TOP                         
+                        104     LOAD_FAST                       0: self
+                        106     STORE_ATTR                      13: neopixel_update_cmd
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      14: neopixel_send_cmd
+                        112     LOAD_FAST                       1: config
+                        114     LOAD_ATTR                       15: getint
+                        116     LOAD_CONST                      4: 'chain_count'
+                        118     LOAD_CONST                      5: 1
+                        120     LOAD_CONST                      5: 1
+                        122     LOAD_CONST                      6: ('minval',)
+                        124     CALL_FUNCTION_KW                3
+                        126     STORE_FAST                      5: chain_count
+                        128     LOAD_FAST                       1: config
+                        130     LOAD_METHOD                     16: getlist
+                        132     LOAD_CONST                      7: 'color_order'
+                        134     LOAD_CONST                      8: 'GRB'
+                        136     BUILD_LIST                      1
+                        138     CALL_METHOD                     2
+                        140     STORE_FAST                      6: color_order
+                        142     LOAD_GLOBAL                     17: len
+                        144     LOAD_FAST                       6: color_order
+                        146     CALL_FUNCTION                   1
+                        148     LOAD_CONST                      5: 1
+                        150     COMPARE_OP                      2 (==)
+                        152     POP_JUMP_IF_FALSE               168
+                        154     LOAD_FAST                       6: color_order
+                        156     LOAD_CONST                      9: 0
+                        158     BINARY_SUBSCR                   
+                        160     BUILD_LIST                      1
+                        162     LOAD_FAST                       5: chain_count
+                        164     BINARY_MULTIPLY                 
+                        166     STORE_FAST                      6: color_order
+                        168     LOAD_GLOBAL                     17: len
+                        170     LOAD_FAST                       6: color_order
+                        172     CALL_FUNCTION                   1
+                        174     LOAD_FAST                       5: chain_count
+                        176     COMPARE_OP                      3 (!=)
+                        178     POP_JUMP_IF_FALSE               190
+                        180     LOAD_FAST                       1: config
+                        182     LOAD_METHOD                     18: error
+                        184     LOAD_CONST                      10: 'color_order does not match chain_count'
+                        186     CALL_METHOD                     1
+                        188     RAISE_VARARGS                   1
+                        190     BUILD_LIST                      0
+                        192     STORE_FAST                      7: color_indexes
+                        194     LOAD_GLOBAL                     19: enumerate
+                        196     LOAD_FAST                       6: color_order
+                        198     CALL_FUNCTION                   1
+                        200     GET_ITER                        
+                        202     FOR_ITER                        72 (to 276)
+                        204     UNPACK_SEQUENCE                 2
+                        206     STORE_DEREF                     0: lidx
+                        208     STORE_FAST                      8: co
+                        210     LOAD_GLOBAL                     20: sorted
+                        212     LOAD_FAST                       8: co
+                        214     CALL_FUNCTION                   1
+                        216     LOAD_GLOBAL                     20: sorted
+                        218     LOAD_CONST                      11: 'RGB'
+                        220     CALL_FUNCTION                   1
+                        222     LOAD_GLOBAL                     20: sorted
+                        224     LOAD_CONST                      12: 'RGBW'
+                        226     CALL_FUNCTION                   1
+                        228     BUILD_TUPLE                     2
+                        230     CONTAINS_OP                     1 (not in)
+                        232     POP_JUMP_IF_FALSE               250
+                        234     LOAD_FAST                       1: config
+                        236     LOAD_METHOD                     18: error
+                        238     LOAD_CONST                      13: "Invalid color_order '%s'"
+                        240     LOAD_FAST                       8: co
+                        242     BUILD_TUPLE                     1
+                        244     BINARY_MODULO                   
+                        246     CALL_METHOD                     1
+                        248     RAISE_VARARGS                   1
+                        250     LOAD_FAST                       7: color_indexes
+                        252     LOAD_METHOD                     21: extend
+                        254     LOAD_CLOSURE                    0: lidx
+                        256     BUILD_TUPLE                     1
+                        258     LOAD_CONST                      14: <CODE> <listcomp>
+                        260     LOAD_CONST                      15: 'PrinterNeoPixel.__init__.<locals>.<listcomp>'
+                        262     MAKE_FUNCTION                   8
+                        264     LOAD_FAST                       8: co
+                        266     GET_ITER                        
+                        268     CALL_FUNCTION                   1
+                        270     CALL_METHOD                     1
+                        272     POP_TOP                         
+                        274     JUMP_ABSOLUTE                   202
+                        276     LOAD_GLOBAL                     22: list
+                        278     LOAD_GLOBAL                     19: enumerate
+                        280     LOAD_FAST                       7: color_indexes
+                        282     CALL_FUNCTION                   1
+                        284     CALL_FUNCTION                   1
+                        286     LOAD_FAST                       0: self
+                        288     STORE_ATTR                      23: color_map
+                        290     LOAD_GLOBAL                     17: len
+                        292     LOAD_FAST                       0: self
+                        294     LOAD_ATTR                       23: color_map
+                        296     CALL_FUNCTION                   1
+                        298     LOAD_GLOBAL                     24: MAX_MCU_SIZE
+                        300     COMPARE_OP                      4 (>)
+                        302     POP_JUMP_IF_FALSE               316
+                        306     LOAD_FAST                       1: config
+                        308     LOAD_METHOD                     18: error
+                        310     LOAD_CONST                      16: 'neopixel chain too long'
+                        312     CALL_METHOD                     1
+                        314     RAISE_VARARGS                   1
+                        316     LOAD_FAST                       2: printer
+                        318     LOAD_METHOD                     25: load_object
+                        320     LOAD_FAST                       1: config
+                        322     LOAD_CONST                      17: 'led'
+                        324     CALL_METHOD                     2
+                        326     STORE_FAST                      9: pled
+                        328     LOAD_FAST                       9: pled
+                        330     LOAD_METHOD                     26: setup_helper
+                        332     LOAD_FAST                       1: config
+                        334     LOAD_FAST                       0: self
+                        336     LOAD_ATTR                       27: update_leds
+                        338     LOAD_FAST                       5: chain_count
+                        340     CALL_METHOD                     3
+                        342     LOAD_FAST                       0: self
+                        344     STORE_ATTR                      28: led_helper
+                        346     LOAD_GLOBAL                     29: bytearray
+                        348     LOAD_GLOBAL                     17: len
+                        350     LOAD_FAST                       0: self
+                        352     LOAD_ATTR                       23: color_map
+                        354     CALL_FUNCTION                   1
+                        356     CALL_FUNCTION                   1
+                        358     LOAD_FAST                       0: self
+                        360     STORE_ATTR                      30: color_data
+                        362     LOAD_FAST                       0: self
+                        364     LOAD_METHOD                     31: update_color_data
+                        366     LOAD_FAST                       0: self
+                        368     LOAD_ATTR                       28: led_helper
+                        370     LOAD_METHOD                     32: get_status
+                        372     CALL_METHOD                     0
+                        374     LOAD_CONST                      18: 'color_data'
+                        376     BINARY_SUBSCR                   
+                        378     CALL_METHOD                     1
+                        380     POP_TOP                         
+                        382     LOAD_GLOBAL                     29: bytearray
+                        384     LOAD_CONST                      19: <CODE> <listcomp>
+                        386     LOAD_CONST                      15: 'PrinterNeoPixel.__init__.<locals>.<listcomp>'
+                        388     MAKE_FUNCTION                   0
+                        390     LOAD_FAST                       0: self
+                        392     LOAD_ATTR                       30: color_data
+                        394     GET_ITER                        
+                        396     CALL_FUNCTION                   1
+                        398     CALL_FUNCTION                   1
+                        400     LOAD_FAST                       0: self
+                        402     STORE_ATTR                      33: old_color_data
+                        404     LOAD_FAST                       2: printer
+                        406     LOAD_METHOD                     34: register_event_handler
+                        408     LOAD_CONST                      20: 'klippy:connect'
+                        410     LOAD_FAST                       0: self
+                        412     LOAD_ATTR                       35: send_data
+                        414     CALL_METHOD                     2
+                        416     POP_TOP                         
+                        418     LOAD_CONST                      0: None
+                        420     RETURN_VALUE                    
+                'PrinterNeoPixel.__init__'
+                [Code]
+                    File Name: /extras/neopixel.py
+                    Object Name: build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu'
+                        'seconds_to_clock'
+                        'BIT_MAX_TIME'
+                        'RESET_MIN_TIME'
+                        'add_config_cmd'
+                        'oid'
+                        'pin'
+                        'len'
+                        'color_data'
+                        'alloc_command_queue'
+                        'lookup_command'
+                        'neopixel_update_cmd'
+                        'lookup_query_command'
+                        'neopixel_send_cmd'
+                    [Var Names]
+                        'self'
+                        'bmt'
+                        'rmt'
+                        'cmd_queue'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'config_neopixel oid=%d pin=%s data_size=%d bit_max_ticks=%d reset_min_ticks=%d'
+                        'neopixel_update oid=%c pos=%hu data=%*s'
+                        (
+                            'cq'
+                        )
+                        'neopixel_send oid=%c'
+                        'neopixel_result oid=%c success=%c'
+                        (
+                            'oid'
+                            'cq'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu
+                        4       LOAD_METHOD                     1: seconds_to_clock
+                        6       LOAD_GLOBAL                     2: BIT_MAX_TIME
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      1: bmt
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: mcu
+                        16      LOAD_METHOD                     1: seconds_to_clock
+                        18      LOAD_GLOBAL                     3: RESET_MIN_TIME
+                        20      CALL_METHOD                     1
+                        22      STORE_FAST                      2: rmt
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       0: mcu
+                        28      LOAD_METHOD                     4: add_config_cmd
+                        30      LOAD_CONST                      1: 'config_neopixel oid=%d pin=%s data_size=%d bit_max_ticks=%d reset_min_ticks=%d'
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       5: oid
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       6: pin
+                        40      LOAD_GLOBAL                     7: len
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       8: color_data
+                        46      CALL_FUNCTION                   1
+                        48      LOAD_FAST                       1: bmt
+                        50      LOAD_FAST                       2: rmt
+                        52      BUILD_TUPLE                     5
+                        54      BINARY_MODULO                   
+                        56      CALL_METHOD                     1
+                        58      POP_TOP                         
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       0: mcu
+                        64      LOAD_METHOD                     9: alloc_command_queue
+                        66      CALL_METHOD                     0
+                        68      STORE_FAST                      3: cmd_queue
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       0: mcu
+                        74      LOAD_ATTR                       10: lookup_command
+                        76      LOAD_CONST                      2: 'neopixel_update oid=%c pos=%hu data=%*s'
+                        78      LOAD_FAST                       3: cmd_queue
+                        80      LOAD_CONST                      3: ('cq',)
+                        82      CALL_FUNCTION_KW                2
+                        84      LOAD_FAST                       0: self
+                        86      STORE_ATTR                      11: neopixel_update_cmd
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       0: mcu
+                        92      LOAD_ATTR                       12: lookup_query_command
+                        94      LOAD_CONST                      4: 'neopixel_send oid=%c'
+                        96      LOAD_CONST                      5: 'neopixel_result oid=%c success=%c'
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       5: oid
+                        102     LOAD_FAST                       3: cmd_queue
+                        104     LOAD_CONST                      6: ('oid', 'cq')
+                        106     CALL_FUNCTION_KW                4
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      13: neopixel_send_cmd
+                        112     LOAD_CONST                      0: None
+                        114     RETURN_VALUE                    
+                'PrinterNeoPixel.build_config'
+                [Code]
+                    File Name: /extras/neopixel.py
+                    Object Name: update_color_data
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'color_data'
+                        'color_map'
+                        'int'
+                    [Var Names]
+                        'self'
+                        'led_state'
+                        'color_data'
+                        'cdidx'
+                        'lidx'
+                        'cidx'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        255
+                        0.5
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: color_data
+                        4       STORE_FAST                      2: color_data
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: color_map
+                        10      GET_ITER                        
+                        12      FOR_ITER                        40 (to 54)
+                        14      UNPACK_SEQUENCE                 2
+                        16      STORE_FAST                      3: cdidx
+                        18      UNPACK_SEQUENCE                 2
+                        20      STORE_FAST                      4: lidx
+                        22      STORE_FAST                      5: cidx
+                        24      LOAD_GLOBAL                     2: int
+                        26      LOAD_FAST                       1: led_state
+                        28      LOAD_FAST                       4: lidx
+                        30      BINARY_SUBSCR                   
+                        32      LOAD_FAST                       5: cidx
+                        34      BINARY_SUBSCR                   
+                        36      LOAD_CONST                      1: 255
+                        38      BINARY_MULTIPLY                 
+                        40      LOAD_CONST                      2: 0.5
+                        42      BINARY_ADD                      
+                        44      CALL_FUNCTION                   1
+                        46      LOAD_FAST                       2: color_data
+                        48      LOAD_FAST                       3: cdidx
+                        50      STORE_SUBSCR                    
+                        52      JUMP_ABSOLUTE                   12
+                        54      LOAD_CONST                      0: None
+                        56      RETURN_VALUE                    
+                'PrinterNeoPixel.update_color_data'
+                None
+                [Code]
+                    File Name: /extras/neopixel.py
+                    Object Name: send_data
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 14
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'old_color_data'
+                        'color_data'
+                        'enumerate'
+                        'zip'
+                        'range'
+                        'len'
+                        'neopixel_update_cmd'
+                        'send'
+                        'oid'
+                        'BACKGROUND_PRIORITY_CLOCK'
+                        'mcu'
+                        'print_time_to_clock'
+                        'neopixel_send_cmd'
+                        'printer'
+                        'get_start_args'
+                        'get'
+                        'logging'
+                        'info'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'old_data'
+                        'new_data'
+                        'diffs'
+                        'i'
+                        'pos'
+                        'count'
+                        'nextpos'
+                        'nextcount'
+                        'ucmd'
+                        'minclock'
+                        'scmd'
+                        'params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/neopixel.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 4
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'i'
+                                'n'
+                                'o'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        28 (to 34)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: i
+                                10      UNPACK_SEQUENCE                 2
+                                12      STORE_FAST                      2: n
+                                14      STORE_FAST                      3: o
+                                16      LOAD_FAST                       2: n
+                                18      LOAD_FAST                       3: o
+                                20      COMPARE_OP                      3 (!=)
+                                22      POP_JUMP_IF_FALSE               4
+                                24      LOAD_FAST                       1: i
+                                26      LOAD_CONST                      0: 1
+                                28      BUILD_LIST                      2
+                                30      LIST_APPEND                     2
+                                32      JUMP_ABSOLUTE                   4
+                                34      RETURN_VALUE                    
+                        'PrinterNeoPixel.send_data.<locals>.<listcomp>'
+                        2
+                        -1
+                        1
+                        5
+                        16
+                        (
+                            'reqclock'
+                        )
+                        0
+                        'debugoutput'
+                        8
+                        (
+                            'minclock'
+                            'reqclock'
+                        )
+                        'success'
+                        'Neopixel update did not succeed'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: old_color_data
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: color_data
+                        8       ROT_TWO                         
+                        10      STORE_FAST                      2: old_data
+                        12      STORE_FAST                      3: new_data
+                        14      LOAD_FAST                       3: new_data
+                        16      LOAD_FAST                       2: old_data
+                        18      COMPARE_OP                      2 (==)
+                        20      POP_JUMP_IF_FALSE               26
+                        22      LOAD_CONST                      0: None
+                        24      RETURN_VALUE                    
+                        26      LOAD_CONST                      1: <CODE> <listcomp>
+                        28      LOAD_CONST                      2: 'PrinterNeoPixel.send_data.<locals>.<listcomp>'
+                        30      MAKE_FUNCTION                   0
+                        32      LOAD_GLOBAL                     2: enumerate
+                        34      LOAD_GLOBAL                     3: zip
+                        36      LOAD_FAST                       3: new_data
+                        38      LOAD_FAST                       2: old_data
+                        40      CALL_FUNCTION                   2
+                        42      CALL_FUNCTION                   1
+                        44      GET_ITER                        
+                        46      CALL_FUNCTION                   1
+                        48      STORE_FAST                      4: diffs
+                        50      LOAD_GLOBAL                     4: range
+                        52      LOAD_GLOBAL                     5: len
+                        54      LOAD_FAST                       4: diffs
+                        56      CALL_FUNCTION                   1
+                        58      LOAD_CONST                      3: 2
+                        60      BINARY_SUBTRACT                 
+                        62      LOAD_CONST                      4: -1
+                        64      LOAD_CONST                      4: -1
+                        66      CALL_FUNCTION                   3
+                        68      GET_ITER                        
+                        70      FOR_ITER                        82 (to 154)
+                        72      STORE_FAST                      5: i
+                        74      LOAD_FAST                       4: diffs
+                        76      LOAD_FAST                       5: i
+                        78      BINARY_SUBSCR                   
+                        80      UNPACK_SEQUENCE                 2
+                        82      STORE_FAST                      6: pos
+                        84      STORE_FAST                      7: count
+                        86      LOAD_FAST                       4: diffs
+                        88      LOAD_FAST                       5: i
+                        90      LOAD_CONST                      5: 1
+                        92      BINARY_ADD                      
+                        94      BINARY_SUBSCR                   
+                        96      UNPACK_SEQUENCE                 2
+                        98      STORE_FAST                      8: nextpos
+                        100     STORE_FAST                      9: nextcount
+                        102     LOAD_FAST                       6: pos
+                        104     LOAD_CONST                      6: 5
+                        106     BINARY_ADD                      
+                        108     LOAD_FAST                       8: nextpos
+                        110     COMPARE_OP                      5 (>=)
+                        112     POP_JUMP_IF_FALSE               70
+                        114     LOAD_FAST                       9: nextcount
+                        116     LOAD_CONST                      7: 16
+                        118     COMPARE_OP                      0 (<)
+                        120     POP_JUMP_IF_FALSE               70
+                        122     LOAD_FAST                       9: nextcount
+                        124     LOAD_FAST                       8: nextpos
+                        126     LOAD_FAST                       6: pos
+                        128     BINARY_SUBTRACT                 
+                        130     BINARY_ADD                      
+                        132     LOAD_FAST                       4: diffs
+                        134     LOAD_FAST                       5: i
+                        136     BINARY_SUBSCR                   
+                        138     LOAD_CONST                      5: 1
+                        140     STORE_SUBSCR                    
+                        142     LOAD_FAST                       4: diffs
+                        144     LOAD_FAST                       5: i
+                        146     LOAD_CONST                      5: 1
+                        148     BINARY_ADD                      
+                        150     DELETE_SUBSCR                   
+                        152     JUMP_ABSOLUTE                   70
+                        154     LOAD_FAST                       0: self
+                        156     LOAD_ATTR                       6: neopixel_update_cmd
+                        158     LOAD_ATTR                       7: send
+                        160     STORE_FAST                      10: ucmd
+                        162     LOAD_FAST                       4: diffs
+                        164     GET_ITER                        
+                        166     FOR_ITER                        40 (to 208)
+                        168     UNPACK_SEQUENCE                 2
+                        170     STORE_FAST                      6: pos
+                        172     STORE_FAST                      7: count
+                        174     LOAD_FAST                       10: ucmd
+                        176     LOAD_FAST                       0: self
+                        178     LOAD_ATTR                       8: oid
+                        180     LOAD_FAST                       6: pos
+                        182     LOAD_FAST                       3: new_data
+                        184     LOAD_FAST                       6: pos
+                        186     LOAD_FAST                       6: pos
+                        188     LOAD_FAST                       7: count
+                        190     BINARY_ADD                      
+                        192     BUILD_SLICE                     2
+                        194     BINARY_SUBSCR                   
+                        196     BUILD_LIST                      3
+                        198     LOAD_GLOBAL                     9: BACKGROUND_PRIORITY_CLOCK
+                        200     LOAD_CONST                      8: ('reqclock',)
+                        202     CALL_FUNCTION_KW                2
+                        204     POP_TOP                         
+                        206     JUMP_ABSOLUTE                   166
+                        208     LOAD_FAST                       3: new_data
+                        210     LOAD_FAST                       2: old_data
+                        212     LOAD_CONST                      0: None
+                        214     LOAD_CONST                      0: None
+                        216     BUILD_SLICE                     2
+                        218     STORE_SUBSCR                    
+                        220     LOAD_CONST                      9: 0
+                        222     STORE_FAST                      11: minclock
+                        224     LOAD_FAST                       1: print_time
+                        226     LOAD_CONST                      0: None
+                        228     IS_OP                           1 (is not)
+                        230     POP_JUMP_IF_FALSE               244
+                        232     LOAD_FAST                       0: self
+                        234     LOAD_ATTR                       10: mcu
+                        236     LOAD_METHOD                     11: print_time_to_clock
+                        238     LOAD_FAST                       1: print_time
+                        240     CALL_METHOD                     1
+                        242     STORE_FAST                      11: minclock
+                        244     LOAD_FAST                       0: self
+                        246     LOAD_ATTR                       12: neopixel_send_cmd
+                        248     LOAD_ATTR                       7: send
+                        250     STORE_FAST                      12: scmd
+                        252     LOAD_FAST                       0: self
+                        254     LOAD_ATTR                       13: printer
+                        256     LOAD_METHOD                     14: get_start_args
+                        258     CALL_METHOD                     0
+                        260     LOAD_METHOD                     15: get
+                        262     LOAD_CONST                      10: 'debugoutput'
+                        264     CALL_METHOD                     1
+                        266     LOAD_CONST                      0: None
+                        268     IS_OP                           1 (is not)
+                        270     POP_JUMP_IF_FALSE               278
+                        274     LOAD_CONST                      0: None
+                        276     RETURN_VALUE                    
+                        278     LOAD_GLOBAL                     4: range
+                        280     LOAD_CONST                      11: 8
+                        282     CALL_FUNCTION                   1
+                        284     GET_ITER                        
+                        286     FOR_ITER                        40 (to 328)
+                        288     STORE_FAST                      5: i
+                        290     LOAD_FAST                       12: scmd
+                        292     LOAD_FAST                       0: self
+                        294     LOAD_ATTR                       8: oid
+                        296     BUILD_LIST                      1
+                        298     LOAD_FAST                       11: minclock
+                        300     LOAD_GLOBAL                     9: BACKGROUND_PRIORITY_CLOCK
+                        302     LOAD_CONST                      12: ('minclock', 'reqclock')
+                        304     CALL_FUNCTION_KW                3
+                        306     STORE_FAST                      13: params
+                        308     LOAD_FAST                       13: params
+                        310     LOAD_CONST                      13: 'success'
+                        312     BINARY_SUBSCR                   
+                        314     POP_JUMP_IF_FALSE               286
+                        318     POP_TOP                         
+                        320     JUMP_ABSOLUTE                   338
+                        324     JUMP_ABSOLUTE                   286
+                        328     LOAD_GLOBAL                     16: logging
+                        330     LOAD_METHOD                     17: info
+                        332     LOAD_CONST                      14: 'Neopixel update did not succeed'
+                        334     CALL_METHOD                     1
+                        336     POP_TOP                         
+                        338     LOAD_CONST                      0: None
+                        340     RETURN_VALUE                    
+                'PrinterNeoPixel.send_data'
+                [Code]
+                    File Name: /extras/neopixel.py
+                    Object Name: update_leds
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 3
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'printer'
+                        'get_reactor'
+                        'register_callback'
+                    [Var Names]
+                        'self'
+                        'led_state'
+                        'print_time'
+                        'reactor_bgfunc'
+                    [Free Vars]
+                    [Cell Vars]
+                        'led_state'
+                        'print_time'
+                        'self'
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/neopixel.py
+                            Object Name: reactor_bgfunc
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 1
+                            Stack Size: 8
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'mutex'
+                                'update_color_data'
+                                'send_data'
+                            [Var Names]
+                                'eventtime'
+                            [Free Vars]
+                                'led_state'
+                                'print_time'
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_DEREF                      2: self
+                                2       LOAD_ATTR                       0: mutex
+                                4       SETUP_WITH                      36 (to 42)
+                                6       POP_TOP                         
+                                8       LOAD_DEREF                      2: self
+                                10      LOAD_METHOD                     1: update_color_data
+                                12      LOAD_DEREF                      0: led_state
+                                14      CALL_METHOD                     1
+                                16      POP_TOP                         
+                                18      LOAD_DEREF                      2: self
+                                20      LOAD_METHOD                     2: send_data
+                                22      LOAD_DEREF                      1: print_time
+                                24      CALL_METHOD                     1
+                                26      POP_TOP                         
+                                28      POP_BLOCK                       
+                                30      LOAD_CONST                      0: None
+                                32      DUP_TOP                         
+                                34      DUP_TOP                         
+                                36      CALL_FUNCTION                   3
+                                38      POP_TOP                         
+                                40      JUMP_FORWARD                    16 (to 58)
+                                42      WITH_EXCEPT_START               
+                                44      POP_JUMP_IF_TRUE                48
+                                46      RERAISE                         
+                                48      POP_TOP                         
+                                50      POP_TOP                         
+                                52      POP_TOP                         
+                                54      POP_EXCEPT                      
+                                56      POP_TOP                         
+                                58      LOAD_CONST                      0: None
+                                60      RETURN_VALUE                    
+                        'PrinterNeoPixel.update_leds.<locals>.reactor_bgfunc'
+                    [Disassembly]
+                        0       LOAD_CLOSURE                    0: led_state
+                        2       LOAD_CLOSURE                    1: print_time
+                        4       LOAD_CLOSURE                    2: self
+                        6       BUILD_TUPLE                     3
+                        8       LOAD_CONST                      1: <CODE> reactor_bgfunc
+                        10      LOAD_CONST                      2: 'PrinterNeoPixel.update_leds.<locals>.reactor_bgfunc'
+                        12      MAKE_FUNCTION                   8
+                        14      STORE_FAST                      3: reactor_bgfunc
+                        16      LOAD_DEREF                      2: self
+                        18      LOAD_ATTR                       0: printer
+                        20      LOAD_METHOD                     1: get_reactor
+                        22      CALL_METHOD                     0
+                        24      LOAD_METHOD                     2: register_callback
+                        26      LOAD_FAST                       3: reactor_bgfunc
+                        28      CALL_METHOD                     1
+                        30      POP_TOP                         
+                        32      LOAD_CONST                      0: None
+                        34      RETURN_VALUE                    
+                'PrinterNeoPixel.update_leds'
+                [Code]
+                    File Name: /extras/neopixel.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'led_helper'
+                        'get_status'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: led_helper
+                        4       LOAD_METHOD                     1: get_status
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_METHOD                     1
+                        10      RETURN_VALUE                    
+                'PrinterNeoPixel.get_status'
+                (
+                    None
+                )
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterNeoPixel'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterNeoPixel.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> build_config
+                18      LOAD_CONST                      4: 'PrinterNeoPixel.build_config'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: build_config
+                24      LOAD_CONST                      5: <CODE> update_color_data
+                26      LOAD_CONST                      6: 'PrinterNeoPixel.update_color_data'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: update_color_data
+                32      LOAD_CONST                      14: (None,)
+                34      LOAD_CONST                      8: <CODE> send_data
+                36      LOAD_CONST                      9: 'PrinterNeoPixel.send_data'
+                38      MAKE_FUNCTION                   1
+                40      STORE_NAME                      6: send_data
+                42      LOAD_CONST                      10: <CODE> update_leds
+                44      LOAD_CONST                      11: 'PrinterNeoPixel.update_leds'
+                46      MAKE_FUNCTION                   0
+                48      STORE_NAME                      7: update_leds
+                50      LOAD_CONST                      15: (None,)
+                52      LOAD_CONST                      12: <CODE> get_status
+                54      LOAD_CONST                      13: 'PrinterNeoPixel.get_status'
+                56      MAKE_FUNCTION                   1
+                58      STORE_NAME                      8: get_status
+                60      LOAD_CONST                      7: None
+                62      RETURN_VALUE                    
+        'PrinterNeoPixel'
+        [Code]
+            File Name: /extras/neopixel.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterNeoPixel'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterNeoPixel
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      2: 0x7FFFFFFF00000000
+        10      STORE_NAME                      1: BACKGROUND_PRIORITY_CLOCK
+        12      LOAD_CONST                      3: 4e-06
+        14      STORE_NAME                      2: BIT_MAX_TIME
+        16      LOAD_CONST                      4: 5e-05
+        18      STORE_NAME                      3: RESET_MIN_TIME
+        20      LOAD_CONST                      5: 500
+        22      STORE_NAME                      4: MAX_MCU_SIZE
+        24      LOAD_BUILD_CLASS                
+        26      LOAD_CONST                      6: <CODE> PrinterNeoPixel
+        28      LOAD_CONST                      7: 'PrinterNeoPixel'
+        30      MAKE_FUNCTION                   0
+        32      LOAD_CONST                      7: 'PrinterNeoPixel'
+        34      CALL_FUNCTION                   2
+        36      STORE_NAME                      5: PrinterNeoPixel
+        38      LOAD_CONST                      8: <CODE> load_config_prefix
+        40      LOAD_CONST                      9: 'load_config_prefix'
+        42      MAKE_FUNCTION                   0
+        44      STORE_NAME                      6: load_config_prefix
+        46      LOAD_CONST                      1: None
+        48      RETURN_VALUE                    

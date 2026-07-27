@@ -1,0 +1,3076 @@
+resonance_tester.pyc (Python 3.9)
+[Code]
+    File Name: /extras/resonance_tester.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'math'
+        'os'
+        'time'
+        ''
+        'shaper_calibrate'
+        'subprocess'
+        'call'
+        'TestAxis'
+        '_parse_axis'
+        'VibrationPulseTest'
+        'ResonanceTester'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'shaper_calibrate'
+        )
+        (
+            'call'
+        )
+        [Code]
+            File Name: /extras/resonance_tester.py
+            Object Name: TestAxis
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'matches'
+                'get_name'
+                'get_point'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'TestAxis'
+                None
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        '_name'
+                        '_vib_dir'
+                        'math'
+                        'sqrt'
+                        'sum'
+                    [Var Names]
+                        'self'
+                        'axis'
+                        'vib_dir'
+                    [Free Vars]
+                    [Cell Vars]
+                        's'
+                    [Constants]
+                        None
+                        'axis=%.3f,%.3f'
+                        0
+                        1
+                        'x'
+                        (
+                            1
+                            0
+                        )
+                        (
+                            0
+                            1
+                        )
+                        [Code]
+                            File Name: /extras/resonance_tester.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'd'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: d
+                                8       LOAD_FAST                       1: d
+                                10      LOAD_FAST                       1: d
+                                12      BINARY_MULTIPLY                 
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                        'TestAxis.__init__.<locals>.<listcomp>'
+                        [Code]
+                            File Name: /extras/resonance_tester.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'd'
+                            [Free Vars]
+                                's'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: d
+                                8       LOAD_FAST                       1: d
+                                10      LOAD_DEREF                      0: s
+                                12      BINARY_TRUE_DIVIDE              
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                    [Disassembly]
+                        0       LOAD_FAST                       1: axis
+                        2       LOAD_CONST                      0: None
+                        4       IS_OP                           0 (is)
+                        6       POP_JUMP_IF_FALSE               32
+                        8       LOAD_CONST                      1: 'axis=%.3f,%.3f'
+                        10      LOAD_FAST                       2: vib_dir
+                        12      LOAD_CONST                      2: 0
+                        14      BINARY_SUBSCR                   
+                        16      LOAD_FAST                       2: vib_dir
+                        18      LOAD_CONST                      3: 1
+                        20      BINARY_SUBSCR                   
+                        22      BUILD_TUPLE                     2
+                        24      BINARY_MODULO                   
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      0: _name
+                        30      JUMP_FORWARD                    6 (to 38)
+                        32      LOAD_FAST                       1: axis
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      0: _name
+                        38      LOAD_FAST                       2: vib_dir
+                        40      LOAD_CONST                      0: None
+                        42      IS_OP                           0 (is)
+                        44      POP_JUMP_IF_FALSE               66
+                        46      LOAD_FAST                       1: axis
+                        48      LOAD_CONST                      4: 'x'
+                        50      COMPARE_OP                      2 (==)
+                        52      POP_JUMP_IF_FALSE               58
+                        54      LOAD_CONST                      5: (1, 0)
+                        56      JUMP_FORWARD                    2 (to 60)
+                        58      LOAD_CONST                      6: (0, 1)
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      1: _vib_dir
+                        64      JUMP_FORWARD                    44 (to 110)
+                        66      LOAD_GLOBAL                     2: math
+                        68      LOAD_METHOD                     3: sqrt
+                        70      LOAD_GLOBAL                     4: sum
+                        72      LOAD_CONST                      7: <CODE> <listcomp>
+                        74      LOAD_CONST                      8: 'TestAxis.__init__.<locals>.<listcomp>'
+                        76      MAKE_FUNCTION                   0
+                        78      LOAD_FAST                       2: vib_dir
+                        80      GET_ITER                        
+                        82      CALL_FUNCTION                   1
+                        84      CALL_FUNCTION                   1
+                        86      CALL_METHOD                     1
+                        88      STORE_DEREF                     0: s
+                        90      LOAD_CLOSURE                    0: s
+                        92      BUILD_TUPLE                     1
+                        94      LOAD_CONST                      9: <CODE> <listcomp>
+                        96      LOAD_CONST                      8: 'TestAxis.__init__.<locals>.<listcomp>'
+                        98      MAKE_FUNCTION                   8
+                        100     LOAD_FAST                       2: vib_dir
+                        102     GET_ITER                        
+                        104     CALL_FUNCTION                   1
+                        106     LOAD_FAST                       0: self
+                        108     STORE_ATTR                      1: _vib_dir
+                        110     LOAD_CONST                      0: None
+                        112     RETURN_VALUE                    
+                'TestAxis.__init__'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: matches
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_vib_dir'
+                    [Var Names]
+                        'self'
+                        'chip_axis'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'x'
+                        True
+                        1
+                        'y'
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _vib_dir
+                        4       LOAD_CONST                      1: 0
+                        6       BINARY_SUBSCR                   
+                        8       POP_JUMP_IF_FALSE               22
+                        10      LOAD_CONST                      2: 'x'
+                        12      LOAD_FAST                       1: chip_axis
+                        14      CONTAINS_OP                     0 (in)
+                        16      POP_JUMP_IF_FALSE               22
+                        18      LOAD_CONST                      3: True
+                        20      RETURN_VALUE                    
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       0: _vib_dir
+                        26      LOAD_CONST                      4: 1
+                        28      BINARY_SUBSCR                   
+                        30      POP_JUMP_IF_FALSE               44
+                        32      LOAD_CONST                      5: 'y'
+                        34      LOAD_FAST                       1: chip_axis
+                        36      CONTAINS_OP                     0 (in)
+                        38      POP_JUMP_IF_FALSE               44
+                        40      LOAD_CONST                      3: True
+                        42      RETURN_VALUE                    
+                        44      LOAD_CONST                      6: False
+                        46      RETURN_VALUE                    
+                'TestAxis.matches'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: get_name
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_name'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _name
+                        4       RETURN_VALUE                    
+                'TestAxis.get_name'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: get_point
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_vib_dir'
+                    [Var Names]
+                        'self'
+                        'l'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _vib_dir
+                        4       LOAD_CONST                      1: 0
+                        6       BINARY_SUBSCR                   
+                        8       LOAD_FAST                       1: l
+                        10      BINARY_MULTIPLY                 
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: _vib_dir
+                        16      LOAD_CONST                      2: 1
+                        18      BINARY_SUBSCR                   
+                        20      LOAD_FAST                       1: l
+                        22      BINARY_MULTIPLY                 
+                        24      BUILD_TUPLE                     2
+                        26      RETURN_VALUE                    
+                'TestAxis.get_point'
+                (
+                    None
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'TestAxis'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      10: (None, None)
+                10      LOAD_CONST                      2: <CODE> __init__
+                12      LOAD_CONST                      3: 'TestAxis.__init__'
+                14      MAKE_FUNCTION                   1
+                16      STORE_NAME                      3: __init__
+                18      LOAD_CONST                      4: <CODE> matches
+                20      LOAD_CONST                      5: 'TestAxis.matches'
+                22      MAKE_FUNCTION                   0
+                24      STORE_NAME                      4: matches
+                26      LOAD_CONST                      6: <CODE> get_name
+                28      LOAD_CONST                      7: 'TestAxis.get_name'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: get_name
+                34      LOAD_CONST                      8: <CODE> get_point
+                36      LOAD_CONST                      9: 'TestAxis.get_point'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: get_point
+                42      LOAD_CONST                      1: None
+                44      RETURN_VALUE                    
+        'TestAxis'
+        [Code]
+            File Name: /extras/resonance_tester.py
+            Object Name: _parse_axis
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 5
+            Stack Size: 8
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'lower'
+                'TestAxis'
+                'split'
+                'len'
+                'error'
+                'float'
+                'strip'
+            [Var Names]
+                'gcmd'
+                'raw_axis'
+                'dirs'
+                'dir_x'
+                'dir_y'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                (
+                    'x'
+                    'y'
+                )
+                (
+                    'axis'
+                )
+                ','
+                2
+                '{"code": "key304", "msg": "Invalid format of axiss \'%s\'", "values":["%s"]}'
+                0
+                1
+                '{"code": "key305", "msg": "Unable to parse axis direction \'%s\'", "values":["%s"]}'
+                (
+                    'vib_dir'
+                )
+            [Disassembly]
+                0       LOAD_FAST                       1: raw_axis
+                2       LOAD_CONST                      0: None
+                4       IS_OP                           0 (is)
+                6       POP_JUMP_IF_FALSE               12
+                8       LOAD_CONST                      0: None
+                10      RETURN_VALUE                    
+                12      LOAD_FAST                       1: raw_axis
+                14      LOAD_METHOD                     0: lower
+                16      CALL_METHOD                     0
+                18      STORE_FAST                      1: raw_axis
+                20      LOAD_FAST                       1: raw_axis
+                22      LOAD_CONST                      1: ('x', 'y')
+                24      CONTAINS_OP                     0 (in)
+                26      POP_JUMP_IF_FALSE               38
+                28      LOAD_GLOBAL                     1: TestAxis
+                30      LOAD_FAST                       1: raw_axis
+                32      LOAD_CONST                      2: ('axis',)
+                34      CALL_FUNCTION_KW                1
+                36      RETURN_VALUE                    
+                38      LOAD_FAST                       1: raw_axis
+                40      LOAD_METHOD                     2: split
+                42      LOAD_CONST                      3: ','
+                44      CALL_METHOD                     1
+                46      STORE_FAST                      2: dirs
+                48      LOAD_GLOBAL                     3: len
+                50      LOAD_FAST                       2: dirs
+                52      CALL_FUNCTION                   1
+                54      LOAD_CONST                      4: 2
+                56      COMPARE_OP                      3 (!=)
+                58      POP_JUMP_IF_FALSE               78
+                60      LOAD_FAST                       0: gcmd
+                62      LOAD_METHOD                     4: error
+                64      LOAD_CONST                      5: '{"code": "key304", "msg": "Invalid format of axiss \'%s\'", "values":["%s"]}'
+                66      LOAD_FAST                       1: raw_axis
+                68      LOAD_FAST                       1: raw_axis
+                70      BUILD_TUPLE                     2
+                72      BINARY_MODULO                   
+                74      CALL_METHOD                     1
+                76      RAISE_VARARGS                   1
+                78      SETUP_FINALLY                   36 (to 116)
+                80      LOAD_GLOBAL                     5: float
+                82      LOAD_FAST                       2: dirs
+                84      LOAD_CONST                      6: 0
+                86      BINARY_SUBSCR                   
+                88      LOAD_METHOD                     6: strip
+                90      CALL_METHOD                     0
+                92      CALL_FUNCTION                   1
+                94      STORE_FAST                      3: dir_x
+                96      LOAD_GLOBAL                     5: float
+                98      LOAD_FAST                       2: dirs
+                100     LOAD_CONST                      7: 1
+                102     BINARY_SUBSCR                   
+                104     LOAD_METHOD                     6: strip
+                106     CALL_METHOD                     0
+                108     CALL_FUNCTION                   1
+                110     STORE_FAST                      4: dir_y
+                112     POP_BLOCK                       
+                114     JUMP_FORWARD                    30 (to 146)
+                116     POP_TOP                         
+                118     POP_TOP                         
+                120     POP_TOP                         
+                122     LOAD_FAST                       0: gcmd
+                124     LOAD_METHOD                     4: error
+                126     LOAD_CONST                      8: '{"code": "key305", "msg": "Unable to parse axis direction \'%s\'", "values":["%s"]}'
+                128     LOAD_FAST                       1: raw_axis
+                130     LOAD_FAST                       1: raw_axis
+                132     BUILD_TUPLE                     2
+                134     BINARY_MODULO                   
+                136     CALL_METHOD                     1
+                138     RAISE_VARARGS                   1
+                140     POP_EXCEPT                      
+                142     JUMP_FORWARD                    2 (to 146)
+                144     RERAISE                         
+                146     LOAD_GLOBAL                     1: TestAxis
+                148     LOAD_FAST                       3: dir_x
+                150     LOAD_FAST                       4: dir_y
+                152     BUILD_TUPLE                     2
+                154     LOAD_CONST                      9: ('vib_dir',)
+                156     CALL_FUNCTION_KW                1
+                158     RETURN_VALUE                    
+        '_parse_axis'
+        [Code]
+            File Name: /extras/resonance_tester.py
+            Object Name: VibrationPulseTest
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_start_test_points'
+                'prepare_test'
+                'run_test'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'VibrationPulseTest'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'lookup_object'
+                        'gcode'
+                        'getfloat'
+                        'min_freq'
+                        'max_freq'
+                        'accel_per_hz'
+                        'hz_per_sec'
+                        'getlists'
+                        'float'
+                        'probe_points'
+                        'getboolean'
+                        'low_mem'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'min_freq'
+                        5
+                        1
+                        (
+                            'minval'
+                        )
+                        'max_freq'
+                        133.333
+                        200
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'accel_per_hz'
+                        75
+                        0
+                        (
+                            'above'
+                        )
+                        'hz_per_sec'
+                        0.1
+                        2
+                        'probe_points'
+                        (
+                            ','
+                            '\n'
+                        )
+                        3
+                        (
+                            'seps'
+                            'parser'
+                            'count'
+                        )
+                        'low_mem'
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: lookup_object
+                        16      LOAD_CONST                      1: 'gcode'
+                        18      CALL_METHOD                     1
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: gcode
+                        24      LOAD_FAST                       1: config
+                        26      LOAD_ATTR                       4: getfloat
+                        28      LOAD_CONST                      2: 'min_freq'
+                        30      LOAD_CONST                      3: 5
+                        32      LOAD_CONST                      4: 1
+                        34      LOAD_CONST                      5: ('minval',)
+                        36      CALL_FUNCTION_KW                3
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      5: min_freq
+                        42      LOAD_FAST                       1: config
+                        44      LOAD_ATTR                       4: getfloat
+                        46      LOAD_CONST                      6: 'max_freq'
+                        48      LOAD_CONST                      7: 133.333
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       5: min_freq
+                        54      LOAD_CONST                      8: 200
+                        56      LOAD_CONST                      9: ('minval', 'maxval')
+                        58      CALL_FUNCTION_KW                4
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      6: max_freq
+                        64      LOAD_FAST                       1: config
+                        66      LOAD_ATTR                       4: getfloat
+                        68      LOAD_CONST                      10: 'accel_per_hz'
+                        70      LOAD_CONST                      11: 75
+                        72      LOAD_CONST                      12: 0
+                        74      LOAD_CONST                      13: ('above',)
+                        76      CALL_FUNCTION_KW                3
+                        78      LOAD_FAST                       0: self
+                        80      STORE_ATTR                      7: accel_per_hz
+                        82      LOAD_FAST                       1: config
+                        84      LOAD_ATTR                       4: getfloat
+                        86      LOAD_CONST                      14: 'hz_per_sec'
+                        88      LOAD_CONST                      4: 1
+                        90      LOAD_CONST                      15: 0.1
+                        92      LOAD_CONST                      16: 2
+                        94      LOAD_CONST                      9: ('minval', 'maxval')
+                        96      CALL_FUNCTION_KW                4
+                        98      LOAD_FAST                       0: self
+                        100     STORE_ATTR                      8: hz_per_sec
+                        102     LOAD_FAST                       1: config
+                        104     LOAD_ATTR                       9: getlists
+                        106     LOAD_CONST                      17: 'probe_points'
+                        108     LOAD_CONST                      18: (',', '\n')
+                        110     LOAD_GLOBAL                     10: float
+                        112     LOAD_CONST                      19: 3
+                        114     LOAD_CONST                      20: ('seps', 'parser', 'count')
+                        116     CALL_FUNCTION_KW                4
+                        118     LOAD_FAST                       0: self
+                        120     STORE_ATTR                      11: probe_points
+                        122     LOAD_FAST                       1: config
+                        124     LOAD_METHOD                     12: getboolean
+                        126     LOAD_CONST                      21: 'low_mem'
+                        128     LOAD_CONST                      22: True
+                        130     CALL_METHOD                     2
+                        132     LOAD_FAST                       0: self
+                        134     STORE_ATTR                      13: low_mem
+                        136     LOAD_CONST                      0: None
+                        138     RETURN_VALUE                    
+                'VibrationPulseTest.__init__'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: get_start_test_points
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'probe_points'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: probe_points
+                        4       RETURN_VALUE                    
+                'VibrationPulseTest.get_start_test_points'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: prepare_test
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'min_freq'
+                        'freq_start'
+                        'max_freq'
+                        'freq_end'
+                        'hz_per_sec'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'FREQ_START'
+                        1
+                        (
+                            'minval'
+                        )
+                        'FREQ_END'
+                        200
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'HZ_PER_SEC'
+                        0
+                        2
+                        (
+                            'above'
+                            'maxval'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_float
+                        4       LOAD_CONST                      1: 'FREQ_START'
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: min_freq
+                        10      LOAD_CONST                      2: 1
+                        12      LOAD_CONST                      3: ('minval',)
+                        14      CALL_FUNCTION_KW                3
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      2: freq_start
+                        20      LOAD_FAST                       1: gcmd
+                        22      LOAD_ATTR                       0: get_float
+                        24      LOAD_CONST                      4: 'FREQ_END'
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       3: max_freq
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       2: freq_start
+                        34      LOAD_CONST                      5: 200
+                        36      LOAD_CONST                      6: ('minval', 'maxval')
+                        38      CALL_FUNCTION_KW                4
+                        40      LOAD_FAST                       0: self
+                        42      STORE_ATTR                      4: freq_end
+                        44      LOAD_FAST                       1: gcmd
+                        46      LOAD_ATTR                       0: get_float
+                        48      LOAD_CONST                      7: 'HZ_PER_SEC'
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       5: hz_per_sec
+                        54      LOAD_CONST                      8: 0
+                        56      LOAD_CONST                      9: 2
+                        58      LOAD_CONST                      10: ('above', 'maxval')
+                        60      CALL_FUNCTION_KW                4
+                        62      LOAD_FAST                       0: self
+                        64      STORE_ATTR                      5: hz_per_sec
+                        66      LOAD_CONST                      0: None
+                        68      RETURN_VALUE                    
+                'VibrationPulseTest.prepare_test'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: run_test
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 25
+                    Stack Size: 11
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_position'
+                        'freq_start'
+                        'get_reactor'
+                        'monotonic'
+                        'get_status'
+                        'freq_end'
+                        'accel_per_hz'
+                        'gcode'
+                        'run_script_from_command'
+                        'get_int'
+                        'disable_shaping'
+                        'respond_info'
+                        'check_cancel_running'
+                        'cmd_M204'
+                        'create_gcode_command'
+                        'get_point'
+                        'move'
+                        'hz_per_sec'
+                        'math'
+                        'floor'
+                        'enable_shaping'
+                    [Var Names]
+                        'self'
+                        'axis'
+                        'gcmd'
+                        'toolhead'
+                        'X'
+                        'Y'
+                        'Z'
+                        'E'
+                        'sign'
+                        'freq'
+                        'systime'
+                        'toolhead_info'
+                        'old_max_accel'
+                        'old_max_accel_to_decel'
+                        'max_accel'
+                        'input_shaper'
+                        't_seg'
+                        'accel'
+                        'max_v'
+                        'L'
+                        'dX'
+                        'dY'
+                        'nX'
+                        'nY'
+                        'old_freq'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        1
+                        'max_accel'
+                        'max_accel_to_decel'
+                        'SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f'
+                        'input_shaper'
+                        'INPUT_SHAPING'
+                        0
+                        'Disabled [input_shaper] for resonance testing'
+                        'Testing frequency %.0f Hz'
+                        1e-06
+                        0.25
+                        'M204'
+                        'S'
+                        0.5
+                        2
+                        2
+                        'Re-enabled [input_shaper]'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      3: toolhead
+                        12      LOAD_FAST                       3: toolhead
+                        14      LOAD_METHOD                     2: get_position
+                        16      CALL_METHOD                     0
+                        18      UNPACK_SEQUENCE                 4
+                        20      STORE_FAST                      4: X
+                        22      STORE_FAST                      5: Y
+                        24      STORE_FAST                      6: Z
+                        26      STORE_FAST                      7: E
+                        28      LOAD_CONST                      2: 1
+                        30      STORE_FAST                      8: sign
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       3: freq_start
+                        36      STORE_FAST                      9: freq
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       0: printer
+                        42      LOAD_METHOD                     4: get_reactor
+                        44      CALL_METHOD                     0
+                        46      LOAD_METHOD                     5: monotonic
+                        48      CALL_METHOD                     0
+                        50      STORE_FAST                      10: systime
+                        52      LOAD_FAST                       3: toolhead
+                        54      LOAD_METHOD                     6: get_status
+                        56      LOAD_FAST                       10: systime
+                        58      CALL_METHOD                     1
+                        60      STORE_FAST                      11: toolhead_info
+                        62      LOAD_FAST                       11: toolhead_info
+                        64      LOAD_CONST                      3: 'max_accel'
+                        66      BINARY_SUBSCR                   
+                        68      STORE_FAST                      12: old_max_accel
+                        70      LOAD_FAST                       11: toolhead_info
+                        72      LOAD_CONST                      4: 'max_accel_to_decel'
+                        74      BINARY_SUBSCR                   
+                        76      STORE_FAST                      13: old_max_accel_to_decel
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       7: freq_end
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       8: accel_per_hz
+                        86      BINARY_MULTIPLY                 
+                        88      STORE_FAST                      14: max_accel
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       9: gcode
+                        94      LOAD_METHOD                     10: run_script_from_command
+                        96      LOAD_CONST                      5: 'SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f'
+                        98      LOAD_FAST                       14: max_accel
+                        100     LOAD_FAST                       14: max_accel
+                        102     BUILD_TUPLE                     2
+                        104     BINARY_MODULO                   
+                        106     CALL_METHOD                     1
+                        108     POP_TOP                         
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       0: printer
+                        114     LOAD_METHOD                     1: lookup_object
+                        116     LOAD_CONST                      6: 'input_shaper'
+                        118     LOAD_CONST                      0: None
+                        120     CALL_METHOD                     2
+                        122     STORE_FAST                      15: input_shaper
+                        124     LOAD_FAST                       15: input_shaper
+                        126     LOAD_CONST                      0: None
+                        128     IS_OP                           1 (is not)
+                        130     POP_JUMP_IF_FALSE               164
+                        132     LOAD_FAST                       2: gcmd
+                        134     LOAD_METHOD                     11: get_int
+                        136     LOAD_CONST                      7: 'INPUT_SHAPING'
+                        138     LOAD_CONST                      8: 0
+                        140     CALL_METHOD                     2
+                        142     POP_JUMP_IF_TRUE                164
+                        144     LOAD_FAST                       15: input_shaper
+                        146     LOAD_METHOD                     12: disable_shaping
+                        148     CALL_METHOD                     0
+                        150     POP_TOP                         
+                        152     LOAD_FAST                       2: gcmd
+                        154     LOAD_METHOD                     13: respond_info
+                        156     LOAD_CONST                      9: 'Disabled [input_shaper] for resonance testing'
+                        158     CALL_METHOD                     1
+                        160     POP_TOP                         
+                        162     JUMP_FORWARD                    4 (to 168)
+                        164     LOAD_CONST                      0: None
+                        166     STORE_FAST                      15: input_shaper
+                        168     LOAD_FAST                       2: gcmd
+                        170     LOAD_METHOD                     13: respond_info
+                        172     LOAD_CONST                      10: 'Testing frequency %.0f Hz'
+                        174     LOAD_FAST                       9: freq
+                        176     BUILD_TUPLE                     1
+                        178     BINARY_MODULO                   
+                        180     CALL_METHOD                     1
+                        182     POP_TOP                         
+                        184     SETUP_FINALLY                   290 (to 478)
+                        188     LOAD_FAST                       9: freq
+                        190     LOAD_FAST                       0: self
+                        192     LOAD_ATTR                       7: freq_end
+                        194     LOAD_CONST                      11: 1e-06
+                        196     BINARY_ADD                      
+                        198     COMPARE_OP                      1 (<=)
+                        200     POP_JUMP_IF_FALSE               426
+                        204     LOAD_FAST                       0: self
+                        206     LOAD_ATTR                       9: gcode
+                        208     LOAD_METHOD                     14: check_cancel_running
+                        210     CALL_METHOD                     0
+                        212     POP_TOP                         
+                        214     LOAD_CONST                      12: 0.25
+                        216     LOAD_FAST                       9: freq
+                        218     BINARY_TRUE_DIVIDE              
+                        220     STORE_FAST                      16: t_seg
+                        222     LOAD_FAST                       0: self
+                        224     LOAD_ATTR                       8: accel_per_hz
+                        226     LOAD_FAST                       9: freq
+                        228     BINARY_MULTIPLY                 
+                        230     STORE_FAST                      17: accel
+                        232     LOAD_FAST                       17: accel
+                        234     LOAD_FAST                       16: t_seg
+                        236     BINARY_MULTIPLY                 
+                        238     STORE_FAST                      18: max_v
+                        240     LOAD_FAST                       3: toolhead
+                        242     LOAD_METHOD                     15: cmd_M204
+                        244     LOAD_FAST                       0: self
+                        246     LOAD_ATTR                       9: gcode
+                        248     LOAD_METHOD                     16: create_gcode_command
+                        250     LOAD_CONST                      13: 'M204'
+                        252     LOAD_CONST                      13: 'M204'
+                        254     LOAD_CONST                      14: 'S'
+                        256     LOAD_FAST                       17: accel
+                        258     BUILD_MAP                       1
+                        260     CALL_METHOD                     3
+                        262     CALL_METHOD                     1
+                        264     POP_TOP                         
+                        266     LOAD_CONST                      15: 0.5
+                        268     LOAD_FAST                       17: accel
+                        270     BINARY_MULTIPLY                 
+                        272     LOAD_FAST                       16: t_seg
+                        274     LOAD_CONST                      16: 2
+                        276     BINARY_POWER                    
+                        278     BINARY_MULTIPLY                 
+                        280     STORE_FAST                      19: L
+                        282     LOAD_FAST                       1: axis
+                        284     LOAD_METHOD                     17: get_point
+                        286     LOAD_FAST                       19: L
+                        288     CALL_METHOD                     1
+                        290     UNPACK_SEQUENCE                 2
+                        292     STORE_FAST                      20: dX
+                        294     STORE_FAST                      21: dY
+                        296     LOAD_FAST                       4: X
+                        298     LOAD_FAST                       8: sign
+                        300     LOAD_FAST                       20: dX
+                        302     BINARY_MULTIPLY                 
+                        304     BINARY_ADD                      
+                        306     STORE_FAST                      22: nX
+                        308     LOAD_FAST                       5: Y
+                        310     LOAD_FAST                       8: sign
+                        312     LOAD_FAST                       21: dY
+                        314     BINARY_MULTIPLY                 
+                        316     BINARY_ADD                      
+                        318     STORE_FAST                      23: nY
+                        320     LOAD_FAST                       3: toolhead
+                        322     LOAD_METHOD                     18: move
+                        324     LOAD_FAST                       22: nX
+                        326     LOAD_FAST                       23: nY
+                        328     LOAD_FAST                       6: Z
+                        330     LOAD_FAST                       7: E
+                        332     BUILD_LIST                      4
+                        334     LOAD_FAST                       18: max_v
+                        336     CALL_METHOD                     2
+                        338     POP_TOP                         
+                        340     LOAD_FAST                       3: toolhead
+                        342     LOAD_METHOD                     18: move
+                        344     LOAD_FAST                       4: X
+                        346     LOAD_FAST                       5: Y
+                        348     LOAD_FAST                       6: Z
+                        350     LOAD_FAST                       7: E
+                        352     BUILD_LIST                      4
+                        354     LOAD_FAST                       18: max_v
+                        356     CALL_METHOD                     2
+                        358     POP_TOP                         
+                        360     LOAD_FAST                       8: sign
+                        362     UNARY_NEGATIVE                  
+                        364     STORE_FAST                      8: sign
+                        366     LOAD_FAST                       9: freq
+                        368     STORE_FAST                      24: old_freq
+                        370     LOAD_FAST                       9: freq
+                        372     LOAD_CONST                      17: 2
+                        374     LOAD_FAST                       16: t_seg
+                        376     BINARY_MULTIPLY                 
+                        378     LOAD_FAST                       0: self
+                        380     LOAD_ATTR                       19: hz_per_sec
+                        382     BINARY_MULTIPLY                 
+                        384     INPLACE_ADD                     
+                        386     STORE_FAST                      9: freq
+                        388     LOAD_GLOBAL                     20: math
+                        390     LOAD_METHOD                     21: floor
+                        392     LOAD_FAST                       9: freq
+                        394     CALL_METHOD                     1
+                        396     LOAD_GLOBAL                     20: math
+                        398     LOAD_METHOD                     21: floor
+                        400     LOAD_FAST                       24: old_freq
+                        402     CALL_METHOD                     1
+                        404     COMPARE_OP                      4 (>)
+                        406     POP_JUMP_IF_FALSE               188
+                        408     LOAD_FAST                       2: gcmd
+                        410     LOAD_METHOD                     13: respond_info
+                        412     LOAD_CONST                      10: 'Testing frequency %.0f Hz'
+                        414     LOAD_FAST                       9: freq
+                        416     BUILD_TUPLE                     1
+                        418     BINARY_MODULO                   
+                        420     CALL_METHOD                     1
+                        422     POP_TOP                         
+                        424     JUMP_ABSOLUTE                   188
+                        426     POP_BLOCK                       
+                        428     LOAD_FAST                       0: self
+                        430     LOAD_ATTR                       9: gcode
+                        432     LOAD_METHOD                     10: run_script_from_command
+                        434     LOAD_CONST                      5: 'SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f'
+                        436     LOAD_FAST                       12: old_max_accel
+                        438     LOAD_FAST                       13: old_max_accel_to_decel
+                        440     BUILD_TUPLE                     2
+                        442     BINARY_MODULO                   
+                        444     CALL_METHOD                     1
+                        446     POP_TOP                         
+                        448     LOAD_FAST                       15: input_shaper
+                        450     LOAD_CONST                      0: None
+                        452     IS_OP                           1 (is not)
+                        454     POP_JUMP_IF_FALSE               528
+                        458     LOAD_FAST                       15: input_shaper
+                        460     LOAD_METHOD                     22: enable_shaping
+                        462     CALL_METHOD                     0
+                        464     POP_TOP                         
+                        466     LOAD_FAST                       2: gcmd
+                        468     LOAD_METHOD                     13: respond_info
+                        470     LOAD_CONST                      18: 'Re-enabled [input_shaper]'
+                        472     CALL_METHOD                     1
+                        474     POP_TOP                         
+                        476     JUMP_FORWARD                    50 (to 528)
+                        478     LOAD_FAST                       0: self
+                        480     LOAD_ATTR                       9: gcode
+                        482     LOAD_METHOD                     10: run_script_from_command
+                        484     LOAD_CONST                      5: 'SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f'
+                        486     LOAD_FAST                       12: old_max_accel
+                        488     LOAD_FAST                       13: old_max_accel_to_decel
+                        490     BUILD_TUPLE                     2
+                        492     BINARY_MODULO                   
+                        494     CALL_METHOD                     1
+                        496     POP_TOP                         
+                        498     LOAD_FAST                       15: input_shaper
+                        500     LOAD_CONST                      0: None
+                        502     IS_OP                           1 (is not)
+                        504     POP_JUMP_IF_FALSE               526
+                        508     LOAD_FAST                       15: input_shaper
+                        510     LOAD_METHOD                     22: enable_shaping
+                        512     CALL_METHOD                     0
+                        514     POP_TOP                         
+                        516     LOAD_FAST                       2: gcmd
+                        518     LOAD_METHOD                     13: respond_info
+                        520     LOAD_CONST                      18: 'Re-enabled [input_shaper]'
+                        522     CALL_METHOD                     1
+                        524     POP_TOP                         
+                        526     RERAISE                         
+                        528     LOAD_CONST                      0: None
+                        530     RETURN_VALUE                    
+                'VibrationPulseTest.run_test'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'VibrationPulseTest'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'VibrationPulseTest.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_start_test_points
+                18      LOAD_CONST                      4: 'VibrationPulseTest.get_start_test_points'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_start_test_points
+                24      LOAD_CONST                      5: <CODE> prepare_test
+                26      LOAD_CONST                      6: 'VibrationPulseTest.prepare_test'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: prepare_test
+                32      LOAD_CONST                      7: <CODE> run_test
+                34      LOAD_CONST                      8: 'VibrationPulseTest.run_test'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: run_test
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'VibrationPulseTest'
+        [Code]
+            File Name: /extras/resonance_tester.py
+            Object Name: ResonanceTester
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'connect'
+                '_run_test'
+                'cmd_TEST_RESONANCES_help'
+                'cmd_TEST_RESONANCES'
+                'cmd_SHAPER_CALIBRATE_help'
+                'cmd_SHAPER_CALIBRATE'
+                'cmd_MEASURE_AXES_NOISE_help'
+                'cmd_MEASURE_AXES_NOISE'
+                'is_valid_name_suffix'
+                'get_filename'
+                'save_calibration_data'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ResonanceTester'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'getfloat'
+                        'move_speed'
+                        'VibrationPulseTest'
+                        'test'
+                        'get'
+                        'strip'
+                        'accel_chip_names'
+                        'max_smoothing'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_MEASURE_AXES_NOISE'
+                        'cmd_MEASURE_AXES_NOISE_help'
+                        'cmd_TEST_RESONANCES'
+                        'cmd_TEST_RESONANCES_help'
+                        'cmd_SHAPER_CALIBRATE'
+                        'cmd_SHAPER_CALIBRATE_help'
+                        'register_event_handler'
+                        'connect'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'move_speed'
+                        50
+                        0
+                        (
+                            'above'
+                        )
+                        'accel_chip_x'
+                        'xy'
+                        'accel_chip'
+                        'x'
+                        'y'
+                        'accel_chip_y'
+                        0
+                        1
+                        'max_smoothing'
+                        0.05
+                        (
+                            'minval'
+                        )
+                        'gcode'
+                        'MEASURE_AXES_NOISE'
+                        (
+                            'desc'
+                        )
+                        'TEST_RESONANCES'
+                        'SHAPER_CALIBRATE'
+                        'klippy:connect'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_ATTR                       2: getfloat
+                        14      LOAD_CONST                      1: 'move_speed'
+                        16      LOAD_CONST                      2: 50
+                        18      LOAD_CONST                      3: 0
+                        20      LOAD_CONST                      4: ('above',)
+                        22      CALL_FUNCTION_KW                3
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      3: move_speed
+                        28      LOAD_GLOBAL                     4: VibrationPulseTest
+                        30      LOAD_FAST                       1: config
+                        32      CALL_FUNCTION                   1
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      5: test
+                        38      LOAD_FAST                       1: config
+                        40      LOAD_METHOD                     6: get
+                        42      LOAD_CONST                      5: 'accel_chip_x'
+                        44      LOAD_CONST                      0: None
+                        46      CALL_METHOD                     2
+                        48      POP_JUMP_IF_TRUE                74
+                        50      LOAD_CONST                      6: 'xy'
+                        52      LOAD_FAST                       1: config
+                        54      LOAD_METHOD                     6: get
+                        56      LOAD_CONST                      7: 'accel_chip'
+                        58      CALL_METHOD                     1
+                        60      LOAD_METHOD                     7: strip
+                        62      CALL_METHOD                     0
+                        64      BUILD_TUPLE                     2
+                        66      BUILD_LIST                      1
+                        68      LOAD_FAST                       0: self
+                        70      STORE_ATTR                      8: accel_chip_names
+                        72      JUMP_FORWARD                    88 (to 162)
+                        74      LOAD_CONST                      8: 'x'
+                        76      LOAD_FAST                       1: config
+                        78      LOAD_METHOD                     6: get
+                        80      LOAD_CONST                      5: 'accel_chip_x'
+                        82      CALL_METHOD                     1
+                        84      LOAD_METHOD                     7: strip
+                        86      CALL_METHOD                     0
+                        88      BUILD_TUPLE                     2
+                        90      LOAD_CONST                      9: 'y'
+                        92      LOAD_FAST                       1: config
+                        94      LOAD_METHOD                     6: get
+                        96      LOAD_CONST                      10: 'accel_chip_y'
+                        98      CALL_METHOD                     1
+                        100     LOAD_METHOD                     7: strip
+                        102     CALL_METHOD                     0
+                        104     BUILD_TUPLE                     2
+                        106     BUILD_LIST                      2
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      8: accel_chip_names
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       8: accel_chip_names
+                        116     LOAD_CONST                      11: 0
+                        118     BINARY_SUBSCR                   
+                        120     LOAD_CONST                      12: 1
+                        122     BINARY_SUBSCR                   
+                        124     LOAD_FAST                       0: self
+                        126     LOAD_ATTR                       8: accel_chip_names
+                        128     LOAD_CONST                      12: 1
+                        130     BINARY_SUBSCR                   
+                        132     LOAD_CONST                      12: 1
+                        134     BINARY_SUBSCR                   
+                        136     COMPARE_OP                      2 (==)
+                        138     POP_JUMP_IF_FALSE               162
+                        140     LOAD_CONST                      6: 'xy'
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       8: accel_chip_names
+                        146     LOAD_CONST                      11: 0
+                        148     BINARY_SUBSCR                   
+                        150     LOAD_CONST                      12: 1
+                        152     BINARY_SUBSCR                   
+                        154     BUILD_TUPLE                     2
+                        156     BUILD_LIST                      1
+                        158     LOAD_FAST                       0: self
+                        160     STORE_ATTR                      8: accel_chip_names
+                        162     LOAD_FAST                       1: config
+                        164     LOAD_ATTR                       2: getfloat
+                        166     LOAD_CONST                      13: 'max_smoothing'
+                        168     LOAD_CONST                      0: None
+                        170     LOAD_CONST                      14: 0.05
+                        172     LOAD_CONST                      15: ('minval',)
+                        174     CALL_FUNCTION_KW                3
+                        176     LOAD_FAST                       0: self
+                        178     STORE_ATTR                      9: max_smoothing
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       1: printer
+                        184     LOAD_METHOD                     10: lookup_object
+                        186     LOAD_CONST                      16: 'gcode'
+                        188     CALL_METHOD                     1
+                        190     LOAD_FAST                       0: self
+                        192     STORE_ATTR                      11: gcode
+                        194     LOAD_FAST                       0: self
+                        196     LOAD_ATTR                       11: gcode
+                        198     LOAD_ATTR                       12: register_command
+                        200     LOAD_CONST                      17: 'MEASURE_AXES_NOISE'
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       13: cmd_MEASURE_AXES_NOISE
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       14: cmd_MEASURE_AXES_NOISE_help
+                        210     LOAD_CONST                      18: ('desc',)
+                        212     CALL_FUNCTION_KW                3
+                        214     POP_TOP                         
+                        216     LOAD_FAST                       0: self
+                        218     LOAD_ATTR                       11: gcode
+                        220     LOAD_ATTR                       12: register_command
+                        222     LOAD_CONST                      19: 'TEST_RESONANCES'
+                        224     LOAD_FAST                       0: self
+                        226     LOAD_ATTR                       15: cmd_TEST_RESONANCES
+                        228     LOAD_FAST                       0: self
+                        230     LOAD_ATTR                       16: cmd_TEST_RESONANCES_help
+                        232     LOAD_CONST                      18: ('desc',)
+                        234     CALL_FUNCTION_KW                3
+                        236     POP_TOP                         
+                        238     LOAD_FAST                       0: self
+                        240     LOAD_ATTR                       11: gcode
+                        242     LOAD_ATTR                       12: register_command
+                        244     LOAD_CONST                      20: 'SHAPER_CALIBRATE'
+                        246     LOAD_FAST                       0: self
+                        248     LOAD_ATTR                       17: cmd_SHAPER_CALIBRATE
+                        250     LOAD_FAST                       0: self
+                        252     LOAD_ATTR                       18: cmd_SHAPER_CALIBRATE_help
+                        254     LOAD_CONST                      18: ('desc',)
+                        256     CALL_FUNCTION_KW                3
+                        258     POP_TOP                         
+                        260     LOAD_FAST                       0: self
+                        262     LOAD_ATTR                       1: printer
+                        264     LOAD_METHOD                     19: register_event_handler
+                        266     LOAD_CONST                      21: 'klippy:connect'
+                        268     LOAD_FAST                       0: self
+                        270     LOAD_ATTR                       20: connect
+                        272     CALL_METHOD                     2
+                        274     POP_TOP                         
+                        276     LOAD_CONST                      0: None
+                        278     RETURN_VALUE                    
+                'ResonanceTester.__init__'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'accel_chip_names'
+                        'accel_chips'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                        'self'
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/resonance_tester.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'printer'
+                                'lookup_object'
+                            [Var Names]
+                                '.0'
+                                'chip_axis'
+                                'chip_name'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        24 (to 30)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: chip_axis
+                                10      STORE_FAST                      2: chip_name
+                                12      LOAD_FAST                       1: chip_axis
+                                14      LOAD_DEREF                      0: self
+                                16      LOAD_ATTR                       0: printer
+                                18      LOAD_METHOD                     1: lookup_object
+                                20      LOAD_FAST                       2: chip_name
+                                22      CALL_METHOD                     1
+                                24      BUILD_TUPLE                     2
+                                26      LIST_APPEND                     2
+                                28      JUMP_ABSOLUTE                   4
+                                30      RETURN_VALUE                    
+                        'ResonanceTester.connect.<locals>.<listcomp>'
+                    [Disassembly]
+                        0       LOAD_CLOSURE                    0: self
+                        2       BUILD_TUPLE                     1
+                        4       LOAD_CONST                      1: <CODE> <listcomp>
+                        6       LOAD_CONST                      2: 'ResonanceTester.connect.<locals>.<listcomp>'
+                        8       MAKE_FUNCTION                   8
+                        10      LOAD_DEREF                      0: self
+                        12      LOAD_ATTR                       0: accel_chip_names
+                        14      GET_ITER                        
+                        16      CALL_FUNCTION                   1
+                        18      LOAD_DEREF                      0: self
+                        20      STORE_ATTR                      1: accel_chips
+                        22      LOAD_CONST                      0: None
+                        24      RETURN_VALUE                    
+                'ResonanceTester.connect'
+                None
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: _run_test
+                    Arg Count: 7
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 19
+                    Stack Size: 17
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'test'
+                        'prepare_test'
+                        'get_start_test_points'
+                        'manual_move'
+                        'move_speed'
+                        'len'
+                        'respond_info'
+                        'tuple'
+                        'wait_moves'
+                        'dwell'
+                        'get_name'
+                        'accel_chips'
+                        'matches'
+                        'start_internal_client'
+                        'append'
+                        'name'
+                        'run_test'
+                        'finish_measurements'
+                        'get_filename'
+                        'write_to_file'
+                        'has_valid_samples'
+                        'error'
+                        'low_mem'
+                        'lowmem_process_accelerometer_data'
+                        'process_accelerometer_data'
+                        'add_data'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'axes'
+                        'helper'
+                        'raw_name_suffix'
+                        'accel_chips'
+                        'test_point'
+                        'toolhead'
+                        'calibration_data'
+                        'test_points'
+                        'point'
+                        'axis'
+                        'raw_values'
+                        'chip_axis'
+                        'chip'
+                        'aclient'
+                        'chip_name'
+                        'raw_name'
+                        'new_data'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        [Code]
+                            File Name: /extras/resonance_tester.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'axis'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        10 (to 16)
+                                6       STORE_FAST                      1: axis
+                                8       LOAD_FAST                       1: axis
+                                10      LOAD_CONST                      0: None
+                                12      MAP_ADD                         2
+                                14      JUMP_ABSOLUTE                   4
+                                16      RETURN_VALUE                    
+                        'ResonanceTester._run_test.<locals>.<dictcomp>'
+                        1
+                        'Probing point (%.3f, %.3f, %.3f)'
+                        0.5
+                        'Testing axis %s'
+                        'raw_data'
+                        'Writing raw accelerometer data to %s file'
+                        '{"code":"key56", "msg":"accelerometer \'%s\' measured no data", "values": ["%s"]}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      7: toolhead
+                        12      LOAD_CONST                      2: <CODE> <dictcomp>
+                        14      LOAD_CONST                      3: 'ResonanceTester._run_test.<locals>.<dictcomp>'
+                        16      MAKE_FUNCTION                   0
+                        18      LOAD_FAST                       2: axes
+                        20      GET_ITER                        
+                        22      CALL_FUNCTION                   1
+                        24      STORE_FAST                      8: calibration_data
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       2: test
+                        30      LOAD_METHOD                     3: prepare_test
+                        32      LOAD_FAST                       1: gcmd
+                        34      CALL_METHOD                     1
+                        36      POP_TOP                         
+                        38      LOAD_FAST                       6: test_point
+                        40      LOAD_CONST                      0: None
+                        42      IS_OP                           1 (is not)
+                        44      POP_JUMP_IF_FALSE               54
+                        46      LOAD_FAST                       6: test_point
+                        48      BUILD_LIST                      1
+                        50      STORE_FAST                      9: test_points
+                        52      JUMP_FORWARD                    10 (to 64)
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       2: test
+                        58      LOAD_METHOD                     4: get_start_test_points
+                        60      CALL_METHOD                     0
+                        62      STORE_FAST                      9: test_points
+                        64      LOAD_FAST                       9: test_points
+                        66      GET_ITER                        
+                        68      FOR_ITER                        592 (to 664)
+                        72      STORE_FAST                      10: point
+                        74      LOAD_FAST                       7: toolhead
+                        76      LOAD_METHOD                     5: manual_move
+                        78      LOAD_FAST                       10: point
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       6: move_speed
+                        84      CALL_METHOD                     2
+                        86      POP_TOP                         
+                        88      LOAD_GLOBAL                     7: len
+                        90      LOAD_FAST                       9: test_points
+                        92      CALL_FUNCTION                   1
+                        94      LOAD_CONST                      4: 1
+                        96      COMPARE_OP                      4 (>)
+                        98      POP_JUMP_IF_TRUE                108
+                        100     LOAD_FAST                       6: test_point
+                        102     LOAD_CONST                      0: None
+                        104     IS_OP                           1 (is not)
+                        106     POP_JUMP_IF_FALSE               126
+                        108     LOAD_FAST                       1: gcmd
+                        110     LOAD_METHOD                     8: respond_info
+                        112     LOAD_CONST                      5: 'Probing point (%.3f, %.3f, %.3f)'
+                        114     LOAD_GLOBAL                     9: tuple
+                        116     LOAD_FAST                       10: point
+                        118     CALL_FUNCTION                   1
+                        120     BINARY_MODULO                   
+                        122     CALL_METHOD                     1
+                        124     POP_TOP                         
+                        126     LOAD_FAST                       2: axes
+                        128     GET_ITER                        
+                        130     FOR_ITER                        528 (to 662)
+                        134     STORE_FAST                      11: axis
+                        136     LOAD_FAST                       7: toolhead
+                        138     LOAD_METHOD                     10: wait_moves
+                        140     CALL_METHOD                     0
+                        142     POP_TOP                         
+                        144     LOAD_FAST                       7: toolhead
+                        146     LOAD_METHOD                     11: dwell
+                        148     LOAD_CONST                      6: 0.5
+                        150     CALL_METHOD                     1
+                        152     POP_TOP                         
+                        154     LOAD_GLOBAL                     7: len
+                        156     LOAD_FAST                       2: axes
+                        158     CALL_FUNCTION                   1
+                        160     LOAD_CONST                      4: 1
+                        162     COMPARE_OP                      4 (>)
+                        164     POP_JUMP_IF_FALSE               184
+                        166     LOAD_FAST                       1: gcmd
+                        168     LOAD_METHOD                     8: respond_info
+                        170     LOAD_CONST                      7: 'Testing axis %s'
+                        172     LOAD_FAST                       11: axis
+                        174     LOAD_METHOD                     12: get_name
+                        176     CALL_METHOD                     0
+                        178     BINARY_MODULO                   
+                        180     CALL_METHOD                     1
+                        182     POP_TOP                         
+                        184     BUILD_LIST                      0
+                        186     STORE_FAST                      12: raw_values
+                        188     LOAD_FAST                       5: accel_chips
+                        190     LOAD_CONST                      0: None
+                        192     IS_OP                           0 (is)
+                        194     POP_JUMP_IF_FALSE               250
+                        196     LOAD_FAST                       0: self
+                        198     LOAD_ATTR                       13: accel_chips
+                        200     GET_ITER                        
+                        202     FOR_ITER                        44 (to 248)
+                        204     UNPACK_SEQUENCE                 2
+                        206     STORE_FAST                      13: chip_axis
+                        208     STORE_FAST                      14: chip
+                        210     LOAD_FAST                       11: axis
+                        212     LOAD_METHOD                     14: matches
+                        214     LOAD_FAST                       13: chip_axis
+                        216     CALL_METHOD                     1
+                        218     POP_JUMP_IF_FALSE               202
+                        220     LOAD_FAST                       14: chip
+                        222     LOAD_METHOD                     15: start_internal_client
+                        224     CALL_METHOD                     0
+                        226     STORE_FAST                      15: aclient
+                        228     LOAD_FAST                       12: raw_values
+                        230     LOAD_METHOD                     16: append
+                        232     LOAD_FAST                       13: chip_axis
+                        234     LOAD_FAST                       15: aclient
+                        236     LOAD_FAST                       14: chip
+                        238     LOAD_ATTR                       17: name
+                        240     BUILD_TUPLE                     3
+                        242     CALL_METHOD                     1
+                        244     POP_TOP                         
+                        246     JUMP_ABSOLUTE                   202
+                        248     JUMP_FORWARD                    36 (to 286)
+                        250     LOAD_FAST                       5: accel_chips
+                        252     GET_ITER                        
+                        254     FOR_ITER                        30 (to 286)
+                        256     STORE_FAST                      14: chip
+                        258     LOAD_FAST                       14: chip
+                        260     LOAD_METHOD                     15: start_internal_client
+                        262     CALL_METHOD                     0
+                        264     STORE_FAST                      15: aclient
+                        266     LOAD_FAST                       12: raw_values
+                        268     LOAD_METHOD                     16: append
+                        270     LOAD_FAST                       11: axis
+                        272     LOAD_FAST                       15: aclient
+                        274     LOAD_FAST                       14: chip
+                        276     LOAD_ATTR                       17: name
+                        278     BUILD_TUPLE                     3
+                        280     CALL_METHOD                     1
+                        282     POP_TOP                         
+                        284     JUMP_ABSOLUTE                   254
+                        286     SETUP_FINALLY                   130 (to 418)
+                        288     LOAD_FAST                       0: self
+                        290     LOAD_ATTR                       2: test
+                        292     LOAD_METHOD                     18: run_test
+                        294     LOAD_FAST                       11: axis
+                        296     LOAD_FAST                       1: gcmd
+                        298     CALL_METHOD                     2
+                        300     POP_TOP                         
+                        302     POP_BLOCK                       
+                        304     LOAD_FAST                       12: raw_values
+                        306     GET_ITER                        
+                        308     FOR_ITER                        106 (to 416)
+                        310     UNPACK_SEQUENCE                 3
+                        312     STORE_FAST                      13: chip_axis
+                        314     STORE_FAST                      15: aclient
+                        316     STORE_FAST                      16: chip_name
+                        318     LOAD_FAST                       15: aclient
+                        320     LOAD_METHOD                     19: finish_measurements
+                        322     CALL_METHOD                     0
+                        324     POP_TOP                         
+                        326     LOAD_FAST                       4: raw_name_suffix
+                        328     LOAD_CONST                      0: None
+                        330     IS_OP                           1 (is not)
+                        332     POP_JUMP_IF_FALSE               308
+                        336     LOAD_FAST                       0: self
+                        338     LOAD_METHOD                     20: get_filename
+                        340     LOAD_CONST                      8: 'raw_data'
+                        342     LOAD_FAST                       4: raw_name_suffix
+                        344     LOAD_FAST                       11: axis
+                        346     LOAD_GLOBAL                     7: len
+                        348     LOAD_FAST                       9: test_points
+                        350     CALL_FUNCTION                   1
+                        352     LOAD_CONST                      4: 1
+                        354     COMPARE_OP                      4 (>)
+                        356     POP_JUMP_IF_FALSE               364
+                        360     LOAD_FAST                       10: point
+                        362     JUMP_FORWARD                    2 (to 366)
+                        364     LOAD_CONST                      0: None
+                        366     LOAD_FAST                       5: accel_chips
+                        368     LOAD_CONST                      0: None
+                        370     IS_OP                           1 (is not)
+                        372     POP_JUMP_IF_FALSE               380
+                        376     LOAD_FAST                       16: chip_name
+                        378     JUMP_FORWARD                    2 (to 382)
+                        380     LOAD_CONST                      0: None
+                        382     CALL_METHOD                     5
+                        384     STORE_FAST                      17: raw_name
+                        386     LOAD_FAST                       15: aclient
+                        388     LOAD_METHOD                     21: write_to_file
+                        390     LOAD_FAST                       17: raw_name
+                        392     CALL_METHOD                     1
+                        394     POP_TOP                         
+                        396     LOAD_FAST                       1: gcmd
+                        398     LOAD_METHOD                     8: respond_info
+                        400     LOAD_CONST                      9: 'Writing raw accelerometer data to %s file'
+                        402     LOAD_FAST                       17: raw_name
+                        404     BUILD_TUPLE                     1
+                        406     BINARY_MODULO                   
+                        408     CALL_METHOD                     1
+                        410     POP_TOP                         
+                        412     JUMP_ABSOLUTE                   308
+                        416     JUMP_FORWARD                    114 (to 532)
+                        418     LOAD_FAST                       12: raw_values
+                        420     GET_ITER                        
+                        422     FOR_ITER                        106 (to 530)
+                        424     UNPACK_SEQUENCE                 3
+                        426     STORE_FAST                      13: chip_axis
+                        428     STORE_FAST                      15: aclient
+                        430     STORE_FAST                      16: chip_name
+                        432     LOAD_FAST                       15: aclient
+                        434     LOAD_METHOD                     19: finish_measurements
+                        436     CALL_METHOD                     0
+                        438     POP_TOP                         
+                        440     LOAD_FAST                       4: raw_name_suffix
+                        442     LOAD_CONST                      0: None
+                        444     IS_OP                           1 (is not)
+                        446     POP_JUMP_IF_FALSE               422
+                        450     LOAD_FAST                       0: self
+                        452     LOAD_METHOD                     20: get_filename
+                        454     LOAD_CONST                      8: 'raw_data'
+                        456     LOAD_FAST                       4: raw_name_suffix
+                        458     LOAD_FAST                       11: axis
+                        460     LOAD_GLOBAL                     7: len
+                        462     LOAD_FAST                       9: test_points
+                        464     CALL_FUNCTION                   1
+                        466     LOAD_CONST                      4: 1
+                        468     COMPARE_OP                      4 (>)
+                        470     POP_JUMP_IF_FALSE               478
+                        474     LOAD_FAST                       10: point
+                        476     JUMP_FORWARD                    2 (to 480)
+                        478     LOAD_CONST                      0: None
+                        480     LOAD_FAST                       5: accel_chips
+                        482     LOAD_CONST                      0: None
+                        484     IS_OP                           1 (is not)
+                        486     POP_JUMP_IF_FALSE               494
+                        490     LOAD_FAST                       16: chip_name
+                        492     JUMP_FORWARD                    2 (to 496)
+                        494     LOAD_CONST                      0: None
+                        496     CALL_METHOD                     5
+                        498     STORE_FAST                      17: raw_name
+                        500     LOAD_FAST                       15: aclient
+                        502     LOAD_METHOD                     21: write_to_file
+                        504     LOAD_FAST                       17: raw_name
+                        506     CALL_METHOD                     1
+                        508     POP_TOP                         
+                        510     LOAD_FAST                       1: gcmd
+                        512     LOAD_METHOD                     8: respond_info
+                        514     LOAD_CONST                      9: 'Writing raw accelerometer data to %s file'
+                        516     LOAD_FAST                       17: raw_name
+                        518     BUILD_TUPLE                     1
+                        520     BINARY_MODULO                   
+                        522     CALL_METHOD                     1
+                        524     POP_TOP                         
+                        526     JUMP_ABSOLUTE                   422
+                        530     RERAISE                         
+                        532     LOAD_FAST                       3: helper
+                        534     LOAD_CONST                      0: None
+                        536     IS_OP                           0 (is)
+                        538     POP_JUMP_IF_FALSE               544
+                        542     JUMP_ABSOLUTE                   130
+                        544     LOAD_FAST                       12: raw_values
+                        546     GET_ITER                        
+                        548     FOR_ITER                        110 (to 660)
+                        550     UNPACK_SEQUENCE                 3
+                        552     STORE_FAST                      13: chip_axis
+                        554     STORE_FAST                      15: aclient
+                        556     STORE_FAST                      16: chip_name
+                        558     LOAD_FAST                       15: aclient
+                        560     LOAD_METHOD                     22: has_valid_samples
+                        562     CALL_METHOD                     0
+                        564     POP_JUMP_IF_TRUE                586
+                        568     LOAD_FAST                       1: gcmd
+                        570     LOAD_METHOD                     23: error
+                        572     LOAD_CONST                      10: '{"code":"key56", "msg":"accelerometer \'%s\' measured no data", "values": ["%s"]}'
+                        574     LOAD_FAST                       16: chip_name
+                        576     LOAD_FAST                       16: chip_name
+                        578     BUILD_TUPLE                     2
+                        580     BINARY_MODULO                   
+                        582     CALL_METHOD                     1
+                        584     RAISE_VARARGS                   1
+                        586     LOAD_FAST                       0: self
+                        588     LOAD_ATTR                       2: test
+                        590     LOAD_ATTR                       24: low_mem
+                        592     POP_JUMP_IF_FALSE               608
+                        596     LOAD_FAST                       3: helper
+                        598     LOAD_METHOD                     25: lowmem_process_accelerometer_data
+                        600     LOAD_FAST                       15: aclient
+                        602     CALL_METHOD                     1
+                        604     STORE_FAST                      18: new_data
+                        606     JUMP_FORWARD                    10 (to 618)
+                        608     LOAD_FAST                       3: helper
+                        610     LOAD_METHOD                     26: process_accelerometer_data
+                        612     LOAD_FAST                       15: aclient
+                        614     CALL_METHOD                     1
+                        616     STORE_FAST                      18: new_data
+                        618     LOAD_FAST                       8: calibration_data
+                        620     LOAD_FAST                       11: axis
+                        622     BINARY_SUBSCR                   
+                        624     LOAD_CONST                      0: None
+                        626     IS_OP                           0 (is)
+                        628     POP_JUMP_IF_FALSE               642
+                        632     LOAD_FAST                       18: new_data
+                        634     LOAD_FAST                       8: calibration_data
+                        636     LOAD_FAST                       11: axis
+                        638     STORE_SUBSCR                    
+                        640     JUMP_FORWARD                    14 (to 656)
+                        642     LOAD_FAST                       8: calibration_data
+                        644     LOAD_FAST                       11: axis
+                        646     BINARY_SUBSCR                   
+                        648     LOAD_METHOD                     27: add_data
+                        650     LOAD_FAST                       18: new_data
+                        652     CALL_METHOD                     1
+                        654     POP_TOP                         
+                        656     JUMP_ABSOLUTE                   548
+                        660     JUMP_ABSOLUTE                   130
+                        662     JUMP_ABSOLUTE                   68
+                        664     LOAD_FAST                       8: calibration_data
+                        666     RETURN_VALUE                    
+                'ResonanceTester._run_test'
+                'Runs the resonance test for a specifed axis'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: cmd_TEST_RESONANCES
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 18
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_parse_axis'
+                        'get'
+                        'lower'
+                        'split'
+                        'len'
+                        'error'
+                        'ValueError'
+                        'strip'
+                        'printer'
+                        'lookup_object'
+                        'append'
+                        'time'
+                        'strftime'
+                        'is_valid_name_suffix'
+                        'shaper_calibrate'
+                        'ShaperCalibrate'
+                        '_run_test'
+                        'save_calibration_data'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'axis'
+                        'accel_chips'
+                        'test_point'
+                        'test_coords'
+                        'parsed_chips'
+                        'chip_name'
+                        'chip_lookup_name'
+                        'chip'
+                        'outputs'
+                        'output'
+                        'name_suffix'
+                        'csv_output'
+                        'raw_output'
+                        'helper'
+                        'data'
+                        'csv_name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'AXIS'
+                        'CHIPS'
+                        'POINT'
+                        ','
+                        3
+                        "Invalid POINT parameter, must be 'x,y,z'"
+                        [Code]
+                            File Name: /extras/resonance_tester.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'float'
+                                'strip'
+                            [Var Names]
+                                '.0'
+                                'p'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        16 (to 22)
+                                6       STORE_FAST                      1: p
+                                8       LOAD_GLOBAL                     0: float
+                                10      LOAD_FAST                       1: p
+                                12      LOAD_METHOD                     1: strip
+                                14      CALL_METHOD                     0
+                                16      CALL_FUNCTION                   1
+                                18      LIST_APPEND                     2
+                                20      JUMP_ABSOLUTE                   4
+                                22      RETURN_VALUE                    
+                        'ResonanceTester.cmd_TEST_RESONANCES.<locals>.<listcomp>'
+                        "Invalid POINT parameter, must be 'x,y,z' where x, y and z are valid floating point numbers"
+                        'adxl345'
+                        'adxl345 '
+                        'OUTPUT'
+                        'resonances'
+                        (
+                            'resonances'
+                            'raw_data'
+                        )
+                        '{"code": "key306", "msg": "Unsupported output \'%s\', only \'resonances\' and \'raw_data\' are supported", "values":["%s"]}'
+                        '{"code": "key307", "msg": "No output specified, at least one of \'resonances\' or \'raw_data\' must be set in OUTPUT parameter", "values":[]}'
+                        'NAME'
+                        '%Y%m%d_%H%M%S'
+                        '{"code":"key55", "msg":"Invalid NAME parameter", "values": []}'
+                        'raw_data'
+                        (
+                            'raw_name_suffix'
+                            'accel_chips'
+                            'test_point'
+                        )
+                        (
+                            'point'
+                        )
+                        'Resonances data written to %s file'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: _parse_axis
+                        2       LOAD_FAST                       1: gcmd
+                        4       LOAD_FAST                       1: gcmd
+                        6       LOAD_METHOD                     1: get
+                        8       LOAD_CONST                      1: 'AXIS'
+                        10      CALL_METHOD                     1
+                        12      LOAD_METHOD                     2: lower
+                        14      CALL_METHOD                     0
+                        16      CALL_FUNCTION                   2
+                        18      STORE_FAST                      2: axis
+                        20      LOAD_FAST                       1: gcmd
+                        22      LOAD_METHOD                     1: get
+                        24      LOAD_CONST                      2: 'CHIPS'
+                        26      LOAD_CONST                      0: None
+                        28      CALL_METHOD                     2
+                        30      STORE_FAST                      3: accel_chips
+                        32      LOAD_FAST                       1: gcmd
+                        34      LOAD_METHOD                     1: get
+                        36      LOAD_CONST                      3: 'POINT'
+                        38      LOAD_CONST                      0: None
+                        40      CALL_METHOD                     2
+                        42      STORE_FAST                      4: test_point
+                        44      LOAD_FAST                       4: test_point
+                        46      POP_JUMP_IF_FALSE               128
+                        48      LOAD_FAST                       4: test_point
+                        50      LOAD_METHOD                     3: split
+                        52      LOAD_CONST                      4: ','
+                        54      CALL_METHOD                     1
+                        56      STORE_FAST                      5: test_coords
+                        58      LOAD_GLOBAL                     4: len
+                        60      LOAD_FAST                       5: test_coords
+                        62      CALL_FUNCTION                   1
+                        64      LOAD_CONST                      5: 3
+                        66      COMPARE_OP                      3 (!=)
+                        68      POP_JUMP_IF_FALSE               80
+                        70      LOAD_FAST                       1: gcmd
+                        72      LOAD_METHOD                     5: error
+                        74      LOAD_CONST                      6: "Invalid POINT parameter, must be 'x,y,z'"
+                        76      CALL_METHOD                     1
+                        78      RAISE_VARARGS                   1
+                        80      SETUP_FINALLY                   18 (to 100)
+                        82      LOAD_CONST                      7: <CODE> <listcomp>
+                        84      LOAD_CONST                      8: 'ResonanceTester.cmd_TEST_RESONANCES.<locals>.<listcomp>'
+                        86      MAKE_FUNCTION                   0
+                        88      LOAD_FAST                       5: test_coords
+                        90      GET_ITER                        
+                        92      CALL_FUNCTION                   1
+                        94      STORE_FAST                      4: test_point
+                        96      POP_BLOCK                       
+                        98      JUMP_FORWARD                    28 (to 128)
+                        100     DUP_TOP                         
+                        102     LOAD_GLOBAL                     6: ValueError
+                        104     JUMP_IF_NOT_EXC_MATCH           126
+                        106     POP_TOP                         
+                        108     POP_TOP                         
+                        110     POP_TOP                         
+                        112     LOAD_FAST                       1: gcmd
+                        114     LOAD_METHOD                     5: error
+                        116     LOAD_CONST                      9: "Invalid POINT parameter, must be 'x,y,z' where x, y and z are valid floating point numbers"
+                        118     CALL_METHOD                     1
+                        120     RAISE_VARARGS                   1
+                        122     POP_EXCEPT                      
+                        124     JUMP_FORWARD                    2 (to 128)
+                        126     RERAISE                         
+                        128     LOAD_FAST                       3: accel_chips
+                        130     POP_JUMP_IF_FALSE               204
+                        132     BUILD_LIST                      0
+                        134     STORE_FAST                      6: parsed_chips
+                        136     LOAD_FAST                       3: accel_chips
+                        138     LOAD_METHOD                     3: split
+                        140     LOAD_CONST                      4: ','
+                        142     CALL_METHOD                     1
+                        144     GET_ITER                        
+                        146     FOR_ITER                        56 (to 204)
+                        148     STORE_FAST                      7: chip_name
+                        150     LOAD_CONST                      10: 'adxl345'
+                        152     LOAD_FAST                       7: chip_name
+                        154     CONTAINS_OP                     0 (in)
+                        156     POP_JUMP_IF_FALSE               168
+                        158     LOAD_FAST                       7: chip_name
+                        160     LOAD_METHOD                     7: strip
+                        162     CALL_METHOD                     0
+                        164     STORE_FAST                      8: chip_lookup_name
+                        166     JUMP_FORWARD                    12 (to 180)
+                        168     LOAD_CONST                      11: 'adxl345 '
+                        170     LOAD_FAST                       7: chip_name
+                        172     LOAD_METHOD                     7: strip
+                        174     CALL_METHOD                     0
+                        176     BINARY_ADD                      
+                        178     STORE_FAST                      8: chip_lookup_name
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       8: printer
+                        184     LOAD_METHOD                     9: lookup_object
+                        186     LOAD_FAST                       8: chip_lookup_name
+                        188     CALL_METHOD                     1
+                        190     STORE_FAST                      9: chip
+                        192     LOAD_FAST                       6: parsed_chips
+                        194     LOAD_METHOD                     10: append
+                        196     LOAD_FAST                       9: chip
+                        198     CALL_METHOD                     1
+                        200     POP_TOP                         
+                        202     JUMP_ABSOLUTE                   146
+                        204     LOAD_FAST                       1: gcmd
+                        206     LOAD_METHOD                     1: get
+                        208     LOAD_CONST                      12: 'OUTPUT'
+                        210     LOAD_CONST                      13: 'resonances'
+                        212     CALL_METHOD                     2
+                        214     LOAD_METHOD                     2: lower
+                        216     CALL_METHOD                     0
+                        218     LOAD_METHOD                     3: split
+                        220     LOAD_CONST                      4: ','
+                        222     CALL_METHOD                     1
+                        224     STORE_FAST                      10: outputs
+                        226     LOAD_FAST                       10: outputs
+                        228     GET_ITER                        
+                        230     FOR_ITER                        30 (to 262)
+                        232     STORE_FAST                      11: output
+                        234     LOAD_FAST                       11: output
+                        236     LOAD_CONST                      14: ('resonances', 'raw_data')
+                        238     CONTAINS_OP                     1 (not in)
+                        240     POP_JUMP_IF_FALSE               230
+                        242     LOAD_FAST                       1: gcmd
+                        244     LOAD_METHOD                     5: error
+                        246     LOAD_CONST                      15: '{"code": "key306", "msg": "Unsupported output \'%s\', only \'resonances\' and \'raw_data\' are supported", "values":["%s"]}'
+                        248     LOAD_FAST                       11: output
+                        250     LOAD_FAST                       11: output
+                        252     BUILD_TUPLE                     2
+                        254     BINARY_MODULO                   
+                        256     CALL_METHOD                     1
+                        258     RAISE_VARARGS                   1
+                        260     JUMP_ABSOLUTE                   230
+                        262     LOAD_FAST                       10: outputs
+                        264     POP_JUMP_IF_TRUE                278
+                        268     LOAD_FAST                       1: gcmd
+                        270     LOAD_METHOD                     5: error
+                        272     LOAD_CONST                      16: '{"code": "key307", "msg": "No output specified, at least one of \'resonances\' or \'raw_data\' must be set in OUTPUT parameter", "values":[]}'
+                        274     CALL_METHOD                     1
+                        276     RAISE_VARARGS                   1
+                        278     LOAD_FAST                       1: gcmd
+                        280     LOAD_METHOD                     1: get
+                        282     LOAD_CONST                      17: 'NAME'
+                        284     LOAD_GLOBAL                     11: time
+                        286     LOAD_METHOD                     12: strftime
+                        288     LOAD_CONST                      18: '%Y%m%d_%H%M%S'
+                        290     CALL_METHOD                     1
+                        292     CALL_METHOD                     2
+                        294     STORE_FAST                      12: name_suffix
+                        296     LOAD_FAST                       0: self
+                        298     LOAD_METHOD                     13: is_valid_name_suffix
+                        300     LOAD_FAST                       12: name_suffix
+                        302     CALL_METHOD                     1
+                        304     POP_JUMP_IF_TRUE                318
+                        308     LOAD_FAST                       1: gcmd
+                        310     LOAD_METHOD                     5: error
+                        312     LOAD_CONST                      19: '{"code":"key55", "msg":"Invalid NAME parameter", "values": []}'
+                        314     CALL_METHOD                     1
+                        316     RAISE_VARARGS                   1
+                        318     LOAD_CONST                      13: 'resonances'
+                        320     LOAD_FAST                       10: outputs
+                        322     CONTAINS_OP                     0 (in)
+                        324     STORE_FAST                      13: csv_output
+                        326     LOAD_CONST                      20: 'raw_data'
+                        328     LOAD_FAST                       10: outputs
+                        330     CONTAINS_OP                     0 (in)
+                        332     STORE_FAST                      14: raw_output
+                        334     LOAD_FAST                       13: csv_output
+                        336     POP_JUMP_IF_FALSE               354
+                        340     LOAD_GLOBAL                     14: shaper_calibrate
+                        342     LOAD_METHOD                     15: ShaperCalibrate
+                        344     LOAD_FAST                       0: self
+                        346     LOAD_ATTR                       8: printer
+                        348     CALL_METHOD                     1
+                        350     STORE_FAST                      15: helper
+                        352     JUMP_FORWARD                    4 (to 358)
+                        354     LOAD_CONST                      0: None
+                        356     STORE_FAST                      15: helper
+                        358     LOAD_FAST                       0: self
+                        360     LOAD_ATTR                       16: _run_test
+                        362     LOAD_FAST                       1: gcmd
+                        364     LOAD_FAST                       2: axis
+                        366     BUILD_LIST                      1
+                        368     LOAD_FAST                       15: helper
+                        370     LOAD_FAST                       14: raw_output
+                        372     POP_JUMP_IF_FALSE               380
+                        376     LOAD_FAST                       12: name_suffix
+                        378     JUMP_FORWARD                    2 (to 382)
+                        380     LOAD_CONST                      0: None
+                        382     LOAD_FAST                       3: accel_chips
+                        384     POP_JUMP_IF_FALSE               392
+                        388     LOAD_FAST                       6: parsed_chips
+                        390     JUMP_FORWARD                    2 (to 394)
+                        392     LOAD_CONST                      0: None
+                        394     LOAD_FAST                       4: test_point
+                        396     LOAD_CONST                      21: ('raw_name_suffix', 'accel_chips', 'test_point')
+                        398     CALL_FUNCTION_KW                6
+                        400     LOAD_FAST                       2: axis
+                        402     BINARY_SUBSCR                   
+                        404     STORE_FAST                      16: data
+                        406     LOAD_FAST                       13: csv_output
+                        408     POP_JUMP_IF_FALSE               450
+                        412     LOAD_FAST                       0: self
+                        414     LOAD_ATTR                       17: save_calibration_data
+                        416     LOAD_CONST                      13: 'resonances'
+                        418     LOAD_FAST                       12: name_suffix
+                        420     LOAD_FAST                       15: helper
+                        422     LOAD_FAST                       2: axis
+                        424     LOAD_FAST                       16: data
+                        426     LOAD_FAST                       4: test_point
+                        428     LOAD_CONST                      22: ('point',)
+                        430     CALL_FUNCTION_KW                6
+                        432     STORE_FAST                      17: csv_name
+                        434     LOAD_FAST                       1: gcmd
+                        436     LOAD_METHOD                     18: respond_info
+                        438     LOAD_CONST                      23: 'Resonances data written to %s file'
+                        440     LOAD_FAST                       17: csv_name
+                        442     BUILD_TUPLE                     1
+                        444     BINARY_MODULO                   
+                        446     CALL_METHOD                     1
+                        448     POP_TOP                         
+                        450     LOAD_CONST                      0: None
+                        452     RETURN_VALUE                    
+                'ResonanceTester.cmd_TEST_RESONANCES'
+                'Simular to TEST_RESONANCES but suggest input shaper config'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: cmd_SHAPER_CALIBRATE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 17
+                    Stack Size: 9
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get'
+                        'printer'
+                        'lookup_object'
+                        'TestAxis'
+                        'lower'
+                        'error'
+                        'get_float'
+                        'max_smoothing'
+                        'time'
+                        'strftime'
+                        'is_valid_name_suffix'
+                        'shaper_calibrate'
+                        'ShaperCalibrate'
+                        '_run_test'
+                        'get_name'
+                        'respond_info'
+                        'normalize_to_frequencies'
+                        'find_best_shaper'
+                        'name'
+                        'freq'
+                        'apply_params'
+                        'save_params'
+                        'save_calibration_data'
+                        'run_script_from_command'
+                        'call'
+                        'enable_shaping'
+                        'send_event'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'axis'
+                        'gcode'
+                        'copy_TestAxis_y_to_x'
+                        'calibrate_axes'
+                        'max_smoothing'
+                        'name_suffix'
+                        'input_shaper'
+                        'helper'
+                        'calibration_data'
+                        'configfile'
+                        'axis_name'
+                        'best_shaper'
+                        'all_shapers'
+                        'csv_name'
+                        'csv_name_x'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'AXIS'
+                        'gcode'
+                        False
+                        'x'
+                        'y'
+                        'xy'
+                        "Unsupported axis '%s'"
+                        True
+                        'MAX_SMOOTHING'
+                        0.05
+                        (
+                            'minval'
+                        )
+                        'NAME'
+                        '%Y%m%d_%H%M%S'
+                        'Invalid NAME parameter'
+                        'input_shaper'
+                        'configfile'
+                        'Calculating the best input shaper parameters for %s axis'
+                        'Recommended shaper_type_%s = %s, shaper_freq_%s = %.1f Hz'
+                        'calibration_data'
+                        'copy_TestAxis_y_to_x Recommended shaper_type_%s = %s, shaper_freq_%s = %.1f Hz'
+                        'copy_TestAxis_y_to_x Shaper calibration data written to %s file'
+                        'Shaper calibration data written to %s file'
+                        'CXSAVE_CONFIG'
+                        'sync'
+                        (
+                            'shell'
+                        )
+                        'UPDATE_INPUT_SHAPER'
+                        'The SAVE_CONFIG command will update the printer config file\nwith these parameters and restart the printer.'
+                        'v_sd:reset_shaper_calibrate_count'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'AXIS'
+                        6       LOAD_CONST                      0: None
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: axis
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: printer
+                        16      LOAD_METHOD                     2: lookup_object
+                        18      LOAD_CONST                      2: 'gcode'
+                        20      CALL_METHOD                     1
+                        22      STORE_FAST                      3: gcode
+                        24      LOAD_CONST                      3: False
+                        26      STORE_FAST                      4: copy_TestAxis_y_to_x
+                        28      LOAD_FAST                       2: axis
+                        30      POP_JUMP_IF_TRUE                50
+                        32      LOAD_GLOBAL                     3: TestAxis
+                        34      LOAD_CONST                      4: 'x'
+                        36      CALL_FUNCTION                   1
+                        38      LOAD_GLOBAL                     3: TestAxis
+                        40      LOAD_CONST                      5: 'y'
+                        42      CALL_FUNCTION                   1
+                        44      BUILD_LIST                      2
+                        46      STORE_FAST                      5: calibrate_axes
+                        48      JUMP_FORWARD                    60 (to 110)
+                        50      LOAD_FAST                       2: axis
+                        52      LOAD_METHOD                     4: lower
+                        54      CALL_METHOD                     0
+                        56      LOAD_CONST                      6: 'xy'
+                        58      CONTAINS_OP                     1 (not in)
+                        60      POP_JUMP_IF_FALSE               80
+                        62      LOAD_FAST                       1: gcmd
+                        64      LOAD_METHOD                     5: error
+                        66      LOAD_CONST                      7: "Unsupported axis '%s'"
+                        68      LOAD_FAST                       2: axis
+                        70      BUILD_TUPLE                     1
+                        72      BINARY_MODULO                   
+                        74      CALL_METHOD                     1
+                        76      RAISE_VARARGS                   1
+                        78      JUMP_FORWARD                    30 (to 110)
+                        80      LOAD_GLOBAL                     3: TestAxis
+                        82      LOAD_FAST                       2: axis
+                        84      LOAD_METHOD                     4: lower
+                        86      CALL_METHOD                     0
+                        88      CALL_FUNCTION                   1
+                        90      BUILD_LIST                      1
+                        92      STORE_FAST                      5: calibrate_axes
+                        94      LOAD_FAST                       2: axis
+                        96      LOAD_METHOD                     4: lower
+                        98      CALL_METHOD                     0
+                        100     LOAD_CONST                      5: 'y'
+                        102     COMPARE_OP                      2 (==)
+                        104     POP_JUMP_IF_FALSE               110
+                        106     LOAD_CONST                      8: True
+                        108     STORE_FAST                      4: copy_TestAxis_y_to_x
+                        110     LOAD_FAST                       1: gcmd
+                        112     LOAD_ATTR                       6: get_float
+                        114     LOAD_CONST                      9: 'MAX_SMOOTHING'
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       7: max_smoothing
+                        120     LOAD_CONST                      10: 0.05
+                        122     LOAD_CONST                      11: ('minval',)
+                        124     CALL_FUNCTION_KW                3
+                        126     STORE_FAST                      6: max_smoothing
+                        128     LOAD_FAST                       1: gcmd
+                        130     LOAD_METHOD                     0: get
+                        132     LOAD_CONST                      12: 'NAME'
+                        134     LOAD_GLOBAL                     8: time
+                        136     LOAD_METHOD                     9: strftime
+                        138     LOAD_CONST                      13: '%Y%m%d_%H%M%S'
+                        140     CALL_METHOD                     1
+                        142     CALL_METHOD                     2
+                        144     STORE_FAST                      7: name_suffix
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_METHOD                     10: is_valid_name_suffix
+                        150     LOAD_FAST                       7: name_suffix
+                        152     CALL_METHOD                     1
+                        154     POP_JUMP_IF_TRUE                166
+                        156     LOAD_FAST                       1: gcmd
+                        158     LOAD_METHOD                     5: error
+                        160     LOAD_CONST                      14: 'Invalid NAME parameter'
+                        162     CALL_METHOD                     1
+                        164     RAISE_VARARGS                   1
+                        166     LOAD_FAST                       0: self
+                        168     LOAD_ATTR                       1: printer
+                        170     LOAD_METHOD                     2: lookup_object
+                        172     LOAD_CONST                      15: 'input_shaper'
+                        174     LOAD_CONST                      0: None
+                        176     CALL_METHOD                     2
+                        178     STORE_FAST                      8: input_shaper
+                        180     LOAD_GLOBAL                     11: shaper_calibrate
+                        182     LOAD_METHOD                     12: ShaperCalibrate
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       1: printer
+                        188     CALL_METHOD                     1
+                        190     STORE_FAST                      9: helper
+                        192     LOAD_FAST                       0: self
+                        194     LOAD_METHOD                     13: _run_test
+                        196     LOAD_FAST                       1: gcmd
+                        198     LOAD_FAST                       5: calibrate_axes
+                        200     LOAD_FAST                       9: helper
+                        202     CALL_METHOD                     3
+                        204     STORE_FAST                      10: calibration_data
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       1: printer
+                        210     LOAD_METHOD                     2: lookup_object
+                        212     LOAD_CONST                      16: 'configfile'
+                        214     CALL_METHOD                     1
+                        216     STORE_FAST                      11: configfile
+                        218     LOAD_FAST                       5: calibrate_axes
+                        220     GET_ITER                        
+                        222     FOR_ITER                        306 (to 532)
+                        226     STORE_FAST                      2: axis
+                        228     LOAD_FAST                       2: axis
+                        230     LOAD_METHOD                     14: get_name
+                        232     CALL_METHOD                     0
+                        234     STORE_FAST                      12: axis_name
+                        236     LOAD_FAST                       1: gcmd
+                        238     LOAD_METHOD                     15: respond_info
+                        240     LOAD_CONST                      17: 'Calculating the best input shaper parameters for %s axis'
+                        242     LOAD_FAST                       12: axis_name
+                        244     BUILD_TUPLE                     1
+                        246     BINARY_MODULO                   
+                        248     CALL_METHOD                     1
+                        250     POP_TOP                         
+                        252     LOAD_FAST                       10: calibration_data
+                        254     LOAD_FAST                       2: axis
+                        256     BINARY_SUBSCR                   
+                        258     LOAD_METHOD                     16: normalize_to_frequencies
+                        260     CALL_METHOD                     0
+                        262     POP_TOP                         
+                        264     LOAD_FAST                       9: helper
+                        266     LOAD_METHOD                     17: find_best_shaper
+                        268     LOAD_FAST                       10: calibration_data
+                        270     LOAD_FAST                       2: axis
+                        272     BINARY_SUBSCR                   
+                        274     LOAD_FAST                       6: max_smoothing
+                        276     LOAD_FAST                       1: gcmd
+                        278     LOAD_ATTR                       15: respond_info
+                        280     CALL_METHOD                     3
+                        282     UNPACK_SEQUENCE                 2
+                        284     STORE_FAST                      13: best_shaper
+                        286     STORE_FAST                      14: all_shapers
+                        288     LOAD_FAST                       1: gcmd
+                        290     LOAD_METHOD                     15: respond_info
+                        292     LOAD_CONST                      18: 'Recommended shaper_type_%s = %s, shaper_freq_%s = %.1f Hz'
+                        294     LOAD_FAST                       12: axis_name
+                        296     LOAD_FAST                       13: best_shaper
+                        298     LOAD_ATTR                       18: name
+                        300     LOAD_FAST                       12: axis_name
+                        302     LOAD_FAST                       13: best_shaper
+                        304     LOAD_ATTR                       19: freq
+                        306     BUILD_TUPLE                     4
+                        308     BINARY_MODULO                   
+                        310     CALL_METHOD                     1
+                        312     POP_TOP                         
+                        314     LOAD_FAST                       8: input_shaper
+                        316     LOAD_CONST                      0: None
+                        318     IS_OP                           1 (is not)
+                        320     POP_JUMP_IF_FALSE               344
+                        324     LOAD_FAST                       9: helper
+                        326     LOAD_METHOD                     20: apply_params
+                        328     LOAD_FAST                       8: input_shaper
+                        330     LOAD_FAST                       12: axis_name
+                        332     LOAD_FAST                       13: best_shaper
+                        334     LOAD_ATTR                       18: name
+                        336     LOAD_FAST                       13: best_shaper
+                        338     LOAD_ATTR                       19: freq
+                        340     CALL_METHOD                     4
+                        342     POP_TOP                         
+                        344     LOAD_FAST                       9: helper
+                        346     LOAD_METHOD                     21: save_params
+                        348     LOAD_FAST                       11: configfile
+                        350     LOAD_FAST                       12: axis_name
+                        352     LOAD_FAST                       13: best_shaper
+                        354     LOAD_ATTR                       18: name
+                        356     LOAD_FAST                       13: best_shaper
+                        358     LOAD_ATTR                       19: freq
+                        360     CALL_METHOD                     4
+                        362     POP_TOP                         
+                        364     LOAD_FAST                       0: self
+                        366     LOAD_METHOD                     22: save_calibration_data
+                        368     LOAD_CONST                      19: 'calibration_data'
+                        370     LOAD_FAST                       7: name_suffix
+                        372     LOAD_FAST                       9: helper
+                        374     LOAD_FAST                       2: axis
+                        376     LOAD_FAST                       10: calibration_data
+                        378     LOAD_FAST                       2: axis
+                        380     BINARY_SUBSCR                   
+                        382     LOAD_FAST                       14: all_shapers
+                        384     CALL_METHOD                     6
+                        386     STORE_FAST                      15: csv_name
+                        388     LOAD_FAST                       4: copy_TestAxis_y_to_x
+                        390     POP_JUMP_IF_FALSE               514
+                        394     LOAD_FAST                       9: helper
+                        396     LOAD_METHOD                     21: save_params
+                        398     LOAD_FAST                       11: configfile
+                        400     LOAD_CONST                      4: 'x'
+                        402     LOAD_FAST                       13: best_shaper
+                        404     LOAD_ATTR                       18: name
+                        406     LOAD_FAST                       13: best_shaper
+                        408     LOAD_ATTR                       19: freq
+                        410     CALL_METHOD                     4
+                        412     POP_TOP                         
+                        414     LOAD_FAST                       8: input_shaper
+                        416     LOAD_CONST                      0: None
+                        418     IS_OP                           1 (is not)
+                        420     POP_JUMP_IF_FALSE               444
+                        424     LOAD_FAST                       9: helper
+                        426     LOAD_METHOD                     20: apply_params
+                        428     LOAD_FAST                       8: input_shaper
+                        430     LOAD_CONST                      4: 'x'
+                        432     LOAD_FAST                       13: best_shaper
+                        434     LOAD_ATTR                       18: name
+                        436     LOAD_FAST                       13: best_shaper
+                        438     LOAD_ATTR                       19: freq
+                        440     CALL_METHOD                     4
+                        442     POP_TOP                         
+                        444     LOAD_FAST                       0: self
+                        446     LOAD_METHOD                     22: save_calibration_data
+                        448     LOAD_CONST                      19: 'calibration_data'
+                        450     LOAD_FAST                       7: name_suffix
+                        452     LOAD_FAST                       9: helper
+                        454     LOAD_GLOBAL                     3: TestAxis
+                        456     LOAD_CONST                      4: 'x'
+                        458     CALL_FUNCTION                   1
+                        460     LOAD_FAST                       10: calibration_data
+                        462     LOAD_FAST                       2: axis
+                        464     BINARY_SUBSCR                   
+                        466     LOAD_FAST                       14: all_shapers
+                        468     CALL_METHOD                     6
+                        470     STORE_FAST                      16: csv_name_x
+                        472     LOAD_FAST                       1: gcmd
+                        474     LOAD_METHOD                     15: respond_info
+                        476     LOAD_CONST                      20: 'copy_TestAxis_y_to_x Recommended shaper_type_%s = %s, shaper_freq_%s = %.1f Hz'
+                        478     LOAD_CONST                      4: 'x'
+                        480     LOAD_FAST                       13: best_shaper
+                        482     LOAD_ATTR                       18: name
+                        484     LOAD_CONST                      4: 'x'
+                        486     LOAD_FAST                       13: best_shaper
+                        488     LOAD_ATTR                       19: freq
+                        490     BUILD_TUPLE                     4
+                        492     BINARY_MODULO                   
+                        494     CALL_METHOD                     1
+                        496     POP_TOP                         
+                        498     LOAD_FAST                       1: gcmd
+                        500     LOAD_METHOD                     15: respond_info
+                        502     LOAD_CONST                      21: 'copy_TestAxis_y_to_x Shaper calibration data written to %s file'
+                        504     LOAD_FAST                       16: csv_name_x
+                        506     BUILD_TUPLE                     1
+                        508     BINARY_MODULO                   
+                        510     CALL_METHOD                     1
+                        512     POP_TOP                         
+                        514     LOAD_FAST                       1: gcmd
+                        516     LOAD_METHOD                     15: respond_info
+                        518     LOAD_CONST                      22: 'Shaper calibration data written to %s file'
+                        520     LOAD_FAST                       15: csv_name
+                        522     BUILD_TUPLE                     1
+                        524     BINARY_MODULO                   
+                        526     CALL_METHOD                     1
+                        528     POP_TOP                         
+                        530     JUMP_ABSOLUTE                   222
+                        532     LOAD_FAST                       3: gcode
+                        534     LOAD_METHOD                     23: run_script_from_command
+                        536     LOAD_CONST                      23: 'CXSAVE_CONFIG'
+                        538     CALL_METHOD                     1
+                        540     POP_TOP                         
+                        542     LOAD_GLOBAL                     24: call
+                        544     LOAD_CONST                      24: 'sync'
+                        546     LOAD_CONST                      8: True
+                        548     LOAD_CONST                      25: ('shell',)
+                        550     CALL_FUNCTION_KW                2
+                        552     POP_TOP                         
+                        554     LOAD_FAST                       0: self
+                        556     LOAD_ATTR                       1: printer
+                        558     LOAD_METHOD                     2: lookup_object
+                        560     LOAD_CONST                      15: 'input_shaper'
+                        562     LOAD_CONST                      0: None
+                        564     CALL_METHOD                     2
+                        566     STORE_FAST                      8: input_shaper
+                        568     LOAD_FAST                       8: input_shaper
+                        570     POP_JUMP_IF_TRUE                606
+                        574     LOAD_FAST                       3: gcode
+                        576     LOAD_METHOD                     23: run_script_from_command
+                        578     LOAD_CONST                      26: 'UPDATE_INPUT_SHAPER'
+                        580     CALL_METHOD                     1
+                        582     POP_TOP                         
+                        584     LOAD_FAST                       0: self
+                        586     LOAD_ATTR                       1: printer
+                        588     LOAD_METHOD                     2: lookup_object
+                        590     LOAD_CONST                      15: 'input_shaper'
+                        592     LOAD_CONST                      0: None
+                        594     CALL_METHOD                     2
+                        596     STORE_FAST                      8: input_shaper
+                        598     LOAD_FAST                       8: input_shaper
+                        600     LOAD_METHOD                     25: enable_shaping
+                        602     CALL_METHOD                     0
+                        604     POP_TOP                         
+                        606     LOAD_FAST                       1: gcmd
+                        608     LOAD_METHOD                     15: respond_info
+                        610     LOAD_CONST                      27: 'The SAVE_CONFIG command will update the printer config file\nwith these parameters and restart the printer.'
+                        612     CALL_METHOD                     1
+                        614     POP_TOP                         
+                        616     LOAD_FAST                       0: self
+                        618     LOAD_ATTR                       1: printer
+                        620     LOAD_METHOD                     26: send_event
+                        622     LOAD_CONST                      28: 'v_sd:reset_shaper_calibrate_count'
+                        624     CALL_METHOD                     1
+                        626     POP_TOP                         
+                        628     LOAD_CONST                      0: None
+                        630     RETURN_VALUE                    
+                'ResonanceTester.cmd_SHAPER_CALIBRATE'
+                'Measures noise of all enabled accelerometer chips'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: cmd_MEASURE_AXES_NOISE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 11
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'accel_chips'
+                        'printer'
+                        'lookup_object'
+                        'dwell'
+                        'finish_measurements'
+                        'shaper_calibrate'
+                        'ShaperCalibrate'
+                        'has_valid_samples'
+                        'error'
+                        'process_accelerometer_data'
+                        'psd_x'
+                        'mean'
+                        'psd_y'
+                        'psd_z'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'meas_time'
+                        'raw_values'
+                        'chip_axis'
+                        'aclient'
+                        'helper'
+                        'data'
+                        'vx'
+                        'vy'
+                        'vz'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'MEAS_TIME'
+                        2
+                        [Code]
+                            File Name: /extras/resonance_tester.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'start_internal_client'
+                            [Var Names]
+                                '.0'
+                                'chip_axis'
+                                'chip'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        20 (to 26)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: chip_axis
+                                10      STORE_FAST                      2: chip
+                                12      LOAD_FAST                       1: chip_axis
+                                14      LOAD_FAST                       2: chip
+                                16      LOAD_METHOD                     0: start_internal_client
+                                18      CALL_METHOD                     0
+                                20      BUILD_TUPLE                     2
+                                22      LIST_APPEND                     2
+                                24      JUMP_ABSOLUTE                   4
+                                26      RETURN_VALUE                    
+                        'ResonanceTester.cmd_MEASURE_AXES_NOISE.<locals>.<listcomp>'
+                        'toolhead'
+                        '%s-axis accelerometer measured no data'
+                        'Axes noise for %s-axis accelerometer: %.6f (x), %.6f (y), %.6f (z)'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get_float
+                        4       LOAD_CONST                      1: 'MEAS_TIME'
+                        6       LOAD_CONST                      2: 2
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: meas_time
+                        12      LOAD_CONST                      3: <CODE> <listcomp>
+                        14      LOAD_CONST                      4: 'ResonanceTester.cmd_MEASURE_AXES_NOISE.<locals>.<listcomp>'
+                        16      MAKE_FUNCTION                   0
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       1: accel_chips
+                        22      GET_ITER                        
+                        24      CALL_FUNCTION                   1
+                        26      STORE_FAST                      3: raw_values
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       2: printer
+                        32      LOAD_METHOD                     3: lookup_object
+                        34      LOAD_CONST                      5: 'toolhead'
+                        36      CALL_METHOD                     1
+                        38      LOAD_METHOD                     4: dwell
+                        40      LOAD_FAST                       2: meas_time
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_FAST                       3: raw_values
+                        48      GET_ITER                        
+                        50      FOR_ITER                        16 (to 68)
+                        52      UNPACK_SEQUENCE                 2
+                        54      STORE_FAST                      4: chip_axis
+                        56      STORE_FAST                      5: aclient
+                        58      LOAD_FAST                       5: aclient
+                        60      LOAD_METHOD                     5: finish_measurements
+                        62      CALL_METHOD                     0
+                        64      POP_TOP                         
+                        66      JUMP_ABSOLUTE                   50
+                        68      LOAD_GLOBAL                     6: shaper_calibrate
+                        70      LOAD_METHOD                     7: ShaperCalibrate
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       2: printer
+                        76      CALL_METHOD                     1
+                        78      STORE_FAST                      6: helper
+                        80      LOAD_FAST                       3: raw_values
+                        82      GET_ITER                        
+                        84      FOR_ITER                        94 (to 180)
+                        86      UNPACK_SEQUENCE                 2
+                        88      STORE_FAST                      4: chip_axis
+                        90      STORE_FAST                      5: aclient
+                        92      LOAD_FAST                       5: aclient
+                        94      LOAD_METHOD                     8: has_valid_samples
+                        96      CALL_METHOD                     0
+                        98      POP_JUMP_IF_TRUE                116
+                        100     LOAD_FAST                       1: gcmd
+                        102     LOAD_METHOD                     9: error
+                        104     LOAD_CONST                      6: '%s-axis accelerometer measured no data'
+                        106     LOAD_FAST                       4: chip_axis
+                        108     BUILD_TUPLE                     1
+                        110     BINARY_MODULO                   
+                        112     CALL_METHOD                     1
+                        114     RAISE_VARARGS                   1
+                        116     LOAD_FAST                       6: helper
+                        118     LOAD_METHOD                     10: process_accelerometer_data
+                        120     LOAD_FAST                       5: aclient
+                        122     CALL_METHOD                     1
+                        124     STORE_FAST                      7: data
+                        126     LOAD_FAST                       7: data
+                        128     LOAD_ATTR                       11: psd_x
+                        130     LOAD_METHOD                     12: mean
+                        132     CALL_METHOD                     0
+                        134     STORE_FAST                      8: vx
+                        136     LOAD_FAST                       7: data
+                        138     LOAD_ATTR                       13: psd_y
+                        140     LOAD_METHOD                     12: mean
+                        142     CALL_METHOD                     0
+                        144     STORE_FAST                      9: vy
+                        146     LOAD_FAST                       7: data
+                        148     LOAD_ATTR                       14: psd_z
+                        150     LOAD_METHOD                     12: mean
+                        152     CALL_METHOD                     0
+                        154     STORE_FAST                      10: vz
+                        156     LOAD_FAST                       1: gcmd
+                        158     LOAD_METHOD                     15: respond_info
+                        160     LOAD_CONST                      7: 'Axes noise for %s-axis accelerometer: %.6f (x), %.6f (y), %.6f (z)'
+                        162     LOAD_FAST                       4: chip_axis
+                        164     LOAD_FAST                       8: vx
+                        166     LOAD_FAST                       9: vy
+                        168     LOAD_FAST                       10: vz
+                        170     BUILD_TUPLE                     4
+                        172     BINARY_MODULO                   
+                        174     CALL_METHOD                     1
+                        176     POP_TOP                         
+                        178     JUMP_ABSOLUTE                   84
+                        180     LOAD_CONST                      0: None
+                        182     RETURN_VALUE                    
+                'ResonanceTester.cmd_MEASURE_AXES_NOISE'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: is_valid_name_suffix
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'replace'
+                        'isalnum'
+                    [Var Names]
+                        'self'
+                        'name_suffix'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '-'
+                        ''
+                        '_'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: name_suffix
+                        2       LOAD_METHOD                     0: replace
+                        4       LOAD_CONST                      1: '-'
+                        6       LOAD_CONST                      2: ''
+                        8       CALL_METHOD                     2
+                        10      LOAD_METHOD                     0: replace
+                        12      LOAD_CONST                      3: '_'
+                        14      LOAD_CONST                      2: ''
+                        16      CALL_METHOD                     2
+                        18      LOAD_METHOD                     1: isalnum
+                        20      CALL_METHOD                     0
+                        22      RETURN_VALUE                    
+                'ResonanceTester.is_valid_name_suffix'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: get_filename
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_name'
+                        'replace'
+                        'os'
+                        'path'
+                        'join'
+                    [Var Names]
+                        'self'
+                        'base'
+                        'name_suffix'
+                        'axis'
+                        'point'
+                        'chip_name'
+                        'name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '_'
+                        ' '
+                        '_%.3f_%.3f_%.3f'
+                        0
+                        1
+                        2
+                        '/tmp'
+                        '.csv'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: base
+                        2       STORE_FAST                      6: name
+                        4       LOAD_FAST                       3: axis
+                        6       POP_JUMP_IF_FALSE               24
+                        8       LOAD_FAST                       6: name
+                        10      LOAD_CONST                      1: '_'
+                        12      LOAD_FAST                       3: axis
+                        14      LOAD_METHOD                     0: get_name
+                        16      CALL_METHOD                     0
+                        18      BINARY_ADD                      
+                        20      INPLACE_ADD                     
+                        22      STORE_FAST                      6: name
+                        24      LOAD_FAST                       5: chip_name
+                        26      POP_JUMP_IF_FALSE               48
+                        28      LOAD_FAST                       6: name
+                        30      LOAD_CONST                      1: '_'
+                        32      LOAD_FAST                       5: chip_name
+                        34      LOAD_METHOD                     1: replace
+                        36      LOAD_CONST                      2: ' '
+                        38      LOAD_CONST                      1: '_'
+                        40      CALL_METHOD                     2
+                        42      BINARY_ADD                      
+                        44      INPLACE_ADD                     
+                        46      STORE_FAST                      6: name
+                        48      LOAD_FAST                       4: point
+                        50      POP_JUMP_IF_FALSE               82
+                        52      LOAD_FAST                       6: name
+                        54      LOAD_CONST                      3: '_%.3f_%.3f_%.3f'
+                        56      LOAD_FAST                       4: point
+                        58      LOAD_CONST                      4: 0
+                        60      BINARY_SUBSCR                   
+                        62      LOAD_FAST                       4: point
+                        64      LOAD_CONST                      5: 1
+                        66      BINARY_SUBSCR                   
+                        68      LOAD_FAST                       4: point
+                        70      LOAD_CONST                      6: 2
+                        72      BINARY_SUBSCR                   
+                        74      BUILD_TUPLE                     3
+                        76      BINARY_MODULO                   
+                        78      INPLACE_ADD                     
+                        80      STORE_FAST                      6: name
+                        82      LOAD_FAST                       6: name
+                        84      LOAD_CONST                      1: '_'
+                        86      LOAD_FAST                       2: name_suffix
+                        88      BINARY_ADD                      
+                        90      INPLACE_ADD                     
+                        92      STORE_FAST                      6: name
+                        94      LOAD_GLOBAL                     2: os
+                        96      LOAD_ATTR                       3: path
+                        98      LOAD_METHOD                     4: join
+                        100     LOAD_CONST                      7: '/tmp'
+                        102     LOAD_FAST                       6: name
+                        104     LOAD_CONST                      8: '.csv'
+                        106     BINARY_ADD                      
+                        108     CALL_METHOD                     2
+                        110     RETURN_VALUE                    
+                'ResonanceTester.get_filename'
+                [Code]
+                    File Name: /extras/resonance_tester.py
+                    Object Name: save_calibration_data
+                    Arg Count: 8
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_filename'
+                        'save_calibration_data'
+                    [Var Names]
+                        'self'
+                        'base_name'
+                        'name_suffix'
+                        'shaper_calibrate'
+                        'axis'
+                        'calibration_data'
+                        'all_shapers'
+                        'point'
+                        'output'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: get_filename
+                        4       LOAD_FAST                       1: base_name
+                        6       LOAD_FAST                       2: name_suffix
+                        8       LOAD_FAST                       4: axis
+                        10      LOAD_FAST                       7: point
+                        12      CALL_METHOD                     4
+                        14      STORE_FAST                      8: output
+                        16      LOAD_FAST                       3: shaper_calibrate
+                        18      LOAD_METHOD                     1: save_calibration_data
+                        20      LOAD_FAST                       8: output
+                        22      LOAD_FAST                       5: calibration_data
+                        24      LOAD_FAST                       6: all_shapers
+                        26      CALL_METHOD                     3
+                        28      POP_TOP                         
+                        30      LOAD_FAST                       8: output
+                        32      RETURN_VALUE                    
+                'ResonanceTester.save_calibration_data'
+                (
+                    None
+                    None
+                    None
+                )
+                (
+                    None
+                    None
+                    None
+                )
+                (
+                    None
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ResonanceTester'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ResonanceTester.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> connect
+                18      LOAD_CONST                      4: 'ResonanceTester.connect'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: connect
+                24      LOAD_CONST                      23: (None, None, None)
+                26      LOAD_CONST                      6: <CODE> _run_test
+                28      LOAD_CONST                      7: 'ResonanceTester._run_test'
+                30      MAKE_FUNCTION                   1
+                32      STORE_NAME                      5: _run_test
+                34      LOAD_CONST                      8: 'Runs the resonance test for a specifed axis'
+                36      STORE_NAME                      6: cmd_TEST_RESONANCES_help
+                38      LOAD_CONST                      9: <CODE> cmd_TEST_RESONANCES
+                40      LOAD_CONST                      10: 'ResonanceTester.cmd_TEST_RESONANCES'
+                42      MAKE_FUNCTION                   0
+                44      STORE_NAME                      7: cmd_TEST_RESONANCES
+                46      LOAD_CONST                      11: 'Simular to TEST_RESONANCES but suggest input shaper config'
+                48      STORE_NAME                      8: cmd_SHAPER_CALIBRATE_help
+                50      LOAD_CONST                      12: <CODE> cmd_SHAPER_CALIBRATE
+                52      LOAD_CONST                      13: 'ResonanceTester.cmd_SHAPER_CALIBRATE'
+                54      MAKE_FUNCTION                   0
+                56      STORE_NAME                      9: cmd_SHAPER_CALIBRATE
+                58      LOAD_CONST                      14: 'Measures noise of all enabled accelerometer chips'
+                60      STORE_NAME                      10: cmd_MEASURE_AXES_NOISE_help
+                62      LOAD_CONST                      15: <CODE> cmd_MEASURE_AXES_NOISE
+                64      LOAD_CONST                      16: 'ResonanceTester.cmd_MEASURE_AXES_NOISE'
+                66      MAKE_FUNCTION                   0
+                68      STORE_NAME                      11: cmd_MEASURE_AXES_NOISE
+                70      LOAD_CONST                      17: <CODE> is_valid_name_suffix
+                72      LOAD_CONST                      18: 'ResonanceTester.is_valid_name_suffix'
+                74      MAKE_FUNCTION                   0
+                76      STORE_NAME                      12: is_valid_name_suffix
+                78      LOAD_CONST                      24: (None, None, None)
+                80      LOAD_CONST                      19: <CODE> get_filename
+                82      LOAD_CONST                      20: 'ResonanceTester.get_filename'
+                84      MAKE_FUNCTION                   1
+                86      STORE_NAME                      13: get_filename
+                88      LOAD_CONST                      25: (None, None)
+                90      LOAD_CONST                      21: <CODE> save_calibration_data
+                92      LOAD_CONST                      22: 'ResonanceTester.save_calibration_data'
+                94      MAKE_FUNCTION                   1
+                96      STORE_NAME                      14: save_calibration_data
+                98      LOAD_CONST                      5: None
+                100     RETURN_VALUE                    
+        'ResonanceTester'
+        [Code]
+            File Name: /extras/resonance_tester.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'ResonanceTester'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: ResonanceTester
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: math
+        14      STORE_NAME                      1: math
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: os
+        22      STORE_NAME                      2: os
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      1: None
+        28      IMPORT_NAME                     3: time
+        30      STORE_NAME                      3: time
+        32      LOAD_CONST                      2: 1
+        34      LOAD_CONST                      3: ('shaper_calibrate',)
+        36      IMPORT_NAME                     4: 
+        38      IMPORT_FROM                     5: shaper_calibrate
+        40      STORE_NAME                      5: shaper_calibrate
+        42      POP_TOP                         
+        44      LOAD_CONST                      0: 0
+        46      LOAD_CONST                      4: ('call',)
+        48      IMPORT_NAME                     6: subprocess
+        50      IMPORT_FROM                     7: call
+        52      STORE_NAME                      7: call
+        54      POP_TOP                         
+        56      LOAD_BUILD_CLASS                
+        58      LOAD_CONST                      5: <CODE> TestAxis
+        60      LOAD_CONST                      6: 'TestAxis'
+        62      MAKE_FUNCTION                   0
+        64      LOAD_CONST                      6: 'TestAxis'
+        66      CALL_FUNCTION                   2
+        68      STORE_NAME                      8: TestAxis
+        70      LOAD_CONST                      7: <CODE> _parse_axis
+        72      LOAD_CONST                      8: '_parse_axis'
+        74      MAKE_FUNCTION                   0
+        76      STORE_NAME                      9: _parse_axis
+        78      LOAD_BUILD_CLASS                
+        80      LOAD_CONST                      9: <CODE> VibrationPulseTest
+        82      LOAD_CONST                      10: 'VibrationPulseTest'
+        84      MAKE_FUNCTION                   0
+        86      LOAD_CONST                      10: 'VibrationPulseTest'
+        88      CALL_FUNCTION                   2
+        90      STORE_NAME                      10: VibrationPulseTest
+        92      LOAD_BUILD_CLASS                
+        94      LOAD_CONST                      11: <CODE> ResonanceTester
+        96      LOAD_CONST                      12: 'ResonanceTester'
+        98      MAKE_FUNCTION                   0
+        100     LOAD_CONST                      12: 'ResonanceTester'
+        102     CALL_FUNCTION                   2
+        104     STORE_NAME                      11: ResonanceTester
+        106     LOAD_CONST                      13: <CODE> load_config
+        108     LOAD_CONST                      14: 'load_config'
+        110     MAKE_FUNCTION                   0
+        112     STORE_NAME                      12: load_config
+        114     LOAD_CONST                      1: None
+        116     RETURN_VALUE                    

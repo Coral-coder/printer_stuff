@@ -1,0 +1,924 @@
+dirzctl.pyc (Python 3.9)
+[Code]
+    File Name: /extras/dirzctl.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'mcu'
+        'time'
+        'DirZCtl'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/dirzctl.py
+            Object Name: DirZCtl
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                '_handle_mcu_identify'
+                '_build_config'
+                '_handle_shutdown'
+                '_handle_disconnect'
+                '_handle_debug_dirzctl'
+                '_handle_result_dirzctl'
+                'get_params'
+                'check_and_run'
+                'send_heart_beat'
+                'cmd_DIRZCTL_help'
+                'cmd_DIRZCTL'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'DirZCtl'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'toolhead'
+                        'mcu'
+                        'get_printer_mcu'
+                        'get'
+                        'create_oid'
+                        'oid'
+                        'steppers'
+                        'register_config_callback'
+                        '_build_config'
+                        'register_response'
+                        '_handle_debug_dirzctl'
+                        '_handle_result_dirzctl'
+                        'register_event_handler'
+                        '_handle_mcu_identify'
+                        '_handle_shutdown'
+                        '_handle_disconnect'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_DIRZCTL'
+                        'cmd_DIRZCTL_help'
+                        'all_params'
+                        'hx711s'
+                        'mcu_freq'
+                        'getfloat'
+                        'step_base'
+                        'last_send_heart'
+                        'is_shutdown'
+                        'is_timeout'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'use_mcu'
+                        'debug_dirzctl'
+                        'result_dirzctl'
+                        'klippy:mcu_identify'
+                        'klippy:shutdown'
+                        'klippy:disconnect'
+                        'gcode'
+                        'DIRZCTL'
+                        (
+                            'desc'
+                        )
+                        72000000
+                        'step_base'
+                        2
+                        1
+                        6
+                        (
+                            'default'
+                            'minval'
+                            'maxval'
+                        )
+                        0
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_CONST                      0: None
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: toolhead
+                        16      LOAD_GLOBAL                     3: mcu
+                        18      LOAD_METHOD                     4: get_printer_mcu
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       1: printer
+                        24      LOAD_FAST                       1: config
+                        26      LOAD_METHOD                     5: get
+                        28      LOAD_CONST                      1: 'use_mcu'
+                        30      CALL_METHOD                     1
+                        32      CALL_METHOD                     2
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      3: mcu
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       3: mcu
+                        42      LOAD_METHOD                     6: create_oid
+                        44      CALL_METHOD                     0
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      7: oid
+                        50      BUILD_LIST                      0
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      8: steppers
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       3: mcu
+                        60      LOAD_METHOD                     9: register_config_callback
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       10: _build_config
+                        66      CALL_METHOD                     1
+                        68      POP_TOP                         
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       3: mcu
+                        74      LOAD_METHOD                     11: register_response
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       12: _handle_debug_dirzctl
+                        80      LOAD_CONST                      2: 'debug_dirzctl'
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       7: oid
+                        86      CALL_METHOD                     3
+                        88      POP_TOP                         
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       3: mcu
+                        94      LOAD_METHOD                     11: register_response
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       13: _handle_result_dirzctl
+                        100     LOAD_CONST                      3: 'result_dirzctl'
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       7: oid
+                        106     CALL_METHOD                     3
+                        108     POP_TOP                         
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       1: printer
+                        114     LOAD_METHOD                     14: register_event_handler
+                        116     LOAD_CONST                      4: 'klippy:mcu_identify'
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       15: _handle_mcu_identify
+                        122     CALL_METHOD                     2
+                        124     POP_TOP                         
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       1: printer
+                        130     LOAD_METHOD                     14: register_event_handler
+                        132     LOAD_CONST                      5: 'klippy:shutdown'
+                        134     LOAD_FAST                       0: self
+                        136     LOAD_ATTR                       16: _handle_shutdown
+                        138     CALL_METHOD                     2
+                        140     POP_TOP                         
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       1: printer
+                        146     LOAD_METHOD                     14: register_event_handler
+                        148     LOAD_CONST                      6: 'klippy:disconnect'
+                        150     LOAD_FAST                       0: self
+                        152     LOAD_ATTR                       17: _handle_disconnect
+                        154     CALL_METHOD                     2
+                        156     POP_TOP                         
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       1: printer
+                        162     LOAD_METHOD                     18: lookup_object
+                        164     LOAD_CONST                      7: 'gcode'
+                        166     CALL_METHOD                     1
+                        168     LOAD_FAST                       0: self
+                        170     STORE_ATTR                      19: gcode
+                        172     LOAD_FAST                       0: self
+                        174     LOAD_ATTR                       19: gcode
+                        176     LOAD_ATTR                       20: register_command
+                        178     LOAD_CONST                      8: 'DIRZCTL'
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       21: cmd_DIRZCTL
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       22: cmd_DIRZCTL_help
+                        188     LOAD_CONST                      9: ('desc',)
+                        190     CALL_FUNCTION_KW                3
+                        192     POP_TOP                         
+                        194     BUILD_LIST                      0
+                        196     LOAD_FAST                       0: self
+                        198     STORE_ATTR                      23: all_params
+                        200     LOAD_CONST                      0: None
+                        202     LOAD_FAST                       0: self
+                        204     STORE_ATTR                      24: hx711s
+                        206     LOAD_CONST                      10: 72000000
+                        208     LOAD_FAST                       0: self
+                        210     STORE_ATTR                      25: mcu_freq
+                        212     LOAD_FAST                       1: config
+                        214     LOAD_ATTR                       26: getfloat
+                        216     LOAD_CONST                      11: 'step_base'
+                        218     LOAD_CONST                      12: 2
+                        220     LOAD_CONST                      13: 1
+                        222     LOAD_CONST                      14: 6
+                        224     LOAD_CONST                      15: ('default', 'minval', 'maxval')
+                        226     CALL_FUNCTION_KW                4
+                        228     LOAD_FAST                       0: self
+                        230     STORE_ATTR                      27: step_base
+                        232     LOAD_CONST                      16: 0
+                        234     LOAD_FAST                       0: self
+                        236     STORE_ATTR                      28: last_send_heart
+                        238     LOAD_CONST                      17: True
+                        240     LOAD_FAST                       0: self
+                        242     STORE_ATTR                      29: is_shutdown
+                        244     LOAD_CONST                      17: True
+                        246     LOAD_FAST                       0: self
+                        248     STORE_ATTR                      30: is_timeout
+                        250     LOAD_CONST                      0: None
+                        252     RETURN_VALUE                    
+                'DirZCtl.__init__'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: _handle_mcu_identify
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'hx711s'
+                        'steppers'
+                        'toolhead'
+                        'get_kinematics'
+                        'get_steppers'
+                        'is_active_axis'
+                        'append'
+                        'mcu'
+                        'get_constant_float'
+                        'mcu_freq'
+                        'is_shutdown'
+                        'is_timeout'
+                    [Var Names]
+                        'self'
+                        'stepper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'hx711s'
+                        'toolhead'
+                        'z'
+                        'CLOCK_FREQ'
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'hx711s'
+                        8       CALL_METHOD                     1
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      2: hx711s
+                        14      BUILD_LIST                      0
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      3: steppers
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       0: printer
+                        24      LOAD_METHOD                     1: lookup_object
+                        26      LOAD_CONST                      2: 'toolhead'
+                        28      CALL_METHOD                     1
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      4: toolhead
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       4: toolhead
+                        38      LOAD_METHOD                     5: get_kinematics
+                        40      CALL_METHOD                     0
+                        42      LOAD_METHOD                     6: get_steppers
+                        44      CALL_METHOD                     0
+                        46      GET_ITER                        
+                        48      FOR_ITER                        26 (to 76)
+                        50      STORE_FAST                      1: stepper
+                        52      LOAD_FAST                       1: stepper
+                        54      LOAD_METHOD                     7: is_active_axis
+                        56      LOAD_CONST                      3: 'z'
+                        58      CALL_METHOD                     1
+                        60      POP_JUMP_IF_FALSE               48
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       3: steppers
+                        66      LOAD_METHOD                     8: append
+                        68      LOAD_FAST                       1: stepper
+                        70      CALL_METHOD                     1
+                        72      POP_TOP                         
+                        74      JUMP_ABSOLUTE                   48
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       9: mcu
+                        80      LOAD_METHOD                     10: get_constant_float
+                        82      LOAD_CONST                      4: 'CLOCK_FREQ'
+                        84      CALL_METHOD                     1
+                        86      LOAD_FAST                       0: self
+                        88      STORE_ATTR                      11: mcu_freq
+                        90      LOAD_CONST                      5: False
+                        92      LOAD_FAST                       0: self
+                        94      STORE_ATTR                      12: is_shutdown
+                        96      LOAD_CONST                      5: False
+                        98      LOAD_FAST                       0: self
+                        100     STORE_ATTR                      13: is_timeout
+                        102     LOAD_CONST                      0: None
+                        104     RETURN_VALUE                    
+                'DirZCtl._handle_mcu_identify'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: _build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu'
+                        'add_config_cmd'
+                        'oid'
+                        'len'
+                        'steppers'
+                        'range'
+                        'get_pin_info'
+                        'lookup_command'
+                        'run_cmd'
+                    [Var Names]
+                        'self'
+                        'i'
+                        'dir_pin'
+                        'step_pin'
+                        'ivt_dir'
+                        'ivt_step'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'config_dirzctl oid=%d z_count=%d'
+                        'add_dirzctl oid=%d index=%d dir_pin=%s step_pin=%s dir_invert=%d step_invert=%d'
+                        'run_dirzctl oid=%c direct=%c step_us=%u step_cnt=%u'
+                        (
+                            'cq'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu
+                        4       LOAD_METHOD                     1: add_config_cmd
+                        6       LOAD_CONST                      1: 'config_dirzctl oid=%d z_count=%d'
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: oid
+                        12      LOAD_GLOBAL                     3: len
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       4: steppers
+                        18      CALL_FUNCTION                   1
+                        20      BUILD_TUPLE                     2
+                        22      BINARY_MODULO                   
+                        24      CALL_METHOD                     1
+                        26      POP_TOP                         
+                        28      LOAD_GLOBAL                     5: range
+                        30      LOAD_GLOBAL                     3: len
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       4: steppers
+                        36      CALL_FUNCTION                   1
+                        38      CALL_FUNCTION                   1
+                        40      GET_ITER                        
+                        42      FOR_ITER                        56 (to 100)
+                        44      STORE_FAST                      1: i
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       4: steppers
+                        50      LOAD_FAST                       1: i
+                        52      BINARY_SUBSCR                   
+                        54      LOAD_METHOD                     6: get_pin_info
+                        56      CALL_METHOD                     0
+                        58      UNPACK_SEQUENCE                 4
+                        60      STORE_FAST                      2: dir_pin
+                        62      STORE_FAST                      3: step_pin
+                        64      STORE_FAST                      4: ivt_dir
+                        66      STORE_FAST                      5: ivt_step
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       0: mcu
+                        72      LOAD_METHOD                     1: add_config_cmd
+                        74      LOAD_CONST                      2: 'add_dirzctl oid=%d index=%d dir_pin=%s step_pin=%s dir_invert=%d step_invert=%d'
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       2: oid
+                        80      LOAD_FAST                       1: i
+                        82      LOAD_FAST                       2: dir_pin
+                        84      LOAD_FAST                       3: step_pin
+                        86      LOAD_FAST                       4: ivt_dir
+                        88      LOAD_FAST                       5: ivt_step
+                        90      BUILD_TUPLE                     6
+                        92      BINARY_MODULO                   
+                        94      CALL_METHOD                     1
+                        96      POP_TOP                         
+                        98      JUMP_ABSOLUTE                   42
+                        100     LOAD_FAST                       0: self
+                        102     LOAD_ATTR                       0: mcu
+                        104     LOAD_ATTR                       7: lookup_command
+                        106     LOAD_CONST                      3: 'run_dirzctl oid=%c direct=%c step_us=%u step_cnt=%u'
+                        108     LOAD_CONST                      0: None
+                        110     LOAD_CONST                      4: ('cq',)
+                        112     CALL_FUNCTION_KW                2
+                        114     LOAD_FAST                       0: self
+                        116     STORE_ATTR                      8: run_cmd
+                        118     LOAD_CONST                      0: None
+                        120     RETURN_VALUE                    
+                'DirZCtl._build_config'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: _handle_shutdown
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_shutdown'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                    [Disassembly]
+                        0       LOAD_CONST                      1: True
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: is_shutdown
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'DirZCtl._handle_shutdown'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: _handle_disconnect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_timeout'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                    [Disassembly]
+                        0       LOAD_CONST                      1: True
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: is_timeout
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'DirZCtl._handle_disconnect'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: _handle_debug_dirzctl
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'pnt_msg'
+                        'str'
+                    [Var Names]
+                        'self'
+                        'params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'prtouch'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'prtouch'
+                        8       CALL_METHOD                     1
+                        10      LOAD_METHOD                     2: pnt_msg
+                        12      LOAD_GLOBAL                     3: str
+                        14      LOAD_FAST                       1: params
+                        16      CALL_FUNCTION                   1
+                        18      CALL_METHOD                     1
+                        20      POP_TOP                         
+                        22      LOAD_CONST                      0: None
+                        24      RETURN_VALUE                    
+                'DirZCtl._handle_debug_dirzctl'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: _handle_result_dirzctl
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'all_params'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: all_params
+                        4       LOAD_METHOD                     1: append
+                        6       LOAD_FAST                       1: params
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'DirZCtl._handle_result_dirzctl'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: get_params
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'all_params'
+                        'len'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'tick'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: all_params
+                        4       LOAD_GLOBAL                     1: len
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       0: all_params
+                        10      CALL_FUNCTION                   1
+                        12      LOAD_CONST                      1: 0
+                        14      COMPARE_OP                      4 (>)
+                        16      POP_JUMP_IF_FALSE               32
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       0: all_params
+                        22      LOAD_CONST                      1: 0
+                        24      BINARY_SUBSCR                   
+                        26      LOAD_CONST                      2: 'tick'
+                        28      BINARY_SUBSCR                   
+                        30      JUMP_FORWARD                    2 (to 34)
+                        32      LOAD_CONST                      1: 0
+                        34      BUILD_TUPLE                     2
+                        36      RETURN_VALUE                    
+                'DirZCtl.get_params'
+                True
+                False
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: check_and_run
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_shutdown'
+                        'is_timeout'
+                        'all_params'
+                        'run_cmd'
+                        'send'
+                        'oid'
+                        'time'
+                        'len'
+                        'hx711s'
+                        'delay_s'
+                    [Var Names]
+                        'self'
+                        'direct'
+                        'step_us'
+                        'step_cnt'
+                        'wait_finish'
+                        'is_ck_con'
+                        't_start'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1.5e+06
+                        2
+                        0.05
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: is_shutdown
+                        4       POP_JUMP_IF_TRUE                12
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: is_timeout
+                        10      POP_JUMP_IF_FALSE               12
+                        12      LOAD_FAST                       3: step_cnt
+                        14      LOAD_CONST                      1: 0
+                        16      COMPARE_OP                      3 (!=)
+                        18      POP_JUMP_IF_FALSE               26
+                        20      BUILD_LIST                      0
+                        22      LOAD_FAST                       0: self
+                        24      STORE_ATTR                      2: all_params
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       3: run_cmd
+                        30      LOAD_METHOD                     4: send
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       5: oid
+                        36      LOAD_FAST                       1: direct
+                        38      LOAD_FAST                       2: step_us
+                        40      LOAD_FAST                       3: step_cnt
+                        42      BUILD_LIST                      4
+                        44      CALL_METHOD                     1
+                        46      POP_TOP                         
+                        48      LOAD_GLOBAL                     6: time
+                        50      LOAD_METHOD                     6: time
+                        52      CALL_METHOD                     0
+                        54      STORE_FAST                      6: t_start
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       0: is_shutdown
+                        60      POP_JUMP_IF_TRUE                124
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       1: is_timeout
+                        66      POP_JUMP_IF_TRUE                124
+                        68      LOAD_FAST                       4: wait_finish
+                        70      POP_JUMP_IF_FALSE               124
+                        72      LOAD_GLOBAL                     6: time
+                        74      LOAD_METHOD                     6: time
+                        76      CALL_METHOD                     0
+                        78      LOAD_FAST                       6: t_start
+                        80      BINARY_SUBTRACT                 
+                        82      LOAD_CONST                      2: 1.5e+06
+                        84      LOAD_FAST                       2: step_us
+                        86      BINARY_MULTIPLY                 
+                        88      LOAD_FAST                       3: step_cnt
+                        90      BINARY_MULTIPLY                 
+                        92      COMPARE_OP                      0 (<)
+                        94      POP_JUMP_IF_FALSE               124
+                        96      LOAD_GLOBAL                     7: len
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       2: all_params
+                        102     CALL_FUNCTION                   1
+                        104     LOAD_CONST                      3: 2
+                        106     COMPARE_OP                      3 (!=)
+                        108     POP_JUMP_IF_FALSE               124
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       8: hx711s
+                        114     LOAD_METHOD                     9: delay_s
+                        116     LOAD_CONST                      4: 0.05
+                        118     CALL_METHOD                     1
+                        120     POP_TOP                         
+                        122     JUMP_ABSOLUTE                   56
+                        124     LOAD_CONST                      0: None
+                        126     RETURN_VALUE                    
+                'DirZCtl.check_and_run'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: send_heart_beat
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_CONST                      0: None
+                        2       RETURN_VALUE                    
+                'DirZCtl.send_heart_beat'
+                'Test DIRZCTL.'
+                [Code]
+                    File Name: /extras/dirzctl.py
+                    Object Name: cmd_DIRZCTL
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_int'
+                        'len'
+                        'steppers'
+                        'check_and_run'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'index'
+                        'direct'
+                        'step_us'
+                        'step_cnt'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'INDEX'
+                        0
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'DIRECT'
+                        1
+                        'STEP_US'
+                        1500
+                        4
+                        100000
+                        'STEP_CNT'
+                        256
+                        10000
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_int
+                        4       LOAD_CONST                      1: 'INDEX'
+                        6       LOAD_GLOBAL                     1: len
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: steppers
+                        12      CALL_FUNCTION                   1
+                        14      LOAD_CONST                      2: 0
+                        16      LOAD_GLOBAL                     1: len
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       2: steppers
+                        22      CALL_FUNCTION                   1
+                        24      LOAD_CONST                      3: ('minval', 'maxval')
+                        26      CALL_FUNCTION_KW                4
+                        28      STORE_FAST                      2: index
+                        30      LOAD_FAST                       1: gcmd
+                        32      LOAD_ATTR                       0: get_int
+                        34      LOAD_CONST                      4: 'DIRECT'
+                        36      LOAD_CONST                      5: 1
+                        38      LOAD_CONST                      2: 0
+                        40      LOAD_CONST                      5: 1
+                        42      LOAD_CONST                      3: ('minval', 'maxval')
+                        44      CALL_FUNCTION_KW                4
+                        46      STORE_FAST                      3: direct
+                        48      LOAD_FAST                       1: gcmd
+                        50      LOAD_ATTR                       0: get_int
+                        52      LOAD_CONST                      6: 'STEP_US'
+                        54      LOAD_CONST                      7: 1500
+                        56      LOAD_CONST                      8: 4
+                        58      LOAD_CONST                      9: 100000
+                        60      LOAD_CONST                      3: ('minval', 'maxval')
+                        62      CALL_FUNCTION_KW                4
+                        64      STORE_FAST                      4: step_us
+                        66      LOAD_FAST                       1: gcmd
+                        68      LOAD_ATTR                       0: get_int
+                        70      LOAD_CONST                      10: 'STEP_CNT'
+                        72      LOAD_CONST                      11: 256
+                        74      LOAD_CONST                      2: 0
+                        76      LOAD_CONST                      12: 10000
+                        78      LOAD_CONST                      3: ('minval', 'maxval')
+                        80      CALL_FUNCTION_KW                4
+                        82      STORE_FAST                      5: step_cnt
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_METHOD                     3: check_and_run
+                        88      LOAD_FAST                       3: direct
+                        90      LOAD_FAST                       4: step_us
+                        92      LOAD_FAST                       5: step_cnt
+                        94      LOAD_CONST                      13: False
+                        96      LOAD_CONST                      13: False
+                        98      CALL_METHOD                     5
+                        100     POP_TOP                         
+                        102     LOAD_CONST                      0: None
+                        104     RETURN_VALUE                    
+                'DirZCtl.cmd_DIRZCTL'
+                None
+                (
+                    True
+                    False
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'DirZCtl'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'DirZCtl.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> _handle_mcu_identify
+                18      LOAD_CONST                      4: 'DirZCtl._handle_mcu_identify'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: _handle_mcu_identify
+                24      LOAD_CONST                      5: <CODE> _build_config
+                26      LOAD_CONST                      6: 'DirZCtl._build_config'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: _build_config
+                32      LOAD_CONST                      7: <CODE> _handle_shutdown
+                34      LOAD_CONST                      8: 'DirZCtl._handle_shutdown'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _handle_shutdown
+                40      LOAD_CONST                      9: <CODE> _handle_disconnect
+                42      LOAD_CONST                      10: 'DirZCtl._handle_disconnect'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _handle_disconnect
+                48      LOAD_CONST                      11: <CODE> _handle_debug_dirzctl
+                50      LOAD_CONST                      12: 'DirZCtl._handle_debug_dirzctl'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: _handle_debug_dirzctl
+                56      LOAD_CONST                      13: <CODE> _handle_result_dirzctl
+                58      LOAD_CONST                      14: 'DirZCtl._handle_result_dirzctl'
+                60      MAKE_FUNCTION                   0
+                62      STORE_NAME                      9: _handle_result_dirzctl
+                64      LOAD_CONST                      15: <CODE> get_params
+                66      LOAD_CONST                      16: 'DirZCtl.get_params'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      10: get_params
+                72      LOAD_CONST                      27: (True, False)
+                74      LOAD_CONST                      19: <CODE> check_and_run
+                76      LOAD_CONST                      20: 'DirZCtl.check_and_run'
+                78      MAKE_FUNCTION                   1
+                80      STORE_NAME                      11: check_and_run
+                82      LOAD_CONST                      21: <CODE> send_heart_beat
+                84      LOAD_CONST                      22: 'DirZCtl.send_heart_beat'
+                86      MAKE_FUNCTION                   0
+                88      STORE_NAME                      12: send_heart_beat
+                90      LOAD_CONST                      23: 'Test DIRZCTL.'
+                92      STORE_NAME                      13: cmd_DIRZCTL_help
+                94      LOAD_CONST                      24: <CODE> cmd_DIRZCTL
+                96      LOAD_CONST                      25: 'DirZCtl.cmd_DIRZCTL'
+                98      MAKE_FUNCTION                   0
+                100     STORE_NAME                      14: cmd_DIRZCTL
+                102     LOAD_CONST                      26: None
+                104     RETURN_VALUE                    
+        'DirZCtl'
+        [Code]
+            File Name: /extras/dirzctl.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'DirZCtl'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: DirZCtl
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: mcu
+        6       STORE_NAME                      0: mcu
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: time
+        14      STORE_NAME                      1: time
+        16      LOAD_BUILD_CLASS                
+        18      LOAD_CONST                      2: <CODE> DirZCtl
+        20      LOAD_CONST                      3: 'DirZCtl'
+        22      MAKE_FUNCTION                   0
+        24      LOAD_CONST                      3: 'DirZCtl'
+        26      CALL_FUNCTION                   2
+        28      STORE_NAME                      2: DirZCtl
+        30      LOAD_CONST                      4: <CODE> load_config
+        32      LOAD_CONST                      5: 'load_config'
+        34      MAKE_FUNCTION                   0
+        36      STORE_NAME                      3: load_config
+        38      LOAD_CONST                      1: None
+        40      RETURN_VALUE                    

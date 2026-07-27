@@ -44,16 +44,15 @@ class IdleTimeout:
         try:
             script = self.idle_gcode.render()
             res = self.gcode.run_script(script)
-        finally:
-            pass
-        logging.exception('idle timeout gcode execution')
-        self.state = 'Ready'
-        return None
+        except:
+            logging.exception('idle timeout gcode execution')
+            self.state = 'Ready'
+            return None
+
         print_time = self.toolhead.get_last_move_time()
         self.state = 'Idle'
         self.printer.send_event('idle_timeout:idle', print_time)
         return self.reactor.NEVER
-
 
     
     def check_idle_timeout(self, eventtime):

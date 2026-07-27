@@ -7,7 +7,15 @@ class PrinterMultiPin:
     def __init__(self, config):
         self.printer = config.get_printer()
         ppins = self.printer.lookup_object('pins')
-    # WARNING: Decompyle incomplete
+        
+        try:
+            ppins.register_chip('multi_pin', self)
+        except ppins.error:
+            pass
+
+        self.pin_type = None
+        self.pin_list = config.getlist('pins')
+        self.mcu_pins = []
 
     
     def setup_pin(self, pin_type, pin_params):

@@ -1,0 +1,1189 @@
+filter.pyc (Python 3.9)
+[Code]
+    File Name: /extras/filter.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'Filter'
+        'os'
+        'remove'
+        'time'
+        'mcu'
+        'math'
+        'RCTFilter'
+        'RCHFilter'
+        'RCLFilter'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        (
+            'Filter'
+        )
+        (
+            'remove'
+        )
+        (
+            'time'
+        )
+        None
+        [Code]
+            File Name: /extras/filter.py
+            Object Name: RCTFilter
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'ftr_val'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'RCTFilter'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: __init__
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_CONST                      0: None
+                        2       RETURN_VALUE                    
+                'RCTFilter.__init__'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: ftr_val
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'len'
+                        'range'
+                        'math'
+                        'fabs'
+                        'index'
+                        'min'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'vals'
+                        'out_vals'
+                        'i'
+                        'tmp'
+                        'index'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        3
+                        2
+                        1
+                        -2
+                        -1
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       STORE_FAST                      2: out_vals
+                        4       LOAD_GLOBAL                     0: len
+                        6       LOAD_FAST                       1: vals
+                        8       CALL_FUNCTION                   1
+                        10      LOAD_CONST                      1: 3
+                        12      COMPARE_OP                      0 (<)
+                        14      POP_JUMP_IF_FALSE               20
+                        16      LOAD_FAST                       1: vals
+                        18      RETURN_VALUE                    
+                        20      LOAD_GLOBAL                     1: range
+                        22      LOAD_GLOBAL                     0: len
+                        24      LOAD_FAST                       1: vals
+                        26      CALL_FUNCTION                   1
+                        28      LOAD_CONST                      2: 2
+                        30      BINARY_SUBTRACT                 
+                        32      CALL_FUNCTION                   1
+                        34      GET_ITER                        
+                        36      FOR_ITER                        84 (to 122)
+                        38      STORE_FAST                      3: i
+                        40      LOAD_GLOBAL                     2: math
+                        42      LOAD_METHOD                     3: fabs
+                        44      LOAD_FAST                       1: vals
+                        46      LOAD_FAST                       3: i
+                        48      BINARY_SUBSCR                   
+                        50      CALL_METHOD                     1
+                        52      LOAD_GLOBAL                     2: math
+                        54      LOAD_METHOD                     3: fabs
+                        56      LOAD_FAST                       1: vals
+                        58      LOAD_FAST                       3: i
+                        60      LOAD_CONST                      3: 1
+                        62      BINARY_ADD                      
+                        64      BINARY_SUBSCR                   
+                        66      CALL_METHOD                     1
+                        68      LOAD_GLOBAL                     2: math
+                        70      LOAD_METHOD                     3: fabs
+                        72      LOAD_FAST                       1: vals
+                        74      LOAD_FAST                       3: i
+                        76      LOAD_CONST                      2: 2
+                        78      BINARY_ADD                      
+                        80      BINARY_SUBSCR                   
+                        82      CALL_METHOD                     1
+                        84      BUILD_LIST                      3
+                        86      STORE_FAST                      4: tmp
+                        88      LOAD_FAST                       4: tmp
+                        90      LOAD_METHOD                     4: index
+                        92      LOAD_GLOBAL                     5: min
+                        94      LOAD_FAST                       4: tmp
+                        96      CALL_FUNCTION                   1
+                        98      CALL_METHOD                     1
+                        100     STORE_FAST                      5: index
+                        102     LOAD_FAST                       2: out_vals
+                        104     LOAD_METHOD                     6: append
+                        106     LOAD_FAST                       1: vals
+                        108     LOAD_FAST                       5: index
+                        110     LOAD_FAST                       3: i
+                        112     BINARY_ADD                      
+                        114     BINARY_SUBSCR                   
+                        116     CALL_METHOD                     1
+                        118     POP_TOP                         
+                        120     JUMP_ABSOLUTE                   36
+                        122     LOAD_FAST                       2: out_vals
+                        124     LOAD_METHOD                     6: append
+                        126     LOAD_FAST                       1: vals
+                        128     LOAD_CONST                      4: -2
+                        130     BINARY_SUBSCR                   
+                        132     CALL_METHOD                     1
+                        134     POP_TOP                         
+                        136     LOAD_FAST                       2: out_vals
+                        138     LOAD_METHOD                     6: append
+                        140     LOAD_FAST                       1: vals
+                        142     LOAD_CONST                      5: -1
+                        144     BINARY_SUBSCR                   
+                        146     CALL_METHOD                     1
+                        148     POP_TOP                         
+                        150     LOAD_FAST                       2: out_vals
+                        152     RETURN_VALUE                    
+                'RCTFilter.ftr_val'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'RCTFilter'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'RCTFilter.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> ftr_val
+                18      LOAD_CONST                      4: 'RCTFilter.ftr_val'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: ftr_val
+                24      LOAD_CONST                      5: None
+                26      RETURN_VALUE                    
+        'RCTFilter'
+        [Code]
+            File Name: /extras/filter.py
+            Object Name: RCHFilter
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'ftr_val'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'RCHFilter'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'cut_frq_hz'
+                        'acq_frq_hz'
+                    [Var Names]
+                        'self'
+                        'cut_frq_hz'
+                        'acq_frq_hz'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: cut_frq_hz
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: cut_frq_hz
+                        6       LOAD_FAST                       2: acq_frq_hz
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: acq_frq_hz
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'RCHFilter.__init__'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: ftr_val
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'math'
+                        'pi'
+                        'cut_frq_hz'
+                        'acq_frq_hz'
+                        'range'
+                        'len'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'vals'
+                        'out_vals'
+                        'rc'
+                        'coff'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        0.5
+                        1
+                        1
+                        -1
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       BUILD_LIST                      1
+                        4       STORE_FAST                      2: out_vals
+                        6       LOAD_CONST                      2: 0.5
+                        8       LOAD_GLOBAL                     0: math
+                        10      LOAD_ATTR                       1: pi
+                        12      BINARY_TRUE_DIVIDE              
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: cut_frq_hz
+                        18      BINARY_TRUE_DIVIDE              
+                        20      STORE_FAST                      3: rc
+                        22      LOAD_FAST                       3: rc
+                        24      LOAD_FAST                       3: rc
+                        26      LOAD_CONST                      3: 1
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       3: acq_frq_hz
+                        32      BINARY_TRUE_DIVIDE              
+                        34      BINARY_ADD                      
+                        36      BINARY_TRUE_DIVIDE              
+                        38      STORE_FAST                      4: coff
+                        40      LOAD_GLOBAL                     4: range
+                        42      LOAD_CONST                      4: 1
+                        44      LOAD_GLOBAL                     5: len
+                        46      LOAD_FAST                       1: vals
+                        48      CALL_FUNCTION                   1
+                        50      CALL_FUNCTION                   2
+                        52      GET_ITER                        
+                        54      FOR_ITER                        42 (to 98)
+                        56      STORE_FAST                      5: i
+                        58      LOAD_FAST                       2: out_vals
+                        60      LOAD_METHOD                     6: append
+                        62      LOAD_FAST                       1: vals
+                        64      LOAD_FAST                       5: i
+                        66      BINARY_SUBSCR                   
+                        68      LOAD_FAST                       1: vals
+                        70      LOAD_FAST                       5: i
+                        72      LOAD_CONST                      4: 1
+                        74      BINARY_SUBTRACT                 
+                        76      BINARY_SUBSCR                   
+                        78      BINARY_SUBTRACT                 
+                        80      LOAD_FAST                       2: out_vals
+                        82      LOAD_CONST                      5: -1
+                        84      BINARY_SUBSCR                   
+                        86      BINARY_ADD                      
+                        88      LOAD_FAST                       4: coff
+                        90      BINARY_MULTIPLY                 
+                        92      CALL_METHOD                     1
+                        94      POP_TOP                         
+                        96      JUMP_ABSOLUTE                   54
+                        98      LOAD_FAST                       2: out_vals
+                        100     RETURN_VALUE                    
+                'RCHFilter.ftr_val'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'RCHFilter'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'RCHFilter.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> ftr_val
+                18      LOAD_CONST                      4: 'RCHFilter.ftr_val'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: ftr_val
+                24      LOAD_CONST                      5: None
+                26      RETURN_VALUE                    
+        'RCHFilter'
+        [Code]
+            File Name: /extras/filter.py
+            Object Name: RCLFilter
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'ftr_val'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'RCLFilter'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'k1_new'
+                    [Var Names]
+                        'self'
+                        'k1_new'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: k1_new
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: k1_new
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'RCLFilter.__init__'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: ftr_val
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'range'
+                        'len'
+                        'append'
+                        'k1_new'
+                    [Var Names]
+                        'self'
+                        'vals'
+                        'out_vals'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1
+                        -1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: vals
+                        2       LOAD_CONST                      1: 0
+                        4       BINARY_SUBSCR                   
+                        6       BUILD_LIST                      1
+                        8       STORE_FAST                      2: out_vals
+                        10      LOAD_GLOBAL                     0: range
+                        12      LOAD_CONST                      2: 1
+                        14      LOAD_GLOBAL                     1: len
+                        16      LOAD_FAST                       1: vals
+                        18      CALL_FUNCTION                   1
+                        20      CALL_FUNCTION                   2
+                        22      GET_ITER                        
+                        24      FOR_ITER                        42 (to 68)
+                        26      STORE_FAST                      3: i
+                        28      LOAD_FAST                       2: out_vals
+                        30      LOAD_METHOD                     2: append
+                        32      LOAD_FAST                       2: out_vals
+                        34      LOAD_CONST                      3: -1
+                        36      BINARY_SUBSCR                   
+                        38      LOAD_CONST                      2: 1
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       3: k1_new
+                        44      BINARY_SUBTRACT                 
+                        46      BINARY_MULTIPLY                 
+                        48      LOAD_FAST                       1: vals
+                        50      LOAD_FAST                       3: i
+                        52      BINARY_SUBSCR                   
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       3: k1_new
+                        58      BINARY_MULTIPLY                 
+                        60      BINARY_ADD                      
+                        62      CALL_METHOD                     1
+                        64      POP_TOP                         
+                        66      JUMP_ABSOLUTE                   24
+                        68      LOAD_FAST                       2: out_vals
+                        70      RETURN_VALUE                    
+                'RCLFilter.ftr_val'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'RCLFilter'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'RCLFilter.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> ftr_val
+                18      LOAD_CONST                      4: 'RCLFilter.ftr_val'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: ftr_val
+                24      LOAD_CONST                      5: None
+                26      RETURN_VALUE                    
+        'RCLFilter'
+        [Code]
+            File Name: /extras/filter.py
+            Object Name: Filter
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_tft'
+                'get_lft'
+                'get_hft'
+                'cal_offset_by_vals'
+                'cal_filter_by_vals'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'Filter'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'getfloat'
+                        'hft_hz'
+                        'lft_k1'
+                        'lft_k1_oft'
+                        'lft_k1_cal'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'hft_hz'
+                        5
+                        0.1
+                        10
+                        (
+                            'default'
+                            'minval'
+                            'maxval'
+                        )
+                        'lft_k1'
+                        0.8
+                        0
+                        1
+                        'lft_k1_oft'
+                        'lft_k1_cal'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_ATTR                       0: getfloat
+                        4       LOAD_CONST                      1: 'hft_hz'
+                        6       LOAD_CONST                      2: 5
+                        8       LOAD_CONST                      3: 0.1
+                        10      LOAD_CONST                      4: 10
+                        12      LOAD_CONST                      5: ('default', 'minval', 'maxval')
+                        14      CALL_FUNCTION_KW                4
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      1: hft_hz
+                        20      LOAD_FAST                       1: config
+                        22      LOAD_ATTR                       0: getfloat
+                        24      LOAD_CONST                      6: 'lft_k1'
+                        26      LOAD_CONST                      7: 0.8
+                        28      LOAD_CONST                      8: 0
+                        30      LOAD_CONST                      9: 1
+                        32      LOAD_CONST                      5: ('default', 'minval', 'maxval')
+                        34      CALL_FUNCTION_KW                4
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      2: lft_k1
+                        40      LOAD_FAST                       1: config
+                        42      LOAD_ATTR                       0: getfloat
+                        44      LOAD_CONST                      10: 'lft_k1_oft'
+                        46      LOAD_CONST                      7: 0.8
+                        48      LOAD_CONST                      8: 0
+                        50      LOAD_CONST                      9: 1
+                        52      LOAD_CONST                      5: ('default', 'minval', 'maxval')
+                        54      CALL_FUNCTION_KW                4
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      3: lft_k1_oft
+                        60      LOAD_FAST                       1: config
+                        62      LOAD_ATTR                       0: getfloat
+                        64      LOAD_CONST                      11: 'lft_k1_cal'
+                        66      LOAD_CONST                      7: 0.8
+                        68      LOAD_CONST                      8: 0
+                        70      LOAD_CONST                      9: 1
+                        72      LOAD_CONST                      5: ('default', 'minval', 'maxval')
+                        74      CALL_FUNCTION_KW                4
+                        76      LOAD_FAST                       0: self
+                        78      STORE_ATTR                      4: lft_k1_cal
+                        80      LOAD_CONST                      0: None
+                        82      RETURN_VALUE                    
+                'Filter.__init__'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: get_tft
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'RCTFilter'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: RCTFilter
+                        2       CALL_FUNCTION                   0
+                        4       RETURN_VALUE                    
+                'Filter.get_tft'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: get_lft
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'RCLFilter'
+                    [Var Names]
+                        'self'
+                        'k1'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: RCLFilter
+                        2       LOAD_FAST                       1: k1
+                        4       CALL_FUNCTION                   1
+                        6       RETURN_VALUE                    
+                'Filter.get_lft'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: get_hft
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'RCHFilter'
+                    [Var Names]
+                        'self'
+                        'cut_hz'
+                        'acq_hz'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'cut_frq_hz'
+                            'acq_frq_hz'
+                        )
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: RCHFilter
+                        2       LOAD_FAST                       1: cut_hz
+                        4       LOAD_FAST                       2: acq_hz
+                        6       LOAD_CONST                      1: ('cut_frq_hz', 'acq_frq_hz')
+                        8       CALL_FUNCTION_KW                2
+                        10      RETURN_VALUE                    
+                'Filter.get_hft'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: cal_offset_by_vals
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 12
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'RCTFilter'
+                        'RCLFilter'
+                        'range'
+                        'ftr_val'
+                        'len'
+                        'math'
+                        'fabs'
+                        'append'
+                        'abs'
+                    [Var Names]
+                        'self'
+                        's_count'
+                        'new_valss'
+                        'lft_k1'
+                        'cut_len'
+                        'out_vals'
+                        'tmp_vals'
+                        'tft'
+                        'lft'
+                        'i'
+                        'sums'
+                        'j'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       STORE_FAST                      5: out_vals
+                        4       BUILD_LIST                      0
+                        6       BUILD_LIST                      0
+                        8       BUILD_LIST                      0
+                        10      BUILD_LIST                      0
+                        12      BUILD_LIST                      4
+                        14      STORE_FAST                      6: tmp_vals
+                        16      LOAD_GLOBAL                     0: RCTFilter
+                        18      CALL_FUNCTION                   0
+                        20      STORE_FAST                      7: tft
+                        22      LOAD_GLOBAL                     1: RCLFilter
+                        24      LOAD_FAST                       3: lft_k1
+                        26      CALL_FUNCTION                   1
+                        28      STORE_FAST                      8: lft
+                        30      LOAD_GLOBAL                     2: range
+                        32      LOAD_FAST                       1: s_count
+                        34      CALL_FUNCTION                   1
+                        36      GET_ITER                        
+                        38      FOR_ITER                        40 (to 80)
+                        40      STORE_FAST                      9: i
+                        42      LOAD_FAST                       7: tft
+                        44      LOAD_METHOD                     3: ftr_val
+                        46      LOAD_FAST                       2: new_valss
+                        48      LOAD_FAST                       9: i
+                        50      BINARY_SUBSCR                   
+                        52      CALL_METHOD                     1
+                        54      LOAD_FAST                       6: tmp_vals
+                        56      LOAD_FAST                       9: i
+                        58      STORE_SUBSCR                    
+                        60      LOAD_FAST                       8: lft
+                        62      LOAD_METHOD                     3: ftr_val
+                        64      LOAD_FAST                       6: tmp_vals
+                        66      LOAD_FAST                       9: i
+                        68      BINARY_SUBSCR                   
+                        70      CALL_METHOD                     1
+                        72      LOAD_FAST                       6: tmp_vals
+                        74      LOAD_FAST                       9: i
+                        76      STORE_SUBSCR                    
+                        78      JUMP_ABSOLUTE                   38
+                        80      LOAD_GLOBAL                     2: range
+                        82      LOAD_GLOBAL                     4: len
+                        84      LOAD_FAST                       6: tmp_vals
+                        86      LOAD_CONST                      1: 0
+                        88      BINARY_SUBSCR                   
+                        90      CALL_FUNCTION                   1
+                        92      CALL_FUNCTION                   1
+                        94      GET_ITER                        
+                        96      FOR_ITER                        70 (to 168)
+                        98      STORE_FAST                      9: i
+                        100     LOAD_CONST                      1: 0
+                        102     STORE_FAST                      10: sums
+                        104     LOAD_GLOBAL                     2: range
+                        106     LOAD_FAST                       1: s_count
+                        108     CALL_FUNCTION                   1
+                        110     GET_ITER                        
+                        112     FOR_ITER                        42 (to 156)
+                        114     STORE_FAST                      11: j
+                        116     LOAD_FAST                       9: i
+                        118     LOAD_GLOBAL                     4: len
+                        120     LOAD_FAST                       6: tmp_vals
+                        122     LOAD_FAST                       11: j
+                        124     BINARY_SUBSCR                   
+                        126     CALL_FUNCTION                   1
+                        128     COMPARE_OP                      0 (<)
+                        130     POP_JUMP_IF_FALSE               112
+                        132     LOAD_FAST                       10: sums
+                        134     LOAD_GLOBAL                     5: math
+                        136     LOAD_METHOD                     6: fabs
+                        138     LOAD_FAST                       6: tmp_vals
+                        140     LOAD_FAST                       11: j
+                        142     BINARY_SUBSCR                   
+                        144     LOAD_FAST                       9: i
+                        146     BINARY_SUBSCR                   
+                        148     CALL_METHOD                     1
+                        150     INPLACE_ADD                     
+                        152     STORE_FAST                      10: sums
+                        154     JUMP_ABSOLUTE                   112
+                        156     LOAD_FAST                       5: out_vals
+                        158     LOAD_METHOD                     7: append
+                        160     LOAD_FAST                       10: sums
+                        162     CALL_METHOD                     1
+                        164     POP_TOP                         
+                        166     JUMP_ABSOLUTE                   96
+                        168     LOAD_GLOBAL                     4: len
+                        170     LOAD_FAST                       5: out_vals
+                        172     CALL_FUNCTION                   1
+                        174     LOAD_FAST                       4: cut_len
+                        176     COMPARE_OP                      4 (>)
+                        178     POP_JUMP_IF_FALSE               198
+                        180     LOAD_FAST                       5: out_vals
+                        182     LOAD_CONST                      1: 0
+                        184     LOAD_GLOBAL                     4: len
+                        186     LOAD_FAST                       5: out_vals
+                        188     CALL_FUNCTION                   1
+                        190     LOAD_FAST                       4: cut_len
+                        192     BINARY_SUBTRACT                 
+                        194     BUILD_SLICE                     2
+                        196     DELETE_SUBSCR                   
+                        198     LOAD_GLOBAL                     2: range
+                        200     LOAD_FAST                       1: s_count
+                        202     CALL_FUNCTION                   1
+                        204     GET_ITER                        
+                        206     FOR_ITER                        94 (to 302)
+                        208     STORE_FAST                      9: i
+                        210     LOAD_GLOBAL                     4: len
+                        212     LOAD_FAST                       6: tmp_vals
+                        214     LOAD_FAST                       9: i
+                        216     BINARY_SUBSCR                   
+                        218     CALL_FUNCTION                   1
+                        220     LOAD_FAST                       4: cut_len
+                        222     COMPARE_OP                      4 (>)
+                        224     POP_JUMP_IF_FALSE               252
+                        226     LOAD_FAST                       6: tmp_vals
+                        228     LOAD_FAST                       9: i
+                        230     BINARY_SUBSCR                   
+                        232     LOAD_CONST                      1: 0
+                        234     LOAD_GLOBAL                     4: len
+                        236     LOAD_FAST                       6: tmp_vals
+                        238     LOAD_FAST                       9: i
+                        240     BINARY_SUBSCR                   
+                        242     CALL_FUNCTION                   1
+                        244     LOAD_FAST                       4: cut_len
+                        246     BINARY_SUBTRACT                 
+                        248     BUILD_SLICE                     2
+                        250     DELETE_SUBSCR                   
+                        252     LOAD_GLOBAL                     2: range
+                        254     LOAD_GLOBAL                     4: len
+                        256     LOAD_FAST                       6: tmp_vals
+                        258     LOAD_FAST                       9: i
+                        260     BINARY_SUBSCR                   
+                        262     CALL_FUNCTION                   1
+                        264     CALL_FUNCTION                   1
+                        266     GET_ITER                        
+                        268     FOR_ITER                        30 (to 300)
+                        270     STORE_FAST                      11: j
+                        272     LOAD_GLOBAL                     8: abs
+                        274     LOAD_FAST                       6: tmp_vals
+                        276     LOAD_FAST                       9: i
+                        278     BINARY_SUBSCR                   
+                        280     LOAD_FAST                       11: j
+                        282     BINARY_SUBSCR                   
+                        284     CALL_FUNCTION                   1
+                        286     LOAD_FAST                       6: tmp_vals
+                        288     LOAD_FAST                       9: i
+                        290     BINARY_SUBSCR                   
+                        292     LOAD_FAST                       11: j
+                        294     STORE_SUBSCR                    
+                        296     JUMP_ABSOLUTE                   268
+                        300     JUMP_ABSOLUTE                   206
+                        302     LOAD_FAST                       5: out_vals
+                        304     LOAD_FAST                       6: tmp_vals
+                        306     BUILD_TUPLE                     2
+                        308     RETURN_VALUE                    
+                'Filter.cal_offset_by_vals'
+                [Code]
+                    File Name: /extras/filter.py
+                    Object Name: cal_filter_by_vals
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 14
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'RCTFilter'
+                        'RCHFilter'
+                        'RCLFilter'
+                        'range'
+                        'ftr_val'
+                        'len'
+                        'math'
+                        'fabs'
+                        'append'
+                        'abs'
+                    [Var Names]
+                        'self'
+                        's_count'
+                        'now_valss'
+                        'hft_hz'
+                        'lft_k1'
+                        'cut_len'
+                        'out_vals'
+                        'tmp_vals'
+                        'tft'
+                        'hft'
+                        'lft'
+                        'i'
+                        'sums'
+                        'j'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        80
+                        0
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       STORE_FAST                      6: out_vals
+                        4       BUILD_LIST                      0
+                        6       BUILD_LIST                      0
+                        8       BUILD_LIST                      0
+                        10      BUILD_LIST                      0
+                        12      BUILD_LIST                      4
+                        14      STORE_FAST                      7: tmp_vals
+                        16      LOAD_GLOBAL                     0: RCTFilter
+                        18      CALL_FUNCTION                   0
+                        20      STORE_FAST                      8: tft
+                        22      LOAD_GLOBAL                     1: RCHFilter
+                        24      LOAD_FAST                       3: hft_hz
+                        26      LOAD_CONST                      1: 80
+                        28      CALL_FUNCTION                   2
+                        30      STORE_FAST                      9: hft
+                        32      LOAD_GLOBAL                     2: RCLFilter
+                        34      LOAD_FAST                       4: lft_k1
+                        36      CALL_FUNCTION                   1
+                        38      STORE_FAST                      10: lft
+                        40      LOAD_GLOBAL                     3: range
+                        42      LOAD_CONST                      2: 0
+                        44      LOAD_FAST                       1: s_count
+                        46      CALL_FUNCTION                   2
+                        48      GET_ITER                        
+                        50      FOR_ITER                        58 (to 110)
+                        52      STORE_FAST                      11: i
+                        54      LOAD_FAST                       8: tft
+                        56      LOAD_METHOD                     4: ftr_val
+                        58      LOAD_FAST                       2: now_valss
+                        60      LOAD_FAST                       11: i
+                        62      BINARY_SUBSCR                   
+                        64      CALL_METHOD                     1
+                        66      LOAD_FAST                       7: tmp_vals
+                        68      LOAD_FAST                       11: i
+                        70      STORE_SUBSCR                    
+                        72      LOAD_FAST                       9: hft
+                        74      LOAD_METHOD                     4: ftr_val
+                        76      LOAD_FAST                       7: tmp_vals
+                        78      LOAD_FAST                       11: i
+                        80      BINARY_SUBSCR                   
+                        82      CALL_METHOD                     1
+                        84      LOAD_FAST                       7: tmp_vals
+                        86      LOAD_FAST                       11: i
+                        88      STORE_SUBSCR                    
+                        90      LOAD_FAST                       10: lft
+                        92      LOAD_METHOD                     4: ftr_val
+                        94      LOAD_FAST                       7: tmp_vals
+                        96      LOAD_FAST                       11: i
+                        98      BINARY_SUBSCR                   
+                        100     CALL_METHOD                     1
+                        102     LOAD_FAST                       7: tmp_vals
+                        104     LOAD_FAST                       11: i
+                        106     STORE_SUBSCR                    
+                        108     JUMP_ABSOLUTE                   50
+                        110     LOAD_GLOBAL                     3: range
+                        112     LOAD_GLOBAL                     5: len
+                        114     LOAD_FAST                       7: tmp_vals
+                        116     LOAD_CONST                      2: 0
+                        118     BINARY_SUBSCR                   
+                        120     CALL_FUNCTION                   1
+                        122     CALL_FUNCTION                   1
+                        124     GET_ITER                        
+                        126     FOR_ITER                        70 (to 198)
+                        128     STORE_FAST                      11: i
+                        130     LOAD_CONST                      2: 0
+                        132     STORE_FAST                      12: sums
+                        134     LOAD_GLOBAL                     3: range
+                        136     LOAD_FAST                       1: s_count
+                        138     CALL_FUNCTION                   1
+                        140     GET_ITER                        
+                        142     FOR_ITER                        42 (to 186)
+                        144     STORE_FAST                      13: j
+                        146     LOAD_FAST                       11: i
+                        148     LOAD_GLOBAL                     5: len
+                        150     LOAD_FAST                       7: tmp_vals
+                        152     LOAD_FAST                       13: j
+                        154     BINARY_SUBSCR                   
+                        156     CALL_FUNCTION                   1
+                        158     COMPARE_OP                      0 (<)
+                        160     POP_JUMP_IF_FALSE               142
+                        162     LOAD_FAST                       12: sums
+                        164     LOAD_GLOBAL                     6: math
+                        166     LOAD_METHOD                     7: fabs
+                        168     LOAD_FAST                       7: tmp_vals
+                        170     LOAD_FAST                       13: j
+                        172     BINARY_SUBSCR                   
+                        174     LOAD_FAST                       11: i
+                        176     BINARY_SUBSCR                   
+                        178     CALL_METHOD                     1
+                        180     INPLACE_ADD                     
+                        182     STORE_FAST                      12: sums
+                        184     JUMP_ABSOLUTE                   142
+                        186     LOAD_FAST                       6: out_vals
+                        188     LOAD_METHOD                     8: append
+                        190     LOAD_FAST                       12: sums
+                        192     CALL_METHOD                     1
+                        194     POP_TOP                         
+                        196     JUMP_ABSOLUTE                   126
+                        198     LOAD_GLOBAL                     5: len
+                        200     LOAD_FAST                       6: out_vals
+                        202     CALL_FUNCTION                   1
+                        204     LOAD_FAST                       5: cut_len
+                        206     COMPARE_OP                      4 (>)
+                        208     POP_JUMP_IF_FALSE               228
+                        210     LOAD_FAST                       6: out_vals
+                        212     LOAD_CONST                      2: 0
+                        214     LOAD_GLOBAL                     5: len
+                        216     LOAD_FAST                       6: out_vals
+                        218     CALL_FUNCTION                   1
+                        220     LOAD_FAST                       5: cut_len
+                        222     BINARY_SUBTRACT                 
+                        224     BUILD_SLICE                     2
+                        226     DELETE_SUBSCR                   
+                        228     LOAD_GLOBAL                     3: range
+                        230     LOAD_FAST                       1: s_count
+                        232     CALL_FUNCTION                   1
+                        234     GET_ITER                        
+                        236     FOR_ITER                        96 (to 334)
+                        238     STORE_FAST                      11: i
+                        240     LOAD_GLOBAL                     5: len
+                        242     LOAD_FAST                       7: tmp_vals
+                        244     LOAD_FAST                       11: i
+                        246     BINARY_SUBSCR                   
+                        248     CALL_FUNCTION                   1
+                        250     LOAD_FAST                       5: cut_len
+                        252     COMPARE_OP                      4 (>)
+                        254     POP_JUMP_IF_FALSE               284
+                        258     LOAD_FAST                       7: tmp_vals
+                        260     LOAD_FAST                       11: i
+                        262     BINARY_SUBSCR                   
+                        264     LOAD_CONST                      2: 0
+                        266     LOAD_GLOBAL                     5: len
+                        268     LOAD_FAST                       7: tmp_vals
+                        270     LOAD_FAST                       11: i
+                        272     BINARY_SUBSCR                   
+                        274     CALL_FUNCTION                   1
+                        276     LOAD_FAST                       5: cut_len
+                        278     BINARY_SUBTRACT                 
+                        280     BUILD_SLICE                     2
+                        282     DELETE_SUBSCR                   
+                        284     LOAD_GLOBAL                     3: range
+                        286     LOAD_GLOBAL                     5: len
+                        288     LOAD_FAST                       7: tmp_vals
+                        290     LOAD_FAST                       11: i
+                        292     BINARY_SUBSCR                   
+                        294     CALL_FUNCTION                   1
+                        296     CALL_FUNCTION                   1
+                        298     GET_ITER                        
+                        300     FOR_ITER                        30 (to 332)
+                        302     STORE_FAST                      13: j
+                        304     LOAD_GLOBAL                     9: abs
+                        306     LOAD_FAST                       7: tmp_vals
+                        308     LOAD_FAST                       11: i
+                        310     BINARY_SUBSCR                   
+                        312     LOAD_FAST                       13: j
+                        314     BINARY_SUBSCR                   
+                        316     CALL_FUNCTION                   1
+                        318     LOAD_FAST                       7: tmp_vals
+                        320     LOAD_FAST                       11: i
+                        322     BINARY_SUBSCR                   
+                        324     LOAD_FAST                       13: j
+                        326     STORE_SUBSCR                    
+                        328     JUMP_ABSOLUTE                   300
+                        332     JUMP_ABSOLUTE                   236
+                        334     LOAD_FAST                       6: out_vals
+                        336     LOAD_FAST                       7: tmp_vals
+                        338     BUILD_TUPLE                     2
+                        340     RETURN_VALUE                    
+                'Filter.cal_filter_by_vals'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'Filter'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'Filter.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_tft
+                18      LOAD_CONST                      4: 'Filter.get_tft'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_tft
+                24      LOAD_CONST                      5: <CODE> get_lft
+                26      LOAD_CONST                      6: 'Filter.get_lft'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: get_lft
+                32      LOAD_CONST                      7: <CODE> get_hft
+                34      LOAD_CONST                      8: 'Filter.get_hft'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: get_hft
+                40      LOAD_CONST                      9: <CODE> cal_offset_by_vals
+                42      LOAD_CONST                      10: 'Filter.cal_offset_by_vals'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: cal_offset_by_vals
+                48      LOAD_CONST                      11: <CODE> cal_filter_by_vals
+                50      LOAD_CONST                      12: 'Filter.cal_filter_by_vals'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: cal_filter_by_vals
+                56      LOAD_CONST                      13: None
+                58      RETURN_VALUE                    
+        'Filter'
+        [Code]
+            File Name: /extras/filter.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'Filter'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: Filter
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: ('Filter',)
+        4       IMPORT_NAME                     0: logging
+        6       IMPORT_FROM                     1: Filter
+        8       STORE_NAME                      1: Filter
+        10      POP_TOP                         
+        12      LOAD_CONST                      0: 0
+        14      LOAD_CONST                      2: ('remove',)
+        16      IMPORT_NAME                     2: os
+        18      IMPORT_FROM                     3: remove
+        20      STORE_NAME                      3: remove
+        22      POP_TOP                         
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      3: ('time',)
+        28      IMPORT_NAME                     4: time
+        30      IMPORT_FROM                     4: time
+        32      STORE_NAME                      4: time
+        34      POP_TOP                         
+        36      LOAD_CONST                      0: 0
+        38      LOAD_CONST                      4: None
+        40      IMPORT_NAME                     5: mcu
+        42      STORE_NAME                      5: mcu
+        44      LOAD_CONST                      0: 0
+        46      LOAD_CONST                      4: None
+        48      IMPORT_NAME                     6: math
+        50      STORE_NAME                      6: math
+        52      LOAD_BUILD_CLASS                
+        54      LOAD_CONST                      5: <CODE> RCTFilter
+        56      LOAD_CONST                      6: 'RCTFilter'
+        58      MAKE_FUNCTION                   0
+        60      LOAD_CONST                      6: 'RCTFilter'
+        62      CALL_FUNCTION                   2
+        64      STORE_NAME                      7: RCTFilter
+        66      LOAD_BUILD_CLASS                
+        68      LOAD_CONST                      7: <CODE> RCHFilter
+        70      LOAD_CONST                      8: 'RCHFilter'
+        72      MAKE_FUNCTION                   0
+        74      LOAD_CONST                      8: 'RCHFilter'
+        76      CALL_FUNCTION                   2
+        78      STORE_NAME                      8: RCHFilter
+        80      LOAD_BUILD_CLASS                
+        82      LOAD_CONST                      9: <CODE> RCLFilter
+        84      LOAD_CONST                      10: 'RCLFilter'
+        86      MAKE_FUNCTION                   0
+        88      LOAD_CONST                      10: 'RCLFilter'
+        90      CALL_FUNCTION                   2
+        92      STORE_NAME                      9: RCLFilter
+        94      LOAD_BUILD_CLASS                
+        96      LOAD_CONST                      11: <CODE> Filter
+        98      LOAD_CONST                      12: 'Filter'
+        100     MAKE_FUNCTION                   0
+        102     LOAD_CONST                      12: 'Filter'
+        104     CALL_FUNCTION                   2
+        106     STORE_NAME                      1: Filter
+        108     LOAD_CONST                      13: <CODE> load_config
+        110     LOAD_CONST                      14: 'load_config'
+        112     MAKE_FUNCTION                   0
+        114     STORE_NAME                      10: load_config
+        116     LOAD_CONST                      4: None
+        118     RETURN_VALUE                    

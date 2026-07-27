@@ -31,9 +31,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!",
-    "lines": 578
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!",
+    "lines": 610
   },
   {
     "pyc": "proprietary/shims/adxl345.pyc",
@@ -43,9 +43,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 7,
-    "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 556
+    "unsupported": false,
+    "warn": "Warning: block stack is not empty!",
+    "lines": 574
   },
   {
     "pyc": "proprietary/shims/auto_addr.pyc",
@@ -68,8 +68,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 162
+    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 179
   },
   {
     "pyc": "proprietary/shims/base_info.pyc",
@@ -91,9 +91,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 208
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 212
   },
   {
     "pyc": "proprietary/shims/belt_mdl.pyc",
@@ -188,7 +188,7 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: block stack is not empty!\nWarning: Stack history is empty, something wrong might have happened",
+    "warn": "Warning: Stack history is empty, something wrong might have happened",
     "lines": 75
   },
   {
@@ -199,21 +199,21 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 50
+    "unsupported": false,
+    "warn": "",
+    "lines": 60
   },
   {
     "pyc": "proprietary/shims/delta_calibrate.pyc",
     "out": "decompiled/shims/delta_calibrate.py",
     "raw_parses": false,
-    "repaired_parses": true,
+    "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 240
+    "unsupported": false,
+    "warn": "Warning: block stack is not empty!",
+    "lines": 254
   },
   {
     "pyc": "proprietary/shims/dirzctl.pyc",
@@ -283,9 +283,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 278
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 319
   },
   {
     "pyc": "proprietary/shims/extruder_stepper.pyc",
@@ -367,9 +367,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 121
+    "unsupported": false,
+    "warn": "",
+    "lines": 126
   },
   {
     "pyc": "proprietary/shims/filter.pyc",
@@ -428,8 +428,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: block stack is not empty!",
-    "lines": 60
+    "warn": "",
+    "lines": 58
   },
   {
     "pyc": "proprietary/shims/gcode_macro.pyc",
@@ -439,9 +439,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 37
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 52
   },
   {
     "pyc": "proprietary/shims/gcode_move.pyc",
@@ -451,9 +451,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: Stack history is empty, something wrong might have happened",
-    "lines": 194
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is empty, something wrong might have happened",
+    "lines": 374
   },
   {
     "pyc": "proprietary/shims/hall_filament_width_sensor.pyc",
@@ -523,9 +523,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 3,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 148
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 229
   },
   {
     "pyc": "proprietary/shims/homing_heaters.pyc",
@@ -572,8 +572,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: block stack is not empty!",
-    "lines": 113
+    "warn": "",
+    "lines": 112
   },
   {
     "pyc": "proprietary/shims/input_shaper.pyc",
@@ -618,10 +618,10 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
-    "unsupported": true,
-    "warn": "Warning: Stack history is empty, something wrong might have happened\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (",
-    "lines": 293
+    "none_calls": 2,
+    "unsupported": false,
+    "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarnin",
+    "lines": 553
   },
   {
     "pyc": "proprietary/shims/manual_probe.pyc",
@@ -631,9 +631,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 229
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 269
   },
   {
     "pyc": "proprietary/shims/manual_stepper.pyc",
@@ -654,10 +654,10 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH ",
-    "lines": 1120
+    "none_calls": 0,
+    "unsupported": false,
+    "warn": "PycBuffer::getByte(): Unexpected end of stream",
+    "lines": 29
   },
   {
     "pyc": "proprietary/shims/motion_report.pyc",
@@ -691,9 +691,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 2,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 552
+    "unsupported": false,
+    "warn": "",
+    "lines": 565
   },
   {
     "pyc": "proprietary/shims/multi_pin.pyc",
@@ -703,9 +703,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 64
+    "unsupported": false,
+    "warn": "",
+    "lines": 72
   },
   {
     "pyc": "proprietary/shims/neopixel.pyc",
@@ -738,10 +738,10 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
-    "unsupported": true,
-    "warn": "Warning: Stack history is empty, something wrong might have happened\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 226
+    "none_calls": 5,
+    "unsupported": false,
+    "warn": "Warning: Stack history is empty, something wrong might have happened",
+    "lines": 283
   },
   {
     "pyc": "proprietary/shims/photograph.pyc",
@@ -751,9 +751,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 13
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 30
   },
   {
     "pyc": "proprietary/shims/pid_calibrate.pyc",
@@ -763,9 +763,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 121
+    "unsupported": false,
+    "warn": "",
+    "lines": 181
   },
   {
     "pyc": "proprietary/shims/print_stats.pyc",
@@ -774,10 +774,10 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 0,
-    "unsupported": true,
-    "warn": "Warning: Stack history is empty, something wrong might have happened\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: Stack history is empty, something wrong might have happened\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 146
+    "none_calls": 2,
+    "unsupported": false,
+    "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is empty, something wrong might have happened",
+    "lines": 202
   },
   {
     "pyc": "proprietary/shims/probe.pyc",
@@ -787,9 +787,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
-    "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: Stack history is empty, something wrong might have happened",
-    "lines": 265
+    "unsupported": false,
+    "warn": "Warning: Stack history is empty, something wrong might have happened",
+    "lines": 272
   },
   {
     "pyc": "proprietary/shims/prtouch.pyc",
@@ -879,13 +879,13 @@
     "pyc": "proprietary/shims/replicape.pyc",
     "out": "decompiled/shims/replicape.py",
     "raw_parses": false,
-    "repaired_parses": true,
+    "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 292
+    "warn": "PycBuffer::getByte(): Unexpected end of stream",
+    "lines": 132
   },
   {
     "pyc": "proprietary/shims/resonance_tester.pyc",
@@ -895,9 +895,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 337
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 374
   },
   {
     "pyc": "proprietary/shims/respond.pyc",
@@ -919,9 +919,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 53
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 100
   },
   {
     "pyc": "proprietary/shims/sdcard_loop.pyc",
@@ -955,9 +955,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 2,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 331
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 355
   },
   {
     "pyc": "proprietary/shims/shaper_defs.pyc",
@@ -1011,13 +1011,13 @@
     "pyc": "proprietary/shims/statistics_ext.pyc",
     "out": "decompiled/shims/statistics_ext.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: block stack is not empty!\nWarning: block stack is not empty!",
-    "lines": 93
+    "warn": "Warning: block stack is not empty!",
+    "lines": 94
   },
   {
     "pyc": "proprietary/shims/stepper_enable.pyc",
@@ -1195,9 +1195,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 100
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 119
   },
   {
     "pyc": "proprietary/shims/virtual_sdcard.pyc",
@@ -1207,9 +1207,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: Stack history is empty, something wrong might have happened\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 116
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 198
   },
   {
     "pyc": "proprietary/shims/z_align.pyc",
@@ -1243,9 +1243,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 2,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 224
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 299
   },
   {
     "pyc": "proprietary/so/auto_addr_wrapper.pyc",
@@ -1256,7 +1256,7 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 162
+    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 179
   }
 ]

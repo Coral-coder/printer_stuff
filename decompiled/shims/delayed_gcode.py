@@ -28,7 +28,17 @@ class DelayedGcode:
     
     def _gcode_timer_event(self, eventtime):
         self.inside_timer = True
-    # WARNING: Decompyle incomplete
+        
+        try:
+            self.gcode.run_script(self.timer_gcode.render())
+        except Exception:
+            logging.exception('Script running error')
+
+        nextwake = self.reactor.NEVER
+        if self.repeat:
+            nextwake = eventtime + self.duration
+        self.inside_timer = self.repeat = False
+        return nextwake
 
     cmd_UPDATE_DELAYED_GCODE_help = 'Update the duration of a delayed_gcode'
     

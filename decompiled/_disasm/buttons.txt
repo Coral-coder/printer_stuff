@@ -1,0 +1,2065 @@
+buttons.pyc (Python 3.9)
+[Code]
+    File Name: /extras/buttons.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 4
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'QUERY_TIME'
+        'RETRANSMIT_COUNT'
+        'MCU_buttons'
+        'ADC_REPORT_TIME'
+        'ADC_DEBOUNCE_TIME'
+        'ADC_SAMPLE_TIME'
+        'ADC_SAMPLE_COUNT'
+        'MCU_ADC_buttons'
+        'BaseRotaryEncoder'
+        'FullStepRotaryEncoder'
+        'HalfStepRotaryEncoder'
+        'PrinterButtons'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        0.002
+        50
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: MCU_buttons
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'setup_buttons'
+                'build_config'
+                'handle_buttons_state'
+                'handle_button'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'MCU_buttons'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_reactor'
+                        'reactor'
+                        'mcu'
+                        'register_config_callback'
+                        'build_config'
+                        'pin_list'
+                        'callbacks'
+                        'invert'
+                        'last_button'
+                        'ack_cmd'
+                        'ack_count'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'mcu'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_METHOD                     0: get_reactor
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: reactor
+                        10      LOAD_FAST                       2: mcu
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: mcu
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: mcu
+                        20      LOAD_METHOD                     3: register_config_callback
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       4: build_config
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      BUILD_LIST                      0
+                        32      LOAD_FAST                       0: self
+                        34      STORE_ATTR                      5: pin_list
+                        36      BUILD_LIST                      0
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      6: callbacks
+                        42      LOAD_CONST                      1: 0
+                        44      DUP_TOP                         
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      7: invert
+                        50      LOAD_FAST                       0: self
+                        52      STORE_ATTR                      8: last_button
+                        54      LOAD_CONST                      0: None
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      9: ack_cmd
+                        60      LOAD_CONST                      1: 0
+                        62      LOAD_FAST                       0: self
+                        64      STORE_ATTR                      10: ack_count
+                        66      LOAD_CONST                      0: None
+                        68      RETURN_VALUE                    
+                'MCU_buttons.__init__'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: setup_buttons
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'len'
+                        'pin_list'
+                        'invert'
+                        'append'
+                        'callbacks'
+                    [Var Names]
+                        'self'
+                        'pins'
+                        'callback'
+                        'mask'
+                        'shift'
+                        'pin_params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'invert'
+                        1
+                        'pin'
+                        'pullup'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       STORE_FAST                      3: mask
+                        4       LOAD_GLOBAL                     0: len
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: pin_list
+                        10      CALL_FUNCTION                   1
+                        12      STORE_FAST                      4: shift
+                        14      LOAD_FAST                       1: pins
+                        16      GET_ITER                        
+                        18      FOR_ITER                        78 (to 98)
+                        20      STORE_FAST                      5: pin_params
+                        22      LOAD_FAST                       5: pin_params
+                        24      LOAD_CONST                      2: 'invert'
+                        26      BINARY_SUBSCR                   
+                        28      POP_JUMP_IF_FALSE               54
+                        30      LOAD_FAST                       0: self
+                        32      DUP_TOP                         
+                        34      LOAD_ATTR                       2: invert
+                        36      LOAD_CONST                      3: 1
+                        38      LOAD_GLOBAL                     0: len
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       1: pin_list
+                        44      CALL_FUNCTION                   1
+                        46      BINARY_LSHIFT                   
+                        48      INPLACE_OR                      
+                        50      ROT_TWO                         
+                        52      STORE_ATTR                      2: invert
+                        54      LOAD_FAST                       3: mask
+                        56      LOAD_CONST                      3: 1
+                        58      LOAD_GLOBAL                     0: len
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       1: pin_list
+                        64      CALL_FUNCTION                   1
+                        66      BINARY_LSHIFT                   
+                        68      INPLACE_OR                      
+                        70      STORE_FAST                      3: mask
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       1: pin_list
+                        76      LOAD_METHOD                     3: append
+                        78      LOAD_FAST                       5: pin_params
+                        80      LOAD_CONST                      4: 'pin'
+                        82      BINARY_SUBSCR                   
+                        84      LOAD_FAST                       5: pin_params
+                        86      LOAD_CONST                      5: 'pullup'
+                        88      BINARY_SUBSCR                   
+                        90      BUILD_TUPLE                     2
+                        92      CALL_METHOD                     1
+                        94      POP_TOP                         
+                        96      JUMP_ABSOLUTE                   18
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       4: callbacks
+                        102     LOAD_METHOD                     3: append
+                        104     LOAD_FAST                       3: mask
+                        106     LOAD_FAST                       4: shift
+                        108     LOAD_FAST                       2: callback
+                        110     BUILD_TUPLE                     3
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     LOAD_CONST                      0: None
+                        118     RETURN_VALUE                    
+                'MCU_buttons.setup_buttons'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pin_list'
+                        'mcu'
+                        'create_oid'
+                        'oid'
+                        'add_config_cmd'
+                        'len'
+                        'enumerate'
+                        'alloc_command_queue'
+                        'lookup_command'
+                        'ack_cmd'
+                        'get_query_slot'
+                        'seconds_to_clock'
+                        'QUERY_TIME'
+                        'RETRANSMIT_COUNT'
+                        'invert'
+                        'register_response'
+                        'handle_buttons_state'
+                    [Var Names]
+                        'self'
+                        'i'
+                        'pin'
+                        'pull_up'
+                        'cmd_queue'
+                        'clock'
+                        'rest_ticks'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'config_buttons oid=%d button_count=%d'
+                        'buttons_add oid=%d pos=%d pin=%s pull_up=%d'
+                        True
+                        (
+                            'is_init'
+                        )
+                        'buttons_ack oid=%c count=%c'
+                        (
+                            'cq'
+                        )
+                        'buttons_query oid=%d clock=%d rest_ticks=%d retransmit_count=%d invert=%d'
+                        'buttons_state'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: pin_list
+                        4       POP_JUMP_IF_TRUE                10
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: mcu
+                        14      LOAD_METHOD                     2: create_oid
+                        16      CALL_METHOD                     0
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      3: oid
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       1: mcu
+                        26      LOAD_METHOD                     4: add_config_cmd
+                        28      LOAD_CONST                      1: 'config_buttons oid=%d button_count=%d'
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       3: oid
+                        34      LOAD_GLOBAL                     5: len
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       0: pin_list
+                        40      CALL_FUNCTION                   1
+                        42      BUILD_TUPLE                     2
+                        44      BINARY_MODULO                   
+                        46      CALL_METHOD                     1
+                        48      POP_TOP                         
+                        50      LOAD_GLOBAL                     6: enumerate
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       0: pin_list
+                        56      CALL_FUNCTION                   1
+                        58      GET_ITER                        
+                        60      FOR_ITER                        42 (to 104)
+                        62      UNPACK_SEQUENCE                 2
+                        64      STORE_FAST                      1: i
+                        66      UNPACK_SEQUENCE                 2
+                        68      STORE_FAST                      2: pin
+                        70      STORE_FAST                      3: pull_up
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       1: mcu
+                        76      LOAD_ATTR                       4: add_config_cmd
+                        78      LOAD_CONST                      2: 'buttons_add oid=%d pos=%d pin=%s pull_up=%d'
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       3: oid
+                        84      LOAD_FAST                       1: i
+                        86      LOAD_FAST                       2: pin
+                        88      LOAD_FAST                       3: pull_up
+                        90      BUILD_TUPLE                     4
+                        92      BINARY_MODULO                   
+                        94      LOAD_CONST                      3: True
+                        96      LOAD_CONST                      4: ('is_init',)
+                        98      CALL_FUNCTION_KW                2
+                        100     POP_TOP                         
+                        102     JUMP_ABSOLUTE                   60
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       1: mcu
+                        108     LOAD_METHOD                     7: alloc_command_queue
+                        110     CALL_METHOD                     0
+                        112     STORE_FAST                      4: cmd_queue
+                        114     LOAD_FAST                       0: self
+                        116     LOAD_ATTR                       1: mcu
+                        118     LOAD_ATTR                       8: lookup_command
+                        120     LOAD_CONST                      5: 'buttons_ack oid=%c count=%c'
+                        122     LOAD_FAST                       4: cmd_queue
+                        124     LOAD_CONST                      6: ('cq',)
+                        126     CALL_FUNCTION_KW                2
+                        128     LOAD_FAST                       0: self
+                        130     STORE_ATTR                      9: ack_cmd
+                        132     LOAD_FAST                       0: self
+                        134     LOAD_ATTR                       1: mcu
+                        136     LOAD_METHOD                     10: get_query_slot
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       3: oid
+                        142     CALL_METHOD                     1
+                        144     STORE_FAST                      5: clock
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       1: mcu
+                        150     LOAD_METHOD                     11: seconds_to_clock
+                        152     LOAD_GLOBAL                     12: QUERY_TIME
+                        154     CALL_METHOD                     1
+                        156     STORE_FAST                      6: rest_ticks
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       1: mcu
+                        162     LOAD_ATTR                       4: add_config_cmd
+                        164     LOAD_CONST                      7: 'buttons_query oid=%d clock=%d rest_ticks=%d retransmit_count=%d invert=%d'
+                        166     LOAD_FAST                       0: self
+                        168     LOAD_ATTR                       3: oid
+                        170     LOAD_FAST                       5: clock
+                        172     LOAD_FAST                       6: rest_ticks
+                        174     LOAD_GLOBAL                     13: RETRANSMIT_COUNT
+                        176     LOAD_FAST                       0: self
+                        178     LOAD_ATTR                       14: invert
+                        180     BUILD_TUPLE                     5
+                        182     BINARY_MODULO                   
+                        184     LOAD_CONST                      3: True
+                        186     LOAD_CONST                      4: ('is_init',)
+                        188     CALL_FUNCTION_KW                2
+                        190     POP_TOP                         
+                        192     LOAD_FAST                       0: self
+                        194     LOAD_ATTR                       1: mcu
+                        196     LOAD_METHOD                     15: register_response
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       16: handle_buttons_state
+                        202     LOAD_CONST                      8: 'buttons_state'
+                        204     LOAD_FAST                       0: self
+                        206     LOAD_ATTR                       3: oid
+                        208     CALL_METHOD                     3
+                        210     POP_TOP                         
+                        212     LOAD_CONST                      0: None
+                        214     RETURN_VALUE                    
+                'MCU_buttons.build_config'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: handle_buttons_state
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'ack_count'
+                        'bytearray'
+                        'len'
+                        'ack_cmd'
+                        'send'
+                        'oid'
+                        'reactor'
+                        'register_async_callback'
+                    [Var Names]
+                        'self'
+                        'params'
+                        'ack_count'
+                        'ack_diff'
+                        'msg_ack_count'
+                        'buttons'
+                        'new_count'
+                        'new_buttons'
+                        'nb'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'ack_count'
+                        255
+                        128
+                        256
+                        'state'
+                        0
+                        [Code]
+                            File Name: /extras/buttons.py
+                            Object Name: <lambda>
+                            Arg Count: 3
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'handle_button'
+                            [Var Names]
+                                'e'
+                                's'
+                                'b'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       1: s
+                                2       LOAD_METHOD                     0: handle_button
+                                4       LOAD_FAST                       0: e
+                                6       LOAD_FAST                       2: b
+                                8       CALL_METHOD                     2
+                                10      RETURN_VALUE                    
+                        'MCU_buttons.handle_buttons_state.<locals>.<lambda>'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: ack_count
+                        4       STORE_FAST                      2: ack_count
+                        6       LOAD_FAST                       2: ack_count
+                        8       LOAD_FAST                       1: params
+                        10      LOAD_CONST                      1: 'ack_count'
+                        12      BINARY_SUBSCR                   
+                        14      BINARY_SUBTRACT                 
+                        16      LOAD_CONST                      2: 255
+                        18      BINARY_AND                      
+                        20      STORE_FAST                      3: ack_diff
+                        22      LOAD_FAST                       3: ack_diff
+                        24      LOAD_CONST                      3: 128
+                        26      BINARY_AND                      
+                        28      POP_JUMP_IF_FALSE               38
+                        30      LOAD_FAST                       3: ack_diff
+                        32      LOAD_CONST                      4: 256
+                        34      INPLACE_SUBTRACT                
+                        36      STORE_FAST                      3: ack_diff
+                        38      LOAD_FAST                       2: ack_count
+                        40      LOAD_FAST                       3: ack_diff
+                        42      BINARY_SUBTRACT                 
+                        44      STORE_FAST                      4: msg_ack_count
+                        46      LOAD_GLOBAL                     1: bytearray
+                        48      LOAD_FAST                       1: params
+                        50      LOAD_CONST                      5: 'state'
+                        52      BINARY_SUBSCR                   
+                        54      CALL_FUNCTION                   1
+                        56      STORE_FAST                      5: buttons
+                        58      LOAD_FAST                       4: msg_ack_count
+                        60      LOAD_GLOBAL                     2: len
+                        62      LOAD_FAST                       5: buttons
+                        64      CALL_FUNCTION                   1
+                        66      BINARY_ADD                      
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       0: ack_count
+                        72      BINARY_SUBTRACT                 
+                        74      STORE_FAST                      6: new_count
+                        76      LOAD_FAST                       6: new_count
+                        78      LOAD_CONST                      6: 0
+                        80      COMPARE_OP                      1 (<=)
+                        82      POP_JUMP_IF_FALSE               88
+                        84      LOAD_CONST                      0: None
+                        86      RETURN_VALUE                    
+                        88      LOAD_FAST                       5: buttons
+                        90      LOAD_FAST                       6: new_count
+                        92      UNARY_NEGATIVE                  
+                        94      LOAD_CONST                      0: None
+                        96      BUILD_SLICE                     2
+                        98      BINARY_SUBSCR                   
+                        100     STORE_FAST                      7: new_buttons
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       3: ack_cmd
+                        106     LOAD_METHOD                     4: send
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       5: oid
+                        112     LOAD_FAST                       6: new_count
+                        114     BUILD_LIST                      2
+                        116     CALL_METHOD                     1
+                        118     POP_TOP                         
+                        120     LOAD_FAST                       0: self
+                        122     DUP_TOP                         
+                        124     LOAD_ATTR                       0: ack_count
+                        126     LOAD_FAST                       6: new_count
+                        128     INPLACE_ADD                     
+                        130     ROT_TWO                         
+                        132     STORE_ATTR                      0: ack_count
+                        134     LOAD_FAST                       7: new_buttons
+                        136     GET_ITER                        
+                        138     FOR_ITER                        26 (to 166)
+                        140     STORE_FAST                      8: nb
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       6: reactor
+                        146     LOAD_METHOD                     7: register_async_callback
+                        148     LOAD_FAST                       0: self
+                        150     LOAD_FAST                       8: nb
+                        152     BUILD_TUPLE                     2
+                        154     LOAD_CONST                      7: <CODE> <lambda>
+                        156     LOAD_CONST                      8: 'MCU_buttons.handle_buttons_state.<locals>.<lambda>'
+                        158     MAKE_FUNCTION                   1
+                        160     CALL_METHOD                     1
+                        162     POP_TOP                         
+                        164     JUMP_ABSOLUTE                   138
+                        166     LOAD_CONST                      0: None
+                        168     RETURN_VALUE                    
+                'MCU_buttons.handle_buttons_state'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: handle_button
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'invert'
+                        'last_button'
+                        'callbacks'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'button'
+                        'changed'
+                        'mask'
+                        'shift'
+                        'callback'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       2: button
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: invert
+                        6       INPLACE_XOR                     
+                        8       STORE_FAST                      2: button
+                        10      LOAD_FAST                       2: button
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: last_button
+                        16      BINARY_XOR                      
+                        18      STORE_FAST                      3: changed
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       2: callbacks
+                        24      GET_ITER                        
+                        26      FOR_ITER                        36 (to 64)
+                        28      UNPACK_SEQUENCE                 3
+                        30      STORE_FAST                      4: mask
+                        32      STORE_FAST                      5: shift
+                        34      STORE_FAST                      6: callback
+                        36      LOAD_FAST                       3: changed
+                        38      LOAD_FAST                       4: mask
+                        40      BINARY_AND                      
+                        42      POP_JUMP_IF_FALSE               26
+                        44      LOAD_FAST                       6: callback
+                        46      LOAD_FAST                       1: eventtime
+                        48      LOAD_FAST                       2: button
+                        50      LOAD_FAST                       4: mask
+                        52      BINARY_AND                      
+                        54      LOAD_FAST                       5: shift
+                        56      BINARY_RSHIFT                   
+                        58      CALL_FUNCTION                   2
+                        60      POP_TOP                         
+                        62      JUMP_ABSOLUTE                   26
+                        64      LOAD_FAST                       2: button
+                        66      LOAD_FAST                       0: self
+                        68      STORE_ATTR                      1: last_button
+                        70      LOAD_CONST                      0: None
+                        72      RETURN_VALUE                    
+                'MCU_buttons.handle_button'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'MCU_buttons'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'MCU_buttons.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> setup_buttons
+                18      LOAD_CONST                      4: 'MCU_buttons.setup_buttons'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: setup_buttons
+                24      LOAD_CONST                      5: <CODE> build_config
+                26      LOAD_CONST                      6: 'MCU_buttons.build_config'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: build_config
+                32      LOAD_CONST                      7: <CODE> handle_buttons_state
+                34      LOAD_CONST                      8: 'MCU_buttons.handle_buttons_state'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: handle_buttons_state
+                40      LOAD_CONST                      9: <CODE> handle_button
+                42      LOAD_CONST                      10: 'MCU_buttons.handle_button'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: handle_button
+                48      LOAD_CONST                      11: None
+                50      RETURN_VALUE                    
+        'MCU_buttons'
+        0.015
+        0.025
+        0.001
+        6
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: MCU_ADC_buttons
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'setup_button'
+                'adc_callback'
+                'call_button'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'MCU_ADC_buttons'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: __init__
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_reactor'
+                        'reactor'
+                        'buttons'
+                        'last_button'
+                        'last_pressed'
+                        'last_debouncetime'
+                        'pullup'
+                        'pin'
+                        'min_value'
+                        'max_value'
+                        'lookup_object'
+                        'setup_pin'
+                        'mcu_adc'
+                        'setup_minmax'
+                        'ADC_SAMPLE_TIME'
+                        'ADC_SAMPLE_COUNT'
+                        'setup_adc_callback'
+                        'ADC_REPORT_TIME'
+                        'adc_callback'
+                        'register_adc'
+                        'strip'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'pin'
+                        'pullup'
+                        'ppins'
+                        'query_adc'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1e+12
+                        0
+                        'pins'
+                        'adc'
+                        'query_adc'
+                        'adc_button:'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_METHOD                     0: get_reactor
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: reactor
+                        10      BUILD_LIST                      0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: buttons
+                        16      LOAD_CONST                      0: None
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      3: last_button
+                        22      LOAD_CONST                      0: None
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: last_pressed
+                        28      LOAD_CONST                      1: 0
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      5: last_debouncetime
+                        34      LOAD_FAST                       3: pullup
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      6: pullup
+                        40      LOAD_FAST                       2: pin
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      7: pin
+                        46      LOAD_CONST                      2: 1e+12
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      8: min_value
+                        52      LOAD_CONST                      3: 0
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      9: max_value
+                        58      LOAD_FAST                       1: printer
+                        60      LOAD_METHOD                     10: lookup_object
+                        62      LOAD_CONST                      4: 'pins'
+                        64      CALL_METHOD                     1
+                        66      STORE_FAST                      4: ppins
+                        68      LOAD_FAST                       4: ppins
+                        70      LOAD_METHOD                     11: setup_pin
+                        72      LOAD_CONST                      5: 'adc'
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_ATTR                       7: pin
+                        78      CALL_METHOD                     2
+                        80      LOAD_FAST                       0: self
+                        82      STORE_ATTR                      12: mcu_adc
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       12: mcu_adc
+                        88      LOAD_METHOD                     13: setup_minmax
+                        90      LOAD_GLOBAL                     14: ADC_SAMPLE_TIME
+                        92      LOAD_GLOBAL                     15: ADC_SAMPLE_COUNT
+                        94      CALL_METHOD                     2
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       12: mcu_adc
+                        102     LOAD_METHOD                     16: setup_adc_callback
+                        104     LOAD_GLOBAL                     17: ADC_REPORT_TIME
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       18: adc_callback
+                        110     CALL_METHOD                     2
+                        112     POP_TOP                         
+                        114     LOAD_FAST                       1: printer
+                        116     LOAD_METHOD                     10: lookup_object
+                        118     LOAD_CONST                      6: 'query_adc'
+                        120     CALL_METHOD                     1
+                        122     STORE_FAST                      5: query_adc
+                        124     LOAD_FAST                       5: query_adc
+                        126     LOAD_METHOD                     19: register_adc
+                        128     LOAD_CONST                      7: 'adc_button:'
+                        130     LOAD_FAST                       2: pin
+                        132     LOAD_METHOD                     20: strip
+                        134     CALL_METHOD                     0
+                        136     BINARY_ADD                      
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       12: mcu_adc
+                        142     CALL_METHOD                     2
+                        144     POP_TOP                         
+                        146     LOAD_CONST                      0: None
+                        148     RETURN_VALUE                    
+                'MCU_ADC_buttons.__init__'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: setup_button
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'min'
+                        'min_value'
+                        'max'
+                        'max_value'
+                        'buttons'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'min_value'
+                        'max_value'
+                        'callback'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: min
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       1: min_value
+                        6       LOAD_FAST                       1: min_value
+                        8       CALL_FUNCTION                   2
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      1: min_value
+                        14      LOAD_GLOBAL                     2: max
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       3: max_value
+                        20      LOAD_FAST                       2: max_value
+                        22      CALL_FUNCTION                   2
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      3: max_value
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       4: buttons
+                        32      LOAD_METHOD                     5: append
+                        34      LOAD_FAST                       1: min_value
+                        36      LOAD_FAST                       2: max_value
+                        38      LOAD_FAST                       3: callback
+                        40      BUILD_TUPLE                     3
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_CONST                      0: None
+                        48      RETURN_VALUE                    
+                'MCU_ADC_buttons.setup_button'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: adc_callback
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 10
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'max'
+                        'min'
+                        'pullup'
+                        'min_value'
+                        'max_value'
+                        'enumerate'
+                        'buttons'
+                        'last_button'
+                        'last_debouncetime'
+                        'ADC_DEBOUNCE_TIME'
+                        'last_pressed'
+                        'call_button'
+                    [Var Names]
+                        'self'
+                        'read_time'
+                        'read_value'
+                        'adc'
+                        'value'
+                        'btn'
+                        'i'
+                        'min_value'
+                        'max_value'
+                        'cb'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1e-05
+                        0.99999
+                        1
+                        False
+                        True
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: max
+                        2       LOAD_CONST                      1: 1e-05
+                        4       LOAD_GLOBAL                     1: min
+                        6       LOAD_CONST                      2: 0.99999
+                        8       LOAD_FAST                       2: read_value
+                        10      CALL_FUNCTION                   2
+                        12      CALL_FUNCTION                   2
+                        14      STORE_FAST                      3: adc
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: pullup
+                        20      LOAD_FAST                       3: adc
+                        22      BINARY_MULTIPLY                 
+                        24      LOAD_CONST                      3: 1
+                        26      LOAD_FAST                       3: adc
+                        28      BINARY_SUBTRACT                 
+                        30      BINARY_TRUE_DIVIDE              
+                        32      STORE_FAST                      4: value
+                        34      LOAD_CONST                      0: None
+                        36      STORE_FAST                      5: btn
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       3: min_value
+                        42      LOAD_FAST                       4: value
+                        44      DUP_TOP                         
+                        46      ROT_THREE                       
+                        48      COMPARE_OP                      1 (<=)
+                        50      POP_JUMP_IF_FALSE               62
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       4: max_value
+                        56      COMPARE_OP                      1 (<=)
+                        58      POP_JUMP_IF_FALSE               124
+                        60      JUMP_FORWARD                    4 (to 66)
+                        62      POP_TOP                         
+                        64      JUMP_FORWARD                    58 (to 124)
+                        66      LOAD_GLOBAL                     5: enumerate
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       6: buttons
+                        72      CALL_FUNCTION                   1
+                        74      GET_ITER                        
+                        76      FOR_ITER                        46 (to 124)
+                        78      UNPACK_SEQUENCE                 2
+                        80      STORE_FAST                      6: i
+                        82      UNPACK_SEQUENCE                 3
+                        84      STORE_FAST                      7: min_value
+                        86      STORE_FAST                      8: max_value
+                        88      STORE_FAST                      9: cb
+                        90      LOAD_FAST                       7: min_value
+                        92      LOAD_FAST                       4: value
+                        94      DUP_TOP                         
+                        96      ROT_THREE                       
+                        98      COMPARE_OP                      0 (<)
+                        100     POP_JUMP_IF_FALSE               110
+                        102     LOAD_FAST                       8: max_value
+                        104     COMPARE_OP                      0 (<)
+                        106     POP_JUMP_IF_FALSE               76
+                        108     JUMP_FORWARD                    4 (to 114)
+                        110     POP_TOP                         
+                        112     JUMP_ABSOLUTE                   76
+                        114     LOAD_FAST                       6: i
+                        116     STORE_FAST                      5: btn
+                        118     POP_TOP                         
+                        120     JUMP_ABSOLUTE                   124
+                        122     JUMP_ABSOLUTE                   76
+                        124     LOAD_FAST                       5: btn
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       7: last_button
+                        130     COMPARE_OP                      3 (!=)
+                        132     POP_JUMP_IF_FALSE               140
+                        134     LOAD_FAST                       1: read_time
+                        136     LOAD_FAST                       0: self
+                        138     STORE_ATTR                      8: last_debouncetime
+                        140     LOAD_FAST                       1: read_time
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       8: last_debouncetime
+                        146     BINARY_SUBTRACT                 
+                        148     LOAD_GLOBAL                     9: ADC_DEBOUNCE_TIME
+                        150     COMPARE_OP                      5 (>=)
+                        152     POP_JUMP_IF_FALSE               230
+                        154     LOAD_FAST                       0: self
+                        156     LOAD_ATTR                       7: last_button
+                        158     LOAD_FAST                       5: btn
+                        160     COMPARE_OP                      2 (==)
+                        162     POP_JUMP_IF_FALSE               230
+                        164     LOAD_FAST                       0: self
+                        166     LOAD_ATTR                       10: last_pressed
+                        168     LOAD_FAST                       5: btn
+                        170     COMPARE_OP                      3 (!=)
+                        172     POP_JUMP_IF_FALSE               230
+                        174     LOAD_FAST                       0: self
+                        176     LOAD_ATTR                       10: last_pressed
+                        178     LOAD_CONST                      0: None
+                        180     IS_OP                           1 (is not)
+                        182     POP_JUMP_IF_FALSE               204
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_METHOD                     11: call_button
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       10: last_pressed
+                        192     LOAD_CONST                      4: False
+                        194     CALL_METHOD                     2
+                        196     POP_TOP                         
+                        198     LOAD_CONST                      0: None
+                        200     LOAD_FAST                       0: self
+                        202     STORE_ATTR                      10: last_pressed
+                        204     LOAD_FAST                       5: btn
+                        206     LOAD_CONST                      0: None
+                        208     IS_OP                           1 (is not)
+                        210     POP_JUMP_IF_FALSE               230
+                        212     LOAD_FAST                       0: self
+                        214     LOAD_METHOD                     11: call_button
+                        216     LOAD_FAST                       5: btn
+                        218     LOAD_CONST                      5: True
+                        220     CALL_METHOD                     2
+                        222     POP_TOP                         
+                        224     LOAD_FAST                       5: btn
+                        226     LOAD_FAST                       0: self
+                        228     STORE_ATTR                      10: last_pressed
+                        230     LOAD_FAST                       5: btn
+                        232     LOAD_FAST                       0: self
+                        234     STORE_ATTR                      7: last_button
+                        236     LOAD_CONST                      0: None
+                        238     RETURN_VALUE                    
+                'MCU_ADC_buttons.adc_callback'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: call_button
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'buttons'
+                        'reactor'
+                        'register_async_callback'
+                    [Var Names]
+                        'self'
+                        'button'
+                        'state'
+                        'minval'
+                        'maxval'
+                        'callback'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/buttons.py
+                            Object Name: <lambda>
+                            Arg Count: 3
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 3
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                'e'
+                                'cb'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       1: cb
+                                2       LOAD_FAST                       0: e
+                                4       LOAD_FAST                       2: s
+                                6       CALL_FUNCTION                   2
+                                8       RETURN_VALUE                    
+                        'MCU_ADC_buttons.call_button.<locals>.<lambda>'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: buttons
+                        4       LOAD_FAST                       1: button
+                        6       BINARY_SUBSCR                   
+                        8       UNPACK_SEQUENCE                 3
+                        10      STORE_FAST                      3: minval
+                        12      STORE_FAST                      4: maxval
+                        14      STORE_FAST                      5: callback
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       1: reactor
+                        20      LOAD_METHOD                     2: register_async_callback
+                        22      LOAD_FAST                       5: callback
+                        24      LOAD_FAST                       2: state
+                        26      BUILD_TUPLE                     2
+                        28      LOAD_CONST                      1: <CODE> <lambda>
+                        30      LOAD_CONST                      2: 'MCU_ADC_buttons.call_button.<locals>.<lambda>'
+                        32      MAKE_FUNCTION                   1
+                        34      CALL_METHOD                     1
+                        36      POP_TOP                         
+                        38      LOAD_CONST                      0: None
+                        40      RETURN_VALUE                    
+                'MCU_ADC_buttons.call_button'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'MCU_ADC_buttons'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'MCU_ADC_buttons.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> setup_button
+                18      LOAD_CONST                      4: 'MCU_ADC_buttons.setup_button'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: setup_button
+                24      LOAD_CONST                      5: <CODE> adc_callback
+                26      LOAD_CONST                      6: 'MCU_ADC_buttons.adc_callback'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: adc_callback
+                32      LOAD_CONST                      7: <CODE> call_button
+                34      LOAD_CONST                      8: 'MCU_ADC_buttons.call_button'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: call_button
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'MCU_ADC_buttons'
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: BaseRotaryEncoder
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                'R_START'
+                'R_DIR_CW'
+                'R_DIR_CCW'
+                'R_DIR_MSK'
+                '__init__'
+                'encoder_callback'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'BaseRotaryEncoder'
+                0
+                16
+                32
+                48
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'cw_callback'
+                        'ccw_callback'
+                        'R_START'
+                        'encoder_state'
+                    [Var Names]
+                        'self'
+                        'cw_callback'
+                        'ccw_callback'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: cw_callback
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: cw_callback
+                        6       LOAD_FAST                       2: ccw_callback
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: ccw_callback
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: R_START
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      3: encoder_state
+                        20      LOAD_CONST                      0: None
+                        22      RETURN_VALUE                    
+                'BaseRotaryEncoder.__init__'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: encoder_callback
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'ENCODER_STATES'
+                        'encoder_state'
+                        'R_DIR_MSK'
+                        'R_DIR_CW'
+                        'cw_callback'
+                        'R_DIR_CCW'
+                        'ccw_callback'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'state'
+                        'es'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        15
+                        3
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: ENCODER_STATES
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: encoder_state
+                        8       LOAD_CONST                      1: 15
+                        10      BINARY_AND                      
+                        12      BINARY_SUBSCR                   
+                        14      LOAD_FAST                       2: state
+                        16      LOAD_CONST                      2: 3
+                        18      BINARY_AND                      
+                        20      BINARY_SUBSCR                   
+                        22      STORE_FAST                      3: es
+                        24      LOAD_FAST                       3: es
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      1: encoder_state
+                        30      LOAD_FAST                       3: es
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       2: R_DIR_MSK
+                        36      BINARY_AND                      
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       3: R_DIR_CW
+                        42      COMPARE_OP                      2 (==)
+                        44      POP_JUMP_IF_FALSE               58
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_METHOD                     4: cw_callback
+                        50      LOAD_FAST                       1: eventtime
+                        52      CALL_METHOD                     1
+                        54      POP_TOP                         
+                        56      JUMP_FORWARD                    26 (to 84)
+                        58      LOAD_FAST                       3: es
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       2: R_DIR_MSK
+                        64      BINARY_AND                      
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       5: R_DIR_CCW
+                        70      COMPARE_OP                      2 (==)
+                        72      POP_JUMP_IF_FALSE               84
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_METHOD                     6: ccw_callback
+                        78      LOAD_FAST                       1: eventtime
+                        80      CALL_METHOD                     1
+                        82      POP_TOP                         
+                        84      LOAD_CONST                      0: None
+                        86      RETURN_VALUE                    
+                'BaseRotaryEncoder.encoder_callback'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'BaseRotaryEncoder'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: 0
+                10      STORE_NAME                      3: R_START
+                12      LOAD_CONST                      2: 16
+                14      STORE_NAME                      4: R_DIR_CW
+                16      LOAD_CONST                      3: 32
+                18      STORE_NAME                      5: R_DIR_CCW
+                20      LOAD_CONST                      4: 48
+                22      STORE_NAME                      6: R_DIR_MSK
+                24      LOAD_CONST                      5: <CODE> __init__
+                26      LOAD_CONST                      6: 'BaseRotaryEncoder.__init__'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      7: __init__
+                32      LOAD_CONST                      7: <CODE> encoder_callback
+                34      LOAD_CONST                      8: 'BaseRotaryEncoder.encoder_callback'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      8: encoder_callback
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'BaseRotaryEncoder'
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: FullStepRotaryEncoder
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 10
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                'R_CW_FINAL'
+                'R_CW_BEGIN'
+                'R_CW_NEXT'
+                'R_CCW_BEGIN'
+                'R_CCW_FINAL'
+                'R_CCW_NEXT'
+                'BaseRotaryEncoder'
+                'R_START'
+                'R_DIR_CW'
+                'R_DIR_CCW'
+                'ENCODER_STATES'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'FullStepRotaryEncoder'
+                1
+                2
+                3
+                4
+                5
+                6
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'FullStepRotaryEncoder'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: 1
+                10      STORE_NAME                      3: R_CW_FINAL
+                12      LOAD_CONST                      2: 2
+                14      STORE_NAME                      4: R_CW_BEGIN
+                16      LOAD_CONST                      3: 3
+                18      STORE_NAME                      5: R_CW_NEXT
+                20      LOAD_CONST                      4: 4
+                22      STORE_NAME                      6: R_CCW_BEGIN
+                24      LOAD_CONST                      5: 5
+                26      STORE_NAME                      7: R_CCW_FINAL
+                28      LOAD_CONST                      6: 6
+                30      STORE_NAME                      8: R_CCW_NEXT
+                32      LOAD_NAME                       9: BaseRotaryEncoder
+                34      LOAD_ATTR                       10: R_START
+                36      LOAD_NAME                       4: R_CW_BEGIN
+                38      LOAD_NAME                       6: R_CCW_BEGIN
+                40      LOAD_NAME                       9: BaseRotaryEncoder
+                42      LOAD_ATTR                       10: R_START
+                44      BUILD_TUPLE                     4
+                46      LOAD_NAME                       5: R_CW_NEXT
+                48      LOAD_NAME                       9: BaseRotaryEncoder
+                50      LOAD_ATTR                       10: R_START
+                52      LOAD_NAME                       3: R_CW_FINAL
+                54      LOAD_NAME                       9: BaseRotaryEncoder
+                56      LOAD_ATTR                       10: R_START
+                58      LOAD_NAME                       9: BaseRotaryEncoder
+                60      LOAD_ATTR                       11: R_DIR_CW
+                62      BINARY_OR                       
+                64      BUILD_TUPLE                     4
+                66      LOAD_NAME                       5: R_CW_NEXT
+                68      LOAD_NAME                       4: R_CW_BEGIN
+                70      LOAD_NAME                       9: BaseRotaryEncoder
+                72      LOAD_ATTR                       10: R_START
+                74      LOAD_NAME                       9: BaseRotaryEncoder
+                76      LOAD_ATTR                       10: R_START
+                78      BUILD_TUPLE                     4
+                80      LOAD_NAME                       5: R_CW_NEXT
+                82      LOAD_NAME                       4: R_CW_BEGIN
+                84      LOAD_NAME                       3: R_CW_FINAL
+                86      LOAD_NAME                       9: BaseRotaryEncoder
+                88      LOAD_ATTR                       10: R_START
+                90      BUILD_TUPLE                     4
+                92      LOAD_NAME                       8: R_CCW_NEXT
+                94      LOAD_NAME                       9: BaseRotaryEncoder
+                96      LOAD_ATTR                       10: R_START
+                98      LOAD_NAME                       6: R_CCW_BEGIN
+                100     LOAD_NAME                       9: BaseRotaryEncoder
+                102     LOAD_ATTR                       10: R_START
+                104     BUILD_TUPLE                     4
+                106     LOAD_NAME                       8: R_CCW_NEXT
+                108     LOAD_NAME                       7: R_CCW_FINAL
+                110     LOAD_NAME                       9: BaseRotaryEncoder
+                112     LOAD_ATTR                       10: R_START
+                114     LOAD_NAME                       9: BaseRotaryEncoder
+                116     LOAD_ATTR                       10: R_START
+                118     LOAD_NAME                       9: BaseRotaryEncoder
+                120     LOAD_ATTR                       12: R_DIR_CCW
+                122     BINARY_OR                       
+                124     BUILD_TUPLE                     4
+                126     LOAD_NAME                       8: R_CCW_NEXT
+                128     LOAD_NAME                       7: R_CCW_FINAL
+                130     LOAD_NAME                       6: R_CCW_BEGIN
+                132     LOAD_NAME                       9: BaseRotaryEncoder
+                134     LOAD_ATTR                       10: R_START
+                136     BUILD_TUPLE                     4
+                138     BUILD_TUPLE                     7
+                140     STORE_NAME                      13: ENCODER_STATES
+                142     LOAD_CONST                      7: None
+                144     RETURN_VALUE                    
+        'FullStepRotaryEncoder'
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: HalfStepRotaryEncoder
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 10
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                'R_CCW_BEGIN'
+                'R_CW_BEGIN'
+                'R_START_M'
+                'R_CW_BEGIN_M'
+                'R_CCW_BEGIN_M'
+                'BaseRotaryEncoder'
+                'R_START'
+                'R_DIR_CCW'
+                'R_DIR_CW'
+                'ENCODER_STATES'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'HalfStepRotaryEncoder'
+                1
+                2
+                3
+                4
+                5
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'HalfStepRotaryEncoder'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: 1
+                10      STORE_NAME                      3: R_CCW_BEGIN
+                12      LOAD_CONST                      2: 2
+                14      STORE_NAME                      4: R_CW_BEGIN
+                16      LOAD_CONST                      3: 3
+                18      STORE_NAME                      5: R_START_M
+                20      LOAD_CONST                      4: 4
+                22      STORE_NAME                      6: R_CW_BEGIN_M
+                24      LOAD_CONST                      5: 5
+                26      STORE_NAME                      7: R_CCW_BEGIN_M
+                28      LOAD_NAME                       5: R_START_M
+                30      LOAD_NAME                       4: R_CW_BEGIN
+                32      LOAD_NAME                       3: R_CCW_BEGIN
+                34      LOAD_NAME                       8: BaseRotaryEncoder
+                36      LOAD_ATTR                       9: R_START
+                38      BUILD_TUPLE                     4
+                40      LOAD_NAME                       5: R_START_M
+                42      LOAD_NAME                       8: BaseRotaryEncoder
+                44      LOAD_ATTR                       10: R_DIR_CCW
+                46      BINARY_OR                       
+                48      LOAD_NAME                       8: BaseRotaryEncoder
+                50      LOAD_ATTR                       9: R_START
+                52      LOAD_NAME                       3: R_CCW_BEGIN
+                54      LOAD_NAME                       8: BaseRotaryEncoder
+                56      LOAD_ATTR                       9: R_START
+                58      BUILD_TUPLE                     4
+                60      LOAD_NAME                       5: R_START_M
+                62      LOAD_NAME                       8: BaseRotaryEncoder
+                64      LOAD_ATTR                       11: R_DIR_CW
+                66      BINARY_OR                       
+                68      LOAD_NAME                       4: R_CW_BEGIN
+                70      LOAD_NAME                       8: BaseRotaryEncoder
+                72      LOAD_ATTR                       9: R_START
+                74      LOAD_NAME                       8: BaseRotaryEncoder
+                76      LOAD_ATTR                       9: R_START
+                78      BUILD_TUPLE                     4
+                80      LOAD_NAME                       5: R_START_M
+                82      LOAD_NAME                       7: R_CCW_BEGIN_M
+                84      LOAD_NAME                       6: R_CW_BEGIN_M
+                86      LOAD_NAME                       8: BaseRotaryEncoder
+                88      LOAD_ATTR                       9: R_START
+                90      BUILD_TUPLE                     4
+                92      LOAD_NAME                       5: R_START_M
+                94      LOAD_NAME                       5: R_START_M
+                96      LOAD_NAME                       6: R_CW_BEGIN_M
+                98      LOAD_NAME                       8: BaseRotaryEncoder
+                100     LOAD_ATTR                       9: R_START
+                102     LOAD_NAME                       8: BaseRotaryEncoder
+                104     LOAD_ATTR                       11: R_DIR_CW
+                106     BINARY_OR                       
+                108     BUILD_TUPLE                     4
+                110     LOAD_NAME                       5: R_START_M
+                112     LOAD_NAME                       7: R_CCW_BEGIN_M
+                114     LOAD_NAME                       5: R_START_M
+                116     LOAD_NAME                       8: BaseRotaryEncoder
+                118     LOAD_ATTR                       9: R_START
+                120     LOAD_NAME                       8: BaseRotaryEncoder
+                122     LOAD_ATTR                       10: R_DIR_CCW
+                124     BINARY_OR                       
+                126     BUILD_TUPLE                     4
+                128     BUILD_TUPLE                     6
+                130     STORE_NAME                      12: ENCODER_STATES
+                132     LOAD_CONST                      6: None
+                134     RETURN_VALUE                    
+        'HalfStepRotaryEncoder'
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: PrinterButtons
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'register_adc_button'
+                'register_adc_button_push'
+                'register_buttons'
+                'register_rotary_encoder'
+                'register_button_push'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterButtons'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'load_object'
+                        'mcu_buttons'
+                        'adc_buttons'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'query_adc'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: load_object
+                        16      LOAD_FAST                       1: config
+                        18      LOAD_CONST                      1: 'query_adc'
+                        20      CALL_METHOD                     2
+                        22      POP_TOP                         
+                        24      BUILD_MAP                       0
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      3: mcu_buttons
+                        30      BUILD_MAP                       0
+                        32      LOAD_FAST                       0: self
+                        34      STORE_ATTR                      4: adc_buttons
+                        36      LOAD_CONST                      0: None
+                        38      RETURN_VALUE                    
+                'PrinterButtons.__init__'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: register_adc_button
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'adc_buttons'
+                        'get'
+                        'MCU_ADC_buttons'
+                        'printer'
+                        'setup_button'
+                    [Var Names]
+                        'self'
+                        'pin'
+                        'min_val'
+                        'max_val'
+                        'pullup'
+                        'callback'
+                        'adc_buttons'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: adc_buttons
+                        4       LOAD_METHOD                     1: get
+                        6       LOAD_FAST                       1: pin
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      6: adc_buttons
+                        12      LOAD_FAST                       6: adc_buttons
+                        14      LOAD_CONST                      0: None
+                        16      IS_OP                           0 (is)
+                        18      POP_JUMP_IF_FALSE               44
+                        20      LOAD_GLOBAL                     2: MCU_ADC_buttons
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       3: printer
+                        26      LOAD_FAST                       1: pin
+                        28      LOAD_FAST                       4: pullup
+                        30      CALL_FUNCTION                   3
+                        32      DUP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       0: adc_buttons
+                        38      LOAD_FAST                       1: pin
+                        40      STORE_SUBSCR                    
+                        42      STORE_FAST                      6: adc_buttons
+                        44      LOAD_FAST                       6: adc_buttons
+                        46      LOAD_METHOD                     4: setup_button
+                        48      LOAD_FAST                       2: min_val
+                        50      LOAD_FAST                       3: max_val
+                        52      LOAD_FAST                       5: callback
+                        54      CALL_METHOD                     3
+                        56      POP_TOP                         
+                        58      LOAD_CONST                      0: None
+                        60      RETURN_VALUE                    
+                'PrinterButtons.register_adc_button'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: register_adc_button_push
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'register_adc_button'
+                    [Var Names]
+                        'self'
+                        'pin'
+                        'min_val'
+                        'max_val'
+                        'pullup'
+                        'callback'
+                        'helper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/buttons.py
+                            Object Name: helper
+                            Arg Count: 3
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 2
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                'eventtime'
+                                'state'
+                                'callback'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       1: state
+                                2       POP_JUMP_IF_FALSE               12
+                                4       LOAD_FAST                       2: callback
+                                6       LOAD_FAST                       0: eventtime
+                                8       CALL_FUNCTION                   1
+                                10      POP_TOP                         
+                                12      LOAD_CONST                      0: None
+                                14      RETURN_VALUE                    
+                        'PrinterButtons.register_adc_button_push.<locals>.helper'
+                    [Disassembly]
+                        0       LOAD_FAST                       5: callback
+                        2       BUILD_TUPLE                     1
+                        4       LOAD_CONST                      1: <CODE> helper
+                        6       LOAD_CONST                      2: 'PrinterButtons.register_adc_button_push.<locals>.helper'
+                        8       MAKE_FUNCTION                   1
+                        10      STORE_FAST                      6: helper
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_METHOD                     0: register_adc_button
+                        16      LOAD_FAST                       1: pin
+                        18      LOAD_FAST                       2: min_val
+                        20      LOAD_FAST                       3: max_val
+                        22      LOAD_FAST                       4: pullup
+                        24      LOAD_FAST                       6: helper
+                        26      CALL_METHOD                     5
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                'PrinterButtons.register_adc_button_push'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: register_buttons
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 10
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'lookup_pin'
+                        'error'
+                        'append'
+                        'mcu_buttons'
+                        'get'
+                        'len'
+                        'pin_list'
+                        'MCU_buttons'
+                        'setup_buttons'
+                    [Var Names]
+                        'self'
+                        'pins'
+                        'callback'
+                        'ppins'
+                        'mcu'
+                        'mcu_name'
+                        'pin_params_list'
+                        'pin'
+                        'pin_params'
+                        'mcu_buttons'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'pins'
+                        True
+                        (
+                            'can_invert'
+                            'can_pullup'
+                        )
+                        'chip'
+                        'button pins must be on same mcu'
+                        'chip_name'
+                        8
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'pins'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      3: ppins
+                        12      LOAD_CONST                      0: None
+                        14      DUP_TOP                         
+                        16      STORE_FAST                      4: mcu
+                        18      STORE_FAST                      5: mcu_name
+                        20      BUILD_LIST                      0
+                        22      STORE_FAST                      6: pin_params_list
+                        24      LOAD_FAST                       1: pins
+                        26      GET_ITER                        
+                        28      FOR_ITER                        76 (to 106)
+                        30      STORE_FAST                      7: pin
+                        32      LOAD_FAST                       3: ppins
+                        34      LOAD_ATTR                       2: lookup_pin
+                        36      LOAD_FAST                       7: pin
+                        38      LOAD_CONST                      2: True
+                        40      LOAD_CONST                      2: True
+                        42      LOAD_CONST                      3: ('can_invert', 'can_pullup')
+                        44      CALL_FUNCTION_KW                3
+                        46      STORE_FAST                      8: pin_params
+                        48      LOAD_FAST                       4: mcu
+                        50      LOAD_CONST                      0: None
+                        52      IS_OP                           1 (is not)
+                        54      POP_JUMP_IF_FALSE               78
+                        56      LOAD_FAST                       8: pin_params
+                        58      LOAD_CONST                      4: 'chip'
+                        60      BINARY_SUBSCR                   
+                        62      LOAD_FAST                       4: mcu
+                        64      COMPARE_OP                      3 (!=)
+                        66      POP_JUMP_IF_FALSE               78
+                        68      LOAD_FAST                       3: ppins
+                        70      LOAD_METHOD                     3: error
+                        72      LOAD_CONST                      5: 'button pins must be on same mcu'
+                        74      CALL_METHOD                     1
+                        76      RAISE_VARARGS                   1
+                        78      LOAD_FAST                       8: pin_params
+                        80      LOAD_CONST                      4: 'chip'
+                        82      BINARY_SUBSCR                   
+                        84      STORE_FAST                      4: mcu
+                        86      LOAD_FAST                       8: pin_params
+                        88      LOAD_CONST                      6: 'chip_name'
+                        90      BINARY_SUBSCR                   
+                        92      STORE_FAST                      5: mcu_name
+                        94      LOAD_FAST                       6: pin_params_list
+                        96      LOAD_METHOD                     4: append
+                        98      LOAD_FAST                       8: pin_params
+                        100     CALL_METHOD                     1
+                        102     POP_TOP                         
+                        104     JUMP_ABSOLUTE                   28
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       5: mcu_buttons
+                        110     LOAD_METHOD                     6: get
+                        112     LOAD_FAST                       5: mcu_name
+                        114     CALL_METHOD                     1
+                        116     STORE_FAST                      9: mcu_buttons
+                        118     LOAD_FAST                       9: mcu_buttons
+                        120     LOAD_CONST                      0: None
+                        122     IS_OP                           0 (is)
+                        124     POP_JUMP_IF_TRUE                148
+                        126     LOAD_GLOBAL                     7: len
+                        128     LOAD_FAST                       9: mcu_buttons
+                        130     LOAD_ATTR                       8: pin_list
+                        132     CALL_FUNCTION                   1
+                        134     LOAD_GLOBAL                     7: len
+                        136     LOAD_FAST                       6: pin_params_list
+                        138     CALL_FUNCTION                   1
+                        140     BINARY_ADD                      
+                        142     LOAD_CONST                      7: 8
+                        144     COMPARE_OP                      4 (>)
+                        146     POP_JUMP_IF_FALSE               170
+                        148     LOAD_GLOBAL                     9: MCU_buttons
+                        150     LOAD_FAST                       0: self
+                        152     LOAD_ATTR                       0: printer
+                        154     LOAD_FAST                       4: mcu
+                        156     CALL_FUNCTION                   2
+                        158     DUP_TOP                         
+                        160     LOAD_FAST                       0: self
+                        162     LOAD_ATTR                       5: mcu_buttons
+                        164     LOAD_FAST                       5: mcu_name
+                        166     STORE_SUBSCR                    
+                        168     STORE_FAST                      9: mcu_buttons
+                        170     LOAD_FAST                       9: mcu_buttons
+                        172     LOAD_METHOD                     10: setup_buttons
+                        174     LOAD_FAST                       6: pin_params_list
+                        176     LOAD_FAST                       2: callback
+                        178     CALL_METHOD                     2
+                        180     POP_TOP                         
+                        182     LOAD_CONST                      0: None
+                        184     RETURN_VALUE                    
+                'PrinterButtons.register_buttons'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: register_rotary_encoder
+                    Arg Count: 6
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'HalfStepRotaryEncoder'
+                        'FullStepRotaryEncoder'
+                        'printer'
+                        'config_error'
+                        'register_buttons'
+                        'encoder_callback'
+                    [Var Names]
+                        'self'
+                        'pin1'
+                        'pin2'
+                        'cw_callback'
+                        'ccw_callback'
+                        'steps_per_detent'
+                        're'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        2
+                        4
+                        '%d steps per detent not supported'
+                    [Disassembly]
+                        0       LOAD_FAST                       5: steps_per_detent
+                        2       LOAD_CONST                      1: 2
+                        4       COMPARE_OP                      2 (==)
+                        6       POP_JUMP_IF_FALSE               20
+                        8       LOAD_GLOBAL                     0: HalfStepRotaryEncoder
+                        10      LOAD_FAST                       3: cw_callback
+                        12      LOAD_FAST                       4: ccw_callback
+                        14      CALL_FUNCTION                   2
+                        16      STORE_FAST                      6: re
+                        18      JUMP_FORWARD                    36 (to 56)
+                        20      LOAD_FAST                       5: steps_per_detent
+                        22      LOAD_CONST                      2: 4
+                        24      COMPARE_OP                      2 (==)
+                        26      POP_JUMP_IF_FALSE               40
+                        28      LOAD_GLOBAL                     1: FullStepRotaryEncoder
+                        30      LOAD_FAST                       3: cw_callback
+                        32      LOAD_FAST                       4: ccw_callback
+                        34      CALL_FUNCTION                   2
+                        36      STORE_FAST                      6: re
+                        38      JUMP_FORWARD                    16 (to 56)
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       2: printer
+                        44      LOAD_METHOD                     3: config_error
+                        46      LOAD_CONST                      3: '%d steps per detent not supported'
+                        48      LOAD_FAST                       5: steps_per_detent
+                        50      BINARY_MODULO                   
+                        52      CALL_METHOD                     1
+                        54      RAISE_VARARGS                   1
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_METHOD                     4: register_buttons
+                        60      LOAD_FAST                       1: pin1
+                        62      LOAD_FAST                       2: pin2
+                        64      BUILD_LIST                      2
+                        66      LOAD_FAST                       6: re
+                        68      LOAD_ATTR                       5: encoder_callback
+                        70      CALL_METHOD                     2
+                        72      POP_TOP                         
+                        74      LOAD_CONST                      0: None
+                        76      RETURN_VALUE                    
+                'PrinterButtons.register_rotary_encoder'
+                [Code]
+                    File Name: /extras/buttons.py
+                    Object Name: register_button_push
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'register_buttons'
+                    [Var Names]
+                        'self'
+                        'pin'
+                        'callback'
+                        'helper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/buttons.py
+                            Object Name: helper
+                            Arg Count: 3
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 2
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                'eventtime'
+                                'state'
+                                'callback'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       1: state
+                                2       POP_JUMP_IF_FALSE               12
+                                4       LOAD_FAST                       2: callback
+                                6       LOAD_FAST                       0: eventtime
+                                8       CALL_FUNCTION                   1
+                                10      POP_TOP                         
+                                12      LOAD_CONST                      0: None
+                                14      RETURN_VALUE                    
+                        'PrinterButtons.register_button_push.<locals>.helper'
+                    [Disassembly]
+                        0       LOAD_FAST                       2: callback
+                        2       BUILD_TUPLE                     1
+                        4       LOAD_CONST                      1: <CODE> helper
+                        6       LOAD_CONST                      2: 'PrinterButtons.register_button_push.<locals>.helper'
+                        8       MAKE_FUNCTION                   1
+                        10      STORE_FAST                      3: helper
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_METHOD                     0: register_buttons
+                        16      LOAD_FAST                       1: pin
+                        18      BUILD_LIST                      1
+                        20      LOAD_FAST                       3: helper
+                        22      CALL_METHOD                     2
+                        24      POP_TOP                         
+                        26      LOAD_CONST                      0: None
+                        28      RETURN_VALUE                    
+                'PrinterButtons.register_button_push'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterButtons'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterButtons.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> register_adc_button
+                18      LOAD_CONST                      4: 'PrinterButtons.register_adc_button'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: register_adc_button
+                24      LOAD_CONST                      5: <CODE> register_adc_button_push
+                26      LOAD_CONST                      6: 'PrinterButtons.register_adc_button_push'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: register_adc_button_push
+                32      LOAD_CONST                      7: <CODE> register_buttons
+                34      LOAD_CONST                      8: 'PrinterButtons.register_buttons'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: register_buttons
+                40      LOAD_CONST                      9: <CODE> register_rotary_encoder
+                42      LOAD_CONST                      10: 'PrinterButtons.register_rotary_encoder'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: register_rotary_encoder
+                48      LOAD_CONST                      11: <CODE> register_button_push
+                50      LOAD_CONST                      12: 'PrinterButtons.register_button_push'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: register_button_push
+                56      LOAD_CONST                      13: None
+                58      RETURN_VALUE                    
+        'PrinterButtons'
+        [Code]
+            File Name: /extras/buttons.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterButtons'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterButtons
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      2: 0.002
+        10      STORE_NAME                      1: QUERY_TIME
+        12      LOAD_CONST                      3: 50
+        14      STORE_NAME                      2: RETRANSMIT_COUNT
+        16      LOAD_BUILD_CLASS                
+        18      LOAD_CONST                      4: <CODE> MCU_buttons
+        20      LOAD_CONST                      5: 'MCU_buttons'
+        22      MAKE_FUNCTION                   0
+        24      LOAD_CONST                      5: 'MCU_buttons'
+        26      CALL_FUNCTION                   2
+        28      STORE_NAME                      3: MCU_buttons
+        30      LOAD_CONST                      6: 0.015
+        32      STORE_NAME                      4: ADC_REPORT_TIME
+        34      LOAD_CONST                      7: 0.025
+        36      STORE_NAME                      5: ADC_DEBOUNCE_TIME
+        38      LOAD_CONST                      8: 0.001
+        40      STORE_NAME                      6: ADC_SAMPLE_TIME
+        42      LOAD_CONST                      9: 6
+        44      STORE_NAME                      7: ADC_SAMPLE_COUNT
+        46      LOAD_BUILD_CLASS                
+        48      LOAD_CONST                      10: <CODE> MCU_ADC_buttons
+        50      LOAD_CONST                      11: 'MCU_ADC_buttons'
+        52      MAKE_FUNCTION                   0
+        54      LOAD_CONST                      11: 'MCU_ADC_buttons'
+        56      CALL_FUNCTION                   2
+        58      STORE_NAME                      8: MCU_ADC_buttons
+        60      LOAD_BUILD_CLASS                
+        62      LOAD_CONST                      12: <CODE> BaseRotaryEncoder
+        64      LOAD_CONST                      13: 'BaseRotaryEncoder'
+        66      MAKE_FUNCTION                   0
+        68      LOAD_CONST                      13: 'BaseRotaryEncoder'
+        70      CALL_FUNCTION                   2
+        72      STORE_NAME                      9: BaseRotaryEncoder
+        74      LOAD_BUILD_CLASS                
+        76      LOAD_CONST                      14: <CODE> FullStepRotaryEncoder
+        78      LOAD_CONST                      15: 'FullStepRotaryEncoder'
+        80      MAKE_FUNCTION                   0
+        82      LOAD_CONST                      15: 'FullStepRotaryEncoder'
+        84      LOAD_NAME                       9: BaseRotaryEncoder
+        86      CALL_FUNCTION                   3
+        88      STORE_NAME                      10: FullStepRotaryEncoder
+        90      LOAD_BUILD_CLASS                
+        92      LOAD_CONST                      16: <CODE> HalfStepRotaryEncoder
+        94      LOAD_CONST                      17: 'HalfStepRotaryEncoder'
+        96      MAKE_FUNCTION                   0
+        98      LOAD_CONST                      17: 'HalfStepRotaryEncoder'
+        100     LOAD_NAME                       9: BaseRotaryEncoder
+        102     CALL_FUNCTION                   3
+        104     STORE_NAME                      11: HalfStepRotaryEncoder
+        106     LOAD_BUILD_CLASS                
+        108     LOAD_CONST                      18: <CODE> PrinterButtons
+        110     LOAD_CONST                      19: 'PrinterButtons'
+        112     MAKE_FUNCTION                   0
+        114     LOAD_CONST                      19: 'PrinterButtons'
+        116     CALL_FUNCTION                   2
+        118     STORE_NAME                      12: PrinterButtons
+        120     LOAD_CONST                      20: <CODE> load_config
+        122     LOAD_CONST                      21: 'load_config'
+        124     MAKE_FUNCTION                   0
+        126     STORE_NAME                      13: load_config
+        128     LOAD_CONST                      1: None
+        130     RETURN_VALUE                    

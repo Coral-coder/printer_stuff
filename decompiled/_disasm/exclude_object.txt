@@ -1,0 +1,2208 @@
+exclude_object.pyc (Python 3.9)
+[Code]
+    File Name: /extras/exclude_object.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'json'
+        'ExcludeObject'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/exclude_object.py
+            Object Name: ExcludeObject
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'cmd_EXCLUDE_OBJECT_RESET'
+                '_register_transform'
+                '_handle_connect'
+                '_unregister_transform'
+                '_reset_state'
+                '_reset_file'
+                '_get_extrusion_offsets'
+                'get_position'
+                '_normal_move'
+                '_ignore_move'
+                '_move_into_excluded_region'
+                '_move_from_excluded_region'
+                '_test_in_excluded_region'
+                'get_status'
+                'move'
+                'cmd_EXCLUDE_OBJECT_START_help'
+                'cmd_EXCLUDE_OBJECT_START'
+                'cmd_EXCLUDE_OBJECT_END_help'
+                'cmd_EXCLUDE_OBJECT_END'
+                'cmd_EXCLUDE_OBJECT_help'
+                'cmd_EXCLUDE_OBJECT'
+                'cmd_EXCLUDE_OBJECT_DEFINE_help'
+                'cmd_EXCLUDE_OBJECT_DEFINE'
+                '_add_object_definition'
+                '_exclude_object'
+                '_unexclude_object'
+                '_list_objects'
+                '_list_excluded_objects'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ExcludeObject'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'lookup_object'
+                        'gcode'
+                        'load_object'
+                        'gcode_move'
+                        'register_event_handler'
+                        '_handle_connect'
+                        '_reset_file'
+                        'next_transform'
+                        'last_position_extruded'
+                        'last_position_excluded'
+                        '_reset_state'
+                        'register_command'
+                        'cmd_EXCLUDE_OBJECT_START'
+                        'cmd_EXCLUDE_OBJECT_START_help'
+                        'cmd_EXCLUDE_OBJECT_END'
+                        'cmd_EXCLUDE_OBJECT_END_help'
+                        'cmd_EXCLUDE_OBJECT'
+                        'cmd_EXCLUDE_OBJECT_help'
+                        'cmd_EXCLUDE_OBJECT_DEFINE'
+                        'cmd_EXCLUDE_OBJECT_DEFINE_help'
+                        'cmd_EXCLUDE_OBJECT_RESET'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'gcode_move'
+                        'klippy:connect'
+                        'virtual_sdcard:reset_file'
+                        (
+                            0
+                            0
+                            0
+                            0
+                        )
+                        'EXCLUDE_OBJECT_START'
+                        (
+                            'desc'
+                        )
+                        'EXCLUDE_OBJECT_END'
+                        'EXCLUDE_OBJECT'
+                        'EXCLUDE_OBJECT_DEFINE'
+                        'EXCLUDE_OBJECT_RESET'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: lookup_object
+                        16      LOAD_CONST                      1: 'gcode'
+                        18      CALL_METHOD                     1
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: gcode
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       1: printer
+                        28      LOAD_METHOD                     4: load_object
+                        30      LOAD_FAST                       1: config
+                        32      LOAD_CONST                      2: 'gcode_move'
+                        34      CALL_METHOD                     2
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      5: gcode_move
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       1: printer
+                        44      LOAD_METHOD                     6: register_event_handler
+                        46      LOAD_CONST                      3: 'klippy:connect'
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       7: _handle_connect
+                        52      CALL_METHOD                     2
+                        54      POP_TOP                         
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       1: printer
+                        60      LOAD_METHOD                     6: register_event_handler
+                        62      LOAD_CONST                      4: 'virtual_sdcard:reset_file'
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       8: _reset_file
+                        68      CALL_METHOD                     2
+                        70      POP_TOP                         
+                        72      LOAD_CONST                      0: None
+                        74      LOAD_FAST                       0: self
+                        76      STORE_ATTR                      9: next_transform
+                        78      BUILD_LIST                      0
+                        80      LOAD_CONST                      5: (0, 0, 0, 0)
+                        82      LIST_EXTEND                     1
+                        84      LOAD_FAST                       0: self
+                        86      STORE_ATTR                      10: last_position_extruded
+                        88      BUILD_LIST                      0
+                        90      LOAD_CONST                      5: (0, 0, 0, 0)
+                        92      LIST_EXTEND                     1
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      11: last_position_excluded
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_METHOD                     12: _reset_state
+                        102     CALL_METHOD                     0
+                        104     POP_TOP                         
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       3: gcode
+                        110     LOAD_ATTR                       13: register_command
+                        112     LOAD_CONST                      6: 'EXCLUDE_OBJECT_START'
+                        114     LOAD_FAST                       0: self
+                        116     LOAD_ATTR                       14: cmd_EXCLUDE_OBJECT_START
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       15: cmd_EXCLUDE_OBJECT_START_help
+                        122     LOAD_CONST                      7: ('desc',)
+                        124     CALL_FUNCTION_KW                3
+                        126     POP_TOP                         
+                        128     LOAD_FAST                       0: self
+                        130     LOAD_ATTR                       3: gcode
+                        132     LOAD_ATTR                       13: register_command
+                        134     LOAD_CONST                      8: 'EXCLUDE_OBJECT_END'
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       16: cmd_EXCLUDE_OBJECT_END
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       17: cmd_EXCLUDE_OBJECT_END_help
+                        144     LOAD_CONST                      7: ('desc',)
+                        146     CALL_FUNCTION_KW                3
+                        148     POP_TOP                         
+                        150     LOAD_FAST                       0: self
+                        152     LOAD_ATTR                       3: gcode
+                        154     LOAD_ATTR                       13: register_command
+                        156     LOAD_CONST                      9: 'EXCLUDE_OBJECT'
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       18: cmd_EXCLUDE_OBJECT
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       19: cmd_EXCLUDE_OBJECT_help
+                        166     LOAD_CONST                      7: ('desc',)
+                        168     CALL_FUNCTION_KW                3
+                        170     POP_TOP                         
+                        172     LOAD_FAST                       0: self
+                        174     LOAD_ATTR                       3: gcode
+                        176     LOAD_ATTR                       13: register_command
+                        178     LOAD_CONST                      10: 'EXCLUDE_OBJECT_DEFINE'
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       20: cmd_EXCLUDE_OBJECT_DEFINE
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       21: cmd_EXCLUDE_OBJECT_DEFINE_help
+                        188     LOAD_CONST                      7: ('desc',)
+                        190     CALL_FUNCTION_KW                3
+                        192     POP_TOP                         
+                        194     LOAD_FAST                       0: self
+                        196     LOAD_ATTR                       3: gcode
+                        198     LOAD_METHOD                     13: register_command
+                        200     LOAD_CONST                      11: 'EXCLUDE_OBJECT_RESET'
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       22: cmd_EXCLUDE_OBJECT_RESET
+                        206     CALL_METHOD                     2
+                        208     POP_TOP                         
+                        210     LOAD_CONST                      0: None
+                        212     RETURN_VALUE                    
+                'ExcludeObject.__init__'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: cmd_EXCLUDE_OBJECT_RESET
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'objects'
+                        'gcode'
+                        'run_script_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'M400'
+                        'EXCLUDE_OBJECT_DEFINE RESET=1'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: objects
+                        4       POP_JUMP_IF_FALSE               42
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: gcode
+                        10      LOAD_METHOD                     2: run_script_from_command
+                        12      LOAD_CONST                      1: 'M400'
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       1: gcode
+                        22      LOAD_METHOD                     2: run_script_from_command
+                        24      LOAD_CONST                      2: 'EXCLUDE_OBJECT_DEFINE RESET=1'
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       1: gcode
+                        34      LOAD_METHOD                     2: run_script_from_command
+                        36      LOAD_CONST                      1: 'M400'
+                        38      CALL_METHOD                     1
+                        40      POP_TOP                         
+                        42      LOAD_CONST                      0: None
+                        44      RETURN_VALUE                    
+                'ExcludeObject.cmd_EXCLUDE_OBJECT_RESET'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _register_transform
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'next_transform'
+                        'printer'
+                        'lookup_object'
+                        'is_active'
+                        'logging'
+                        'info'
+                        'gcode_move'
+                        'set_move_transform'
+                        'extrusion_offsets'
+                        'max_position_extruded'
+                        'max_position_excluded'
+                        'extruder_adj'
+                        'initial_extrusion_moves'
+                        'last_position'
+                        'get_position'
+                        'last_position_extruded'
+                        'last_position_excluded'
+                    [Var Names]
+                        'self'
+                        'tuning_tower'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'tuning_tower'
+                        'The ExcludeObject move transform is not being loaded due to Tuning tower being Active'
+                        True
+                        (
+                            'force'
+                        )
+                        0
+                        5
+                        (
+                            0
+                            0
+                            0
+                            0
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: next_transform
+                        4       LOAD_CONST                      0: None
+                        6       IS_OP                           0 (is)
+                        8       POP_JUMP_IF_FALSE               142
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: lookup_object
+                        16      LOAD_CONST                      1: 'tuning_tower'
+                        18      CALL_METHOD                     1
+                        20      STORE_FAST                      1: tuning_tower
+                        22      LOAD_FAST                       1: tuning_tower
+                        24      LOAD_METHOD                     3: is_active
+                        26      CALL_METHOD                     0
+                        28      POP_JUMP_IF_FALSE               44
+                        30      LOAD_GLOBAL                     4: logging
+                        32      LOAD_METHOD                     5: info
+                        34      LOAD_CONST                      2: 'The ExcludeObject move transform is not being loaded due to Tuning tower being Active'
+                        36      CALL_METHOD                     1
+                        38      POP_TOP                         
+                        40      LOAD_CONST                      0: None
+                        42      RETURN_VALUE                    
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       6: gcode_move
+                        48      LOAD_ATTR                       7: set_move_transform
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_CONST                      3: True
+                        54      LOAD_CONST                      4: ('force',)
+                        56      CALL_FUNCTION_KW                2
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      0: next_transform
+                        62      BUILD_MAP                       0
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      8: extrusion_offsets
+                        68      LOAD_CONST                      5: 0
+                        70      LOAD_FAST                       0: self
+                        72      STORE_ATTR                      9: max_position_extruded
+                        74      LOAD_CONST                      5: 0
+                        76      LOAD_FAST                       0: self
+                        78      STORE_ATTR                      10: max_position_excluded
+                        80      LOAD_CONST                      5: 0
+                        82      LOAD_FAST                       0: self
+                        84      STORE_ATTR                      11: extruder_adj
+                        86      LOAD_CONST                      6: 5
+                        88      LOAD_FAST                       0: self
+                        90      STORE_ATTR                      12: initial_extrusion_moves
+                        92      BUILD_LIST                      0
+                        94      LOAD_CONST                      7: (0, 0, 0, 0)
+                        96      LIST_EXTEND                     1
+                        98      LOAD_FAST                       0: self
+                        100     STORE_ATTR                      13: last_position
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_METHOD                     14: get_position
+                        106     CALL_METHOD                     0
+                        108     POP_TOP                         
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       13: last_position
+                        114     LOAD_FAST                       0: self
+                        116     LOAD_ATTR                       15: last_position_extruded
+                        118     LOAD_CONST                      0: None
+                        120     LOAD_CONST                      0: None
+                        122     BUILD_SLICE                     2
+                        124     STORE_SUBSCR                    
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       13: last_position
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       16: last_position_excluded
+                        134     LOAD_CONST                      0: None
+                        136     LOAD_CONST                      0: None
+                        138     BUILD_SLICE                     2
+                        140     STORE_SUBSCR                    
+                        142     LOAD_CONST                      0: None
+                        144     RETURN_VALUE                    
+                'ExcludeObject._register_transform'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _handle_connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'toolhead'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      2: toolhead
+                        14      LOAD_CONST                      0: None
+                        16      RETURN_VALUE                    
+                'ExcludeObject._handle_connect'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _unregister_transform
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'next_transform'
+                        'printer'
+                        'lookup_object'
+                        'is_active'
+                        'logging'
+                        'error'
+                        'gcode_move'
+                        'set_move_transform'
+                        'reset_last_position'
+                    [Var Names]
+                        'self'
+                        'tuning_tower'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'tuning_tower'
+                        'The Exclude Object move transform was not unregistered because it is not at the head of the transform chain.'
+                        True
+                        (
+                            'force'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: next_transform
+                        4       POP_JUMP_IF_FALSE               74
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: printer
+                        10      LOAD_METHOD                     2: lookup_object
+                        12      LOAD_CONST                      1: 'tuning_tower'
+                        14      CALL_METHOD                     1
+                        16      STORE_FAST                      1: tuning_tower
+                        18      LOAD_FAST                       1: tuning_tower
+                        20      LOAD_METHOD                     3: is_active
+                        22      CALL_METHOD                     0
+                        24      POP_JUMP_IF_FALSE               40
+                        26      LOAD_GLOBAL                     4: logging
+                        28      LOAD_METHOD                     5: error
+                        30      LOAD_CONST                      2: 'The Exclude Object move transform was not unregistered because it is not at the head of the transform chain.'
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_CONST                      0: None
+                        38      RETURN_VALUE                    
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       6: gcode_move
+                        44      LOAD_ATTR                       7: set_move_transform
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       0: next_transform
+                        50      LOAD_CONST                      3: True
+                        52      LOAD_CONST                      4: ('force',)
+                        54      CALL_FUNCTION_KW                2
+                        56      POP_TOP                         
+                        58      LOAD_CONST                      0: None
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      0: next_transform
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       6: gcode_move
+                        68      LOAD_METHOD                     8: reset_last_position
+                        70      CALL_METHOD                     0
+                        72      POP_TOP                         
+                        74      LOAD_CONST                      0: None
+                        76      RETURN_VALUE                    
+                'ExcludeObject._unregister_transform'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _reset_state
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'objects'
+                        'excluded_objects'
+                        'current_object'
+                        'in_excluded_region'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: objects
+                        6       BUILD_LIST                      0
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: excluded_objects
+                        12      LOAD_CONST                      0: None
+                        14      LOAD_FAST                       0: self
+                        16      STORE_ATTR                      2: current_object
+                        18      LOAD_CONST                      1: False
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: in_excluded_region
+                        24      LOAD_CONST                      0: None
+                        26      RETURN_VALUE                    
+                'ExcludeObject._reset_state'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _reset_file
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_reset_state'
+                        '_unregister_transform'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _reset_state
+                        4       CALL_METHOD                     0
+                        6       POP_TOP                         
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_METHOD                     1: _unregister_transform
+                        12      CALL_METHOD                     0
+                        14      POP_TOP                         
+                        16      LOAD_CONST                      0: None
+                        18      RETURN_VALUE                    
+                'ExcludeObject._reset_file'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _get_extrusion_offsets
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'extrusion_offsets'
+                        'get'
+                        'toolhead'
+                        'get_extruder'
+                        'get_name'
+                    [Var Names]
+                        'self'
+                        'offset'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            0
+                            0
+                            0
+                            0
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: extrusion_offsets
+                        4       LOAD_METHOD                     1: get
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       2: toolhead
+                        10      LOAD_METHOD                     3: get_extruder
+                        12      CALL_METHOD                     0
+                        14      LOAD_METHOD                     4: get_name
+                        16      CALL_METHOD                     0
+                        18      CALL_METHOD                     1
+                        20      STORE_FAST                      1: offset
+                        22      LOAD_FAST                       1: offset
+                        24      LOAD_CONST                      0: None
+                        26      IS_OP                           0 (is)
+                        28      POP_JUMP_IF_FALSE               58
+                        30      BUILD_LIST                      0
+                        32      LOAD_CONST                      1: (0, 0, 0, 0)
+                        34      LIST_EXTEND                     1
+                        36      STORE_FAST                      1: offset
+                        38      LOAD_FAST                       1: offset
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       0: extrusion_offsets
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       2: toolhead
+                        48      LOAD_METHOD                     3: get_extruder
+                        50      CALL_METHOD                     0
+                        52      LOAD_METHOD                     4: get_name
+                        54      CALL_METHOD                     0
+                        56      STORE_SUBSCR                    
+                        58      LOAD_FAST                       1: offset
+                        60      RETURN_VALUE                    
+                'ExcludeObject._get_extrusion_offsets'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: get_position
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_get_extrusion_offsets'
+                        'next_transform'
+                        'get_position'
+                        'range'
+                        'last_position'
+                        'list'
+                    [Var Names]
+                        'self'
+                        'offset'
+                        'pos'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        4
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _get_extrusion_offsets
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      1: offset
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: next_transform
+                        12      LOAD_METHOD                     2: get_position
+                        14      CALL_METHOD                     0
+                        16      STORE_FAST                      2: pos
+                        18      LOAD_GLOBAL                     3: range
+                        20      LOAD_CONST                      1: 4
+                        22      CALL_FUNCTION                   1
+                        24      GET_ITER                        
+                        26      FOR_ITER                        26 (to 54)
+                        28      STORE_FAST                      3: i
+                        30      LOAD_FAST                       2: pos
+                        32      LOAD_FAST                       3: i
+                        34      BINARY_SUBSCR                   
+                        36      LOAD_FAST                       1: offset
+                        38      LOAD_FAST                       3: i
+                        40      BINARY_SUBSCR                   
+                        42      BINARY_ADD                      
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       4: last_position
+                        48      LOAD_FAST                       3: i
+                        50      STORE_SUBSCR                    
+                        52      JUMP_ABSOLUTE                   26
+                        54      LOAD_GLOBAL                     5: list
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       4: last_position
+                        60      CALL_FUNCTION                   1
+                        62      RETURN_VALUE                    
+                'ExcludeObject.get_position'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _normal_move
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_get_extrusion_offsets'
+                        'initial_extrusion_moves'
+                        'last_position'
+                        'last_position_extruded'
+                        'max'
+                        'max_position_extruded'
+                        'last_position_excluded'
+                        'extruder_adj'
+                        'range'
+                        'next_transform'
+                        'move'
+                    [Var Names]
+                        'self'
+                        'newpos'
+                        'speed'
+                        'offset'
+                        'tx_pos'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        3
+                        1
+                        2
+                        4
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _get_extrusion_offsets
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      3: offset
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: initial_extrusion_moves
+                        12      LOAD_CONST                      1: 0
+                        14      COMPARE_OP                      4 (>)
+                        16      POP_JUMP_IF_FALSE               50
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       2: last_position
+                        22      LOAD_CONST                      2: 3
+                        24      BINARY_SUBSCR                   
+                        26      LOAD_FAST                       1: newpos
+                        28      LOAD_CONST                      2: 3
+                        30      BINARY_SUBSCR                   
+                        32      COMPARE_OP                      3 (!=)
+                        34      POP_JUMP_IF_FALSE               50
+                        36      LOAD_FAST                       0: self
+                        38      DUP_TOP                         
+                        40      LOAD_ATTR                       1: initial_extrusion_moves
+                        42      LOAD_CONST                      3: 1
+                        44      INPLACE_SUBTRACT                
+                        46      ROT_TWO                         
+                        48      STORE_ATTR                      1: initial_extrusion_moves
+                        50      LOAD_FAST                       1: newpos
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       2: last_position
+                        56      LOAD_CONST                      0: None
+                        58      LOAD_CONST                      0: None
+                        60      BUILD_SLICE                     2
+                        62      STORE_SUBSCR                    
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       2: last_position
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       3: last_position_extruded
+                        72      LOAD_CONST                      0: None
+                        74      LOAD_CONST                      0: None
+                        76      BUILD_SLICE                     2
+                        78      STORE_SUBSCR                    
+                        80      LOAD_GLOBAL                     4: max
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       5: max_position_extruded
+                        86      LOAD_FAST                       1: newpos
+                        88      LOAD_CONST                      2: 3
+                        90      BINARY_SUBSCR                   
+                        92      CALL_FUNCTION                   2
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      5: max_position_extruded
+                        98      LOAD_FAST                       3: offset
+                        100     LOAD_CONST                      1: 0
+                        102     BINARY_SUBSCR                   
+                        104     LOAD_CONST                      1: 0
+                        106     COMPARE_OP                      3 (!=)
+                        108     POP_JUMP_IF_TRUE                122
+                        110     LOAD_FAST                       3: offset
+                        112     LOAD_CONST                      3: 1
+                        114     BINARY_SUBSCR                   
+                        116     LOAD_CONST                      1: 0
+                        118     COMPARE_OP                      3 (!=)
+                        120     POP_JUMP_IF_FALSE               206
+                        122     LOAD_FAST                       1: newpos
+                        124     LOAD_CONST                      1: 0
+                        126     BINARY_SUBSCR                   
+                        128     LOAD_FAST                       0: self
+                        130     LOAD_ATTR                       6: last_position_excluded
+                        132     LOAD_CONST                      1: 0
+                        134     BINARY_SUBSCR                   
+                        136     COMPARE_OP                      3 (!=)
+                        138     POP_JUMP_IF_TRUE                158
+                        140     LOAD_FAST                       1: newpos
+                        142     LOAD_CONST                      3: 1
+                        144     BINARY_SUBSCR                   
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       6: last_position_excluded
+                        150     LOAD_CONST                      3: 1
+                        152     BINARY_SUBSCR                   
+                        154     COMPARE_OP                      3 (!=)
+                        156     POP_JUMP_IF_FALSE               206
+                        158     LOAD_CONST                      1: 0
+                        160     LOAD_FAST                       3: offset
+                        162     LOAD_CONST                      1: 0
+                        164     STORE_SUBSCR                    
+                        166     LOAD_CONST                      1: 0
+                        168     LOAD_FAST                       3: offset
+                        170     LOAD_CONST                      3: 1
+                        172     STORE_SUBSCR                    
+                        174     LOAD_CONST                      1: 0
+                        176     LOAD_FAST                       3: offset
+                        178     LOAD_CONST                      4: 2
+                        180     STORE_SUBSCR                    
+                        182     LOAD_FAST                       3: offset
+                        184     LOAD_CONST                      2: 3
+                        186     DUP_TOP_TWO                     
+                        188     BINARY_SUBSCR                   
+                        190     LOAD_FAST                       0: self
+                        192     LOAD_ATTR                       7: extruder_adj
+                        194     INPLACE_ADD                     
+                        196     ROT_THREE                       
+                        198     STORE_SUBSCR                    
+                        200     LOAD_CONST                      1: 0
+                        202     LOAD_FAST                       0: self
+                        204     STORE_ATTR                      7: extruder_adj
+                        206     LOAD_FAST                       3: offset
+                        208     LOAD_CONST                      4: 2
+                        210     BINARY_SUBSCR                   
+                        212     LOAD_CONST                      1: 0
+                        214     COMPARE_OP                      3 (!=)
+                        216     POP_JUMP_IF_FALSE               244
+                        218     LOAD_FAST                       1: newpos
+                        220     LOAD_CONST                      4: 2
+                        222     BINARY_SUBSCR                   
+                        224     LOAD_FAST                       0: self
+                        226     LOAD_ATTR                       6: last_position_excluded
+                        228     LOAD_CONST                      4: 2
+                        230     BINARY_SUBSCR                   
+                        232     COMPARE_OP                      3 (!=)
+                        234     POP_JUMP_IF_FALSE               244
+                        236     LOAD_CONST                      1: 0
+                        238     LOAD_FAST                       3: offset
+                        240     LOAD_CONST                      4: 2
+                        242     STORE_SUBSCR                    
+                        244     LOAD_FAST                       0: self
+                        246     LOAD_ATTR                       7: extruder_adj
+                        248     LOAD_CONST                      1: 0
+                        250     COMPARE_OP                      3 (!=)
+                        252     POP_JUMP_IF_FALSE               300
+                        256     LOAD_FAST                       1: newpos
+                        258     LOAD_CONST                      2: 3
+                        260     BINARY_SUBSCR                   
+                        262     LOAD_FAST                       0: self
+                        264     LOAD_ATTR                       6: last_position_excluded
+                        266     LOAD_CONST                      2: 3
+                        268     BINARY_SUBSCR                   
+                        270     COMPARE_OP                      3 (!=)
+                        272     POP_JUMP_IF_FALSE               300
+                        276     LOAD_FAST                       3: offset
+                        278     LOAD_CONST                      2: 3
+                        280     DUP_TOP_TWO                     
+                        282     BINARY_SUBSCR                   
+                        284     LOAD_FAST                       0: self
+                        286     LOAD_ATTR                       7: extruder_adj
+                        288     INPLACE_ADD                     
+                        290     ROT_THREE                       
+                        292     STORE_SUBSCR                    
+                        294     LOAD_CONST                      1: 0
+                        296     LOAD_FAST                       0: self
+                        298     STORE_ATTR                      7: extruder_adj
+                        300     LOAD_FAST                       1: newpos
+                        302     LOAD_CONST                      0: None
+                        304     LOAD_CONST                      0: None
+                        306     BUILD_SLICE                     2
+                        308     BINARY_SUBSCR                   
+                        310     STORE_FAST                      4: tx_pos
+                        312     LOAD_GLOBAL                     8: range
+                        314     LOAD_CONST                      5: 4
+                        316     CALL_FUNCTION                   1
+                        318     GET_ITER                        
+                        320     FOR_ITER                        26 (to 348)
+                        322     STORE_FAST                      5: i
+                        324     LOAD_FAST                       1: newpos
+                        326     LOAD_FAST                       5: i
+                        328     BINARY_SUBSCR                   
+                        330     LOAD_FAST                       3: offset
+                        332     LOAD_FAST                       5: i
+                        334     BINARY_SUBSCR                   
+                        336     BINARY_SUBTRACT                 
+                        338     LOAD_FAST                       4: tx_pos
+                        340     LOAD_FAST                       5: i
+                        342     STORE_SUBSCR                    
+                        344     JUMP_ABSOLUTE                   320
+                        348     LOAD_FAST                       0: self
+                        350     LOAD_ATTR                       9: next_transform
+                        352     LOAD_METHOD                     10: move
+                        354     LOAD_FAST                       4: tx_pos
+                        356     LOAD_FAST                       2: speed
+                        358     CALL_METHOD                     2
+                        360     POP_TOP                         
+                        362     LOAD_CONST                      0: None
+                        364     RETURN_VALUE                    
+                'ExcludeObject._normal_move'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _ignore_move
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_get_extrusion_offsets'
+                        'range'
+                        'last_position_extruded'
+                        'last_position'
+                        'last_position_excluded'
+                        'max'
+                        'max_position_excluded'
+                    [Var Names]
+                        'self'
+                        'newpos'
+                        'speed'
+                        'offset'
+                        'i'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        3
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _get_extrusion_offsets
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      3: offset
+                        8       LOAD_GLOBAL                     1: range
+                        10      LOAD_CONST                      1: 3
+                        12      CALL_FUNCTION                   1
+                        14      GET_ITER                        
+                        16      FOR_ITER                        26 (to 44)
+                        18      STORE_FAST                      4: i
+                        20      LOAD_FAST                       1: newpos
+                        22      LOAD_FAST                       4: i
+                        24      BINARY_SUBSCR                   
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       2: last_position_extruded
+                        30      LOAD_FAST                       4: i
+                        32      BINARY_SUBSCR                   
+                        34      BINARY_SUBTRACT                 
+                        36      LOAD_FAST                       3: offset
+                        38      LOAD_FAST                       4: i
+                        40      STORE_SUBSCR                    
+                        42      JUMP_ABSOLUTE                   16
+                        44      LOAD_FAST                       3: offset
+                        46      LOAD_CONST                      1: 3
+                        48      BINARY_SUBSCR                   
+                        50      LOAD_FAST                       1: newpos
+                        52      LOAD_CONST                      1: 3
+                        54      BINARY_SUBSCR                   
+                        56      BINARY_ADD                      
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       3: last_position
+                        62      LOAD_CONST                      1: 3
+                        64      BINARY_SUBSCR                   
+                        66      BINARY_SUBTRACT                 
+                        68      LOAD_FAST                       3: offset
+                        70      LOAD_CONST                      1: 3
+                        72      STORE_SUBSCR                    
+                        74      LOAD_FAST                       1: newpos
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       3: last_position
+                        80      LOAD_CONST                      0: None
+                        82      LOAD_CONST                      0: None
+                        84      BUILD_SLICE                     2
+                        86      STORE_SUBSCR                    
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       3: last_position
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       4: last_position_excluded
+                        96      LOAD_CONST                      0: None
+                        98      LOAD_CONST                      0: None
+                        100     BUILD_SLICE                     2
+                        102     STORE_SUBSCR                    
+                        104     LOAD_GLOBAL                     5: max
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       6: max_position_excluded
+                        110     LOAD_FAST                       1: newpos
+                        112     LOAD_CONST                      1: 3
+                        114     BINARY_SUBSCR                   
+                        116     CALL_FUNCTION                   2
+                        118     LOAD_FAST                       0: self
+                        120     STORE_ATTR                      6: max_position_excluded
+                        122     LOAD_CONST                      0: None
+                        124     RETURN_VALUE                    
+                'ExcludeObject._ignore_move'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _move_into_excluded_region
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'in_excluded_region'
+                        '_ignore_move'
+                    [Var Names]
+                        'self'
+                        'newpos'
+                        'speed'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                    [Disassembly]
+                        0       LOAD_CONST                      1: True
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: in_excluded_region
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_METHOD                     1: _ignore_move
+                        10      LOAD_FAST                       1: newpos
+                        12      LOAD_FAST                       2: speed
+                        14      CALL_METHOD                     2
+                        16      POP_TOP                         
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                'ExcludeObject._move_into_excluded_region'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _move_from_excluded_region
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'in_excluded_region'
+                        'max_position_excluded'
+                        'last_position_excluded'
+                        'max_position_extruded'
+                        'last_position_extruded'
+                        'extruder_adj'
+                        '_normal_move'
+                    [Var Names]
+                        'self'
+                        'newpos'
+                        'speed'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        3
+                    [Disassembly]
+                        0       LOAD_CONST                      1: False
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: in_excluded_region
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: max_position_excluded
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       2: last_position_excluded
+                        14      LOAD_CONST                      2: 3
+                        16      BINARY_SUBSCR                   
+                        18      BINARY_SUBTRACT                 
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: max_position_extruded
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       4: last_position_extruded
+                        28      LOAD_CONST                      2: 3
+                        30      BINARY_SUBSCR                   
+                        32      BINARY_SUBTRACT                 
+                        34      BINARY_SUBTRACT                 
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      5: extruder_adj
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_METHOD                     6: _normal_move
+                        44      LOAD_FAST                       1: newpos
+                        46      LOAD_FAST                       2: speed
+                        48      CALL_METHOD                     2
+                        50      POP_TOP                         
+                        52      LOAD_CONST                      0: None
+                        54      RETURN_VALUE                    
+                'ExcludeObject._move_from_excluded_region'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _test_in_excluded_region
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'current_object'
+                        'excluded_objects'
+                        'initial_extrusion_moves'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: current_object
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: excluded_objects
+                        8       CONTAINS_OP                     0 (in)
+                        10      JUMP_IF_FALSE_OR_POP            20
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: initial_extrusion_moves
+                        16      LOAD_CONST                      1: 0
+                        18      COMPARE_OP                      2 (==)
+                        20      RETURN_VALUE                    
+                'ExcludeObject._test_in_excluded_region'
+                None
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'objects'
+                        'excluded_objects'
+                        'current_object'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'status'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'objects'
+                            'excluded_objects'
+                            'current_object'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: objects
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: excluded_objects
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: current_object
+                        12      LOAD_CONST                      1: ('objects', 'excluded_objects', 'current_object')
+                        14      BUILD_CONST_KEY_MAP             3
+                        16      STORE_FAST                      2: status
+                        18      LOAD_FAST                       2: status
+                        20      RETURN_VALUE                    
+                'ExcludeObject.get_status'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: move
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_test_in_excluded_region'
+                        'last_speed'
+                        'in_excluded_region'
+                        '_ignore_move'
+                        '_move_into_excluded_region'
+                        '_move_from_excluded_region'
+                        '_normal_move'
+                    [Var Names]
+                        'self'
+                        'newpos'
+                        'speed'
+                        'move_in_excluded_region'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _test_in_excluded_region
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      3: move_in_excluded_region
+                        8       LOAD_FAST                       2: speed
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      1: last_speed
+                        14      LOAD_FAST                       3: move_in_excluded_region
+                        16      POP_JUMP_IF_FALSE               52
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       2: in_excluded_region
+                        22      POP_JUMP_IF_FALSE               38
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_METHOD                     3: _ignore_move
+                        28      LOAD_FAST                       1: newpos
+                        30      LOAD_FAST                       2: speed
+                        32      CALL_METHOD                     2
+                        34      POP_TOP                         
+                        36      JUMP_ABSOLUTE                   84
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_METHOD                     4: _move_into_excluded_region
+                        42      LOAD_FAST                       1: newpos
+                        44      LOAD_FAST                       2: speed
+                        46      CALL_METHOD                     2
+                        48      POP_TOP                         
+                        50      JUMP_FORWARD                    32 (to 84)
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       2: in_excluded_region
+                        56      POP_JUMP_IF_FALSE               72
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_METHOD                     5: _move_from_excluded_region
+                        62      LOAD_FAST                       1: newpos
+                        64      LOAD_FAST                       2: speed
+                        66      CALL_METHOD                     2
+                        68      POP_TOP                         
+                        70      JUMP_FORWARD                    12 (to 84)
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_METHOD                     6: _normal_move
+                        76      LOAD_FAST                       1: newpos
+                        78      LOAD_FAST                       2: speed
+                        80      CALL_METHOD                     2
+                        82      POP_TOP                         
+                        84      LOAD_CONST                      0: None
+                        86      RETURN_VALUE                    
+                'ExcludeObject.move'
+                'Marks the beginning the current object as labeled'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: cmd_EXCLUDE_OBJECT_START
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'get'
+                        'upper'
+                        'any'
+                        'objects'
+                        '_add_object_definition'
+                        'current_object'
+                        '_test_in_excluded_region'
+                        'was_excluded_at_start'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                        'name'
+                    [Constants]
+                        None
+                        'NAME'
+                        [Code]
+                            File Name: /extras/exclude_object.py
+                            Object Name: <genexpr>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 3
+                            Flags: 0x00000033 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_GENERATOR)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'obj'
+                            [Free Vars]
+                                'name'
+                            [Cell Vars]
+                            [Constants]
+                                'name'
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       0: .0
+                                2       FOR_ITER                        18 (to 22)
+                                4       STORE_FAST                      1: obj
+                                6       LOAD_FAST                       1: obj
+                                8       LOAD_CONST                      0: 'name'
+                                10      BINARY_SUBSCR                   
+                                12      LOAD_DEREF                      0: name
+                                14      COMPARE_OP                      2 (==)
+                                16      YIELD_VALUE                     
+                                18      POP_TOP                         
+                                20      JUMP_ABSOLUTE                   2
+                                22      LOAD_CONST                      1: None
+                                24      RETURN_VALUE                    
+                        'ExcludeObject.cmd_EXCLUDE_OBJECT_START.<locals>.<genexpr>'
+                        'name'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'NAME'
+                        6       CALL_METHOD                     1
+                        8       LOAD_METHOD                     1: upper
+                        10      CALL_METHOD                     0
+                        12      STORE_DEREF                     0: name
+                        14      LOAD_GLOBAL                     2: any
+                        16      LOAD_CLOSURE                    0: name
+                        18      BUILD_TUPLE                     1
+                        20      LOAD_CONST                      2: <CODE> <genexpr>
+                        22      LOAD_CONST                      3: 'ExcludeObject.cmd_EXCLUDE_OBJECT_START.<locals>.<genexpr>'
+                        24      MAKE_FUNCTION                   8
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       3: objects
+                        30      GET_ITER                        
+                        32      CALL_FUNCTION                   1
+                        34      CALL_FUNCTION                   1
+                        36      POP_JUMP_IF_TRUE                52
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_METHOD                     4: _add_object_definition
+                        42      LOAD_CONST                      4: 'name'
+                        44      LOAD_DEREF                      0: name
+                        46      BUILD_MAP                       1
+                        48      CALL_METHOD                     1
+                        50      POP_TOP                         
+                        52      LOAD_DEREF                      0: name
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      5: current_object
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_METHOD                     6: _test_in_excluded_region
+                        62      CALL_METHOD                     0
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      7: was_excluded_at_start
+                        68      LOAD_CONST                      0: None
+                        70      RETURN_VALUE                    
+                'ExcludeObject.cmd_EXCLUDE_OBJECT_START'
+                'Marks the end the current object'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: cmd_EXCLUDE_OBJECT_END
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'current_object'
+                        'next_transform'
+                        'respond_info'
+                        'get'
+                        'upper'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'EXCLUDE_OBJECT_END called, but no object is currently active'
+                        'NAME'
+                        (
+                            'default'
+                        )
+                        'EXCLUDE_OBJECT_END NAME=%s does not match the current object NAME=%s'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: current_object
+                        4       LOAD_CONST                      0: None
+                        6       COMPARE_OP                      2 (==)
+                        8       POP_JUMP_IF_FALSE               30
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: next_transform
+                        14      POP_JUMP_IF_FALSE               30
+                        16      LOAD_FAST                       1: gcmd
+                        18      LOAD_METHOD                     2: respond_info
+                        20      LOAD_CONST                      1: 'EXCLUDE_OBJECT_END called, but no object is currently active'
+                        22      CALL_METHOD                     1
+                        24      POP_TOP                         
+                        26      LOAD_CONST                      0: None
+                        28      RETURN_VALUE                    
+                        30      LOAD_FAST                       1: gcmd
+                        32      LOAD_ATTR                       3: get
+                        34      LOAD_CONST                      2: 'NAME'
+                        36      LOAD_CONST                      0: None
+                        38      LOAD_CONST                      3: ('default',)
+                        40      CALL_FUNCTION_KW                2
+                        42      STORE_FAST                      2: name
+                        44      LOAD_FAST                       2: name
+                        46      LOAD_CONST                      0: None
+                        48      COMPARE_OP                      3 (!=)
+                        50      POP_JUMP_IF_FALSE               90
+                        52      LOAD_FAST                       2: name
+                        54      LOAD_METHOD                     4: upper
+                        56      CALL_METHOD                     0
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       0: current_object
+                        62      COMPARE_OP                      3 (!=)
+                        64      POP_JUMP_IF_FALSE               90
+                        66      LOAD_FAST                       1: gcmd
+                        68      LOAD_METHOD                     2: respond_info
+                        70      LOAD_CONST                      4: 'EXCLUDE_OBJECT_END NAME=%s does not match the current object NAME=%s'
+                        72      LOAD_FAST                       2: name
+                        74      LOAD_METHOD                     4: upper
+                        76      CALL_METHOD                     0
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       0: current_object
+                        82      BUILD_TUPLE                     2
+                        84      BINARY_MODULO                   
+                        86      CALL_METHOD                     1
+                        88      POP_TOP                         
+                        90      LOAD_CONST                      0: None
+                        92      LOAD_FAST                       0: self
+                        94      STORE_ATTR                      0: current_object
+                        96      LOAD_CONST                      0: None
+                        98      RETURN_VALUE                    
+                'ExcludeObject.cmd_EXCLUDE_OBJECT_END'
+                'Cancel moves inside a specified objects'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: cmd_EXCLUDE_OBJECT
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get'
+                        'upper'
+                        'current_object'
+                        'gcode'
+                        'respond_info'
+                        '_unexclude_object'
+                        'excluded_objects'
+                        '_exclude_object'
+                        'respond_error'
+                        '_list_excluded_objects'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'reset'
+                        'current'
+                        'name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'RESET'
+                        'CURRENT'
+                        'NAME'
+                        ''
+                        'Forbidden EXCLUDE_OBJECT current_print_object:%s'
+                        'There is no current object to cancel'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'RESET'
+                        6       LOAD_CONST                      0: None
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: reset
+                        12      LOAD_FAST                       1: gcmd
+                        14      LOAD_METHOD                     0: get
+                        16      LOAD_CONST                      2: 'CURRENT'
+                        18      LOAD_CONST                      0: None
+                        20      CALL_METHOD                     2
+                        22      STORE_FAST                      3: current
+                        24      LOAD_FAST                       1: gcmd
+                        26      LOAD_METHOD                     0: get
+                        28      LOAD_CONST                      3: 'NAME'
+                        30      LOAD_CONST                      4: ''
+                        32      CALL_METHOD                     2
+                        34      LOAD_METHOD                     1: upper
+                        36      CALL_METHOD                     0
+                        38      STORE_FAST                      4: name
+                        40      LOAD_FAST                       4: name
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       2: current_object
+                        46      COMPARE_OP                      2 (==)
+                        48      POP_JUMP_IF_FALSE               72
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       3: gcode
+                        54      LOAD_METHOD                     4: respond_info
+                        56      LOAD_CONST                      5: 'Forbidden EXCLUDE_OBJECT current_print_object:%s'
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       2: current_object
+                        62      BINARY_MODULO                   
+                        64      CALL_METHOD                     1
+                        66      POP_TOP                         
+                        68      LOAD_CONST                      0: None
+                        70      RETURN_VALUE                    
+                        72      LOAD_FAST                       2: reset
+                        74      POP_JUMP_IF_FALSE               100
+                        76      LOAD_FAST                       4: name
+                        78      POP_JUMP_IF_FALSE               92
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_METHOD                     5: _unexclude_object
+                        84      LOAD_FAST                       4: name
+                        86      CALL_METHOD                     1
+                        88      POP_TOP                         
+                        90      JUMP_ABSOLUTE                   180
+                        92      BUILD_LIST                      0
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      6: excluded_objects
+                        98      JUMP_FORWARD                    80 (to 180)
+                        100     LOAD_FAST                       4: name
+                        102     POP_JUMP_IF_FALSE               134
+                        104     LOAD_FAST                       4: name
+                        106     LOAD_METHOD                     1: upper
+                        108     CALL_METHOD                     0
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       6: excluded_objects
+                        114     CONTAINS_OP                     1 (not in)
+                        116     POP_JUMP_IF_FALSE               180
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_METHOD                     7: _exclude_object
+                        122     LOAD_FAST                       4: name
+                        124     LOAD_METHOD                     1: upper
+                        126     CALL_METHOD                     0
+                        128     CALL_METHOD                     1
+                        130     POP_TOP                         
+                        132     JUMP_FORWARD                    46 (to 180)
+                        134     LOAD_FAST                       3: current
+                        136     POP_JUMP_IF_FALSE               170
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       2: current_object
+                        142     POP_JUMP_IF_TRUE                156
+                        144     LOAD_FAST                       1: gcmd
+                        146     LOAD_METHOD                     8: respond_error
+                        148     LOAD_CONST                      6: 'There is no current object to cancel'
+                        150     CALL_METHOD                     1
+                        152     POP_TOP                         
+                        154     JUMP_ABSOLUTE                   180
+                        156     LOAD_FAST                       0: self
+                        158     LOAD_METHOD                     7: _exclude_object
+                        160     LOAD_FAST                       0: self
+                        162     LOAD_ATTR                       2: current_object
+                        164     CALL_METHOD                     1
+                        166     POP_TOP                         
+                        168     JUMP_FORWARD                    10 (to 180)
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_METHOD                     9: _list_excluded_objects
+                        174     LOAD_FAST                       1: gcmd
+                        176     CALL_METHOD                     1
+                        178     POP_TOP                         
+                        180     LOAD_CONST                      0: None
+                        182     RETURN_VALUE                    
+                'ExcludeObject.cmd_EXCLUDE_OBJECT'
+                'Provides a summary of an object'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: cmd_EXCLUDE_OBJECT_DEFINE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get'
+                        'upper'
+                        '_reset_file'
+                        'get_command_parameters'
+                        'copy'
+                        'pop'
+                        'update'
+                        'json'
+                        'loads'
+                        'Exception'
+                        'logging'
+                        'exception'
+                        '_add_object_definition'
+                        '_list_objects'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'reset'
+                        'name'
+                        'parameters'
+                        'center'
+                        'polygon'
+                        'obj'
+                        'err'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'RESET'
+                        'NAME'
+                        ''
+                        'CENTER'
+                        'POLYGON'
+                        'name'
+                        '[%s]'
+                        'center'
+                        'polygon'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'RESET'
+                        6       LOAD_CONST                      0: None
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: reset
+                        12      LOAD_FAST                       1: gcmd
+                        14      LOAD_METHOD                     0: get
+                        16      LOAD_CONST                      2: 'NAME'
+                        18      LOAD_CONST                      3: ''
+                        20      CALL_METHOD                     2
+                        22      LOAD_METHOD                     1: upper
+                        24      CALL_METHOD                     0
+                        26      STORE_FAST                      3: name
+                        28      LOAD_FAST                       2: reset
+                        30      POP_JUMP_IF_FALSE               42
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_METHOD                     2: _reset_file
+                        36      CALL_METHOD                     0
+                        38      POP_TOP                         
+                        40      JUMP_FORWARD                    252 (to 294)
+                        42      LOAD_FAST                       3: name
+                        44      POP_JUMP_IF_FALSE               284
+                        48      LOAD_FAST                       1: gcmd
+                        50      LOAD_METHOD                     3: get_command_parameters
+                        52      CALL_METHOD                     0
+                        54      LOAD_METHOD                     4: copy
+                        56      CALL_METHOD                     0
+                        58      STORE_FAST                      4: parameters
+                        60      LOAD_FAST                       4: parameters
+                        62      LOAD_METHOD                     5: pop
+                        64      LOAD_CONST                      2: 'NAME'
+                        66      CALL_METHOD                     1
+                        68      POP_TOP                         
+                        70      LOAD_FAST                       4: parameters
+                        72      LOAD_METHOD                     5: pop
+                        74      LOAD_CONST                      4: 'CENTER'
+                        76      LOAD_CONST                      0: None
+                        78      CALL_METHOD                     2
+                        80      STORE_FAST                      5: center
+                        82      LOAD_FAST                       4: parameters
+                        84      LOAD_METHOD                     5: pop
+                        86      LOAD_CONST                      5: 'POLYGON'
+                        88      LOAD_CONST                      0: None
+                        90      CALL_METHOD                     2
+                        92      STORE_FAST                      6: polygon
+                        94      LOAD_CONST                      6: 'name'
+                        96      LOAD_FAST                       3: name
+                        98      LOAD_METHOD                     1: upper
+                        100     CALL_METHOD                     0
+                        102     BUILD_MAP                       1
+                        104     STORE_FAST                      7: obj
+                        106     LOAD_FAST                       7: obj
+                        108     LOAD_METHOD                     6: update
+                        110     LOAD_FAST                       4: parameters
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     LOAD_FAST                       5: center
+                        118     LOAD_CONST                      0: None
+                        120     COMPARE_OP                      3 (!=)
+                        122     POP_JUMP_IF_FALSE               194
+                        124     SETUP_FINALLY                   22 (to 148)
+                        126     LOAD_GLOBAL                     7: json
+                        128     LOAD_METHOD                     8: loads
+                        130     LOAD_CONST                      7: '[%s]'
+                        132     LOAD_FAST                       5: center
+                        134     BINARY_MODULO                   
+                        136     CALL_METHOD                     1
+                        138     LOAD_FAST                       7: obj
+                        140     LOAD_CONST                      8: 'center'
+                        142     STORE_SUBSCR                    
+                        144     POP_BLOCK                       
+                        146     JUMP_FORWARD                    46 (to 194)
+                        148     DUP_TOP                         
+                        150     LOAD_GLOBAL                     9: Exception
+                        152     JUMP_IF_NOT_EXC_MATCH           192
+                        154     POP_TOP                         
+                        156     STORE_FAST                      8: err
+                        158     POP_TOP                         
+                        160     SETUP_FINALLY                   22 (to 184)
+                        162     LOAD_GLOBAL                     10: logging
+                        164     LOAD_METHOD                     11: exception
+                        166     LOAD_FAST                       8: err
+                        168     CALL_METHOD                     1
+                        170     POP_TOP                         
+                        172     POP_BLOCK                       
+                        174     POP_EXCEPT                      
+                        176     LOAD_CONST                      0: None
+                        178     STORE_FAST                      8: err
+                        180     DELETE_FAST                     8: err
+                        182     JUMP_FORWARD                    10 (to 194)
+                        184     LOAD_CONST                      0: None
+                        186     STORE_FAST                      8: err
+                        188     DELETE_FAST                     8: err
+                        190     RERAISE                         
+                        192     RERAISE                         
+                        194     LOAD_FAST                       6: polygon
+                        196     LOAD_CONST                      0: None
+                        198     COMPARE_OP                      3 (!=)
+                        200     POP_JUMP_IF_FALSE               272
+                        204     SETUP_FINALLY                   18 (to 224)
+                        206     LOAD_GLOBAL                     7: json
+                        208     LOAD_METHOD                     8: loads
+                        210     LOAD_FAST                       6: polygon
+                        212     CALL_METHOD                     1
+                        214     LOAD_FAST                       7: obj
+                        216     LOAD_CONST                      9: 'polygon'
+                        218     STORE_SUBSCR                    
+                        220     POP_BLOCK                       
+                        222     JUMP_FORWARD                    48 (to 272)
+                        224     DUP_TOP                         
+                        226     LOAD_GLOBAL                     9: Exception
+                        228     JUMP_IF_NOT_EXC_MATCH           270
+                        232     POP_TOP                         
+                        234     STORE_FAST                      8: err
+                        236     POP_TOP                         
+                        238     SETUP_FINALLY                   22 (to 262)
+                        240     LOAD_GLOBAL                     10: logging
+                        242     LOAD_METHOD                     11: exception
+                        244     LOAD_FAST                       8: err
+                        246     CALL_METHOD                     1
+                        248     POP_TOP                         
+                        250     POP_BLOCK                       
+                        252     POP_EXCEPT                      
+                        254     LOAD_CONST                      0: None
+                        256     STORE_FAST                      8: err
+                        258     DELETE_FAST                     8: err
+                        260     JUMP_FORWARD                    10 (to 272)
+                        262     LOAD_CONST                      0: None
+                        264     STORE_FAST                      8: err
+                        266     DELETE_FAST                     8: err
+                        268     RERAISE                         
+                        270     RERAISE                         
+                        272     LOAD_FAST                       0: self
+                        274     LOAD_METHOD                     12: _add_object_definition
+                        276     LOAD_FAST                       7: obj
+                        278     CALL_METHOD                     1
+                        280     POP_TOP                         
+                        282     JUMP_FORWARD                    10 (to 294)
+                        284     LOAD_FAST                       0: self
+                        286     LOAD_METHOD                     13: _list_objects
+                        288     LOAD_FAST                       1: gcmd
+                        290     CALL_METHOD                     1
+                        292     POP_TOP                         
+                        294     LOAD_CONST                      0: None
+                        296     RETURN_VALUE                    
+                'ExcludeObject.cmd_EXCLUDE_OBJECT_DEFINE'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _add_object_definition
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'objects'
+                    [Var Names]
+                        'self'
+                        'definition'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: objects
+                        4       LOAD_FAST                       1: definition
+                        6       BUILD_LIST                      1
+                        8       BINARY_ADD                      
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      0: objects
+                        14      LOAD_CONST                      0: None
+                        16      RETURN_VALUE                    
+                'ExcludeObject._add_object_definition'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _exclude_object
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_register_transform'
+                        'gcode'
+                        'respond_info'
+                        'format'
+                        'upper'
+                        'excluded_objects'
+                        'sorted'
+                    [Var Names]
+                        'self'
+                        'name'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'Excluding object {}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _register_transform
+                        4       CALL_METHOD                     0
+                        6       POP_TOP                         
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: gcode
+                        12      LOAD_METHOD                     2: respond_info
+                        14      LOAD_CONST                      1: 'Excluding object {}'
+                        16      LOAD_METHOD                     3: format
+                        18      LOAD_FAST                       1: name
+                        20      LOAD_METHOD                     4: upper
+                        22      CALL_METHOD                     0
+                        24      CALL_METHOD                     1
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_FAST                       1: name
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       5: excluded_objects
+                        36      CONTAINS_OP                     1 (not in)
+                        38      POP_JUMP_IF_FALSE               58
+                        40      LOAD_GLOBAL                     6: sorted
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       5: excluded_objects
+                        46      LOAD_FAST                       1: name
+                        48      BUILD_LIST                      1
+                        50      BINARY_ADD                      
+                        52      CALL_FUNCTION                   1
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      5: excluded_objects
+                        58      LOAD_CONST                      0: None
+                        60      RETURN_VALUE                    
+                'ExcludeObject._exclude_object'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _unexclude_object
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'respond_info'
+                        'format'
+                        'upper'
+                        'excluded_objects'
+                        'list'
+                        'remove'
+                        'sorted'
+                    [Var Names]
+                        'self'
+                        'name'
+                        'excluded_objects'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'Unexcluding object {}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: respond_info
+                        6       LOAD_CONST                      1: 'Unexcluding object {}'
+                        8       LOAD_METHOD                     2: format
+                        10      LOAD_FAST                       1: name
+                        12      LOAD_METHOD                     3: upper
+                        14      CALL_METHOD                     0
+                        16      CALL_METHOD                     1
+                        18      CALL_METHOD                     1
+                        20      POP_TOP                         
+                        22      LOAD_FAST                       1: name
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       4: excluded_objects
+                        28      CONTAINS_OP                     0 (in)
+                        30      POP_JUMP_IF_FALSE               62
+                        32      LOAD_GLOBAL                     5: list
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       4: excluded_objects
+                        38      CALL_FUNCTION                   1
+                        40      STORE_FAST                      2: excluded_objects
+                        42      LOAD_FAST                       2: excluded_objects
+                        44      LOAD_METHOD                     6: remove
+                        46      LOAD_FAST                       1: name
+                        48      CALL_METHOD                     1
+                        50      POP_TOP                         
+                        52      LOAD_GLOBAL                     7: sorted
+                        54      LOAD_FAST                       2: excluded_objects
+                        56      CALL_FUNCTION                   1
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      4: excluded_objects
+                        62      LOAD_CONST                      0: None
+                        64      RETURN_VALUE                    
+                'ExcludeObject._unexclude_object'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _list_objects
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get'
+                        'json'
+                        'dumps'
+                        'objects'
+                        'join'
+                        'respond_info'
+                        'format'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'object_list'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'JSON'
+                        ' '
+                        [Code]
+                            File Name: /extras/exclude_object.py
+                            Object Name: <genexpr>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 3
+                            Flags: 0x00000073 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_GENERATOR | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'obj'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                'name'
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       0: .0
+                                2       FOR_ITER                        14 (to 18)
+                                4       STORE_FAST                      1: obj
+                                6       LOAD_FAST                       1: obj
+                                8       LOAD_CONST                      0: 'name'
+                                10      BINARY_SUBSCR                   
+                                12      YIELD_VALUE                     
+                                14      POP_TOP                         
+                                16      JUMP_ABSOLUTE                   2
+                                18      LOAD_CONST                      1: None
+                                20      RETURN_VALUE                    
+                        'ExcludeObject._list_objects.<locals>.<genexpr>'
+                        'Known objects: {}'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'JSON'
+                        6       LOAD_CONST                      0: None
+                        8       CALL_METHOD                     2
+                        10      LOAD_CONST                      0: None
+                        12      IS_OP                           1 (is not)
+                        14      POP_JUMP_IF_FALSE               30
+                        16      LOAD_GLOBAL                     1: json
+                        18      LOAD_METHOD                     2: dumps
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: objects
+                        24      CALL_METHOD                     1
+                        26      STORE_FAST                      2: object_list
+                        28      JUMP_FORWARD                    22 (to 52)
+                        30      LOAD_CONST                      2: ' '
+                        32      LOAD_METHOD                     4: join
+                        34      LOAD_CONST                      3: <CODE> <genexpr>
+                        36      LOAD_CONST                      4: 'ExcludeObject._list_objects.<locals>.<genexpr>'
+                        38      MAKE_FUNCTION                   0
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       3: objects
+                        44      GET_ITER                        
+                        46      CALL_FUNCTION                   1
+                        48      CALL_METHOD                     1
+                        50      STORE_FAST                      2: object_list
+                        52      LOAD_FAST                       1: gcmd
+                        54      LOAD_METHOD                     5: respond_info
+                        56      LOAD_CONST                      5: 'Known objects: {}'
+                        58      LOAD_METHOD                     6: format
+                        60      LOAD_FAST                       2: object_list
+                        62      CALL_METHOD                     1
+                        64      CALL_METHOD                     1
+                        66      POP_TOP                         
+                        68      LOAD_CONST                      0: None
+                        70      RETURN_VALUE                    
+                'ExcludeObject._list_objects'
+                [Code]
+                    File Name: /extras/exclude_object.py
+                    Object Name: _list_excluded_objects
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'join'
+                        'excluded_objects'
+                        'respond_info'
+                        'format'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'object_list'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        ' '
+                        'Excluded objects: {}'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: ' '
+                        2       LOAD_METHOD                     0: join
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: excluded_objects
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: object_list
+                        12      LOAD_FAST                       1: gcmd
+                        14      LOAD_METHOD                     2: respond_info
+                        16      LOAD_CONST                      2: 'Excluded objects: {}'
+                        18      LOAD_METHOD                     3: format
+                        20      LOAD_FAST                       2: object_list
+                        22      CALL_METHOD                     1
+                        24      CALL_METHOD                     1
+                        26      POP_TOP                         
+                        28      LOAD_CONST                      0: None
+                        30      RETURN_VALUE                    
+                'ExcludeObject._list_excluded_objects'
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ExcludeObject'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ExcludeObject.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> cmd_EXCLUDE_OBJECT_RESET
+                18      LOAD_CONST                      4: 'ExcludeObject.cmd_EXCLUDE_OBJECT_RESET'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: cmd_EXCLUDE_OBJECT_RESET
+                24      LOAD_CONST                      5: <CODE> _register_transform
+                26      LOAD_CONST                      6: 'ExcludeObject._register_transform'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: _register_transform
+                32      LOAD_CONST                      7: <CODE> _handle_connect
+                34      LOAD_CONST                      8: 'ExcludeObject._handle_connect'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _handle_connect
+                40      LOAD_CONST                      9: <CODE> _unregister_transform
+                42      LOAD_CONST                      10: 'ExcludeObject._unregister_transform'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _unregister_transform
+                48      LOAD_CONST                      11: <CODE> _reset_state
+                50      LOAD_CONST                      12: 'ExcludeObject._reset_state'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: _reset_state
+                56      LOAD_CONST                      13: <CODE> _reset_file
+                58      LOAD_CONST                      14: 'ExcludeObject._reset_file'
+                60      MAKE_FUNCTION                   0
+                62      STORE_NAME                      9: _reset_file
+                64      LOAD_CONST                      15: <CODE> _get_extrusion_offsets
+                66      LOAD_CONST                      16: 'ExcludeObject._get_extrusion_offsets'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      10: _get_extrusion_offsets
+                72      LOAD_CONST                      17: <CODE> get_position
+                74      LOAD_CONST                      18: 'ExcludeObject.get_position'
+                76      MAKE_FUNCTION                   0
+                78      STORE_NAME                      11: get_position
+                80      LOAD_CONST                      19: <CODE> _normal_move
+                82      LOAD_CONST                      20: 'ExcludeObject._normal_move'
+                84      MAKE_FUNCTION                   0
+                86      STORE_NAME                      12: _normal_move
+                88      LOAD_CONST                      21: <CODE> _ignore_move
+                90      LOAD_CONST                      22: 'ExcludeObject._ignore_move'
+                92      MAKE_FUNCTION                   0
+                94      STORE_NAME                      13: _ignore_move
+                96      LOAD_CONST                      23: <CODE> _move_into_excluded_region
+                98      LOAD_CONST                      24: 'ExcludeObject._move_into_excluded_region'
+                100     MAKE_FUNCTION                   0
+                102     STORE_NAME                      14: _move_into_excluded_region
+                104     LOAD_CONST                      25: <CODE> _move_from_excluded_region
+                106     LOAD_CONST                      26: 'ExcludeObject._move_from_excluded_region'
+                108     MAKE_FUNCTION                   0
+                110     STORE_NAME                      15: _move_from_excluded_region
+                112     LOAD_CONST                      27: <CODE> _test_in_excluded_region
+                114     LOAD_CONST                      28: 'ExcludeObject._test_in_excluded_region'
+                116     MAKE_FUNCTION                   0
+                118     STORE_NAME                      16: _test_in_excluded_region
+                120     LOAD_CONST                      56: (None,)
+                122     LOAD_CONST                      30: <CODE> get_status
+                124     LOAD_CONST                      31: 'ExcludeObject.get_status'
+                126     MAKE_FUNCTION                   1
+                128     STORE_NAME                      17: get_status
+                130     LOAD_CONST                      32: <CODE> move
+                132     LOAD_CONST                      33: 'ExcludeObject.move'
+                134     MAKE_FUNCTION                   0
+                136     STORE_NAME                      18: move
+                138     LOAD_CONST                      34: 'Marks the beginning the current object as labeled'
+                140     STORE_NAME                      19: cmd_EXCLUDE_OBJECT_START_help
+                142     LOAD_CONST                      35: <CODE> cmd_EXCLUDE_OBJECT_START
+                144     LOAD_CONST                      36: 'ExcludeObject.cmd_EXCLUDE_OBJECT_START'
+                146     MAKE_FUNCTION                   0
+                148     STORE_NAME                      20: cmd_EXCLUDE_OBJECT_START
+                150     LOAD_CONST                      37: 'Marks the end the current object'
+                152     STORE_NAME                      21: cmd_EXCLUDE_OBJECT_END_help
+                154     LOAD_CONST                      38: <CODE> cmd_EXCLUDE_OBJECT_END
+                156     LOAD_CONST                      39: 'ExcludeObject.cmd_EXCLUDE_OBJECT_END'
+                158     MAKE_FUNCTION                   0
+                160     STORE_NAME                      22: cmd_EXCLUDE_OBJECT_END
+                162     LOAD_CONST                      40: 'Cancel moves inside a specified objects'
+                164     STORE_NAME                      23: cmd_EXCLUDE_OBJECT_help
+                166     LOAD_CONST                      41: <CODE> cmd_EXCLUDE_OBJECT
+                168     LOAD_CONST                      42: 'ExcludeObject.cmd_EXCLUDE_OBJECT'
+                170     MAKE_FUNCTION                   0
+                172     STORE_NAME                      24: cmd_EXCLUDE_OBJECT
+                174     LOAD_CONST                      43: 'Provides a summary of an object'
+                176     STORE_NAME                      25: cmd_EXCLUDE_OBJECT_DEFINE_help
+                178     LOAD_CONST                      44: <CODE> cmd_EXCLUDE_OBJECT_DEFINE
+                180     LOAD_CONST                      45: 'ExcludeObject.cmd_EXCLUDE_OBJECT_DEFINE'
+                182     MAKE_FUNCTION                   0
+                184     STORE_NAME                      26: cmd_EXCLUDE_OBJECT_DEFINE
+                186     LOAD_CONST                      46: <CODE> _add_object_definition
+                188     LOAD_CONST                      47: 'ExcludeObject._add_object_definition'
+                190     MAKE_FUNCTION                   0
+                192     STORE_NAME                      27: _add_object_definition
+                194     LOAD_CONST                      48: <CODE> _exclude_object
+                196     LOAD_CONST                      49: 'ExcludeObject._exclude_object'
+                198     MAKE_FUNCTION                   0
+                200     STORE_NAME                      28: _exclude_object
+                202     LOAD_CONST                      50: <CODE> _unexclude_object
+                204     LOAD_CONST                      51: 'ExcludeObject._unexclude_object'
+                206     MAKE_FUNCTION                   0
+                208     STORE_NAME                      29: _unexclude_object
+                210     LOAD_CONST                      52: <CODE> _list_objects
+                212     LOAD_CONST                      53: 'ExcludeObject._list_objects'
+                214     MAKE_FUNCTION                   0
+                216     STORE_NAME                      30: _list_objects
+                218     LOAD_CONST                      54: <CODE> _list_excluded_objects
+                220     LOAD_CONST                      55: 'ExcludeObject._list_excluded_objects'
+                222     MAKE_FUNCTION                   0
+                224     STORE_NAME                      31: _list_excluded_objects
+                226     LOAD_CONST                      29: None
+                228     RETURN_VALUE                    
+        'ExcludeObject'
+        [Code]
+            File Name: /extras/exclude_object.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'ExcludeObject'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: ExcludeObject
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: json
+        14      STORE_NAME                      1: json
+        16      LOAD_BUILD_CLASS                
+        18      LOAD_CONST                      2: <CODE> ExcludeObject
+        20      LOAD_CONST                      3: 'ExcludeObject'
+        22      MAKE_FUNCTION                   0
+        24      LOAD_CONST                      3: 'ExcludeObject'
+        26      CALL_FUNCTION                   2
+        28      STORE_NAME                      2: ExcludeObject
+        30      LOAD_CONST                      4: <CODE> load_config
+        32      LOAD_CONST                      5: 'load_config'
+        34      MAKE_FUNCTION                   0
+        36      STORE_NAME                      3: load_config
+        38      LOAD_CONST                      1: None
+        40      RETURN_VALUE                    

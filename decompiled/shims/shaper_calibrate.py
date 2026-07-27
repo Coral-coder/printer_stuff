@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/shaper_calibrate.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: shaper_calibrate.pyc (Python 3.9)
 
@@ -33,25 +42,24 @@ def exec_cmd(conn, method):
     
     try:
         val = os.nice(10)
-    finally:
+    except:
         pass
+
     
     try:
         process = subprocess.Popen(shlex.split(method), stdout=subprocess.PIPE)
         output = process.communicate()[0]
         retcode = process.poll()
-    finally:
-        pass
-    retcode = -1
-    conn.send((True, retcode))
-    conn.close()
-    return None
+    except:
+        retcode = -1
+        conn.send((True, retcode))
+        conn.close()
+        return None
+
     if retcode is 0:
         conn.send((False, retcode))
     else:
         conn.send((True, retcode))
-
-
     conn.close()
 
 
@@ -116,7 +124,36 @@ class ShaperCalibrate:
         configfile = self.printer.lookup_object('configfile')
         gcode_macro_path = os.path.join(base_dir, 'printer_data/config/gcode_macro.cfg')
         gconfig = None
-    # WARNING: Decompyle incomplete
+        
+        try:
+            gconfig = configfile.read_config(gcode_macro_path)
+            if gconfig and gconfig.has_section('gcode_macro AUTOTUNE_SHAPERS'):
+                AUTOTUNE_SHAPERS = gconfig.getsection('gcode_macro AUTOTUNE_SHAPERS')
+                self.autotune_shapers = list(map((lambda x: x.replace("'", '')), AUTOTUNE_SHAPERS.getlist('variable_autotune_shapers', [
+                    'zv',
+                    'mzv',
+                    'ei',
+                    '2hump_ei',
+                    '3hump_ei'])))
+        except Exception:
+            err = None
+            
+            try:
+                logging.error('gcode_macro_path: %s, configfile.read_config error:%s' % (gcode_macro_path, err))
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            
+            try:
+                self.numpy = importlib.import_module('numpy')
+            except ImportError:
+                raise self.error('Failed to import `numpy` module, make sure it was installed via `~/klippy-env/bin/pip install` (refer to docs/Measuring_Resonances.md for more details).')
+
+            return None
+
+
 
     
     def background_process_exec(self, method, args):
@@ -132,23 +169,20 @@ class ShaperCalibrate:
                 gcode.respond_info('current nice: %d' % os.nice(0), log=False)
                 val = os.nice(10)
                 gcode.respond_info('process id: %d, current nice: %d' % (os.getpid(), val), log=False)
-            finally:
-                pass
-            gcode.respond_info('nice process failed', log=False)
+            except:
+                gcode.respond_info('nice process failed', log=False)
+
             queuelogger.clear_bg_logging()
             
             try:
                 res = method(*args)
-            finally:
-                pass
-            child_conn.send((True, traceback.format_exc()))
-            child_conn.close()
-            return None
+            except:
+                child_conn.send((True, traceback.format_exc()))
+                child_conn.close()
+                return None
+
             child_conn.send((False, res))
             child_conn.close()
-            return None
-
-
 
         calc_proc = multiprocessing.Process(target=wrapper)
         calc_proc.daemon = True
@@ -259,15 +293,14 @@ class ShaperCalibrate:
         
         try:
             shm = shared_memory.SharedMemory(name)
-        finally:
-            pass
-        gcode.respond_info('open shared memory %s fail!' % name)
-        return None
+        except:
+            gcode.respond_info('open shared memory %s fail!' % name)
+            return None
+
         np = self.numpy
         array = np.ndarray((shm.size // 8,), dtype=np.float64, buffer=shm.buf, offset=0)
         shm.unlink()
         return array.copy()
-
 
     
     def lowmem_process_accelerometer_data(self, data):

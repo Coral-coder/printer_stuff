@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/probe.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: probe.pyc (Python 3.9)
 
@@ -78,10 +87,8 @@ class PrinterProbe:
         
         try:
             self.multi_probe_end()
-        finally:
-            pass
-        logging.exception('Multi-probe end')
-        return None
+        except:
+            logging.exception('Multi-probe end')
 
 
     
@@ -131,7 +138,32 @@ class PrinterProbe:
                 if target_z < max_target_z:
                     target_z = max_target_z
         pos[2] = target_z
-    # WARNING: Decompyle incomplete
+        
+        try:
+            epos = phoming.probing_move(self.mcu_probe, pos, speed)
+        except self.printer.command_error:
+            e = None
+            
+            try:
+                reason = str(e)
+                if 'Timeout during endstop homing' in reason:
+                    reason += HINT_TIMEOUT
+                raise self.printer.command_error(reason)
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            axis_twist_compensation = self.printer.lookup_object('axis_twist_compensation', None)
+            z_compensation = 0
+            if axis_twist_compensation is not None:
+                z_compensation = axis_twist_compensation.get_z_compensation_value(pos)
+
+
+        self.gcode.respond_info('probe at %.3f,%.3f is z=%.6f z_compensation=%.6f' % (epos[0], epos[1], epos[2], z_compensation))
+        epos[2] += z_compensation
+        self.gcode.respond_info('probe at %.3f,%.3f is z=%.6f' % (epos[0], epos[1], epos[2]))
+        return epos[:3]
 
     
     def _move(self, coord, speed):
@@ -246,20 +278,4 @@ class PrinterProbe:
         deviation_sum = 0
         for i in range(len(positions)):
             deviation_sum += pow(positions[i][2] - avg_value, 2)
-        sigma = (deviation_sum / len(positions)) ** 0.5
-        z_values = [ pos[2] for pos in (positions) ]
-        gcmd.respond_info('probe accuracy results: maximum %.6f, minimum %.6f, range %.6f, average %.6f, median %.6f, standard deviation %.6f' % (max_value, min_value, range_value, avg_value, median, sigma))
-        return (max_value, min_value, range_value, avg_value, median, sigma, positions)
-
-    
-    def probe_calibrate_finalize(self, kin_pos):
-        if kin_pos is None:
-            return None
-        z_offset = None.probe_calibrate_z - kin_pos[2]
-        self.gcode.respond_info('%s: z_offset: %.3f\nThe SAVE_CONFIG command will update the printer config file\nwith the above and restart the printer.' % (self.name, z_offset))
-        configfile = self.printer.lookup_object('configfile')
-        configfile.set(self.name, 'z_offset', '%.3f' % (z_offset,))
-
-    cmd_PROBE_CALIBRATE_help = "Calibrate the probe's z_offset"
-    
-    def cmd_PROBE_CALIBRATE(self, 
+        sigma = (deviation_su

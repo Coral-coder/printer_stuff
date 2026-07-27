@@ -1,0 +1,638 @@
+tool.pyc (Python 3.9)
+[Code]
+    File Name: /extras/tool.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        're'
+        'os'
+        'logging'
+        'threading'
+        'subprocess'
+        'call'
+        'json'
+        'random'
+        'time'
+        'extras.base_info'
+        'base_dir'
+        'datetime'
+        'send'
+        'reportInformation'
+        'compress_key701'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        (
+            'call'
+        )
+        (
+            'base_dir'
+        )
+        (
+            'datetime'
+        )
+        [Code]
+            File Name: /extras/tool.py
+            Object Name: send
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 8
+            Stack Size: 10
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'datetime'
+                'now'
+                'strftime'
+                'os'
+                'path'
+                'join'
+                'base_dir'
+                'makedirs'
+                'dirname'
+                're'
+                'findall'
+                'str'
+                'int'
+                'time'
+                'open'
+                'write'
+                'json'
+                'dumps'
+                'chr'
+                'flush'
+                'Exception'
+                'logging'
+                'error'
+            [Var Names]
+                'msg'
+                'data'
+                'time_str'
+                'pipeFilePath'
+                'ret'
+                'send_data'
+                'f'
+                'err'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '%Y%m%d'
+                '20250101'
+                'creality/gui/config/pipe-'
+                '.json'
+                True
+                (
+                    'exist_ok'
+                )
+                'key(\\d+)'
+                'key%s'
+                0
+                1000
+                '00000000000000'
+                (
+                    'reqId'
+                    'dn'
+                    'code'
+                    'data'
+                )
+                'a'
+                3
+                'reportInformation err:%s'
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: datetime
+                2       LOAD_METHOD                     1: now
+                4       CALL_METHOD                     0
+                6       LOAD_METHOD                     2: strftime
+                8       LOAD_CONST                      1: '%Y%m%d'
+                10      CALL_METHOD                     1
+                12      STORE_FAST                      2: time_str
+                14      LOAD_FAST                       2: time_str
+                16      LOAD_CONST                      2: '20250101'
+                18      COMPARE_OP                      0 (<)
+                20      POP_JUMP_IF_FALSE               26
+                22      LOAD_CONST                      0: None
+                24      RETURN_VALUE                    
+                26      LOAD_GLOBAL                     3: os
+                28      LOAD_ATTR                       4: path
+                30      LOAD_METHOD                     5: join
+                32      LOAD_GLOBAL                     6: base_dir
+                34      LOAD_CONST                      3: 'creality/gui/config/pipe-'
+                36      LOAD_FAST                       2: time_str
+                38      BINARY_ADD                      
+                40      LOAD_CONST                      4: '.json'
+                42      BINARY_ADD                      
+                44      CALL_METHOD                     2
+                46      STORE_FAST                      3: pipeFilePath
+                48      SETUP_FINALLY                   164 (to 214)
+                50      LOAD_GLOBAL                     3: os
+                52      LOAD_ATTR                       7: makedirs
+                54      LOAD_GLOBAL                     3: os
+                56      LOAD_ATTR                       4: path
+                58      LOAD_METHOD                     8: dirname
+                60      LOAD_FAST                       3: pipeFilePath
+                62      CALL_METHOD                     1
+                64      LOAD_CONST                      5: True
+                66      LOAD_CONST                      6: ('exist_ok',)
+                68      CALL_FUNCTION_KW                2
+                70      POP_TOP                         
+                72      LOAD_GLOBAL                     9: re
+                74      LOAD_METHOD                     10: findall
+                76      LOAD_CONST                      7: 'key(\\d+)'
+                78      LOAD_FAST                       0: msg
+                80      CALL_METHOD                     2
+                82      STORE_FAST                      4: ret
+                84      LOAD_FAST                       4: ret
+                86      POP_JUMP_IF_FALSE               210
+                88      LOAD_CONST                      8: 'key%s'
+                90      LOAD_FAST                       4: ret
+                92      LOAD_CONST                      9: 0
+                94      BINARY_SUBSCR                   
+                96      BINARY_MODULO                   
+                98      STORE_FAST                      0: msg
+                100     LOAD_GLOBAL                     11: str
+                102     LOAD_GLOBAL                     12: int
+                104     LOAD_GLOBAL                     13: time
+                106     LOAD_METHOD                     13: time
+                108     CALL_METHOD                     0
+                110     LOAD_CONST                      10: 1000
+                112     BINARY_MULTIPLY                 
+                114     CALL_FUNCTION                   1
+                116     CALL_FUNCTION                   1
+                118     LOAD_CONST                      11: '00000000000000'
+                120     LOAD_FAST                       0: msg
+                122     LOAD_FAST                       1: data
+                124     LOAD_CONST                      12: ('reqId', 'dn', 'code', 'data')
+                126     BUILD_CONST_KEY_MAP             4
+                128     STORE_FAST                      5: send_data
+                130     LOAD_GLOBAL                     14: open
+                132     LOAD_FAST                       3: pipeFilePath
+                134     LOAD_CONST                      13: 'a'
+                136     CALL_FUNCTION                   2
+                138     SETUP_WITH                      54 (to 194)
+                140     STORE_FAST                      6: f
+                142     LOAD_FAST                       6: f
+                144     LOAD_METHOD                     15: write
+                146     LOAD_GLOBAL                     16: json
+                148     LOAD_METHOD                     17: dumps
+                150     LOAD_FAST                       5: send_data
+                152     CALL_METHOD                     1
+                154     CALL_METHOD                     1
+                156     POP_TOP                         
+                158     LOAD_FAST                       6: f
+                160     LOAD_METHOD                     15: write
+                162     LOAD_GLOBAL                     18: chr
+                164     LOAD_CONST                      14: 3
+                166     CALL_FUNCTION                   1
+                168     CALL_METHOD                     1
+                170     POP_TOP                         
+                172     LOAD_FAST                       6: f
+                174     LOAD_METHOD                     19: flush
+                176     CALL_METHOD                     0
+                178     POP_TOP                         
+                180     POP_BLOCK                       
+                182     LOAD_CONST                      0: None
+                184     DUP_TOP                         
+                186     DUP_TOP                         
+                188     CALL_FUNCTION                   3
+                190     POP_TOP                         
+                192     JUMP_FORWARD                    16 (to 210)
+                194     WITH_EXCEPT_START               
+                196     POP_JUMP_IF_TRUE                200
+                198     RERAISE                         
+                200     POP_TOP                         
+                202     POP_TOP                         
+                204     POP_TOP                         
+                206     POP_EXCEPT                      
+                208     POP_TOP                         
+                210     POP_BLOCK                       
+                212     JUMP_FORWARD                    52 (to 266)
+                214     DUP_TOP                         
+                216     LOAD_GLOBAL                     20: Exception
+                218     JUMP_IF_NOT_EXC_MATCH           264
+                222     POP_TOP                         
+                224     STORE_FAST                      7: err
+                226     POP_TOP                         
+                228     SETUP_FINALLY                   26 (to 256)
+                230     LOAD_GLOBAL                     21: logging
+                232     LOAD_METHOD                     22: error
+                234     LOAD_CONST                      15: 'reportInformation err:%s'
+                236     LOAD_FAST                       7: err
+                238     BINARY_MODULO                   
+                240     CALL_METHOD                     1
+                242     POP_TOP                         
+                244     POP_BLOCK                       
+                246     POP_EXCEPT                      
+                248     LOAD_CONST                      0: None
+                250     STORE_FAST                      7: err
+                252     DELETE_FAST                     7: err
+                254     JUMP_FORWARD                    10 (to 266)
+                256     LOAD_CONST                      0: None
+                258     STORE_FAST                      7: err
+                260     DELETE_FAST                     7: err
+                262     RERAISE                         
+                264     RERAISE                         
+                266     LOAD_CONST                      0: None
+                268     RETURN_VALUE                    
+        'send'
+        [Code]
+            File Name: /extras/tool.py
+            Object Name: reportInformation
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 3
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'threading'
+                'Thread'
+                'send'
+                'start'
+            [Var Names]
+                'msg'
+                'data'
+                't'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                (
+                    'target'
+                    'args'
+                )
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: threading
+                2       LOAD_ATTR                       1: Thread
+                4       LOAD_GLOBAL                     2: send
+                6       LOAD_FAST                       0: msg
+                8       LOAD_FAST                       1: data
+                10      BUILD_TUPLE                     2
+                12      LOAD_CONST                      1: ('target', 'args')
+                14      CALL_FUNCTION_KW                2
+                16      STORE_FAST                      2: t
+                18      LOAD_FAST                       2: t
+                20      LOAD_METHOD                     3: start
+                22      CALL_METHOD                     0
+                24      POP_TOP                         
+                26      LOAD_CONST                      0: None
+                28      RETURN_VALUE                    
+        'reportInformation'
+        [Code]
+            File Name: /extras/tool.py
+            Object Name: compress_key701
+            Arg Count: 2
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 6
+            Stack Size: 35
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'get'
+                'Exception'
+                'logging'
+                'exception'
+            [Var Names]
+                'code'
+                'data'
+                'metadata'
+                'model_info'
+                'result'
+                'err'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                'key701'
+                'jobs'
+                0
+                'metadata'
+                'model_info'
+                '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s'
+                'end_time'
+                'filament_used'
+                'filename'
+                ''
+                'print_duration'
+                'start_time'
+                'status'
+                'error_msg'
+                'total_duration'
+                'estimated_time'
+                'filament_total'
+                'filament_weight_total'
+                'first_layer_bed_temp'
+                'first_layer_extr_temp'
+                'first_layer_height'
+                'gcode_end_byte'
+                'gcode_start_byte'
+                'layer_count'
+                'layer_height'
+                'modified'
+                'object_height'
+                'size'
+                'slicer'
+                'slicer_version'
+                'MaterialType'
+                'MaterialName'
+                'MAXX'
+                'MAXY'
+                'MAXZ'
+                'MINX'
+                'MINY'
+                'MINZ'
+            [Disassembly]
+                0       LOAD_FAST                       0: code
+                2       LOAD_CONST                      1: 'key701'
+                4       COMPARE_OP                      2 (==)
+                6       POP_JUMP_IF_FALSE               442
+                10      SETUP_FINALLY                   380 (to 394)
+                14      LOAD_FAST                       1: data
+                16      LOAD_METHOD                     0: get
+                18      LOAD_CONST                      2: 'jobs'
+                20      BUILD_LIST                      0
+                22      CALL_METHOD                     2
+                24      POP_JUMP_IF_FALSE               42
+                26      LOAD_FAST                       1: data
+                28      LOAD_METHOD                     0: get
+                30      LOAD_CONST                      2: 'jobs'
+                32      BUILD_LIST                      0
+                34      CALL_METHOD                     2
+                36      LOAD_CONST                      3: 0
+                38      BINARY_SUBSCR                   
+                40      JUMP_FORWARD                    2 (to 44)
+                42      BUILD_MAP                       0
+                44      STORE_FAST                      1: data
+                46      LOAD_FAST                       1: data
+                48      LOAD_METHOD                     0: get
+                50      LOAD_CONST                      4: 'metadata'
+                52      BUILD_MAP                       0
+                54      CALL_METHOD                     2
+                56      STORE_FAST                      2: metadata
+                58      LOAD_FAST                       2: metadata
+                60      LOAD_METHOD                     0: get
+                62      LOAD_CONST                      5: 'model_info'
+                64      BUILD_MAP                       0
+                66      CALL_METHOD                     2
+                68      STORE_FAST                      3: model_info
+                70      LOAD_CONST                      6: '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s'
+                72      LOAD_FAST                       1: data
+                74      LOAD_METHOD                     0: get
+                76      LOAD_CONST                      7: 'end_time'
+                78      LOAD_CONST                      3: 0
+                80      CALL_METHOD                     2
+                82      LOAD_FAST                       1: data
+                84      LOAD_METHOD                     0: get
+                86      LOAD_CONST                      8: 'filament_used'
+                88      LOAD_CONST                      3: 0
+                90      CALL_METHOD                     2
+                92      LOAD_FAST                       1: data
+                94      LOAD_METHOD                     0: get
+                96      LOAD_CONST                      9: 'filename'
+                98      LOAD_CONST                      10: ''
+                100     CALL_METHOD                     2
+                102     LOAD_FAST                       1: data
+                104     LOAD_METHOD                     0: get
+                106     LOAD_CONST                      11: 'print_duration'
+                108     LOAD_CONST                      3: 0
+                110     CALL_METHOD                     2
+                112     LOAD_FAST                       1: data
+                114     LOAD_METHOD                     0: get
+                116     LOAD_CONST                      12: 'start_time'
+                118     LOAD_CONST                      3: 0
+                120     CALL_METHOD                     2
+                122     LOAD_FAST                       1: data
+                124     LOAD_METHOD                     0: get
+                126     LOAD_CONST                      13: 'status'
+                128     LOAD_CONST                      10: ''
+                130     CALL_METHOD                     2
+                132     LOAD_FAST                       1: data
+                134     LOAD_METHOD                     0: get
+                136     LOAD_CONST                      14: 'error_msg'
+                138     LOAD_CONST                      10: ''
+                140     CALL_METHOD                     2
+                142     LOAD_FAST                       1: data
+                144     LOAD_METHOD                     0: get
+                146     LOAD_CONST                      15: 'total_duration'
+                148     LOAD_CONST                      3: 0
+                150     CALL_METHOD                     2
+                152     LOAD_FAST                       2: metadata
+                154     LOAD_METHOD                     0: get
+                156     LOAD_CONST                      16: 'estimated_time'
+                158     LOAD_CONST                      3: 0
+                160     CALL_METHOD                     2
+                162     LOAD_FAST                       2: metadata
+                164     LOAD_METHOD                     0: get
+                166     LOAD_CONST                      17: 'filament_total'
+                168     LOAD_CONST                      3: 0
+                170     CALL_METHOD                     2
+                172     LOAD_FAST                       2: metadata
+                174     LOAD_METHOD                     0: get
+                176     LOAD_CONST                      18: 'filament_weight_total'
+                178     LOAD_CONST                      3: 0
+                180     CALL_METHOD                     2
+                182     LOAD_FAST                       2: metadata
+                184     LOAD_METHOD                     0: get
+                186     LOAD_CONST                      19: 'first_layer_bed_temp'
+                188     LOAD_CONST                      3: 0
+                190     CALL_METHOD                     2
+                192     LOAD_FAST                       2: metadata
+                194     LOAD_METHOD                     0: get
+                196     LOAD_CONST                      20: 'first_layer_extr_temp'
+                198     LOAD_CONST                      3: 0
+                200     CALL_METHOD                     2
+                202     LOAD_FAST                       2: metadata
+                204     LOAD_METHOD                     0: get
+                206     LOAD_CONST                      21: 'first_layer_height'
+                208     LOAD_CONST                      3: 0
+                210     CALL_METHOD                     2
+                212     LOAD_FAST                       2: metadata
+                214     LOAD_METHOD                     0: get
+                216     LOAD_CONST                      22: 'gcode_end_byte'
+                218     LOAD_CONST                      3: 0
+                220     CALL_METHOD                     2
+                222     LOAD_FAST                       2: metadata
+                224     LOAD_METHOD                     0: get
+                226     LOAD_CONST                      23: 'gcode_start_byte'
+                228     LOAD_CONST                      3: 0
+                230     CALL_METHOD                     2
+                232     LOAD_FAST                       2: metadata
+                234     LOAD_METHOD                     0: get
+                236     LOAD_CONST                      24: 'layer_count'
+                238     LOAD_CONST                      3: 0
+                240     CALL_METHOD                     2
+                242     LOAD_FAST                       2: metadata
+                244     LOAD_METHOD                     0: get
+                246     LOAD_CONST                      25: 'layer_height'
+                248     LOAD_CONST                      3: 0
+                250     CALL_METHOD                     2
+                252     LOAD_FAST                       2: metadata
+                254     LOAD_METHOD                     0: get
+                256     LOAD_CONST                      26: 'modified'
+                258     LOAD_CONST                      3: 0
+                260     CALL_METHOD                     2
+                262     LOAD_FAST                       2: metadata
+                264     LOAD_METHOD                     0: get
+                266     LOAD_CONST                      27: 'object_height'
+                268     LOAD_CONST                      3: 0
+                270     CALL_METHOD                     2
+                272     LOAD_FAST                       2: metadata
+                274     LOAD_METHOD                     0: get
+                276     LOAD_CONST                      28: 'size'
+                278     LOAD_CONST                      3: 0
+                280     CALL_METHOD                     2
+                282     LOAD_FAST                       2: metadata
+                284     LOAD_METHOD                     0: get
+                286     LOAD_CONST                      29: 'slicer'
+                288     LOAD_CONST                      10: ''
+                290     CALL_METHOD                     2
+                292     LOAD_FAST                       2: metadata
+                294     LOAD_METHOD                     0: get
+                296     LOAD_CONST                      30: 'slicer_version'
+                298     LOAD_CONST                      10: ''
+                300     CALL_METHOD                     2
+                302     LOAD_FAST                       3: model_info
+                304     LOAD_METHOD                     0: get
+                306     LOAD_CONST                      31: 'MaterialType'
+                308     LOAD_CONST                      10: ''
+                310     CALL_METHOD                     2
+                312     LOAD_FAST                       3: model_info
+                314     LOAD_METHOD                     0: get
+                316     LOAD_CONST                      32: 'MaterialName'
+                318     LOAD_CONST                      10: ''
+                320     CALL_METHOD                     2
+                322     LOAD_FAST                       3: model_info
+                324     LOAD_METHOD                     0: get
+                326     LOAD_CONST                      33: 'MAXX'
+                328     LOAD_CONST                      3: 0
+                330     CALL_METHOD                     2
+                332     LOAD_FAST                       3: model_info
+                334     LOAD_METHOD                     0: get
+                336     LOAD_CONST                      34: 'MAXY'
+                338     LOAD_CONST                      3: 0
+                340     CALL_METHOD                     2
+                342     LOAD_FAST                       3: model_info
+                344     LOAD_METHOD                     0: get
+                346     LOAD_CONST                      35: 'MAXZ'
+                348     LOAD_CONST                      3: 0
+                350     CALL_METHOD                     2
+                352     LOAD_FAST                       3: model_info
+                354     LOAD_METHOD                     0: get
+                356     LOAD_CONST                      36: 'MINX'
+                358     LOAD_CONST                      3: 0
+                360     CALL_METHOD                     2
+                362     LOAD_FAST                       3: model_info
+                364     LOAD_METHOD                     0: get
+                366     LOAD_CONST                      37: 'MINY'
+                368     LOAD_CONST                      3: 0
+                370     CALL_METHOD                     2
+                372     LOAD_FAST                       3: model_info
+                374     LOAD_METHOD                     0: get
+                376     LOAD_CONST                      38: 'MINZ'
+                378     LOAD_CONST                      3: 0
+                380     CALL_METHOD                     2
+                382     BUILD_TUPLE                     31
+                384     BINARY_MODULO                   
+                386     STORE_FAST                      4: result
+                388     LOAD_FAST                       4: result
+                390     POP_BLOCK                       
+                392     RETURN_VALUE                    
+                394     DUP_TOP                         
+                396     LOAD_GLOBAL                     1: Exception
+                398     JUMP_IF_NOT_EXC_MATCH           440
+                402     POP_TOP                         
+                404     STORE_FAST                      5: err
+                406     POP_TOP                         
+                408     SETUP_FINALLY                   22 (to 432)
+                410     LOAD_GLOBAL                     2: logging
+                412     LOAD_METHOD                     3: exception
+                414     LOAD_FAST                       5: err
+                416     CALL_METHOD                     1
+                418     POP_TOP                         
+                420     POP_BLOCK                       
+                422     POP_EXCEPT                      
+                424     LOAD_CONST                      0: None
+                426     STORE_FAST                      5: err
+                428     DELETE_FAST                     5: err
+                430     JUMP_FORWARD                    10 (to 442)
+                432     LOAD_CONST                      0: None
+                434     STORE_FAST                      5: err
+                436     DELETE_FAST                     5: err
+                438     RERAISE                         
+                440     RERAISE                         
+                442     LOAD_CONST                      0: None
+                444     RETURN_VALUE                    
+        'compress_key701'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: re
+        6       STORE_NAME                      0: re
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: os
+        14      STORE_NAME                      1: os
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: logging
+        22      STORE_NAME                      2: logging
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      1: None
+        28      IMPORT_NAME                     3: threading
+        30      STORE_NAME                      3: threading
+        32      LOAD_CONST                      0: 0
+        34      LOAD_CONST                      2: ('call',)
+        36      IMPORT_NAME                     4: subprocess
+        38      IMPORT_FROM                     5: call
+        40      STORE_NAME                      5: call
+        42      POP_TOP                         
+        44      LOAD_CONST                      0: 0
+        46      LOAD_CONST                      1: None
+        48      IMPORT_NAME                     6: json
+        50      STORE_NAME                      6: json
+        52      LOAD_CONST                      0: 0
+        54      LOAD_CONST                      1: None
+        56      IMPORT_NAME                     7: random
+        58      STORE_NAME                      7: random
+        60      LOAD_CONST                      0: 0
+        62      LOAD_CONST                      1: None
+        64      IMPORT_NAME                     8: time
+        66      STORE_NAME                      8: time
+        68      LOAD_CONST                      0: 0
+        70      LOAD_CONST                      3: ('base_dir',)
+        72      IMPORT_NAME                     9: extras.base_info
+        74      IMPORT_FROM                     10: base_dir
+        76      STORE_NAME                      10: base_dir
+        78      POP_TOP                         
+        80      LOAD_CONST                      0: 0
+        82      LOAD_CONST                      4: ('datetime',)
+        84      IMPORT_NAME                     11: datetime
+        86      IMPORT_FROM                     11: datetime
+        88      STORE_NAME                      11: datetime
+        90      POP_TOP                         
+        92      BUILD_MAP                       0
+        94      BUILD_TUPLE                     1
+        96      LOAD_CONST                      5: <CODE> send
+        98      LOAD_CONST                      6: 'send'
+        100     MAKE_FUNCTION                   1
+        102     STORE_NAME                      12: send
+        104     BUILD_MAP                       0
+        106     BUILD_TUPLE                     1
+        108     LOAD_CONST                      7: <CODE> reportInformation
+        110     LOAD_CONST                      8: 'reportInformation'
+        112     MAKE_FUNCTION                   1
+        114     STORE_NAME                      13: reportInformation
+        116     LOAD_CONST                      9: <CODE> compress_key701
+        118     LOAD_CONST                      10: 'compress_key701'
+        120     MAKE_FUNCTION                   0
+        122     STORE_NAME                      14: compress_key701
+        124     LOAD_CONST                      1: None
+        126     RETURN_VALUE                    

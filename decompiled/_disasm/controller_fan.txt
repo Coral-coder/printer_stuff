@@ -1,0 +1,666 @@
+controller_fan.pyc (Python 3.9)
+[Code]
+    File Name: /extras/controller_fan.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        ''
+        'fan'
+        'PIN_MIN_TIME'
+        'ControllerFan'
+        'load_config_prefix'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        1
+        (
+            'fan'
+        )
+        0.1
+        [Code]
+            File Name: /extras/controller_fan.py
+            Object Name: ControllerFan
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'handle_connect'
+                'handle_ready'
+                'get_status'
+                'callback'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ControllerFan'
+                [Code]
+                    File Name: /extras/controller_fan.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'register_event_handler'
+                        'handle_ready'
+                        'handle_connect'
+                        'getlist'
+                        'stepper_names'
+                        'load_object'
+                        'stepper_enable'
+                        'heaters'
+                        'fan'
+                        'Fan'
+                        'getfloat'
+                        'fan_speed'
+                        'idle_speed'
+                        'getint'
+                        'idle_timeout'
+                        'heater_names'
+                        'last_on'
+                        'last_speed'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'klippy:ready'
+                        'klippy:connect'
+                        'stepper'
+                        'stepper_enable'
+                        'heaters'
+                        'fan_speed'
+                        1
+                        0
+                        (
+                            'default'
+                            'minval'
+                            'maxval'
+                        )
+                        'idle_speed'
+                        'idle_timeout'
+                        30
+                        0
+                        (
+                            'default'
+                            'minval'
+                        )
+                        'heater'
+                        (
+                            'extruder'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: register_event_handler
+                        16      LOAD_CONST                      1: 'klippy:ready'
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: handle_ready
+                        22      CALL_METHOD                     2
+                        24      POP_TOP                         
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       1: printer
+                        30      LOAD_METHOD                     2: register_event_handler
+                        32      LOAD_CONST                      2: 'klippy:connect'
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       4: handle_connect
+                        38      CALL_METHOD                     2
+                        40      POP_TOP                         
+                        42      LOAD_FAST                       1: config
+                        44      LOAD_METHOD                     5: getlist
+                        46      LOAD_CONST                      3: 'stepper'
+                        48      LOAD_CONST                      0: None
+                        50      CALL_METHOD                     2
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      6: stepper_names
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       1: printer
+                        60      LOAD_METHOD                     7: load_object
+                        62      LOAD_FAST                       1: config
+                        64      LOAD_CONST                      4: 'stepper_enable'
+                        66      CALL_METHOD                     2
+                        68      LOAD_FAST                       0: self
+                        70      STORE_ATTR                      8: stepper_enable
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       1: printer
+                        76      LOAD_METHOD                     7: load_object
+                        78      LOAD_FAST                       1: config
+                        80      LOAD_CONST                      5: 'heaters'
+                        82      CALL_METHOD                     2
+                        84      POP_TOP                         
+                        86      BUILD_LIST                      0
+                        88      LOAD_FAST                       0: self
+                        90      STORE_ATTR                      9: heaters
+                        92      LOAD_GLOBAL                     10: fan
+                        94      LOAD_METHOD                     11: Fan
+                        96      LOAD_FAST                       1: config
+                        98      CALL_METHOD                     1
+                        100     LOAD_FAST                       0: self
+                        102     STORE_ATTR                      10: fan
+                        104     LOAD_FAST                       1: config
+                        106     LOAD_ATTR                       12: getfloat
+                        108     LOAD_CONST                      6: 'fan_speed'
+                        110     LOAD_CONST                      7: 1
+                        112     LOAD_CONST                      8: 0
+                        114     LOAD_CONST                      7: 1
+                        116     LOAD_CONST                      9: ('default', 'minval', 'maxval')
+                        118     CALL_FUNCTION_KW                4
+                        120     LOAD_FAST                       0: self
+                        122     STORE_ATTR                      13: fan_speed
+                        124     LOAD_FAST                       1: config
+                        126     LOAD_ATTR                       12: getfloat
+                        128     LOAD_CONST                      10: 'idle_speed'
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       13: fan_speed
+                        134     LOAD_CONST                      8: 0
+                        136     LOAD_CONST                      7: 1
+                        138     LOAD_CONST                      9: ('default', 'minval', 'maxval')
+                        140     CALL_FUNCTION_KW                4
+                        142     LOAD_FAST                       0: self
+                        144     STORE_ATTR                      14: idle_speed
+                        146     LOAD_FAST                       1: config
+                        148     LOAD_ATTR                       15: getint
+                        150     LOAD_CONST                      11: 'idle_timeout'
+                        152     LOAD_CONST                      12: 30
+                        154     LOAD_CONST                      13: 0
+                        156     LOAD_CONST                      14: ('default', 'minval')
+                        158     CALL_FUNCTION_KW                3
+                        160     LOAD_FAST                       0: self
+                        162     STORE_ATTR                      16: idle_timeout
+                        164     LOAD_FAST                       1: config
+                        166     LOAD_METHOD                     5: getlist
+                        168     LOAD_CONST                      15: 'heater'
+                        170     LOAD_CONST                      16: ('extruder',)
+                        172     CALL_METHOD                     2
+                        174     LOAD_FAST                       0: self
+                        176     STORE_ATTR                      17: heater_names
+                        178     LOAD_FAST                       0: self
+                        180     LOAD_ATTR                       16: idle_timeout
+                        182     LOAD_FAST                       0: self
+                        184     STORE_ATTR                      18: last_on
+                        186     LOAD_CONST                      8: 0
+                        188     LOAD_FAST                       0: self
+                        190     STORE_ATTR                      19: last_speed
+                        192     LOAD_CONST                      0: None
+                        194     RETURN_VALUE                    
+                'ControllerFan.__init__'
+                [Code]
+                    File Name: /extras/controller_fan.py
+                    Object Name: handle_connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 9
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'heater_names'
+                        'heaters'
+                        'stepper_enable'
+                        'get_steppers'
+                        'stepper_names'
+                        'all'
+                        'config_error'
+                        'join'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                        'all_steppers'
+                        'pheaters'
+                    [Constants]
+                        None
+                        'heaters'
+                        [Code]
+                            File Name: /extras/controller_fan.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'lookup_heater'
+                            [Var Names]
+                                '.0'
+                                'n'
+                            [Free Vars]
+                                'pheaters'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        14 (to 20)
+                                6       STORE_FAST                      1: n
+                                8       LOAD_DEREF                      0: pheaters
+                                10      LOAD_METHOD                     0: lookup_heater
+                                12      LOAD_FAST                       1: n
+                                14      CALL_METHOD                     1
+                                16      LIST_APPEND                     2
+                                18      JUMP_ABSOLUTE                   4
+                                20      RETURN_VALUE                    
+                        'ControllerFan.handle_connect.<locals>.<listcomp>'
+                        [Code]
+                            File Name: /extras/controller_fan.py
+                            Object Name: <genexpr>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 3
+                            Flags: 0x00000033 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_GENERATOR)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'x'
+                            [Free Vars]
+                                'all_steppers'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_FAST                       0: .0
+                                2       FOR_ITER                        14 (to 18)
+                                4       STORE_FAST                      1: x
+                                6       LOAD_FAST                       1: x
+                                8       LOAD_DEREF                      0: all_steppers
+                                10      CONTAINS_OP                     0 (in)
+                                12      YIELD_VALUE                     
+                                14      POP_TOP                         
+                                16      JUMP_ABSOLUTE                   2
+                                18      LOAD_CONST                      0: None
+                                20      RETURN_VALUE                    
+                        'ControllerFan.handle_connect.<locals>.<genexpr>'
+                        '{"code":"key66", "msg":"One or more of these steppers are unknown: %s (valid steppers are: %s)", "values": ["%s", "%s"]}'
+                        ', '
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'heaters'
+                        8       CALL_METHOD                     1
+                        10      STORE_DEREF                     1: pheaters
+                        12      LOAD_CLOSURE                    1: pheaters
+                        14      BUILD_TUPLE                     1
+                        16      LOAD_CONST                      2: <CODE> <listcomp>
+                        18      LOAD_CONST                      3: 'ControllerFan.handle_connect.<locals>.<listcomp>'
+                        20      MAKE_FUNCTION                   8
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: heater_names
+                        26      GET_ITER                        
+                        28      CALL_FUNCTION                   1
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      3: heaters
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       4: stepper_enable
+                        38      LOAD_METHOD                     5: get_steppers
+                        40      CALL_METHOD                     0
+                        42      STORE_DEREF                     0: all_steppers
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       6: stepper_names
+                        48      LOAD_CONST                      0: None
+                        50      IS_OP                           0 (is)
+                        52      POP_JUMP_IF_FALSE               64
+                        54      LOAD_DEREF                      0: all_steppers
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      6: stepper_names
+                        60      LOAD_CONST                      0: None
+                        62      RETURN_VALUE                    
+                        64      LOAD_GLOBAL                     7: all
+                        66      LOAD_CLOSURE                    0: all_steppers
+                        68      BUILD_TUPLE                     1
+                        70      LOAD_CONST                      4: <CODE> <genexpr>
+                        72      LOAD_CONST                      5: 'ControllerFan.handle_connect.<locals>.<genexpr>'
+                        74      MAKE_FUNCTION                   8
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       6: stepper_names
+                        80      GET_ITER                        
+                        82      CALL_FUNCTION                   1
+                        84      CALL_FUNCTION                   1
+                        86      POP_JUMP_IF_TRUE                128
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       0: printer
+                        92      LOAD_METHOD                     8: config_error
+                        94      LOAD_CONST                      6: '{"code":"key66", "msg":"One or more of these steppers are unknown: %s (valid steppers are: %s)", "values": ["%s", "%s"]}'
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       6: stepper_names
+                        100     LOAD_CONST                      7: ', '
+                        102     LOAD_METHOD                     9: join
+                        104     LOAD_DEREF                      0: all_steppers
+                        106     CALL_METHOD                     1
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       6: stepper_names
+                        112     LOAD_CONST                      7: ', '
+                        114     LOAD_METHOD                     9: join
+                        116     LOAD_DEREF                      0: all_steppers
+                        118     CALL_METHOD                     1
+                        120     BUILD_TUPLE                     4
+                        122     BINARY_MODULO                   
+                        124     CALL_METHOD                     1
+                        126     RAISE_VARARGS                   1
+                        128     LOAD_CONST                      0: None
+                        130     RETURN_VALUE                    
+                'ControllerFan.handle_connect'
+                [Code]
+                    File Name: /extras/controller_fan.py
+                    Object Name: handle_ready
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'get_reactor'
+                        'register_timer'
+                        'callback'
+                        'monotonic'
+                        'PIN_MIN_TIME'
+                    [Var Names]
+                        'self'
+                        'reactor'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: get_reactor
+                        6       CALL_METHOD                     0
+                        8       STORE_FAST                      1: reactor
+                        10      LOAD_FAST                       1: reactor
+                        12      LOAD_METHOD                     2: register_timer
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       3: callback
+                        18      LOAD_FAST                       1: reactor
+                        20      LOAD_METHOD                     4: monotonic
+                        22      CALL_METHOD                     0
+                        24      LOAD_GLOBAL                     5: PIN_MIN_TIME
+                        26      BINARY_ADD                      
+                        28      CALL_METHOD                     2
+                        30      POP_TOP                         
+                        32      LOAD_CONST                      0: None
+                        34      RETURN_VALUE                    
+                'ControllerFan.handle_ready'
+                [Code]
+                    File Name: /extras/controller_fan.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fan'
+                        'get_status'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: fan
+                        4       LOAD_METHOD                     1: get_status
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_METHOD                     1
+                        10      RETURN_VALUE                    
+                'ControllerFan.get_status'
+                [Code]
+                    File Name: /extras/controller_fan.py
+                    Object Name: callback
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 10
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'stepper_names'
+                        'stepper_enable'
+                        'lookup_enable'
+                        'is_motor_enabled'
+                        'heaters'
+                        'get_temp'
+                        'last_on'
+                        'fan_speed'
+                        'idle_timeout'
+                        'idle_speed'
+                        'last_speed'
+                        'printer'
+                        'get_reactor'
+                        'monotonic'
+                        'fan'
+                        'get_mcu'
+                        'estimated_print_time'
+                        'set_speed'
+                        'PIN_MIN_TIME'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'speed'
+                        'active'
+                        'name'
+                        'heater'
+                        '_'
+                        'target_temp'
+                        'curtime'
+                        'print_time'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        False
+                        True
+                        0
+                        1
+                        1
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       STORE_FAST                      2: speed
+                        4       LOAD_CONST                      2: False
+                        6       STORE_FAST                      3: active
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       0: stepper_names
+                        12      GET_ITER                        
+                        14      FOR_ITER                        24 (to 40)
+                        16      STORE_FAST                      4: name
+                        18      LOAD_FAST                       3: active
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       1: stepper_enable
+                        24      LOAD_METHOD                     2: lookup_enable
+                        26      LOAD_FAST                       4: name
+                        28      CALL_METHOD                     1
+                        30      LOAD_METHOD                     3: is_motor_enabled
+                        32      CALL_METHOD                     0
+                        34      INPLACE_OR                      
+                        36      STORE_FAST                      3: active
+                        38      JUMP_ABSOLUTE                   14
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       4: heaters
+                        44      GET_ITER                        
+                        46      FOR_ITER                        26 (to 74)
+                        48      STORE_FAST                      5: heater
+                        50      LOAD_FAST                       5: heater
+                        52      LOAD_METHOD                     5: get_temp
+                        54      LOAD_FAST                       1: eventtime
+                        56      CALL_METHOD                     1
+                        58      UNPACK_SEQUENCE                 2
+                        60      STORE_FAST                      6: _
+                        62      STORE_FAST                      7: target_temp
+                        64      LOAD_FAST                       7: target_temp
+                        66      POP_JUMP_IF_FALSE               46
+                        68      LOAD_CONST                      3: True
+                        70      STORE_FAST                      3: active
+                        72      JUMP_ABSOLUTE                   46
+                        74      LOAD_FAST                       3: active
+                        76      POP_JUMP_IF_FALSE               92
+                        78      LOAD_CONST                      4: 0
+                        80      LOAD_FAST                       0: self
+                        82      STORE_ATTR                      6: last_on
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       7: fan_speed
+                        88      STORE_FAST                      2: speed
+                        90      JUMP_FORWARD                    32 (to 124)
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       6: last_on
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       8: idle_timeout
+                        100     COMPARE_OP                      0 (<)
+                        102     POP_JUMP_IF_FALSE               124
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       9: idle_speed
+                        108     STORE_FAST                      2: speed
+                        110     LOAD_FAST                       0: self
+                        112     DUP_TOP                         
+                        114     LOAD_ATTR                       6: last_on
+                        116     LOAD_CONST                      5: 1
+                        118     INPLACE_ADD                     
+                        120     ROT_TWO                         
+                        122     STORE_ATTR                      6: last_on
+                        124     LOAD_FAST                       2: speed
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       10: last_speed
+                        130     COMPARE_OP                      3 (!=)
+                        132     POP_JUMP_IF_FALSE               188
+                        134     LOAD_FAST                       2: speed
+                        136     LOAD_FAST                       0: self
+                        138     STORE_ATTR                      10: last_speed
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       11: printer
+                        144     LOAD_METHOD                     12: get_reactor
+                        146     CALL_METHOD                     0
+                        148     LOAD_METHOD                     13: monotonic
+                        150     CALL_METHOD                     0
+                        152     STORE_FAST                      8: curtime
+                        154     LOAD_FAST                       0: self
+                        156     LOAD_ATTR                       14: fan
+                        158     LOAD_METHOD                     15: get_mcu
+                        160     CALL_METHOD                     0
+                        162     LOAD_METHOD                     16: estimated_print_time
+                        164     LOAD_FAST                       8: curtime
+                        166     CALL_METHOD                     1
+                        168     STORE_FAST                      9: print_time
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       14: fan
+                        174     LOAD_METHOD                     17: set_speed
+                        176     LOAD_FAST                       9: print_time
+                        178     LOAD_GLOBAL                     18: PIN_MIN_TIME
+                        180     BINARY_ADD                      
+                        182     LOAD_FAST                       2: speed
+                        184     CALL_METHOD                     2
+                        186     POP_TOP                         
+                        188     LOAD_FAST                       1: eventtime
+                        190     LOAD_CONST                      6: 1
+                        192     BINARY_ADD                      
+                        194     RETURN_VALUE                    
+                'ControllerFan.callback'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ControllerFan'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ControllerFan.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> handle_connect
+                18      LOAD_CONST                      4: 'ControllerFan.handle_connect'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: handle_connect
+                24      LOAD_CONST                      5: <CODE> handle_ready
+                26      LOAD_CONST                      6: 'ControllerFan.handle_ready'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: handle_ready
+                32      LOAD_CONST                      7: <CODE> get_status
+                34      LOAD_CONST                      8: 'ControllerFan.get_status'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: get_status
+                40      LOAD_CONST                      9: <CODE> callback
+                42      LOAD_CONST                      10: 'ControllerFan.callback'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: callback
+                48      LOAD_CONST                      11: None
+                50      RETURN_VALUE                    
+        'ControllerFan'
+        [Code]
+            File Name: /extras/controller_fan.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'ControllerFan'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: ControllerFan
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+        None
+    [Disassembly]
+        0       LOAD_CONST                      0: 1
+        2       LOAD_CONST                      1: ('fan',)
+        4       IMPORT_NAME                     0: 
+        6       IMPORT_FROM                     1: fan
+        8       STORE_NAME                      1: fan
+        10      POP_TOP                         
+        12      LOAD_CONST                      2: 0.1
+        14      STORE_NAME                      2: PIN_MIN_TIME
+        16      LOAD_BUILD_CLASS                
+        18      LOAD_CONST                      3: <CODE> ControllerFan
+        20      LOAD_CONST                      4: 'ControllerFan'
+        22      MAKE_FUNCTION                   0
+        24      LOAD_CONST                      4: 'ControllerFan'
+        26      CALL_FUNCTION                   2
+        28      STORE_NAME                      3: ControllerFan
+        30      LOAD_CONST                      5: <CODE> load_config_prefix
+        32      LOAD_CONST                      6: 'load_config_prefix'
+        34      MAKE_FUNCTION                   0
+        36      STORE_NAME                      4: load_config_prefix
+        38      LOAD_CONST                      7: None
+        40      RETURN_VALUE                    

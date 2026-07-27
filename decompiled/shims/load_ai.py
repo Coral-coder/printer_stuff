@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/load_ai.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: load_ai.pyc (Python 3.9)
 
@@ -47,34 +56,193 @@ class LoadAI:
 
     
     def extract_ai_control_prefer_values(self, json_file, keys):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            with open(json_file, 'r') as file:
+                data = json.load(file)
+                None(None, None, None)
+            with None:
+                if not None:
+                    pass
+        except Exception:
+            e = None
+            
+            try:
+                logging.error(f'''Error opening or reading the JSON file: {e}''')
+            finally:
+                e = None
+                del e
+                return None
+                e = None
+                del e
+                values = { }
+                for key in keys:
+                    if 'ai_control' in data and key in data['ai_control']:
+                        values[key] = data['ai_control'][key]
+                        continue
+                    logging.warning(f'''Key \'{key}\' not found in \'ai_control\'''')
+                    values[key] = None
+                return values
+
+
 
     
     def nozzle_cam_power_on(self):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            logging.info('nozzle_cam_power.sh on')
+            result_capture = subprocess.run([
+                'nozzle_cam_power.sh',
+                'on'], capture_output=True, text=True)
+            logging.info(result_capture.stdout)
+            logging.info(result_capture.stderr)
+        except Exception:
+            e = None
+            
+            try:
+                logging.info(f'''Error: {e}''')
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
 
     
     def nozzle_cam_power_off(self):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            logging.info('nozzle_cam_power.sh off')
+            result_capture = subprocess.run([
+                'nozzle_cam_power.sh',
+                'off'], capture_output=True, text=True)
+            logging.info(result_capture.stdout)
+            logging.info(result_capture.stderr)
+        except Exception:
+            e = None
+            
+            try:
+                logging.info(f'''Error: {e}''')
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
 
     
     def ai_capture(self):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            logging.info('ai_capture 1')
+            result_capture = subprocess.run([
+                'ai_capture',
+                '1'], capture_output=True, text=True)
+            logging.info(result_capture.stdout)
+            logging.info(result_capture.stderr)
+        return None
+        except Exception:
+            e = None
+            
+            try:
+                logging.info(f'''Error: {e}''')
+            finally:
+                e = None
+                del e
+                return None
+                e = None
+                del e
+                return None
+
+
 
     
     def remove_files(self, file_path):
         command = 'rm -rf ' + file_path
-    # WARNING: Decompyle incomplete
+        
+        try:
+            subprocess.run(command, shell=True, check=True)
+            print('Files removed successfully.')
+        except subprocess.CalledProcessError:
+            e = None
+            
+            try:
+                print(f'''Error occurred: {e}''')
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
 
     
     def calculate_overlap_area(self, rectangles):
         '''使用扫描线算法计算矩形的重叠区域总面积'''
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            (OPEN, CLOSE) = (1, -1)
+            events = []
+            for x1, y1, x2, y2 in rectangles:
+                events.append((x1, OPEN, y1, y2))
+                events.append((x2, CLOSE, y1, y2))
+            events.sort()
+            
+            def calc_area(active_y_intervals):
+                '''计算当前活动的 y 区间覆盖的 y 长度'''
+                total = 0
+                current_y = -1
+                for y1, y2 in active_y_intervals:
+                    current_y = max(current_y, y1)
+                    total += max(0, y2 - current_y)
+                    current_y = max(current_y, y2)
+                return total
+
+            active_intervals = []
+            last_x = 0
+            total_area = 0
+            for x, typ, y1, y2 in events:
+                logging.info(f'''Processing event: x={x}, typ={typ}, y1={y1}, y2={y2}''')
+                area = calc_area(active_intervals) * (x - last_x)
+                logging.info(f'''Area between x={last_x} and x={x}: {area}''')
+                total_area += area
+                last_x = x
+                if typ == OPEN:
+                    active_intervals.append((y1, y2))
+                    active_intervals.sort()
+                    logging.info(f'''Added interval: {(y1, y2)}, active_intervals={active_intervals}''')
+                    continue
+                if typ == CLOSE:
+                    
+                    try:
+                        active_intervals.remove((y1, y2))
+                        logging.info(f'''Removed interval: {(y1, y2)}, active_intervals={active_intervals}''')
+                    continue
+                    except ValueError:
+                        logging.warning(f'''Warning: Interval {(y1, y2)} not found in {active_intervals}''')
+                        continue
+
+                return None
+                except Exception:
+                    e = None
+                    
+                    try:
+                        logging.error(f'''An error occurred in calculate_overlap_area: {e}''')
+                        logging.exception('Exception details:')
+                    finally:
+                        e = None
+                        del e
+                        return 0
+                        e = None
+                        del e
+                        return None
+
+
 
     
     def process_waste_ai_detect_result(self, result_stdout_str):
@@ -213,13 +381,70 @@ class LoadAI:
 
     
     def cmd_LOAD_AI_DEAL(self, gcmd):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            self.ai_capture()
+            self.reactor.pause(self.reactor.monotonic() + 2)
+            filename = self.find_latest_photo()
+            if not filename or os.path.exists(filename):
+                self.gcode.respond_info('LOAD_AI_DEAL photo error, filename is %s' % filename)
+        return None
+        files = {
+            'file': filename }
+        response = self.send_post_request(files)
+        self.gcode.respond_info('LOAD_AI_DEAL:%s' % response)
+        logging.info('files:%s', files)
+        self.remove_files(filename)
+        except Exception:
+            e = None
+            
+            try:
+                logging.exception(e)
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
 
     
     def ai_engine_capture(self, cmd):
         logging.info(f'''Executing command: {cmd}''')
-    # WARNING: Decompyle incomplete
+        
+        try:
+            process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+            (self.result, self.stderr) = process.communicate()
+            if process.returncode != 0:
+                logging.error(f'''Command \'{cmd}\' failed with return code {process.returncode}''')
+                if self.stderr:
+                    logging.error(f'''Error output: {self.stderr.strip()}''')
+                else:
+                    logging.error('No error output captured.')
+            logging.info(f'''Command \'{cmd}\' returned output: {self.result.strip()}''')
+        except subprocess.CalledProcessError:
+            e = None
+            
+            try:
+                logging.error(f'''Command \'{e.cmd}\' returned non-zero exit status {e.returncode}''')
+                logging.error(f'''Error output: {e.stderr.strip() if e.stderr else 'No error output captured.'}''')
+            e = None
+            del e
+            except Exception:
+                e = None
+                
+                try:
+                    logging.error(f'''An unexpected error occurred: {str(e)}''')
+                finally:
+                    e = None
+                    del e
+                e = None
+                del e
+                return None
+
+
+
 
     
     def execute_ai_waste_detection(self):
@@ -236,7 +461,51 @@ class LoadAI:
             'normalized_total_area': 0,
             'output_width': 0,
             'output_height': 0 }
-    # WARNING: Decompyle incomplete
+        
+        try:
+            self.result = { }
+            self.stderr = ''
+            background_thread = threading.Thread(target=self.ai_engine_capture, args=(cmd,))
+            background_thread.start()
+            for _ in range(100):
+                if self.result:
+                    pass
+                else:
+                    self.reactor.pause(self.reactor.monotonic() + 0.1)
+                logging.info('run cmd_LOAD_AI_DETECT_WASTE failed: timeout')
+            return None
+            if self.stderr:
+                json_output['stderr'] = self.stderr
+            else:
+                ai_results = self.process_waste_ai_detect_result(self.result)
+                if ai_results is not None:
+                    json_output['ai_results'] = ai_results['ai_results']
+                    json_output['max_re_prob'] = ai_results['max_re_prob']
+                    json_output['normalized_total_area'] = ai_results['normalized_total_area']
+                    json_output['output_width'] = ai_results['output_width']
+                    json_output['output_height'] = ai_results['output_height']
+            self.cx_ai_engine_status = copy.deepcopy(json_output)
+            json_output['stdout'] = self.result
+            json_output_str = json.dumps(json_output, indent=4)
+            logging.info(json_output_str)
+        return None
+        except Exception:
+            e = None
+            
+            try:
+                json_output['stderr'] = str(e)
+                self.cx_ai_engine_status = json_output
+                json_output_str = json.dumps(json_output, indent=4)
+                logging.info(json_output_str)
+            finally:
+                e = None
+                del e
+                return None
+                e = None
+                del e
+                return None
+
+
 
     
     def cmd_LOAD_AI_DETECT_WASTE(self, gcmd):

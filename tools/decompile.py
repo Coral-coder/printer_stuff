@@ -18,7 +18,19 @@ import ast, json, os, subprocess, sys, re
 
 ROOT = os.environ.get("REPO_ROOT", os.getcwd())
 PYCDC = os.environ.get("PYCDC", "pycdc")
+PYCDAS = os.environ.get("PYCDAS", "pycdas")
 OUT = os.path.join(ROOT, "decompiled")
+
+PARTIAL_HEADER = (
+    "# =====================================================================\n"
+    "# PARTIAL DECOMPILATION -- this module did not fully round-trip.\n"
+    "# The 3.9 bytecode uses control flow the decompiler could not fully\n"
+    "# reconstruct (e.g. try/except/else with returns, or a generator with a\n"
+    "# dropped builtin rendered as `None(...)`). The code below is best-effort\n"
+    "# and will not import as-is. Ground-truth disassembly for repair:\n"
+    "#     decompiled/_disasm/{name}.txt\n"
+    "# =====================================================================\n"
+)
 
 # ---- string/comment mask so paren scanning ignores quotes and comments ----
 def mask(src):
@@ -275,8 +287,25 @@ def main():
         out_rel = out_rel[:-1]  # .pyc -> .py
         out_path = os.path.join(OUT, out_rel)
         os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        name = os.path.basename(out_path)[:-3]
+        none_calls = len(re.findall(r"(?<![\w.])None\(", final))
+        body = final
+        if not rep_ok:
+            body = PARTIAL_HEADER.format(name=name) + "\n" + final
         with open(out_path, "w") as fh:
-            fh.write(final)
+            fh.write(body)
+        # Ground-truth disassembly for anything not clean (invalid, or valid
+        # but carrying a dropped-name `None(` defect).
+        if (not rep_ok) or none_calls:
+            dis_dir = os.path.join(OUT, "_disasm")
+            os.makedirs(dis_dir, exist_ok=True)
+            try:
+                dproc = subprocess.run([PYCDAS, pyc], capture_output=True,
+                                       text=True, timeout=120)
+                with open(os.path.join(dis_dir, name + ".txt"), "w") as fh:
+                    fh.write(dproc.stdout)
+            except Exception:
+                pass
         report.append({
             "pyc": rel,
             "out": os.path.relpath(out_path, ROOT),
@@ -284,13 +313,14 @@ def main():
             "repaired_parses": rep_ok,
             "used_repaired": final is repaired,
             "kw_tuples_remaining": final.count("**('") + final.count('**("'),
-            "none_calls": len(re.findall(r"(?<![\w.])None\(", final)),
+            "none_calls": none_calls,
             "unsupported": ("Unsupported" in warn) or ("unsupported" in warn),
             "warn": warn[:400],
             "lines": final.count("\n") + 1,
         })
     with open(os.path.join(ROOT, "decompiled", "_report.json"), "w") as fh:
         json.dump(report, fh, indent=2)
+    _write_status(report)
     # summary
     n = len(report)
     ok = sum(1 for r in report if r["repaired_parses"])
@@ -302,6 +332,34 @@ def main():
     for r in report:
         if not r["repaired_parses"]:
             print(f"  {r['pyc']}  (raw_ok={r['raw_parses']}) warn={r['warn'][:120]!r}")
+
+def _write_status(report):
+    n = len(report)
+    ok = [r for r in report if r["repaired_parses"]]
+    bad = [r for r in report if not r["repaired_parses"]]
+    clean = [r for r in ok if not r["none_calls"]]
+    flagged = [r for r in ok if r["none_calls"]]
+    lines = []
+    lines.append("# Decompilation status\n")
+    lines.append(f"- Modules: **{n}**")
+    lines.append(f"- Clean (ast-valid, no known defects): **{len(clean)}**")
+    lines.append(f"- Ast-valid but flagged (`None(...)` dropped builtin -- see disasm): **{len(flagged)}**")
+    lines.append(f"- Partial (did not fully round-trip -- see disasm): **{len(bad)}**\n")
+    def row(r):
+        nm = r["pyc"].split("/")[-1]
+        if not r["repaired_parses"]:
+            st = "partial"
+        elif r["none_calls"]:
+            st = f"flagged ({r['none_calls']}x None-call)"
+        else:
+            st = "clean"
+        return f"| `{nm}` | {st} | {r['lines']} |"
+    lines.append("| module | status | lines |")
+    lines.append("|--------|--------|-------|")
+    for r in sorted(report, key=lambda r: (r["repaired_parses"], not r["none_calls"], r["pyc"])):
+        lines.append(row(r))
+    with open(os.path.join(OUT, "STATUS.md"), "w") as fh:
+        fh.write("\n".join(lines) + "\n")
 
 def _parses(s):
     try:

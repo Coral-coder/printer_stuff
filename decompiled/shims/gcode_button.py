@@ -38,10 +38,8 @@ class GCodeButton:
         
         try:
             self.gcode.run_script(template.render())
-        finally:
-            pass
-        logging.exception('Script running error')
-        return None
+        except:
+            logging.exception('Script running error')
 
 
     

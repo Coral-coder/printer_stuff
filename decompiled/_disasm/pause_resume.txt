@@ -1,0 +1,1992 @@
+pause_resume.pyc (Python 3.9)
+[Code]
+    File Name: /extras/pause_resume.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'os'
+        'json'
+        'logging'
+        'PauseResume'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/pause_resume.py
+            Object Name: PauseResume
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'handle_connect'
+                '_getBootLoaderVersion'
+                '_setBootLoaderState'
+                '_set_print_first_layer_request'
+                '_check_power_loss_state_request'
+                '_handle_cancel_continue_print_request'
+                '_handle_cancel_request'
+                '_handle_pause_request'
+                '_handle_resume_request'
+                '_handle_fast_stop'
+                '_handle_fast_response'
+                'get_status'
+                'is_sd_active'
+                'send_pause_command'
+                'cmd_PAUSE_help'
+                'cmd_PAUSE'
+                'send_resume_command'
+                'cmd_RESUME_help'
+                'cmd_RESUME'
+                'cmd_CLEAR_PAUSE_help'
+                'cmd_CLEAR_PAUSE'
+                'cmd_CANCEL_PRINT_help'
+                'cmd_CANCEL_PRINT'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PauseResume'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'get_reactor'
+                        'reactor'
+                        'lookup_object'
+                        'gcode'
+                        'getfloat'
+                        'recover_velocity'
+                        'v_sd'
+                        'is_paused'
+                        'sd_paused'
+                        'pause_command_sent'
+                        'config'
+                        'register_event_handler'
+                        'handle_connect'
+                        'register_command'
+                        'cmd_PAUSE'
+                        'cmd_PAUSE_help'
+                        'cmd_RESUME'
+                        'cmd_RESUME_help'
+                        'cmd_CLEAR_PAUSE'
+                        'cmd_CLEAR_PAUSE_help'
+                        'cmd_CANCEL_PRINT'
+                        'cmd_CANCEL_PRINT_help'
+                        'register_endpoint'
+                        '_handle_cancel_continue_print_request'
+                        '_check_power_loss_state_request'
+                        '_set_print_first_layer_request'
+                        '_handle_cancel_request'
+                        '_handle_pause_request'
+                        '_handle_resume_request'
+                        '_getBootLoaderVersion'
+                        '_handle_fast_response'
+                        '_handle_fast_stop'
+                        '_setBootLoaderStateCmdOid'
+                        'pause_start'
+                        'motor_cancel_print_start'
+                        'resume_err'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'webhooks'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'recover_velocity'
+                        50
+                        False
+                        'klippy:connect'
+                        'PAUSE'
+                        (
+                            'desc'
+                        )
+                        'RESUME'
+                        'CLEAR_PAUSE'
+                        'CANCEL_PRINT'
+                        'webhooks'
+                        'pause_resume/cancel_continue_print'
+                        'pause_resume/check_continue_print_state'
+                        'pause_resume/set_print_first_layer'
+                        'pause_resume/cancel'
+                        'pause_resume/pause'
+                        'pause_resume/resume'
+                        'getBootLoaderVersion'
+                        'fast/response'
+                        'fast/stop'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: get_reactor
+                        16      CALL_METHOD                     0
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      3: reactor
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       1: printer
+                        26      LOAD_METHOD                     4: lookup_object
+                        28      LOAD_CONST                      1: 'gcode'
+                        30      CALL_METHOD                     1
+                        32      LOAD_FAST                       0: self
+                        34      STORE_ATTR                      5: gcode
+                        36      LOAD_FAST                       1: config
+                        38      LOAD_METHOD                     6: getfloat
+                        40      LOAD_CONST                      2: 'recover_velocity'
+                        42      LOAD_CONST                      3: 50
+                        44      CALL_METHOD                     2
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      7: recover_velocity
+                        50      LOAD_CONST                      0: None
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      8: v_sd
+                        56      LOAD_CONST                      4: False
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      9: is_paused
+                        62      LOAD_CONST                      4: False
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      10: sd_paused
+                        68      LOAD_CONST                      4: False
+                        70      LOAD_FAST                       0: self
+                        72      STORE_ATTR                      11: pause_command_sent
+                        74      LOAD_FAST                       1: config
+                        76      LOAD_FAST                       0: self
+                        78      STORE_ATTR                      12: config
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       1: printer
+                        84      LOAD_METHOD                     13: register_event_handler
+                        86      LOAD_CONST                      5: 'klippy:connect'
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       14: handle_connect
+                        92      CALL_METHOD                     2
+                        94      POP_TOP                         
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       5: gcode
+                        100     LOAD_ATTR                       15: register_command
+                        102     LOAD_CONST                      6: 'PAUSE'
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       16: cmd_PAUSE
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       17: cmd_PAUSE_help
+                        112     LOAD_CONST                      7: ('desc',)
+                        114     CALL_FUNCTION_KW                3
+                        116     POP_TOP                         
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       5: gcode
+                        122     LOAD_ATTR                       15: register_command
+                        124     LOAD_CONST                      8: 'RESUME'
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       18: cmd_RESUME
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       19: cmd_RESUME_help
+                        134     LOAD_CONST                      7: ('desc',)
+                        136     CALL_FUNCTION_KW                3
+                        138     POP_TOP                         
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       5: gcode
+                        144     LOAD_ATTR                       15: register_command
+                        146     LOAD_CONST                      9: 'CLEAR_PAUSE'
+                        148     LOAD_FAST                       0: self
+                        150     LOAD_ATTR                       20: cmd_CLEAR_PAUSE
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       21: cmd_CLEAR_PAUSE_help
+                        156     LOAD_CONST                      7: ('desc',)
+                        158     CALL_FUNCTION_KW                3
+                        160     POP_TOP                         
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       5: gcode
+                        166     LOAD_ATTR                       15: register_command
+                        168     LOAD_CONST                      10: 'CANCEL_PRINT'
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       22: cmd_CANCEL_PRINT
+                        174     LOAD_FAST                       0: self
+                        176     LOAD_ATTR                       23: cmd_CANCEL_PRINT_help
+                        178     LOAD_CONST                      7: ('desc',)
+                        180     CALL_FUNCTION_KW                3
+                        182     POP_TOP                         
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       1: printer
+                        188     LOAD_METHOD                     4: lookup_object
+                        190     LOAD_CONST                      11: 'webhooks'
+                        192     CALL_METHOD                     1
+                        194     STORE_FAST                      2: webhooks
+                        196     LOAD_FAST                       2: webhooks
+                        198     LOAD_METHOD                     24: register_endpoint
+                        200     LOAD_CONST                      12: 'pause_resume/cancel_continue_print'
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       25: _handle_cancel_continue_print_request
+                        206     CALL_METHOD                     2
+                        208     POP_TOP                         
+                        210     LOAD_FAST                       2: webhooks
+                        212     LOAD_METHOD                     24: register_endpoint
+                        214     LOAD_CONST                      13: 'pause_resume/check_continue_print_state'
+                        216     LOAD_FAST                       0: self
+                        218     LOAD_ATTR                       26: _check_power_loss_state_request
+                        220     CALL_METHOD                     2
+                        222     POP_TOP                         
+                        224     LOAD_FAST                       2: webhooks
+                        226     LOAD_METHOD                     24: register_endpoint
+                        228     LOAD_CONST                      14: 'pause_resume/set_print_first_layer'
+                        230     LOAD_FAST                       0: self
+                        232     LOAD_ATTR                       27: _set_print_first_layer_request
+                        234     CALL_METHOD                     2
+                        236     POP_TOP                         
+                        238     LOAD_FAST                       2: webhooks
+                        240     LOAD_METHOD                     24: register_endpoint
+                        242     LOAD_CONST                      15: 'pause_resume/cancel'
+                        244     LOAD_FAST                       0: self
+                        246     LOAD_ATTR                       28: _handle_cancel_request
+                        248     CALL_METHOD                     2
+                        250     POP_TOP                         
+                        252     LOAD_FAST                       2: webhooks
+                        254     LOAD_METHOD                     24: register_endpoint
+                        256     LOAD_CONST                      16: 'pause_resume/pause'
+                        258     LOAD_FAST                       0: self
+                        260     LOAD_ATTR                       29: _handle_pause_request
+                        262     CALL_METHOD                     2
+                        264     POP_TOP                         
+                        266     LOAD_FAST                       2: webhooks
+                        268     LOAD_METHOD                     24: register_endpoint
+                        270     LOAD_CONST                      17: 'pause_resume/resume'
+                        272     LOAD_FAST                       0: self
+                        274     LOAD_ATTR                       30: _handle_resume_request
+                        276     CALL_METHOD                     2
+                        278     POP_TOP                         
+                        280     LOAD_FAST                       2: webhooks
+                        282     LOAD_METHOD                     24: register_endpoint
+                        284     LOAD_CONST                      18: 'getBootLoaderVersion'
+                        286     LOAD_FAST                       0: self
+                        288     LOAD_ATTR                       31: _getBootLoaderVersion
+                        290     CALL_METHOD                     2
+                        292     POP_TOP                         
+                        294     LOAD_FAST                       2: webhooks
+                        296     LOAD_METHOD                     24: register_endpoint
+                        298     LOAD_CONST                      19: 'fast/response'
+                        300     LOAD_FAST                       0: self
+                        302     LOAD_ATTR                       32: _handle_fast_response
+                        304     CALL_METHOD                     2
+                        306     POP_TOP                         
+                        308     LOAD_FAST                       2: webhooks
+                        310     LOAD_METHOD                     24: register_endpoint
+                        312     LOAD_CONST                      20: 'fast/stop'
+                        314     LOAD_FAST                       0: self
+                        316     LOAD_ATTR                       33: _handle_fast_stop
+                        318     CALL_METHOD                     2
+                        320     POP_TOP                         
+                        322     LOAD_CONST                      0: None
+                        324     LOAD_FAST                       0: self
+                        326     STORE_ATTR                      34: _setBootLoaderStateCmdOid
+                        328     LOAD_CONST                      4: False
+                        330     LOAD_FAST                       0: self
+                        332     STORE_ATTR                      35: pause_start
+                        334     LOAD_CONST                      4: False
+                        336     LOAD_FAST                       0: self
+                        338     STORE_ATTR                      36: motor_cancel_print_start
+                        340     LOAD_CONST                      4: False
+                        342     LOAD_FAST                       0: self
+                        344     STORE_ATTR                      37: resume_err
+                        346     LOAD_CONST                      0: None
+                        348     RETURN_VALUE                    
+                'PauseResume.__init__'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: handle_connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'v_sd'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'virtual_sdcard'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'virtual_sdcard'
+                        8       LOAD_CONST                      0: None
+                        10      CALL_METHOD                     2
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: v_sd
+                        16      LOAD_CONST                      0: None
+                        18      RETURN_VALUE                    
+                'PauseResume.handle_connect'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _getBootLoaderVersion
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_constants'
+                        'get'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'mcu'
+                        'result'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'mcu'
+                        'software_version'
+                        ''
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'mcu'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: mcu
+                        12      LOAD_FAST                       2: mcu
+                        14      LOAD_METHOD                     2: get_constants
+                        16      CALL_METHOD                     0
+                        18      LOAD_METHOD                     3: get
+                        20      LOAD_CONST                      2: 'software_version'
+                        22      LOAD_CONST                      3: ''
+                        24      CALL_METHOD                     2
+                        26      STORE_FAST                      3: result
+                        28      LOAD_FAST                       1: web_request
+                        30      LOAD_METHOD                     4: send
+                        32      LOAD_CONST                      2: 'software_version'
+                        34      LOAD_FAST                       3: result
+                        36      BUILD_MAP                       1
+                        38      CALL_METHOD                     1
+                        40      POP_TOP                         
+                        42      LOAD_CONST                      2: 'software_version'
+                        44      LOAD_FAST                       3: result
+                        46      BUILD_MAP                       1
+                        48      RETURN_VALUE                    
+                'PauseResume._getBootLoaderVersion'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _setBootLoaderState
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        '_setBootLoaderStateCmdOid'
+                        'create_oid'
+                        'add_config_cmd'
+                        'lookup_query_command'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'mcu'
+                        'oid'
+                        'result'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'mcu'
+                        'config_usrboot oid=%d'
+                        'jump_to_usrboot_query oid=%c'
+                        'usrboot_ack oid=%c enter_boot_status=%c'
+                        (
+                            'oid'
+                        )
+                        'result'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'mcu'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: mcu
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: _setBootLoaderStateCmdOid
+                        16      POP_JUMP_IF_TRUE                26
+                        18      LOAD_FAST                       2: mcu
+                        20      LOAD_METHOD                     3: create_oid
+                        22      CALL_METHOD                     0
+                        24      JUMP_FORWARD                    4 (to 30)
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       2: _setBootLoaderStateCmdOid
+                        30      STORE_FAST                      3: oid
+                        32      LOAD_FAST                       3: oid
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      2: _setBootLoaderStateCmdOid
+                        38      LOAD_FAST                       2: mcu
+                        40      LOAD_METHOD                     4: add_config_cmd
+                        42      LOAD_CONST                      2: 'config_usrboot oid=%d'
+                        44      LOAD_FAST                       3: oid
+                        46      BUILD_TUPLE                     1
+                        48      BINARY_MODULO                   
+                        50      CALL_METHOD                     1
+                        52      POP_TOP                         
+                        54      LOAD_FAST                       2: mcu
+                        56      LOAD_ATTR                       5: lookup_query_command
+                        58      LOAD_CONST                      3: 'jump_to_usrboot_query oid=%c'
+                        60      LOAD_CONST                      4: 'usrboot_ack oid=%c enter_boot_status=%c'
+                        62      LOAD_FAST                       3: oid
+                        64      LOAD_CONST                      5: ('oid',)
+                        66      CALL_FUNCTION_KW                3
+                        68      LOAD_METHOD                     6: send
+                        70      CALL_METHOD                     0
+                        72      STORE_FAST                      4: result
+                        74      LOAD_CONST                      6: 'result'
+                        76      LOAD_FAST                       4: result
+                        78      BUILD_MAP                       1
+                        80      RETURN_VALUE                    
+                'PauseResume._setBootLoaderState'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _set_print_first_layer_request
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'v_sd'
+                        'first_layer_stop'
+                        'print_first_layer'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'response'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        'state'
+                        'success'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: False
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: v_sd
+                        6       STORE_ATTR                      1: first_layer_stop
+                        8       LOAD_CONST                      1: False
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: v_sd
+                        14      STORE_ATTR                      2: print_first_layer
+                        16      LOAD_CONST                      2: 'state'
+                        18      LOAD_CONST                      3: 'success'
+                        20      BUILD_MAP                       1
+                        22      STORE_FAST                      2: response
+                        24      LOAD_FAST                       1: web_request
+                        26      LOAD_METHOD                     3: send
+                        28      LOAD_FAST                       2: response
+                        30      CALL_METHOD                     1
+                        32      POP_TOP                         
+                        34      LOAD_FAST                       2: response
+                        36      RETURN_VALUE                    
+                'PauseResume._set_print_first_layer_request'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _check_power_loss_state_request
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 11
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'subprocess'
+                        'call'
+                        'os'
+                        'path'
+                        'exists'
+                        'v_sd'
+                        'print_file_name_path'
+                        'open'
+                        'read'
+                        'logging'
+                        'info'
+                        'len'
+                        'error'
+                        'json'
+                        'loads'
+                        'Exception'
+                        'remove'
+                        'printer'
+                        'objects'
+                        'lookup_object'
+                        'gcode'
+                        'run_script'
+                        'exception'
+                        'user_print_refer_path'
+                        'get'
+                        'checkEepromFirstEnable'
+                        'state'
+                        'power_loss'
+                        'exclude_object_info'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'call'
+                        'response'
+                        'f'
+                        'data'
+                        'err'
+                        'bl24c16f'
+                        'power_loss_switch'
+                        'eepromState'
+                        'print_stats'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        (
+                            'call'
+                        )
+                        False
+                        (
+                            'file_state'
+                            'eeprom_state'
+                        )
+                        'r'
+                        '[print_file_name_path] POWER_LOSS_DATA: \n %s'
+                        '%s f.read()==None read fail!!!'
+                        True
+                        'file_state'
+                        'bl24c16f'
+                        'EEPROM_WRITE_BYTE ADDR=1 VAL=255'
+                        '[user_print_refer_path] POWER_LOSS_DATA: \n %s'
+                        'power_loss'
+                        'switch'
+                        'EEPROM_DEBUG_READ ADDR=0 SIZE=56'
+                        'power_loss_switch is %s, bl24c16f is %s, eepromState is %s'
+                        'eeprom_state'
+                        'print_stats'
+                        'print_stats.state is %s'
+                        'standby'
+                        1
+                        'current printer state:%s'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_CONST                      2: ('call',)
+                        4       IMPORT_NAME                     0: subprocess
+                        6       IMPORT_FROM                     1: call
+                        8       STORE_FAST                      2: call
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      3: False
+                        14      LOAD_CONST                      3: False
+                        16      LOAD_CONST                      4: ('file_state', 'eeprom_state')
+                        18      BUILD_CONST_KEY_MAP             2
+                        20      STORE_FAST                      3: response
+                        22      LOAD_GLOBAL                     2: os
+                        24      LOAD_ATTR                       3: path
+                        26      LOAD_METHOD                     4: exists
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       5: v_sd
+                        32      LOAD_ATTR                       6: print_file_name_path
+                        34      CALL_METHOD                     1
+                        36      POP_JUMP_IF_FALSE               270
+                        40      SETUP_FINALLY                   122 (to 164)
+                        42      LOAD_GLOBAL                     7: open
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       5: v_sd
+                        48      LOAD_ATTR                       6: print_file_name_path
+                        50      LOAD_CONST                      5: 'r'
+                        52      CALL_FUNCTION                   2
+                        54      SETUP_WITH                      88 (to 144)
+                        56      STORE_FAST                      4: f
+                        58      LOAD_FAST                       4: f
+                        60      LOAD_METHOD                     8: read
+                        62      CALL_METHOD                     0
+                        64      STORE_FAST                      5: data
+                        66      LOAD_GLOBAL                     9: logging
+                        68      LOAD_METHOD                     10: info
+                        70      LOAD_CONST                      6: '[print_file_name_path] POWER_LOSS_DATA: \n %s'
+                        72      LOAD_FAST                       5: data
+                        74      CALL_METHOD                     2
+                        76      POP_TOP                         
+                        78      LOAD_GLOBAL                     11: len
+                        80      LOAD_FAST                       5: data
+                        82      CALL_FUNCTION                   1
+                        84      LOAD_CONST                      1: 0
+                        86      COMPARE_OP                      2 (==)
+                        88      POP_JUMP_IF_FALSE               108
+                        90      LOAD_GLOBAL                     9: logging
+                        92      LOAD_METHOD                     12: error
+                        94      LOAD_CONST                      7: '%s f.read()==None read fail!!!'
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       5: v_sd
+                        100     LOAD_ATTR                       6: print_file_name_path
+                        102     BINARY_MODULO                   
+                        104     CALL_METHOD                     1
+                        106     POP_TOP                         
+                        108     LOAD_GLOBAL                     13: json
+                        110     LOAD_METHOD                     14: loads
+                        112     LOAD_FAST                       5: data
+                        114     CALL_METHOD                     1
+                        116     POP_JUMP_IF_FALSE               122
+                        118     LOAD_CONST                      8: True
+                        120     JUMP_FORWARD                    2 (to 124)
+                        122     LOAD_CONST                      3: False
+                        124     LOAD_FAST                       3: response
+                        126     LOAD_CONST                      9: 'file_state'
+                        128     STORE_SUBSCR                    
+                        130     POP_BLOCK                       
+                        132     LOAD_CONST                      0: None
+                        134     DUP_TOP                         
+                        136     DUP_TOP                         
+                        138     CALL_FUNCTION                   3
+                        140     POP_TOP                         
+                        142     JUMP_FORWARD                    16 (to 160)
+                        144     WITH_EXCEPT_START               
+                        146     POP_JUMP_IF_TRUE                150
+                        148     RERAISE                         
+                        150     POP_TOP                         
+                        152     POP_TOP                         
+                        154     POP_TOP                         
+                        156     POP_EXCEPT                      
+                        158     POP_TOP                         
+                        160     POP_BLOCK                       
+                        162     JUMP_FORWARD                    106 (to 270)
+                        164     DUP_TOP                         
+                        166     LOAD_GLOBAL                     15: Exception
+                        168     JUMP_IF_NOT_EXC_MATCH           268
+                        172     POP_TOP                         
+                        174     STORE_FAST                      6: err
+                        176     POP_TOP                         
+                        178     SETUP_FINALLY                   80 (to 260)
+                        180     LOAD_GLOBAL                     2: os
+                        182     LOAD_METHOD                     16: remove
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       5: v_sd
+                        188     LOAD_ATTR                       6: print_file_name_path
+                        190     CALL_METHOD                     1
+                        192     POP_TOP                         
+                        194     LOAD_CONST                      10: 'bl24c16f'
+                        196     LOAD_FAST                       0: self
+                        198     LOAD_ATTR                       17: printer
+                        200     LOAD_ATTR                       18: objects
+                        202     CONTAINS_OP                     0 (in)
+                        204     POP_JUMP_IF_FALSE               218
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       17: printer
+                        210     LOAD_METHOD                     19: lookup_object
+                        212     LOAD_CONST                      10: 'bl24c16f'
+                        214     CALL_METHOD                     1
+                        216     JUMP_FORWARD                    2 (to 220)
+                        218     LOAD_CONST                      0: None
+                        220     STORE_FAST                      7: bl24c16f
+                        222     LOAD_FAST                       7: bl24c16f
+                        224     POP_JUMP_IF_FALSE               238
+                        226     LOAD_FAST                       0: self
+                        228     LOAD_ATTR                       20: gcode
+                        230     LOAD_METHOD                     21: run_script
+                        232     LOAD_CONST                      11: 'EEPROM_WRITE_BYTE ADDR=1 VAL=255'
+                        234     CALL_METHOD                     1
+                        236     POP_TOP                         
+                        238     LOAD_GLOBAL                     9: logging
+                        240     LOAD_METHOD                     22: exception
+                        242     LOAD_FAST                       6: err
+                        244     CALL_METHOD                     1
+                        246     POP_TOP                         
+                        248     POP_BLOCK                       
+                        250     POP_EXCEPT                      
+                        252     LOAD_CONST                      0: None
+                        254     STORE_FAST                      6: err
+                        256     DELETE_FAST                     6: err
+                        258     JUMP_FORWARD                    10 (to 270)
+                        260     LOAD_CONST                      0: None
+                        262     STORE_FAST                      6: err
+                        264     DELETE_FAST                     6: err
+                        266     RERAISE                         
+                        268     RERAISE                         
+                        270     LOAD_CONST                      3: False
+                        272     STORE_FAST                      8: power_loss_switch
+                        274     LOAD_GLOBAL                     2: os
+                        276     LOAD_ATTR                       3: path
+                        278     LOAD_METHOD                     4: exists
+                        280     LOAD_FAST                       0: self
+                        282     LOAD_ATTR                       5: v_sd
+                        284     LOAD_ATTR                       23: user_print_refer_path
+                        286     CALL_METHOD                     1
+                        288     POP_JUMP_IF_FALSE               386
+                        292     LOAD_GLOBAL                     7: open
+                        294     LOAD_FAST                       0: self
+                        296     LOAD_ATTR                       5: v_sd
+                        298     LOAD_ATTR                       23: user_print_refer_path
+                        300     LOAD_CONST                      5: 'r'
+                        302     CALL_FUNCTION                   2
+                        304     SETUP_WITH                      62 (to 368)
+                        306     STORE_FAST                      4: f
+                        308     LOAD_GLOBAL                     13: json
+                        310     LOAD_METHOD                     14: loads
+                        312     LOAD_FAST                       4: f
+                        314     LOAD_METHOD                     8: read
+                        316     CALL_METHOD                     0
+                        318     CALL_METHOD                     1
+                        320     STORE_FAST                      5: data
+                        322     LOAD_GLOBAL                     9: logging
+                        324     LOAD_METHOD                     10: info
+                        326     LOAD_CONST                      12: '[user_print_refer_path] POWER_LOSS_DATA: \n %s'
+                        328     LOAD_FAST                       5: data
+                        330     CALL_METHOD                     2
+                        332     POP_TOP                         
+                        334     LOAD_FAST                       5: data
+                        336     LOAD_METHOD                     24: get
+                        338     LOAD_CONST                      13: 'power_loss'
+                        340     BUILD_MAP                       0
+                        342     CALL_METHOD                     2
+                        344     LOAD_METHOD                     24: get
+                        346     LOAD_CONST                      14: 'switch'
+                        348     LOAD_CONST                      3: False
+                        350     CALL_METHOD                     2
+                        352     STORE_FAST                      8: power_loss_switch
+                        354     POP_BLOCK                       
+                        356     LOAD_CONST                      0: None
+                        358     DUP_TOP                         
+                        360     DUP_TOP                         
+                        362     CALL_FUNCTION                   3
+                        364     POP_TOP                         
+                        366     JUMP_FORWARD                    18 (to 386)
+                        368     WITH_EXCEPT_START               
+                        370     POP_JUMP_IF_TRUE                376
+                        374     RERAISE                         
+                        376     POP_TOP                         
+                        378     POP_TOP                         
+                        380     POP_TOP                         
+                        382     POP_EXCEPT                      
+                        384     POP_TOP                         
+                        386     LOAD_CONST                      10: 'bl24c16f'
+                        388     LOAD_FAST                       0: self
+                        390     LOAD_ATTR                       17: printer
+                        392     LOAD_ATTR                       18: objects
+                        394     CONTAINS_OP                     0 (in)
+                        396     POP_JUMP_IF_FALSE               412
+                        400     LOAD_FAST                       0: self
+                        402     LOAD_ATTR                       17: printer
+                        404     LOAD_METHOD                     19: lookup_object
+                        406     LOAD_CONST                      10: 'bl24c16f'
+                        408     CALL_METHOD                     1
+                        410     JUMP_FORWARD                    2 (to 414)
+                        412     LOAD_CONST                      0: None
+                        414     STORE_FAST                      7: bl24c16f
+                        416     LOAD_FAST                       8: power_loss_switch
+                        418     POP_JUMP_IF_FALSE               436
+                        422     LOAD_FAST                       7: bl24c16f
+                        424     POP_JUMP_IF_FALSE               436
+                        428     LOAD_FAST                       7: bl24c16f
+                        430     LOAD_METHOD                     25: checkEepromFirstEnable
+                        432     CALL_METHOD                     0
+                        434     JUMP_FORWARD                    2 (to 438)
+                        436     LOAD_CONST                      8: True
+                        438     STORE_FAST                      9: eepromState
+                        440     LOAD_FAST                       0: self
+                        442     LOAD_ATTR                       20: gcode
+                        444     LOAD_METHOD                     21: run_script
+                        446     LOAD_CONST                      15: 'EEPROM_DEBUG_READ ADDR=0 SIZE=56'
+                        448     CALL_METHOD                     1
+                        450     POP_TOP                         
+                        452     LOAD_GLOBAL                     9: logging
+                        454     LOAD_METHOD                     10: info
+                        456     LOAD_CONST                      16: 'power_loss_switch is %s, bl24c16f is %s, eepromState is %s'
+                        458     LOAD_FAST                       8: power_loss_switch
+                        460     LOAD_FAST                       7: bl24c16f
+                        462     LOAD_FAST                       9: eepromState
+                        464     CALL_METHOD                     4
+                        466     POP_TOP                         
+                        468     LOAD_FAST                       9: eepromState
+                        470     POP_JUMP_IF_TRUE                482
+                        474     LOAD_CONST                      8: True
+                        476     LOAD_FAST                       3: response
+                        478     LOAD_CONST                      17: 'eeprom_state'
+                        480     STORE_SUBSCR                    
+                        482     LOAD_FAST                       0: self
+                        484     LOAD_ATTR                       17: printer
+                        486     LOAD_METHOD                     19: lookup_object
+                        488     LOAD_CONST                      18: 'print_stats'
+                        490     LOAD_CONST                      0: None
+                        492     CALL_METHOD                     2
+                        494     STORE_FAST                      10: print_stats
+                        496     LOAD_GLOBAL                     9: logging
+                        498     LOAD_METHOD                     10: info
+                        500     LOAD_CONST                      19: 'print_stats.state is %s'
+                        502     LOAD_FAST                       10: print_stats
+                        504     LOAD_ATTR                       26: state
+                        506     CALL_METHOD                     2
+                        508     POP_TOP                         
+                        510     LOAD_FAST                       3: response
+                        512     LOAD_CONST                      9: 'file_state'
+                        514     BINARY_SUBSCR                   
+                        516     LOAD_CONST                      8: True
+                        518     COMPARE_OP                      2 (==)
+                        520     POP_JUMP_IF_FALSE               562
+                        524     LOAD_FAST                       3: response
+                        526     LOAD_CONST                      17: 'eeprom_state'
+                        528     BINARY_SUBSCR                   
+                        530     LOAD_CONST                      8: True
+                        532     COMPARE_OP                      2 (==)
+                        534     POP_JUMP_IF_FALSE               562
+                        538     LOAD_FAST                       10: print_stats
+                        540     POP_JUMP_IF_FALSE               562
+                        544     LOAD_FAST                       10: print_stats
+                        546     LOAD_ATTR                       26: state
+                        548     LOAD_CONST                      20: 'standby'
+                        550     COMPARE_OP                      2 (==)
+                        552     POP_JUMP_IF_FALSE               562
+                        556     LOAD_CONST                      21: 1
+                        558     LOAD_FAST                       10: print_stats
+                        560     STORE_ATTR                      27: power_loss
+                        562     LOAD_FAST                       10: print_stats
+                        564     POP_JUMP_IF_FALSE               612
+                        568     LOAD_FAST                       10: print_stats
+                        570     LOAD_ATTR                       26: state
+                        572     LOAD_CONST                      20: 'standby'
+                        574     COMPARE_OP                      3 (!=)
+                        576     POP_JUMP_IF_FALSE               612
+                        580     LOAD_CONST                      3: False
+                        582     LOAD_FAST                       3: response
+                        584     LOAD_CONST                      9: 'file_state'
+                        586     STORE_SUBSCR                    
+                        588     LOAD_CONST                      3: False
+                        590     LOAD_FAST                       3: response
+                        592     LOAD_CONST                      17: 'eeprom_state'
+                        594     STORE_SUBSCR                    
+                        596     LOAD_GLOBAL                     9: logging
+                        598     LOAD_METHOD                     10: info
+                        600     LOAD_CONST                      22: 'current printer state:%s'
+                        602     LOAD_FAST                       10: print_stats
+                        604     LOAD_ATTR                       26: state
+                        606     BINARY_MODULO                   
+                        608     CALL_METHOD                     1
+                        610     POP_TOP                         
+                        612     LOAD_GLOBAL                     2: os
+                        614     LOAD_ATTR                       3: path
+                        616     LOAD_METHOD                     4: exists
+                        618     LOAD_FAST                       0: self
+                        620     LOAD_ATTR                       20: gcode
+                        622     LOAD_ATTR                       28: exclude_object_info
+                        624     CALL_METHOD                     1
+                        626     POP_JUMP_IF_FALSE               672
+                        630     LOAD_FAST                       3: response
+                        632     LOAD_CONST                      9: 'file_state'
+                        634     BINARY_SUBSCR                   
+                        636     LOAD_CONST                      3: False
+                        638     COMPARE_OP                      2 (==)
+                        640     POP_JUMP_IF_TRUE                658
+                        644     LOAD_FAST                       3: response
+                        646     LOAD_CONST                      17: 'eeprom_state'
+                        648     BINARY_SUBSCR                   
+                        650     LOAD_CONST                      3: False
+                        652     COMPARE_OP                      2 (==)
+                        654     POP_JUMP_IF_FALSE               672
+                        658     LOAD_GLOBAL                     2: os
+                        660     LOAD_METHOD                     16: remove
+                        662     LOAD_FAST                       0: self
+                        664     LOAD_ATTR                       20: gcode
+                        666     LOAD_ATTR                       28: exclude_object_info
+                        668     CALL_METHOD                     1
+                        670     POP_TOP                         
+                        672     LOAD_FAST                       1: web_request
+                        674     LOAD_METHOD                     29: send
+                        676     LOAD_FAST                       3: response
+                        678     CALL_METHOD                     1
+                        680     POP_TOP                         
+                        682     LOAD_FAST                       3: response
+                        684     RETURN_VALUE                    
+                'PauseResume._check_power_loss_state_request'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _handle_cancel_continue_print_request
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'send_event'
+                        'get_reactor'
+                        'pause'
+                        'monotonic'
+                        'subprocess'
+                        'call'
+                        'os'
+                        'path'
+                        'exists'
+                        'v_sd'
+                        'print_file_name_path'
+                        'remove'
+                        'gcode'
+                        'exclude_object_info'
+                        'objects'
+                        'lookup_object'
+                        'user_print_refer_path'
+                        'open'
+                        'json'
+                        'loads'
+                        'read'
+                        'get'
+                        'run_script'
+                        'respond_info'
+                        'power_loss'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'reactor'
+                        'call'
+                        'bl24c16f'
+                        'power_loss_switch'
+                        'f'
+                        'data'
+                        'print_stats'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'v_sd:cancel_power_loss_update_filament_used'
+                        0.2
+                        0
+                        (
+                            'call'
+                        )
+                        'sync'
+                        True
+                        (
+                            'shell'
+                        )
+                        'bl24c16f'
+                        False
+                        'r'
+                        'power_loss'
+                        'switch'
+                        'EEPROM_WRITE_BYTE ADDR=1 VAL=255'
+                        'cancel_continue_print:success'
+                        'print_stats'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: send_event
+                        6       LOAD_CONST                      1: 'v_sd:cancel_power_loss_update_filament_used'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: printer
+                        16      LOAD_METHOD                     2: get_reactor
+                        18      CALL_METHOD                     0
+                        20      STORE_FAST                      2: reactor
+                        22      LOAD_FAST                       2: reactor
+                        24      LOAD_METHOD                     3: pause
+                        26      LOAD_FAST                       2: reactor
+                        28      LOAD_METHOD                     4: monotonic
+                        30      CALL_METHOD                     0
+                        32      LOAD_CONST                      2: 0.2
+                        34      BINARY_ADD                      
+                        36      CALL_METHOD                     1
+                        38      POP_TOP                         
+                        40      LOAD_CONST                      3: 0
+                        42      LOAD_CONST                      4: ('call',)
+                        44      IMPORT_NAME                     5: subprocess
+                        46      IMPORT_FROM                     6: call
+                        48      STORE_FAST                      3: call
+                        50      POP_TOP                         
+                        52      LOAD_GLOBAL                     7: os
+                        54      LOAD_ATTR                       8: path
+                        56      LOAD_METHOD                     9: exists
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       10: v_sd
+                        62      LOAD_ATTR                       11: print_file_name_path
+                        64      CALL_METHOD                     1
+                        66      POP_JUMP_IF_FALSE               82
+                        68      LOAD_GLOBAL                     7: os
+                        70      LOAD_METHOD                     12: remove
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       10: v_sd
+                        76      LOAD_ATTR                       11: print_file_name_path
+                        78      CALL_METHOD                     1
+                        80      POP_TOP                         
+                        82      LOAD_GLOBAL                     7: os
+                        84      LOAD_ATTR                       8: path
+                        86      LOAD_METHOD                     9: exists
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       13: gcode
+                        92      LOAD_ATTR                       14: exclude_object_info
+                        94      CALL_METHOD                     1
+                        96      POP_JUMP_IF_FALSE               112
+                        98      LOAD_GLOBAL                     7: os
+                        100     LOAD_METHOD                     12: remove
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       13: gcode
+                        106     LOAD_ATTR                       14: exclude_object_info
+                        108     CALL_METHOD                     1
+                        110     POP_TOP                         
+                        112     LOAD_FAST                       3: call
+                        114     LOAD_CONST                      5: 'sync'
+                        116     LOAD_CONST                      6: True
+                        118     LOAD_CONST                      7: ('shell',)
+                        120     CALL_FUNCTION_KW                2
+                        122     POP_TOP                         
+                        124     LOAD_CONST                      8: 'bl24c16f'
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       0: printer
+                        130     LOAD_ATTR                       15: objects
+                        132     CONTAINS_OP                     0 (in)
+                        134     POP_JUMP_IF_FALSE               148
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       0: printer
+                        140     LOAD_METHOD                     16: lookup_object
+                        142     LOAD_CONST                      8: 'bl24c16f'
+                        144     CALL_METHOD                     1
+                        146     JUMP_FORWARD                    2 (to 150)
+                        148     LOAD_CONST                      0: None
+                        150     STORE_FAST                      4: bl24c16f
+                        152     LOAD_CONST                      9: False
+                        154     STORE_FAST                      5: power_loss_switch
+                        156     LOAD_GLOBAL                     7: os
+                        158     LOAD_ATTR                       8: path
+                        160     LOAD_METHOD                     9: exists
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       10: v_sd
+                        166     LOAD_ATTR                       17: user_print_refer_path
+                        168     CALL_METHOD                     1
+                        170     POP_JUMP_IF_FALSE               252
+                        172     LOAD_GLOBAL                     18: open
+                        174     LOAD_FAST                       0: self
+                        176     LOAD_ATTR                       10: v_sd
+                        178     LOAD_ATTR                       17: user_print_refer_path
+                        180     LOAD_CONST                      10: 'r'
+                        182     CALL_FUNCTION                   2
+                        184     SETUP_WITH                      50 (to 236)
+                        186     STORE_FAST                      6: f
+                        188     LOAD_GLOBAL                     19: json
+                        190     LOAD_METHOD                     20: loads
+                        192     LOAD_FAST                       6: f
+                        194     LOAD_METHOD                     21: read
+                        196     CALL_METHOD                     0
+                        198     CALL_METHOD                     1
+                        200     STORE_FAST                      7: data
+                        202     LOAD_FAST                       7: data
+                        204     LOAD_METHOD                     22: get
+                        206     LOAD_CONST                      11: 'power_loss'
+                        208     BUILD_MAP                       0
+                        210     CALL_METHOD                     2
+                        212     LOAD_METHOD                     22: get
+                        214     LOAD_CONST                      12: 'switch'
+                        216     LOAD_CONST                      9: False
+                        218     CALL_METHOD                     2
+                        220     STORE_FAST                      5: power_loss_switch
+                        222     POP_BLOCK                       
+                        224     LOAD_CONST                      0: None
+                        226     DUP_TOP                         
+                        228     DUP_TOP                         
+                        230     CALL_FUNCTION                   3
+                        232     POP_TOP                         
+                        234     JUMP_FORWARD                    16 (to 252)
+                        236     WITH_EXCEPT_START               
+                        238     POP_JUMP_IF_TRUE                242
+                        240     RERAISE                         
+                        242     POP_TOP                         
+                        244     POP_TOP                         
+                        246     POP_TOP                         
+                        248     POP_EXCEPT                      
+                        250     POP_TOP                         
+                        252     LOAD_CONST                      8: 'bl24c16f'
+                        254     LOAD_FAST                       0: self
+                        256     LOAD_ATTR                       0: printer
+                        258     LOAD_ATTR                       15: objects
+                        260     CONTAINS_OP                     0 (in)
+                        262     POP_JUMP_IF_FALSE               278
+                        266     LOAD_FAST                       0: self
+                        268     LOAD_ATTR                       0: printer
+                        270     LOAD_METHOD                     16: lookup_object
+                        272     LOAD_CONST                      8: 'bl24c16f'
+                        274     CALL_METHOD                     1
+                        276     JUMP_FORWARD                    2 (to 280)
+                        278     LOAD_CONST                      0: None
+                        280     STORE_FAST                      4: bl24c16f
+                        282     LOAD_FAST                       5: power_loss_switch
+                        284     POP_JUMP_IF_FALSE               318
+                        288     LOAD_FAST                       4: bl24c16f
+                        290     POP_JUMP_IF_FALSE               318
+                        294     LOAD_FAST                       0: self
+                        296     LOAD_ATTR                       13: gcode
+                        298     LOAD_METHOD                     23: run_script
+                        300     LOAD_CONST                      13: 'EEPROM_WRITE_BYTE ADDR=1 VAL=255'
+                        302     CALL_METHOD                     1
+                        304     POP_TOP                         
+                        306     LOAD_FAST                       0: self
+                        308     LOAD_ATTR                       13: gcode
+                        310     LOAD_METHOD                     24: respond_info
+                        312     LOAD_CONST                      14: 'cancel_continue_print:success'
+                        314     CALL_METHOD                     1
+                        316     POP_TOP                         
+                        318     LOAD_FAST                       0: self
+                        320     LOAD_ATTR                       0: printer
+                        322     LOAD_METHOD                     16: lookup_object
+                        324     LOAD_CONST                      15: 'print_stats'
+                        326     LOAD_CONST                      0: None
+                        328     CALL_METHOD                     2
+                        330     STORE_FAST                      8: print_stats
+                        332     LOAD_FAST                       8: print_stats
+                        334     POP_JUMP_IF_FALSE               344
+                        338     LOAD_CONST                      3: 0
+                        340     LOAD_FAST                       8: print_stats
+                        342     STORE_ATTR                      25: power_loss
+                        344     LOAD_CONST                      0: None
+                        346     RETURN_VALUE                    
+                'PauseResume._handle_cancel_continue_print_request'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _handle_cancel_request
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'invoke_action'
+                        'fast_stop_complete'
+                        'run_script'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'CANCEL_PRINT'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: invoke_action
+                        6       CALL_METHOD                     0
+                        8       POP_TOP                         
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: gcode
+                        14      LOAD_METHOD                     2: fast_stop_complete
+                        16      CALL_METHOD                     0
+                        18      POP_TOP                         
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       0: gcode
+                        24      LOAD_METHOD                     3: run_script
+                        26      LOAD_CONST                      1: 'CANCEL_PRINT'
+                        28      CALL_METHOD                     1
+                        30      POP_TOP                         
+                        32      LOAD_CONST                      0: None
+                        34      RETURN_VALUE                    
+                'PauseResume._handle_cancel_request'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _handle_pause_request
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'PAUSE'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script
+                        6       LOAD_CONST                      1: 'PAUSE'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'PauseResume._handle_pause_request'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _handle_resume_request
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'RESUME'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script
+                        6       LOAD_CONST                      1: 'RESUME'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'PauseResume._handle_resume_request'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _handle_fast_stop
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'fast_stop_complete'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: fast_stop_complete
+                        6       CALL_METHOD                     0
+                        8       POP_TOP                         
+                        10      LOAD_CONST                      0: None
+                        12      RETURN_VALUE                    
+                'PauseResume._handle_fast_stop'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: _handle_fast_response
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'invoke_action'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: invoke_action
+                        6       CALL_METHOD                     0
+                        8       POP_TOP                         
+                        10      LOAD_CONST                      0: None
+                        12      RETURN_VALUE                    
+                'PauseResume._handle_fast_response'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_paused'
+                        'resume_err'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'is_paused'
+                            'resume_err'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: is_paused
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: resume_err
+                        8       LOAD_CONST                      1: ('is_paused', 'resume_err')
+                        10      BUILD_CONST_KEY_MAP             2
+                        12      RETURN_VALUE                    
+                'PauseResume.get_status'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: is_sd_active
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'v_sd'
+                        'is_active'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: v_sd
+                        4       LOAD_CONST                      0: None
+                        6       IS_OP                           1 (is not)
+                        8       JUMP_IF_FALSE_OR_POP            18
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: v_sd
+                        14      LOAD_METHOD                     1: is_active
+                        16      CALL_METHOD                     0
+                        18      RETURN_VALUE                    
+                'PauseResume.is_sd_active'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: send_pause_command
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pause_command_sent'
+                        'is_sd_active'
+                        'sd_paused'
+                        'v_sd'
+                        'do_pause'
+                        'gcode'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        False
+                        'action:paused'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: pause_command_sent
+                        4       POP_JUMP_IF_TRUE                56
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_METHOD                     1: is_sd_active
+                        10      CALL_METHOD                     0
+                        12      POP_JUMP_IF_FALSE               32
+                        14      LOAD_CONST                      1: True
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      2: sd_paused
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: v_sd
+                        24      LOAD_METHOD                     4: do_pause
+                        26      CALL_METHOD                     0
+                        28      POP_TOP                         
+                        30      JUMP_FORWARD                    18 (to 50)
+                        32      LOAD_CONST                      2: False
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      2: sd_paused
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       5: gcode
+                        42      LOAD_METHOD                     6: respond_info
+                        44      LOAD_CONST                      3: 'action:paused'
+                        46      CALL_METHOD                     1
+                        48      POP_TOP                         
+                        50      LOAD_CONST                      1: True
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      0: pause_command_sent
+                        56      LOAD_CONST                      0: None
+                        58      RETURN_VALUE                    
+                'PauseResume.send_pause_command'
+                'Pauses the current print'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: cmd_PAUSE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_paused'
+                        'respond_info'
+                        'send_pause_command'
+                        'gcode'
+                        'run_script_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key211", "msg": "Print already paused", "values": []}'
+                        'SAVE_GCODE_STATE NAME=PAUSE_STATE'
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: is_paused
+                        4       POP_JUMP_IF_FALSE               20
+                        6       LOAD_FAST                       1: gcmd
+                        8       LOAD_METHOD                     1: respond_info
+                        10      LOAD_CONST                      1: '{"code":"key211", "msg": "Print already paused", "values": []}'
+                        12      CALL_METHOD                     1
+                        14      POP_TOP                         
+                        16      LOAD_CONST                      0: None
+                        18      RETURN_VALUE                    
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_METHOD                     2: send_pause_command
+                        24      CALL_METHOD                     0
+                        26      POP_TOP                         
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       3: gcode
+                        32      LOAD_METHOD                     4: run_script_from_command
+                        34      LOAD_CONST                      2: 'SAVE_GCODE_STATE NAME=PAUSE_STATE'
+                        36      CALL_METHOD                     1
+                        38      POP_TOP                         
+                        40      LOAD_CONST                      3: True
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      0: is_paused
+                        46      LOAD_CONST                      0: None
+                        48      RETURN_VALUE                    
+                'PauseResume.cmd_PAUSE'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: send_resume_command
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'sd_paused'
+                        'v_sd'
+                        'do_resume_status'
+                        'do_resume'
+                        'gcode'
+                        'respond_info'
+                        'pause_command_sent'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        False
+                        'action:resumed'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: sd_paused
+                        4       POP_JUMP_IF_FALSE               32
+                        6       LOAD_CONST                      1: True
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: v_sd
+                        12      STORE_ATTR                      2: do_resume_status
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       1: v_sd
+                        18      LOAD_METHOD                     3: do_resume
+                        20      CALL_METHOD                     0
+                        22      POP_TOP                         
+                        24      LOAD_CONST                      2: False
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      0: sd_paused
+                        30      JUMP_FORWARD                    12 (to 44)
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       4: gcode
+                        36      LOAD_METHOD                     5: respond_info
+                        38      LOAD_CONST                      3: 'action:resumed'
+                        40      CALL_METHOD                     1
+                        42      POP_TOP                         
+                        44      LOAD_CONST                      2: False
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      6: pause_command_sent
+                        50      LOAD_CONST                      0: None
+                        52      RETURN_VALUE                    
+                'PauseResume.send_resume_command'
+                'Resumes the print from a pause'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: cmd_RESUME
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_paused'
+                        'warning'
+                        'resume_err'
+                        'logging'
+                        'info'
+                        'reactor'
+                        'pause'
+                        'monotonic'
+                        'get_float'
+                        'recover_velocity'
+                        'gcode'
+                        'run_script_from_command'
+                        'send_resume_command'
+                        'os'
+                        'path'
+                        'exists'
+                        'v_sd'
+                        'print_file_name_path'
+                        'open'
+                        'json'
+                        'loads'
+                        'read'
+                        'write'
+                        'dumps'
+                        'flush'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'velocity'
+                        'result'
+                        'f'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code": "key16", "msg": "Print is not paused, resume aborted"}'
+                        True
+                        'resume_err is True'
+                        0.5
+                        False
+                        'VELOCITY'
+                        'RESTORE_GCODE_STATE NAME=PAUSE_STATE MOVE=1 MOVE_SPEED=%.4f'
+                        'r'
+                        0
+                        'variable_z_safe_pause'
+                        'w'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: is_paused
+                        4       POP_JUMP_IF_TRUE                16
+                        6       LOAD_FAST                       1: gcmd
+                        8       LOAD_METHOD                     1: warning
+                        10      LOAD_CONST                      1: '{"code": "key16", "msg": "Print is not paused, resume aborted"}'
+                        12      CALL_METHOD                     1
+                        14      RETURN_VALUE                    
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: resume_err
+                        20      LOAD_CONST                      2: True
+                        22      COMPARE_OP                      2 (==)
+                        24      POP_JUMP_IF_FALSE               68
+                        26      LOAD_GLOBAL                     3: logging
+                        28      LOAD_METHOD                     4: info
+                        30      LOAD_CONST                      3: 'resume_err is True'
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       5: reactor
+                        40      LOAD_METHOD                     6: pause
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       5: reactor
+                        46      LOAD_METHOD                     7: monotonic
+                        48      CALL_METHOD                     0
+                        50      LOAD_CONST                      4: 0.5
+                        52      BINARY_ADD                      
+                        54      CALL_METHOD                     1
+                        56      POP_TOP                         
+                        58      LOAD_CONST                      5: False
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      2: resume_err
+                        64      LOAD_CONST                      0: None
+                        66      RETURN_VALUE                    
+                        68      LOAD_FAST                       1: gcmd
+                        70      LOAD_METHOD                     8: get_float
+                        72      LOAD_CONST                      6: 'VELOCITY'
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_ATTR                       9: recover_velocity
+                        78      CALL_METHOD                     2
+                        80      STORE_FAST                      2: velocity
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       10: gcode
+                        86      LOAD_METHOD                     11: run_script_from_command
+                        88      LOAD_CONST                      7: 'RESTORE_GCODE_STATE NAME=PAUSE_STATE MOVE=1 MOVE_SPEED=%.4f'
+                        90      LOAD_FAST                       2: velocity
+                        92      BINARY_MODULO                   
+                        94      CALL_METHOD                     1
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_METHOD                     12: send_resume_command
+                        102     CALL_METHOD                     0
+                        104     POP_TOP                         
+                        106     LOAD_CONST                      5: False
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      0: is_paused
+                        112     BUILD_MAP                       0
+                        114     STORE_FAST                      3: result
+                        116     LOAD_GLOBAL                     13: os
+                        118     LOAD_ATTR                       14: path
+                        120     LOAD_METHOD                     15: exists
+                        122     LOAD_FAST                       0: self
+                        124     LOAD_ATTR                       16: v_sd
+                        126     LOAD_ATTR                       17: print_file_name_path
+                        128     CALL_METHOD                     1
+                        130     POP_JUMP_IF_FALSE               274
+                        134     LOAD_GLOBAL                     18: open
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       16: v_sd
+                        140     LOAD_ATTR                       17: print_file_name_path
+                        142     LOAD_CONST                      8: 'r'
+                        144     CALL_FUNCTION                   2
+                        146     SETUP_WITH                      38 (to 186)
+                        148     STORE_FAST                      4: f
+                        150     LOAD_GLOBAL                     19: json
+                        152     LOAD_METHOD                     20: loads
+                        154     LOAD_FAST                       4: f
+                        156     LOAD_METHOD                     21: read
+                        158     CALL_METHOD                     0
+                        160     CALL_METHOD                     1
+                        162     STORE_FAST                      3: result
+                        164     LOAD_CONST                      9: 0
+                        166     LOAD_FAST                       3: result
+                        168     LOAD_CONST                      10: 'variable_z_safe_pause'
+                        170     STORE_SUBSCR                    
+                        172     POP_BLOCK                       
+                        174     LOAD_CONST                      0: None
+                        176     DUP_TOP                         
+                        178     DUP_TOP                         
+                        180     CALL_FUNCTION                   3
+                        182     POP_TOP                         
+                        184     JUMP_FORWARD                    16 (to 202)
+                        186     WITH_EXCEPT_START               
+                        188     POP_JUMP_IF_TRUE                192
+                        190     RERAISE                         
+                        192     POP_TOP                         
+                        194     POP_TOP                         
+                        196     POP_TOP                         
+                        198     POP_EXCEPT                      
+                        200     POP_TOP                         
+                        202     LOAD_GLOBAL                     18: open
+                        204     LOAD_FAST                       0: self
+                        206     LOAD_ATTR                       16: v_sd
+                        208     LOAD_ATTR                       17: print_file_name_path
+                        210     LOAD_CONST                      11: 'w'
+                        212     CALL_FUNCTION                   2
+                        214     SETUP_WITH                      40 (to 256)
+                        216     STORE_FAST                      4: f
+                        218     LOAD_FAST                       4: f
+                        220     LOAD_METHOD                     22: write
+                        222     LOAD_GLOBAL                     19: json
+                        224     LOAD_METHOD                     23: dumps
+                        226     LOAD_FAST                       3: result
+                        228     CALL_METHOD                     1
+                        230     CALL_METHOD                     1
+                        232     POP_TOP                         
+                        234     LOAD_FAST                       4: f
+                        236     LOAD_METHOD                     24: flush
+                        238     CALL_METHOD                     0
+                        240     POP_TOP                         
+                        242     POP_BLOCK                       
+                        244     LOAD_CONST                      0: None
+                        246     DUP_TOP                         
+                        248     DUP_TOP                         
+                        250     CALL_FUNCTION                   3
+                        252     POP_TOP                         
+                        254     JUMP_FORWARD                    18 (to 274)
+                        256     WITH_EXCEPT_START               
+                        258     POP_JUMP_IF_TRUE                264
+                        262     RERAISE                         
+                        264     POP_TOP                         
+                        266     POP_TOP                         
+                        268     POP_TOP                         
+                        270     POP_EXCEPT                      
+                        272     POP_TOP                         
+                        274     LOAD_CONST                      0: None
+                        276     RETURN_VALUE                    
+                'PauseResume.cmd_RESUME'
+                'Clears the current paused state without resuming the print'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: cmd_CLEAR_PAUSE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_paused'
+                        'pause_command_sent'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       LOAD_CONST                      1: False
+                        2       DUP_TOP                         
+                        4       LOAD_FAST                       0: self
+                        6       STORE_ATTR                      0: is_paused
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: pause_command_sent
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'PauseResume.cmd_CLEAR_PAUSE'
+                'Cancel the current print'
+                [Code]
+                    File Name: /extras/pause_resume.py
+                    Object Name: cmd_CANCEL_PRINT
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_sd_active'
+                        'sd_paused'
+                        'v_sd'
+                        'do_cancel'
+                        'respond_info'
+                        'cmd_CLEAR_PAUSE'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'action:cancel'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: is_sd_active
+                        4       CALL_METHOD                     0
+                        6       POP_JUMP_IF_TRUE                14
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: sd_paused
+                        12      POP_JUMP_IF_FALSE               26
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: v_sd
+                        18      LOAD_METHOD                     3: do_cancel
+                        20      CALL_METHOD                     0
+                        22      POP_TOP                         
+                        24      JUMP_FORWARD                    10 (to 36)
+                        26      LOAD_FAST                       1: gcmd
+                        28      LOAD_METHOD                     4: respond_info
+                        30      LOAD_CONST                      1: 'action:cancel'
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_METHOD                     5: cmd_CLEAR_PAUSE
+                        40      LOAD_FAST                       1: gcmd
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_CONST                      0: None
+                        48      RETURN_VALUE                    
+                'PauseResume.cmd_CANCEL_PRINT'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PauseResume'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PauseResume.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> handle_connect
+                18      LOAD_CONST                      4: 'PauseResume.handle_connect'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: handle_connect
+                24      LOAD_CONST                      5: <CODE> _getBootLoaderVersion
+                26      LOAD_CONST                      6: 'PauseResume._getBootLoaderVersion'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: _getBootLoaderVersion
+                32      LOAD_CONST                      7: <CODE> _setBootLoaderState
+                34      LOAD_CONST                      8: 'PauseResume._setBootLoaderState'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _setBootLoaderState
+                40      LOAD_CONST                      9: <CODE> _set_print_first_layer_request
+                42      LOAD_CONST                      10: 'PauseResume._set_print_first_layer_request'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _set_print_first_layer_request
+                48      LOAD_CONST                      11: <CODE> _check_power_loss_state_request
+                50      LOAD_CONST                      12: 'PauseResume._check_power_loss_state_request'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: _check_power_loss_state_request
+                56      LOAD_CONST                      13: <CODE> _handle_cancel_continue_print_request
+                58      LOAD_CONST                      14: 'PauseResume._handle_cancel_continue_print_request'
+                60      MAKE_FUNCTION                   0
+                62      STORE_NAME                      9: _handle_cancel_continue_print_request
+                64      LOAD_CONST                      15: <CODE> _handle_cancel_request
+                66      LOAD_CONST                      16: 'PauseResume._handle_cancel_request'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      10: _handle_cancel_request
+                72      LOAD_CONST                      17: <CODE> _handle_pause_request
+                74      LOAD_CONST                      18: 'PauseResume._handle_pause_request'
+                76      MAKE_FUNCTION                   0
+                78      STORE_NAME                      11: _handle_pause_request
+                80      LOAD_CONST                      19: <CODE> _handle_resume_request
+                82      LOAD_CONST                      20: 'PauseResume._handle_resume_request'
+                84      MAKE_FUNCTION                   0
+                86      STORE_NAME                      12: _handle_resume_request
+                88      LOAD_CONST                      21: <CODE> _handle_fast_stop
+                90      LOAD_CONST                      22: 'PauseResume._handle_fast_stop'
+                92      MAKE_FUNCTION                   0
+                94      STORE_NAME                      13: _handle_fast_stop
+                96      LOAD_CONST                      23: <CODE> _handle_fast_response
+                98      LOAD_CONST                      24: 'PauseResume._handle_fast_response'
+                100     MAKE_FUNCTION                   0
+                102     STORE_NAME                      14: _handle_fast_response
+                104     LOAD_CONST                      25: <CODE> get_status
+                106     LOAD_CONST                      26: 'PauseResume.get_status'
+                108     MAKE_FUNCTION                   0
+                110     STORE_NAME                      15: get_status
+                112     LOAD_CONST                      27: <CODE> is_sd_active
+                114     LOAD_CONST                      28: 'PauseResume.is_sd_active'
+                116     MAKE_FUNCTION                   0
+                118     STORE_NAME                      16: is_sd_active
+                120     LOAD_CONST                      29: <CODE> send_pause_command
+                122     LOAD_CONST                      30: 'PauseResume.send_pause_command'
+                124     MAKE_FUNCTION                   0
+                126     STORE_NAME                      17: send_pause_command
+                128     LOAD_CONST                      31: 'Pauses the current print'
+                130     STORE_NAME                      18: cmd_PAUSE_help
+                132     LOAD_CONST                      32: <CODE> cmd_PAUSE
+                134     LOAD_CONST                      33: 'PauseResume.cmd_PAUSE'
+                136     MAKE_FUNCTION                   0
+                138     STORE_NAME                      19: cmd_PAUSE
+                140     LOAD_CONST                      34: <CODE> send_resume_command
+                142     LOAD_CONST                      35: 'PauseResume.send_resume_command'
+                144     MAKE_FUNCTION                   0
+                146     STORE_NAME                      20: send_resume_command
+                148     LOAD_CONST                      36: 'Resumes the print from a pause'
+                150     STORE_NAME                      21: cmd_RESUME_help
+                152     LOAD_CONST                      37: <CODE> cmd_RESUME
+                154     LOAD_CONST                      38: 'PauseResume.cmd_RESUME'
+                156     MAKE_FUNCTION                   0
+                158     STORE_NAME                      22: cmd_RESUME
+                160     LOAD_CONST                      39: 'Clears the current paused state without resuming the print'
+                162     STORE_NAME                      23: cmd_CLEAR_PAUSE_help
+                164     LOAD_CONST                      40: <CODE> cmd_CLEAR_PAUSE
+                166     LOAD_CONST                      41: 'PauseResume.cmd_CLEAR_PAUSE'
+                168     MAKE_FUNCTION                   0
+                170     STORE_NAME                      24: cmd_CLEAR_PAUSE
+                172     LOAD_CONST                      42: 'Cancel the current print'
+                174     STORE_NAME                      25: cmd_CANCEL_PRINT_help
+                176     LOAD_CONST                      43: <CODE> cmd_CANCEL_PRINT
+                178     LOAD_CONST                      44: 'PauseResume.cmd_CANCEL_PRINT'
+                180     MAKE_FUNCTION                   0
+                182     STORE_NAME                      26: cmd_CANCEL_PRINT
+                184     LOAD_CONST                      45: None
+                186     RETURN_VALUE                    
+        'PauseResume'
+        [Code]
+            File Name: /extras/pause_resume.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PauseResume'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PauseResume
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: os
+        6       STORE_NAME                      0: os
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: json
+        14      STORE_NAME                      1: json
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: logging
+        22      STORE_NAME                      2: logging
+        24      LOAD_BUILD_CLASS                
+        26      LOAD_CONST                      2: <CODE> PauseResume
+        28      LOAD_CONST                      3: 'PauseResume'
+        30      MAKE_FUNCTION                   0
+        32      LOAD_CONST                      3: 'PauseResume'
+        34      CALL_FUNCTION                   2
+        36      STORE_NAME                      3: PauseResume
+        38      LOAD_CONST                      4: <CODE> load_config
+        40      LOAD_CONST                      5: 'load_config'
+        42      MAKE_FUNCTION                   0
+        44      STORE_NAME                      4: load_config
+        46      LOAD_CONST                      1: None
+        48      RETURN_VALUE                    

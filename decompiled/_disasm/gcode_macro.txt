@@ -1,0 +1,2014 @@
+gcode_macro.pyc (Python 3.9)
+[Code]
+    File Name: /extras/gcode_macro.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'traceback'
+        'logging'
+        'ast'
+        'copy'
+        'jinja2'
+        'GetStatusWrapper'
+        'TemplateWrapper'
+        'PrinterGCodeMacro'
+        'load_config'
+        'GCodeMacro'
+        'load_config_prefix'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/gcode_macro.py
+            Object Name: GetStatusWrapper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                '__getitem__'
+                '__contains__'
+                '__iter__'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'GetStatusWrapper'
+                None
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'eventtime'
+                        'cache'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: printer
+                        6       LOAD_FAST                       2: eventtime
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: eventtime
+                        12      BUILD_MAP                       0
+                        14      LOAD_FAST                       0: self
+                        16      STORE_ATTR                      2: cache
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                'GetStatusWrapper.__init__'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __getitem__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'str'
+                        'strip'
+                        'cache'
+                        'printer'
+                        'lookup_object'
+                        'hasattr'
+                        'KeyError'
+                        'eventtime'
+                        'get_reactor'
+                        'monotonic'
+                        'copy'
+                        'deepcopy'
+                        'get_status'
+                    [Var Names]
+                        'self'
+                        'val'
+                        'sval'
+                        'po'
+                        'res'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'get_status'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: str
+                        2       LOAD_FAST                       1: val
+                        4       CALL_FUNCTION                   1
+                        6       LOAD_METHOD                     1: strip
+                        8       CALL_METHOD                     0
+                        10      STORE_FAST                      2: sval
+                        12      LOAD_FAST                       2: sval
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: cache
+                        18      CONTAINS_OP                     0 (in)
+                        20      POP_JUMP_IF_FALSE               32
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: cache
+                        26      LOAD_FAST                       2: sval
+                        28      BINARY_SUBSCR                   
+                        30      RETURN_VALUE                    
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       3: printer
+                        36      LOAD_METHOD                     4: lookup_object
+                        38      LOAD_FAST                       2: sval
+                        40      LOAD_CONST                      0: None
+                        42      CALL_METHOD                     2
+                        44      STORE_FAST                      3: po
+                        46      LOAD_FAST                       3: po
+                        48      LOAD_CONST                      0: None
+                        50      IS_OP                           0 (is)
+                        52      POP_JUMP_IF_TRUE                64
+                        54      LOAD_GLOBAL                     5: hasattr
+                        56      LOAD_FAST                       3: po
+                        58      LOAD_CONST                      1: 'get_status'
+                        60      CALL_FUNCTION                   2
+                        62      POP_JUMP_IF_TRUE                72
+                        64      LOAD_GLOBAL                     6: KeyError
+                        66      LOAD_FAST                       1: val
+                        68      CALL_FUNCTION                   1
+                        70      RAISE_VARARGS                   1
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       7: eventtime
+                        76      LOAD_CONST                      0: None
+                        78      IS_OP                           0 (is)
+                        80      POP_JUMP_IF_FALSE               98
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       3: printer
+                        86      LOAD_METHOD                     8: get_reactor
+                        88      CALL_METHOD                     0
+                        90      LOAD_METHOD                     9: monotonic
+                        92      CALL_METHOD                     0
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      7: eventtime
+                        98      LOAD_GLOBAL                     10: copy
+                        100     LOAD_METHOD                     11: deepcopy
+                        102     LOAD_FAST                       3: po
+                        104     LOAD_METHOD                     12: get_status
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       7: eventtime
+                        110     CALL_METHOD                     1
+                        112     CALL_METHOD                     1
+                        114     DUP_TOP                         
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       2: cache
+                        120     LOAD_FAST                       2: sval
+                        122     STORE_SUBSCR                    
+                        124     STORE_FAST                      4: res
+                        126     LOAD_FAST                       4: res
+                        128     RETURN_VALUE                    
+                'GetStatusWrapper.__getitem__'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __contains__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '__getitem__'
+                        'KeyError'
+                    [Var Names]
+                        'self'
+                        'val'
+                        'e'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        True
+                    [Disassembly]
+                        0       SETUP_FINALLY                   14 (to 16)
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_METHOD                     0: __getitem__
+                        6       LOAD_FAST                       1: val
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      POP_BLOCK                       
+                        14      JUMP_FORWARD                    38 (to 54)
+                        16      DUP_TOP                         
+                        18      LOAD_GLOBAL                     1: KeyError
+                        20      JUMP_IF_NOT_EXC_MATCH           52
+                        22      POP_TOP                         
+                        24      STORE_FAST                      2: e
+                        26      POP_TOP                         
+                        28      SETUP_FINALLY                   14 (to 44)
+                        30      POP_BLOCK                       
+                        32      POP_EXCEPT                      
+                        34      LOAD_CONST                      0: None
+                        36      STORE_FAST                      2: e
+                        38      DELETE_FAST                     2: e
+                        40      LOAD_CONST                      1: False
+                        42      RETURN_VALUE                    
+                        44      LOAD_CONST                      0: None
+                        46      STORE_FAST                      2: e
+                        48      DELETE_FAST                     2: e
+                        50      RERAISE                         
+                        52      RERAISE                         
+                        54      LOAD_CONST                      2: True
+                        56      RETURN_VALUE                    
+                'GetStatusWrapper.__contains__'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __iter__
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000063 (CO_OPTIMIZED | CO_NEWLOCALS | CO_GENERATOR | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_objects'
+                        '__contains__'
+                    [Var Names]
+                        'self'
+                        'name'
+                        'obj'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_objects
+                        6       CALL_METHOD                     0
+                        8       GET_ITER                        
+                        10      FOR_ITER                        24 (to 36)
+                        12      UNPACK_SEQUENCE                 2
+                        14      STORE_FAST                      1: name
+                        16      STORE_FAST                      2: obj
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_METHOD                     2: __contains__
+                        22      LOAD_FAST                       1: name
+                        24      CALL_METHOD                     1
+                        26      POP_JUMP_IF_FALSE               10
+                        28      LOAD_FAST                       1: name
+                        30      YIELD_VALUE                     
+                        32      POP_TOP                         
+                        34      JUMP_ABSOLUTE                   10
+                        36      LOAD_CONST                      0: None
+                        38      RETURN_VALUE                    
+                'GetStatusWrapper.__iter__'
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'GetStatusWrapper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      10: (None,)
+                10      LOAD_CONST                      2: <CODE> __init__
+                12      LOAD_CONST                      3: 'GetStatusWrapper.__init__'
+                14      MAKE_FUNCTION                   1
+                16      STORE_NAME                      3: __init__
+                18      LOAD_CONST                      4: <CODE> __getitem__
+                20      LOAD_CONST                      5: 'GetStatusWrapper.__getitem__'
+                22      MAKE_FUNCTION                   0
+                24      STORE_NAME                      4: __getitem__
+                26      LOAD_CONST                      6: <CODE> __contains__
+                28      LOAD_CONST                      7: 'GetStatusWrapper.__contains__'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: __contains__
+                34      LOAD_CONST                      8: <CODE> __iter__
+                36      LOAD_CONST                      9: 'GetStatusWrapper.__iter__'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: __iter__
+                42      LOAD_CONST                      1: None
+                44      RETURN_VALUE                    
+        'GetStatusWrapper'
+        [Code]
+            File Name: /extras/gcode_macro.py
+            Object Name: TemplateWrapper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'render'
+                'run_gcode_from_command'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'TemplateWrapper'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __init__
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 11
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'name'
+                        'lookup_object'
+                        'gcode'
+                        'create_template_context'
+                        'from_string'
+                        'template'
+                        'Exception'
+                        'traceback'
+                        'format_exception_only'
+                        'type'
+                        'logging'
+                        'exception'
+                        'config_error'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'env'
+                        'name'
+                        'script'
+                        'gcode_macro'
+                        'e'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'gcode_macro'
+                        '{"code":"key164", "msg": "Error loading template \'%s\': %s", "values": ["%s", "%s"]}'
+                        -1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: printer
+                        6       LOAD_FAST                       3: name
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: name
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: printer
+                        16      LOAD_METHOD                     2: lookup_object
+                        18      LOAD_CONST                      1: 'gcode'
+                        20      CALL_METHOD                     1
+                        22      LOAD_FAST                       0: self
+                        24      STORE_ATTR                      3: gcode
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       0: printer
+                        30      LOAD_METHOD                     2: lookup_object
+                        32      LOAD_CONST                      2: 'gcode_macro'
+                        34      CALL_METHOD                     1
+                        36      STORE_FAST                      5: gcode_macro
+                        38      LOAD_FAST                       5: gcode_macro
+                        40      LOAD_ATTR                       4: create_template_context
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      4: create_template_context
+                        46      SETUP_FINALLY                   16 (to 64)
+                        48      LOAD_FAST                       2: env
+                        50      LOAD_METHOD                     5: from_string
+                        52      LOAD_FAST                       4: script
+                        54      CALL_METHOD                     1
+                        56      LOAD_FAST                       0: self
+                        58      STORE_ATTR                      6: template
+                        60      POP_BLOCK                       
+                        62      JUMP_FORWARD                    104 (to 168)
+                        64      DUP_TOP                         
+                        66      LOAD_GLOBAL                     7: Exception
+                        68      JUMP_IF_NOT_EXC_MATCH           166
+                        70      POP_TOP                         
+                        72      STORE_FAST                      6: e
+                        74      POP_TOP                         
+                        76      SETUP_FINALLY                   80 (to 158)
+                        78      LOAD_CONST                      3: '{"code":"key164", "msg": "Error loading template \'%s\': %s", "values": ["%s", "%s"]}'
+                        80      LOAD_FAST                       3: name
+                        82      LOAD_GLOBAL                     8: traceback
+                        84      LOAD_METHOD                     9: format_exception_only
+                        86      LOAD_GLOBAL                     10: type
+                        88      LOAD_FAST                       6: e
+                        90      CALL_FUNCTION                   1
+                        92      LOAD_FAST                       6: e
+                        94      CALL_METHOD                     2
+                        96      LOAD_CONST                      4: -1
+                        98      BINARY_SUBSCR                   
+                        100     LOAD_FAST                       3: name
+                        102     LOAD_GLOBAL                     8: traceback
+                        104     LOAD_METHOD                     9: format_exception_only
+                        106     LOAD_GLOBAL                     10: type
+                        108     LOAD_FAST                       6: e
+                        110     CALL_FUNCTION                   1
+                        112     LOAD_FAST                       6: e
+                        114     CALL_METHOD                     2
+                        116     LOAD_CONST                      4: -1
+                        118     BINARY_SUBSCR                   
+                        120     BUILD_TUPLE                     4
+                        122     BINARY_MODULO                   
+                        124     STORE_FAST                      7: msg
+                        126     LOAD_GLOBAL                     11: logging
+                        128     LOAD_METHOD                     12: exception
+                        130     LOAD_FAST                       7: msg
+                        132     CALL_METHOD                     1
+                        134     POP_TOP                         
+                        136     LOAD_FAST                       1: printer
+                        138     LOAD_METHOD                     13: config_error
+                        140     LOAD_FAST                       7: msg
+                        142     CALL_METHOD                     1
+                        144     RAISE_VARARGS                   1
+                        146     POP_BLOCK                       
+                        148     POP_EXCEPT                      
+                        150     LOAD_CONST                      0: None
+                        152     STORE_FAST                      6: e
+                        154     DELETE_FAST                     6: e
+                        156     JUMP_FORWARD                    10 (to 168)
+                        158     LOAD_CONST                      0: None
+                        160     STORE_FAST                      6: e
+                        162     DELETE_FAST                     6: e
+                        164     RERAISE                         
+                        166     RERAISE                         
+                        168     LOAD_CONST                      0: None
+                        170     RETURN_VALUE                    
+                'TemplateWrapper.__init__'
+                None
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: render
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 11
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'create_template_context'
+                        'str'
+                        'template'
+                        'render'
+                        'Exception'
+                        'name'
+                        'traceback'
+                        'format_exception_only'
+                        'type'
+                        'logging'
+                        'exception'
+                        'gcode'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'context'
+                        'e'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key165", "msg": "Error evaluating \'%s\': %s", "values": ["%s", "%s"]}'
+                        -1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: context
+                        2       LOAD_CONST                      0: None
+                        4       IS_OP                           0 (is)
+                        6       POP_JUMP_IF_FALSE               16
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_METHOD                     0: create_template_context
+                        12      CALL_METHOD                     0
+                        14      STORE_FAST                      1: context
+                        16      SETUP_FINALLY                   18 (to 36)
+                        18      LOAD_GLOBAL                     1: str
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       2: template
+                        24      LOAD_METHOD                     3: render
+                        26      LOAD_FAST                       1: context
+                        28      CALL_METHOD                     1
+                        30      CALL_FUNCTION                   1
+                        32      POP_BLOCK                       
+                        34      RETURN_VALUE                    
+                        36      DUP_TOP                         
+                        38      LOAD_GLOBAL                     4: Exception
+                        40      JUMP_IF_NOT_EXC_MATCH           144
+                        42      POP_TOP                         
+                        44      STORE_FAST                      2: e
+                        46      POP_TOP                         
+                        48      SETUP_FINALLY                   86 (to 136)
+                        50      LOAD_CONST                      1: '{"code":"key165", "msg": "Error evaluating \'%s\': %s", "values": ["%s", "%s"]}'
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       5: name
+                        56      LOAD_GLOBAL                     6: traceback
+                        58      LOAD_METHOD                     7: format_exception_only
+                        60      LOAD_GLOBAL                     8: type
+                        62      LOAD_FAST                       2: e
+                        64      CALL_FUNCTION                   1
+                        66      LOAD_FAST                       2: e
+                        68      CALL_METHOD                     2
+                        70      LOAD_CONST                      2: -1
+                        72      BINARY_SUBSCR                   
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_ATTR                       5: name
+                        78      LOAD_GLOBAL                     6: traceback
+                        80      LOAD_METHOD                     7: format_exception_only
+                        82      LOAD_GLOBAL                     8: type
+                        84      LOAD_FAST                       2: e
+                        86      CALL_FUNCTION                   1
+                        88      LOAD_FAST                       2: e
+                        90      CALL_METHOD                     2
+                        92      LOAD_CONST                      2: -1
+                        94      BINARY_SUBSCR                   
+                        96      BUILD_TUPLE                     4
+                        98      BINARY_MODULO                   
+                        100     STORE_FAST                      3: msg
+                        102     LOAD_GLOBAL                     9: logging
+                        104     LOAD_METHOD                     10: exception
+                        106     LOAD_FAST                       3: msg
+                        108     CALL_METHOD                     1
+                        110     POP_TOP                         
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       11: gcode
+                        116     LOAD_METHOD                     12: error
+                        118     LOAD_FAST                       3: msg
+                        120     CALL_METHOD                     1
+                        122     RAISE_VARARGS                   1
+                        124     POP_BLOCK                       
+                        126     POP_EXCEPT                      
+                        128     LOAD_CONST                      0: None
+                        130     STORE_FAST                      2: e
+                        132     DELETE_FAST                     2: e
+                        134     JUMP_FORWARD                    10 (to 146)
+                        136     LOAD_CONST                      0: None
+                        138     STORE_FAST                      2: e
+                        140     DELETE_FAST                     2: e
+                        142     RERAISE                         
+                        144     RERAISE                         
+                        146     LOAD_CONST                      0: None
+                        148     RETURN_VALUE                    
+                'TemplateWrapper.render'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: run_gcode_from_command
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script_from_command'
+                        'render'
+                    [Var Names]
+                        'self'
+                        'context'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script_from_command
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_METHOD                     2: render
+                        10      LOAD_FAST                       1: context
+                        12      CALL_METHOD                     1
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                'TemplateWrapper.run_gcode_from_command'
+                (
+                    None
+                )
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'TemplateWrapper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'TemplateWrapper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      8: (None,)
+                18      LOAD_CONST                      4: <CODE> render
+                20      LOAD_CONST                      5: 'TemplateWrapper.render'
+                22      MAKE_FUNCTION                   1
+                24      STORE_NAME                      4: render
+                26      LOAD_CONST                      9: (None,)
+                28      LOAD_CONST                      6: <CODE> run_gcode_from_command
+                30      LOAD_CONST                      7: 'TemplateWrapper.run_gcode_from_command'
+                32      MAKE_FUNCTION                   1
+                34      STORE_NAME                      5: run_gcode_from_command
+                36      LOAD_CONST                      3: None
+                38      RETURN_VALUE                    
+        'TemplateWrapper'
+        [Code]
+            File Name: /extras/gcode_macro.py
+            Object Name: PrinterGCodeMacro
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'load_template'
+                '_action_emergency_stop'
+                '_action_respond_info'
+                '_action_raise_error'
+                '_action_call_remote_method'
+                'create_template_context'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterGCodeMacro'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'jinja2'
+                        'Environment'
+                        'env'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{%'
+                        '%}'
+                        '{'
+                        '}'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_GLOBAL                     2: jinja2
+                        12      LOAD_METHOD                     3: Environment
+                        14      LOAD_CONST                      1: '{%'
+                        16      LOAD_CONST                      2: '%}'
+                        18      LOAD_CONST                      3: '{'
+                        20      LOAD_CONST                      4: '}'
+                        22      CALL_METHOD                     4
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: env
+                        28      LOAD_CONST                      0: None
+                        30      RETURN_VALUE                    
+                'PrinterGCodeMacro.__init__'
+                None
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: load_template
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_name'
+                        'get'
+                        'TemplateWrapper'
+                        'printer'
+                        'env'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'option'
+                        'default'
+                        'name'
+                        'script'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '%s:%s'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: '%s:%s'
+                        2       LOAD_FAST                       1: config
+                        4       LOAD_METHOD                     0: get_name
+                        6       CALL_METHOD                     0
+                        8       LOAD_FAST                       2: option
+                        10      BUILD_TUPLE                     2
+                        12      BINARY_MODULO                   
+                        14      STORE_FAST                      4: name
+                        16      LOAD_FAST                       3: default
+                        18      LOAD_CONST                      0: None
+                        20      IS_OP                           0 (is)
+                        22      POP_JUMP_IF_FALSE               36
+                        24      LOAD_FAST                       1: config
+                        26      LOAD_METHOD                     1: get
+                        28      LOAD_FAST                       2: option
+                        30      CALL_METHOD                     1
+                        32      STORE_FAST                      5: script
+                        34      JUMP_FORWARD                    12 (to 48)
+                        36      LOAD_FAST                       1: config
+                        38      LOAD_METHOD                     1: get
+                        40      LOAD_FAST                       2: option
+                        42      LOAD_FAST                       3: default
+                        44      CALL_METHOD                     2
+                        46      STORE_FAST                      5: script
+                        48      LOAD_GLOBAL                     2: TemplateWrapper
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       3: printer
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       4: env
+                        58      LOAD_FAST                       4: name
+                        60      LOAD_FAST                       5: script
+                        62      CALL_FUNCTION                   4
+                        64      RETURN_VALUE                    
+                'PrinterGCodeMacro.load_template'
+                'action_emergency_stop'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: _action_emergency_stop
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'invoke_shutdown'
+                    [Var Names]
+                        'self'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key170", "msg": "Shutdown due to %s", "values": ["%s"]}'
+                        ''
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: invoke_shutdown
+                        6       LOAD_CONST                      1: '{"code":"key170", "msg": "Shutdown due to %s", "values": ["%s"]}'
+                        8       LOAD_FAST                       1: msg
+                        10      LOAD_FAST                       1: msg
+                        12      BUILD_TUPLE                     2
+                        14      BINARY_MODULO                   
+                        16      CALL_METHOD                     1
+                        18      POP_TOP                         
+                        20      LOAD_CONST                      2: ''
+                        22      RETURN_VALUE                    
+                'PrinterGCodeMacro._action_emergency_stop'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: _action_respond_info
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        ''
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'gcode'
+                        8       CALL_METHOD                     1
+                        10      LOAD_METHOD                     2: respond_info
+                        12      LOAD_FAST                       1: msg
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_CONST                      2: ''
+                        20      RETURN_VALUE                    
+                'PrinterGCodeMacro._action_respond_info'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: _action_raise_error
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'command_error'
+                    [Var Names]
+                        'self'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: command_error
+                        6       LOAD_FAST                       1: msg
+                        8       CALL_METHOD                     1
+                        10      RAISE_VARARGS                   1
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'PrinterGCodeMacro._action_raise_error'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: _action_call_remote_method
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 8
+                    Flags: 0x0000004B (CO_OPTIMIZED | CO_NEWLOCALS | CO_VARKEYWORDS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'call_remote_method'
+                        'command_error'
+                        'logging'
+                        'exception'
+                    [Var Names]
+                        'self'
+                        'method'
+                        'kwargs'
+                        'webhooks'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'webhooks'
+                        'Remote Call Error'
+                        ''
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'webhooks'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      3: webhooks
+                        12      SETUP_FINALLY                   22 (to 36)
+                        14      LOAD_FAST                       3: webhooks
+                        16      LOAD_ATTR                       2: call_remote_method
+                        18      LOAD_FAST                       1: method
+                        20      BUILD_TUPLE                     1
+                        22      BUILD_MAP                       0
+                        24      LOAD_FAST                       2: kwargs
+                        26      DICT_MERGE                      1
+                        28      CALL_FUNCTION_EX                1
+                        30      POP_TOP                         
+                        32      POP_BLOCK                       
+                        34      JUMP_FORWARD                    32 (to 68)
+                        36      DUP_TOP                         
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       0: printer
+                        42      LOAD_ATTR                       3: command_error
+                        44      JUMP_IF_NOT_EXC_MATCH           66
+                        46      POP_TOP                         
+                        48      POP_TOP                         
+                        50      POP_TOP                         
+                        52      LOAD_GLOBAL                     4: logging
+                        54      LOAD_METHOD                     5: exception
+                        56      LOAD_CONST                      2: 'Remote Call Error'
+                        58      CALL_METHOD                     1
+                        60      POP_TOP                         
+                        62      POP_EXCEPT                      
+                        64      JUMP_FORWARD                    2 (to 68)
+                        66      RERAISE                         
+                        68      LOAD_CONST                      3: ''
+                        70      RETURN_VALUE                    
+                'PrinterGCodeMacro._action_call_remote_method'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: create_template_context
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'GetStatusWrapper'
+                        'printer'
+                        '_action_emergency_stop'
+                        '_action_respond_info'
+                        '_action_raise_error'
+                        '_action_call_remote_method'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'printer'
+                            'action_emergency_stop'
+                            'action_respond_info'
+                            'action_raise_error'
+                            'action_call_remote_method'
+                        )
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: GetStatusWrapper
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       1: printer
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_FUNCTION                   2
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       2: _action_emergency_stop
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       3: _action_respond_info
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       4: _action_raise_error
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       5: _action_call_remote_method
+                        26      LOAD_CONST                      1: ('printer', 'action_emergency_stop', 'action_respond_info', 'action_raise_error', 'action_call_remote_method')
+                        28      BUILD_CONST_KEY_MAP             5
+                        30      RETURN_VALUE                    
+                'PrinterGCodeMacro.create_template_context'
+                (
+                    None
+                )
+                (
+                    'action_emergency_stop'
+                )
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterGCodeMacro'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterGCodeMacro.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      17: (None,)
+                18      LOAD_CONST                      4: <CODE> load_template
+                20      LOAD_CONST                      5: 'PrinterGCodeMacro.load_template'
+                22      MAKE_FUNCTION                   1
+                24      STORE_NAME                      4: load_template
+                26      LOAD_CONST                      18: ('action_emergency_stop',)
+                28      LOAD_CONST                      7: <CODE> _action_emergency_stop
+                30      LOAD_CONST                      8: 'PrinterGCodeMacro._action_emergency_stop'
+                32      MAKE_FUNCTION                   1
+                34      STORE_NAME                      5: _action_emergency_stop
+                36      LOAD_CONST                      9: <CODE> _action_respond_info
+                38      LOAD_CONST                      10: 'PrinterGCodeMacro._action_respond_info'
+                40      MAKE_FUNCTION                   0
+                42      STORE_NAME                      6: _action_respond_info
+                44      LOAD_CONST                      11: <CODE> _action_raise_error
+                46      LOAD_CONST                      12: 'PrinterGCodeMacro._action_raise_error'
+                48      MAKE_FUNCTION                   0
+                50      STORE_NAME                      7: _action_raise_error
+                52      LOAD_CONST                      13: <CODE> _action_call_remote_method
+                54      LOAD_CONST                      14: 'PrinterGCodeMacro._action_call_remote_method'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      8: _action_call_remote_method
+                60      LOAD_CONST                      19: (None,)
+                62      LOAD_CONST                      15: <CODE> create_template_context
+                64      LOAD_CONST                      16: 'PrinterGCodeMacro.create_template_context'
+                66      MAKE_FUNCTION                   1
+                68      STORE_NAME                      9: create_template_context
+                70      LOAD_CONST                      3: None
+                72      RETURN_VALUE                    
+        'PrinterGCodeMacro'
+        [Code]
+            File Name: /extras/gcode_macro.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterGCodeMacro'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterGCodeMacro
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+        [Code]
+            File Name: /extras/gcode_macro.py
+            Object Name: GCodeMacro
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'handle_connect'
+                'get_status'
+                'cmd_SET_GCODE_VARIABLE_help'
+                'cmd_SET_GCODE_VARIABLE'
+                'cmd'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'GCodeMacro'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 11
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'len'
+                        'get_name'
+                        'split'
+                        'error'
+                        'upper'
+                        'alias'
+                        'get_printer'
+                        'printer'
+                        'load_object'
+                        'load_template'
+                        'template'
+                        'lookup_object'
+                        'gcode'
+                        'get'
+                        'rename_existing'
+                        'cmd_desc'
+                        'is_traditional_gcode'
+                        'register_event_handler'
+                        'handle_connect'
+                        'register_command'
+                        'cmd'
+                        'register_mux_command'
+                        'cmd_SET_GCODE_VARIABLE'
+                        'cmd_SET_GCODE_VARIABLE_help'
+                        'in_script'
+                        'variables'
+                        'get_prefix_options'
+                        'ast'
+                        'literal_eval'
+                        'ValueError'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'name'
+                        'printer'
+                        'gcode_macro'
+                        'prefix'
+                        'option'
+                        'e'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        2
+                        '{"code":"key166", "msg": "Name of section \'%s\' contains illegal whitespace", "values": ["%s"]}'
+                        1
+                        'gcode_macro'
+                        'gcode'
+                        'rename_existing'
+                        'description'
+                        'G-Code macro'
+                        '{"code":"key167", "msg": "G-Code macro rename of different types (\'%s\' vs \'%s\')", "values": ["%s", "%s"]}'
+                        'klippy:connect'
+                        (
+                            'desc'
+                        )
+                        'SET_GCODE_VARIABLE'
+                        'MACRO'
+                        False
+                        'variable_'
+                        "Option '%s' in section '%s' is not a valid literal"
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: len
+                        2       LOAD_FAST                       1: config
+                        4       LOAD_METHOD                     1: get_name
+                        6       CALL_METHOD                     0
+                        8       LOAD_METHOD                     2: split
+                        10      CALL_METHOD                     0
+                        12      CALL_FUNCTION                   1
+                        14      LOAD_CONST                      1: 2
+                        16      COMPARE_OP                      4 (>)
+                        18      POP_JUMP_IF_FALSE               46
+                        20      LOAD_FAST                       1: config
+                        22      LOAD_METHOD                     3: error
+                        24      LOAD_CONST                      2: '{"code":"key166", "msg": "Name of section \'%s\' contains illegal whitespace", "values": ["%s"]}'
+                        26      LOAD_FAST                       1: config
+                        28      LOAD_METHOD                     1: get_name
+                        30      CALL_METHOD                     0
+                        32      LOAD_FAST                       1: config
+                        34      LOAD_METHOD                     1: get_name
+                        36      CALL_METHOD                     0
+                        38      BUILD_TUPLE                     2
+                        40      BINARY_MODULO                   
+                        42      CALL_METHOD                     1
+                        44      RAISE_VARARGS                   1
+                        46      LOAD_FAST                       1: config
+                        48      LOAD_METHOD                     1: get_name
+                        50      CALL_METHOD                     0
+                        52      LOAD_METHOD                     2: split
+                        54      CALL_METHOD                     0
+                        56      LOAD_CONST                      3: 1
+                        58      BINARY_SUBSCR                   
+                        60      STORE_FAST                      2: name
+                        62      LOAD_FAST                       2: name
+                        64      LOAD_METHOD                     4: upper
+                        66      CALL_METHOD                     0
+                        68      LOAD_FAST                       0: self
+                        70      STORE_ATTR                      5: alias
+                        72      LOAD_FAST                       1: config
+                        74      LOAD_METHOD                     6: get_printer
+                        76      CALL_METHOD                     0
+                        78      DUP_TOP                         
+                        80      LOAD_FAST                       0: self
+                        82      STORE_ATTR                      7: printer
+                        84      STORE_FAST                      3: printer
+                        86      LOAD_FAST                       3: printer
+                        88      LOAD_METHOD                     8: load_object
+                        90      LOAD_FAST                       1: config
+                        92      LOAD_CONST                      4: 'gcode_macro'
+                        94      CALL_METHOD                     2
+                        96      STORE_FAST                      4: gcode_macro
+                        98      LOAD_FAST                       4: gcode_macro
+                        100     LOAD_METHOD                     9: load_template
+                        102     LOAD_FAST                       1: config
+                        104     LOAD_CONST                      5: 'gcode'
+                        106     CALL_METHOD                     2
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      10: template
+                        112     LOAD_FAST                       3: printer
+                        114     LOAD_METHOD                     11: lookup_object
+                        116     LOAD_CONST                      5: 'gcode'
+                        118     CALL_METHOD                     1
+                        120     LOAD_FAST                       0: self
+                        122     STORE_ATTR                      12: gcode
+                        124     LOAD_FAST                       1: config
+                        126     LOAD_METHOD                     13: get
+                        128     LOAD_CONST                      6: 'rename_existing'
+                        130     LOAD_CONST                      0: None
+                        132     CALL_METHOD                     2
+                        134     LOAD_FAST                       0: self
+                        136     STORE_ATTR                      14: rename_existing
+                        138     LOAD_FAST                       1: config
+                        140     LOAD_METHOD                     13: get
+                        142     LOAD_CONST                      7: 'description'
+                        144     LOAD_CONST                      8: 'G-Code macro'
+                        146     CALL_METHOD                     2
+                        148     LOAD_FAST                       0: self
+                        150     STORE_ATTR                      15: cmd_desc
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       14: rename_existing
+                        156     LOAD_CONST                      0: None
+                        158     IS_OP                           1 (is not)
+                        160     POP_JUMP_IF_FALSE               236
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       12: gcode
+                        166     LOAD_METHOD                     16: is_traditional_gcode
+                        168     LOAD_FAST                       0: self
+                        170     LOAD_ATTR                       5: alias
+                        172     CALL_METHOD                     1
+                        174     LOAD_FAST                       0: self
+                        176     LOAD_ATTR                       12: gcode
+                        178     LOAD_METHOD                     16: is_traditional_gcode
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       14: rename_existing
+                        184     CALL_METHOD                     1
+                        186     COMPARE_OP                      3 (!=)
+                        188     POP_JUMP_IF_FALSE               220
+                        190     LOAD_FAST                       1: config
+                        192     LOAD_METHOD                     3: error
+                        194     LOAD_CONST                      9: '{"code":"key167", "msg": "G-Code macro rename of different types (\'%s\' vs \'%s\')", "values": ["%s", "%s"]}'
+                        196     LOAD_FAST                       0: self
+                        198     LOAD_ATTR                       5: alias
+                        200     LOAD_FAST                       0: self
+                        202     LOAD_ATTR                       14: rename_existing
+                        204     LOAD_FAST                       0: self
+                        206     LOAD_ATTR                       5: alias
+                        208     LOAD_FAST                       0: self
+                        210     LOAD_ATTR                       14: rename_existing
+                        212     BUILD_TUPLE                     4
+                        214     BINARY_MODULO                   
+                        216     CALL_METHOD                     1
+                        218     RAISE_VARARGS                   1
+                        220     LOAD_FAST                       3: printer
+                        222     LOAD_METHOD                     17: register_event_handler
+                        224     LOAD_CONST                      10: 'klippy:connect'
+                        226     LOAD_FAST                       0: self
+                        228     LOAD_ATTR                       18: handle_connect
+                        230     CALL_METHOD                     2
+                        232     POP_TOP                         
+                        234     JUMP_FORWARD                    24 (to 260)
+                        236     LOAD_FAST                       0: self
+                        238     LOAD_ATTR                       12: gcode
+                        240     LOAD_ATTR                       19: register_command
+                        242     LOAD_FAST                       0: self
+                        244     LOAD_ATTR                       5: alias
+                        246     LOAD_FAST                       0: self
+                        248     LOAD_ATTR                       20: cmd
+                        250     LOAD_FAST                       0: self
+                        252     LOAD_ATTR                       15: cmd_desc
+                        254     LOAD_CONST                      11: ('desc',)
+                        256     CALL_FUNCTION_KW                3
+                        258     POP_TOP                         
+                        260     LOAD_FAST                       0: self
+                        262     LOAD_ATTR                       12: gcode
+                        264     LOAD_ATTR                       21: register_mux_command
+                        266     LOAD_CONST                      12: 'SET_GCODE_VARIABLE'
+                        268     LOAD_CONST                      13: 'MACRO'
+                        270     LOAD_FAST                       2: name
+                        272     LOAD_FAST                       0: self
+                        274     LOAD_ATTR                       22: cmd_SET_GCODE_VARIABLE
+                        276     LOAD_FAST                       0: self
+                        278     LOAD_ATTR                       23: cmd_SET_GCODE_VARIABLE_help
+                        280     LOAD_CONST                      11: ('desc',)
+                        282     CALL_FUNCTION_KW                5
+                        284     POP_TOP                         
+                        286     LOAD_CONST                      14: False
+                        288     LOAD_FAST                       0: self
+                        290     STORE_ATTR                      24: in_script
+                        292     BUILD_MAP                       0
+                        294     LOAD_FAST                       0: self
+                        296     STORE_ATTR                      25: variables
+                        298     LOAD_CONST                      15: 'variable_'
+                        300     STORE_FAST                      5: prefix
+                        302     LOAD_FAST                       1: config
+                        304     LOAD_METHOD                     26: get_prefix_options
+                        306     LOAD_FAST                       5: prefix
+                        308     CALL_METHOD                     1
+                        310     GET_ITER                        
+                        312     FOR_ITER                        106 (to 420)
+                        314     STORE_FAST                      6: option
+                        316     SETUP_FINALLY                   38 (to 356)
+                        318     LOAD_GLOBAL                     27: ast
+                        320     LOAD_METHOD                     28: literal_eval
+                        322     LOAD_FAST                       1: config
+                        324     LOAD_METHOD                     13: get
+                        326     LOAD_FAST                       6: option
+                        328     CALL_METHOD                     1
+                        330     CALL_METHOD                     1
+                        332     LOAD_FAST                       0: self
+                        334     LOAD_ATTR                       25: variables
+                        336     LOAD_FAST                       6: option
+                        338     LOAD_GLOBAL                     0: len
+                        340     LOAD_FAST                       5: prefix
+                        342     CALL_FUNCTION                   1
+                        344     LOAD_CONST                      0: None
+                        346     BUILD_SLICE                     2
+                        348     BINARY_SUBSCR                   
+                        350     STORE_SUBSCR                    
+                        352     POP_BLOCK                       
+                        354     JUMP_FORWARD                    60 (to 416)
+                        356     DUP_TOP                         
+                        358     LOAD_GLOBAL                     29: ValueError
+                        360     JUMP_IF_NOT_EXC_MATCH           414
+                        364     POP_TOP                         
+                        366     STORE_FAST                      7: e
+                        368     POP_TOP                         
+                        370     SETUP_FINALLY                   34 (to 406)
+                        372     LOAD_FAST                       1: config
+                        374     LOAD_METHOD                     3: error
+                        376     LOAD_CONST                      16: "Option '%s' in section '%s' is not a valid literal"
+                        378     LOAD_FAST                       6: option
+                        380     LOAD_FAST                       1: config
+                        382     LOAD_METHOD                     1: get_name
+                        384     CALL_METHOD                     0
+                        386     BUILD_TUPLE                     2
+                        388     BINARY_MODULO                   
+                        390     CALL_METHOD                     1
+                        392     RAISE_VARARGS                   1
+                        394     POP_BLOCK                       
+                        396     POP_EXCEPT                      
+                        398     LOAD_CONST                      0: None
+                        400     STORE_FAST                      7: e
+                        402     DELETE_FAST                     7: e
+                        404     JUMP_FORWARD                    10 (to 416)
+                        406     LOAD_CONST                      0: None
+                        408     STORE_FAST                      7: e
+                        410     DELETE_FAST                     7: e
+                        412     RERAISE                         
+                        414     RERAISE                         
+                        416     JUMP_ABSOLUTE                   312
+                        420     LOAD_CONST                      0: None
+                        422     RETURN_VALUE                    
+                'GCodeMacro.__init__'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: handle_connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'register_command'
+                        'alias'
+                        'printer'
+                        'config_error'
+                        'rename_existing'
+                        'cmd'
+                        'cmd_desc'
+                    [Var Names]
+                        'self'
+                        'prev_cmd'
+                        'pdesc'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key169", "msg": "Existing command \'%s\' not found in gcode_macro rename", "values": ["%s"]}'
+                        "Renamed builtin of '%s'"
+                        (
+                            'desc'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: register_command
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       2: alias
+                        10      LOAD_CONST                      0: None
+                        12      CALL_METHOD                     2
+                        14      STORE_FAST                      1: prev_cmd
+                        16      LOAD_FAST                       1: prev_cmd
+                        18      LOAD_CONST                      0: None
+                        20      IS_OP                           0 (is)
+                        22      POP_JUMP_IF_FALSE               48
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       3: printer
+                        28      LOAD_METHOD                     4: config_error
+                        30      LOAD_CONST                      1: '{"code":"key169", "msg": "Existing command \'%s\' not found in gcode_macro rename", "values": ["%s"]}'
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       2: alias
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       2: alias
+                        40      BUILD_TUPLE                     2
+                        42      BINARY_MODULO                   
+                        44      CALL_METHOD                     1
+                        46      RAISE_VARARGS                   1
+                        48      LOAD_CONST                      2: "Renamed builtin of '%s'"
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       2: alias
+                        54      BUILD_TUPLE                     1
+                        56      BINARY_MODULO                   
+                        58      STORE_FAST                      2: pdesc
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       0: gcode
+                        64      LOAD_ATTR                       1: register_command
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       5: rename_existing
+                        70      LOAD_FAST                       1: prev_cmd
+                        72      LOAD_FAST                       2: pdesc
+                        74      LOAD_CONST                      3: ('desc',)
+                        76      CALL_FUNCTION_KW                3
+                        78      POP_TOP                         
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       0: gcode
+                        84      LOAD_ATTR                       1: register_command
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       2: alias
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       6: cmd
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       7: cmd_desc
+                        98      LOAD_CONST                      3: ('desc',)
+                        100     CALL_FUNCTION_KW                3
+                        102     POP_TOP                         
+                        104     LOAD_CONST                      0: None
+                        106     RETURN_VALUE                    
+                'GCodeMacro.handle_connect'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'variables'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: variables
+                        4       RETURN_VALUE                    
+                'GCodeMacro.get_status'
+                'Set the value of a G-Code macro variable'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: cmd_SET_GCODE_VARIABLE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 13
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get'
+                        'variables'
+                        'error'
+                        'ast'
+                        'literal_eval'
+                        'ValueError'
+                        'dict'
+                        'os'
+                        'json'
+                        'logging'
+                        'info'
+                        'printer'
+                        'lookup_object'
+                        'path'
+                        'exists'
+                        'print_file_name_path'
+                        'open'
+                        'loads'
+                        'read'
+                        'write'
+                        'dumps'
+                        'flush'
+                        'Exception'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'variable'
+                        'value'
+                        'literal'
+                        'e'
+                        'v'
+                        'os'
+                        'json'
+                        'v_sd'
+                        'result'
+                        'f'
+                        'err'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'VARIABLE'
+                        'VALUE'
+                        "Unknown gcode_macro variable '%s'"
+                        "Unable to parse '%s' as a literal"
+                        0
+                        'z_safe_pause'
+                        'SET_GCODE_VARIABLE variable:%s literal:%s'
+                        'virtual_sdcard'
+                        'r'
+                        'variable_z_safe_pause'
+                        'w'
+                        'SET_GCODE_VARIABLE save z_safe_pause err:%s'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'VARIABLE'
+                        6       CALL_METHOD                     1
+                        8       STORE_FAST                      2: variable
+                        10      LOAD_FAST                       1: gcmd
+                        12      LOAD_METHOD                     0: get
+                        14      LOAD_CONST                      2: 'VALUE'
+                        16      CALL_METHOD                     1
+                        18      STORE_FAST                      3: value
+                        20      LOAD_FAST                       2: variable
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       1: variables
+                        26      CONTAINS_OP                     1 (not in)
+                        28      POP_JUMP_IF_FALSE               46
+                        30      LOAD_FAST                       1: gcmd
+                        32      LOAD_METHOD                     2: error
+                        34      LOAD_CONST                      3: "Unknown gcode_macro variable '%s'"
+                        36      LOAD_FAST                       2: variable
+                        38      BUILD_TUPLE                     1
+                        40      BINARY_MODULO                   
+                        42      CALL_METHOD                     1
+                        44      RAISE_VARARGS                   1
+                        46      SETUP_FINALLY                   14 (to 62)
+                        48      LOAD_GLOBAL                     3: ast
+                        50      LOAD_METHOD                     4: literal_eval
+                        52      LOAD_FAST                       3: value
+                        54      CALL_METHOD                     1
+                        56      STORE_FAST                      4: literal
+                        58      POP_BLOCK                       
+                        60      JUMP_FORWARD                    52 (to 114)
+                        62      DUP_TOP                         
+                        64      LOAD_GLOBAL                     5: ValueError
+                        66      JUMP_IF_NOT_EXC_MATCH           112
+                        68      POP_TOP                         
+                        70      STORE_FAST                      5: e
+                        72      POP_TOP                         
+                        74      SETUP_FINALLY                   28 (to 104)
+                        76      LOAD_FAST                       1: gcmd
+                        78      LOAD_METHOD                     2: error
+                        80      LOAD_CONST                      4: "Unable to parse '%s' as a literal"
+                        82      LOAD_FAST                       3: value
+                        84      BUILD_TUPLE                     1
+                        86      BINARY_MODULO                   
+                        88      CALL_METHOD                     1
+                        90      RAISE_VARARGS                   1
+                        92      POP_BLOCK                       
+                        94      POP_EXCEPT                      
+                        96      LOAD_CONST                      0: None
+                        98      STORE_FAST                      5: e
+                        100     DELETE_FAST                     5: e
+                        102     JUMP_FORWARD                    10 (to 114)
+                        104     LOAD_CONST                      0: None
+                        106     STORE_FAST                      5: e
+                        108     DELETE_FAST                     5: e
+                        110     RERAISE                         
+                        112     RERAISE                         
+                        114     LOAD_GLOBAL                     6: dict
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       1: variables
+                        120     CALL_FUNCTION                   1
+                        122     STORE_FAST                      6: v
+                        124     LOAD_FAST                       4: literal
+                        126     LOAD_FAST                       6: v
+                        128     LOAD_FAST                       2: variable
+                        130     STORE_SUBSCR                    
+                        132     LOAD_FAST                       6: v
+                        134     LOAD_FAST                       0: self
+                        136     STORE_ATTR                      1: variables
+                        138     SETUP_FINALLY                   220 (to 360)
+                        140     LOAD_CONST                      5: 0
+                        142     LOAD_CONST                      0: None
+                        144     IMPORT_NAME                     7: os
+                        146     STORE_FAST                      7: os
+                        148     LOAD_CONST                      5: 0
+                        150     LOAD_CONST                      0: None
+                        152     IMPORT_NAME                     8: json
+                        154     STORE_FAST                      8: json
+                        156     LOAD_CONST                      6: 'z_safe_pause'
+                        158     LOAD_FAST                       2: variable
+                        160     CONTAINS_OP                     0 (in)
+                        162     POP_JUMP_IF_FALSE               356
+                        166     LOAD_GLOBAL                     9: logging
+                        168     LOAD_METHOD                     10: info
+                        170     LOAD_CONST                      7: 'SET_GCODE_VARIABLE variable:%s literal:%s'
+                        172     LOAD_FAST                       2: variable
+                        174     LOAD_FAST                       4: literal
+                        176     BUILD_TUPLE                     2
+                        178     BINARY_MODULO                   
+                        180     CALL_METHOD                     1
+                        182     POP_TOP                         
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       11: printer
+                        188     LOAD_METHOD                     12: lookup_object
+                        190     LOAD_CONST                      8: 'virtual_sdcard'
+                        192     LOAD_CONST                      0: None
+                        194     CALL_METHOD                     2
+                        196     STORE_FAST                      9: v_sd
+                        198     LOAD_FAST                       7: os
+                        200     LOAD_ATTR                       13: path
+                        202     LOAD_METHOD                     14: exists
+                        204     LOAD_FAST                       9: v_sd
+                        206     LOAD_ATTR                       15: print_file_name_path
+                        208     CALL_METHOD                     1
+                        210     POP_JUMP_IF_FALSE               356
+                        214     BUILD_MAP                       0
+                        216     STORE_FAST                      10: result
+                        218     LOAD_GLOBAL                     16: open
+                        220     LOAD_FAST                       9: v_sd
+                        222     LOAD_ATTR                       15: print_file_name_path
+                        224     LOAD_CONST                      9: 'r'
+                        226     CALL_FUNCTION                   2
+                        228     SETUP_WITH                      38 (to 268)
+                        230     STORE_FAST                      11: f
+                        232     LOAD_FAST                       8: json
+                        234     LOAD_METHOD                     17: loads
+                        236     LOAD_FAST                       11: f
+                        238     LOAD_METHOD                     18: read
+                        240     CALL_METHOD                     0
+                        242     CALL_METHOD                     1
+                        244     STORE_FAST                      10: result
+                        246     LOAD_FAST                       4: literal
+                        248     LOAD_FAST                       10: result
+                        250     LOAD_CONST                      10: 'variable_z_safe_pause'
+                        252     STORE_SUBSCR                    
+                        254     POP_BLOCK                       
+                        256     LOAD_CONST                      0: None
+                        258     DUP_TOP                         
+                        260     DUP_TOP                         
+                        262     CALL_FUNCTION                   3
+                        264     POP_TOP                         
+                        266     JUMP_FORWARD                    18 (to 286)
+                        268     WITH_EXCEPT_START               
+                        270     POP_JUMP_IF_TRUE                276
+                        274     RERAISE                         
+                        276     POP_TOP                         
+                        278     POP_TOP                         
+                        280     POP_TOP                         
+                        282     POP_EXCEPT                      
+                        284     POP_TOP                         
+                        286     LOAD_GLOBAL                     16: open
+                        288     LOAD_FAST                       9: v_sd
+                        290     LOAD_ATTR                       15: print_file_name_path
+                        292     LOAD_CONST                      11: 'w'
+                        294     CALL_FUNCTION                   2
+                        296     SETUP_WITH                      40 (to 338)
+                        298     STORE_FAST                      11: f
+                        300     LOAD_FAST                       11: f
+                        302     LOAD_METHOD                     19: write
+                        304     LOAD_FAST                       8: json
+                        306     LOAD_METHOD                     20: dumps
+                        308     LOAD_FAST                       10: result
+                        310     CALL_METHOD                     1
+                        312     CALL_METHOD                     1
+                        314     POP_TOP                         
+                        316     LOAD_FAST                       11: f
+                        318     LOAD_METHOD                     21: flush
+                        320     CALL_METHOD                     0
+                        322     POP_TOP                         
+                        324     POP_BLOCK                       
+                        326     LOAD_CONST                      0: None
+                        328     DUP_TOP                         
+                        330     DUP_TOP                         
+                        332     CALL_FUNCTION                   3
+                        334     POP_TOP                         
+                        336     JUMP_FORWARD                    18 (to 356)
+                        338     WITH_EXCEPT_START               
+                        340     POP_JUMP_IF_TRUE                346
+                        344     RERAISE                         
+                        346     POP_TOP                         
+                        348     POP_TOP                         
+                        350     POP_TOP                         
+                        352     POP_EXCEPT                      
+                        354     POP_TOP                         
+                        356     POP_BLOCK                       
+                        358     JUMP_FORWARD                    52 (to 412)
+                        360     DUP_TOP                         
+                        362     LOAD_GLOBAL                     22: Exception
+                        364     JUMP_IF_NOT_EXC_MATCH           410
+                        368     POP_TOP                         
+                        370     STORE_FAST                      12: err
+                        372     POP_TOP                         
+                        374     SETUP_FINALLY                   26 (to 402)
+                        376     LOAD_GLOBAL                     9: logging
+                        378     LOAD_METHOD                     2: error
+                        380     LOAD_CONST                      12: 'SET_GCODE_VARIABLE save z_safe_pause err:%s'
+                        382     LOAD_FAST                       12: err
+                        384     BINARY_MODULO                   
+                        386     CALL_METHOD                     1
+                        388     POP_TOP                         
+                        390     POP_BLOCK                       
+                        392     POP_EXCEPT                      
+                        394     LOAD_CONST                      0: None
+                        396     STORE_FAST                      12: err
+                        398     DELETE_FAST                     12: err
+                        400     JUMP_FORWARD                    10 (to 412)
+                        402     LOAD_CONST                      0: None
+                        404     STORE_FAST                      12: err
+                        406     DELETE_FAST                     12: err
+                        408     RERAISE                         
+                        410     RERAISE                         
+                        412     LOAD_CONST                      0: None
+                        414     RETURN_VALUE                    
+                'GCodeMacro.cmd_SET_GCODE_VARIABLE'
+                [Code]
+                    File Name: /extras/gcode_macro.py
+                    Object Name: cmd
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'in_script'
+                        'warning'
+                        'alias'
+                        'dict'
+                        'variables'
+                        'update'
+                        'template'
+                        'create_template_context'
+                        'get_command_parameters'
+                        'get_raw_command_parameters'
+                        'printer'
+                        'lookup_object'
+                        'pause_start'
+                        'run_gcode_from_command'
+                        'motor_cancel_print_start'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'kwparams'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key172", "msg": "Macro %s called recursively", "values": ["%s"]}'
+                        'params'
+                        'rawparams'
+                        True
+                        'PAUSE'
+                        'pause_resume'
+                        False
+                        'MOTOR_CANCEL_PRINT'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: in_script
+                        4       POP_JUMP_IF_FALSE               28
+                        6       LOAD_FAST                       1: gcmd
+                        8       LOAD_METHOD                     1: warning
+                        10      LOAD_CONST                      1: '{"code":"key172", "msg": "Macro %s called recursively", "values": ["%s"]}'
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: alias
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: alias
+                        20      BUILD_TUPLE                     2
+                        22      BINARY_MODULO                   
+                        24      CALL_METHOD                     1
+                        26      RETURN_VALUE                    
+                        28      LOAD_GLOBAL                     3: dict
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       4: variables
+                        34      CALL_FUNCTION                   1
+                        36      STORE_FAST                      2: kwparams
+                        38      LOAD_FAST                       2: kwparams
+                        40      LOAD_METHOD                     5: update
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       6: template
+                        46      LOAD_METHOD                     7: create_template_context
+                        48      CALL_METHOD                     0
+                        50      CALL_METHOD                     1
+                        52      POP_TOP                         
+                        54      LOAD_FAST                       1: gcmd
+                        56      LOAD_METHOD                     8: get_command_parameters
+                        58      CALL_METHOD                     0
+                        60      LOAD_FAST                       2: kwparams
+                        62      LOAD_CONST                      2: 'params'
+                        64      STORE_SUBSCR                    
+                        66      LOAD_FAST                       1: gcmd
+                        68      LOAD_METHOD                     9: get_raw_command_parameters
+                        70      CALL_METHOD                     0
+                        72      LOAD_FAST                       2: kwparams
+                        74      LOAD_CONST                      3: 'rawparams'
+                        76      STORE_SUBSCR                    
+                        78      LOAD_CONST                      4: True
+                        80      LOAD_FAST                       0: self
+                        82      STORE_ATTR                      0: in_script
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       2: alias
+                        88      LOAD_CONST                      5: 'PAUSE'
+                        90      COMPARE_OP                      2 (==)
+                        92      POP_JUMP_IF_FALSE               108
+                        94      LOAD_CONST                      4: True
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       10: printer
+                        100     LOAD_METHOD                     11: lookup_object
+                        102     LOAD_CONST                      6: 'pause_resume'
+                        104     CALL_METHOD                     1
+                        106     STORE_ATTR                      12: pause_start
+                        108     SETUP_FINALLY                   72 (to 182)
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       6: template
+                        114     LOAD_METHOD                     13: run_gcode_from_command
+                        116     LOAD_FAST                       2: kwparams
+                        118     CALL_METHOD                     1
+                        120     POP_TOP                         
+                        122     POP_BLOCK                       
+                        124     LOAD_CONST                      7: False
+                        126     LOAD_FAST                       0: self
+                        128     STORE_ATTR                      0: in_script
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       2: alias
+                        134     LOAD_CONST                      5: 'PAUSE'
+                        136     COMPARE_OP                      2 (==)
+                        138     POP_JUMP_IF_FALSE               156
+                        140     LOAD_CONST                      7: False
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       10: printer
+                        146     LOAD_METHOD                     11: lookup_object
+                        148     LOAD_CONST                      6: 'pause_resume'
+                        150     CALL_METHOD                     1
+                        152     STORE_ATTR                      12: pause_start
+                        154     JUMP_ABSOLUTE                   240
+                        156     LOAD_FAST                       0: self
+                        158     LOAD_ATTR                       2: alias
+                        160     LOAD_CONST                      8: 'MOTOR_CANCEL_PRINT'
+                        162     COMPARE_OP                      2 (==)
+                        164     POP_JUMP_IF_FALSE               240
+                        166     LOAD_CONST                      7: False
+                        168     LOAD_FAST                       0: self
+                        170     LOAD_ATTR                       10: printer
+                        172     LOAD_METHOD                     11: lookup_object
+                        174     LOAD_CONST                      6: 'pause_resume'
+                        176     CALL_METHOD                     1
+                        178     STORE_ATTR                      14: motor_cancel_print_start
+                        180     JUMP_FORWARD                    58 (to 240)
+                        182     LOAD_CONST                      7: False
+                        184     LOAD_FAST                       0: self
+                        186     STORE_ATTR                      0: in_script
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       2: alias
+                        192     LOAD_CONST                      5: 'PAUSE'
+                        194     COMPARE_OP                      2 (==)
+                        196     POP_JUMP_IF_FALSE               214
+                        198     LOAD_CONST                      7: False
+                        200     LOAD_FAST                       0: self
+                        202     LOAD_ATTR                       10: printer
+                        204     LOAD_METHOD                     11: lookup_object
+                        206     LOAD_CONST                      6: 'pause_resume'
+                        208     CALL_METHOD                     1
+                        210     STORE_ATTR                      12: pause_start
+                        212     JUMP_FORWARD                    24 (to 238)
+                        214     LOAD_FAST                       0: self
+                        216     LOAD_ATTR                       2: alias
+                        218     LOAD_CONST                      8: 'MOTOR_CANCEL_PRINT'
+                        220     COMPARE_OP                      2 (==)
+                        222     POP_JUMP_IF_FALSE               238
+                        224     LOAD_CONST                      7: False
+                        226     LOAD_FAST                       0: self
+                        228     LOAD_ATTR                       10: printer
+                        230     LOAD_METHOD                     11: lookup_object
+                        232     LOAD_CONST                      6: 'pause_resume'
+                        234     CALL_METHOD                     1
+                        236     STORE_ATTR                      14: motor_cancel_print_start
+                        238     RERAISE                         
+                        240     LOAD_CONST                      0: None
+                        242     RETURN_VALUE                    
+                'GCodeMacro.cmd'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'GCodeMacro'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'GCodeMacro.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> handle_connect
+                18      LOAD_CONST                      4: 'GCodeMacro.handle_connect'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: handle_connect
+                24      LOAD_CONST                      5: <CODE> get_status
+                26      LOAD_CONST                      6: 'GCodeMacro.get_status'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: get_status
+                32      LOAD_CONST                      7: 'Set the value of a G-Code macro variable'
+                34      STORE_NAME                      6: cmd_SET_GCODE_VARIABLE_help
+                36      LOAD_CONST                      8: <CODE> cmd_SET_GCODE_VARIABLE
+                38      LOAD_CONST                      9: 'GCodeMacro.cmd_SET_GCODE_VARIABLE'
+                40      MAKE_FUNCTION                   0
+                42      STORE_NAME                      7: cmd_SET_GCODE_VARIABLE
+                44      LOAD_CONST                      10: <CODE> cmd
+                46      LOAD_CONST                      11: 'GCodeMacro.cmd'
+                48      MAKE_FUNCTION                   0
+                50      STORE_NAME                      8: cmd
+                52      LOAD_CONST                      12: None
+                54      RETURN_VALUE                    
+        'GCodeMacro'
+        [Code]
+            File Name: /extras/gcode_macro.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'GCodeMacro'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: GCodeMacro
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: traceback
+        6       STORE_NAME                      0: traceback
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: logging
+        14      STORE_NAME                      1: logging
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: ast
+        22      STORE_NAME                      2: ast
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      1: None
+        28      IMPORT_NAME                     3: copy
+        30      STORE_NAME                      3: copy
+        32      LOAD_CONST                      0: 0
+        34      LOAD_CONST                      1: None
+        36      IMPORT_NAME                     4: jinja2
+        38      STORE_NAME                      4: jinja2
+        40      LOAD_BUILD_CLASS                
+        42      LOAD_CONST                      2: <CODE> GetStatusWrapper
+        44      LOAD_CONST                      3: 'GetStatusWrapper'
+        46      MAKE_FUNCTION                   0
+        48      LOAD_CONST                      3: 'GetStatusWrapper'
+        50      CALL_FUNCTION                   2
+        52      STORE_NAME                      5: GetStatusWrapper
+        54      LOAD_BUILD_CLASS                
+        56      LOAD_CONST                      4: <CODE> TemplateWrapper
+        58      LOAD_CONST                      5: 'TemplateWrapper'
+        60      MAKE_FUNCTION                   0
+        62      LOAD_CONST                      5: 'TemplateWrapper'
+        64      CALL_FUNCTION                   2
+        66      STORE_NAME                      6: TemplateWrapper
+        68      LOAD_BUILD_CLASS                
+        70      LOAD_CONST                      6: <CODE> PrinterGCodeMacro
+        72      LOAD_CONST                      7: 'PrinterGCodeMacro'
+        74      MAKE_FUNCTION                   0
+        76      LOAD_CONST                      7: 'PrinterGCodeMacro'
+        78      CALL_FUNCTION                   2
+        80      STORE_NAME                      7: PrinterGCodeMacro
+        82      LOAD_CONST                      8: <CODE> load_config
+        84      LOAD_CONST                      9: 'load_config'
+        86      MAKE_FUNCTION                   0
+        88      STORE_NAME                      8: load_config
+        90      LOAD_BUILD_CLASS                
+        92      LOAD_CONST                      10: <CODE> GCodeMacro
+        94      LOAD_CONST                      11: 'GCodeMacro'
+        96      MAKE_FUNCTION                   0
+        98      LOAD_CONST                      11: 'GCodeMacro'
+        100     CALL_FUNCTION                   2
+        102     STORE_NAME                      9: GCodeMacro
+        104     LOAD_CONST                      12: <CODE> load_config_prefix
+        106     LOAD_CONST                      13: 'load_config_prefix'
+        108     MAKE_FUNCTION                   0
+        110     STORE_NAME                      10: load_config_prefix
+        112     LOAD_CONST                      1: None
+        114     RETURN_VALUE                    

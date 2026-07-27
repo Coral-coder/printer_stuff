@@ -1,0 +1,1262 @@
+tmc2208.pyc (Python 3.9)
+[Code]
+    File Name: /extras/tmc2208.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 21
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        ''
+        'tmc'
+        'tmc_uart'
+        'tmc2130'
+        'TMC_FREQUENCY'
+        'Registers'
+        'ReadRegisters'
+        'Fields'
+        'SignedFields'
+        'dict'
+        'FieldFormatters'
+        'update'
+        'TMC2208'
+        'load_config_prefix'
+        'TMCStealthchopCal'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'tmc'
+            'tmc_uart'
+            'tmc2130'
+        )
+        1.2e+07
+        2
+        3
+        4
+        5
+        6
+        7
+        16
+        17
+        18
+        19
+        34
+        106
+        107
+        108
+        111
+        112
+        113
+        114
+        (
+            'GCONF'
+            'GSTAT'
+            'IFCNT'
+            'SLAVECONF'
+            'OTP_PROG'
+            'OTP_READ'
+            'IOIN'
+            'FACTORY_CONF'
+            'IHOLD_IRUN'
+            'TPOWERDOWN'
+            'TSTEP'
+            'TPWMTHRS'
+            'VACTUAL'
+            'MSCNT'
+            'MSCURACT'
+            'CHOPCONF'
+            'DRV_STATUS'
+            'PWMCONF'
+            'PWM_SCALE'
+            'PWM_AUTO'
+        )
+        (
+            'GCONF'
+            'GSTAT'
+            'IFCNT'
+            'OTP_READ'
+            'IOIN'
+            'FACTORY_CONF'
+            'TSTEP'
+            'MSCNT'
+            'MSCURACT'
+            'CHOPCONF'
+            'DRV_STATUS'
+            'PWMCONF'
+            'PWM_SCALE'
+            'PWM_AUTO'
+        )
+        8
+        32
+        64
+        128
+        256
+        512
+        (
+            'i_scale_analog'
+            'internal_rsense'
+            'en_spreadcycle'
+            'shaft'
+            'index_otpw'
+            'index_step'
+            'pdn_disable'
+            'mstep_reg_select'
+            'multistep_filt'
+            'test_mode'
+        )
+        'GCONF'
+        (
+            'reset'
+            'drv_err'
+            'uv_cp'
+        )
+        'GSTAT'
+        'ifcnt'
+        255
+        'IFCNT'
+        'senddelay'
+        3840
+        'SLAVECONF'
+        48
+        65280
+        (
+            'otpbit'
+            'otpbyte'
+            'otpmagic'
+        )
+        'OTP_PROG'
+        31
+        4096
+        57344
+        65536
+        131072
+        262144
+        1572864
+        6291456
+        8388608
+        (
+            'otp_fclktrim'
+            'otp_ottrim'
+            'otp_internalrsense'
+            'otp_tbl'
+            'otp_pwm_grad'
+            'otp_pwm_autograd'
+            'otp_tpwmthrs'
+            'otp_pwm_ofs'
+            'otp_pwm_reg'
+            'otp_pwm_freq'
+            'otp_iholddelay'
+            'otp_ihold'
+            'otp_en_spreadcycle'
+        )
+        'OTP_READ'
+        0xFF000000
+        (
+            'pdn_uart'
+            'spread'
+            'dir'
+            'enn'
+            'step'
+            'ms1'
+            'ms2'
+            'sel_a'
+            'version'
+        )
+        'IOIN@TMC222x'
+        (
+            'enn'
+            'ms1'
+            'ms2'
+            'diag'
+            'pdn_uart'
+            'step'
+            'sel_a'
+            'dir'
+            'version'
+        )
+        'IOIN@TMC220x'
+        768
+        (
+            'fclktrim'
+            'ottrim'
+        )
+        'FACTORY_CONF'
+        7936
+        983040
+        (
+            'ihold'
+            'irun'
+            'iholddelay'
+        )
+        'IHOLD_IRUN'
+        'tpowerdown'
+        'TPOWERDOWN'
+        'tstep'
+        1048575
+        'TSTEP'
+        'tpwmthrs'
+        'TPWMTHRS'
+        'vactual'
+        16777215
+        'VACTUAL'
+        'mscnt'
+        1023
+        'MSCNT'
+        511
+        33488896
+        (
+            'cur_a'
+            'cur_b'
+        )
+        'MSCURACT'
+        15
+        1920
+        98304
+        251658240
+        268435456
+        536870912
+        1073741824
+        0x80000000
+        (
+            'toff'
+            'hstrt'
+            'hend'
+            'tbl'
+            'vsense'
+            'mres'
+            'intpol'
+            'dedge'
+            'diss2g'
+            'diss2vs'
+        )
+        'CHOPCONF'
+        1024
+        2048
+        2031616
+        (
+            'otpw'
+            'ot'
+            's2ga'
+            's2gb'
+            's2vsa'
+            's2vsb'
+            'ola'
+            'olb'
+            't120'
+            't143'
+            't150'
+            't157'
+            'cs_actual'
+            'stealth'
+            'stst'
+        )
+        'DRV_STATUS'
+        196608
+        524288
+        3145728
+        0xF0000000
+        (
+            'pwm_ofs'
+            'pwm_grad'
+            'pwm_freq'
+            'pwm_autoscale'
+            'pwm_autograd'
+            'freewheel'
+            'pwm_reg'
+            'pwm_lim'
+        )
+        'PWMCONF'
+        (
+            'pwm_scale_sum'
+            'pwm_scale_auto'
+        )
+        'PWM_SCALE'
+        16711680
+        (
+            'pwm_ofs_auto'
+            'pwm_grad_auto'
+        )
+        'PWM_AUTO'
+        (
+            'cur_a'
+            'cur_b'
+            'pwm_scale_auto'
+        )
+        [Code]
+            File Name: /extras/tmc2208.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 4
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '%d(%s)'
+                'TMC222x'
+                'TMC220x'
+            [Disassembly]
+                0       LOAD_CONST                      1: '%d(%s)'
+                2       LOAD_FAST                       0: v
+                4       LOAD_CONST                      2: 'TMC222x'
+                6       LOAD_CONST                      3: 'TMC220x'
+                8       BUILD_LIST                      2
+                10      LOAD_FAST                       0: v
+                12      BINARY_SUBSCR                   
+                14      BUILD_TUPLE                     2
+                16      BINARY_MODULO                   
+                18      RETURN_VALUE                    
+        '<lambda>'
+        [Code]
+            File Name: /extras/tmc2208.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(LowSideShort_A!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(LowSideShort_A!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        [Code]
+            File Name: /extras/tmc2208.py
+            Object Name: <lambda>
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 1
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+            [Var Names]
+                'v'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                '1(LowSideShort_B!)'
+                ''
+            [Disassembly]
+                0       LOAD_FAST                       0: v
+                2       POP_JUMP_IF_FALSE               8
+                4       LOAD_CONST                      1: '1(LowSideShort_B!)'
+                6       RETURN_VALUE                    
+                8       LOAD_CONST                      2: ''
+                10      RETURN_VALUE                    
+        (
+            'sel_a'
+            's2vsa'
+            's2vsb'
+        )
+        [Code]
+            File Name: /extras/tmc2208.py
+            Object Name: TMC2208
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'read_translate'
+                'cmd_TMC2208_STEALTHCHOP'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'TMC2208'
+                [Code]
+                    File Name: /extras/tmc2208.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'config'
+                        'get_printer'
+                        'printer'
+                        'lookup_object'
+                        'gcode'
+                        'tmc'
+                        'FieldHelper'
+                        'Fields'
+                        'SignedFields'
+                        'FieldFormatters'
+                        'fields'
+                        'tmc_uart'
+                        'MCU_TMC_uart'
+                        'Registers'
+                        'mcu_tmc'
+                        'set_field'
+                        'tmc2130'
+                        'TMCCurrentHelper'
+                        'TMCCommandHelper'
+                        'setup_register_dump'
+                        'ReadRegisters'
+                        'read_translate'
+                        'get_phase_offset'
+                        'get_status'
+                        'TMC_FREQUENCY'
+                        'mcu_freq'
+                        'TMCStealthchopHelper'
+                        'set_config_field'
+                        'register_command'
+                        'cmd_TMC2208_STEALTHCHOP'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'current_helper'
+                        'cmdhelper'
+                        'set_config_field'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'pdn_disable'
+                        True
+                        'mstep_reg_select'
+                        'multistep_filt'
+                        'toff'
+                        3
+                        'hstrt'
+                        5
+                        'hend'
+                        0
+                        'tbl'
+                        2
+                        'iholddelay'
+                        8
+                        'tpowerdown'
+                        20
+                        'pwm_ofs'
+                        36
+                        'pwm_grad'
+                        14
+                        'pwm_freq'
+                        1
+                        'pwm_autoscale'
+                        'pwm_autograd'
+                        'pwm_reg'
+                        'pwm_lim'
+                        12
+                        'TMC2208_STEALTHCHOP'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: config
+                        6       LOAD_FAST                       1: config
+                        8       LOAD_METHOD                     1: get_printer
+                        10      CALL_METHOD                     0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: printer
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: printer
+                        20      LOAD_METHOD                     3: lookup_object
+                        22      LOAD_CONST                      1: 'gcode'
+                        24      CALL_METHOD                     1
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      4: gcode
+                        30      LOAD_GLOBAL                     5: tmc
+                        32      LOAD_METHOD                     6: FieldHelper
+                        34      LOAD_GLOBAL                     7: Fields
+                        36      LOAD_GLOBAL                     8: SignedFields
+                        38      LOAD_GLOBAL                     9: FieldFormatters
+                        40      CALL_METHOD                     3
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      10: fields
+                        46      LOAD_GLOBAL                     11: tmc_uart
+                        48      LOAD_METHOD                     12: MCU_TMC_uart
+                        50      LOAD_FAST                       1: config
+                        52      LOAD_GLOBAL                     13: Registers
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       10: fields
+                        58      CALL_METHOD                     3
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      14: mcu_tmc
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       10: fields
+                        68      LOAD_METHOD                     15: set_field
+                        70      LOAD_CONST                      2: 'pdn_disable'
+                        72      LOAD_CONST                      3: True
+                        74      CALL_METHOD                     2
+                        76      POP_TOP                         
+                        78      LOAD_GLOBAL                     16: tmc2130
+                        80      LOAD_METHOD                     17: TMCCurrentHelper
+                        82      LOAD_FAST                       1: config
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       14: mcu_tmc
+                        88      CALL_METHOD                     2
+                        90      STORE_FAST                      2: current_helper
+                        92      LOAD_GLOBAL                     5: tmc
+                        94      LOAD_METHOD                     18: TMCCommandHelper
+                        96      LOAD_FAST                       1: config
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       14: mcu_tmc
+                        102     LOAD_FAST                       2: current_helper
+                        104     CALL_METHOD                     3
+                        106     STORE_FAST                      3: cmdhelper
+                        108     LOAD_FAST                       3: cmdhelper
+                        110     LOAD_METHOD                     19: setup_register_dump
+                        112     LOAD_GLOBAL                     20: ReadRegisters
+                        114     LOAD_FAST                       0: self
+                        116     LOAD_ATTR                       21: read_translate
+                        118     CALL_METHOD                     2
+                        120     POP_TOP                         
+                        122     LOAD_FAST                       3: cmdhelper
+                        124     LOAD_ATTR                       22: get_phase_offset
+                        126     LOAD_FAST                       0: self
+                        128     STORE_ATTR                      22: get_phase_offset
+                        130     LOAD_FAST                       3: cmdhelper
+                        132     LOAD_ATTR                       23: get_status
+                        134     LOAD_FAST                       0: self
+                        136     STORE_ATTR                      23: get_status
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       10: fields
+                        142     LOAD_METHOD                     15: set_field
+                        144     LOAD_CONST                      4: 'mstep_reg_select'
+                        146     LOAD_CONST                      3: True
+                        148     CALL_METHOD                     2
+                        150     POP_TOP                         
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       10: fields
+                        156     LOAD_METHOD                     15: set_field
+                        158     LOAD_CONST                      5: 'multistep_filt'
+                        160     LOAD_CONST                      3: True
+                        162     CALL_METHOD                     2
+                        164     POP_TOP                         
+                        166     LOAD_GLOBAL                     24: TMC_FREQUENCY
+                        168     LOAD_FAST                       0: self
+                        170     STORE_ATTR                      25: mcu_freq
+                        172     LOAD_GLOBAL                     5: tmc
+                        174     LOAD_METHOD                     26: TMCStealthchopHelper
+                        176     LOAD_FAST                       1: config
+                        178     LOAD_FAST                       0: self
+                        180     LOAD_ATTR                       14: mcu_tmc
+                        182     LOAD_GLOBAL                     24: TMC_FREQUENCY
+                        184     CALL_METHOD                     3
+                        186     POP_TOP                         
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       10: fields
+                        192     LOAD_ATTR                       27: set_config_field
+                        194     STORE_FAST                      4: set_config_field
+                        196     LOAD_FAST                       4: set_config_field
+                        198     LOAD_FAST                       1: config
+                        200     LOAD_CONST                      6: 'toff'
+                        202     LOAD_CONST                      7: 3
+                        204     CALL_FUNCTION                   3
+                        206     POP_TOP                         
+                        208     LOAD_FAST                       4: set_config_field
+                        210     LOAD_FAST                       1: config
+                        212     LOAD_CONST                      8: 'hstrt'
+                        214     LOAD_CONST                      9: 5
+                        216     CALL_FUNCTION                   3
+                        218     POP_TOP                         
+                        220     LOAD_FAST                       4: set_config_field
+                        222     LOAD_FAST                       1: config
+                        224     LOAD_CONST                      10: 'hend'
+                        226     LOAD_CONST                      11: 0
+                        228     CALL_FUNCTION                   3
+                        230     POP_TOP                         
+                        232     LOAD_FAST                       4: set_config_field
+                        234     LOAD_FAST                       1: config
+                        236     LOAD_CONST                      12: 'tbl'
+                        238     LOAD_CONST                      13: 2
+                        240     CALL_FUNCTION                   3
+                        242     POP_TOP                         
+                        244     LOAD_FAST                       4: set_config_field
+                        246     LOAD_FAST                       1: config
+                        248     LOAD_CONST                      14: 'iholddelay'
+                        250     LOAD_CONST                      15: 8
+                        252     CALL_FUNCTION                   3
+                        254     POP_TOP                         
+                        256     LOAD_FAST                       4: set_config_field
+                        258     LOAD_FAST                       1: config
+                        260     LOAD_CONST                      16: 'tpowerdown'
+                        262     LOAD_CONST                      17: 20
+                        264     CALL_FUNCTION                   3
+                        266     POP_TOP                         
+                        268     LOAD_FAST                       4: set_config_field
+                        270     LOAD_FAST                       1: config
+                        272     LOAD_CONST                      18: 'pwm_ofs'
+                        274     LOAD_CONST                      19: 36
+                        276     CALL_FUNCTION                   3
+                        278     POP_TOP                         
+                        280     LOAD_FAST                       4: set_config_field
+                        282     LOAD_FAST                       1: config
+                        284     LOAD_CONST                      20: 'pwm_grad'
+                        286     LOAD_CONST                      21: 14
+                        288     CALL_FUNCTION                   3
+                        290     POP_TOP                         
+                        292     LOAD_FAST                       4: set_config_field
+                        294     LOAD_FAST                       1: config
+                        296     LOAD_CONST                      22: 'pwm_freq'
+                        298     LOAD_CONST                      23: 1
+                        300     CALL_FUNCTION                   3
+                        302     POP_TOP                         
+                        304     LOAD_FAST                       4: set_config_field
+                        306     LOAD_FAST                       1: config
+                        308     LOAD_CONST                      24: 'pwm_autoscale'
+                        310     LOAD_CONST                      3: True
+                        312     CALL_FUNCTION                   3
+                        314     POP_TOP                         
+                        316     LOAD_FAST                       4: set_config_field
+                        318     LOAD_FAST                       1: config
+                        320     LOAD_CONST                      25: 'pwm_autograd'
+                        322     LOAD_CONST                      3: True
+                        324     CALL_FUNCTION                   3
+                        326     POP_TOP                         
+                        328     LOAD_FAST                       4: set_config_field
+                        330     LOAD_FAST                       1: config
+                        332     LOAD_CONST                      26: 'pwm_reg'
+                        334     LOAD_CONST                      15: 8
+                        336     CALL_FUNCTION                   3
+                        338     POP_TOP                         
+                        340     LOAD_FAST                       4: set_config_field
+                        342     LOAD_FAST                       1: config
+                        344     LOAD_CONST                      27: 'pwm_lim'
+                        346     LOAD_CONST                      28: 12
+                        348     CALL_FUNCTION                   3
+                        350     POP_TOP                         
+                        352     LOAD_FAST                       0: self
+                        354     LOAD_ATTR                       4: gcode
+                        356     LOAD_METHOD                     28: register_command
+                        358     LOAD_CONST                      29: 'TMC2208_STEALTHCHOP'
+                        360     LOAD_FAST                       0: self
+                        362     LOAD_ATTR                       29: cmd_TMC2208_STEALTHCHOP
+                        364     CALL_METHOD                     2
+                        366     POP_TOP                         
+                        368     LOAD_CONST                      0: None
+                        370     RETURN_VALUE                    
+                'TMC2208.__init__'
+                [Code]
+                    File Name: /extras/tmc2208.py
+                    Object Name: read_translate
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'fields'
+                        'get_field'
+                    [Var Names]
+                        'self'
+                        'reg_name'
+                        'val'
+                        'drv_type'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'IOIN'
+                        'sel_a'
+                        'IOIN@TMC220x'
+                        'IOIN@TMC222x'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: reg_name
+                        2       LOAD_CONST                      1: 'IOIN'
+                        4       COMPARE_OP                      2 (==)
+                        6       POP_JUMP_IF_FALSE               34
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       0: fields
+                        12      LOAD_METHOD                     1: get_field
+                        14      LOAD_CONST                      2: 'sel_a'
+                        16      LOAD_FAST                       2: val
+                        18      CALL_METHOD                     2
+                        20      STORE_FAST                      3: drv_type
+                        22      LOAD_FAST                       3: drv_type
+                        24      POP_JUMP_IF_FALSE               30
+                        26      LOAD_CONST                      3: 'IOIN@TMC220x'
+                        28      JUMP_FORWARD                    2 (to 32)
+                        30      LOAD_CONST                      4: 'IOIN@TMC222x'
+                        32      STORE_FAST                      1: reg_name
+                        34      LOAD_FAST                       1: reg_name
+                        36      LOAD_FAST                       2: val
+                        38      BUILD_TUPLE                     2
+                        40      RETURN_VALUE                    
+                'TMC2208.read_translate'
+                [Code]
+                    File Name: /extras/tmc2208.py
+                    Object Name: cmd_TMC2208_STEALTHCHOP
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'get'
+                        'TMCStealthchopCal'
+                        'config'
+                        'mcu_tmc'
+                        'mcu_freq'
+                        'gcode'
+                        'run_script_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'velocity'
+                        'stepper'
+                        'threshold'
+                        'en_spreadcycle'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'VAL'
+                        0
+                        'STEPPER'
+                        0
+                        1
+                        'SET_TMC_FIELD STEPPER=%s FIELD=en_spreadcycle VALUE=%d'
+                        'SET_TMC_FIELD STEPPER=%s FIELD=tpwmthrs VALUE=%d'
+                        'GET_TMC_FIELD STEPPER=%s FIELD=tpwmthrs'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get_float
+                        4       LOAD_CONST                      1: 'VAL'
+                        6       LOAD_CONST                      2: 0
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: velocity
+                        12      LOAD_FAST                       1: gcmd
+                        14      LOAD_METHOD                     1: get
+                        16      LOAD_CONST                      3: 'STEPPER'
+                        18      LOAD_CONST                      2: 0
+                        20      CALL_METHOD                     2
+                        22      STORE_FAST                      3: stepper
+                        24      LOAD_GLOBAL                     2: TMCStealthchopCal
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       3: config
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       4: mcu_tmc
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       5: mcu_freq
+                        38      LOAD_FAST                       2: velocity
+                        40      CALL_FUNCTION                   4
+                        42      STORE_FAST                      4: threshold
+                        44      LOAD_FAST                       4: threshold
+                        46      LOAD_CONST                      4: 0
+                        48      COMPARE_OP                      4 (>)
+                        50      POP_JUMP_IF_FALSE               56
+                        52      LOAD_CONST                      4: 0
+                        54      JUMP_FORWARD                    2 (to 58)
+                        56      LOAD_CONST                      5: 1
+                        58      STORE_FAST                      5: en_spreadcycle
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       6: gcode
+                        64      LOAD_METHOD                     7: run_script_from_command
+                        66      LOAD_CONST                      6: 'SET_TMC_FIELD STEPPER=%s FIELD=en_spreadcycle VALUE=%d'
+                        68      LOAD_FAST                       3: stepper
+                        70      LOAD_FAST                       5: en_spreadcycle
+                        72      BUILD_TUPLE                     2
+                        74      BINARY_MODULO                   
+                        76      CALL_METHOD                     1
+                        78      POP_TOP                         
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       6: gcode
+                        84      LOAD_METHOD                     7: run_script_from_command
+                        86      LOAD_CONST                      7: 'SET_TMC_FIELD STEPPER=%s FIELD=tpwmthrs VALUE=%d'
+                        88      LOAD_FAST                       3: stepper
+                        90      LOAD_FAST                       4: threshold
+                        92      BUILD_TUPLE                     2
+                        94      BINARY_MODULO                   
+                        96      CALL_METHOD                     1
+                        98      POP_TOP                         
+                        100     LOAD_FAST                       0: self
+                        102     LOAD_ATTR                       6: gcode
+                        104     LOAD_METHOD                     7: run_script_from_command
+                        106     LOAD_CONST                      8: 'GET_TMC_FIELD STEPPER=%s FIELD=tpwmthrs'
+                        108     LOAD_FAST                       3: stepper
+                        110     BINARY_MODULO                   
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     LOAD_CONST                      0: None
+                        118     RETURN_VALUE                    
+                'TMC2208.cmd_TMC2208_STEALTHCHOP'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'TMC2208'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'TMC2208.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> read_translate
+                18      LOAD_CONST                      4: 'TMC2208.read_translate'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: read_translate
+                24      LOAD_CONST                      5: <CODE> cmd_TMC2208_STEALTHCHOP
+                26      LOAD_CONST                      6: 'TMC2208.cmd_TMC2208_STEALTHCHOP'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: cmd_TMC2208_STEALTHCHOP
+                32      LOAD_CONST                      7: None
+                34      RETURN_VALUE                    
+        'TMC2208'
+        [Code]
+            File Name: /extras/tmc2208.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'TMC2208'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: TMC2208
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+        [Code]
+            File Name: /extras/tmc2208.py
+            Object Name: TMCStealthchopCal
+            Arg Count: 4
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 13
+            Stack Size: 5
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'get_fields'
+                'join'
+                'get_name'
+                'split'
+                'getsection'
+                'stepper'
+                'parse_step_distance'
+                'get_field'
+                'int'
+                'max'
+                'min'
+            [Var Names]
+                'config'
+                'mcu_tmc'
+                'tmc_freq'
+                'velocity'
+                'fields'
+                'threshold'
+                'stepper_name'
+                'sconfig'
+                'stepper'
+                'rotation_dist'
+                'steps_per_rotation'
+                'step_dist'
+                'step_dist_256'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+                0
+                ' '
+                1
+                'mres'
+                0.5
+                1048575
+            [Disassembly]
+                0       LOAD_FAST                       1: mcu_tmc
+                2       LOAD_METHOD                     0: get_fields
+                4       CALL_METHOD                     0
+                6       STORE_FAST                      4: fields
+                8       LOAD_CONST                      1: 0
+                10      STORE_FAST                      5: threshold
+                12      LOAD_FAST                       3: velocity
+                14      POP_JUMP_IF_FALSE               120
+                16      LOAD_CONST                      2: ' '
+                18      LOAD_METHOD                     1: join
+                20      LOAD_FAST                       0: config
+                22      LOAD_METHOD                     2: get_name
+                24      CALL_METHOD                     0
+                26      LOAD_METHOD                     3: split
+                28      CALL_METHOD                     0
+                30      LOAD_CONST                      3: 1
+                32      LOAD_CONST                      0: None
+                34      BUILD_SLICE                     2
+                36      BINARY_SUBSCR                   
+                38      CALL_METHOD                     1
+                40      STORE_FAST                      6: stepper_name
+                42      LOAD_FAST                       0: config
+                44      LOAD_METHOD                     4: getsection
+                46      LOAD_FAST                       6: stepper_name
+                48      CALL_METHOD                     1
+                50      STORE_FAST                      7: sconfig
+                52      LOAD_CONST                      1: 0
+                54      LOAD_CONST                      0: None
+                56      IMPORT_NAME                     5: stepper
+                58      STORE_FAST                      8: stepper
+                60      LOAD_FAST                       8: stepper
+                62      LOAD_METHOD                     6: parse_step_distance
+                64      LOAD_FAST                       7: sconfig
+                66      CALL_METHOD                     1
+                68      UNPACK_SEQUENCE                 2
+                70      STORE_FAST                      9: rotation_dist
+                72      STORE_FAST                      10: steps_per_rotation
+                74      LOAD_FAST                       9: rotation_dist
+                76      LOAD_FAST                       10: steps_per_rotation
+                78      BINARY_TRUE_DIVIDE              
+                80      STORE_FAST                      11: step_dist
+                82      LOAD_FAST                       11: step_dist
+                84      LOAD_CONST                      3: 1
+                86      LOAD_FAST                       4: fields
+                88      LOAD_METHOD                     7: get_field
+                90      LOAD_CONST                      4: 'mres'
+                92      CALL_METHOD                     1
+                94      BINARY_LSHIFT                   
+                96      BINARY_TRUE_DIVIDE              
+                98      STORE_FAST                      12: step_dist_256
+                100     LOAD_GLOBAL                     8: int
+                102     LOAD_FAST                       2: tmc_freq
+                104     LOAD_FAST                       12: step_dist_256
+                106     BINARY_MULTIPLY                 
+                108     LOAD_FAST                       3: velocity
+                110     BINARY_TRUE_DIVIDE              
+                112     LOAD_CONST                      5: 0.5
+                114     BINARY_ADD                      
+                116     CALL_FUNCTION                   1
+                118     STORE_FAST                      5: threshold
+                120     LOAD_GLOBAL                     9: max
+                122     LOAD_CONST                      1: 0
+                124     LOAD_GLOBAL                     10: min
+                126     LOAD_CONST                      6: 1048575
+                128     LOAD_FAST                       5: threshold
+                130     CALL_FUNCTION                   2
+                132     CALL_FUNCTION                   2
+                134     RETURN_VALUE                    
+        'TMCStealthchopCal'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      2: 1
+        10      LOAD_CONST                      3: ('tmc', 'tmc_uart', 'tmc2130')
+        12      IMPORT_NAME                     1: 
+        14      IMPORT_FROM                     2: tmc
+        16      STORE_NAME                      2: tmc
+        18      IMPORT_FROM                     3: tmc_uart
+        20      STORE_NAME                      3: tmc_uart
+        22      IMPORT_FROM                     4: tmc2130
+        24      STORE_NAME                      4: tmc2130
+        26      POP_TOP                         
+        28      LOAD_CONST                      4: 1.2e+07
+        30      STORE_NAME                      5: TMC_FREQUENCY
+        32      LOAD_CONST                      0: 0
+        34      LOAD_CONST                      2: 1
+        36      LOAD_CONST                      5: 2
+        38      LOAD_CONST                      6: 3
+        40      LOAD_CONST                      7: 4
+        42      LOAD_CONST                      8: 5
+        44      LOAD_CONST                      9: 6
+        46      LOAD_CONST                      10: 7
+        48      LOAD_CONST                      11: 16
+        50      LOAD_CONST                      12: 17
+        52      LOAD_CONST                      13: 18
+        54      LOAD_CONST                      14: 19
+        56      LOAD_CONST                      15: 34
+        58      LOAD_CONST                      16: 106
+        60      LOAD_CONST                      17: 107
+        62      LOAD_CONST                      18: 108
+        64      LOAD_CONST                      19: 111
+        66      LOAD_CONST                      20: 112
+        68      LOAD_CONST                      21: 113
+        70      LOAD_CONST                      22: 114
+        72      LOAD_CONST                      23: ('GCONF', 'GSTAT', 'IFCNT', 'SLAVECONF', 'OTP_PROG', 'OTP_READ', 'IOIN', 'FACTORY_CONF', 'IHOLD_IRUN', 'TPOWERDOWN', 'TSTEP', 'TPWMTHRS', 'VACTUAL', 'MSCNT', 'MSCURACT', 'CHOPCONF', 'DRV_STATUS', 'PWMCONF', 'PWM_SCALE', 'PWM_AUTO')
+        74      BUILD_CONST_KEY_MAP             20
+        76      STORE_NAME                      6: Registers
+        78      BUILD_LIST                      0
+        80      LOAD_CONST                      24: ('GCONF', 'GSTAT', 'IFCNT', 'OTP_READ', 'IOIN', 'FACTORY_CONF', 'TSTEP', 'MSCNT', 'MSCURACT', 'CHOPCONF', 'DRV_STATUS', 'PWMCONF', 'PWM_SCALE', 'PWM_AUTO')
+        82      LIST_EXTEND                     1
+        84      STORE_NAME                      7: ReadRegisters
+        86      BUILD_MAP                       0
+        88      STORE_NAME                      8: Fields
+        90      LOAD_CONST                      2: 1
+        92      LOAD_CONST                      5: 2
+        94      LOAD_CONST                      7: 4
+        96      LOAD_CONST                      25: 8
+        98      LOAD_CONST                      11: 16
+        100     LOAD_CONST                      26: 32
+        102     LOAD_CONST                      27: 64
+        104     LOAD_CONST                      28: 128
+        106     LOAD_CONST                      29: 256
+        108     LOAD_CONST                      30: 512
+        110     LOAD_CONST                      31: ('i_scale_analog', 'internal_rsense', 'en_spreadcycle', 'shaft', 'index_otpw', 'index_step', 'pdn_disable', 'mstep_reg_select', 'multistep_filt', 'test_mode')
+        112     BUILD_CONST_KEY_MAP             10
+        114     LOAD_NAME                       8: Fields
+        116     LOAD_CONST                      32: 'GCONF'
+        118     STORE_SUBSCR                    
+        120     LOAD_CONST                      2: 1
+        122     LOAD_CONST                      5: 2
+        124     LOAD_CONST                      7: 4
+        126     LOAD_CONST                      33: ('reset', 'drv_err', 'uv_cp')
+        128     BUILD_CONST_KEY_MAP             3
+        130     LOAD_NAME                       8: Fields
+        132     LOAD_CONST                      34: 'GSTAT'
+        134     STORE_SUBSCR                    
+        136     LOAD_CONST                      35: 'ifcnt'
+        138     LOAD_CONST                      36: 255
+        140     BUILD_MAP                       1
+        142     LOAD_NAME                       8: Fields
+        144     LOAD_CONST                      37: 'IFCNT'
+        146     STORE_SUBSCR                    
+        148     LOAD_CONST                      38: 'senddelay'
+        150     LOAD_CONST                      39: 3840
+        152     BUILD_MAP                       1
+        154     LOAD_NAME                       8: Fields
+        156     LOAD_CONST                      40: 'SLAVECONF'
+        158     STORE_SUBSCR                    
+        160     LOAD_CONST                      10: 7
+        162     LOAD_CONST                      41: 48
+        164     LOAD_CONST                      42: 65280
+        166     LOAD_CONST                      43: ('otpbit', 'otpbyte', 'otpmagic')
+        168     BUILD_CONST_KEY_MAP             3
+        170     LOAD_NAME                       8: Fields
+        172     LOAD_CONST                      44: 'OTP_PROG'
+        174     STORE_SUBSCR                    
+        176     LOAD_CONST                      45: 31
+        178     LOAD_CONST                      26: 32
+        180     LOAD_CONST                      27: 64
+        182     LOAD_CONST                      28: 128
+        184     LOAD_CONST                      39: 3840
+        186     LOAD_CONST                      46: 4096
+        188     LOAD_CONST                      47: 57344
+        190     LOAD_CONST                      48: 65536
+        192     LOAD_CONST                      49: 131072
+        194     LOAD_CONST                      50: 262144
+        196     LOAD_CONST                      51: 1572864
+        198     LOAD_CONST                      52: 6291456
+        200     LOAD_CONST                      53: 8388608
+        202     LOAD_CONST                      54: ('otp_fclktrim', 'otp_ottrim', 'otp_internalrsense', 'otp_tbl', 'otp_pwm_grad', 'otp_pwm_autograd', 'otp_tpwmthrs', 'otp_pwm_ofs', 'otp_pwm_reg', 'otp_pwm_freq', 'otp_iholddelay', 'otp_ihold', 'otp_en_spreadcycle')
+        204     BUILD_CONST_KEY_MAP             13
+        206     LOAD_NAME                       8: Fields
+        208     LOAD_CONST                      55: 'OTP_READ'
+        210     STORE_SUBSCR                    
+        212     LOAD_CONST                      5: 2
+        214     LOAD_CONST                      7: 4
+        216     LOAD_CONST                      25: 8
+        218     LOAD_CONST                      11: 16
+        220     LOAD_CONST                      26: 32
+        222     LOAD_CONST                      27: 64
+        224     LOAD_CONST                      28: 128
+        226     LOAD_CONST                      29: 256
+        228     LOAD_CONST                      56: 0xFF000000
+        230     LOAD_CONST                      57: ('pdn_uart', 'spread', 'dir', 'enn', 'step', 'ms1', 'ms2', 'sel_a', 'version')
+        232     BUILD_CONST_KEY_MAP             9
+        234     LOAD_NAME                       8: Fields
+        236     LOAD_CONST                      58: 'IOIN@TMC222x'
+        238     STORE_SUBSCR                    
+        240     LOAD_CONST                      2: 1
+        242     LOAD_CONST                      7: 4
+        244     LOAD_CONST                      25: 8
+        246     LOAD_CONST                      11: 16
+        248     LOAD_CONST                      27: 64
+        250     LOAD_CONST                      28: 128
+        252     LOAD_CONST                      29: 256
+        254     LOAD_CONST                      30: 512
+        256     LOAD_CONST                      56: 0xFF000000
+        258     LOAD_CONST                      59: ('enn', 'ms1', 'ms2', 'diag', 'pdn_uart', 'step', 'sel_a', 'dir', 'version')
+        260     BUILD_CONST_KEY_MAP             9
+        262     LOAD_NAME                       8: Fields
+        264     LOAD_CONST                      60: 'IOIN@TMC220x'
+        266     STORE_SUBSCR                    
+        268     LOAD_CONST                      45: 31
+        270     LOAD_CONST                      61: 768
+        272     LOAD_CONST                      62: ('fclktrim', 'ottrim')
+        274     BUILD_CONST_KEY_MAP             2
+        276     LOAD_NAME                       8: Fields
+        278     LOAD_CONST                      63: 'FACTORY_CONF'
+        280     STORE_SUBSCR                    
+        282     LOAD_CONST                      45: 31
+        284     LOAD_CONST                      64: 7936
+        286     LOAD_CONST                      65: 983040
+        288     LOAD_CONST                      66: ('ihold', 'irun', 'iholddelay')
+        290     BUILD_CONST_KEY_MAP             3
+        292     LOAD_NAME                       8: Fields
+        294     LOAD_CONST                      67: 'IHOLD_IRUN'
+        296     STORE_SUBSCR                    
+        298     LOAD_CONST                      68: 'tpowerdown'
+        300     LOAD_CONST                      36: 255
+        302     BUILD_MAP                       1
+        304     LOAD_NAME                       8: Fields
+        306     LOAD_CONST                      69: 'TPOWERDOWN'
+        308     STORE_SUBSCR                    
+        310     LOAD_CONST                      70: 'tstep'
+        312     LOAD_CONST                      71: 1048575
+        314     BUILD_MAP                       1
+        316     LOAD_NAME                       8: Fields
+        318     LOAD_CONST                      72: 'TSTEP'
+        320     STORE_SUBSCR                    
+        322     LOAD_CONST                      73: 'tpwmthrs'
+        324     LOAD_CONST                      71: 1048575
+        326     BUILD_MAP                       1
+        328     LOAD_NAME                       8: Fields
+        330     LOAD_CONST                      74: 'TPWMTHRS'
+        332     STORE_SUBSCR                    
+        334     LOAD_CONST                      75: 'vactual'
+        336     LOAD_CONST                      76: 16777215
+        338     BUILD_MAP                       1
+        340     LOAD_NAME                       8: Fields
+        342     LOAD_CONST                      77: 'VACTUAL'
+        344     STORE_SUBSCR                    
+        346     LOAD_CONST                      78: 'mscnt'
+        348     LOAD_CONST                      79: 1023
+        350     BUILD_MAP                       1
+        352     LOAD_NAME                       8: Fields
+        354     LOAD_CONST                      80: 'MSCNT'
+        356     STORE_SUBSCR                    
+        358     LOAD_CONST                      81: 511
+        360     LOAD_CONST                      82: 33488896
+        362     LOAD_CONST                      83: ('cur_a', 'cur_b')
+        364     BUILD_CONST_KEY_MAP             2
+        366     LOAD_NAME                       8: Fields
+        368     LOAD_CONST                      84: 'MSCURACT'
+        370     STORE_SUBSCR                    
+        372     LOAD_CONST                      85: 15
+        374     LOAD_CONST                      20: 112
+        376     LOAD_CONST                      86: 1920
+        378     LOAD_CONST                      87: 98304
+        380     LOAD_CONST                      49: 131072
+        382     LOAD_CONST                      88: 251658240
+        384     LOAD_CONST                      89: 268435456
+        386     LOAD_CONST                      90: 536870912
+        388     LOAD_CONST                      91: 1073741824
+        390     LOAD_CONST                      92: 0x80000000
+        392     LOAD_CONST                      93: ('toff', 'hstrt', 'hend', 'tbl', 'vsense', 'mres', 'intpol', 'dedge', 'diss2g', 'diss2vs')
+        394     BUILD_CONST_KEY_MAP             10
+        396     LOAD_NAME                       8: Fields
+        398     LOAD_CONST                      94: 'CHOPCONF'
+        400     STORE_SUBSCR                    
+        402     LOAD_CONST                      2: 1
+        404     LOAD_CONST                      5: 2
+        406     LOAD_CONST                      7: 4
+        408     LOAD_CONST                      25: 8
+        410     LOAD_CONST                      11: 16
+        412     LOAD_CONST                      26: 32
+        414     LOAD_CONST                      27: 64
+        416     LOAD_CONST                      28: 128
+        418     LOAD_CONST                      29: 256
+        420     LOAD_CONST                      30: 512
+        422     LOAD_CONST                      95: 1024
+        424     LOAD_CONST                      96: 2048
+        426     LOAD_CONST                      97: 2031616
+        428     LOAD_CONST                      91: 1073741824
+        430     LOAD_CONST                      92: 0x80000000
+        432     LOAD_CONST                      98: ('otpw', 'ot', 's2ga', 's2gb', 's2vsa', 's2vsb', 'ola', 'olb', 't120', 't143', 't150', 't157', 'cs_actual', 'stealth', 'stst')
+        434     BUILD_CONST_KEY_MAP             15
+        436     LOAD_NAME                       8: Fields
+        438     LOAD_CONST                      99: 'DRV_STATUS'
+        440     STORE_SUBSCR                    
+        442     LOAD_CONST                      36: 255
+        444     LOAD_CONST                      42: 65280
+        446     LOAD_CONST                      100: 196608
+        448     LOAD_CONST                      50: 262144
+        450     LOAD_CONST                      101: 524288
+        452     LOAD_CONST                      102: 3145728
+        454     LOAD_CONST                      88: 251658240
+        456     LOAD_CONST                      103: 0xF0000000
+        458     LOAD_CONST                      104: ('pwm_ofs', 'pwm_grad', 'pwm_freq', 'pwm_autoscale', 'pwm_autograd', 'freewheel', 'pwm_reg', 'pwm_lim')
+        460     BUILD_CONST_KEY_MAP             8
+        462     LOAD_NAME                       8: Fields
+        464     LOAD_CONST                      105: 'PWMCONF'
+        466     STORE_SUBSCR                    
+        468     LOAD_CONST                      36: 255
+        470     LOAD_CONST                      82: 33488896
+        472     LOAD_CONST                      106: ('pwm_scale_sum', 'pwm_scale_auto')
+        474     BUILD_CONST_KEY_MAP             2
+        476     LOAD_NAME                       8: Fields
+        478     LOAD_CONST                      107: 'PWM_SCALE'
+        480     STORE_SUBSCR                    
+        482     LOAD_CONST                      36: 255
+        484     LOAD_CONST                      108: 16711680
+        486     LOAD_CONST                      109: ('pwm_ofs_auto', 'pwm_grad_auto')
+        488     BUILD_CONST_KEY_MAP             2
+        490     LOAD_NAME                       8: Fields
+        492     LOAD_CONST                      110: 'PWM_AUTO'
+        494     STORE_SUBSCR                    
+        496     BUILD_LIST                      0
+        498     LOAD_CONST                      111: ('cur_a', 'cur_b', 'pwm_scale_auto')
+        500     LIST_EXTEND                     1
+        502     STORE_NAME                      9: SignedFields
+        504     LOAD_NAME                       10: dict
+        506     LOAD_NAME                       4: tmc2130
+        508     LOAD_ATTR                       11: FieldFormatters
+        510     CALL_FUNCTION                   1
+        512     STORE_NAME                      11: FieldFormatters
+        514     LOAD_NAME                       11: FieldFormatters
+        516     LOAD_METHOD                     12: update
+        518     LOAD_CONST                      112: <CODE> <lambda>
+        520     LOAD_CONST                      113: '<lambda>'
+        522     MAKE_FUNCTION                   0
+        524     LOAD_CONST                      114: <CODE> <lambda>
+        526     LOAD_CONST                      113: '<lambda>'
+        528     MAKE_FUNCTION                   0
+        530     LOAD_CONST                      115: <CODE> <lambda>
+        532     LOAD_CONST                      113: '<lambda>'
+        534     MAKE_FUNCTION                   0
+        536     LOAD_CONST                      116: ('sel_a', 's2vsa', 's2vsb')
+        538     BUILD_CONST_KEY_MAP             3
+        540     CALL_METHOD                     1
+        542     POP_TOP                         
+        544     LOAD_BUILD_CLASS                
+        546     LOAD_CONST                      117: <CODE> TMC2208
+        548     LOAD_CONST                      118: 'TMC2208'
+        550     MAKE_FUNCTION                   0
+        552     LOAD_CONST                      118: 'TMC2208'
+        554     CALL_FUNCTION                   2
+        556     STORE_NAME                      13: TMC2208
+        558     LOAD_CONST                      119: <CODE> load_config_prefix
+        560     LOAD_CONST                      120: 'load_config_prefix'
+        562     MAKE_FUNCTION                   0
+        564     STORE_NAME                      14: load_config_prefix
+        566     LOAD_CONST                      121: <CODE> TMCStealthchopCal
+        568     LOAD_CONST                      122: 'TMCStealthchopCal'
+        570     MAKE_FUNCTION                   0
+        572     STORE_NAME                      15: TMCStealthchopCal
+        574     LOAD_CONST                      1: None
+        576     RETURN_VALUE                    

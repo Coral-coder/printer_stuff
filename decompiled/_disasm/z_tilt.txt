@@ -1,0 +1,2406 @@
+z_tilt.pyc (Python 3.9)
+[Code]
+    File Name: /extras/z_tilt.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'os'
+        'mathutil'
+        ''
+        'probe'
+        'extras.base_info'
+        'base_dir'
+        'ZAdjustHelper'
+        'ZAdjustStatus'
+        'RetryHelper'
+        'ZTilt'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'probe'
+        )
+        (
+            'base_dir'
+        )
+        [Code]
+            File Name: /extras/z_tilt.py
+            Object Name: ZAdjustHelper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'handle_connect'
+                'adjust_steppers'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ZAdjustHelper'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'get_name'
+                        'name'
+                        'z_count'
+                        'z_steppers'
+                        'register_event_handler'
+                        'handle_connect'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'z_count'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'klippy:connect'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_METHOD                     2: get_name
+                        14      CALL_METHOD                     0
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      3: name
+                        20      LOAD_FAST                       2: z_count
+                        22      LOAD_FAST                       0: self
+                        24      STORE_ATTR                      4: z_count
+                        26      BUILD_LIST                      0
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      5: z_steppers
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       1: printer
+                        36      LOAD_METHOD                     6: register_event_handler
+                        38      LOAD_CONST                      1: 'klippy:connect'
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       7: handle_connect
+                        44      CALL_METHOD                     2
+                        46      POP_TOP                         
+                        48      LOAD_CONST                      0: None
+                        50      RETURN_VALUE                    
+                'ZAdjustHelper.__init__'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: handle_connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_kinematics'
+                        'get_steppers'
+                        'len'
+                        'z_count'
+                        'name'
+                        'config_error'
+                        'z_steppers'
+                    [Var Names]
+                        'self'
+                        'kin'
+                        'z_steppers'
+                        'err_msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'is_active_axis'
+                            [Var Names]
+                                '.0'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                'z'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: s
+                                8       LOAD_FAST                       1: s
+                                10      LOAD_METHOD                     0: is_active_axis
+                                12      LOAD_CONST                      0: 'z'
+                                14      CALL_METHOD                     1
+                                16      POP_JUMP_IF_FALSE               4
+                                18      LOAD_FAST                       1: s
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'ZAdjustHelper.handle_connect.<locals>.<listcomp>'
+                        '{"code":"key346", "msg":"%s z_positions needs exactly %d items", "values":[]}'
+                        2
+                        '{"code":"key347", "msg":"%s requires multiple z steppers", "values":[]}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      LOAD_METHOD                     2: get_kinematics
+                        12      CALL_METHOD                     0
+                        14      STORE_FAST                      1: kin
+                        16      LOAD_CONST                      2: <CODE> <listcomp>
+                        18      LOAD_CONST                      3: 'ZAdjustHelper.handle_connect.<locals>.<listcomp>'
+                        20      MAKE_FUNCTION                   0
+                        22      LOAD_FAST                       1: kin
+                        24      LOAD_METHOD                     3: get_steppers
+                        26      CALL_METHOD                     0
+                        28      GET_ITER                        
+                        30      CALL_FUNCTION                   1
+                        32      STORE_FAST                      2: z_steppers
+                        34      LOAD_GLOBAL                     4: len
+                        36      LOAD_FAST                       2: z_steppers
+                        38      CALL_FUNCTION                   1
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       5: z_count
+                        44      COMPARE_OP                      3 (!=)
+                        46      POP_JUMP_IF_FALSE               78
+                        48      LOAD_CONST                      4: '{"code":"key346", "msg":"%s z_positions needs exactly %d items", "values":[]}'
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       6: name
+                        54      LOAD_GLOBAL                     4: len
+                        56      LOAD_FAST                       2: z_steppers
+                        58      CALL_FUNCTION                   1
+                        60      BUILD_TUPLE                     2
+                        62      BINARY_MODULO                   
+                        64      STORE_FAST                      3: err_msg
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       0: printer
+                        70      LOAD_METHOD                     7: config_error
+                        72      LOAD_FAST                       3: err_msg
+                        74      CALL_METHOD                     1
+                        76      RAISE_VARARGS                   1
+                        78      LOAD_GLOBAL                     4: len
+                        80      LOAD_FAST                       2: z_steppers
+                        82      CALL_FUNCTION                   1
+                        84      LOAD_CONST                      5: 2
+                        86      COMPARE_OP                      0 (<)
+                        88      POP_JUMP_IF_FALSE               112
+                        90      LOAD_CONST                      6: '{"code":"key347", "msg":"%s requires multiple z steppers", "values":[]}'
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       6: name
+                        96      BINARY_MODULO                   
+                        98      STORE_FAST                      3: err_msg
+                        100     LOAD_FAST                       0: self
+                        102     LOAD_ATTR                       0: printer
+                        104     LOAD_METHOD                     7: config_error
+                        106     LOAD_FAST                       3: err_msg
+                        108     CALL_METHOD                     1
+                        110     RAISE_VARARGS                   1
+                        112     LOAD_FAST                       2: z_steppers
+                        114     LOAD_FAST                       0: self
+                        116     STORE_ATTR                      8: z_steppers
+                        118     LOAD_CONST                      0: None
+                        120     RETURN_VALUE                    
+                'ZAdjustHelper.handle_connect'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: adjust_steppers
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 24
+                    Stack Size: 11
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_position'
+                        'zip'
+                        'z_steppers'
+                        'join'
+                        'respond_info'
+                        'get_name'
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                        'flush_step_generation'
+                        'set_trapq'
+                        'sort'
+                        'range'
+                        'len'
+                        'get_trapq'
+                        'move'
+                        'set_position'
+                        'Exception'
+                        'logging'
+                        'exception'
+                        'str'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'adjustments'
+                        'speed'
+                        'toolhead'
+                        'gcode'
+                        'curpos'
+                        'stepstrs'
+                        'msg'
+                        'z_tilt'
+                        's'
+                        'a'
+                        'positions'
+                        'first_stepper_offset'
+                        'first_stepper'
+                        'z_low'
+                        'i'
+                        'stepper_offset'
+                        'stepper'
+                        'next_stepper_offset'
+                        'next_stepper'
+                        'err'
+                        'err_msg'
+                        'last_stepper_offset'
+                        'last_stepper'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        'gcode'
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'get_name'
+                            [Var Names]
+                                '.0'
+                                's'
+                                'a'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                '%s = %.6f'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        24 (to 30)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: s
+                                10      STORE_FAST                      2: a
+                                12      LOAD_CONST                      0: '%s = %.6f'
+                                14      LOAD_FAST                       1: s
+                                16      LOAD_METHOD                     0: get_name
+                                18      CALL_METHOD                     0
+                                20      LOAD_FAST                       2: a
+                                22      BUILD_TUPLE                     2
+                                24      BINARY_MODULO                   
+                                26      LIST_APPEND                     2
+                                28      JUMP_ABSOLUTE                   4
+                                30      RETURN_VALUE                    
+                        'ZAdjustHelper.adjust_steppers.<locals>.<listcomp>'
+                        'Making the following Z adjustments:\n%s'
+                        '\n'
+                        'z_tilt'
+                        'stepper_z'
+                        'stepper_z1'
+                        'stepper_z_adjustment:%s stepper_z1_adjustment:%s'
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'a'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: a
+                                10      STORE_FAST                      2: s
+                                12      LOAD_FAST                       1: a
+                                14      UNARY_NEGATIVE                  
+                                16      LOAD_FAST                       2: s
+                                18      BUILD_TUPLE                     2
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: <lambda>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 1
+                            Stack Size: 2
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                'k'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                0
+                            [Disassembly]
+                                0       LOAD_FAST                       0: k
+                                2       LOAD_CONST                      1: 0
+                                4       BINARY_SUBSCR                   
+                                6       RETURN_VALUE                    
+                        'ZAdjustHelper.adjust_steppers.<locals>.<lambda>'
+                        (
+                            'key'
+                        )
+                        0
+                        2
+                        1
+                        'ZAdjustHelper adjust_steppers'
+                        '{"code":"key348", "msg":"toolhead.move(%s, %s) ZAdjustHelper adjust_steppers error:%s", "values":[]}'
+                        -1
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      3: toolhead
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: printer
+                        16      LOAD_METHOD                     1: lookup_object
+                        18      LOAD_CONST                      2: 'gcode'
+                        20      CALL_METHOD                     1
+                        22      STORE_FAST                      4: gcode
+                        24      LOAD_FAST                       3: toolhead
+                        26      LOAD_METHOD                     2: get_position
+                        28      CALL_METHOD                     0
+                        30      STORE_FAST                      5: curpos
+                        32      LOAD_CONST                      3: <CODE> <listcomp>
+                        34      LOAD_CONST                      4: 'ZAdjustHelper.adjust_steppers.<locals>.<listcomp>'
+                        36      MAKE_FUNCTION                   0
+                        38      LOAD_GLOBAL                     3: zip
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       4: z_steppers
+                        44      LOAD_FAST                       1: adjustments
+                        46      CALL_FUNCTION                   2
+                        48      GET_ITER                        
+                        50      CALL_FUNCTION                   1
+                        52      STORE_FAST                      6: stepstrs
+                        54      LOAD_CONST                      5: 'Making the following Z adjustments:\n%s'
+                        56      LOAD_CONST                      6: '\n'
+                        58      LOAD_METHOD                     5: join
+                        60      LOAD_FAST                       6: stepstrs
+                        62      CALL_METHOD                     1
+                        64      BUILD_TUPLE                     1
+                        66      BINARY_MODULO                   
+                        68      STORE_FAST                      7: msg
+                        70      LOAD_FAST                       4: gcode
+                        72      LOAD_METHOD                     6: respond_info
+                        74      LOAD_FAST                       7: msg
+                        76      CALL_METHOD                     1
+                        78      POP_TOP                         
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       0: printer
+                        84      LOAD_METHOD                     1: lookup_object
+                        86      LOAD_CONST                      7: 'z_tilt'
+                        88      CALL_METHOD                     1
+                        90      STORE_FAST                      8: z_tilt
+                        92      LOAD_GLOBAL                     3: zip
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       4: z_steppers
+                        98      LOAD_FAST                       1: adjustments
+                        100     CALL_FUNCTION                   2
+                        102     GET_ITER                        
+                        104     FOR_ITER                        62 (to 168)
+                        106     UNPACK_SEQUENCE                 2
+                        108     STORE_FAST                      9: s
+                        110     STORE_FAST                      10: a
+                        112     LOAD_FAST                       9: s
+                        114     LOAD_METHOD                     7: get_name
+                        116     CALL_METHOD                     0
+                        118     LOAD_CONST                      8: 'stepper_z'
+                        120     COMPARE_OP                      2 (==)
+                        122     POP_JUMP_IF_FALSE               140
+                        124     LOAD_FAST                       8: z_tilt
+                        126     DUP_TOP                         
+                        128     LOAD_ATTR                       8: stepper_z_adjustment
+                        130     LOAD_FAST                       10: a
+                        132     INPLACE_ADD                     
+                        134     ROT_TWO                         
+                        136     STORE_ATTR                      8: stepper_z_adjustment
+                        138     JUMP_ABSOLUTE                   104
+                        140     LOAD_FAST                       9: s
+                        142     LOAD_METHOD                     7: get_name
+                        144     CALL_METHOD                     0
+                        146     LOAD_CONST                      9: 'stepper_z1'
+                        148     COMPARE_OP                      2 (==)
+                        150     POP_JUMP_IF_FALSE               104
+                        152     LOAD_FAST                       8: z_tilt
+                        154     DUP_TOP                         
+                        156     LOAD_ATTR                       9: stepper_z1_adjustment
+                        158     LOAD_FAST                       10: a
+                        160     INPLACE_ADD                     
+                        162     ROT_TWO                         
+                        164     STORE_ATTR                      9: stepper_z1_adjustment
+                        166     JUMP_ABSOLUTE                   104
+                        168     LOAD_FAST                       4: gcode
+                        170     LOAD_METHOD                     6: respond_info
+                        172     LOAD_CONST                      10: 'stepper_z_adjustment:%s stepper_z1_adjustment:%s'
+                        174     LOAD_FAST                       8: z_tilt
+                        176     LOAD_ATTR                       8: stepper_z_adjustment
+                        178     LOAD_FAST                       8: z_tilt
+                        180     LOAD_ATTR                       9: stepper_z1_adjustment
+                        182     BUILD_TUPLE                     2
+                        184     BINARY_MODULO                   
+                        186     CALL_METHOD                     1
+                        188     POP_TOP                         
+                        190     LOAD_FAST                       3: toolhead
+                        192     LOAD_METHOD                     10: flush_step_generation
+                        194     CALL_METHOD                     0
+                        196     POP_TOP                         
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       4: z_steppers
+                        202     GET_ITER                        
+                        204     FOR_ITER                        14 (to 220)
+                        206     STORE_FAST                      9: s
+                        208     LOAD_FAST                       9: s
+                        210     LOAD_METHOD                     11: set_trapq
+                        212     LOAD_CONST                      0: None
+                        214     CALL_METHOD                     1
+                        216     POP_TOP                         
+                        218     JUMP_ABSOLUTE                   204
+                        220     LOAD_CONST                      11: <CODE> <listcomp>
+                        222     LOAD_CONST                      4: 'ZAdjustHelper.adjust_steppers.<locals>.<listcomp>'
+                        224     MAKE_FUNCTION                   0
+                        226     LOAD_GLOBAL                     3: zip
+                        228     LOAD_FAST                       1: adjustments
+                        230     LOAD_FAST                       0: self
+                        232     LOAD_ATTR                       4: z_steppers
+                        234     CALL_FUNCTION                   2
+                        236     GET_ITER                        
+                        238     CALL_FUNCTION                   1
+                        240     STORE_FAST                      11: positions
+                        242     LOAD_FAST                       11: positions
+                        244     LOAD_ATTR                       12: sort
+                        246     LOAD_CONST                      12: <CODE> <lambda>
+                        248     LOAD_CONST                      13: 'ZAdjustHelper.adjust_steppers.<locals>.<lambda>'
+                        250     MAKE_FUNCTION                   0
+                        252     LOAD_CONST                      14: ('key',)
+                        254     CALL_FUNCTION_KW                1
+                        256     POP_TOP                         
+                        258     LOAD_FAST                       11: positions
+                        260     LOAD_CONST                      15: 0
+                        262     BINARY_SUBSCR                   
+                        264     UNPACK_SEQUENCE                 2
+                        266     STORE_FAST                      12: first_stepper_offset
+                        268     STORE_FAST                      13: first_stepper
+                        270     LOAD_FAST                       5: curpos
+                        272     LOAD_CONST                      16: 2
+                        274     BINARY_SUBSCR                   
+                        276     LOAD_FAST                       12: first_stepper_offset
+                        278     BINARY_SUBTRACT                 
+                        280     STORE_FAST                      14: z_low
+                        282     LOAD_GLOBAL                     13: range
+                        284     LOAD_GLOBAL                     14: len
+                        286     LOAD_FAST                       11: positions
+                        288     CALL_FUNCTION                   1
+                        290     LOAD_CONST                      17: 1
+                        292     BINARY_SUBTRACT                 
+                        294     CALL_FUNCTION                   1
+                        296     GET_ITER                        
+                        298     FOR_ITER                        212 (to 512)
+                        300     STORE_FAST                      15: i
+                        302     LOAD_FAST                       11: positions
+                        304     LOAD_FAST                       15: i
+                        306     BINARY_SUBSCR                   
+                        308     UNPACK_SEQUENCE                 2
+                        310     STORE_FAST                      16: stepper_offset
+                        312     STORE_FAST                      17: stepper
+                        314     LOAD_FAST                       11: positions
+                        316     LOAD_FAST                       15: i
+                        318     LOAD_CONST                      17: 1
+                        320     BINARY_ADD                      
+                        322     BINARY_SUBSCR                   
+                        324     UNPACK_SEQUENCE                 2
+                        326     STORE_FAST                      18: next_stepper_offset
+                        328     STORE_FAST                      19: next_stepper
+                        330     LOAD_FAST                       3: toolhead
+                        332     LOAD_METHOD                     10: flush_step_generation
+                        334     CALL_METHOD                     0
+                        336     POP_TOP                         
+                        338     LOAD_FAST                       17: stepper
+                        340     LOAD_METHOD                     11: set_trapq
+                        342     LOAD_FAST                       3: toolhead
+                        344     LOAD_METHOD                     15: get_trapq
+                        346     CALL_METHOD                     0
+                        348     CALL_METHOD                     1
+                        350     POP_TOP                         
+                        352     LOAD_FAST                       14: z_low
+                        354     LOAD_FAST                       18: next_stepper_offset
+                        356     BINARY_ADD                      
+                        358     LOAD_FAST                       5: curpos
+                        360     LOAD_CONST                      16: 2
+                        362     STORE_SUBSCR                    
+                        364     SETUP_FINALLY                   26 (to 392)
+                        366     LOAD_FAST                       3: toolhead
+                        368     LOAD_METHOD                     16: move
+                        370     LOAD_FAST                       5: curpos
+                        372     LOAD_FAST                       2: speed
+                        374     CALL_METHOD                     2
+                        376     POP_TOP                         
+                        378     LOAD_FAST                       3: toolhead
+                        380     LOAD_METHOD                     17: set_position
+                        382     LOAD_FAST                       5: curpos
+                        384     CALL_METHOD                     1
+                        386     POP_TOP                         
+                        388     POP_BLOCK                       
+                        390     JUMP_FORWARD                    116 (to 508)
+                        392     DUP_TOP                         
+                        394     LOAD_GLOBAL                     18: Exception
+                        396     JUMP_IF_NOT_EXC_MATCH           506
+                        400     POP_TOP                         
+                        402     STORE_FAST                      20: err
+                        404     POP_TOP                         
+                        406     SETUP_FINALLY                   90 (to 498)
+                        408     LOAD_GLOBAL                     19: logging
+                        410     LOAD_METHOD                     20: exception
+                        412     LOAD_CONST                      18: 'ZAdjustHelper adjust_steppers'
+                        414     CALL_METHOD                     1
+                        416     POP_TOP                         
+                        418     LOAD_FAST                       3: toolhead
+                        420     LOAD_METHOD                     10: flush_step_generation
+                        422     CALL_METHOD                     0
+                        424     POP_TOP                         
+                        426     LOAD_FAST                       0: self
+                        428     LOAD_ATTR                       4: z_steppers
+                        430     GET_ITER                        
+                        432     FOR_ITER                        20 (to 454)
+                        434     STORE_FAST                      9: s
+                        436     LOAD_FAST                       9: s
+                        438     LOAD_METHOD                     11: set_trapq
+                        440     LOAD_FAST                       3: toolhead
+                        442     LOAD_METHOD                     15: get_trapq
+                        444     CALL_METHOD                     0
+                        446     CALL_METHOD                     1
+                        448     POP_TOP                         
+                        450     JUMP_ABSOLUTE                   432
+                        454     LOAD_CONST                      19: '{"code":"key348", "msg":"toolhead.move(%s, %s) ZAdjustHelper adjust_steppers error:%s", "values":[]}'
+                        456     LOAD_GLOBAL                     21: str
+                        458     LOAD_FAST                       5: curpos
+                        460     CALL_FUNCTION                   1
+                        462     LOAD_FAST                       2: speed
+                        464     LOAD_GLOBAL                     21: str
+                        466     LOAD_FAST                       20: err
+                        468     CALL_FUNCTION                   1
+                        470     BUILD_TUPLE                     3
+                        472     BINARY_MODULO                   
+                        474     STORE_FAST                      21: err_msg
+                        476     LOAD_FAST                       4: gcode
+                        478     LOAD_METHOD                     22: error
+                        480     LOAD_FAST                       21: err_msg
+                        482     CALL_METHOD                     1
+                        484     RAISE_VARARGS                   1
+                        486     POP_BLOCK                       
+                        488     POP_EXCEPT                      
+                        490     LOAD_CONST                      0: None
+                        492     STORE_FAST                      20: err
+                        494     DELETE_FAST                     20: err
+                        496     JUMP_FORWARD                    10 (to 508)
+                        498     LOAD_CONST                      0: None
+                        500     STORE_FAST                      20: err
+                        502     DELETE_FAST                     20: err
+                        504     RERAISE                         
+                        506     RERAISE                         
+                        508     JUMP_ABSOLUTE                   298
+                        512     LOAD_FAST                       11: positions
+                        514     LOAD_CONST                      20: -1
+                        516     BINARY_SUBSCR                   
+                        518     UNPACK_SEQUENCE                 2
+                        520     STORE_FAST                      22: last_stepper_offset
+                        522     STORE_FAST                      23: last_stepper
+                        524     LOAD_FAST                       3: toolhead
+                        526     LOAD_METHOD                     10: flush_step_generation
+                        528     CALL_METHOD                     0
+                        530     POP_TOP                         
+                        532     LOAD_FAST                       23: last_stepper
+                        534     LOAD_METHOD                     11: set_trapq
+                        536     LOAD_FAST                       3: toolhead
+                        538     LOAD_METHOD                     15: get_trapq
+                        540     CALL_METHOD                     0
+                        542     CALL_METHOD                     1
+                        544     POP_TOP                         
+                        546     LOAD_FAST                       5: curpos
+                        548     LOAD_CONST                      16: 2
+                        550     DUP_TOP_TWO                     
+                        552     BINARY_SUBSCR                   
+                        554     LOAD_FAST                       12: first_stepper_offset
+                        556     INPLACE_ADD                     
+                        558     ROT_THREE                       
+                        560     STORE_SUBSCR                    
+                        562     LOAD_FAST                       3: toolhead
+                        564     LOAD_METHOD                     17: set_position
+                        566     LOAD_FAST                       5: curpos
+                        568     CALL_METHOD                     1
+                        570     POP_TOP                         
+                        572     LOAD_CONST                      0: None
+                        574     RETURN_VALUE                    
+                'ZAdjustHelper.adjust_steppers'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ZAdjustHelper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ZAdjustHelper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> handle_connect
+                18      LOAD_CONST                      4: 'ZAdjustHelper.handle_connect'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: handle_connect
+                24      LOAD_CONST                      5: <CODE> adjust_steppers
+                26      LOAD_CONST                      6: 'ZAdjustHelper.adjust_steppers'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: adjust_steppers
+                32      LOAD_CONST                      7: None
+                34      RETURN_VALUE                    
+        'ZAdjustHelper'
+        [Code]
+            File Name: /extras/z_tilt.py
+            Object Name: ZAdjustStatus
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'check_retry_result'
+                'reset'
+                'get_status'
+                '_motor_off'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ZAdjustStatus'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'applied'
+                        'register_event_handler'
+                        '_motor_off'
+                    [Var Names]
+                        'self'
+                        'printer'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        'stepper_enable:motor_off'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: False
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: applied
+                        6       LOAD_FAST                       1: printer
+                        8       LOAD_METHOD                     1: register_event_handler
+                        10      LOAD_CONST                      2: 'stepper_enable:motor_off'
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: _motor_off
+                        16      CALL_METHOD                     2
+                        18      POP_TOP                         
+                        20      LOAD_CONST                      0: None
+                        22      RETURN_VALUE                    
+                'ZAdjustStatus.__init__'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: check_retry_result
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'applied'
+                    [Var Names]
+                        'self'
+                        'retry_result'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'done'
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       1: retry_result
+                        2       LOAD_CONST                      1: 'done'
+                        4       COMPARE_OP                      2 (==)
+                        6       POP_JUMP_IF_FALSE               14
+                        8       LOAD_CONST                      2: True
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      0: applied
+                        14      LOAD_FAST                       1: retry_result
+                        16      RETURN_VALUE                    
+                'ZAdjustStatus.check_retry_result'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: reset
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'applied'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       LOAD_CONST                      1: False
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: applied
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'ZAdjustStatus.reset'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'applied'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'applied'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 'applied'
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: applied
+                        6       BUILD_MAP                       1
+                        8       RETURN_VALUE                    
+                'ZAdjustStatus.get_status'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: _motor_off
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'reset'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: reset
+                        4       CALL_METHOD                     0
+                        6       POP_TOP                         
+                        8       LOAD_CONST                      0: None
+                        10      RETURN_VALUE                    
+                'ZAdjustStatus._motor_off'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ZAdjustStatus'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ZAdjustStatus.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> check_retry_result
+                18      LOAD_CONST                      4: 'ZAdjustStatus.check_retry_result'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: check_retry_result
+                24      LOAD_CONST                      5: <CODE> reset
+                26      LOAD_CONST                      6: 'ZAdjustStatus.reset'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: reset
+                32      LOAD_CONST                      7: <CODE> get_status
+                34      LOAD_CONST                      8: 'ZAdjustStatus.get_status'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: get_status
+                40      LOAD_CONST                      9: <CODE> _motor_off
+                42      LOAD_CONST                      10: 'ZAdjustStatus._motor_off'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _motor_off
+                48      LOAD_CONST                      11: None
+                50      RETURN_VALUE                    
+        'ZAdjustStatus'
+        [Code]
+            File Name: /extras/z_tilt.py
+            Object Name: RetryHelper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'start'
+                'check_increase'
+                'check_retry'
+                'write_z_adjustment'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'RetryHelper'
+                ''
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'lookup_object'
+                        'gcode'
+                        'getint'
+                        'default_max_retries'
+                        'getfloat'
+                        'default_retry_tolerance'
+                        'value_label'
+                        'error_msg_extra'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'error_msg_extra'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'retries'
+                        0
+                        (
+                            'minval'
+                        )
+                        'retry_tolerance'
+                        0
+                        (
+                            'above'
+                        )
+                        'Probed points range'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_METHOD                     0: get_printer
+                        14      CALL_METHOD                     0
+                        16      LOAD_METHOD                     2: lookup_object
+                        18      LOAD_CONST                      1: 'gcode'
+                        20      CALL_METHOD                     1
+                        22      LOAD_FAST                       0: self
+                        24      STORE_ATTR                      3: gcode
+                        26      LOAD_FAST                       1: config
+                        28      LOAD_ATTR                       4: getint
+                        30      LOAD_CONST                      2: 'retries'
+                        32      LOAD_CONST                      3: 0
+                        34      LOAD_CONST                      3: 0
+                        36      LOAD_CONST                      4: ('minval',)
+                        38      CALL_FUNCTION_KW                3
+                        40      LOAD_FAST                       0: self
+                        42      STORE_ATTR                      5: default_max_retries
+                        44      LOAD_FAST                       1: config
+                        46      LOAD_ATTR                       6: getfloat
+                        48      LOAD_CONST                      5: 'retry_tolerance'
+                        50      LOAD_CONST                      6: 0
+                        52      LOAD_CONST                      6: 0
+                        54      LOAD_CONST                      7: ('above',)
+                        56      CALL_FUNCTION_KW                3
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      7: default_retry_tolerance
+                        62      LOAD_CONST                      8: 'Probed points range'
+                        64      LOAD_FAST                       0: self
+                        66      STORE_ATTR                      8: value_label
+                        68      LOAD_FAST                       2: error_msg_extra
+                        70      LOAD_FAST                       0: self
+                        72      STORE_ATTR                      9: error_msg_extra
+                        74      LOAD_CONST                      0: None
+                        76      RETURN_VALUE                    
+                'RetryHelper.__init__'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: start
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_int'
+                        'default_max_retries'
+                        'max_retries'
+                        'get_float'
+                        'default_retry_tolerance'
+                        'retry_tolerance'
+                        'current_retry'
+                        'previous'
+                        'increasing'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'RETRIES'
+                        0
+                        30
+                        (
+                            'minval'
+                            'maxval'
+                        )
+                        'RETRY_TOLERANCE'
+                        0
+                        1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_int
+                        4       LOAD_CONST                      1: 'RETRIES'
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: default_max_retries
+                        10      LOAD_CONST                      2: 0
+                        12      LOAD_CONST                      3: 30
+                        14      LOAD_CONST                      4: ('minval', 'maxval')
+                        16      CALL_FUNCTION_KW                4
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      2: max_retries
+                        22      LOAD_FAST                       1: gcmd
+                        24      LOAD_ATTR                       3: get_float
+                        26      LOAD_CONST                      5: 'RETRY_TOLERANCE'
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       4: default_retry_tolerance
+                        32      LOAD_CONST                      6: 0
+                        34      LOAD_CONST                      7: 1
+                        36      LOAD_CONST                      4: ('minval', 'maxval')
+                        38      CALL_FUNCTION_KW                4
+                        40      LOAD_FAST                       0: self
+                        42      STORE_ATTR                      5: retry_tolerance
+                        44      LOAD_CONST                      2: 0
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      6: current_retry
+                        50      LOAD_CONST                      0: None
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      7: previous
+                        56      LOAD_CONST                      2: 0
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      8: increasing
+                        62      LOAD_CONST                      0: None
+                        64      RETURN_VALUE                    
+                'RetryHelper.start'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: check_increase
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'previous'
+                        'increasing'
+                    [Var Names]
+                        'self'
+                        'error'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1e-07
+                        1
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: previous
+                        4       POP_JUMP_IF_FALSE               36
+                        6       LOAD_FAST                       1: error
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       0: previous
+                        12      LOAD_CONST                      1: 1e-07
+                        14      BINARY_ADD                      
+                        16      COMPARE_OP                      4 (>)
+                        18      POP_JUMP_IF_FALSE               36
+                        20      LOAD_FAST                       0: self
+                        22      DUP_TOP                         
+                        24      LOAD_ATTR                       1: increasing
+                        26      LOAD_CONST                      2: 1
+                        28      INPLACE_ADD                     
+                        30      ROT_TWO                         
+                        32      STORE_ATTR                      1: increasing
+                        34      JUMP_FORWARD                    24 (to 60)
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       1: increasing
+                        40      LOAD_CONST                      3: 0
+                        42      COMPARE_OP                      4 (>)
+                        44      POP_JUMP_IF_FALSE               60
+                        46      LOAD_FAST                       0: self
+                        48      DUP_TOP                         
+                        50      LOAD_ATTR                       1: increasing
+                        52      LOAD_CONST                      2: 1
+                        54      INPLACE_SUBTRACT                
+                        56      ROT_TWO                         
+                        58      STORE_ATTR                      1: increasing
+                        60      LOAD_FAST                       1: error
+                        62      LOAD_FAST                       0: self
+                        64      STORE_ATTR                      0: previous
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       1: increasing
+                        70      LOAD_CONST                      2: 1
+                        72      COMPARE_OP                      4 (>)
+                        74      RETURN_VALUE                    
+                'RetryHelper.check_increase'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: check_retry
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'max_retries'
+                        'round'
+                        'max'
+                        'min'
+                        'gcode'
+                        'respond_info'
+                        'current_retry'
+                        'value_label'
+                        'retry_tolerance'
+                        'check_increase'
+                        'error_msg_extra'
+                        'warning'
+                        'printer'
+                        'lookup_object'
+                        'G29_flag'
+                        'write_z_adjustment'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'z_positions'
+                        'error'
+                        'err_msg'
+                        'toolhead'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        6
+                        'Retries: %d/%d %s: %0.6f tolerance: %0.6f'
+                        '{"code":"key349", "msg":"Retries aborting: %s is increasing. %s", "values":[]}'
+                        'toolhead'
+                        True
+                        'done'
+                        1
+                        '{"code":"key350", "msg":"Too many retries", "values":[]}'
+                        'retry'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: max_retries
+                        4       LOAD_CONST                      1: 0
+                        6       COMPARE_OP                      2 (==)
+                        8       POP_JUMP_IF_FALSE               14
+                        10      LOAD_CONST                      0: None
+                        12      RETURN_VALUE                    
+                        14      LOAD_GLOBAL                     1: round
+                        16      LOAD_GLOBAL                     2: max
+                        18      LOAD_FAST                       1: z_positions
+                        20      CALL_FUNCTION                   1
+                        22      LOAD_GLOBAL                     3: min
+                        24      LOAD_FAST                       1: z_positions
+                        26      CALL_FUNCTION                   1
+                        28      BINARY_SUBTRACT                 
+                        30      LOAD_CONST                      2: 6
+                        32      CALL_FUNCTION                   2
+                        34      STORE_FAST                      2: error
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       4: gcode
+                        40      LOAD_METHOD                     5: respond_info
+                        42      LOAD_CONST                      3: 'Retries: %d/%d %s: %0.6f tolerance: %0.6f'
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       6: current_retry
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       0: max_retries
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       7: value_label
+                        56      LOAD_FAST                       2: error
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       8: retry_tolerance
+                        62      BUILD_TUPLE                     5
+                        64      BINARY_MODULO                   
+                        66      CALL_METHOD                     1
+                        68      POP_TOP                         
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_METHOD                     9: check_increase
+                        74      LOAD_FAST                       2: error
+                        76      CALL_METHOD                     1
+                        78      POP_JUMP_IF_FALSE               108
+                        80      LOAD_CONST                      4: '{"code":"key349", "msg":"Retries aborting: %s is increasing. %s", "values":[]}'
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       7: value_label
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       10: error_msg_extra
+                        90      BUILD_TUPLE                     2
+                        92      BINARY_MODULO                   
+                        94      STORE_FAST                      3: err_msg
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       4: gcode
+                        100     LOAD_METHOD                     11: warning
+                        102     LOAD_FAST                       3: err_msg
+                        104     CALL_METHOD                     1
+                        106     RETURN_VALUE                    
+                        108     LOAD_FAST                       2: error
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       8: retry_tolerance
+                        114     COMPARE_OP                      1 (<=)
+                        116     POP_JUMP_IF_FALSE               152
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       12: printer
+                        122     LOAD_METHOD                     13: lookup_object
+                        124     LOAD_CONST                      5: 'toolhead'
+                        126     CALL_METHOD                     1
+                        128     STORE_FAST                      4: toolhead
+                        130     LOAD_FAST                       4: toolhead
+                        132     LOAD_ATTR                       14: G29_flag
+                        134     LOAD_CONST                      6: True
+                        136     COMPARE_OP                      2 (==)
+                        138     POP_JUMP_IF_FALSE               148
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_METHOD                     15: write_z_adjustment
+                        144     CALL_METHOD                     0
+                        146     POP_TOP                         
+                        148     LOAD_CONST                      7: 'done'
+                        150     RETURN_VALUE                    
+                        152     LOAD_FAST                       0: self
+                        154     DUP_TOP                         
+                        156     LOAD_ATTR                       6: current_retry
+                        158     LOAD_CONST                      8: 1
+                        160     INPLACE_ADD                     
+                        162     ROT_TWO                         
+                        164     STORE_ATTR                      6: current_retry
+                        166     LOAD_FAST                       0: self
+                        168     LOAD_ATTR                       6: current_retry
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       0: max_retries
+                        174     COMPARE_OP                      4 (>)
+                        176     POP_JUMP_IF_FALSE               194
+                        178     LOAD_CONST                      9: '{"code":"key350", "msg":"Too many retries", "values":[]}'
+                        180     STORE_FAST                      3: err_msg
+                        182     LOAD_FAST                       0: self
+                        184     LOAD_ATTR                       4: gcode
+                        186     LOAD_METHOD                     16: error
+                        188     LOAD_FAST                       3: err_msg
+                        190     CALL_METHOD                     1
+                        192     RAISE_VARARGS                   1
+                        194     LOAD_CONST                      10: 'retry'
+                        196     RETURN_VALUE                    
+                'RetryHelper.check_retry'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: write_z_adjustment
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 8
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'json'
+                        'printer'
+                        'lookup_object'
+                        'open'
+                        'stepper_adjustment_path'
+                        'write'
+                        'dumps'
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                        'flush'
+                    [Var Names]
+                        'self'
+                        'json'
+                        'z_tilt'
+                        'f'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'z_tilt'
+                        'w'
+                        (
+                            'stepper_z_adjustment'
+                            'stepper_z1_adjustment'
+                        )
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_CONST                      0: None
+                        4       IMPORT_NAME                     0: json
+                        6       STORE_FAST                      1: json
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: printer
+                        12      LOAD_METHOD                     2: lookup_object
+                        14      LOAD_CONST                      2: 'z_tilt'
+                        16      CALL_METHOD                     1
+                        18      STORE_FAST                      2: z_tilt
+                        20      LOAD_GLOBAL                     3: open
+                        22      LOAD_FAST                       2: z_tilt
+                        24      LOAD_ATTR                       4: stepper_adjustment_path
+                        26      LOAD_CONST                      3: 'w'
+                        28      CALL_FUNCTION                   2
+                        30      SETUP_WITH                      50 (to 82)
+                        32      STORE_FAST                      3: f
+                        34      LOAD_FAST                       3: f
+                        36      LOAD_METHOD                     5: write
+                        38      LOAD_FAST                       1: json
+                        40      LOAD_METHOD                     6: dumps
+                        42      LOAD_FAST                       2: z_tilt
+                        44      LOAD_ATTR                       7: stepper_z_adjustment
+                        46      LOAD_FAST                       2: z_tilt
+                        48      LOAD_ATTR                       8: stepper_z1_adjustment
+                        50      LOAD_CONST                      4: ('stepper_z_adjustment', 'stepper_z1_adjustment')
+                        52      BUILD_CONST_KEY_MAP             2
+                        54      CALL_METHOD                     1
+                        56      CALL_METHOD                     1
+                        58      POP_TOP                         
+                        60      LOAD_FAST                       3: f
+                        62      LOAD_METHOD                     9: flush
+                        64      CALL_METHOD                     0
+                        66      POP_TOP                         
+                        68      POP_BLOCK                       
+                        70      LOAD_CONST                      0: None
+                        72      DUP_TOP                         
+                        74      DUP_TOP                         
+                        76      CALL_FUNCTION                   3
+                        78      POP_TOP                         
+                        80      JUMP_FORWARD                    16 (to 98)
+                        82      WITH_EXCEPT_START               
+                        84      POP_JUMP_IF_TRUE                88
+                        86      RERAISE                         
+                        88      POP_TOP                         
+                        90      POP_TOP                         
+                        92      POP_TOP                         
+                        94      POP_EXCEPT                      
+                        96      POP_TOP                         
+                        98      LOAD_CONST                      0: None
+                        100     RETURN_VALUE                    
+                'RetryHelper.write_z_adjustment'
+                None
+                (
+                    ''
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'RetryHelper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      13: ('',)
+                10      LOAD_CONST                      2: <CODE> __init__
+                12      LOAD_CONST                      3: 'RetryHelper.__init__'
+                14      MAKE_FUNCTION                   1
+                16      STORE_NAME                      3: __init__
+                18      LOAD_CONST                      4: <CODE> start
+                20      LOAD_CONST                      5: 'RetryHelper.start'
+                22      MAKE_FUNCTION                   0
+                24      STORE_NAME                      4: start
+                26      LOAD_CONST                      6: <CODE> check_increase
+                28      LOAD_CONST                      7: 'RetryHelper.check_increase'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: check_increase
+                34      LOAD_CONST                      8: <CODE> check_retry
+                36      LOAD_CONST                      9: 'RetryHelper.check_retry'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: check_retry
+                42      LOAD_CONST                      10: <CODE> write_z_adjustment
+                44      LOAD_CONST                      11: 'RetryHelper.write_z_adjustment'
+                46      MAKE_FUNCTION                   0
+                48      STORE_NAME                      7: write_z_adjustment
+                50      LOAD_CONST                      12: None
+                52      RETURN_VALUE                    
+        'RetryHelper'
+        [Code]
+            File Name: /extras/z_tilt.py
+            Object Name: ZTilt
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'cmd_Z_TILT_ADJUST_help'
+                'cmd_Z_TILT_ADJUST'
+                'cmd_RM_ADJUSTMENT_FILE'
+                'cmd_ADJUST_STEPPERS'
+                'get_adjustments'
+                'probe_finalize'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ZTilt'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'getlists'
+                        'float'
+                        'z_positions'
+                        'RetryHelper'
+                        'retry_helper'
+                        'probe'
+                        'ProbePointsHelper'
+                        'probe_finalize'
+                        'probe_helper'
+                        'minimum_points'
+                        'ZAdjustStatus'
+                        'z_status'
+                        'ZAdjustHelper'
+                        'len'
+                        'z_helper'
+                        'lookup_object'
+                        'register_command'
+                        'cmd_Z_TILT_ADJUST'
+                        'cmd_Z_TILT_ADJUST_help'
+                        'cmd_ADJUST_STEPPERS'
+                        'cmd_RM_ADJUSTMENT_FILE'
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                        'os'
+                        'path'
+                        'join'
+                        'base_dir'
+                        'stepper_adjustment_path'
+                        'real_zmax_path'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'gcode'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'z_positions'
+                        (
+                            ','
+                            '\n'
+                        )
+                        2
+                        (
+                            'seps'
+                            'parser'
+                            'count'
+                        )
+                        'gcode'
+                        'Z_TILT_ADJUST'
+                        (
+                            'desc'
+                        )
+                        'ADJUST_STEPPERS'
+                        'RM_ADJUSTMENT_FILE'
+                        0
+                        'creality/userdata/config/stepper_adjustment.json'
+                        'creality/userdata/config/real_zmax.json'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_ATTR                       2: getlists
+                        14      LOAD_CONST                      1: 'z_positions'
+                        16      LOAD_CONST                      2: (',', '\n')
+                        18      LOAD_GLOBAL                     3: float
+                        20      LOAD_CONST                      3: 2
+                        22      LOAD_CONST                      4: ('seps', 'parser', 'count')
+                        24      CALL_FUNCTION_KW                4
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      4: z_positions
+                        30      LOAD_GLOBAL                     5: RetryHelper
+                        32      LOAD_FAST                       1: config
+                        34      CALL_FUNCTION                   1
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      6: retry_helper
+                        40      LOAD_GLOBAL                     7: probe
+                        42      LOAD_METHOD                     8: ProbePointsHelper
+                        44      LOAD_FAST                       1: config
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       9: probe_finalize
+                        50      CALL_METHOD                     2
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      10: probe_helper
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       10: probe_helper
+                        60      LOAD_METHOD                     11: minimum_points
+                        62      LOAD_CONST                      3: 2
+                        64      CALL_METHOD                     1
+                        66      POP_TOP                         
+                        68      LOAD_GLOBAL                     12: ZAdjustStatus
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       1: printer
+                        74      CALL_FUNCTION                   1
+                        76      LOAD_FAST                       0: self
+                        78      STORE_ATTR                      13: z_status
+                        80      LOAD_GLOBAL                     14: ZAdjustHelper
+                        82      LOAD_FAST                       1: config
+                        84      LOAD_GLOBAL                     15: len
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       4: z_positions
+                        90      CALL_FUNCTION                   1
+                        92      CALL_FUNCTION                   2
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      16: z_helper
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       1: printer
+                        102     LOAD_METHOD                     17: lookup_object
+                        104     LOAD_CONST                      5: 'gcode'
+                        106     CALL_METHOD                     1
+                        108     STORE_FAST                      2: gcode
+                        110     LOAD_FAST                       2: gcode
+                        112     LOAD_ATTR                       18: register_command
+                        114     LOAD_CONST                      6: 'Z_TILT_ADJUST'
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       19: cmd_Z_TILT_ADJUST
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       20: cmd_Z_TILT_ADJUST_help
+                        124     LOAD_CONST                      7: ('desc',)
+                        126     CALL_FUNCTION_KW                3
+                        128     POP_TOP                         
+                        130     LOAD_FAST                       2: gcode
+                        132     LOAD_METHOD                     18: register_command
+                        134     LOAD_CONST                      8: 'ADJUST_STEPPERS'
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       21: cmd_ADJUST_STEPPERS
+                        140     CALL_METHOD                     2
+                        142     POP_TOP                         
+                        144     LOAD_FAST                       2: gcode
+                        146     LOAD_METHOD                     18: register_command
+                        148     LOAD_CONST                      9: 'RM_ADJUSTMENT_FILE'
+                        150     LOAD_FAST                       0: self
+                        152     LOAD_ATTR                       22: cmd_RM_ADJUSTMENT_FILE
+                        154     CALL_METHOD                     2
+                        156     POP_TOP                         
+                        158     LOAD_CONST                      10: 0
+                        160     LOAD_FAST                       0: self
+                        162     STORE_ATTR                      23: stepper_z_adjustment
+                        164     LOAD_CONST                      10: 0
+                        166     LOAD_FAST                       0: self
+                        168     STORE_ATTR                      24: stepper_z1_adjustment
+                        170     LOAD_GLOBAL                     25: os
+                        172     LOAD_ATTR                       26: path
+                        174     LOAD_METHOD                     27: join
+                        176     LOAD_GLOBAL                     28: base_dir
+                        178     LOAD_CONST                      11: 'creality/userdata/config/stepper_adjustment.json'
+                        180     CALL_METHOD                     2
+                        182     LOAD_FAST                       0: self
+                        184     STORE_ATTR                      29: stepper_adjustment_path
+                        186     LOAD_GLOBAL                     25: os
+                        188     LOAD_ATTR                       26: path
+                        190     LOAD_METHOD                     27: join
+                        192     LOAD_GLOBAL                     28: base_dir
+                        194     LOAD_CONST                      12: 'creality/userdata/config/real_zmax.json'
+                        196     CALL_METHOD                     2
+                        198     LOAD_FAST                       0: self
+                        200     STORE_ATTR                      30: real_zmax_path
+                        202     LOAD_CONST                      0: None
+                        204     RETURN_VALUE                    
+                'ZTilt.__init__'
+                'Adjust the Z tilt'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: cmd_Z_TILT_ADJUST
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                        'z_status'
+                        'reset'
+                        'retry_helper'
+                        'start'
+                        'probe_helper'
+                        'start_probe'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: stepper_z_adjustment
+                        6       LOAD_CONST                      1: 0
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: stepper_z1_adjustment
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: z_status
+                        16      LOAD_METHOD                     3: reset
+                        18      CALL_METHOD                     0
+                        20      POP_TOP                         
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       4: retry_helper
+                        26      LOAD_METHOD                     5: start
+                        28      LOAD_FAST                       1: gcmd
+                        30      CALL_METHOD                     1
+                        32      POP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       6: probe_helper
+                        38      LOAD_METHOD                     7: start_probe
+                        40      LOAD_FAST                       1: gcmd
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_CONST                      0: None
+                        48      RETURN_VALUE                    
+                'ZTilt.cmd_Z_TILT_ADJUST'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: cmd_RM_ADJUSTMENT_FILE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'os'
+                        'path'
+                        'exists'
+                        'stepper_adjustment_path'
+                        'remove'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: os
+                        2       LOAD_ATTR                       1: path
+                        4       LOAD_METHOD                     2: exists
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       3: stepper_adjustment_path
+                        10      CALL_METHOD                     1
+                        12      POP_JUMP_IF_FALSE               26
+                        14      LOAD_GLOBAL                     0: os
+                        16      LOAD_METHOD                     4: remove
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: stepper_adjustment_path
+                        22      CALL_METHOD                     1
+                        24      POP_TOP                         
+                        26      LOAD_CONST                      0: None
+                        28      RETURN_VALUE                    
+                'ZTilt.cmd_RM_ADJUSTMENT_FILE'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: cmd_ADJUST_STEPPERS
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                        'get_adjustments'
+                        'probe_helper'
+                        'get_lift_speed'
+                        'printer'
+                        'lookup_object'
+                        'run_script_from_command'
+                        'z_helper'
+                        'adjust_steppers'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'adjustments'
+                        'speed'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'gcode'
+                        'G4 P200'
+                        'G4 P500'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: stepper_z_adjustment
+                        6       LOAD_CONST                      1: 0
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: stepper_z1_adjustment
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_METHOD                     2: get_adjustments
+                        16      CALL_METHOD                     0
+                        18      STORE_FAST                      2: adjustments
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: probe_helper
+                        24      LOAD_METHOD                     4: get_lift_speed
+                        26      CALL_METHOD                     0
+                        28      STORE_FAST                      3: speed
+                        30      LOAD_FAST                       2: adjustments
+                        32      POP_JUMP_IF_FALSE               84
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       5: printer
+                        38      LOAD_METHOD                     6: lookup_object
+                        40      LOAD_CONST                      2: 'gcode'
+                        42      CALL_METHOD                     1
+                        44      LOAD_METHOD                     7: run_script_from_command
+                        46      LOAD_CONST                      3: 'G4 P200'
+                        48      CALL_METHOD                     1
+                        50      POP_TOP                         
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       8: z_helper
+                        56      LOAD_METHOD                     9: adjust_steppers
+                        58      LOAD_FAST                       2: adjustments
+                        60      LOAD_FAST                       3: speed
+                        62      CALL_METHOD                     2
+                        64      POP_TOP                         
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       5: printer
+                        70      LOAD_METHOD                     6: lookup_object
+                        72      LOAD_CONST                      2: 'gcode'
+                        74      CALL_METHOD                     1
+                        76      LOAD_METHOD                     7: run_script_from_command
+                        78      LOAD_CONST                      4: 'G4 P500'
+                        80      CALL_METHOD                     1
+                        82      POP_TOP                         
+                        84      LOAD_CONST                      0: None
+                        86      RETURN_VALUE                    
+                'ZTilt.cmd_ADJUST_STEPPERS'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: get_adjustments
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 11
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'json'
+                        'os'
+                        'path'
+                        'exists'
+                        'stepper_adjustment_path'
+                        'open'
+                        'loads'
+                        'read'
+                        'get'
+                        'Exception'
+                        'logging'
+                        'exception'
+                    [Var Names]
+                        'self'
+                        'json'
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                        'result'
+                        'f'
+                        'err'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        -10
+                        'r'
+                        'stepper_z_adjustment'
+                        'stepper_z1_adjustment'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_CONST                      0: None
+                        4       IMPORT_NAME                     0: json
+                        6       STORE_FAST                      1: json
+                        8       LOAD_CONST                      2: -10
+                        10      STORE_FAST                      2: stepper_z_adjustment
+                        12      LOAD_CONST                      2: -10
+                        14      STORE_FAST                      3: stepper_z1_adjustment
+                        16      LOAD_GLOBAL                     1: os
+                        18      LOAD_ATTR                       2: path
+                        20      LOAD_METHOD                     3: exists
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       4: stepper_adjustment_path
+                        26      CALL_METHOD                     1
+                        28      POP_JUMP_IF_FALSE               168
+                        30      BUILD_MAP                       0
+                        32      STORE_FAST                      4: result
+                        34      LOAD_GLOBAL                     5: open
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       4: stepper_adjustment_path
+                        40      LOAD_CONST                      3: 'r'
+                        42      CALL_FUNCTION                   2
+                        44      SETUP_WITH                      106 (to 152)
+                        46      STORE_FAST                      5: f
+                        48      SETUP_FINALLY                   42 (to 92)
+                        50      LOAD_FAST                       1: json
+                        52      LOAD_METHOD                     6: loads
+                        54      LOAD_FAST                       5: f
+                        56      LOAD_METHOD                     7: read
+                        58      CALL_METHOD                     0
+                        60      CALL_METHOD                     1
+                        62      STORE_FAST                      4: result
+                        64      LOAD_FAST                       4: result
+                        66      LOAD_METHOD                     8: get
+                        68      LOAD_CONST                      4: 'stepper_z_adjustment'
+                        70      LOAD_CONST                      2: -10
+                        72      CALL_METHOD                     2
+                        74      STORE_FAST                      2: stepper_z_adjustment
+                        76      LOAD_FAST                       4: result
+                        78      LOAD_METHOD                     8: get
+                        80      LOAD_CONST                      5: 'stepper_z1_adjustment'
+                        82      LOAD_CONST                      2: -10
+                        84      CALL_METHOD                     2
+                        86      STORE_FAST                      3: stepper_z1_adjustment
+                        88      POP_BLOCK                       
+                        90      JUMP_FORWARD                    46 (to 138)
+                        92      DUP_TOP                         
+                        94      LOAD_GLOBAL                     9: Exception
+                        96      JUMP_IF_NOT_EXC_MATCH           136
+                        98      POP_TOP                         
+                        100     STORE_FAST                      6: err
+                        102     POP_TOP                         
+                        104     SETUP_FINALLY                   22 (to 128)
+                        106     LOAD_GLOBAL                     10: logging
+                        108     LOAD_METHOD                     11: exception
+                        110     LOAD_FAST                       6: err
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     POP_BLOCK                       
+                        118     POP_EXCEPT                      
+                        120     LOAD_CONST                      0: None
+                        122     STORE_FAST                      6: err
+                        124     DELETE_FAST                     6: err
+                        126     JUMP_FORWARD                    10 (to 138)
+                        128     LOAD_CONST                      0: None
+                        130     STORE_FAST                      6: err
+                        132     DELETE_FAST                     6: err
+                        134     RERAISE                         
+                        136     RERAISE                         
+                        138     POP_BLOCK                       
+                        140     LOAD_CONST                      0: None
+                        142     DUP_TOP                         
+                        144     DUP_TOP                         
+                        146     CALL_FUNCTION                   3
+                        148     POP_TOP                         
+                        150     JUMP_FORWARD                    16 (to 168)
+                        152     WITH_EXCEPT_START               
+                        154     POP_JUMP_IF_TRUE                158
+                        156     RERAISE                         
+                        158     POP_TOP                         
+                        160     POP_TOP                         
+                        162     POP_TOP                         
+                        164     POP_EXCEPT                      
+                        166     POP_TOP                         
+                        168     LOAD_FAST                       2: stepper_z_adjustment
+                        170     LOAD_CONST                      2: -10
+                        172     COMPARE_OP                      3 (!=)
+                        174     POP_JUMP_IF_FALSE               192
+                        176     LOAD_FAST                       3: stepper_z1_adjustment
+                        178     LOAD_CONST                      2: -10
+                        180     COMPARE_OP                      3 (!=)
+                        182     POP_JUMP_IF_FALSE               192
+                        184     LOAD_FAST                       2: stepper_z_adjustment
+                        186     LOAD_FAST                       3: stepper_z1_adjustment
+                        188     BUILD_LIST                      2
+                        190     RETURN_VALUE                    
+                        192     LOAD_CONST                      0: None
+                        194     RETURN_VALUE                    
+                'ZTilt.get_adjustments'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: probe_finalize
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 6
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'logging'
+                        'info'
+                        'mathutil'
+                        'coordinate_descent'
+                        'keys'
+                        'probe_helper'
+                        'get_lift_speed'
+                        'z_positions'
+                        'z_helper'
+                        'adjust_steppers'
+                        'z_status'
+                        'check_retry_result'
+                        'retry_helper'
+                        'check_retry'
+                    [Var Names]
+                        'self'
+                        'offsets'
+                        'positions'
+                        'z_offset'
+                        'params'
+                        'errorfunc'
+                        'new_params'
+                        'speed'
+                        'adjustments'
+                    [Free Vars]
+                    [Cell Vars]
+                        'adjusted_height'
+                        'positions'
+                        'x_adjust'
+                        'y_adjust'
+                        'z_adjust'
+                    [Constants]
+                        None
+                        2
+                        'Calculating bed tilt with: %s'
+                        0
+                        (
+                            'x_adjust'
+                            'y_adjust'
+                            'z_adjust'
+                        )
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: adjusted_height
+                            Arg Count: 2
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 5
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                'pos'
+                                'params'
+                                'x'
+                                'y'
+                                'z'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                'x_adjust'
+                                'y_adjust'
+                                'z_adjust'
+                            [Disassembly]
+                                0       LOAD_FAST                       0: pos
+                                2       UNPACK_SEQUENCE                 3
+                                4       STORE_FAST                      2: x
+                                6       STORE_FAST                      3: y
+                                8       STORE_FAST                      4: z
+                                10      LOAD_FAST                       4: z
+                                12      LOAD_FAST                       2: x
+                                14      LOAD_FAST                       1: params
+                                16      LOAD_CONST                      1: 'x_adjust'
+                                18      BINARY_SUBSCR                   
+                                20      BINARY_MULTIPLY                 
+                                22      BINARY_SUBTRACT                 
+                                24      LOAD_FAST                       3: y
+                                26      LOAD_FAST                       1: params
+                                28      LOAD_CONST                      2: 'y_adjust'
+                                30      BINARY_SUBSCR                   
+                                32      BINARY_MULTIPLY                 
+                                34      BINARY_SUBTRACT                 
+                                36      LOAD_FAST                       1: params
+                                38      LOAD_CONST                      3: 'z_adjust'
+                                40      BINARY_SUBSCR                   
+                                42      BINARY_SUBTRACT                 
+                                44      RETURN_VALUE                    
+                        'ZTilt.probe_finalize.<locals>.adjusted_height'
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: errorfunc
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                            [Var Names]
+                                'params'
+                                'total_error'
+                                'pos'
+                            [Free Vars]
+                                'adjusted_height'
+                                'positions'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                0
+                                2
+                            [Disassembly]
+                                0       LOAD_CONST                      1: 0
+                                2       STORE_FAST                      1: total_error
+                                4       LOAD_DEREF                      1: positions
+                                6       GET_ITER                        
+                                8       FOR_ITER                        22 (to 32)
+                                10      STORE_FAST                      2: pos
+                                12      LOAD_FAST                       1: total_error
+                                14      LOAD_DEREF                      0: adjusted_height
+                                16      LOAD_FAST                       2: pos
+                                18      LOAD_FAST                       0: params
+                                20      CALL_FUNCTION                   2
+                                22      LOAD_CONST                      2: 2
+                                24      BINARY_POWER                    
+                                26      INPLACE_ADD                     
+                                28      STORE_FAST                      1: total_error
+                                30      JUMP_ABSOLUTE                   8
+                                32      LOAD_FAST                       1: total_error
+                                34      RETURN_VALUE                    
+                        'ZTilt.probe_finalize.<locals>.errorfunc'
+                        'Calculated bed tilt parameters: %s'
+                        'x_adjust'
+                        'y_adjust'
+                        'z_adjust'
+                        0
+                        1
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'x'
+                                'y'
+                            [Free Vars]
+                                'x_adjust'
+                                'y_adjust'
+                                'z_adjust'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        28 (to 34)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: x
+                                10      STORE_FAST                      2: y
+                                12      LOAD_FAST                       1: x
+                                14      LOAD_DEREF                      0: x_adjust
+                                16      BINARY_MULTIPLY                 
+                                18      LOAD_FAST                       2: y
+                                20      LOAD_DEREF                      1: y_adjust
+                                22      BINARY_MULTIPLY                 
+                                24      BINARY_ADD                      
+                                26      LOAD_DEREF                      2: z_adjust
+                                28      BINARY_ADD                      
+                                30      LIST_APPEND                     2
+                                32      JUMP_ABSOLUTE                   4
+                                34      RETURN_VALUE                    
+                        'ZTilt.probe_finalize.<locals>.<listcomp>'
+                        [Code]
+                            File Name: /extras/z_tilt.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'p'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                2
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        12 (to 18)
+                                6       STORE_FAST                      1: p
+                                8       LOAD_FAST                       1: p
+                                10      LOAD_CONST                      0: 2
+                                12      BINARY_SUBSCR                   
+                                14      LIST_APPEND                     2
+                                16      JUMP_ABSOLUTE                   4
+                                18      RETURN_VALUE                    
+                    [Disassembly]
+                        0       LOAD_FAST                       1: offsets
+                        2       LOAD_CONST                      1: 2
+                        4       BINARY_SUBSCR                   
+                        6       STORE_FAST                      3: z_offset
+                        8       LOAD_GLOBAL                     0: logging
+                        10      LOAD_METHOD                     1: info
+                        12      LOAD_CONST                      2: 'Calculating bed tilt with: %s'
+                        14      LOAD_DEREF                      1: positions
+                        16      CALL_METHOD                     2
+                        18      POP_TOP                         
+                        20      LOAD_CONST                      3: 0
+                        22      LOAD_CONST                      3: 0
+                        24      LOAD_FAST                       3: z_offset
+                        26      LOAD_CONST                      4: ('x_adjust', 'y_adjust', 'z_adjust')
+                        28      BUILD_CONST_KEY_MAP             3
+                        30      STORE_FAST                      4: params
+                        32      LOAD_CONST                      5: <CODE> adjusted_height
+                        34      LOAD_CONST                      6: 'ZTilt.probe_finalize.<locals>.adjusted_height'
+                        36      MAKE_FUNCTION                   0
+                        38      STORE_DEREF                     0: adjusted_height
+                        40      LOAD_CLOSURE                    0: adjusted_height
+                        42      LOAD_CLOSURE                    1: positions
+                        44      BUILD_TUPLE                     2
+                        46      LOAD_CONST                      7: <CODE> errorfunc
+                        48      LOAD_CONST                      8: 'ZTilt.probe_finalize.<locals>.errorfunc'
+                        50      MAKE_FUNCTION                   8
+                        52      STORE_FAST                      5: errorfunc
+                        54      LOAD_GLOBAL                     2: mathutil
+                        56      LOAD_METHOD                     3: coordinate_descent
+                        58      LOAD_FAST                       4: params
+                        60      LOAD_METHOD                     4: keys
+                        62      CALL_METHOD                     0
+                        64      LOAD_FAST                       4: params
+                        66      LOAD_FAST                       5: errorfunc
+                        68      CALL_METHOD                     3
+                        70      STORE_FAST                      6: new_params
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       5: probe_helper
+                        76      LOAD_METHOD                     6: get_lift_speed
+                        78      CALL_METHOD                     0
+                        80      STORE_FAST                      7: speed
+                        82      LOAD_GLOBAL                     0: logging
+                        84      LOAD_METHOD                     1: info
+                        86      LOAD_CONST                      9: 'Calculated bed tilt parameters: %s'
+                        88      LOAD_FAST                       6: new_params
+                        90      CALL_METHOD                     2
+                        92      POP_TOP                         
+                        94      LOAD_FAST                       6: new_params
+                        96      LOAD_CONST                      10: 'x_adjust'
+                        98      BINARY_SUBSCR                   
+                        100     STORE_DEREF                     2: x_adjust
+                        102     LOAD_FAST                       6: new_params
+                        104     LOAD_CONST                      11: 'y_adjust'
+                        106     BINARY_SUBSCR                   
+                        108     STORE_DEREF                     3: y_adjust
+                        110     LOAD_FAST                       6: new_params
+                        112     LOAD_CONST                      12: 'z_adjust'
+                        114     BINARY_SUBSCR                   
+                        116     LOAD_FAST                       3: z_offset
+                        118     BINARY_SUBTRACT                 
+                        120     LOAD_DEREF                      2: x_adjust
+                        122     LOAD_FAST                       1: offsets
+                        124     LOAD_CONST                      13: 0
+                        126     BINARY_SUBSCR                   
+                        128     BINARY_MULTIPLY                 
+                        130     BINARY_SUBTRACT                 
+                        132     LOAD_DEREF                      3: y_adjust
+                        134     LOAD_FAST                       1: offsets
+                        136     LOAD_CONST                      14: 1
+                        138     BINARY_SUBSCR                   
+                        140     BINARY_MULTIPLY                 
+                        142     BINARY_SUBTRACT                 
+                        144     STORE_DEREF                     4: z_adjust
+                        146     LOAD_CLOSURE                    2: x_adjust
+                        148     LOAD_CLOSURE                    3: y_adjust
+                        150     LOAD_CLOSURE                    4: z_adjust
+                        152     BUILD_TUPLE                     3
+                        154     LOAD_CONST                      15: <CODE> <listcomp>
+                        156     LOAD_CONST                      16: 'ZTilt.probe_finalize.<locals>.<listcomp>'
+                        158     MAKE_FUNCTION                   8
+                        160     LOAD_FAST                       0: self
+                        162     LOAD_ATTR                       7: z_positions
+                        164     GET_ITER                        
+                        166     CALL_FUNCTION                   1
+                        168     STORE_FAST                      8: adjustments
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       8: z_helper
+                        174     LOAD_METHOD                     9: adjust_steppers
+                        176     LOAD_FAST                       8: adjustments
+                        178     LOAD_FAST                       7: speed
+                        180     CALL_METHOD                     2
+                        182     POP_TOP                         
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       10: z_status
+                        188     LOAD_METHOD                     11: check_retry_result
+                        190     LOAD_FAST                       0: self
+                        192     LOAD_ATTR                       12: retry_helper
+                        194     LOAD_METHOD                     13: check_retry
+                        196     LOAD_CONST                      17: <CODE> <listcomp>
+                        198     LOAD_CONST                      16: 'ZTilt.probe_finalize.<locals>.<listcomp>'
+                        200     MAKE_FUNCTION                   0
+                        202     LOAD_DEREF                      1: positions
+                        204     GET_ITER                        
+                        206     CALL_FUNCTION                   1
+                        208     CALL_METHOD                     1
+                        210     CALL_METHOD                     1
+                        212     RETURN_VALUE                    
+                'ZTilt.probe_finalize'
+                [Code]
+                    File Name: /extras/z_tilt.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'z_status'
+                        'get_status'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: z_status
+                        4       LOAD_METHOD                     1: get_status
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_METHOD                     1
+                        10      RETURN_VALUE                    
+                'ZTilt.get_status'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ZTilt'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ZTilt.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: 'Adjust the Z tilt'
+                18      STORE_NAME                      4: cmd_Z_TILT_ADJUST_help
+                20      LOAD_CONST                      4: <CODE> cmd_Z_TILT_ADJUST
+                22      LOAD_CONST                      5: 'ZTilt.cmd_Z_TILT_ADJUST'
+                24      MAKE_FUNCTION                   0
+                26      STORE_NAME                      5: cmd_Z_TILT_ADJUST
+                28      LOAD_CONST                      6: <CODE> cmd_RM_ADJUSTMENT_FILE
+                30      LOAD_CONST                      7: 'ZTilt.cmd_RM_ADJUSTMENT_FILE'
+                32      MAKE_FUNCTION                   0
+                34      STORE_NAME                      6: cmd_RM_ADJUSTMENT_FILE
+                36      LOAD_CONST                      8: <CODE> cmd_ADJUST_STEPPERS
+                38      LOAD_CONST                      9: 'ZTilt.cmd_ADJUST_STEPPERS'
+                40      MAKE_FUNCTION                   0
+                42      STORE_NAME                      7: cmd_ADJUST_STEPPERS
+                44      LOAD_CONST                      10: <CODE> get_adjustments
+                46      LOAD_CONST                      11: 'ZTilt.get_adjustments'
+                48      MAKE_FUNCTION                   0
+                50      STORE_NAME                      8: get_adjustments
+                52      LOAD_CONST                      12: <CODE> probe_finalize
+                54      LOAD_CONST                      13: 'ZTilt.probe_finalize'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      9: probe_finalize
+                60      LOAD_CONST                      14: <CODE> get_status
+                62      LOAD_CONST                      15: 'ZTilt.get_status'
+                64      MAKE_FUNCTION                   0
+                66      STORE_NAME                      10: get_status
+                68      LOAD_CONST                      16: None
+                70      RETURN_VALUE                    
+        'ZTilt'
+        [Code]
+            File Name: /extras/z_tilt.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'ZTilt'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: ZTilt
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: os
+        14      STORE_NAME                      1: os
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: mathutil
+        22      STORE_NAME                      2: mathutil
+        24      LOAD_CONST                      2: 1
+        26      LOAD_CONST                      3: ('probe',)
+        28      IMPORT_NAME                     3: 
+        30      IMPORT_FROM                     4: probe
+        32      STORE_NAME                      4: probe
+        34      POP_TOP                         
+        36      LOAD_CONST                      0: 0
+        38      LOAD_CONST                      4: ('base_dir',)
+        40      IMPORT_NAME                     5: extras.base_info
+        42      IMPORT_FROM                     6: base_dir
+        44      STORE_NAME                      6: base_dir
+        46      POP_TOP                         
+        48      LOAD_BUILD_CLASS                
+        50      LOAD_CONST                      5: <CODE> ZAdjustHelper
+        52      LOAD_CONST                      6: 'ZAdjustHelper'
+        54      MAKE_FUNCTION                   0
+        56      LOAD_CONST                      6: 'ZAdjustHelper'
+        58      CALL_FUNCTION                   2
+        60      STORE_NAME                      7: ZAdjustHelper
+        62      LOAD_BUILD_CLASS                
+        64      LOAD_CONST                      7: <CODE> ZAdjustStatus
+        66      LOAD_CONST                      8: 'ZAdjustStatus'
+        68      MAKE_FUNCTION                   0
+        70      LOAD_CONST                      8: 'ZAdjustStatus'
+        72      CALL_FUNCTION                   2
+        74      STORE_NAME                      8: ZAdjustStatus
+        76      LOAD_BUILD_CLASS                
+        78      LOAD_CONST                      9: <CODE> RetryHelper
+        80      LOAD_CONST                      10: 'RetryHelper'
+        82      MAKE_FUNCTION                   0
+        84      LOAD_CONST                      10: 'RetryHelper'
+        86      CALL_FUNCTION                   2
+        88      STORE_NAME                      9: RetryHelper
+        90      LOAD_BUILD_CLASS                
+        92      LOAD_CONST                      11: <CODE> ZTilt
+        94      LOAD_CONST                      12: 'ZTilt'
+        96      MAKE_FUNCTION                   0
+        98      LOAD_CONST                      12: 'ZTilt'
+        100     CALL_FUNCTION                   2
+        102     STORE_NAME                      10: ZTilt
+        104     LOAD_CONST                      13: <CODE> load_config
+        106     LOAD_CONST                      14: 'load_config'
+        108     MAKE_FUNCTION                   0
+        110     STORE_NAME                      11: load_config
+        112     LOAD_CONST                      1: None
+        114     RETURN_VALUE                    

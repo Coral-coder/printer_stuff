@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/delta_calibrate.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: delta_calibrate.pyc (Python 3.9)
 
@@ -147,8 +156,24 @@ class DeltaCalibrate:
             z_weight = len(distances) / (MEASURE_WEIGHT * len(probe_positions))
         
         def delta_errorfunc(params = None):
-            pass
-        # WARNING: Decompyle incomplete
+            
+            try:
+                delta_params = orig_delta_params.new_calibration(params)
+                getpos = delta_params.get_position_from_stable
+                total_error = 0
+                for z_offset, stable_pos in height_positions:
+                    (x, y, z) = getpos(stable_pos)
+                    total_error += (z - z_offset) ** 2
+                total_error *= z_weight
+                for dist, stable_pos1, stable_pos2 in distances:
+                    (x1, y1, z1) = getpos(stable_pos1)
+                    (x2, y2, z2) = getpos(stable_pos2)
+                    d = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
+                    total_error += (d - dist) ** 2
+            return None
+            except ValueError:
+                return 1e+13
+
 
         new_params = mathutil.background_coordinate_descent(self.printer, adj_params, params, delta_errorfunc)
         logging.info('Calculated delta_calibrate parameters: %s', new_params)
@@ -217,20 +242,18 @@ class DeltaCalibrate:
             
             try:
                 parts = list(map(float, data.split(',')))
-            finally:
-                pass
-            raise gcmd.error("Unable to parse parameter '%s'" % (name,))
+            except:
+                raise gcmd.error("Unable to parse parameter '%s'" % (name,))
+
             if len(parts) != count:
                 raise gcmd.error("Parameter '%s' must have %d values" % (name, count))
             self.delta_analyze_entry[name] = parts
             logging.info('DELTA_ANALYZE %s = %s', name, parts)
-            continue
-            action = gcmd.get('CALIBRATE', None)
-            if action is not None:
-                if action != 'extended':
-                    raise gcmd.error('Unknown calibrate action')
-                self.do_extended_calibration()
-
+        action = gcmd.get('CALIBRATE', None)
+        if action is not None:
+            if action != 'extended':
+                raise gcmd.error('Unknown calibrate action')
+            self.do_extended_calibration()
 
 
 

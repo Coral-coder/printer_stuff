@@ -1,0 +1,2524 @@
+z_align.pyc (Python 3.9)
+[Code]
+    File Name: /extras/z_align.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 4
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'mcu'
+        'logging'
+        'os'
+        'extras.base_info'
+        'base_dir'
+        'MOTOR_ZDOWN_TIMEOUT'
+        'MOTOR_PROTECT_ERROR'
+        'Exception'
+        'CommandError'
+        'Zalign'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        (
+            'base_dir'
+        )
+        -10000
+        -10001
+        [Code]
+            File Name: /extras/z_align.py
+            Object Name: CommandError
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 1
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'CommandError'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'CommandError'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: None
+                10      RETURN_VALUE                    
+        'CommandError'
+        [Code]
+            File Name: /extras/z_align.py
+            Object Name: Zalign
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                'CommandError'
+                'error'
+                '__init__'
+                'get_switch_states'
+                '_button_handler'
+                'zdown_force_stop'
+                'get_status'
+                '_build_config'
+                'get_real_zmax_path'
+                'cmd_ZDOWN_FORCE_STOP'
+                'cmd_ZDOWN_SWITCH'
+                'cmd_GET_MAX_Z'
+                'cmd_ZDOWN'
+                'read_real_zmax'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'Zalign'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'config'
+                        'get_printer'
+                        'printer'
+                        'full_steps_pre_rev'
+                        'getsection'
+                        'getfloat'
+                        'distance_ratio'
+                        'getint'
+                        'quickSpeed'
+                        'slowSpeed'
+                        'risingDist'
+                        'safeDist'
+                        'filterCnt'
+                        'timeout'
+                        'retries'
+                        'retry_tolerance'
+                        'getlist'
+                        'endstop_pin_z'
+                        'zd_up'
+                        'zes_untrig'
+                        'zmax_safe_pox_diff'
+                        'mcu'
+                        'get_printer_mcu'
+                        'create_oid'
+                        'oidz'
+                        'register_config_callback'
+                        '_build_config'
+                        'cur_retries'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_GET_MAX_Z'
+                        'cmd_ZDOWN'
+                        'cmd_ZDOWN_SWITCH'
+                        'cmd_ZDOWN_FORCE_STOP'
+                        'zdown_switch_enable'
+                        'z_align_force_stop'
+                        'force_stop_flag'
+                        'is_already_zodwn'
+                        'endstop_pin_status'
+                        'register_endpoint'
+                        'zdown_force_stop'
+                        'os'
+                        'path'
+                        'join'
+                        'base_dir'
+                        'real_zmax_path'
+                        'load_object'
+                        'register_buttons'
+                        '_button_handler'
+                        'min'
+                        'len'
+                        'pin_len'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'webhooks'
+                        'buttons'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        200
+                        'z_align'
+                        'distance_ratio'
+                        'quick_speed'
+                        'slow_speed'
+                        'rising_dist'
+                        'safe_dist'
+                        'filter_cnt'
+                        'timeout'
+                        'retries'
+                        'retry_tolerance'
+                        'endstop_pin_z'
+                        'zd_up'
+                        'zes_untrig'
+                        'zmax_safe_pox_diff'
+                        'mcu'
+                        0
+                        'gcode'
+                        'GET_MAX_Z'
+                        'ZDOWN'
+                        'ZDOWN_SWITCH'
+                        'ZDOWN_FORCE_STOP'
+                        False
+                        'webhooks'
+                        'zdown_force_stop'
+                        'creality/userdata/config/real_zmax.json'
+                        'buttons'
+                        8
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: config
+                        6       LOAD_FAST                       1: config
+                        8       LOAD_METHOD                     1: get_printer
+                        10      CALL_METHOD                     0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: printer
+                        16      LOAD_CONST                      1: 200
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      3: full_steps_pre_rev
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       0: config
+                        26      LOAD_METHOD                     4: getsection
+                        28      LOAD_CONST                      2: 'z_align'
+                        30      CALL_METHOD                     1
+                        32      LOAD_METHOD                     5: getfloat
+                        34      LOAD_CONST                      3: 'distance_ratio'
+                        36      CALL_METHOD                     1
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      6: distance_ratio
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       0: config
+                        46      LOAD_METHOD                     4: getsection
+                        48      LOAD_CONST                      2: 'z_align'
+                        50      CALL_METHOD                     1
+                        52      LOAD_METHOD                     7: getint
+                        54      LOAD_CONST                      4: 'quick_speed'
+                        56      CALL_METHOD                     1
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      8: quickSpeed
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       0: config
+                        66      LOAD_METHOD                     4: getsection
+                        68      LOAD_CONST                      2: 'z_align'
+                        70      CALL_METHOD                     1
+                        72      LOAD_METHOD                     7: getint
+                        74      LOAD_CONST                      5: 'slow_speed'
+                        76      CALL_METHOD                     1
+                        78      LOAD_FAST                       0: self
+                        80      STORE_ATTR                      9: slowSpeed
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       0: config
+                        86      LOAD_METHOD                     4: getsection
+                        88      LOAD_CONST                      2: 'z_align'
+                        90      CALL_METHOD                     1
+                        92      LOAD_METHOD                     7: getint
+                        94      LOAD_CONST                      6: 'rising_dist'
+                        96      CALL_METHOD                     1
+                        98      LOAD_FAST                       0: self
+                        100     STORE_ATTR                      10: risingDist
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       0: config
+                        106     LOAD_METHOD                     4: getsection
+                        108     LOAD_CONST                      2: 'z_align'
+                        110     CALL_METHOD                     1
+                        112     LOAD_METHOD                     7: getint
+                        114     LOAD_CONST                      7: 'safe_dist'
+                        116     CALL_METHOD                     1
+                        118     LOAD_FAST                       0: self
+                        120     STORE_ATTR                      11: safeDist
+                        122     LOAD_FAST                       0: self
+                        124     LOAD_ATTR                       0: config
+                        126     LOAD_METHOD                     4: getsection
+                        128     LOAD_CONST                      2: 'z_align'
+                        130     CALL_METHOD                     1
+                        132     LOAD_METHOD                     7: getint
+                        134     LOAD_CONST                      8: 'filter_cnt'
+                        136     CALL_METHOD                     1
+                        138     LOAD_FAST                       0: self
+                        140     STORE_ATTR                      12: filterCnt
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       0: config
+                        146     LOAD_METHOD                     4: getsection
+                        148     LOAD_CONST                      2: 'z_align'
+                        150     CALL_METHOD                     1
+                        152     LOAD_METHOD                     7: getint
+                        154     LOAD_CONST                      9: 'timeout'
+                        156     CALL_METHOD                     1
+                        158     LOAD_FAST                       0: self
+                        160     STORE_ATTR                      13: timeout
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       0: config
+                        166     LOAD_METHOD                     4: getsection
+                        168     LOAD_CONST                      2: 'z_align'
+                        170     CALL_METHOD                     1
+                        172     LOAD_METHOD                     7: getint
+                        174     LOAD_CONST                      10: 'retries'
+                        176     CALL_METHOD                     1
+                        178     LOAD_FAST                       0: self
+                        180     STORE_ATTR                      14: retries
+                        182     LOAD_FAST                       0: self
+                        184     LOAD_ATTR                       0: config
+                        186     LOAD_METHOD                     4: getsection
+                        188     LOAD_CONST                      2: 'z_align'
+                        190     CALL_METHOD                     1
+                        192     LOAD_METHOD                     7: getint
+                        194     LOAD_CONST                      11: 'retry_tolerance'
+                        196     CALL_METHOD                     1
+                        198     LOAD_FAST                       0: self
+                        200     STORE_ATTR                      15: retry_tolerance
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       0: config
+                        206     LOAD_METHOD                     4: getsection
+                        208     LOAD_CONST                      2: 'z_align'
+                        210     CALL_METHOD                     1
+                        212     LOAD_METHOD                     16: getlist
+                        214     LOAD_CONST                      12: 'endstop_pin_z'
+                        216     CALL_METHOD                     1
+                        218     LOAD_FAST                       0: self
+                        220     STORE_ATTR                      17: endstop_pin_z
+                        222     LOAD_FAST                       0: self
+                        224     LOAD_ATTR                       0: config
+                        226     LOAD_METHOD                     4: getsection
+                        228     LOAD_CONST                      2: 'z_align'
+                        230     CALL_METHOD                     1
+                        232     LOAD_METHOD                     7: getint
+                        234     LOAD_CONST                      13: 'zd_up'
+                        236     CALL_METHOD                     1
+                        238     LOAD_FAST                       0: self
+                        240     STORE_ATTR                      18: zd_up
+                        242     LOAD_FAST                       0: self
+                        244     LOAD_ATTR                       0: config
+                        246     LOAD_METHOD                     4: getsection
+                        248     LOAD_CONST                      2: 'z_align'
+                        250     CALL_METHOD                     1
+                        252     LOAD_METHOD                     7: getint
+                        254     LOAD_CONST                      14: 'zes_untrig'
+                        256     CALL_METHOD                     1
+                        258     LOAD_FAST                       0: self
+                        260     STORE_ATTR                      19: zes_untrig
+                        262     LOAD_FAST                       0: self
+                        264     LOAD_ATTR                       0: config
+                        266     LOAD_METHOD                     4: getsection
+                        268     LOAD_CONST                      2: 'z_align'
+                        270     CALL_METHOD                     1
+                        272     LOAD_METHOD                     7: getint
+                        274     LOAD_CONST                      15: 'zmax_safe_pox_diff'
+                        276     CALL_METHOD                     1
+                        278     LOAD_FAST                       0: self
+                        280     STORE_ATTR                      20: zmax_safe_pox_diff
+                        282     LOAD_GLOBAL                     21: mcu
+                        284     LOAD_METHOD                     22: get_printer_mcu
+                        286     LOAD_FAST                       0: self
+                        288     LOAD_ATTR                       2: printer
+                        290     LOAD_CONST                      16: 'mcu'
+                        292     CALL_METHOD                     2
+                        294     LOAD_FAST                       0: self
+                        296     STORE_ATTR                      21: mcu
+                        298     LOAD_FAST                       0: self
+                        300     LOAD_ATTR                       21: mcu
+                        302     LOAD_METHOD                     23: create_oid
+                        304     CALL_METHOD                     0
+                        306     LOAD_FAST                       0: self
+                        308     STORE_ATTR                      24: oidz
+                        310     LOAD_FAST                       0: self
+                        312     LOAD_ATTR                       21: mcu
+                        314     LOAD_METHOD                     25: register_config_callback
+                        316     LOAD_FAST                       0: self
+                        318     LOAD_ATTR                       26: _build_config
+                        320     CALL_METHOD                     1
+                        322     POP_TOP                         
+                        324     LOAD_CONST                      17: 0
+                        326     LOAD_FAST                       0: self
+                        328     STORE_ATTR                      27: cur_retries
+                        330     LOAD_FAST                       1: config
+                        332     LOAD_METHOD                     1: get_printer
+                        334     CALL_METHOD                     0
+                        336     LOAD_METHOD                     28: lookup_object
+                        338     LOAD_CONST                      18: 'gcode'
+                        340     CALL_METHOD                     1
+                        342     LOAD_FAST                       0: self
+                        344     STORE_ATTR                      29: gcode
+                        346     LOAD_FAST                       0: self
+                        348     LOAD_ATTR                       29: gcode
+                        350     LOAD_METHOD                     30: register_command
+                        352     LOAD_CONST                      19: 'GET_MAX_Z'
+                        354     LOAD_FAST                       0: self
+                        356     LOAD_ATTR                       31: cmd_GET_MAX_Z
+                        358     CALL_METHOD                     2
+                        360     POP_TOP                         
+                        362     LOAD_FAST                       0: self
+                        364     LOAD_ATTR                       29: gcode
+                        366     LOAD_METHOD                     30: register_command
+                        368     LOAD_CONST                      20: 'ZDOWN'
+                        370     LOAD_FAST                       0: self
+                        372     LOAD_ATTR                       32: cmd_ZDOWN
+                        374     CALL_METHOD                     2
+                        376     POP_TOP                         
+                        378     LOAD_FAST                       0: self
+                        380     LOAD_ATTR                       29: gcode
+                        382     LOAD_METHOD                     30: register_command
+                        384     LOAD_CONST                      21: 'ZDOWN_SWITCH'
+                        386     LOAD_FAST                       0: self
+                        388     LOAD_ATTR                       33: cmd_ZDOWN_SWITCH
+                        390     CALL_METHOD                     2
+                        392     POP_TOP                         
+                        394     LOAD_FAST                       0: self
+                        396     LOAD_ATTR                       29: gcode
+                        398     LOAD_METHOD                     30: register_command
+                        400     LOAD_CONST                      22: 'ZDOWN_FORCE_STOP'
+                        402     LOAD_FAST                       0: self
+                        404     LOAD_ATTR                       34: cmd_ZDOWN_FORCE_STOP
+                        406     CALL_METHOD                     2
+                        408     POP_TOP                         
+                        410     LOAD_CONST                      17: 0
+                        412     LOAD_FAST                       0: self
+                        414     STORE_ATTR                      35: zdown_switch_enable
+                        416     LOAD_CONST                      0: None
+                        418     LOAD_FAST                       0: self
+                        420     STORE_ATTR                      36: z_align_force_stop
+                        422     LOAD_CONST                      23: False
+                        424     LOAD_FAST                       0: self
+                        426     STORE_ATTR                      37: force_stop_flag
+                        428     LOAD_CONST                      23: False
+                        430     LOAD_FAST                       0: self
+                        432     STORE_ATTR                      38: is_already_zodwn
+                        434     BUILD_LIST                      0
+                        436     LOAD_FAST                       0: self
+                        438     STORE_ATTR                      39: endstop_pin_status
+                        440     LOAD_FAST                       0: self
+                        442     LOAD_ATTR                       2: printer
+                        444     LOAD_METHOD                     28: lookup_object
+                        446     LOAD_CONST                      24: 'webhooks'
+                        448     CALL_METHOD                     1
+                        450     STORE_FAST                      2: webhooks
+                        452     LOAD_FAST                       2: webhooks
+                        454     LOAD_METHOD                     40: register_endpoint
+                        456     LOAD_CONST                      25: 'zdown_force_stop'
+                        458     LOAD_FAST                       0: self
+                        460     LOAD_ATTR                       41: zdown_force_stop
+                        462     CALL_METHOD                     2
+                        464     POP_TOP                         
+                        466     LOAD_GLOBAL                     42: os
+                        468     LOAD_ATTR                       43: path
+                        470     LOAD_METHOD                     44: join
+                        472     LOAD_GLOBAL                     45: base_dir
+                        474     LOAD_CONST                      26: 'creality/userdata/config/real_zmax.json'
+                        476     CALL_METHOD                     2
+                        478     LOAD_FAST                       0: self
+                        480     STORE_ATTR                      46: real_zmax_path
+                        482     LOAD_FAST                       0: self
+                        484     LOAD_ATTR                       2: printer
+                        486     LOAD_METHOD                     47: load_object
+                        488     LOAD_FAST                       1: config
+                        490     LOAD_CONST                      27: 'buttons'
+                        492     CALL_METHOD                     2
+                        494     STORE_FAST                      3: buttons
+                        496     LOAD_FAST                       3: buttons
+                        498     LOAD_METHOD                     48: register_buttons
+                        500     LOAD_FAST                       0: self
+                        502     LOAD_ATTR                       17: endstop_pin_z
+                        504     LOAD_FAST                       0: self
+                        506     LOAD_ATTR                       49: _button_handler
+                        508     CALL_METHOD                     2
+                        510     POP_TOP                         
+                        512     LOAD_GLOBAL                     50: min
+                        514     LOAD_GLOBAL                     51: len
+                        516     LOAD_FAST                       0: self
+                        518     LOAD_ATTR                       17: endstop_pin_z
+                        520     CALL_FUNCTION                   1
+                        522     LOAD_CONST                      28: 8
+                        524     CALL_FUNCTION                   2
+                        526     LOAD_FAST                       0: self
+                        528     STORE_ATTR                      52: pin_len
+                        530     LOAD_CONST                      0: None
+                        532     RETURN_VALUE                    
+                'Zalign.__init__'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: get_switch_states
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'range'
+                        'pin_len'
+                    [Var Names]
+                        'self'
+                        'state'
+                    [Free Vars]
+                    [Cell Vars]
+                        'state'
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/z_align.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'i'
+                            [Free Vars]
+                                'state'
+                            [Cell Vars]
+                            [Constants]
+                                1
+                                0
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        28 (to 34)
+                                6       STORE_FAST                      1: i
+                                8       LOAD_DEREF                      0: state
+                                10      LOAD_CONST                      0: 1
+                                12      LOAD_FAST                       1: i
+                                14      BINARY_LSHIFT                   
+                                16      BINARY_AND                      
+                                18      LOAD_CONST                      1: 0
+                                20      COMPARE_OP                      2 (==)
+                                22      POP_JUMP_IF_FALSE               28
+                                24      LOAD_CONST                      0: 1
+                                26      JUMP_FORWARD                    2 (to 30)
+                                28      LOAD_CONST                      1: 0
+                                30      LIST_APPEND                     2
+                                32      JUMP_ABSOLUTE                   4
+                                34      RETURN_VALUE                    
+                        'Zalign.get_switch_states.<locals>.<listcomp>'
+                    [Disassembly]
+                        0       LOAD_CLOSURE                    0: state
+                        2       BUILD_TUPLE                     1
+                        4       LOAD_CONST                      1: <CODE> <listcomp>
+                        6       LOAD_CONST                      2: 'Zalign.get_switch_states.<locals>.<listcomp>'
+                        8       MAKE_FUNCTION                   8
+                        10      LOAD_GLOBAL                     0: range
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: pin_len
+                        16      CALL_FUNCTION                   1
+                        18      GET_ITER                        
+                        20      CALL_FUNCTION                   1
+                        22      RETURN_VALUE                    
+                'Zalign.get_switch_states'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: _button_handler
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_switch_states'
+                        'enumerate'
+                        'endstop_pin_status'
+                        'gcode'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'state'
+                        'get_state'
+                        'i'
+                        'val'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1
+                        'z%s Photoelectric switch triggered'
+                        'z%s Photoelectric switch not triggered'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: get_switch_states
+                        4       LOAD_FAST                       2: state
+                        6       CALL_METHOD                     1
+                        8       STORE_FAST                      3: get_state
+                        10      LOAD_GLOBAL                     1: enumerate
+                        12      LOAD_FAST                       3: get_state
+                        14      CALL_FUNCTION                   1
+                        16      GET_ITER                        
+                        18      FOR_ITER                        72 (to 92)
+                        20      UNPACK_SEQUENCE                 2
+                        22      STORE_FAST                      4: i
+                        24      STORE_FAST                      5: val
+                        26      LOAD_FAST                       5: val
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       2: endstop_pin_status
+                        32      LOAD_FAST                       4: i
+                        34      BINARY_SUBSCR                   
+                        36      COMPARE_OP                      3 (!=)
+                        38      POP_JUMP_IF_FALSE               18
+                        40      LOAD_FAST                       5: val
+                        42      LOAD_CONST                      1: 1
+                        44      COMPARE_OP                      2 (==)
+                        46      POP_JUMP_IF_FALSE               70
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       3: gcode
+                        52      LOAD_METHOD                     4: respond_info
+                        54      LOAD_CONST                      2: 'z%s Photoelectric switch triggered'
+                        56      LOAD_FAST                       4: i
+                        58      LOAD_CONST                      1: 1
+                        60      BINARY_ADD                      
+                        62      BINARY_MODULO                   
+                        64      CALL_METHOD                     1
+                        66      POP_TOP                         
+                        68      JUMP_ABSOLUTE                   18
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       3: gcode
+                        74      LOAD_METHOD                     4: respond_info
+                        76      LOAD_CONST                      3: 'z%s Photoelectric switch not triggered'
+                        78      LOAD_FAST                       4: i
+                        80      LOAD_CONST                      1: 1
+                        82      BINARY_ADD                      
+                        84      BINARY_MODULO                   
+                        86      CALL_METHOD                     1
+                        88      POP_TOP                         
+                        90      JUMP_ABSOLUTE                   18
+                        92      LOAD_FAST                       3: get_state
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      2: endstop_pin_status
+                        98      LOAD_CONST                      0: None
+                        100     RETURN_VALUE                    
+                'Zalign._button_handler'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: zdown_force_stop
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'force_stop_flag'
+                        'gcode'
+                        'respond_info'
+                        'z_align_force_stop'
+                        'send'
+                        'oidz'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        'zdown_force_stop start'
+                        'zdown_force_stop end'
+                        'result'
+                        'success'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: True
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: force_stop_flag
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: gcode
+                        10      LOAD_METHOD                     2: respond_info
+                        12      LOAD_CONST                      2: 'zdown_force_stop start'
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: z_align_force_stop
+                        22      LOAD_METHOD                     4: send
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       5: oidz
+                        28      BUILD_LIST                      1
+                        30      CALL_METHOD                     1
+                        32      POP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       1: gcode
+                        38      LOAD_METHOD                     2: respond_info
+                        40      LOAD_CONST                      3: 'zdown_force_stop end'
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_FAST                       1: web_request
+                        48      LOAD_METHOD                     4: send
+                        50      LOAD_CONST                      4: 'result'
+                        52      LOAD_CONST                      5: 'success'
+                        54      BUILD_MAP                       1
+                        56      CALL_METHOD                     1
+                        58      POP_TOP                         
+                        60      LOAD_CONST                      0: None
+                        62      RETURN_VALUE                    
+                'Zalign.zdown_force_stop'
+                None
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'endstop_pin_status'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'endstop_pin_status'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 'endstop_pin_status'
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: endstop_pin_status
+                        6       BUILD_MAP                       1
+                        8       RETURN_VALUE                    
+                'Zalign.get_status'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: _build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 12
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'oidz'
+                        'logging'
+                        'info'
+                        'mcu'
+                        'add_config_cmd'
+                        'enumerate'
+                        'endstop_pin_z'
+                        'config'
+                        'getsection'
+                        'get'
+                        'startswith'
+                        'zd_up'
+                        'zes_untrig'
+                        'lookup_command'
+                        'z_align_force_stop'
+                        'range'
+                        'len'
+                        'endstop_pin_status'
+                        'append'
+                    [Var Names]
+                        'self'
+                        'config_z_align'
+                        'stepper_indx_z'
+                        'endstop_pin'
+                        'step_pin_z'
+                        'dir_pin_z'
+                        'config_z_align_add_z'
+                        '_'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'config_z_align oid=%d'
+                        0
+                        'stepper_z'
+                        'step_pin'
+                        'dir_pin'
+                        '!'
+                        1
+                        'config_z_align_add oid=%d z_indx=%d zs_pin=%s zd_pin=%s zd_up=%d zes_pin=%s zes_untrig=%d'
+                        '[stepper_indx_z=%d] config_z_align_add oid=%d z_indx=%d zs_pin=%s zd_pin=%s zd_up=%d zes_pin=%s zes_untrig=%d'
+                        'z_align_force_stop oid=%c'
+                        (
+                            'cq'
+                        )
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 'config_z_align oid=%d'
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: oidz
+                        6       BINARY_MODULO                   
+                        8       STORE_FAST                      1: config_z_align
+                        10      LOAD_GLOBAL                     1: logging
+                        12      LOAD_METHOD                     2: info
+                        14      LOAD_FAST                       1: config_z_align
+                        16      CALL_METHOD                     1
+                        18      POP_TOP                         
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       3: mcu
+                        24      LOAD_METHOD                     4: add_config_cmd
+                        26      LOAD_FAST                       1: config_z_align
+                        28      CALL_METHOD                     1
+                        30      POP_TOP                         
+                        32      LOAD_GLOBAL                     5: enumerate
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       6: endstop_pin_z
+                        38      CALL_FUNCTION                   1
+                        40      GET_ITER                        
+                        42      FOR_ITER                        178 (to 222)
+                        44      UNPACK_SEQUENCE                 2
+                        46      STORE_FAST                      2: stepper_indx_z
+                        48      STORE_FAST                      3: endstop_pin
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       7: config
+                        54      LOAD_METHOD                     8: getsection
+                        56      LOAD_FAST                       2: stepper_indx_z
+                        58      LOAD_CONST                      2: 0
+                        60      COMPARE_OP                      4 (>)
+                        62      POP_JUMP_IF_FALSE               74
+                        64      LOAD_CONST                      3: 'stepper_z'
+                        66      LOAD_FAST                       2: stepper_indx_z
+                        68      FORMAT_VALUE                    0 (FVC_NONE)
+                        70      BUILD_STRING                    2
+                        72      JUMP_FORWARD                    2 (to 76)
+                        74      LOAD_CONST                      3: 'stepper_z'
+                        76      CALL_METHOD                     1
+                        78      LOAD_METHOD                     9: get
+                        80      LOAD_CONST                      4: 'step_pin'
+                        82      CALL_METHOD                     1
+                        84      STORE_FAST                      4: step_pin_z
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       7: config
+                        90      LOAD_METHOD                     8: getsection
+                        92      LOAD_FAST                       2: stepper_indx_z
+                        94      LOAD_CONST                      2: 0
+                        96      COMPARE_OP                      4 (>)
+                        98      POP_JUMP_IF_FALSE               110
+                        100     LOAD_CONST                      3: 'stepper_z'
+                        102     LOAD_FAST                       2: stepper_indx_z
+                        104     FORMAT_VALUE                    0 (FVC_NONE)
+                        106     BUILD_STRING                    2
+                        108     JUMP_FORWARD                    2 (to 112)
+                        110     LOAD_CONST                      3: 'stepper_z'
+                        112     CALL_METHOD                     1
+                        114     LOAD_METHOD                     9: get
+                        116     LOAD_CONST                      5: 'dir_pin'
+                        118     CALL_METHOD                     1
+                        120     STORE_FAST                      5: dir_pin_z
+                        122     LOAD_FAST                       5: dir_pin_z
+                        124     LOAD_METHOD                     10: startswith
+                        126     LOAD_CONST                      6: '!'
+                        128     CALL_METHOD                     1
+                        130     POP_JUMP_IF_FALSE               144
+                        132     LOAD_FAST                       5: dir_pin_z
+                        134     LOAD_CONST                      7: 1
+                        136     LOAD_CONST                      0: None
+                        138     BUILD_SLICE                     2
+                        140     BINARY_SUBSCR                   
+                        142     STORE_FAST                      5: dir_pin_z
+                        144     LOAD_CONST                      8: 'config_z_align_add oid=%d z_indx=%d zs_pin=%s zd_pin=%s zd_up=%d zes_pin=%s zes_untrig=%d'
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       0: oidz
+                        150     LOAD_FAST                       2: stepper_indx_z
+                        152     LOAD_FAST                       4: step_pin_z
+                        154     LOAD_FAST                       5: dir_pin_z
+                        156     LOAD_FAST                       0: self
+                        158     LOAD_ATTR                       11: zd_up
+                        160     LOAD_FAST                       3: endstop_pin
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       12: zes_untrig
+                        166     BUILD_TUPLE                     7
+                        168     BINARY_MODULO                   
+                        170     STORE_FAST                      6: config_z_align_add_z
+                        172     LOAD_FAST                       0: self
+                        174     LOAD_ATTR                       3: mcu
+                        176     LOAD_METHOD                     4: add_config_cmd
+                        178     LOAD_FAST                       6: config_z_align_add_z
+                        180     CALL_METHOD                     1
+                        182     POP_TOP                         
+                        184     LOAD_GLOBAL                     1: logging
+                        186     LOAD_METHOD                     2: info
+                        188     LOAD_CONST                      9: '[stepper_indx_z=%d] config_z_align_add oid=%d z_indx=%d zs_pin=%s zd_pin=%s zd_up=%d zes_pin=%s zes_untrig=%d'
+                        190     LOAD_FAST                       2: stepper_indx_z
+                        192     LOAD_FAST                       0: self
+                        194     LOAD_ATTR                       0: oidz
+                        196     LOAD_FAST                       2: stepper_indx_z
+                        198     LOAD_FAST                       4: step_pin_z
+                        200     LOAD_FAST                       5: dir_pin_z
+                        202     LOAD_FAST                       0: self
+                        204     LOAD_ATTR                       11: zd_up
+                        206     LOAD_FAST                       3: endstop_pin
+                        208     LOAD_FAST                       0: self
+                        210     LOAD_ATTR                       12: zes_untrig
+                        212     BUILD_TUPLE                     8
+                        214     BINARY_MODULO                   
+                        216     CALL_METHOD                     1
+                        218     POP_TOP                         
+                        220     JUMP_ABSOLUTE                   42
+                        222     LOAD_FAST                       0: self
+                        224     LOAD_ATTR                       3: mcu
+                        226     LOAD_ATTR                       13: lookup_command
+                        228     LOAD_CONST                      10: 'z_align_force_stop oid=%c'
+                        230     LOAD_CONST                      0: None
+                        232     LOAD_CONST                      11: ('cq',)
+                        234     CALL_FUNCTION_KW                2
+                        236     LOAD_FAST                       0: self
+                        238     STORE_ATTR                      14: z_align_force_stop
+                        240     LOAD_GLOBAL                     15: range
+                        242     LOAD_GLOBAL                     16: len
+                        244     LOAD_FAST                       0: self
+                        246     LOAD_ATTR                       6: endstop_pin_z
+                        248     CALL_FUNCTION                   1
+                        250     CALL_FUNCTION                   1
+                        252     GET_ITER                        
+                        254     FOR_ITER                        16 (to 272)
+                        256     STORE_FAST                      7: _
+                        258     LOAD_FAST                       0: self
+                        260     LOAD_ATTR                       17: endstop_pin_status
+                        262     LOAD_METHOD                     18: append
+                        264     LOAD_CONST                      2: 0
+                        266     CALL_METHOD                     1
+                        268     POP_TOP                         
+                        270     JUMP_ABSOLUTE                   254
+                        272     LOAD_CONST                      0: None
+                        274     RETURN_VALUE                    
+                'Zalign._build_config'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: get_real_zmax_path
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'real_zmax_path'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: real_zmax_path
+                        4       RETURN_VALUE                    
+                'Zalign.get_real_zmax_path'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: cmd_ZDOWN_FORCE_STOP
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'force_stop_flag'
+                        'gcode'
+                        'respond_info'
+                        'z_align_force_stop'
+                        'send'
+                        'oidz'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        'zdown_force_stop start'
+                        'zdown_force_stop end'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: True
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: force_stop_flag
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: gcode
+                        10      LOAD_METHOD                     2: respond_info
+                        12      LOAD_CONST                      2: 'zdown_force_stop start'
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       3: z_align_force_stop
+                        22      LOAD_METHOD                     4: send
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       5: oidz
+                        28      BUILD_LIST                      1
+                        30      CALL_METHOD                     1
+                        32      POP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       1: gcode
+                        38      LOAD_METHOD                     2: respond_info
+                        40      LOAD_CONST                      3: 'zdown_force_stop end'
+                        42      CALL_METHOD                     1
+                        44      POP_TOP                         
+                        46      LOAD_CONST                      0: None
+                        48      RETURN_VALUE                    
+                'Zalign.cmd_ZDOWN_FORCE_STOP'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: cmd_ZDOWN_SWITCH
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_int'
+                        'zdown_switch_enable'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'ENABLE'
+                        1
+                        (
+                            'default'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_int
+                        4       LOAD_CONST                      1: 'ENABLE'
+                        6       LOAD_CONST                      2: 1
+                        8       LOAD_CONST                      3: ('default',)
+                        10      CALL_FUNCTION_KW                2
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      1: zdown_switch_enable
+                        16      LOAD_CONST                      0: None
+                        18      RETURN_VALUE                    
+                'Zalign.cmd_ZDOWN_SWITCH'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: cmd_GET_MAX_Z
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 21
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script_from_command'
+                        'mcu'
+                        'lookup_query_command'
+                        'oidz'
+                        'config'
+                        'getsection'
+                        'getfloat'
+                        '_serial'
+                        'msgparser'
+                        'get_constant_float'
+                        'full_steps_pre_rev'
+                        'int'
+                        'quickSpeed'
+                        'filterCnt'
+                        'send'
+                        'printer'
+                        'lookup_object'
+                        'last_position'
+                        'get_reactor'
+                        'finetuning_status'
+                        'monotonic'
+                        'respond_info'
+                        'str'
+                        'get'
+                        'timeout'
+                        'pause'
+                        'get_position'
+                        'set_position'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'query_finetuning'
+                        'rotation_distance'
+                        'microsteps'
+                        'mcu_freq'
+                        'subdivision'
+                        'step_distance'
+                        'quickSpeedTicks'
+                        'enable'
+                        'maxDist'
+                        'gcode_move'
+                        'cur_z_pos'
+                        'reactor'
+                        'curtime'
+                        'steps'
+                        'nowtime'
+                        'usetime'
+                        'flag'
+                        'toolhead'
+                        'now_pos'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'BED_MESH_CLEAR'
+                        'query_finetuning oid=%c enable=%c speed=%u maxDist=%u filterCnt=%c'
+                        'finetuning_status oid=%c flag=%i steps=%u'
+                        (
+                            'oid'
+                        )
+                        'stepper_z'
+                        'rotation_distance'
+                        'microsteps'
+                        'CLOCK_FREQ'
+                        1
+                        2
+                        288000
+                        'M84'
+                        'G28'
+                        'G4 P3000'
+                        'gcode_move'
+                        0
+                        'flag'
+                        'steps'
+                        'finetuning_status mcu timeout'
+                        'finetuning_status 30s timeout'
+                        1
+                        'finetuning_status result: %s+%s=%s'
+                        0.0025
+                        5
+                        'toolhead'
+                        'position_max'
+                        (
+                            2
+                        )
+                        (
+                            'homing_axes'
+                        )
+                        306
+                        'G1 F%d X%.3f Y%.3f Z%.3f'
+                        1800
+                        'G28 Z'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script_from_command
+                        6       LOAD_CONST                      1: 'BED_MESH_CLEAR'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: mcu
+                        16      LOAD_ATTR                       3: lookup_query_command
+                        18      LOAD_CONST                      2: 'query_finetuning oid=%c enable=%c speed=%u maxDist=%u filterCnt=%c'
+                        20      LOAD_CONST                      3: 'finetuning_status oid=%c flag=%i steps=%u'
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       4: oidz
+                        26      LOAD_CONST                      4: ('oid',)
+                        28      CALL_FUNCTION_KW                3
+                        30      STORE_FAST                      2: query_finetuning
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       5: config
+                        36      LOAD_METHOD                     6: getsection
+                        38      LOAD_CONST                      5: 'stepper_z'
+                        40      CALL_METHOD                     1
+                        42      LOAD_METHOD                     7: getfloat
+                        44      LOAD_CONST                      6: 'rotation_distance'
+                        46      CALL_METHOD                     1
+                        48      STORE_FAST                      3: rotation_distance
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       5: config
+                        54      LOAD_METHOD                     6: getsection
+                        56      LOAD_CONST                      5: 'stepper_z'
+                        58      CALL_METHOD                     1
+                        60      LOAD_METHOD                     7: getfloat
+                        62      LOAD_CONST                      7: 'microsteps'
+                        64      CALL_METHOD                     1
+                        66      STORE_FAST                      4: microsteps
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       2: mcu
+                        72      LOAD_ATTR                       8: _serial
+                        74      LOAD_ATTR                       9: msgparser
+                        76      LOAD_METHOD                     10: get_constant_float
+                        78      LOAD_CONST                      8: 'CLOCK_FREQ'
+                        80      CALL_METHOD                     1
+                        82      STORE_FAST                      5: mcu_freq
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       11: full_steps_pre_rev
+                        88      LOAD_FAST                       4: microsteps
+                        90      BINARY_MULTIPLY                 
+                        92      STORE_FAST                      6: subdivision
+                        94      LOAD_FAST                       3: rotation_distance
+                        96      LOAD_FAST                       6: subdivision
+                        98      BINARY_TRUE_DIVIDE              
+                        100     STORE_FAST                      7: step_distance
+                        102     LOAD_GLOBAL                     12: int
+                        104     LOAD_CONST                      9: 1
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       13: quickSpeed
+                        110     LOAD_FAST                       7: step_distance
+                        112     BINARY_TRUE_DIVIDE              
+                        114     BINARY_TRUE_DIVIDE              
+                        116     LOAD_FAST                       5: mcu_freq
+                        118     BINARY_MULTIPLY                 
+                        120     LOAD_CONST                      10: 2
+                        122     BINARY_TRUE_DIVIDE              
+                        124     CALL_FUNCTION                   1
+                        126     STORE_FAST                      8: quickSpeedTicks
+                        128     LOAD_CONST                      9: 1
+                        130     STORE_FAST                      9: enable
+                        132     LOAD_GLOBAL                     12: int
+                        134     LOAD_CONST                      11: 288000
+                        136     CALL_FUNCTION                   1
+                        138     STORE_FAST                      10: maxDist
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       14: filterCnt
+                        144     POP_TOP                         
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       0: gcode
+                        150     LOAD_METHOD                     1: run_script_from_command
+                        152     LOAD_CONST                      12: 'M84'
+                        154     CALL_METHOD                     1
+                        156     POP_TOP                         
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       0: gcode
+                        162     LOAD_METHOD                     1: run_script_from_command
+                        164     LOAD_CONST                      13: 'G28'
+                        166     CALL_METHOD                     1
+                        168     POP_TOP                         
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       0: gcode
+                        174     LOAD_METHOD                     1: run_script_from_command
+                        176     LOAD_CONST                      14: 'G4 P3000'
+                        178     CALL_METHOD                     1
+                        180     POP_TOP                         
+                        182     LOAD_FAST                       2: query_finetuning
+                        184     LOAD_METHOD                     15: send
+                        186     LOAD_FAST                       0: self
+                        188     LOAD_ATTR                       4: oidz
+                        190     LOAD_FAST                       9: enable
+                        192     LOAD_FAST                       8: quickSpeedTicks
+                        194     LOAD_FAST                       10: maxDist
+                        196     LOAD_FAST                       0: self
+                        198     LOAD_ATTR                       14: filterCnt
+                        200     BUILD_LIST                      5
+                        202     CALL_METHOD                     1
+                        204     POP_TOP                         
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       16: printer
+                        210     LOAD_METHOD                     17: lookup_object
+                        212     LOAD_CONST                      15: 'gcode_move'
+                        214     CALL_METHOD                     1
+                        216     STORE_FAST                      11: gcode_move
+                        218     LOAD_FAST                       11: gcode_move
+                        220     LOAD_ATTR                       18: last_position
+                        222     LOAD_CONST                      10: 2
+                        224     BINARY_SUBSCR                   
+                        226     STORE_FAST                      12: cur_z_pos
+                        228     LOAD_FAST                       0: self
+                        230     LOAD_ATTR                       16: printer
+                        232     LOAD_METHOD                     19: get_reactor
+                        234     CALL_METHOD                     0
+                        236     STORE_FAST                      13: reactor
+                        238     BUILD_MAP                       0
+                        240     LOAD_FAST                       0: self
+                        242     LOAD_ATTR                       2: mcu
+                        244     LOAD_ATTR                       8: _serial
+                        246     STORE_ATTR                      20: finetuning_status
+                        248     LOAD_FAST                       13: reactor
+                        250     LOAD_METHOD                     21: monotonic
+                        252     CALL_METHOD                     0
+                        254     STORE_FAST                      14: curtime
+                        256     LOAD_CONST                      16: 0
+                        258     STORE_FAST                      15: steps
+                        260     LOAD_FAST                       0: self
+                        262     LOAD_ATTR                       0: gcode
+                        264     LOAD_METHOD                     22: respond_info
+                        266     LOAD_GLOBAL                     23: str
+                        268     LOAD_FAST                       0: self
+                        270     LOAD_ATTR                       2: mcu
+                        272     LOAD_ATTR                       8: _serial
+                        274     LOAD_ATTR                       20: finetuning_status
+                        276     CALL_FUNCTION                   1
+                        278     CALL_METHOD                     1
+                        280     POP_TOP                         
+                        282     LOAD_FAST                       13: reactor
+                        284     LOAD_METHOD                     21: monotonic
+                        286     CALL_METHOD                     0
+                        288     STORE_FAST                      16: nowtime
+                        290     LOAD_FAST                       16: nowtime
+                        292     LOAD_FAST                       14: curtime
+                        294     BINARY_SUBTRACT                 
+                        296     STORE_FAST                      17: usetime
+                        298     LOAD_FAST                       0: self
+                        300     LOAD_ATTR                       2: mcu
+                        302     LOAD_ATTR                       8: _serial
+                        304     LOAD_ATTR                       20: finetuning_status
+                        306     LOAD_METHOD                     24: get
+                        308     LOAD_CONST                      17: 'flag'
+                        310     LOAD_CONST                      16: 0
+                        312     CALL_METHOD                     2
+                        314     STORE_FAST                      18: flag
+                        316     LOAD_FAST                       18: flag
+                        318     LOAD_CONST                      9: 1
+                        320     COMPARE_OP                      2 (==)
+                        322     POP_JUMP_IF_FALSE               354
+                        326     LOAD_GLOBAL                     12: int
+                        328     LOAD_FAST                       0: self
+                        330     LOAD_ATTR                       2: mcu
+                        332     LOAD_ATTR                       8: _serial
+                        334     LOAD_ATTR                       20: finetuning_status
+                        336     LOAD_METHOD                     24: get
+                        338     LOAD_CONST                      18: 'steps'
+                        340     LOAD_CONST                      16: 0
+                        342     CALL_METHOD                     2
+                        344     CALL_FUNCTION                   1
+                        346     STORE_FAST                      15: steps
+                        348     JUMP_ABSOLUTE                   432
+                        352     JUMP_FORWARD                    56 (to 410)
+                        354     LOAD_FAST                       18: flag
+                        356     LOAD_CONST                      10: 2
+                        358     COMPARE_OP                      2 (==)
+                        360     POP_JUMP_IF_FALSE               382
+                        364     LOAD_FAST                       0: self
+                        366     LOAD_ATTR                       0: gcode
+                        368     LOAD_METHOD                     22: respond_info
+                        370     LOAD_CONST                      19: 'finetuning_status mcu timeout'
+                        372     CALL_METHOD                     1
+                        374     POP_TOP                         
+                        376     JUMP_ABSOLUTE                   432
+                        380     JUMP_FORWARD                    28 (to 410)
+                        382     LOAD_FAST                       17: usetime
+                        384     LOAD_FAST                       0: self
+                        386     LOAD_ATTR                       25: timeout
+                        388     COMPARE_OP                      4 (>)
+                        390     POP_JUMP_IF_FALSE               410
+                        394     LOAD_FAST                       0: self
+                        396     LOAD_ATTR                       0: gcode
+                        398     LOAD_METHOD                     22: respond_info
+                        400     LOAD_CONST                      20: 'finetuning_status 30s timeout'
+                        402     CALL_METHOD                     1
+                        404     POP_TOP                         
+                        406     JUMP_ABSOLUTE                   432
+                        410     LOAD_FAST                       13: reactor
+                        412     LOAD_METHOD                     26: pause
+                        414     LOAD_FAST                       13: reactor
+                        416     LOAD_METHOD                     21: monotonic
+                        418     CALL_METHOD                     0
+                        420     LOAD_CONST                      21: 1
+                        422     BINARY_ADD                      
+                        424     CALL_METHOD                     1
+                        426     POP_TOP                         
+                        428     JUMP_ABSOLUTE                   260
+                        432     LOAD_FAST                       0: self
+                        434     LOAD_ATTR                       0: gcode
+                        436     LOAD_METHOD                     22: respond_info
+                        438     LOAD_CONST                      22: 'finetuning_status result: %s+%s=%s'
+                        440     LOAD_FAST                       12: cur_z_pos
+                        442     LOAD_FAST                       15: steps
+                        444     LOAD_CONST                      23: 0.0025
+                        446     BINARY_MULTIPLY                 
+                        448     LOAD_CONST                      10: 2
+                        450     BINARY_TRUE_DIVIDE              
+                        452     LOAD_FAST                       15: steps
+                        454     LOAD_CONST                      23: 0.0025
+                        456     BINARY_MULTIPLY                 
+                        458     LOAD_CONST                      10: 2
+                        460     BINARY_TRUE_DIVIDE              
+                        462     LOAD_CONST                      24: 5
+                        464     BINARY_ADD                      
+                        466     BUILD_TUPLE                     3
+                        468     BINARY_MODULO                   
+                        470     CALL_METHOD                     1
+                        472     POP_TOP                         
+                        474     LOAD_FAST                       0: self
+                        476     LOAD_ATTR                       16: printer
+                        478     LOAD_METHOD                     17: lookup_object
+                        480     LOAD_CONST                      25: 'toolhead'
+                        482     CALL_METHOD                     1
+                        484     STORE_FAST                      19: toolhead
+                        486     LOAD_FAST                       19: toolhead
+                        488     LOAD_METHOD                     27: get_position
+                        490     CALL_METHOD                     0
+                        492     STORE_FAST                      20: now_pos
+                        494     LOAD_FAST                       0: self
+                        496     LOAD_ATTR                       5: config
+                        498     LOAD_METHOD                     6: getsection
+                        500     LOAD_CONST                      5: 'stepper_z'
+                        502     CALL_METHOD                     1
+                        504     LOAD_METHOD                     7: getfloat
+                        506     LOAD_CONST                      26: 'position_max'
+                        508     CALL_METHOD                     1
+                        510     LOAD_FAST                       20: now_pos
+                        512     LOAD_CONST                      10: 2
+                        514     STORE_SUBSCR                    
+                        516     LOAD_FAST                       19: toolhead
+                        518     LOAD_ATTR                       28: set_position
+                        520     LOAD_FAST                       20: now_pos
+                        522     LOAD_CONST                      27: (2,)
+                        524     LOAD_CONST                      28: ('homing_axes',)
+                        526     CALL_FUNCTION_KW                2
+                        528     POP_TOP                         
+                        530     LOAD_FAST                       19: toolhead
+                        532     LOAD_METHOD                     27: get_position
+                        534     CALL_METHOD                     0
+                        536     STORE_FAST                      20: now_pos
+                        538     LOAD_FAST                       19: toolhead
+                        540     LOAD_ATTR                       28: set_position
+                        542     LOAD_FAST                       20: now_pos
+                        544     LOAD_CONST                      27: (2,)
+                        546     LOAD_CONST                      28: ('homing_axes',)
+                        548     CALL_FUNCTION_KW                2
+                        550     POP_TOP                         
+                        552     LOAD_FAST                       20: now_pos
+                        554     LOAD_CONST                      10: 2
+                        556     BINARY_SUBSCR                   
+                        558     LOAD_CONST                      29: 306
+                        560     BINARY_SUBTRACT                 
+                        562     LOAD_FAST                       20: now_pos
+                        564     LOAD_CONST                      10: 2
+                        566     STORE_SUBSCR                    
+                        568     LOAD_CONST                      30: 'G1 F%d X%.3f Y%.3f Z%.3f'
+                        570     LOAD_CONST                      31: 1800
+                        572     LOAD_FAST                       20: now_pos
+                        574     LOAD_CONST                      16: 0
+                        576     BINARY_SUBSCR                   
+                        578     LOAD_FAST                       20: now_pos
+                        580     LOAD_CONST                      9: 1
+                        582     BINARY_SUBSCR                   
+                        584     LOAD_FAST                       20: now_pos
+                        586     LOAD_CONST                      10: 2
+                        588     BINARY_SUBSCR                   
+                        590     BUILD_TUPLE                     4
+                        592     BINARY_MODULO                   
+                        594     STORE_FAST                      1: gcmd
+                        596     LOAD_FAST                       0: self
+                        598     LOAD_ATTR                       0: gcode
+                        600     LOAD_METHOD                     1: run_script_from_command
+                        602     LOAD_FAST                       1: gcmd
+                        604     CALL_METHOD                     1
+                        606     POP_TOP                         
+                        608     LOAD_FAST                       0: self
+                        610     LOAD_ATTR                       0: gcode
+                        612     LOAD_METHOD                     1: run_script_from_command
+                        614     LOAD_CONST                      32: 'G28 Z'
+                        616     CALL_METHOD                     1
+                        618     POP_TOP                         
+                        620     LOAD_CONST                      0: None
+                        622     RETURN_VALUE                    
+                'Zalign.cmd_GET_MAX_Z'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: cmd_ZDOWN
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 16
+                    Stack Size: 9
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'gcode'
+                        'run_script_from_command'
+                        'printer'
+                        'get_reactor'
+                        'mcu'
+                        'lookup_query_command'
+                        'oidz'
+                        'lookup_command'
+                        'config'
+                        'getsection'
+                        'getfloat'
+                        '_serial'
+                        'msgparser'
+                        'get_constant_float'
+                        'full_steps_pre_rev'
+                        'int'
+                        'quickSpeed'
+                        'slowSpeed'
+                        'risingDist'
+                        'safeDist'
+                        'lookup_object'
+                        'get_position'
+                        'set_position'
+                        'range'
+                        'len'
+                        'endstop_pin_z'
+                        'cur_retries'
+                        'retries'
+                        '_respond_error'
+                        'retry_tolerance'
+                        'str'
+                        'MOTOR_ZDOWN_TIMEOUT'
+                        'MOTOR_PROTECT_ERROR'
+                        'respond_info'
+                        'abs'
+                        'G29_flag'
+                        'read_real_zmax'
+                        'logging'
+                        'info'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'rotation_distance'
+                        'microsteps'
+                        'mcu_freq'
+                        'subdivision'
+                        'step_distance'
+                        'run_cmd'
+                        'toolhead'
+                        'now_pos'
+                        'stepper_indx_z'
+                        'stepper_name'
+                        'deltaError'
+                        'offset_value'
+                        'real_zmax'
+                        'za'
+                    [Free Vars]
+                    [Cell Vars]
+                        'enable'
+                        'query_z_align'
+                        'quickSpeedTicks'
+                        'reactor'
+                        'risingDistStep'
+                        'safeDistStep'
+                        'self'
+                        'slowSpeedTicks'
+                        'z_align_force_stop'
+                    [Constants]
+                        None
+                        'RESTORE_Z_LIMIT'
+                        'BED_MESH_CLEAR'
+                        'query_z_align oid=%c enable=%c quickSpeed=%u slowSpeed=%u risingDist=%u filterCnt=%c safeDist=%u'
+                        'z_align_status oid=%c flag=%i deltaError1=%i'
+                        (
+                            'oid'
+                        )
+                        'z_align_force_stop oid=%c'
+                        (
+                            'cq'
+                        )
+                        'stepper_z'
+                        'rotation_distance'
+                        'microsteps'
+                        'CLOCK_FREQ'
+                        1
+                        2
+                        [Code]
+                            File Name: /extras/z_align.py
+                            Object Name: run_cmd
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 7
+                            Stack Size: 9
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'oidz'
+                                'filterCnt'
+                                'send'
+                                'gcode'
+                                'respond_info'
+                                'monotonic'
+                                'pause'
+                                'force_stop_flag'
+                                'MOTOR_PROTECT_ERROR'
+                                'timeout'
+                                '_respond_error'
+                                'str'
+                                'mcu'
+                                '_serial'
+                                'z_align_status'
+                                'MOTOR_ZDOWN_TIMEOUT'
+                                'get'
+                                'int'
+                            [Var Names]
+                                'cur_retries'
+                                'deltaError'
+                                'msg'
+                                'params'
+                                'curtime'
+                                'nowtime'
+                                'usetime'
+                            [Free Vars]
+                                'enable'
+                                'query_z_align'
+                                'quickSpeedTicks'
+                                'reactor'
+                                'risingDistStep'
+                                'safeDistStep'
+                                'self'
+                                'slowSpeedTicks'
+                                'z_align_force_stop'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                0
+                                'send query_z_align cur_retries:%s oid=%d enable=%d quickSpeed=%s slowSpeed=%s risingDist=%s filterCnt:%s safeDist:%s'
+                                1
+                                False
+                                '{"code":"key351", "msg":"z_align ZDOWN timeout:%ss result: %s", "values":[]}'
+                                'flag'
+                                1
+                                'usetime:%s z_align_status :%s'
+                                'deltaError1'
+                                2
+                                '{"code":"key357", "msg":"光电开关状态异常或者是热床过于倾斜", "values":[]}'
+                                5
+                                0.1
+                            [Disassembly]
+                                0       LOAD_CONST                      1: 0
+                                2       STORE_FAST                      1: deltaError
+                                4       LOAD_CONST                      2: 'send query_z_align cur_retries:%s oid=%d enable=%d quickSpeed=%s slowSpeed=%s risingDist=%s filterCnt:%s safeDist:%s'
+                                6       LOAD_FAST                       0: cur_retries
+                                8       LOAD_DEREF                      6: self
+                                10      LOAD_ATTR                       0: oidz
+                                12      LOAD_DEREF                      0: enable
+                                14      LOAD_DEREF                      2: quickSpeedTicks
+                                16      LOAD_DEREF                      7: slowSpeedTicks
+                                18      LOAD_DEREF                      4: risingDistStep
+                                20      LOAD_DEREF                      6: self
+                                22      LOAD_ATTR                       1: filterCnt
+                                24      LOAD_DEREF                      5: safeDistStep
+                                26      BUILD_TUPLE                     8
+                                28      BINARY_MODULO                   
+                                30      STORE_FAST                      2: msg
+                                32      LOAD_DEREF                      1: query_z_align
+                                34      LOAD_METHOD                     2: send
+                                36      LOAD_DEREF                      6: self
+                                38      LOAD_ATTR                       0: oidz
+                                40      LOAD_DEREF                      0: enable
+                                42      LOAD_DEREF                      2: quickSpeedTicks
+                                44      LOAD_DEREF                      7: slowSpeedTicks
+                                46      LOAD_DEREF                      4: risingDistStep
+                                48      LOAD_DEREF                      6: self
+                                50      LOAD_ATTR                       1: filterCnt
+                                52      LOAD_DEREF                      5: safeDistStep
+                                54      BUILD_LIST                      7
+                                56      CALL_METHOD                     1
+                                58      STORE_FAST                      3: params
+                                60      LOAD_DEREF                      6: self
+                                62      LOAD_ATTR                       3: gcode
+                                64      LOAD_METHOD                     4: respond_info
+                                66      LOAD_FAST                       2: msg
+                                68      CALL_METHOD                     1
+                                70      POP_TOP                         
+                                72      LOAD_DEREF                      3: reactor
+                                74      LOAD_METHOD                     5: monotonic
+                                76      CALL_METHOD                     0
+                                78      STORE_FAST                      4: curtime
+                                80      LOAD_DEREF                      3: reactor
+                                82      LOAD_METHOD                     6: pause
+                                84      LOAD_DEREF                      3: reactor
+                                86      LOAD_METHOD                     5: monotonic
+                                88      CALL_METHOD                     0
+                                90      LOAD_CONST                      3: 1
+                                92      BINARY_ADD                      
+                                94      CALL_METHOD                     1
+                                96      POP_TOP                         
+                                98      LOAD_DEREF                      3: reactor
+                                100     LOAD_METHOD                     5: monotonic
+                                102     CALL_METHOD                     0
+                                104     STORE_FAST                      5: nowtime
+                                106     LOAD_FAST                       5: nowtime
+                                108     LOAD_FAST                       4: curtime
+                                110     BINARY_SUBTRACT                 
+                                112     STORE_FAST                      6: usetime
+                                114     LOAD_DEREF                      6: self
+                                116     LOAD_ATTR                       7: force_stop_flag
+                                118     POP_JUMP_IF_FALSE               144
+                                120     LOAD_CONST                      4: False
+                                122     LOAD_DEREF                      6: self
+                                124     STORE_ATTR                      7: force_stop_flag
+                                126     LOAD_DEREF                      8: z_align_force_stop
+                                128     LOAD_METHOD                     2: send
+                                130     LOAD_DEREF                      6: self
+                                132     LOAD_ATTR                       0: oidz
+                                134     BUILD_LIST                      1
+                                136     CALL_METHOD                     1
+                                138     POP_TOP                         
+                                140     LOAD_GLOBAL                     8: MOTOR_PROTECT_ERROR
+                                142     RETURN_VALUE                    
+                                144     LOAD_FAST                       6: usetime
+                                146     LOAD_DEREF                      6: self
+                                148     LOAD_ATTR                       9: timeout
+                                150     COMPARE_OP                      4 (>)
+                                152     POP_JUMP_IF_FALSE               204
+                                154     LOAD_DEREF                      6: self
+                                156     LOAD_ATTR                       3: gcode
+                                158     LOAD_METHOD                     10: _respond_error
+                                160     LOAD_CONST                      5: '{"code":"key351", "msg":"z_align ZDOWN timeout:%ss result: %s", "values":[]}'
+                                162     LOAD_DEREF                      6: self
+                                164     LOAD_ATTR                       9: timeout
+                                166     LOAD_GLOBAL                     11: str
+                                168     LOAD_DEREF                      6: self
+                                170     LOAD_ATTR                       12: mcu
+                                172     LOAD_ATTR                       13: _serial
+                                174     LOAD_ATTR                       14: z_align_status
+                                176     CALL_FUNCTION                   1
+                                178     BUILD_TUPLE                     2
+                                180     BINARY_MODULO                   
+                                182     CALL_METHOD                     1
+                                184     POP_TOP                         
+                                186     LOAD_DEREF                      8: z_align_force_stop
+                                188     LOAD_METHOD                     2: send
+                                190     LOAD_DEREF                      6: self
+                                192     LOAD_ATTR                       0: oidz
+                                194     BUILD_LIST                      1
+                                196     CALL_METHOD                     1
+                                198     POP_TOP                         
+                                200     LOAD_GLOBAL                     15: MOTOR_ZDOWN_TIMEOUT
+                                202     RETURN_VALUE                    
+                                204     LOAD_DEREF                      6: self
+                                206     LOAD_ATTR                       12: mcu
+                                208     LOAD_ATTR                       13: _serial
+                                210     LOAD_ATTR                       14: z_align_status
+                                212     LOAD_METHOD                     16: get
+                                214     LOAD_CONST                      6: 'flag'
+                                216     LOAD_CONST                      1: 0
+                                218     CALL_METHOD                     2
+                                220     LOAD_CONST                      7: 1
+                                222     COMPARE_OP                      2 (==)
+                                224     POP_JUMP_IF_FALSE               286
+                                228     LOAD_DEREF                      6: self
+                                230     LOAD_ATTR                       3: gcode
+                                232     LOAD_METHOD                     4: respond_info
+                                234     LOAD_CONST                      8: 'usetime:%s z_align_status :%s'
+                                236     LOAD_FAST                       6: usetime
+                                238     LOAD_GLOBAL                     11: str
+                                240     LOAD_DEREF                      6: self
+                                242     LOAD_ATTR                       12: mcu
+                                244     LOAD_ATTR                       13: _serial
+                                246     LOAD_ATTR                       14: z_align_status
+                                248     CALL_FUNCTION                   1
+                                250     BUILD_TUPLE                     2
+                                252     BINARY_MODULO                   
+                                254     CALL_METHOD                     1
+                                256     POP_TOP                         
+                                258     LOAD_GLOBAL                     17: int
+                                260     LOAD_DEREF                      6: self
+                                262     LOAD_ATTR                       12: mcu
+                                264     LOAD_ATTR                       13: _serial
+                                266     LOAD_ATTR                       14: z_align_status
+                                268     LOAD_METHOD                     16: get
+                                270     LOAD_CONST                      9: 'deltaError1'
+                                272     LOAD_CONST                      1: 0
+                                274     CALL_METHOD                     2
+                                276     CALL_FUNCTION                   1
+                                278     STORE_FAST                      1: deltaError
+                                280     JUMP_ABSOLUTE                   364
+                                284     JUMP_FORWARD                    58 (to 344)
+                                286     LOAD_DEREF                      6: self
+                                288     LOAD_ATTR                       12: mcu
+                                290     LOAD_ATTR                       13: _serial
+                                292     LOAD_ATTR                       14: z_align_status
+                                294     LOAD_METHOD                     16: get
+                                296     LOAD_CONST                      6: 'flag'
+                                298     LOAD_CONST                      1: 0
+                                300     CALL_METHOD                     2
+                                302     LOAD_CONST                      10: 2
+                                304     COMPARE_OP                      2 (==)
+                                306     POP_JUMP_IF_FALSE               344
+                                310     LOAD_DEREF                      6: self
+                                312     LOAD_ATTR                       3: gcode
+                                314     LOAD_METHOD                     10: _respond_error
+                                316     LOAD_CONST                      11: '{"code":"key357", "msg":"光电开关状态异常或者是热床过于倾斜", "values":[]}'
+                                318     CALL_METHOD                     1
+                                320     POP_TOP                         
+                                322     LOAD_DEREF                      3: reactor
+                                324     LOAD_METHOD                     6: pause
+                                326     LOAD_DEREF                      3: reactor
+                                328     LOAD_METHOD                     5: monotonic
+                                330     CALL_METHOD                     0
+                                332     LOAD_CONST                      12: 5
+                                334     BINARY_ADD                      
+                                336     CALL_METHOD                     1
+                                338     POP_TOP                         
+                                340     LOAD_GLOBAL                     8: MOTOR_PROTECT_ERROR
+                                342     RETURN_VALUE                    
+                                344     LOAD_DEREF                      3: reactor
+                                346     LOAD_METHOD                     6: pause
+                                348     LOAD_DEREF                      3: reactor
+                                350     LOAD_METHOD                     5: monotonic
+                                352     CALL_METHOD                     0
+                                354     LOAD_CONST                      13: 0.1
+                                356     BINARY_ADD                      
+                                358     CALL_METHOD                     1
+                                360     POP_TOP                         
+                                362     JUMP_ABSOLUTE                   98
+                                364     LOAD_FAST                       1: deltaError
+                                366     RETURN_VALUE                    
+                        'Zalign.cmd_ZDOWN.<locals>.run_cmd'
+                        'toolhead'
+                        (
+                            2
+                        )
+                        (
+                            'homing_axes'
+                        )
+                        0
+                        'SET_STEPPER_ENABLE STEPPER='
+                        ' ENABLE=1'
+                        '{"code":"key352", "msg":"z_align ZDOWN too many retries: %s, deltaError:%s retry_tolerance:%s", "values":[]}'
+                        (
+                            0
+                            1
+                            2
+                        )
+                        'G1 F%d X%.3f Y%.3f Z%.3f'
+                        1000
+                        0.001
+                        'M84'
+                        'zdown_force_stop success'
+                        'ZDOWN end'
+                        False
+                        3
+                        'ZDOWN G29_flag is Fasle, real_zmax:%s offset_value:%s za:%s now_pos:%s'
+                        'G91\nG1 Z-10 F600\nG90'
+                        'M400'
+                        'ADJUST_STEPPERS'
+                        'ZDOWN G29_flag is Fasle, after ADJUST_STEPPERS now_pos:%s'
+                        'position_max'
+                        'ZDOWN G29_flag is True, set zmax:%s'
+                    [Disassembly]
+                        0       LOAD_DEREF                      6: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script_from_command
+                        6       LOAD_CONST                      1: 'RESTORE_Z_LIMIT'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_DEREF                      6: self
+                        14      LOAD_ATTR                       0: gcode
+                        16      LOAD_METHOD                     1: run_script_from_command
+                        18      LOAD_CONST                      2: 'BED_MESH_CLEAR'
+                        20      CALL_METHOD                     1
+                        22      POP_TOP                         
+                        24      LOAD_DEREF                      6: self
+                        26      LOAD_ATTR                       2: printer
+                        28      LOAD_METHOD                     3: get_reactor
+                        30      CALL_METHOD                     0
+                        32      STORE_DEREF                     3: reactor
+                        34      LOAD_DEREF                      6: self
+                        36      LOAD_ATTR                       4: mcu
+                        38      LOAD_ATTR                       5: lookup_query_command
+                        40      LOAD_CONST                      3: 'query_z_align oid=%c enable=%c quickSpeed=%u slowSpeed=%u risingDist=%u filterCnt=%c safeDist=%u'
+                        42      LOAD_CONST                      4: 'z_align_status oid=%c flag=%i deltaError1=%i'
+                        44      LOAD_DEREF                      6: self
+                        46      LOAD_ATTR                       6: oidz
+                        48      LOAD_CONST                      5: ('oid',)
+                        50      CALL_FUNCTION_KW                3
+                        52      STORE_DEREF                     1: query_z_align
+                        54      LOAD_DEREF                      6: self
+                        56      LOAD_ATTR                       4: mcu
+                        58      LOAD_ATTR                       7: lookup_command
+                        60      LOAD_CONST                      6: 'z_align_force_stop oid=%c'
+                        62      LOAD_CONST                      0: None
+                        64      LOAD_CONST                      7: ('cq',)
+                        66      CALL_FUNCTION_KW                2
+                        68      STORE_DEREF                     8: z_align_force_stop
+                        70      LOAD_DEREF                      6: self
+                        72      LOAD_ATTR                       8: config
+                        74      LOAD_METHOD                     9: getsection
+                        76      LOAD_CONST                      8: 'stepper_z'
+                        78      CALL_METHOD                     1
+                        80      LOAD_METHOD                     10: getfloat
+                        82      LOAD_CONST                      9: 'rotation_distance'
+                        84      CALL_METHOD                     1
+                        86      STORE_FAST                      2: rotation_distance
+                        88      LOAD_DEREF                      6: self
+                        90      LOAD_ATTR                       8: config
+                        92      LOAD_METHOD                     9: getsection
+                        94      LOAD_CONST                      8: 'stepper_z'
+                        96      CALL_METHOD                     1
+                        98      LOAD_METHOD                     10: getfloat
+                        100     LOAD_CONST                      10: 'microsteps'
+                        102     CALL_METHOD                     1
+                        104     STORE_FAST                      3: microsteps
+                        106     LOAD_DEREF                      6: self
+                        108     LOAD_ATTR                       4: mcu
+                        110     LOAD_ATTR                       11: _serial
+                        112     LOAD_ATTR                       12: msgparser
+                        114     LOAD_METHOD                     13: get_constant_float
+                        116     LOAD_CONST                      11: 'CLOCK_FREQ'
+                        118     CALL_METHOD                     1
+                        120     STORE_FAST                      4: mcu_freq
+                        122     LOAD_DEREF                      6: self
+                        124     LOAD_ATTR                       14: full_steps_pre_rev
+                        126     LOAD_FAST                       3: microsteps
+                        128     BINARY_MULTIPLY                 
+                        130     STORE_FAST                      5: subdivision
+                        132     LOAD_FAST                       2: rotation_distance
+                        134     LOAD_FAST                       5: subdivision
+                        136     BINARY_TRUE_DIVIDE              
+                        138     STORE_FAST                      6: step_distance
+                        140     LOAD_GLOBAL                     15: int
+                        142     LOAD_CONST                      12: 1
+                        144     LOAD_DEREF                      6: self
+                        146     LOAD_ATTR                       16: quickSpeed
+                        148     LOAD_FAST                       6: step_distance
+                        150     BINARY_TRUE_DIVIDE              
+                        152     BINARY_TRUE_DIVIDE              
+                        154     LOAD_FAST                       4: mcu_freq
+                        156     BINARY_MULTIPLY                 
+                        158     LOAD_CONST                      13: 2
+                        160     BINARY_TRUE_DIVIDE              
+                        162     CALL_FUNCTION                   1
+                        164     STORE_DEREF                     2: quickSpeedTicks
+                        166     LOAD_GLOBAL                     15: int
+                        168     LOAD_CONST                      12: 1
+                        170     LOAD_DEREF                      6: self
+                        172     LOAD_ATTR                       17: slowSpeed
+                        174     LOAD_FAST                       6: step_distance
+                        176     BINARY_TRUE_DIVIDE              
+                        178     BINARY_TRUE_DIVIDE              
+                        180     LOAD_FAST                       4: mcu_freq
+                        182     BINARY_MULTIPLY                 
+                        184     LOAD_CONST                      13: 2
+                        186     BINARY_TRUE_DIVIDE              
+                        188     CALL_FUNCTION                   1
+                        190     STORE_DEREF                     7: slowSpeedTicks
+                        192     LOAD_GLOBAL                     15: int
+                        194     LOAD_DEREF                      6: self
+                        196     LOAD_ATTR                       18: risingDist
+                        198     LOAD_FAST                       6: step_distance
+                        200     BINARY_TRUE_DIVIDE              
+                        202     CALL_FUNCTION                   1
+                        204     LOAD_CONST                      13: 2
+                        206     BINARY_MULTIPLY                 
+                        208     STORE_DEREF                     4: risingDistStep
+                        210     LOAD_GLOBAL                     15: int
+                        212     LOAD_DEREF                      6: self
+                        214     LOAD_ATTR                       19: safeDist
+                        216     LOAD_FAST                       6: step_distance
+                        218     BINARY_TRUE_DIVIDE              
+                        220     CALL_FUNCTION                   1
+                        222     LOAD_CONST                      13: 2
+                        224     BINARY_MULTIPLY                 
+                        226     STORE_DEREF                     5: safeDistStep
+                        228     LOAD_CONST                      12: 1
+                        230     STORE_DEREF                     0: enable
+                        232     LOAD_CLOSURE                    0: enable
+                        234     LOAD_CLOSURE                    1: query_z_align
+                        236     LOAD_CLOSURE                    2: quickSpeedTicks
+                        238     LOAD_CLOSURE                    3: reactor
+                        240     LOAD_CLOSURE                    4: risingDistStep
+                        242     LOAD_CLOSURE                    5: safeDistStep
+                        244     LOAD_CLOSURE                    6: self
+                        246     LOAD_CLOSURE                    7: slowSpeedTicks
+                        248     LOAD_CLOSURE                    8: z_align_force_stop
+                        250     BUILD_TUPLE                     9
+                        252     LOAD_CONST                      14: <CODE> run_cmd
+                        254     LOAD_CONST                      15: 'Zalign.cmd_ZDOWN.<locals>.run_cmd'
+                        256     MAKE_FUNCTION                   8
+                        258     STORE_FAST                      7: run_cmd
+                        260     LOAD_DEREF                      6: self
+                        262     LOAD_ATTR                       2: printer
+                        264     LOAD_METHOD                     20: lookup_object
+                        266     LOAD_CONST                      16: 'toolhead'
+                        268     CALL_METHOD                     1
+                        270     STORE_FAST                      8: toolhead
+                        272     LOAD_FAST                       8: toolhead
+                        274     LOAD_METHOD                     21: get_position
+                        276     CALL_METHOD                     0
+                        278     STORE_FAST                      9: now_pos
+                        280     LOAD_FAST                       8: toolhead
+                        282     LOAD_ATTR                       22: set_position
+                        284     LOAD_FAST                       9: now_pos
+                        286     LOAD_CONST                      17: (2,)
+                        288     LOAD_CONST                      18: ('homing_axes',)
+                        290     CALL_FUNCTION_KW                2
+                        292     POP_TOP                         
+                        294     LOAD_GLOBAL                     23: range
+                        296     LOAD_GLOBAL                     24: len
+                        298     LOAD_DEREF                      6: self
+                        300     LOAD_ATTR                       25: endstop_pin_z
+                        302     CALL_FUNCTION                   1
+                        304     CALL_FUNCTION                   1
+                        306     GET_ITER                        
+                        308     FOR_ITER                        50 (to 360)
+                        310     STORE_FAST                      10: stepper_indx_z
+                        312     LOAD_FAST                       10: stepper_indx_z
+                        314     LOAD_CONST                      19: 0
+                        316     COMPARE_OP                      4 (>)
+                        318     POP_JUMP_IF_FALSE               332
+                        322     LOAD_CONST                      8: 'stepper_z'
+                        324     LOAD_FAST                       10: stepper_indx_z
+                        326     FORMAT_VALUE                    0 (FVC_NONE)
+                        328     BUILD_STRING                    2
+                        330     JUMP_FORWARD                    2 (to 334)
+                        332     LOAD_CONST                      8: 'stepper_z'
+                        334     STORE_FAST                      11: stepper_name
+                        336     LOAD_DEREF                      6: self
+                        338     LOAD_ATTR                       0: gcode
+                        340     LOAD_METHOD                     1: run_script_from_command
+                        342     LOAD_CONST                      20: 'SET_STEPPER_ENABLE STEPPER='
+                        344     LOAD_FAST                       11: stepper_name
+                        346     FORMAT_VALUE                    0 (FVC_NONE)
+                        348     LOAD_CONST                      21: ' ENABLE=1'
+                        350     BUILD_STRING                    3
+                        352     CALL_METHOD                     1
+                        354     POP_TOP                         
+                        356     JUMP_ABSOLUTE                   308
+                        360     LOAD_CONST                      19: 0
+                        362     LOAD_DEREF                      6: self
+                        364     STORE_ATTR                      26: cur_retries
+                        366     LOAD_DEREF                      6: self
+                        368     LOAD_ATTR                       26: cur_retries
+                        370     LOAD_DEREF                      6: self
+                        372     LOAD_ATTR                       27: retries
+                        374     COMPARE_OP                      0 (<)
+                        376     POP_JUMP_IF_FALSE               392
+                        380     LOAD_FAST                       7: run_cmd
+                        382     LOAD_DEREF                      6: self
+                        384     LOAD_ATTR                       26: cur_retries
+                        386     CALL_FUNCTION                   1
+                        388     STORE_FAST                      12: deltaError
+                        390     JUMP_FORWARD                    34 (to 426)
+                        392     LOAD_DEREF                      6: self
+                        394     LOAD_ATTR                       0: gcode
+                        396     LOAD_METHOD                     28: _respond_error
+                        398     LOAD_CONST                      22: '{"code":"key352", "msg":"z_align ZDOWN too many retries: %s, deltaError:%s retry_tolerance:%s", "values":[]}'
+                        400     LOAD_FAST                       12: deltaError
+                        402     LOAD_DEREF                      6: self
+                        404     LOAD_ATTR                       29: retry_tolerance
+                        406     LOAD_GLOBAL                     30: str
+                        408     LOAD_DEREF                      6: self
+                        410     LOAD_ATTR                       27: retries
+                        412     CALL_FUNCTION                   1
+                        414     BUILD_TUPLE                     3
+                        416     BINARY_MODULO                   
+                        418     CALL_METHOD                     1
+                        420     POP_TOP                         
+                        422     JUMP_ABSOLUTE                   618
+                        426     LOAD_FAST                       12: deltaError
+                        428     LOAD_GLOBAL                     31: MOTOR_ZDOWN_TIMEOUT
+                        430     COMPARE_OP                      2 (==)
+                        432     POP_JUMP_IF_FALSE               530
+                        436     LOAD_DEREF                      6: self
+                        438     LOAD_ATTR                       2: printer
+                        440     LOAD_METHOD                     20: lookup_object
+                        442     LOAD_CONST                      16: 'toolhead'
+                        444     CALL_METHOD                     1
+                        446     STORE_FAST                      8: toolhead
+                        448     LOAD_FAST                       8: toolhead
+                        450     LOAD_METHOD                     21: get_position
+                        452     CALL_METHOD                     0
+                        454     STORE_FAST                      9: now_pos
+                        456     LOAD_FAST                       8: toolhead
+                        458     LOAD_ATTR                       22: set_position
+                        460     LOAD_FAST                       9: now_pos
+                        462     LOAD_CONST                      23: (0, 1, 2)
+                        464     LOAD_CONST                      18: ('homing_axes',)
+                        466     CALL_FUNCTION_KW                2
+                        468     POP_TOP                         
+                        470     LOAD_CONST                      24: 'G1 F%d X%.3f Y%.3f Z%.3f'
+                        472     LOAD_CONST                      25: 1000
+                        474     LOAD_FAST                       9: now_pos
+                        476     LOAD_CONST                      19: 0
+                        478     BINARY_SUBSCR                   
+                        480     LOAD_CONST                      26: 0.001
+                        482     BINARY_ADD                      
+                        484     LOAD_FAST                       9: now_pos
+                        486     LOAD_CONST                      12: 1
+                        488     BINARY_SUBSCR                   
+                        490     LOAD_FAST                       9: now_pos
+                        492     LOAD_CONST                      13: 2
+                        494     BINARY_SUBSCR                   
+                        496     BUILD_TUPLE                     4
+                        498     BINARY_MODULO                   
+                        500     STORE_FAST                      1: gcmd
+                        502     LOAD_DEREF                      6: self
+                        504     LOAD_ATTR                       0: gcode
+                        506     LOAD_METHOD                     1: run_script_from_command
+                        508     LOAD_FAST                       1: gcmd
+                        510     CALL_METHOD                     1
+                        512     POP_TOP                         
+                        514     LOAD_DEREF                      6: self
+                        516     LOAD_ATTR                       0: gcode
+                        518     LOAD_METHOD                     1: run_script_from_command
+                        520     LOAD_CONST                      27: 'M84'
+                        522     CALL_METHOD                     1
+                        524     POP_TOP                         
+                        526     LOAD_GLOBAL                     31: MOTOR_ZDOWN_TIMEOUT
+                        528     RETURN_VALUE                    
+                        530     LOAD_FAST                       12: deltaError
+                        532     LOAD_GLOBAL                     32: MOTOR_PROTECT_ERROR
+                        534     COMPARE_OP                      2 (==)
+                        536     POP_JUMP_IF_FALSE               568
+                        540     LOAD_DEREF                      6: self
+                        542     LOAD_ATTR                       0: gcode
+                        544     LOAD_METHOD                     1: run_script_from_command
+                        546     LOAD_CONST                      27: 'M84'
+                        548     CALL_METHOD                     1
+                        550     POP_TOP                         
+                        552     LOAD_DEREF                      6: self
+                        554     LOAD_ATTR                       0: gcode
+                        556     LOAD_METHOD                     33: respond_info
+                        558     LOAD_CONST                      28: 'zdown_force_stop success'
+                        560     CALL_METHOD                     1
+                        562     POP_TOP                         
+                        564     LOAD_GLOBAL                     32: MOTOR_PROTECT_ERROR
+                        566     RETURN_VALUE                    
+                        568     LOAD_GLOBAL                     34: abs
+                        570     LOAD_FAST                       12: deltaError
+                        572     CALL_FUNCTION                   1
+                        574     LOAD_DEREF                      6: self
+                        576     LOAD_ATTR                       29: retry_tolerance
+                        578     COMPARE_OP                      0 (<)
+                        580     POP_JUMP_IF_FALSE               600
+                        584     LOAD_DEREF                      6: self
+                        586     LOAD_ATTR                       0: gcode
+                        588     LOAD_METHOD                     33: respond_info
+                        590     LOAD_CONST                      29: 'ZDOWN end'
+                        592     CALL_METHOD                     1
+                        594     POP_TOP                         
+                        596     JUMP_ABSOLUTE                   618
+                        600     LOAD_DEREF                      6: self
+                        602     DUP_TOP                         
+                        604     LOAD_ATTR                       26: cur_retries
+                        606     LOAD_CONST                      12: 1
+                        608     INPLACE_ADD                     
+                        610     ROT_TWO                         
+                        612     STORE_ATTR                      26: cur_retries
+                        614     JUMP_ABSOLUTE                   366
+                        618     LOAD_FAST                       8: toolhead
+                        620     LOAD_ATTR                       35: G29_flag
+                        622     LOAD_CONST                      30: False
+                        624     COMPARE_OP                      2 (==)
+                        626     POP_JUMP_IF_FALSE               794
+                        630     LOAD_CONST                      19: 0
+                        632     STORE_FAST                      13: offset_value
+                        634     LOAD_FAST                       8: toolhead
+                        636     LOAD_METHOD                     21: get_position
+                        638     CALL_METHOD                     0
+                        640     STORE_FAST                      9: now_pos
+                        642     LOAD_DEREF                      6: self
+                        644     LOAD_METHOD                     36: read_real_zmax
+                        646     CALL_METHOD                     0
+                        648     STORE_FAST                      14: real_zmax
+                        650     LOAD_FAST                       14: real_zmax
+                        652     LOAD_FAST                       13: offset_value
+                        654     BINARY_ADD                      
+                        656     STORE_FAST                      15: za
+                        658     LOAD_FAST                       8: toolhead
+                        660     LOAD_ATTR                       22: set_position
+                        662     LOAD_FAST                       9: now_pos
+                        664     LOAD_CONST                      19: 0
+                        666     BINARY_SUBSCR                   
+                        668     LOAD_FAST                       9: now_pos
+                        670     LOAD_CONST                      12: 1
+                        672     BINARY_SUBSCR                   
+                        674     LOAD_FAST                       15: za
+                        676     LOAD_FAST                       9: now_pos
+                        678     LOAD_CONST                      31: 3
+                        680     BINARY_SUBSCR                   
+                        682     BUILD_LIST                      4
+                        684     LOAD_CONST                      17: (2,)
+                        686     LOAD_CONST                      18: ('homing_axes',)
+                        688     CALL_FUNCTION_KW                2
+                        690     POP_TOP                         
+                        692     LOAD_GLOBAL                     37: logging
+                        694     LOAD_METHOD                     38: info
+                        696     LOAD_CONST                      32: 'ZDOWN G29_flag is Fasle, real_zmax:%s offset_value:%s za:%s now_pos:%s'
+                        698     LOAD_FAST                       14: real_zmax
+                        700     LOAD_FAST                       13: offset_value
+                        702     LOAD_FAST                       15: za
+                        704     LOAD_GLOBAL                     30: str
+                        706     LOAD_FAST                       9: now_pos
+                        708     CALL_FUNCTION                   1
+                        710     BUILD_TUPLE                     4
+                        712     BINARY_MODULO                   
+                        714     CALL_METHOD                     1
+                        716     POP_TOP                         
+                        718     LOAD_DEREF                      6: self
+                        720     LOAD_ATTR                       0: gcode
+                        722     LOAD_METHOD                     1: run_script_from_command
+                        724     LOAD_CONST                      33: 'G91\nG1 Z-10 F600\nG90'
+                        726     CALL_METHOD                     1
+                        728     POP_TOP                         
+                        730     LOAD_DEREF                      6: self
+                        732     LOAD_ATTR                       0: gcode
+                        734     LOAD_METHOD                     1: run_script_from_command
+                        736     LOAD_CONST                      34: 'M400'
+                        738     CALL_METHOD                     1
+                        740     POP_TOP                         
+                        742     LOAD_DEREF                      6: self
+                        744     LOAD_ATTR                       0: gcode
+                        746     LOAD_METHOD                     1: run_script_from_command
+                        748     LOAD_CONST                      35: 'ADJUST_STEPPERS'
+                        750     CALL_METHOD                     1
+                        752     POP_TOP                         
+                        754     LOAD_DEREF                      6: self
+                        756     LOAD_ATTR                       0: gcode
+                        758     LOAD_METHOD                     1: run_script_from_command
+                        760     LOAD_CONST                      34: 'M400'
+                        762     CALL_METHOD                     1
+                        764     POP_TOP                         
+                        766     LOAD_FAST                       8: toolhead
+                        768     LOAD_METHOD                     21: get_position
+                        770     CALL_METHOD                     0
+                        772     STORE_FAST                      9: now_pos
+                        774     LOAD_GLOBAL                     37: logging
+                        776     LOAD_METHOD                     38: info
+                        778     LOAD_CONST                      36: 'ZDOWN G29_flag is Fasle, after ADJUST_STEPPERS now_pos:%s'
+                        780     LOAD_GLOBAL                     30: str
+                        782     LOAD_FAST                       9: now_pos
+                        784     CALL_FUNCTION                   1
+                        786     BINARY_MODULO                   
+                        788     CALL_METHOD                     1
+                        790     POP_TOP                         
+                        792     JUMP_FORWARD                    86 (to 880)
+                        794     LOAD_DEREF                      6: self
+                        796     LOAD_ATTR                       0: gcode
+                        798     LOAD_METHOD                     1: run_script_from_command
+                        800     LOAD_CONST                      34: 'M400'
+                        802     CALL_METHOD                     1
+                        804     POP_TOP                         
+                        806     LOAD_DEREF                      6: self
+                        808     LOAD_ATTR                       2: printer
+                        810     LOAD_METHOD                     20: lookup_object
+                        812     LOAD_CONST                      16: 'toolhead'
+                        814     CALL_METHOD                     1
+                        816     STORE_FAST                      8: toolhead
+                        818     LOAD_FAST                       8: toolhead
+                        820     LOAD_METHOD                     21: get_position
+                        822     CALL_METHOD                     0
+                        824     STORE_FAST                      9: now_pos
+                        826     LOAD_DEREF                      6: self
+                        828     LOAD_ATTR                       8: config
+                        830     LOAD_METHOD                     9: getsection
+                        832     LOAD_CONST                      8: 'stepper_z'
+                        834     CALL_METHOD                     1
+                        836     LOAD_METHOD                     10: getfloat
+                        838     LOAD_CONST                      37: 'position_max'
+                        840     CALL_METHOD                     1
+                        842     LOAD_FAST                       9: now_pos
+                        844     LOAD_CONST                      13: 2
+                        846     STORE_SUBSCR                    
+                        848     LOAD_FAST                       8: toolhead
+                        850     LOAD_ATTR                       22: set_position
+                        852     LOAD_FAST                       9: now_pos
+                        854     LOAD_CONST                      17: (2,)
+                        856     LOAD_CONST                      18: ('homing_axes',)
+                        858     CALL_FUNCTION_KW                2
+                        860     POP_TOP                         
+                        862     LOAD_GLOBAL                     37: logging
+                        864     LOAD_METHOD                     38: info
+                        866     LOAD_CONST                      38: 'ZDOWN G29_flag is True, set zmax:%s'
+                        868     LOAD_GLOBAL                     30: str
+                        870     LOAD_FAST                       9: now_pos
+                        872     CALL_FUNCTION                   1
+                        874     BINARY_MODULO                   
+                        876     CALL_METHOD                     1
+                        878     POP_TOP                         
+                        880     LOAD_CONST                      19: 0
+                        882     RETURN_VALUE                    
+                'Zalign.cmd_ZDOWN'
+                [Code]
+                    File Name: /extras/z_align.py
+                    Object Name: read_real_zmax
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'os'
+                        'json'
+                        'config'
+                        'getsection'
+                        'getfloat'
+                        'logging'
+                        'info'
+                        'path'
+                        'exists'
+                        'real_zmax_path'
+                        'open'
+                        'loads'
+                        'read'
+                        'get'
+                        'Exception'
+                        'error'
+                        'gcode'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'os'
+                        'json'
+                        'max_z'
+                        'data'
+                        'f'
+                        'err'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'stepper_z'
+                        'position_max'
+                        360
+                        (
+                            'default'
+                        )
+                        'stepper_z position_max:%s'
+                        10
+                        'r'
+                        'zmax'
+                        'real_zmax:%s'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_CONST                      0: None
+                        4       IMPORT_NAME                     0: os
+                        6       STORE_FAST                      1: os
+                        8       LOAD_CONST                      1: 0
+                        10      LOAD_CONST                      0: None
+                        12      IMPORT_NAME                     1: json
+                        14      STORE_FAST                      2: json
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: config
+                        20      LOAD_METHOD                     3: getsection
+                        22      LOAD_CONST                      2: 'stepper_z'
+                        24      CALL_METHOD                     1
+                        26      LOAD_ATTR                       4: getfloat
+                        28      LOAD_CONST                      3: 'position_max'
+                        30      LOAD_CONST                      4: 360
+                        32      LOAD_CONST                      5: ('default',)
+                        34      CALL_FUNCTION_KW                2
+                        36      STORE_FAST                      3: max_z
+                        38      LOAD_GLOBAL                     5: logging
+                        40      LOAD_METHOD                     6: info
+                        42      LOAD_CONST                      6: 'stepper_z position_max:%s'
+                        44      LOAD_FAST                       3: max_z
+                        46      BINARY_MODULO                   
+                        48      CALL_METHOD                     1
+                        50      POP_TOP                         
+                        52      LOAD_FAST                       3: max_z
+                        54      LOAD_CONST                      7: 10
+                        56      BINARY_SUBTRACT                 
+                        58      STORE_FAST                      4: data
+                        60      LOAD_FAST                       1: os
+                        62      LOAD_ATTR                       7: path
+                        64      LOAD_METHOD                     8: exists
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       9: real_zmax_path
+                        70      CALL_METHOD                     1
+                        72      POP_JUMP_IF_FALSE               208
+                        74      SETUP_FINALLY                   86 (to 162)
+                        76      LOAD_GLOBAL                     10: open
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       9: real_zmax_path
+                        82      LOAD_CONST                      8: 'r'
+                        84      CALL_FUNCTION                   2
+                        86      SETUP_WITH                      54 (to 142)
+                        88      STORE_FAST                      5: f
+                        90      LOAD_FAST                       2: json
+                        92      LOAD_METHOD                     11: loads
+                        94      LOAD_FAST                       5: f
+                        96      LOAD_METHOD                     12: read
+                        98      CALL_METHOD                     0
+                        100     CALL_METHOD                     1
+                        102     LOAD_METHOD                     13: get
+                        104     LOAD_CONST                      9: 'zmax'
+                        106     LOAD_CONST                      1: 0
+                        108     CALL_METHOD                     2
+                        110     STORE_FAST                      4: data
+                        112     LOAD_FAST                       4: data
+                        114     LOAD_FAST                       3: max_z
+                        116     COMPARE_OP                      4 (>)
+                        118     POP_JUMP_IF_FALSE               128
+                        120     LOAD_FAST                       3: max_z
+                        122     LOAD_CONST                      7: 10
+                        124     BINARY_SUBTRACT                 
+                        126     STORE_FAST                      4: data
+                        128     POP_BLOCK                       
+                        130     LOAD_CONST                      0: None
+                        132     DUP_TOP                         
+                        134     DUP_TOP                         
+                        136     CALL_FUNCTION                   3
+                        138     POP_TOP                         
+                        140     JUMP_FORWARD                    16 (to 158)
+                        142     WITH_EXCEPT_START               
+                        144     POP_JUMP_IF_TRUE                148
+                        146     RERAISE                         
+                        148     POP_TOP                         
+                        150     POP_TOP                         
+                        152     POP_TOP                         
+                        154     POP_EXCEPT                      
+                        156     POP_TOP                         
+                        158     POP_BLOCK                       
+                        160     JUMP_FORWARD                    46 (to 208)
+                        162     DUP_TOP                         
+                        164     LOAD_GLOBAL                     14: Exception
+                        166     JUMP_IF_NOT_EXC_MATCH           206
+                        168     POP_TOP                         
+                        170     STORE_FAST                      6: err
+                        172     POP_TOP                         
+                        174     SETUP_FINALLY                   22 (to 198)
+                        176     LOAD_GLOBAL                     5: logging
+                        178     LOAD_METHOD                     15: error
+                        180     LOAD_FAST                       6: err
+                        182     CALL_METHOD                     1
+                        184     POP_TOP                         
+                        186     POP_BLOCK                       
+                        188     POP_EXCEPT                      
+                        190     LOAD_CONST                      0: None
+                        192     STORE_FAST                      6: err
+                        194     DELETE_FAST                     6: err
+                        196     JUMP_FORWARD                    10 (to 208)
+                        198     LOAD_CONST                      0: None
+                        200     STORE_FAST                      6: err
+                        202     DELETE_FAST                     6: err
+                        204     RERAISE                         
+                        206     RERAISE                         
+                        208     LOAD_FAST                       0: self
+                        210     LOAD_ATTR                       16: gcode
+                        212     LOAD_METHOD                     17: respond_info
+                        214     LOAD_CONST                      10: 'real_zmax:%s'
+                        216     LOAD_FAST                       4: data
+                        218     BINARY_MODULO                   
+                        220     CALL_METHOD                     1
+                        222     POP_TOP                         
+                        224     LOAD_FAST                       4: data
+                        226     RETURN_VALUE                    
+                'Zalign.read_real_zmax'
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'Zalign'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_NAME                       3: CommandError
+                10      STORE_NAME                      4: error
+                12      LOAD_CONST                      1: <CODE> __init__
+                14      LOAD_CONST                      2: 'Zalign.__init__'
+                16      MAKE_FUNCTION                   0
+                18      STORE_NAME                      5: __init__
+                20      LOAD_CONST                      3: <CODE> get_switch_states
+                22      LOAD_CONST                      4: 'Zalign.get_switch_states'
+                24      MAKE_FUNCTION                   0
+                26      STORE_NAME                      6: get_switch_states
+                28      LOAD_CONST                      5: <CODE> _button_handler
+                30      LOAD_CONST                      6: 'Zalign._button_handler'
+                32      MAKE_FUNCTION                   0
+                34      STORE_NAME                      7: _button_handler
+                36      LOAD_CONST                      7: <CODE> zdown_force_stop
+                38      LOAD_CONST                      8: 'Zalign.zdown_force_stop'
+                40      MAKE_FUNCTION                   0
+                42      STORE_NAME                      8: zdown_force_stop
+                44      LOAD_CONST                      26: (None,)
+                46      LOAD_CONST                      10: <CODE> get_status
+                48      LOAD_CONST                      11: 'Zalign.get_status'
+                50      MAKE_FUNCTION                   1
+                52      STORE_NAME                      9: get_status
+                54      LOAD_CONST                      12: <CODE> _build_config
+                56      LOAD_CONST                      13: 'Zalign._build_config'
+                58      MAKE_FUNCTION                   0
+                60      STORE_NAME                      10: _build_config
+                62      LOAD_CONST                      14: <CODE> get_real_zmax_path
+                64      LOAD_CONST                      15: 'Zalign.get_real_zmax_path'
+                66      MAKE_FUNCTION                   0
+                68      STORE_NAME                      11: get_real_zmax_path
+                70      LOAD_CONST                      16: <CODE> cmd_ZDOWN_FORCE_STOP
+                72      LOAD_CONST                      17: 'Zalign.cmd_ZDOWN_FORCE_STOP'
+                74      MAKE_FUNCTION                   0
+                76      STORE_NAME                      12: cmd_ZDOWN_FORCE_STOP
+                78      LOAD_CONST                      18: <CODE> cmd_ZDOWN_SWITCH
+                80      LOAD_CONST                      19: 'Zalign.cmd_ZDOWN_SWITCH'
+                82      MAKE_FUNCTION                   0
+                84      STORE_NAME                      13: cmd_ZDOWN_SWITCH
+                86      LOAD_CONST                      20: <CODE> cmd_GET_MAX_Z
+                88      LOAD_CONST                      21: 'Zalign.cmd_GET_MAX_Z'
+                90      MAKE_FUNCTION                   0
+                92      STORE_NAME                      14: cmd_GET_MAX_Z
+                94      LOAD_CONST                      22: <CODE> cmd_ZDOWN
+                96      LOAD_CONST                      23: 'Zalign.cmd_ZDOWN'
+                98      MAKE_FUNCTION                   0
+                100     STORE_NAME                      15: cmd_ZDOWN
+                102     LOAD_CONST                      24: <CODE> read_real_zmax
+                104     LOAD_CONST                      25: 'Zalign.read_real_zmax'
+                106     MAKE_FUNCTION                   0
+                108     STORE_NAME                      16: read_real_zmax
+                110     LOAD_CONST                      9: None
+                112     RETURN_VALUE                    
+        'Zalign'
+        [Code]
+            File Name: /extras/z_align.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'Zalign'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: Zalign
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: mcu
+        6       STORE_NAME                      0: mcu
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: logging
+        14      STORE_NAME                      1: logging
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: os
+        22      STORE_NAME                      2: os
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      2: ('base_dir',)
+        28      IMPORT_NAME                     3: extras.base_info
+        30      IMPORT_FROM                     4: base_dir
+        32      STORE_NAME                      4: base_dir
+        34      POP_TOP                         
+        36      LOAD_CONST                      3: -10000
+        38      STORE_NAME                      5: MOTOR_ZDOWN_TIMEOUT
+        40      LOAD_CONST                      4: -10001
+        42      STORE_NAME                      6: MOTOR_PROTECT_ERROR
+        44      LOAD_BUILD_CLASS                
+        46      LOAD_CONST                      5: <CODE> CommandError
+        48      LOAD_CONST                      6: 'CommandError'
+        50      MAKE_FUNCTION                   0
+        52      LOAD_CONST                      6: 'CommandError'
+        54      LOAD_NAME                       7: Exception
+        56      CALL_FUNCTION                   3
+        58      STORE_NAME                      8: CommandError
+        60      LOAD_BUILD_CLASS                
+        62      LOAD_CONST                      7: <CODE> Zalign
+        64      LOAD_CONST                      8: 'Zalign'
+        66      MAKE_FUNCTION                   0
+        68      LOAD_CONST                      8: 'Zalign'
+        70      CALL_FUNCTION                   2
+        72      STORE_NAME                      9: Zalign
+        74      LOAD_CONST                      9: <CODE> load_config
+        76      LOAD_CONST                      10: 'load_config'
+        78      MAKE_FUNCTION                   0
+        80      STORE_NAME                      10: load_config
+        82      LOAD_CONST                      1: None
+        84      RETURN_VALUE                    

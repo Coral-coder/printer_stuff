@@ -96,7 +96,24 @@ class LinearVoltage:
                 logging.warn('Ignoring adc sample %.3f/%.3f in heater %s', temp, volt, config.get_name())
                 continue
             samples.append((adc, temp))
-    # WARNING: Decompyle incomplete
+        
+        try:
+            li = LinearInterpolate(samples)
+        except ValueError:
+            e = None
+            
+            try:
+                raise config.error('{"code":"key28", "msg":"adc_temperature %s in heater %s", "values": ["%s", "%s"]}' % (str(e), config.get_name(), str(e), config.get_name()))
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            self.calc_temp = li.interpolate
+            self.calc_adc = li.reverse_interpolate
+            return None
+
+
 
 
 
@@ -125,7 +142,22 @@ class LinearResistance:
     
     def __init__(self, config, samples):
         self.pullup = config.getfloat('pullup_resistor', 4700, above=0)
-    # WARNING: Decompyle incomplete
+        
+        try:
+            self.li = LinearInterpolate([ (r, t) for t, r in (samples) ])
+        except ValueError:
+            e = None
+            
+            try:
+                raise config.error('{"code":"key28", "msg":"adc_temperature %s in heater %s", "values": ["%s", "%s"]}' % (str(e), config.get_name(), str(e), config.get_name()))
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
 
     
     def calc_temp(self, adc):

@@ -1,0 +1,1655 @@
+heater_bed.pyc (Python 3.9)
+[Code]
+    File Name: /extras/heater_bed.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'PrinterHeaterBed'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        [Code]
+            File Name: /extras/heater_bed.py
+            Object Name: PrinterHeaterBed
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'cmd_M140'
+                'cmd_M190'
+                'cmd_BED_HEADER_SET_HEARER_POWER_MAX'
+                'cmd_BED_HEADER_POWER_CALIBRATION'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterHeaterBed'
+                [Code]
+                    File Name: /extras/heater_bed.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'load_object'
+                        'setup_heater'
+                        'heater'
+                        'get_status'
+                        'stats'
+                        'lookup_object'
+                        'register_command'
+                        'cmd_M140'
+                        'cmd_M190'
+                        'cmd_BED_HEADER_SET_HEARER_POWER_MAX'
+                        'cmd_BED_HEADER_POWER_CALIBRATION'
+                        'getfloat'
+                        'max_temp'
+                        'heater_bed_state'
+                        'last_pwm_value'
+                        'getboolean'
+                        'power_calibration_enable'
+                        'power_calibration_wait_even_heating_time'
+                        'power_calibration_start_temp'
+                        'power_calibration_end_temp'
+                        'power_calibration_sample_interval'
+                        'power_calibration_sample_end_temp_offset'
+                        'power_calibration_sample_start_temp_offset'
+                        'power_calibration_full_power_110_220_slop_divide'
+                        'power_calibration_power_110'
+                        'power_calibration_power_220'
+                        'getint'
+                        'power_calibration_max_calibrate_times'
+                        'power_calibration_retry_times'
+                        'power_calibration_heating_slope_low'
+                        'power_calibration_heating_slope_high'
+                        'pid'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'pheaters'
+                        'gcode'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'heaters'
+                        'B'
+                        'gcode'
+                        'M140'
+                        'M190'
+                        'BED_HEADER_SET_HEARER_POWER_MAX'
+                        'BED_HEADER_POWER_CALIBRATION'
+                        'max_temp'
+                        0
+                        (
+                            'above'
+                        )
+                        0
+                        'power_calibration_enable'
+                        'power_calibration_wait_even_heating_time'
+                        'power_calibration_start_temp'
+                        70
+                        'power_calibration_end_temp'
+                        100
+                        'power_calibration_sample_interval'
+                        0.1
+                        'power_calibration_sample_end_temp_offset'
+                        10
+                        'power_calibration_sample_start_temp_offset'
+                        'power_calibration_full_power_110_220_slop_divide'
+                        0.2
+                        'power_calibration_power_110'
+                        1
+                        'power_calibration_power_220'
+                        0.75
+                        'power_calibration_max_calibrate_times'
+                        'power_calibration_retry_times'
+                        3
+                        'power_calibration_heating_slope_low'
+                        0.45
+                        'power_calibration_heating_slope_high'
+                        0.67
+                        'pid_220_kp'
+                        18.578
+                        'pid_110_kp'
+                        52.98
+                        'pid_220_ki'
+                        0.314
+                        'pid_110_ki'
+                        0.849
+                        'pid_220_kd'
+                        274.489
+                        'pid_110_kd'
+                        826.491
+                        (
+                            'Kp'
+                            'Ki'
+                            'Kd'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: load_object
+                        16      LOAD_FAST                       1: config
+                        18      LOAD_CONST                      1: 'heaters'
+                        20      CALL_METHOD                     2
+                        22      STORE_FAST                      2: pheaters
+                        24      LOAD_FAST                       2: pheaters
+                        26      LOAD_METHOD                     3: setup_heater
+                        28      LOAD_FAST                       1: config
+                        30      LOAD_CONST                      2: 'B'
+                        32      CALL_METHOD                     2
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      4: heater
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       4: heater
+                        42      LOAD_ATTR                       5: get_status
+                        44      LOAD_FAST                       0: self
+                        46      STORE_ATTR                      5: get_status
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       4: heater
+                        52      LOAD_ATTR                       6: stats
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      6: stats
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       1: printer
+                        62      LOAD_METHOD                     7: lookup_object
+                        64      LOAD_CONST                      3: 'gcode'
+                        66      CALL_METHOD                     1
+                        68      STORE_FAST                      3: gcode
+                        70      LOAD_FAST                       3: gcode
+                        72      LOAD_METHOD                     8: register_command
+                        74      LOAD_CONST                      4: 'M140'
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       9: cmd_M140
+                        80      CALL_METHOD                     2
+                        82      POP_TOP                         
+                        84      LOAD_FAST                       3: gcode
+                        86      LOAD_METHOD                     8: register_command
+                        88      LOAD_CONST                      5: 'M190'
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       10: cmd_M190
+                        94      CALL_METHOD                     2
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       3: gcode
+                        100     LOAD_METHOD                     8: register_command
+                        102     LOAD_CONST                      6: 'BED_HEADER_SET_HEARER_POWER_MAX'
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       11: cmd_BED_HEADER_SET_HEARER_POWER_MAX
+                        108     CALL_METHOD                     2
+                        110     POP_TOP                         
+                        112     LOAD_FAST                       3: gcode
+                        114     LOAD_METHOD                     8: register_command
+                        116     LOAD_CONST                      7: 'BED_HEADER_POWER_CALIBRATION'
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       12: cmd_BED_HEADER_POWER_CALIBRATION
+                        122     CALL_METHOD                     2
+                        124     POP_TOP                         
+                        126     LOAD_FAST                       1: config
+                        128     LOAD_ATTR                       13: getfloat
+                        130     LOAD_CONST                      8: 'max_temp'
+                        132     LOAD_CONST                      9: 0
+                        134     LOAD_CONST                      10: ('above',)
+                        136     CALL_FUNCTION_KW                2
+                        138     LOAD_FAST                       0: self
+                        140     STORE_ATTR                      14: max_temp
+                        142     LOAD_CONST                      11: 0
+                        144     LOAD_FAST                       0: self
+                        146     STORE_ATTR                      15: heater_bed_state
+                        148     LOAD_CONST                      11: 0
+                        150     LOAD_FAST                       0: self
+                        152     STORE_ATTR                      16: last_pwm_value
+                        154     LOAD_FAST                       1: config
+                        156     LOAD_METHOD                     17: getboolean
+                        158     LOAD_CONST                      12: 'power_calibration_enable'
+                        160     LOAD_CONST                      11: 0
+                        162     CALL_METHOD                     2
+                        164     LOAD_FAST                       0: self
+                        166     STORE_ATTR                      18: power_calibration_enable
+                        168     LOAD_FAST                       1: config
+                        170     LOAD_METHOD                     13: getfloat
+                        172     LOAD_CONST                      13: 'power_calibration_wait_even_heating_time'
+                        174     LOAD_CONST                      11: 0
+                        176     CALL_METHOD                     2
+                        178     LOAD_FAST                       0: self
+                        180     STORE_ATTR                      19: power_calibration_wait_even_heating_time
+                        182     LOAD_FAST                       1: config
+                        184     LOAD_METHOD                     13: getfloat
+                        186     LOAD_CONST                      14: 'power_calibration_start_temp'
+                        188     LOAD_CONST                      15: 70
+                        190     CALL_METHOD                     2
+                        192     LOAD_FAST                       0: self
+                        194     STORE_ATTR                      20: power_calibration_start_temp
+                        196     LOAD_FAST                       1: config
+                        198     LOAD_METHOD                     13: getfloat
+                        200     LOAD_CONST                      16: 'power_calibration_end_temp'
+                        202     LOAD_CONST                      17: 100
+                        204     CALL_METHOD                     2
+                        206     LOAD_FAST                       0: self
+                        208     STORE_ATTR                      21: power_calibration_end_temp
+                        210     LOAD_FAST                       1: config
+                        212     LOAD_METHOD                     13: getfloat
+                        214     LOAD_CONST                      18: 'power_calibration_sample_interval'
+                        216     LOAD_CONST                      19: 0.1
+                        218     CALL_METHOD                     2
+                        220     LOAD_FAST                       0: self
+                        222     STORE_ATTR                      22: power_calibration_sample_interval
+                        224     LOAD_FAST                       1: config
+                        226     LOAD_METHOD                     13: getfloat
+                        228     LOAD_CONST                      20: 'power_calibration_sample_end_temp_offset'
+                        230     LOAD_CONST                      21: 10
+                        232     CALL_METHOD                     2
+                        234     LOAD_FAST                       0: self
+                        236     STORE_ATTR                      23: power_calibration_sample_end_temp_offset
+                        238     LOAD_FAST                       1: config
+                        240     LOAD_METHOD                     13: getfloat
+                        242     LOAD_CONST                      22: 'power_calibration_sample_start_temp_offset'
+                        244     LOAD_CONST                      21: 10
+                        246     CALL_METHOD                     2
+                        248     LOAD_FAST                       0: self
+                        250     STORE_ATTR                      24: power_calibration_sample_start_temp_offset
+                        252     LOAD_FAST                       1: config
+                        254     LOAD_METHOD                     13: getfloat
+                        256     LOAD_CONST                      23: 'power_calibration_full_power_110_220_slop_divide'
+                        258     LOAD_CONST                      24: 0.2
+                        260     CALL_METHOD                     2
+                        262     LOAD_FAST                       0: self
+                        264     STORE_ATTR                      25: power_calibration_full_power_110_220_slop_divide
+                        266     LOAD_FAST                       1: config
+                        268     LOAD_METHOD                     13: getfloat
+                        270     LOAD_CONST                      25: 'power_calibration_power_110'
+                        272     LOAD_CONST                      26: 1
+                        274     CALL_METHOD                     2
+                        276     LOAD_FAST                       0: self
+                        278     STORE_ATTR                      26: power_calibration_power_110
+                        280     LOAD_FAST                       1: config
+                        282     LOAD_METHOD                     13: getfloat
+                        284     LOAD_CONST                      27: 'power_calibration_power_220'
+                        286     LOAD_CONST                      28: 0.75
+                        288     CALL_METHOD                     2
+                        290     LOAD_FAST                       0: self
+                        292     STORE_ATTR                      27: power_calibration_power_220
+                        294     LOAD_FAST                       1: config
+                        296     LOAD_METHOD                     28: getint
+                        298     LOAD_CONST                      29: 'power_calibration_max_calibrate_times'
+                        300     LOAD_CONST                      21: 10
+                        302     CALL_METHOD                     2
+                        304     LOAD_FAST                       0: self
+                        306     STORE_ATTR                      29: power_calibration_max_calibrate_times
+                        308     LOAD_FAST                       1: config
+                        310     LOAD_METHOD                     28: getint
+                        312     LOAD_CONST                      30: 'power_calibration_retry_times'
+                        314     LOAD_CONST                      31: 3
+                        316     CALL_METHOD                     2
+                        318     LOAD_FAST                       0: self
+                        320     STORE_ATTR                      30: power_calibration_retry_times
+                        322     LOAD_FAST                       1: config
+                        324     LOAD_METHOD                     13: getfloat
+                        326     LOAD_CONST                      32: 'power_calibration_heating_slope_low'
+                        328     LOAD_CONST                      33: 0.45
+                        330     CALL_METHOD                     2
+                        332     LOAD_FAST                       0: self
+                        334     STORE_ATTR                      31: power_calibration_heating_slope_low
+                        336     LOAD_FAST                       1: config
+                        338     LOAD_METHOD                     13: getfloat
+                        340     LOAD_CONST                      34: 'power_calibration_heating_slope_high'
+                        342     LOAD_CONST                      35: 0.67
+                        344     CALL_METHOD                     2
+                        346     LOAD_FAST                       0: self
+                        348     STORE_ATTR                      32: power_calibration_heating_slope_high
+                        350     LOAD_FAST                       1: config
+                        352     LOAD_METHOD                     13: getfloat
+                        354     LOAD_CONST                      36: 'pid_220_kp'
+                        356     LOAD_CONST                      37: 18.578
+                        358     CALL_METHOD                     2
+                        360     LOAD_FAST                       1: config
+                        362     LOAD_METHOD                     13: getfloat
+                        364     LOAD_CONST                      38: 'pid_110_kp'
+                        366     LOAD_CONST                      39: 52.98
+                        368     CALL_METHOD                     2
+                        370     BUILD_LIST                      2
+                        372     LOAD_FAST                       1: config
+                        374     LOAD_METHOD                     13: getfloat
+                        376     LOAD_CONST                      40: 'pid_220_ki'
+                        378     LOAD_CONST                      41: 0.314
+                        380     CALL_METHOD                     2
+                        382     LOAD_FAST                       1: config
+                        384     LOAD_METHOD                     13: getfloat
+                        386     LOAD_CONST                      42: 'pid_110_ki'
+                        388     LOAD_CONST                      43: 0.849
+                        390     CALL_METHOD                     2
+                        392     BUILD_LIST                      2
+                        394     LOAD_FAST                       1: config
+                        396     LOAD_METHOD                     13: getfloat
+                        398     LOAD_CONST                      44: 'pid_220_kd'
+                        400     LOAD_CONST                      45: 274.489
+                        402     CALL_METHOD                     2
+                        404     LOAD_FAST                       1: config
+                        406     LOAD_METHOD                     13: getfloat
+                        408     LOAD_CONST                      46: 'pid_110_kd'
+                        410     LOAD_CONST                      47: 826.491
+                        412     CALL_METHOD                     2
+                        414     BUILD_LIST                      2
+                        416     LOAD_CONST                      48: ('Kp', 'Ki', 'Kd')
+                        418     BUILD_CONST_KEY_MAP             3
+                        420     LOAD_FAST                       0: self
+                        422     STORE_ATTR                      33: pid
+                        424     LOAD_CONST                      0: None
+                        426     RETURN_VALUE                    
+                'PrinterHeaterBed.__init__'
+                False
+                [Code]
+                    File Name: /extras/heater_bed.py
+                    Object Name: cmd_M140
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'max_temp'
+                        'printer'
+                        'lookup_object'
+                        'set_temperature'
+                        'heater'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'wait'
+                        'temp'
+                        'pheaters'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'S'
+                        0
+                        15
+                        'heaters'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get_float
+                        4       LOAD_CONST                      1: 'S'
+                        6       LOAD_CONST                      2: 0
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      3: temp
+                        12      LOAD_FAST                       3: temp
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       1: max_temp
+                        18      LOAD_CONST                      3: 15
+                        20      BINARY_SUBTRACT                 
+                        22      COMPARE_OP                      4 (>)
+                        24      POP_JUMP_IF_FALSE               36
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       1: max_temp
+                        30      LOAD_CONST                      3: 15
+                        32      BINARY_SUBTRACT                 
+                        34      STORE_FAST                      3: temp
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       2: printer
+                        40      LOAD_METHOD                     3: lookup_object
+                        42      LOAD_CONST                      4: 'heaters'
+                        44      CALL_METHOD                     1
+                        46      STORE_FAST                      4: pheaters
+                        48      LOAD_FAST                       4: pheaters
+                        50      LOAD_METHOD                     4: set_temperature
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       5: heater
+                        56      LOAD_FAST                       3: temp
+                        58      LOAD_FAST                       2: wait
+                        60      CALL_METHOD                     3
+                        62      POP_TOP                         
+                        64      LOAD_CONST                      0: None
+                        66      RETURN_VALUE                    
+                'PrinterHeaterBed.cmd_M140'
+                [Code]
+                    File Name: /extras/heater_bed.py
+                    Object Name: cmd_M190
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'cmd_M140'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        (
+                            'wait'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: cmd_M140
+                        4       LOAD_FAST                       1: gcmd
+                        6       LOAD_CONST                      1: True
+                        8       LOAD_CONST                      2: ('wait',)
+                        10      CALL_FUNCTION_KW                2
+                        12      POP_TOP                         
+                        14      LOAD_CONST                      0: None
+                        16      RETURN_VALUE                    
+                'PrinterHeaterBed.cmd_M190'
+                [Code]
+                    File Name: /extras/heater_bed.py
+                    Object Name: cmd_BED_HEADER_SET_HEARER_POWER_MAX
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'heater'
+                        'max_power'
+                        'control'
+                        'heater_max_power'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'max_power'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'S'
+                        1
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get_float
+                        4       LOAD_CONST                      1: 'S'
+                        6       LOAD_CONST                      2: 1
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: max_power
+                        12      LOAD_FAST                       2: max_power
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       1: heater
+                        18      STORE_ATTR                      2: max_power
+                        20      LOAD_FAST                       2: max_power
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       1: heater
+                        26      LOAD_ATTR                       3: control
+                        28      STORE_ATTR                      4: heater_max_power
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                'PrinterHeaterBed.cmd_BED_HEADER_SET_HEARER_POWER_MAX'
+                [Code]
+                    File Name: /extras/heater_bed.py
+                    Object Name: cmd_BED_HEADER_POWER_CALIBRATION
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 6
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_reactor'
+                        'get_float'
+                        'power_calibration_enable'
+                        'set'
+                        'heater'
+                        'max_power'
+                        'control'
+                        '__class__'
+                        '__name__'
+                        'pid'
+                        'items'
+                        'run_script_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'if_power_is_220v'
+                        'power_220v_calibration'
+                        'finish_temp'
+                        'raw_pid'
+                    [Free Vars]
+                    [Cell Vars]
+                        'configfile'
+                        'gcode_obj'
+                        'get_heater_slope'
+                        'reactor_obj'
+                        'self'
+                        'set_temperature'
+                    [Constants]
+                        '\n        bed_header_power_calibration\n        1.preheat to 80 degree\n        2.heating 70-100 degree,sample 0.1s,full power\n        3.if slope < 0.4, may be 110v heater return\n        4.find max power, slope 0.45-0.67\n        :param gcmd:\n        :return:\n        '
+                        1
+                        True
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: set_temperature
+                            Arg Count: 3
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 4
+                            Stack Size: 5
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'printer'
+                                'lookup_object'
+                                'heater'
+                                'max_power'
+                                'control'
+                                'heater_max_power'
+                                'set_temperature'
+                            [Var Names]
+                                'temperature'
+                                'power'
+                                'wait'
+                                'pheaters'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                'heaters'
+                            [Disassembly]
+                                0       LOAD_DEREF                      0: self
+                                2       LOAD_ATTR                       0: printer
+                                4       LOAD_METHOD                     1: lookup_object
+                                6       LOAD_CONST                      1: 'heaters'
+                                8       CALL_METHOD                     1
+                                10      STORE_FAST                      3: pheaters
+                                12      LOAD_FAST                       1: power
+                                14      LOAD_DEREF                      0: self
+                                16      LOAD_ATTR                       2: heater
+                                18      STORE_ATTR                      3: max_power
+                                20      LOAD_FAST                       1: power
+                                22      LOAD_DEREF                      0: self
+                                24      LOAD_ATTR                       2: heater
+                                26      LOAD_ATTR                       4: control
+                                28      STORE_ATTR                      5: heater_max_power
+                                30      LOAD_FAST                       3: pheaters
+                                32      LOAD_METHOD                     6: set_temperature
+                                34      LOAD_DEREF                      0: self
+                                36      LOAD_ATTR                       2: heater
+                                38      LOAD_FAST                       0: temperature
+                                40      LOAD_FAST                       2: wait
+                                42      CALL_METHOD                     3
+                                44      POP_TOP                         
+                                46      LOAD_CONST                      0: None
+                                48      RETURN_VALUE                    
+                        'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.set_temperature'
+                        False
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: get_heater_slope
+                            Arg Count: 4
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 13
+                            Stack Size: 8
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'respond_info'
+                                'pause'
+                                'monotonic'
+                                'power_calibration_wait_even_heating_time'
+                                'heater'
+                                'last_temp'
+                                'power_calibration_sample_end_temp_offset'
+                                'power_calibration_sample_start_temp_offset'
+                                'append'
+                                'numpy'
+                                'array'
+                                'polyfit'
+                            [Var Names]
+                                'b_temp'
+                                'e_temp'
+                                'max_power_'
+                                'wait_even_heating'
+                                'sample_times'
+                                'sample_temps'
+                                'current_time'
+                                'n_temp'
+                                'np'
+                                'x'
+                                'y'
+                                'slope_'
+                                'intercept'
+                            [Free Vars]
+                                'gcode_obj'
+                                'reactor_obj'
+                                'self'
+                                'set_temperature'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                'get_heater_slope b_temp:'
+                                ',e_temp:'
+                                ',max_power_:'
+                                1
+                                True
+                                False
+                                (
+                                    'wait'
+                                )
+                                0.1
+                                180
+                                0
+                                'heating_slope:'
+                            [Disassembly]
+                                0       LOAD_DEREF                      0: gcode_obj
+                                2       LOAD_METHOD                     0: respond_info
+                                4       LOAD_CONST                      1: 'get_heater_slope b_temp:'
+                                6       LOAD_FAST                       0: b_temp
+                                8       FORMAT_VALUE                    0 (FVC_NONE)
+                                10      LOAD_CONST                      2: ',e_temp:'
+                                12      LOAD_FAST                       1: e_temp
+                                14      FORMAT_VALUE                    0 (FVC_NONE)
+                                16      LOAD_CONST                      3: ',max_power_:'
+                                18      LOAD_FAST                       2: max_power_
+                                20      FORMAT_VALUE                    0 (FVC_NONE)
+                                22      BUILD_STRING                    6
+                                24      CALL_METHOD                     1
+                                26      POP_TOP                         
+                                28      LOAD_DEREF                      3: set_temperature
+                                30      LOAD_FAST                       0: b_temp
+                                32      LOAD_CONST                      4: 1
+                                34      LOAD_CONST                      5: True
+                                36      CALL_FUNCTION                   3
+                                38      POP_TOP                         
+                                40      LOAD_FAST                       3: wait_even_heating
+                                42      POP_JUMP_IF_FALSE               64
+                                44      LOAD_DEREF                      1: reactor_obj
+                                46      LOAD_METHOD                     1: pause
+                                48      LOAD_DEREF                      1: reactor_obj
+                                50      LOAD_METHOD                     2: monotonic
+                                52      CALL_METHOD                     0
+                                54      LOAD_DEREF                      2: self
+                                56      LOAD_ATTR                       3: power_calibration_wait_even_heating_time
+                                58      BINARY_ADD                      
+                                60      CALL_METHOD                     1
+                                62      POP_TOP                         
+                                64      LOAD_DEREF                      3: set_temperature
+                                66      LOAD_FAST                       1: e_temp
+                                68      LOAD_FAST                       2: max_power_
+                                70      LOAD_CONST                      6: False
+                                72      LOAD_CONST                      7: ('wait',)
+                                74      CALL_FUNCTION_KW                3
+                                76      POP_TOP                         
+                                78      BUILD_LIST                      0
+                                80      STORE_FAST                      4: sample_times
+                                82      BUILD_LIST                      0
+                                84      STORE_FAST                      5: sample_temps
+                                86      LOAD_DEREF                      1: reactor_obj
+                                88      LOAD_METHOD                     2: monotonic
+                                90      CALL_METHOD                     0
+                                92      STORE_FAST                      6: current_time
+                                94      LOAD_DEREF                      2: self
+                                96      LOAD_ATTR                       4: heater
+                                98      LOAD_ATTR                       5: last_temp
+                                100     DUP_TOP                         
+                                102     STORE_FAST                      7: n_temp
+                                104     LOAD_FAST                       1: e_temp
+                                106     LOAD_DEREF                      2: self
+                                108     LOAD_ATTR                       6: power_calibration_sample_end_temp_offset
+                                110     BINARY_SUBTRACT                 
+                                112     COMPARE_OP                      0 (<)
+                                114     POP_JUMP_IF_FALSE               184
+                                116     LOAD_FAST                       7: n_temp
+                                118     LOAD_FAST                       0: b_temp
+                                120     LOAD_DEREF                      2: self
+                                122     LOAD_ATTR                       7: power_calibration_sample_start_temp_offset
+                                124     BINARY_ADD                      
+                                126     COMPARE_OP                      4 (>)
+                                128     POP_JUMP_IF_FALSE               154
+                                130     LOAD_FAST                       5: sample_temps
+                                132     LOAD_METHOD                     8: append
+                                134     LOAD_FAST                       7: n_temp
+                                136     CALL_METHOD                     1
+                                138     POP_TOP                         
+                                140     LOAD_FAST                       4: sample_times
+                                142     LOAD_METHOD                     8: append
+                                144     LOAD_DEREF                      1: reactor_obj
+                                146     LOAD_METHOD                     2: monotonic
+                                148     CALL_METHOD                     0
+                                150     CALL_METHOD                     1
+                                152     POP_TOP                         
+                                154     LOAD_DEREF                      1: reactor_obj
+                                156     LOAD_METHOD                     1: pause
+                                158     LOAD_DEREF                      1: reactor_obj
+                                160     LOAD_METHOD                     2: monotonic
+                                162     CALL_METHOD                     0
+                                164     LOAD_CONST                      8: 0.1
+                                166     BINARY_ADD                      
+                                168     CALL_METHOD                     1
+                                170     LOAD_FAST                       6: current_time
+                                172     BINARY_SUBTRACT                 
+                                174     LOAD_CONST                      9: 180
+                                176     COMPARE_OP                      4 (>)
+                                178     POP_JUMP_IF_FALSE               94
+                                180     JUMP_ABSOLUTE                   184
+                                182     JUMP_ABSOLUTE                   94
+                                184     LOAD_DEREF                      3: set_temperature
+                                186     LOAD_CONST                      10: 0
+                                188     LOAD_CONST                      4: 1
+                                190     LOAD_CONST                      6: False
+                                192     CALL_FUNCTION                   3
+                                194     POP_TOP                         
+                                196     LOAD_FAST                       5: sample_temps
+                                198     LOAD_CONST                      4: 1
+                                200     LOAD_CONST                      0: None
+                                202     BUILD_SLICE                     2
+                                204     BINARY_SUBSCR                   
+                                206     STORE_FAST                      5: sample_temps
+                                208     LOAD_FAST                       4: sample_times
+                                210     LOAD_CONST                      4: 1
+                                212     LOAD_CONST                      0: None
+                                214     BUILD_SLICE                     2
+                                216     BINARY_SUBSCR                   
+                                218     STORE_FAST                      4: sample_times
+                                220     LOAD_CONST                      10: 0
+                                222     LOAD_CONST                      0: None
+                                224     IMPORT_NAME                     9: numpy
+                                226     STORE_FAST                      8: np
+                                228     LOAD_FAST                       8: np
+                                230     LOAD_METHOD                     10: array
+                                232     LOAD_FAST                       4: sample_times
+                                234     CALL_METHOD                     1
+                                236     STORE_FAST                      9: x
+                                238     LOAD_FAST                       8: np
+                                240     LOAD_METHOD                     10: array
+                                242     LOAD_FAST                       5: sample_temps
+                                244     CALL_METHOD                     1
+                                246     STORE_FAST                      10: y
+                                248     LOAD_FAST                       8: np
+                                250     LOAD_METHOD                     11: polyfit
+                                252     LOAD_FAST                       9: x
+                                254     LOAD_FAST                       10: y
+                                256     LOAD_CONST                      4: 1
+                                258     CALL_METHOD                     3
+                                260     UNPACK_SEQUENCE                 2
+                                262     STORE_FAST                      11: slope_
+                                264     STORE_FAST                      12: intercept
+                                266     LOAD_DEREF                      0: gcode_obj
+                                268     LOAD_METHOD                     0: respond_info
+                                270     LOAD_CONST                      11: 'heating_slope:'
+                                272     LOAD_FAST                       11: slope_
+                                274     FORMAT_VALUE                    0 (FVC_NONE)
+                                276     BUILD_STRING                    2
+                                278     CALL_METHOD                     1
+                                280     POP_TOP                         
+                                282     LOAD_FAST                       11: slope_
+                                284     RETURN_VALUE                    
+                        'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.get_heater_slope'
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: if_power_is_220v
+                            Arg Count: 0
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 6
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'heater'
+                                'last_temp'
+                                'power_calibration_end_temp'
+                                'respond_info'
+                                'pause'
+                                'monotonic'
+                                'power_calibration_wait_even_heating_time'
+                                'power_calibration_full_power_110_220_slop_divide'
+                                'power_calibration_power_110'
+                                'max_power'
+                                'control'
+                                'heater_max_power'
+                                'power_calibration_enable'
+                                'power_calibration_power_220'
+                            [Var Names]
+                                'is_220v'
+                                'current_temp'
+                                'need_preheat'
+                                'start_temp'
+                                'target_temp'
+                                'slope'
+                            [Free Vars]
+                                'gcode_obj'
+                                'get_heater_slope'
+                                'reactor_obj'
+                                'self'
+                                'set_temperature'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                True
+                                False
+                                30
+                                'start_temp:'
+                                ',target_temp:'
+                                1
+                                0.5
+                                (
+                                    'wait_even_heating'
+                                )
+                                'max_power:1, slope:'
+                                ' <= full_power_110_220_slop_divide:'
+                                'May be 110v heater,set max_power:'
+                                ' > full_power_110_220_slop_divide:'
+                                'May be 220v heater,set max_power:'
+                            [Disassembly]
+                                0       LOAD_CONST                      1: True
+                                2       STORE_FAST                      0: is_220v
+                                4       LOAD_DEREF                      3: self
+                                6       LOAD_ATTR                       0: heater
+                                8       LOAD_ATTR                       1: last_temp
+                                10      STORE_FAST                      1: current_temp
+                                12      LOAD_CONST                      2: False
+                                14      STORE_FAST                      2: need_preheat
+                                16      LOAD_FAST                       1: current_temp
+                                18      LOAD_DEREF                      3: self
+                                20      LOAD_ATTR                       2: power_calibration_end_temp
+                                22      LOAD_CONST                      3: 30
+                                24      BINARY_SUBTRACT                 
+                                26      COMPARE_OP                      1 (<=)
+                                28      POP_JUMP_IF_FALSE               44
+                                30      LOAD_FAST                       1: current_temp
+                                32      STORE_FAST                      3: start_temp
+                                34      LOAD_FAST                       1: current_temp
+                                36      LOAD_CONST                      3: 30
+                                38      BINARY_ADD                      
+                                40      STORE_FAST                      4: target_temp
+                                42      JUMP_FORWARD                    20 (to 64)
+                                44      LOAD_CONST                      1: True
+                                46      STORE_FAST                      2: need_preheat
+                                48      LOAD_DEREF                      3: self
+                                50      LOAD_ATTR                       2: power_calibration_end_temp
+                                52      LOAD_CONST                      3: 30
+                                54      BINARY_SUBTRACT                 
+                                56      STORE_FAST                      3: start_temp
+                                58      LOAD_DEREF                      3: self
+                                60      LOAD_ATTR                       2: power_calibration_end_temp
+                                62      STORE_FAST                      4: target_temp
+                                64      LOAD_DEREF                      0: gcode_obj
+                                66      LOAD_METHOD                     3: respond_info
+                                68      LOAD_CONST                      4: 'start_temp:'
+                                70      LOAD_FAST                       3: start_temp
+                                72      FORMAT_VALUE                    0 (FVC_NONE)
+                                74      LOAD_CONST                      5: ',target_temp:'
+                                76      LOAD_FAST                       4: target_temp
+                                78      FORMAT_VALUE                    0 (FVC_NONE)
+                                80      BUILD_STRING                    4
+                                82      CALL_METHOD                     1
+                                84      POP_TOP                         
+                                86      LOAD_FAST                       2: need_preheat
+                                88      POP_JUMP_IF_FALSE               102
+                                90      LOAD_DEREF                      4: set_temperature
+                                92      LOAD_FAST                       3: start_temp
+                                94      LOAD_CONST                      6: 1
+                                96      LOAD_CONST                      1: True
+                                98      CALL_FUNCTION                   3
+                                100     POP_TOP                         
+                                102     LOAD_DEREF                      2: reactor_obj
+                                104     LOAD_METHOD                     4: pause
+                                106     LOAD_DEREF                      2: reactor_obj
+                                108     LOAD_METHOD                     5: monotonic
+                                110     CALL_METHOD                     0
+                                112     LOAD_DEREF                      3: self
+                                114     LOAD_ATTR                       6: power_calibration_wait_even_heating_time
+                                116     BINARY_ADD                      
+                                118     CALL_METHOD                     1
+                                120     POP_TOP                         
+                                122     LOAD_DEREF                      1: get_heater_slope
+                                124     LOAD_FAST                       3: start_temp
+                                126     LOAD_FAST                       4: target_temp
+                                128     LOAD_CONST                      7: 0.5
+                                130     LOAD_CONST                      2: False
+                                132     LOAD_CONST                      8: ('wait_even_heating',)
+                                134     CALL_FUNCTION_KW                4
+                                136     STORE_FAST                      5: slope
+                                138     LOAD_FAST                       5: slope
+                                140     LOAD_DEREF                      3: self
+                                142     LOAD_ATTR                       7: power_calibration_full_power_110_220_slop_divide
+                                144     COMPARE_OP                      1 (<=)
+                                146     POP_JUMP_IF_FALSE               218
+                                148     LOAD_CONST                      2: False
+                                150     STORE_FAST                      0: is_220v
+                                152     LOAD_DEREF                      0: gcode_obj
+                                154     LOAD_METHOD                     3: respond_info
+                                156     LOAD_CONST                      9: 'max_power:1, slope:'
+                                158     LOAD_FAST                       5: slope
+                                160     FORMAT_VALUE                    0 (FVC_NONE)
+                                162     LOAD_CONST                      10: ' <= full_power_110_220_slop_divide:'
+                                164     LOAD_DEREF                      3: self
+                                166     LOAD_ATTR                       7: power_calibration_full_power_110_220_slop_divide
+                                168     FORMAT_VALUE                    0 (FVC_NONE)
+                                170     BUILD_STRING                    4
+                                172     CALL_METHOD                     1
+                                174     POP_TOP                         
+                                176     LOAD_DEREF                      0: gcode_obj
+                                178     LOAD_METHOD                     3: respond_info
+                                180     LOAD_CONST                      11: 'May be 110v heater,set max_power:'
+                                182     LOAD_DEREF                      3: self
+                                184     LOAD_ATTR                       8: power_calibration_power_110
+                                186     FORMAT_VALUE                    0 (FVC_NONE)
+                                188     BUILD_STRING                    2
+                                190     CALL_METHOD                     1
+                                192     POP_TOP                         
+                                194     LOAD_DEREF                      3: self
+                                196     LOAD_ATTR                       8: power_calibration_power_110
+                                198     LOAD_DEREF                      3: self
+                                200     LOAD_ATTR                       0: heater
+                                202     STORE_ATTR                      9: max_power
+                                204     LOAD_DEREF                      3: self
+                                206     LOAD_ATTR                       8: power_calibration_power_110
+                                208     LOAD_DEREF                      3: self
+                                210     LOAD_ATTR                       0: heater
+                                212     LOAD_ATTR                       10: control
+                                214     STORE_ATTR                      11: heater_max_power
+                                216     JUMP_FORWARD                    72 (to 290)
+                                218     LOAD_DEREF                      3: self
+                                220     LOAD_ATTR                       12: power_calibration_enable
+                                222     POP_JUMP_IF_TRUE                290
+                                226     LOAD_DEREF                      0: gcode_obj
+                                228     LOAD_METHOD                     3: respond_info
+                                230     LOAD_CONST                      9: 'max_power:1, slope:'
+                                232     LOAD_FAST                       5: slope
+                                234     FORMAT_VALUE                    0 (FVC_NONE)
+                                236     LOAD_CONST                      12: ' > full_power_110_220_slop_divide:'
+                                238     LOAD_DEREF                      3: self
+                                240     LOAD_ATTR                       7: power_calibration_full_power_110_220_slop_divide
+                                242     FORMAT_VALUE                    0 (FVC_NONE)
+                                244     BUILD_STRING                    4
+                                246     CALL_METHOD                     1
+                                248     POP_TOP                         
+                                250     LOAD_DEREF                      0: gcode_obj
+                                252     LOAD_METHOD                     3: respond_info
+                                254     LOAD_CONST                      13: 'May be 220v heater,set max_power:'
+                                256     LOAD_DEREF                      3: self
+                                258     LOAD_ATTR                       13: power_calibration_power_220
+                                260     FORMAT_VALUE                    0 (FVC_NONE)
+                                262     BUILD_STRING                    2
+                                264     CALL_METHOD                     1
+                                266     POP_TOP                         
+                                268     LOAD_DEREF                      3: self
+                                270     LOAD_ATTR                       13: power_calibration_power_220
+                                272     LOAD_DEREF                      3: self
+                                274     LOAD_ATTR                       0: heater
+                                276     STORE_ATTR                      9: max_power
+                                278     LOAD_DEREF                      3: self
+                                280     LOAD_ATTR                       13: power_calibration_power_220
+                                282     LOAD_DEREF                      3: self
+                                284     LOAD_ATTR                       0: heater
+                                286     LOAD_ATTR                       10: control
+                                288     STORE_ATTR                      11: heater_max_power
+                                290     LOAD_FAST                       0: is_220v
+                                292     RETURN_VALUE                    
+                        'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.if_power_is_220v'
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: power_220v_calibration
+                            Arg Count: 0
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 7
+                            Stack Size: 9
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'range'
+                                'power_calibration_retry_times'
+                                'respond_info'
+                                'power_calibration_max_calibrate_times'
+                                'power_calibration_start_temp'
+                                'power_calibration_end_temp'
+                                'power_calibration_heating_slope_low'
+                                'power_calibration_heating_slope_high'
+                                'set'
+                                'run_script_from_command'
+                            [Var Names]
+                                'low_power'
+                                'high_power'
+                                'stop_calibrate'
+                                'retry_count'
+                                'calibrate_times'
+                                'max_power'
+                                'slope'
+                            [Free Vars]
+                                'configfile'
+                                'gcode_obj'
+                                'get_heater_slope'
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                0
+                                1
+                                False
+                                'Start power calibration'
+                                'calibrate_times:'
+                                2
+                                'max_power:'
+                                ',slope:'
+                                ' < heating_slope_low:'
+                                ' > heating_slope_high:'
+                                ', slope:'
+                                ' 0.45-0.67'
+                                'power calibration success'
+                                'heater_bed'
+                                'max_power'
+                                '.6f'
+                                'CXSAVE_CONFIG'
+                                True
+                                'power calibration fail'
+                                'low_power:'
+                                ', high_power:'
+                            [Disassembly]
+                                0       LOAD_CONST                      1: 0
+                                2       STORE_FAST                      0: low_power
+                                4       LOAD_CONST                      2: 1
+                                6       STORE_FAST                      1: high_power
+                                8       LOAD_CONST                      3: False
+                                10      STORE_FAST                      2: stop_calibrate
+                                12      LOAD_GLOBAL                     0: range
+                                14      LOAD_DEREF                      3: self
+                                16      LOAD_ATTR                       1: power_calibration_retry_times
+                                18      CALL_FUNCTION                   1
+                                20      GET_ITER                        
+                                22      FOR_ITER                        314 (to 340)
+                                26      STORE_FAST                      3: retry_count
+                                28      LOAD_FAST                       2: stop_calibrate
+                                30      POP_JUMP_IF_FALSE               38
+                                32      POP_TOP                         
+                                34      JUMP_ABSOLUTE                   340
+                                38      LOAD_DEREF                      1: gcode_obj
+                                40      LOAD_METHOD                     2: respond_info
+                                42      LOAD_CONST                      4: 'Start power calibration'
+                                44      CALL_METHOD                     1
+                                46      POP_TOP                         
+                                48      LOAD_DEREF                      3: self
+                                50      LOAD_ATTR                       3: power_calibration_max_calibrate_times
+                                52      LOAD_CONST                      2: 1
+                                54      BINARY_ADD                      
+                                56      STORE_FAST                      4: calibrate_times
+                                58      LOAD_FAST                       4: calibrate_times
+                                60      LOAD_CONST                      2: 1
+                                62      BINARY_SUBTRACT                 
+                                64      DUP_TOP                         
+                                66      STORE_FAST                      4: calibrate_times
+                                68      POP_JUMP_IF_FALSE               22
+                                70      LOAD_DEREF                      1: gcode_obj
+                                72      LOAD_METHOD                     2: respond_info
+                                74      LOAD_CONST                      5: 'calibrate_times:'
+                                76      LOAD_FAST                       4: calibrate_times
+                                78      FORMAT_VALUE                    0 (FVC_NONE)
+                                80      BUILD_STRING                    2
+                                82      CALL_METHOD                     1
+                                84      POP_TOP                         
+                                86      LOAD_FAST                       0: low_power
+                                88      LOAD_FAST                       1: high_power
+                                90      BINARY_ADD                      
+                                92      LOAD_CONST                      6: 2
+                                94      BINARY_TRUE_DIVIDE              
+                                96      STORE_FAST                      5: max_power
+                                98      LOAD_DEREF                      2: get_heater_slope
+                                100     LOAD_DEREF                      3: self
+                                102     LOAD_ATTR                       4: power_calibration_start_temp
+                                104     LOAD_DEREF                      3: self
+                                106     LOAD_ATTR                       5: power_calibration_end_temp
+                                108     LOAD_FAST                       5: max_power
+                                110     CALL_FUNCTION                   3
+                                112     STORE_FAST                      6: slope
+                                114     LOAD_FAST                       6: slope
+                                116     LOAD_DEREF                      3: self
+                                118     LOAD_ATTR                       6: power_calibration_heating_slope_low
+                                120     COMPARE_OP                      0 (<)
+                                122     POP_JUMP_IF_FALSE               160
+                                124     LOAD_DEREF                      1: gcode_obj
+                                126     LOAD_METHOD                     2: respond_info
+                                128     LOAD_CONST                      7: 'max_power:'
+                                130     LOAD_FAST                       5: max_power
+                                132     FORMAT_VALUE                    0 (FVC_NONE)
+                                134     LOAD_CONST                      8: ',slope:'
+                                136     LOAD_FAST                       6: slope
+                                138     FORMAT_VALUE                    0 (FVC_NONE)
+                                140     LOAD_CONST                      9: ' < heating_slope_low:'
+                                142     LOAD_DEREF                      3: self
+                                144     LOAD_ATTR                       6: power_calibration_heating_slope_low
+                                146     FORMAT_VALUE                    0 (FVC_NONE)
+                                148     BUILD_STRING                    6
+                                150     CALL_METHOD                     1
+                                152     POP_TOP                         
+                                154     LOAD_FAST                       5: max_power
+                                156     STORE_FAST                      0: low_power
+                                158     JUMP_FORWARD                    114 (to 274)
+                                160     LOAD_FAST                       6: slope
+                                162     LOAD_DEREF                      3: self
+                                164     LOAD_ATTR                       7: power_calibration_heating_slope_high
+                                166     COMPARE_OP                      4 (>)
+                                168     POP_JUMP_IF_FALSE               206
+                                170     LOAD_DEREF                      1: gcode_obj
+                                172     LOAD_METHOD                     2: respond_info
+                                174     LOAD_CONST                      7: 'max_power:'
+                                176     LOAD_FAST                       5: max_power
+                                178     FORMAT_VALUE                    0 (FVC_NONE)
+                                180     LOAD_CONST                      8: ',slope:'
+                                182     LOAD_FAST                       6: slope
+                                184     FORMAT_VALUE                    0 (FVC_NONE)
+                                186     LOAD_CONST                      10: ' > heating_slope_high:'
+                                188     LOAD_DEREF                      3: self
+                                190     LOAD_ATTR                       7: power_calibration_heating_slope_high
+                                192     FORMAT_VALUE                    0 (FVC_NONE)
+                                194     BUILD_STRING                    6
+                                196     CALL_METHOD                     1
+                                198     POP_TOP                         
+                                200     LOAD_FAST                       5: max_power
+                                202     STORE_FAST                      1: high_power
+                                204     JUMP_FORWARD                    68 (to 274)
+                                206     LOAD_DEREF                      1: gcode_obj
+                                208     LOAD_METHOD                     2: respond_info
+                                210     LOAD_CONST                      7: 'max_power:'
+                                212     LOAD_FAST                       5: max_power
+                                214     FORMAT_VALUE                    0 (FVC_NONE)
+                                216     LOAD_CONST                      11: ', slope:'
+                                218     LOAD_FAST                       6: slope
+                                220     FORMAT_VALUE                    0 (FVC_NONE)
+                                222     LOAD_CONST                      12: ' 0.45-0.67'
+                                224     BUILD_STRING                    5
+                                226     CALL_METHOD                     1
+                                228     POP_TOP                         
+                                230     LOAD_DEREF                      1: gcode_obj
+                                232     LOAD_METHOD                     2: respond_info
+                                234     LOAD_CONST                      13: 'power calibration success'
+                                236     CALL_METHOD                     1
+                                238     POP_TOP                         
+                                240     LOAD_DEREF                      0: configfile
+                                242     LOAD_METHOD                     8: set
+                                244     LOAD_CONST                      14: 'heater_bed'
+                                246     LOAD_CONST                      15: 'max_power'
+                                248     LOAD_FAST                       5: max_power
+                                250     LOAD_CONST                      16: '.6f'
+                                252     FORMAT_VALUE                    4 (FVC_NONE | FVS_HAVE_SPEC)
+                                254     CALL_METHOD                     3
+                                256     POP_TOP                         
+                                258     LOAD_DEREF                      1: gcode_obj
+                                260     LOAD_METHOD                     9: run_script_from_command
+                                262     LOAD_CONST                      17: 'CXSAVE_CONFIG'
+                                264     CALL_METHOD                     1
+                                266     POP_TOP                         
+                                268     LOAD_CONST                      18: True
+                                270     STORE_FAST                      2: stop_calibrate
+                                272     JUMP_ABSOLUTE                   22
+                                274     LOAD_FAST                       4: calibrate_times
+                                276     LOAD_CONST                      2: 1
+                                278     COMPARE_OP                      2 (==)
+                                280     POP_JUMP_IF_FALSE               58
+                                282     LOAD_DEREF                      1: gcode_obj
+                                284     LOAD_METHOD                     2: respond_info
+                                286     LOAD_CONST                      19: 'power calibration fail'
+                                288     CALL_METHOD                     1
+                                290     POP_TOP                         
+                                292     LOAD_DEREF                      1: gcode_obj
+                                294     LOAD_METHOD                     2: respond_info
+                                296     LOAD_CONST                      7: 'max_power:'
+                                298     LOAD_FAST                       5: max_power
+                                300     FORMAT_VALUE                    0 (FVC_NONE)
+                                302     LOAD_CONST                      11: ', slope:'
+                                304     LOAD_FAST                       6: slope
+                                306     FORMAT_VALUE                    0 (FVC_NONE)
+                                308     BUILD_STRING                    4
+                                310     CALL_METHOD                     1
+                                312     POP_TOP                         
+                                314     LOAD_DEREF                      1: gcode_obj
+                                316     LOAD_METHOD                     2: respond_info
+                                318     LOAD_CONST                      20: 'low_power:'
+                                320     LOAD_FAST                       0: low_power
+                                322     FORMAT_VALUE                    0 (FVC_NONE)
+                                324     LOAD_CONST                      21: ', high_power:'
+                                326     LOAD_FAST                       1: high_power
+                                328     FORMAT_VALUE                    0 (FVC_NONE)
+                                330     BUILD_STRING                    4
+                                332     CALL_METHOD                     1
+                                334     POP_TOP                         
+                                336     JUMP_ABSOLUTE                   58
+                                338     JUMP_ABSOLUTE                   22
+                                340     LOAD_CONST                      0: None
+                                342     RETURN_VALUE                    
+                        'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.power_220v_calibration'
+                        'gcode'
+                        'configfile'
+                        'S'
+                        0
+                        'heater_bed'
+                        'max_power'
+                        '.6f'
+                        'ControlPID'
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'heater'
+                                'max_power'
+                                'is_integer'
+                                'int'
+                            [Var Names]
+                                '.0'
+                                'k'
+                                'v'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                0
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        46 (to 52)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: k
+                                10      STORE_FAST                      2: v
+                                12      LOAD_FAST                       1: k
+                                14      LOAD_DEREF                      0: self
+                                16      LOAD_ATTR                       0: heater
+                                18      LOAD_ATTR                       1: max_power
+                                20      LOAD_METHOD                     2: is_integer
+                                22      CALL_METHOD                     0
+                                24      POP_JUMP_IF_FALSE               42
+                                26      LOAD_FAST                       2: v
+                                28      LOAD_GLOBAL                     3: int
+                                30      LOAD_DEREF                      0: self
+                                32      LOAD_ATTR                       0: heater
+                                34      LOAD_ATTR                       1: max_power
+                                36      CALL_FUNCTION                   1
+                                38      BINARY_SUBSCR                   
+                                40      JUMP_FORWARD                    6 (to 48)
+                                42      LOAD_FAST                       2: v
+                                44      LOAD_CONST                      0: 0
+                                46      BINARY_SUBSCR                   
+                                48      MAP_ADD                         2
+                                50      JUMP_ABSOLUTE                   4
+                                52      RETURN_VALUE                    
+                        'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.<dictcomp>'
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: <lambda>
+                            Arg Count: 3
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'setattr'
+                                'heater'
+                                'control'
+                            [Var Names]
+                                'Kp'
+                                'Ki'
+                                'Kd'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                'Kp'
+                                'Ki'
+                                'Kd'
+                            [Disassembly]
+                                0       LOAD_GLOBAL                     0: setattr
+                                2       LOAD_DEREF                      0: self
+                                4       LOAD_ATTR                       1: heater
+                                6       LOAD_ATTR                       2: control
+                                8       LOAD_CONST                      1: 'Kp'
+                                10      LOAD_FAST                       0: Kp
+                                12      CALL_FUNCTION                   3
+                                14      LOAD_GLOBAL                     0: setattr
+                                16      LOAD_DEREF                      0: self
+                                18      LOAD_ATTR                       1: heater
+                                20      LOAD_ATTR                       2: control
+                                22      LOAD_CONST                      2: 'Ki'
+                                24      LOAD_FAST                       1: Ki
+                                26      CALL_FUNCTION                   3
+                                28      LOAD_GLOBAL                     0: setattr
+                                30      LOAD_DEREF                      0: self
+                                32      LOAD_ATTR                       1: heater
+                                34      LOAD_ATTR                       2: control
+                                36      LOAD_CONST                      3: 'Kd'
+                                38      LOAD_FAST                       2: Kd
+                                40      CALL_FUNCTION                   3
+                                42      BUILD_TUPLE                     3
+                                44      RETURN_VALUE                    
+                        'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.<lambda>'
+                        [Code]
+                            File Name: /extras/heater_bed.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'k'
+                                'v'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                255
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: k
+                                10      STORE_FAST                      2: v
+                                12      LOAD_FAST                       1: k
+                                14      LOAD_FAST                       2: v
+                                16      LOAD_CONST                      0: 255
+                                18      BINARY_TRUE_DIVIDE              
+                                20      MAP_ADD                         2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'control'
+                        'pid'
+                        'pid_kp'
+                        'Kp'
+                        'pid_ki'
+                        'Ki'
+                        'pid_kd'
+                        'Kd'
+                        'CXSAVE_CONFIG'
+                        None
+                        (
+                            1
+                            True
+                        )
+                        (
+                            1
+                            False
+                        )
+                    [Disassembly]
+                        0       LOAD_CONST                      35: (1, True)
+                        2       LOAD_CLOSURE                    4: self
+                        4       BUILD_TUPLE                     1
+                        6       LOAD_CONST                      3: <CODE> set_temperature
+                        8       LOAD_CONST                      4: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.set_temperature'
+                        10      MAKE_FUNCTION                   9
+                        12      STORE_DEREF                     5: set_temperature
+                        14      LOAD_CONST                      36: (1, False)
+                        16      LOAD_CLOSURE                    1: gcode_obj
+                        18      LOAD_CLOSURE                    3: reactor_obj
+                        20      LOAD_CLOSURE                    4: self
+                        22      LOAD_CLOSURE                    5: set_temperature
+                        24      BUILD_TUPLE                     4
+                        26      LOAD_CONST                      6: <CODE> get_heater_slope
+                        28      LOAD_CONST                      7: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.get_heater_slope'
+                        30      MAKE_FUNCTION                   9
+                        32      STORE_DEREF                     2: get_heater_slope
+                        34      LOAD_CLOSURE                    1: gcode_obj
+                        36      LOAD_CLOSURE                    2: get_heater_slope
+                        38      LOAD_CLOSURE                    3: reactor_obj
+                        40      LOAD_CLOSURE                    4: self
+                        42      LOAD_CLOSURE                    5: set_temperature
+                        44      BUILD_TUPLE                     5
+                        46      LOAD_CONST                      8: <CODE> if_power_is_220v
+                        48      LOAD_CONST                      9: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.if_power_is_220v'
+                        50      MAKE_FUNCTION                   8
+                        52      STORE_FAST                      2: if_power_is_220v
+                        54      LOAD_CLOSURE                    0: configfile
+                        56      LOAD_CLOSURE                    1: gcode_obj
+                        58      LOAD_CLOSURE                    2: get_heater_slope
+                        60      LOAD_CLOSURE                    4: self
+                        62      BUILD_TUPLE                     4
+                        64      LOAD_CONST                      10: <CODE> power_220v_calibration
+                        66      LOAD_CONST                      11: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.power_220v_calibration'
+                        68      MAKE_FUNCTION                   8
+                        70      STORE_FAST                      3: power_220v_calibration
+                        72      LOAD_DEREF                      4: self
+                        74      LOAD_ATTR                       0: printer
+                        76      LOAD_METHOD                     1: lookup_object
+                        78      LOAD_CONST                      12: 'gcode'
+                        80      CALL_METHOD                     1
+                        82      STORE_DEREF                     1: gcode_obj
+                        84      LOAD_DEREF                      4: self
+                        86      LOAD_ATTR                       0: printer
+                        88      LOAD_METHOD                     2: get_reactor
+                        90      CALL_METHOD                     0
+                        92      STORE_DEREF                     3: reactor_obj
+                        94      LOAD_DEREF                      4: self
+                        96      LOAD_ATTR                       0: printer
+                        98      LOAD_METHOD                     1: lookup_object
+                        100     LOAD_CONST                      13: 'configfile'
+                        102     CALL_METHOD                     1
+                        104     STORE_DEREF                     0: configfile
+                        106     LOAD_FAST                       1: gcmd
+                        108     LOAD_METHOD                     3: get_float
+                        110     LOAD_CONST                      14: 'S'
+                        112     LOAD_CONST                      15: 0
+                        114     CALL_METHOD                     2
+                        116     STORE_FAST                      4: finish_temp
+                        118     LOAD_FAST                       2: if_power_is_220v
+                        120     CALL_FUNCTION                   0
+                        122     POP_JUMP_IF_FALSE               132
+                        124     LOAD_DEREF                      4: self
+                        126     LOAD_ATTR                       4: power_calibration_enable
+                        128     POP_JUMP_IF_TRUE                342
+                        132     LOAD_DEREF                      0: configfile
+                        134     LOAD_METHOD                     5: set
+                        136     LOAD_CONST                      16: 'heater_bed'
+                        138     LOAD_CONST                      17: 'max_power'
+                        140     LOAD_DEREF                      4: self
+                        142     LOAD_ATTR                       6: heater
+                        144     LOAD_ATTR                       7: max_power
+                        146     LOAD_CONST                      18: '.6f'
+                        148     FORMAT_VALUE                    4 (FVC_NONE | FVS_HAVE_SPEC)
+                        150     CALL_METHOD                     3
+                        152     POP_TOP                         
+                        154     LOAD_DEREF                      5: set_temperature
+                        156     LOAD_FAST                       4: finish_temp
+                        158     LOAD_DEREF                      4: self
+                        160     LOAD_ATTR                       6: heater
+                        162     LOAD_ATTR                       7: max_power
+                        164     LOAD_CONST                      2: True
+                        166     CALL_FUNCTION                   3
+                        168     POP_TOP                         
+                        170     LOAD_DEREF                      4: self
+                        172     LOAD_ATTR                       6: heater
+                        174     LOAD_ATTR                       8: control
+                        176     LOAD_ATTR                       9: __class__
+                        178     LOAD_ATTR                       10: __name__
+                        180     LOAD_CONST                      19: 'ControlPID'
+                        182     COMPARE_OP                      2 (==)
+                        184     POP_JUMP_IF_FALSE               328
+                        188     LOAD_CLOSURE                    4: self
+                        190     BUILD_TUPLE                     1
+                        192     LOAD_CONST                      20: <CODE> <dictcomp>
+                        194     LOAD_CONST                      21: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.<dictcomp>'
+                        196     MAKE_FUNCTION                   8
+                        198     LOAD_DEREF                      4: self
+                        200     LOAD_ATTR                       11: pid
+                        202     LOAD_METHOD                     12: items
+                        204     CALL_METHOD                     0
+                        206     GET_ITER                        
+                        208     CALL_FUNCTION                   1
+                        210     STORE_FAST                      5: raw_pid
+                        212     LOAD_CLOSURE                    4: self
+                        214     BUILD_TUPLE                     1
+                        216     LOAD_CONST                      22: <CODE> <lambda>
+                        218     LOAD_CONST                      23: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.<lambda>'
+                        220     MAKE_FUNCTION                   8
+                        222     BUILD_TUPLE                     0
+                        224     BUILD_MAP                       0
+                        226     LOAD_CONST                      24: <CODE> <dictcomp>
+                        228     LOAD_CONST                      21: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION.<locals>.<dictcomp>'
+                        230     MAKE_FUNCTION                   0
+                        232     LOAD_FAST                       5: raw_pid
+                        234     LOAD_METHOD                     12: items
+                        236     CALL_METHOD                     0
+                        238     GET_ITER                        
+                        240     CALL_FUNCTION                   1
+                        242     DICT_MERGE                      1
+                        244     CALL_FUNCTION_EX                1
+                        246     POP_TOP                         
+                        248     LOAD_DEREF                      0: configfile
+                        250     LOAD_METHOD                     5: set
+                        252     LOAD_CONST                      16: 'heater_bed'
+                        254     LOAD_CONST                      25: 'control'
+                        256     LOAD_CONST                      26: 'pid'
+                        258     CALL_METHOD                     3
+                        260     POP_TOP                         
+                        262     LOAD_DEREF                      0: configfile
+                        264     LOAD_METHOD                     5: set
+                        266     LOAD_CONST                      16: 'heater_bed'
+                        268     LOAD_CONST                      27: 'pid_kp'
+                        270     LOAD_FAST                       5: raw_pid
+                        272     LOAD_CONST                      28: 'Kp'
+                        274     BINARY_SUBSCR                   
+                        276     LOAD_CONST                      18: '.6f'
+                        278     FORMAT_VALUE                    4 (FVC_NONE | FVS_HAVE_SPEC)
+                        280     CALL_METHOD                     3
+                        282     POP_TOP                         
+                        284     LOAD_DEREF                      0: configfile
+                        286     LOAD_METHOD                     5: set
+                        288     LOAD_CONST                      16: 'heater_bed'
+                        290     LOAD_CONST                      29: 'pid_ki'
+                        292     LOAD_FAST                       5: raw_pid
+                        294     LOAD_CONST                      30: 'Ki'
+                        296     BINARY_SUBSCR                   
+                        298     LOAD_CONST                      18: '.6f'
+                        300     FORMAT_VALUE                    4 (FVC_NONE | FVS_HAVE_SPEC)
+                        302     CALL_METHOD                     3
+                        304     POP_TOP                         
+                        306     LOAD_DEREF                      0: configfile
+                        308     LOAD_METHOD                     5: set
+                        310     LOAD_CONST                      16: 'heater_bed'
+                        312     LOAD_CONST                      31: 'pid_kd'
+                        314     LOAD_FAST                       5: raw_pid
+                        316     LOAD_CONST                      32: 'Kd'
+                        318     BINARY_SUBSCR                   
+                        320     LOAD_CONST                      18: '.6f'
+                        322     FORMAT_VALUE                    4 (FVC_NONE | FVS_HAVE_SPEC)
+                        324     CALL_METHOD                     3
+                        326     POP_TOP                         
+                        328     LOAD_DEREF                      1: gcode_obj
+                        330     LOAD_METHOD                     13: run_script_from_command
+                        332     LOAD_CONST                      33: 'CXSAVE_CONFIG'
+                        334     CALL_METHOD                     1
+                        336     POP_TOP                         
+                        338     LOAD_CONST                      34: None
+                        340     RETURN_VALUE                    
+                        342     LOAD_FAST                       3: power_220v_calibration
+                        344     CALL_FUNCTION                   0
+                        346     POP_TOP                         
+                        348     LOAD_DEREF                      5: set_temperature
+                        350     LOAD_FAST                       4: finish_temp
+                        352     LOAD_DEREF                      4: self
+                        354     LOAD_ATTR                       6: heater
+                        356     LOAD_ATTR                       7: max_power
+                        358     LOAD_CONST                      2: True
+                        360     CALL_FUNCTION                   3
+                        362     POP_TOP                         
+                        364     LOAD_CONST                      34: None
+                        366     RETURN_VALUE                    
+                'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION'
+                None
+                (
+                    False
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterHeaterBed'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterHeaterBed.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      13: (False,)
+                18      LOAD_CONST                      4: <CODE> cmd_M140
+                20      LOAD_CONST                      5: 'PrinterHeaterBed.cmd_M140'
+                22      MAKE_FUNCTION                   1
+                24      STORE_NAME                      4: cmd_M140
+                26      LOAD_CONST                      6: <CODE> cmd_M190
+                28      LOAD_CONST                      7: 'PrinterHeaterBed.cmd_M190'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: cmd_M190
+                34      LOAD_CONST                      8: <CODE> cmd_BED_HEADER_SET_HEARER_POWER_MAX
+                36      LOAD_CONST                      9: 'PrinterHeaterBed.cmd_BED_HEADER_SET_HEARER_POWER_MAX'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: cmd_BED_HEADER_SET_HEARER_POWER_MAX
+                42      LOAD_CONST                      10: <CODE> cmd_BED_HEADER_POWER_CALIBRATION
+                44      LOAD_CONST                      11: 'PrinterHeaterBed.cmd_BED_HEADER_POWER_CALIBRATION'
+                46      MAKE_FUNCTION                   0
+                48      STORE_NAME                      7: cmd_BED_HEADER_POWER_CALIBRATION
+                50      LOAD_CONST                      12: None
+                52      RETURN_VALUE                    
+        'PrinterHeaterBed'
+        [Code]
+            File Name: /extras/heater_bed.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterHeaterBed'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterHeaterBed
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+        None
+    [Disassembly]
+        0       LOAD_BUILD_CLASS                
+        2       LOAD_CONST                      0: <CODE> PrinterHeaterBed
+        4       LOAD_CONST                      1: 'PrinterHeaterBed'
+        6       MAKE_FUNCTION                   0
+        8       LOAD_CONST                      1: 'PrinterHeaterBed'
+        10      CALL_FUNCTION                   2
+        12      STORE_NAME                      0: PrinterHeaterBed
+        14      LOAD_CONST                      2: <CODE> load_config
+        16      LOAD_CONST                      3: 'load_config'
+        18      MAKE_FUNCTION                   0
+        20      STORE_NAME                      1: load_config
+        22      LOAD_CONST                      4: None
+        24      RETURN_VALUE                    

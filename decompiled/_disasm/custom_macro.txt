@@ -1,0 +1,1176 @@
+custom_macro.pyc (Python 3.9)
+[Code]
+    File Name: /extras/custom_macro.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'time'
+        'CUSTOM_MACRO'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        [Code]
+            File Name: /extras/custom_macro.py
+            Object Name: CUSTOM_MACRO
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_status'
+                'cmd_CX_PRINT_LEVELING_CALIBRATION_help'
+                'cmd_CX_PRINT_LEVELING_CALIBRATION'
+                'cmd_CX_CLEAN_CALIBRATION_FLAGS_help'
+                'cmd_CX_CLEAN_CALIBRATION_FLAGS'
+                'cmd_CX_PRINT_DRAW_ONE_LINE_help'
+                'cmd_CX_PRINT_DRAW_ONE_LINE'
+                'cmd_CX_ROUGH_G28_help'
+                'cmd_CX_ROUGH_G28'
+                'cmd_CX_NOZZLE_CLEAR_help'
+                'cmd_CX_NOZZLE_CLEAR'
+                'cmd_SET_QMODE_FLAG_help'
+                'cmd_SET_QMODE_FLAG'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'CUSTOM_MACRO'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'lookup_object'
+                        'gcode'
+                        'pheaters'
+                        'heater_hot'
+                        'extruder_temp'
+                        'bed_temp'
+                        'prtouch'
+                        'register_command'
+                        'cmd_CX_PRINT_LEVELING_CALIBRATION'
+                        'cmd_CX_PRINT_LEVELING_CALIBRATION_help'
+                        'cmd_CX_CLEAN_CALIBRATION_FLAGS'
+                        'cmd_CX_CLEAN_CALIBRATION_FLAGS_help'
+                        'cmd_CX_PRINT_DRAW_ONE_LINE'
+                        'cmd_CX_PRINT_DRAW_ONE_LINE_help'
+                        'cmd_CX_ROUGH_G28'
+                        'cmd_CX_ROUGH_G28_help'
+                        'cmd_CX_NOZZLE_CLEAR'
+                        'cmd_CX_NOZZLE_CLEAR_help'
+                        'getfloat'
+                        'default_extruder_temp'
+                        'default_bed_temp'
+                        'g28_ext_temp'
+                        'getboolean'
+                        'nozzle_clear'
+                        'getint'
+                        'calibration'
+                        'leveling_calibration'
+                        'qmode_flag'
+                        'cmd_SET_QMODE_FLAG'
+                        'cmd_SET_QMODE_FLAG_help'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'gcode'
+                        'CX_PRINT_LEVELING_CALIBRATION'
+                        (
+                            'desc'
+                        )
+                        'CX_CLEAN_CALIBRATION_FLAGS'
+                        'CX_PRINT_DRAW_ONE_LINE'
+                        'CX_ROUGH_G28'
+                        'CX_NOZZLE_CLEAR'
+                        'default_extruder_temp'
+                        240
+                        (
+                            'default'
+                        )
+                        'default_bed_temp'
+                        50
+                        'g28_ext_temp'
+                        140
+                        'nozzle_clear'
+                        True
+                        'calibration'
+                        0
+                        'SET_QMODE_FLAG'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: printer
+                        14      LOAD_METHOD                     2: lookup_object
+                        16      LOAD_CONST                      1: 'gcode'
+                        18      CALL_METHOD                     1
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: gcode
+                        24      LOAD_CONST                      0: None
+                        26      LOAD_FAST                       0: self
+                        28      STORE_ATTR                      4: pheaters
+                        30      LOAD_CONST                      0: None
+                        32      LOAD_FAST                       0: self
+                        34      STORE_ATTR                      5: heater_hot
+                        36      LOAD_CONST                      0: None
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      6: extruder_temp
+                        42      LOAD_CONST                      0: None
+                        44      LOAD_FAST                       0: self
+                        46      STORE_ATTR                      7: bed_temp
+                        48      LOAD_CONST                      0: None
+                        50      LOAD_FAST                       0: self
+                        52      STORE_ATTR                      8: prtouch
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       3: gcode
+                        58      LOAD_ATTR                       9: register_command
+                        60      LOAD_CONST                      2: 'CX_PRINT_LEVELING_CALIBRATION'
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       10: cmd_CX_PRINT_LEVELING_CALIBRATION
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       11: cmd_CX_PRINT_LEVELING_CALIBRATION_help
+                        70      LOAD_CONST                      3: ('desc',)
+                        72      CALL_FUNCTION_KW                3
+                        74      POP_TOP                         
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       3: gcode
+                        80      LOAD_ATTR                       9: register_command
+                        82      LOAD_CONST                      4: 'CX_CLEAN_CALIBRATION_FLAGS'
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       12: cmd_CX_CLEAN_CALIBRATION_FLAGS
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       13: cmd_CX_CLEAN_CALIBRATION_FLAGS_help
+                        92      LOAD_CONST                      3: ('desc',)
+                        94      CALL_FUNCTION_KW                3
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       3: gcode
+                        102     LOAD_ATTR                       9: register_command
+                        104     LOAD_CONST                      5: 'CX_PRINT_DRAW_ONE_LINE'
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       14: cmd_CX_PRINT_DRAW_ONE_LINE
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       15: cmd_CX_PRINT_DRAW_ONE_LINE_help
+                        114     LOAD_CONST                      3: ('desc',)
+                        116     CALL_FUNCTION_KW                3
+                        118     POP_TOP                         
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       3: gcode
+                        124     LOAD_ATTR                       9: register_command
+                        126     LOAD_CONST                      6: 'CX_ROUGH_G28'
+                        128     LOAD_FAST                       0: self
+                        130     LOAD_ATTR                       16: cmd_CX_ROUGH_G28
+                        132     LOAD_FAST                       0: self
+                        134     LOAD_ATTR                       17: cmd_CX_ROUGH_G28_help
+                        136     LOAD_CONST                      3: ('desc',)
+                        138     CALL_FUNCTION_KW                3
+                        140     POP_TOP                         
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       3: gcode
+                        146     LOAD_ATTR                       9: register_command
+                        148     LOAD_CONST                      7: 'CX_NOZZLE_CLEAR'
+                        150     LOAD_FAST                       0: self
+                        152     LOAD_ATTR                       18: cmd_CX_NOZZLE_CLEAR
+                        154     LOAD_FAST                       0: self
+                        156     LOAD_ATTR                       19: cmd_CX_NOZZLE_CLEAR_help
+                        158     LOAD_CONST                      3: ('desc',)
+                        160     CALL_FUNCTION_KW                3
+                        162     POP_TOP                         
+                        164     LOAD_FAST                       1: config
+                        166     LOAD_ATTR                       20: getfloat
+                        168     LOAD_CONST                      8: 'default_extruder_temp'
+                        170     LOAD_CONST                      9: 240
+                        172     LOAD_CONST                      10: ('default',)
+                        174     CALL_FUNCTION_KW                2
+                        176     LOAD_FAST                       0: self
+                        178     STORE_ATTR                      21: default_extruder_temp
+                        180     LOAD_FAST                       1: config
+                        182     LOAD_ATTR                       20: getfloat
+                        184     LOAD_CONST                      11: 'default_bed_temp'
+                        186     LOAD_CONST                      12: 50
+                        188     LOAD_CONST                      10: ('default',)
+                        190     CALL_FUNCTION_KW                2
+                        192     LOAD_FAST                       0: self
+                        194     STORE_ATTR                      22: default_bed_temp
+                        196     LOAD_FAST                       1: config
+                        198     LOAD_ATTR                       20: getfloat
+                        200     LOAD_CONST                      13: 'g28_ext_temp'
+                        202     LOAD_CONST                      14: 140
+                        204     LOAD_CONST                      10: ('default',)
+                        206     CALL_FUNCTION_KW                2
+                        208     LOAD_FAST                       0: self
+                        210     STORE_ATTR                      23: g28_ext_temp
+                        212     LOAD_FAST                       1: config
+                        214     LOAD_METHOD                     24: getboolean
+                        216     LOAD_CONST                      15: 'nozzle_clear'
+                        218     LOAD_CONST                      16: True
+                        220     CALL_METHOD                     2
+                        222     LOAD_FAST                       0: self
+                        224     STORE_ATTR                      25: nozzle_clear
+                        226     LOAD_FAST                       1: config
+                        228     LOAD_ATTR                       26: getint
+                        230     LOAD_CONST                      17: 'calibration'
+                        232     LOAD_CONST                      18: 0
+                        234     LOAD_CONST                      10: ('default',)
+                        236     CALL_FUNCTION_KW                2
+                        238     LOAD_FAST                       0: self
+                        240     STORE_ATTR                      27: calibration
+                        242     LOAD_CONST                      18: 0
+                        244     LOAD_FAST                       0: self
+                        246     STORE_ATTR                      28: leveling_calibration
+                        248     LOAD_CONST                      18: 0
+                        250     LOAD_FAST                       0: self
+                        252     STORE_ATTR                      29: qmode_flag
+                        254     LOAD_FAST                       0: self
+                        256     LOAD_ATTR                       3: gcode
+                        258     LOAD_ATTR                       9: register_command
+                        260     LOAD_CONST                      19: 'SET_QMODE_FLAG'
+                        262     LOAD_FAST                       0: self
+                        264     LOAD_ATTR                       30: cmd_SET_QMODE_FLAG
+                        266     LOAD_FAST                       0: self
+                        268     LOAD_ATTR                       31: cmd_SET_QMODE_FLAG_help
+                        270     LOAD_CONST                      3: ('desc',)
+                        272     CALL_FUNCTION_KW                3
+                        274     POP_TOP                         
+                        276     LOAD_CONST                      0: None
+                        278     RETURN_VALUE                    
+                'CUSTOM_MACRO.__init__'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'leveling_calibration'
+                        'default_extruder_temp'
+                        'default_bed_temp'
+                        'g28_ext_temp'
+                        'qmode_flag'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'leveling_calibration'
+                            'default_extruder_temp'
+                            'default_bed_temp'
+                            'g28_ext_temp'
+                            'qmode_flag'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: leveling_calibration
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: default_extruder_temp
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: default_bed_temp
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       3: g28_ext_temp
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       4: qmode_flag
+                        20      LOAD_CONST                      1: ('leveling_calibration', 'default_extruder_temp', 'default_bed_temp', 'g28_ext_temp', 'qmode_flag')
+                        22      BUILD_CONST_KEY_MAP             5
+                        24      RETURN_VALUE                    
+                'CUSTOM_MACRO.get_status'
+                'Start Print function,three parameter:EXTRUDER_TEMP(180-300),BED_TEMP(0-100),CALIBRATION(0 or 1)'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: cmd_CX_PRINT_LEVELING_CALIBRATION
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'CHECK_BED_MESH AUTO_G29=1'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script_from_command
+                        6       LOAD_CONST                      1: 'CHECK_BED_MESH AUTO_G29=1'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'CUSTOM_MACRO.cmd_CX_PRINT_LEVELING_CALIBRATION'
+                'Clean calibration flags'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: cmd_CX_CLEAN_CALIBRATION_FLAGS
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'leveling_calibration'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: leveling_calibration
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'CUSTOM_MACRO.cmd_CX_CLEAN_CALIBRATION_FLAGS'
+                'Draw one line before printing'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: cmd_CX_PRINT_DRAW_ONE_LINE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script_from_command'
+                        'printer'
+                        'lookup_object'
+                        'pheaters'
+                        'heater'
+                        'heater_hot'
+                        'respond_info'
+                        'can_break_flag'
+                        'extruder_temp'
+                        'bed_temp'
+                        'set_temperature'
+                        'time'
+                        'sleep'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'G28 X Y'
+                        'M83'
+                        'G1 X10 Y10 Z2 F6000'
+                        'G1 Z0.1 F600'
+                        'heaters'
+                        'extruder'
+                        'can_break_flag = %d'
+                        'M104 S%d'
+                        'M140 S%d'
+                        True
+                        1
+                        3
+                        0
+                        'can_break_flag is 3'
+                        'G21'
+                        'G1 F2400 E-0.5'
+                        'SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=5'
+                        'M204 S12000'
+                        'SET_VELOCITY_LIMIT ACCEL_TO_DECEL=6000'
+                        'M220 S100'
+                        'G1 Z2.0 F1200'
+                        'G1 X0.1 Y20 Z0.3 F6000.0'
+                        'G1 X0.1 Y180.0 Z0.3 F3000.0 E10.0'
+                        'G1 X0.4 Y180.0 Z0.3 F3000.0'
+                        'G1 X0.4 Y20.0 Z0.3 F3000.0 E10.0'
+                        'G1 Y10.0 F3000.0'
+                        'G1 Z2.0 F600.0'
+                        'G1 Z0.3 F600.0'
+                        'M82'
+                        'G92 E0'
+                        'G1 F12000'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script_from_command
+                        6       LOAD_CONST                      1: 'G28 X Y'
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       0: gcode
+                        16      LOAD_METHOD                     1: run_script_from_command
+                        18      LOAD_CONST                      2: 'M83'
+                        20      CALL_METHOD                     1
+                        22      POP_TOP                         
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       0: gcode
+                        28      LOAD_METHOD                     1: run_script_from_command
+                        30      LOAD_CONST                      3: 'G1 X10 Y10 Z2 F6000'
+                        32      CALL_METHOD                     1
+                        34      POP_TOP                         
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       0: gcode
+                        40      LOAD_METHOD                     1: run_script_from_command
+                        42      LOAD_CONST                      4: 'G1 Z0.1 F600'
+                        44      CALL_METHOD                     1
+                        46      POP_TOP                         
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       2: printer
+                        52      LOAD_METHOD                     3: lookup_object
+                        54      LOAD_CONST                      5: 'heaters'
+                        56      CALL_METHOD                     1
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      4: pheaters
+                        62      LOAD_FAST                       0: self
+                        64      LOAD_ATTR                       2: printer
+                        66      LOAD_METHOD                     3: lookup_object
+                        68      LOAD_CONST                      6: 'extruder'
+                        70      CALL_METHOD                     1
+                        72      LOAD_ATTR                       5: heater
+                        74      LOAD_FAST                       0: self
+                        76      STORE_ATTR                      6: heater_hot
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       0: gcode
+                        82      LOAD_METHOD                     7: respond_info
+                        84      LOAD_CONST                      7: 'can_break_flag = %d'
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       4: pheaters
+                        90      LOAD_ATTR                       8: can_break_flag
+                        92      BINARY_MODULO                   
+                        94      CALL_METHOD                     1
+                        96      POP_TOP                         
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       0: gcode
+                        102     LOAD_METHOD                     1: run_script_from_command
+                        104     LOAD_CONST                      8: 'M104 S%d'
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       9: extruder_temp
+                        110     BINARY_MODULO                   
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       0: gcode
+                        120     LOAD_METHOD                     1: run_script_from_command
+                        122     LOAD_CONST                      9: 'M140 S%d'
+                        124     LOAD_FAST                       0: self
+                        126     LOAD_ATTR                       10: bed_temp
+                        128     BINARY_MODULO                   
+                        130     CALL_METHOD                     1
+                        132     POP_TOP                         
+                        134     LOAD_FAST                       0: self
+                        136     LOAD_ATTR                       4: pheaters
+                        138     LOAD_METHOD                     11: set_temperature
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       6: heater_hot
+                        144     LOAD_FAST                       0: self
+                        146     LOAD_ATTR                       9: extruder_temp
+                        148     LOAD_CONST                      10: True
+                        150     CALL_METHOD                     3
+                        152     POP_TOP                         
+                        154     LOAD_FAST                       0: self
+                        156     LOAD_ATTR                       0: gcode
+                        158     LOAD_METHOD                     7: respond_info
+                        160     LOAD_CONST                      7: 'can_break_flag = %d'
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       4: pheaters
+                        166     LOAD_ATTR                       8: can_break_flag
+                        168     BINARY_MODULO                   
+                        170     CALL_METHOD                     1
+                        172     POP_TOP                         
+                        174     LOAD_FAST                       0: self
+                        176     LOAD_ATTR                       4: pheaters
+                        178     LOAD_ATTR                       8: can_break_flag
+                        180     LOAD_CONST                      11: 1
+                        182     COMPARE_OP                      2 (==)
+                        184     POP_JUMP_IF_FALSE               198
+                        186     LOAD_GLOBAL                     12: time
+                        188     LOAD_METHOD                     13: sleep
+                        190     LOAD_CONST                      11: 1
+                        192     CALL_METHOD                     1
+                        194     POP_TOP                         
+                        196     JUMP_ABSOLUTE                   174
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       0: gcode
+                        202     LOAD_METHOD                     7: respond_info
+                        204     LOAD_CONST                      7: 'can_break_flag = %d'
+                        206     LOAD_FAST                       0: self
+                        208     LOAD_ATTR                       4: pheaters
+                        210     LOAD_ATTR                       8: can_break_flag
+                        212     BINARY_MODULO                   
+                        214     CALL_METHOD                     1
+                        216     POP_TOP                         
+                        218     LOAD_FAST                       0: self
+                        220     LOAD_ATTR                       4: pheaters
+                        222     LOAD_ATTR                       8: can_break_flag
+                        224     LOAD_CONST                      12: 3
+                        226     COMPARE_OP                      2 (==)
+                        228     POP_JUMP_IF_FALSE               492
+                        232     LOAD_CONST                      13: 0
+                        234     LOAD_FAST                       0: self
+                        236     LOAD_ATTR                       4: pheaters
+                        238     STORE_ATTR                      8: can_break_flag
+                        240     LOAD_FAST                       0: self
+                        242     LOAD_ATTR                       0: gcode
+                        244     LOAD_METHOD                     7: respond_info
+                        246     LOAD_CONST                      14: 'can_break_flag is 3'
+                        248     CALL_METHOD                     1
+                        250     POP_TOP                         
+                        252     LOAD_FAST                       0: self
+                        254     LOAD_ATTR                       0: gcode
+                        256     LOAD_METHOD                     1: run_script_from_command
+                        258     LOAD_CONST                      15: 'G21'
+                        260     CALL_METHOD                     1
+                        262     POP_TOP                         
+                        264     LOAD_FAST                       0: self
+                        266     LOAD_ATTR                       0: gcode
+                        268     LOAD_METHOD                     1: run_script_from_command
+                        270     LOAD_CONST                      16: 'G1 F2400 E-0.5'
+                        272     CALL_METHOD                     1
+                        274     POP_TOP                         
+                        276     LOAD_FAST                       0: self
+                        278     LOAD_ATTR                       0: gcode
+                        280     LOAD_METHOD                     1: run_script_from_command
+                        282     LOAD_CONST                      17: 'SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=5'
+                        284     CALL_METHOD                     1
+                        286     POP_TOP                         
+                        288     LOAD_FAST                       0: self
+                        290     LOAD_ATTR                       0: gcode
+                        292     LOAD_METHOD                     1: run_script_from_command
+                        294     LOAD_CONST                      18: 'M204 S12000'
+                        296     CALL_METHOD                     1
+                        298     POP_TOP                         
+                        300     LOAD_FAST                       0: self
+                        302     LOAD_ATTR                       0: gcode
+                        304     LOAD_METHOD                     1: run_script_from_command
+                        306     LOAD_CONST                      15: 'G21'
+                        308     CALL_METHOD                     1
+                        310     POP_TOP                         
+                        312     LOAD_FAST                       0: self
+                        314     LOAD_ATTR                       0: gcode
+                        316     LOAD_METHOD                     1: run_script_from_command
+                        318     LOAD_CONST                      19: 'SET_VELOCITY_LIMIT ACCEL_TO_DECEL=6000'
+                        320     CALL_METHOD                     1
+                        322     POP_TOP                         
+                        324     LOAD_FAST                       0: self
+                        326     LOAD_ATTR                       0: gcode
+                        328     LOAD_METHOD                     1: run_script_from_command
+                        330     LOAD_CONST                      20: 'M220 S100'
+                        332     CALL_METHOD                     1
+                        334     POP_TOP                         
+                        336     LOAD_FAST                       0: self
+                        338     LOAD_ATTR                       0: gcode
+                        340     LOAD_METHOD                     1: run_script_from_command
+                        342     LOAD_CONST                      21: 'G1 Z2.0 F1200'
+                        344     CALL_METHOD                     1
+                        346     POP_TOP                         
+                        348     LOAD_FAST                       0: self
+                        350     LOAD_ATTR                       0: gcode
+                        352     LOAD_METHOD                     1: run_script_from_command
+                        354     LOAD_CONST                      22: 'G1 X0.1 Y20 Z0.3 F6000.0'
+                        356     CALL_METHOD                     1
+                        358     POP_TOP                         
+                        360     LOAD_FAST                       0: self
+                        362     LOAD_ATTR                       0: gcode
+                        364     LOAD_METHOD                     1: run_script_from_command
+                        366     LOAD_CONST                      23: 'G1 X0.1 Y180.0 Z0.3 F3000.0 E10.0'
+                        368     CALL_METHOD                     1
+                        370     POP_TOP                         
+                        372     LOAD_FAST                       0: self
+                        374     LOAD_ATTR                       0: gcode
+                        376     LOAD_METHOD                     1: run_script_from_command
+                        378     LOAD_CONST                      24: 'G1 X0.4 Y180.0 Z0.3 F3000.0'
+                        380     CALL_METHOD                     1
+                        382     POP_TOP                         
+                        384     LOAD_FAST                       0: self
+                        386     LOAD_ATTR                       0: gcode
+                        388     LOAD_METHOD                     1: run_script_from_command
+                        390     LOAD_CONST                      25: 'G1 X0.4 Y20.0 Z0.3 F3000.0 E10.0'
+                        392     CALL_METHOD                     1
+                        394     POP_TOP                         
+                        396     LOAD_FAST                       0: self
+                        398     LOAD_ATTR                       0: gcode
+                        400     LOAD_METHOD                     1: run_script_from_command
+                        402     LOAD_CONST                      26: 'G1 Y10.0 F3000.0'
+                        404     CALL_METHOD                     1
+                        406     POP_TOP                         
+                        408     LOAD_FAST                       0: self
+                        410     LOAD_ATTR                       0: gcode
+                        412     LOAD_METHOD                     1: run_script_from_command
+                        414     LOAD_CONST                      27: 'G1 Z2.0 F600.0'
+                        416     CALL_METHOD                     1
+                        418     POP_TOP                         
+                        420     LOAD_FAST                       0: self
+                        422     LOAD_ATTR                       0: gcode
+                        424     LOAD_METHOD                     1: run_script_from_command
+                        426     LOAD_CONST                      28: 'G1 Z0.3 F600.0'
+                        428     CALL_METHOD                     1
+                        430     POP_TOP                         
+                        432     LOAD_FAST                       0: self
+                        434     LOAD_ATTR                       0: gcode
+                        436     LOAD_METHOD                     1: run_script_from_command
+                        438     LOAD_CONST                      27: 'G1 Z2.0 F600.0'
+                        440     CALL_METHOD                     1
+                        442     POP_TOP                         
+                        444     LOAD_FAST                       0: self
+                        446     LOAD_ATTR                       0: gcode
+                        448     LOAD_METHOD                     1: run_script_from_command
+                        450     LOAD_CONST                      29: 'M82'
+                        452     CALL_METHOD                     1
+                        454     POP_TOP                         
+                        456     LOAD_FAST                       0: self
+                        458     LOAD_ATTR                       0: gcode
+                        460     LOAD_METHOD                     1: run_script_from_command
+                        462     LOAD_CONST                      30: 'G92 E0'
+                        464     CALL_METHOD                     1
+                        466     POP_TOP                         
+                        468     LOAD_FAST                       0: self
+                        470     LOAD_ATTR                       0: gcode
+                        472     LOAD_METHOD                     1: run_script_from_command
+                        474     LOAD_CONST                      31: 'G1 F12000'
+                        476     CALL_METHOD                     1
+                        478     POP_TOP                         
+                        480     LOAD_FAST                       0: self
+                        482     LOAD_ATTR                       0: gcode
+                        484     LOAD_METHOD                     1: run_script_from_command
+                        486     LOAD_CONST                      15: 'G21'
+                        488     CALL_METHOD                     1
+                        490     POP_TOP                         
+                        492     LOAD_CONST                      0: None
+                        494     RETURN_VALUE                    
+                'CUSTOM_MACRO.cmd_CX_PRINT_DRAW_ONE_LINE'
+                'rough G28'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: cmd_CX_ROUGH_G28
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_float'
+                        'default_extruder_temp'
+                        'extruder_temp'
+                        'g28_ext_temp'
+                        'printer'
+                        'lookup_object'
+                        'prtouch'
+                        'respond_info'
+                        'change_hot_min_temp'
+                        'default_bed_temp'
+                        'bed_temp'
+                        'get_int'
+                        'leveling_calibration'
+                        'gcode'
+                        'run_script_from_command'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'EXTRUDER_TEMP'
+                        180
+                        320
+                        (
+                            'default'
+                            'minval'
+                            'maxval'
+                        )
+                        70
+                        'prtouch_v2'
+                        'prtouch'
+                        'self.prtouch = prtouch'
+                        'BED_TEMP'
+                        0
+                        130
+                        'LEVELING_CALIBRATION'
+                        1
+                        0
+                        'M104 S%d'
+                        'M140 S%d'
+                        'M204 S500'
+                        'G28'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_float
+                        4       LOAD_CONST                      1: 'EXTRUDER_TEMP'
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: default_extruder_temp
+                        10      LOAD_CONST                      2: 180
+                        12      LOAD_CONST                      3: 320
+                        14      LOAD_CONST                      4: ('default', 'minval', 'maxval')
+                        16      CALL_FUNCTION_KW                4
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      2: extruder_temp
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: extruder_temp
+                        26      LOAD_CONST                      5: 70
+                        28      BINARY_SUBTRACT                 
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      3: g28_ext_temp
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       3: g28_ext_temp
+                        38      LOAD_CONST                      2: 180
+                        40      COMPARE_OP                      4 (>)
+                        42      POP_JUMP_IF_FALSE               50
+                        44      LOAD_CONST                      2: 180
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      3: g28_ext_temp
+                        50      SETUP_FINALLY                   18 (to 70)
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       4: printer
+                        56      LOAD_METHOD                     5: lookup_object
+                        58      LOAD_CONST                      6: 'prtouch_v2'
+                        60      CALL_METHOD                     1
+                        62      LOAD_FAST                       0: self
+                        64      STORE_ATTR                      6: prtouch
+                        66      POP_BLOCK                       
+                        68      JUMP_FORWARD                    36 (to 106)
+                        70      POP_TOP                         
+                        72      POP_TOP                         
+                        74      POP_TOP                         
+                        76      LOAD_FAST                       0: self
+                        78      LOAD_ATTR                       4: printer
+                        80      LOAD_METHOD                     5: lookup_object
+                        82      LOAD_CONST                      7: 'prtouch'
+                        84      CALL_METHOD                     1
+                        86      LOAD_FAST                       0: self
+                        88      STORE_ATTR                      6: prtouch
+                        90      LOAD_FAST                       1: gcmd
+                        92      LOAD_METHOD                     7: respond_info
+                        94      LOAD_CONST                      8: 'self.prtouch = prtouch'
+                        96      CALL_METHOD                     1
+                        98      POP_TOP                         
+                        100     POP_EXCEPT                      
+                        102     JUMP_FORWARD                    2 (to 106)
+                        104     RERAISE                         
+                        106     LOAD_FAST                       0: self
+                        108     LOAD_ATTR                       6: prtouch
+                        110     LOAD_METHOD                     8: change_hot_min_temp
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       3: g28_ext_temp
+                        116     CALL_METHOD                     1
+                        118     POP_TOP                         
+                        120     LOAD_FAST                       1: gcmd
+                        122     LOAD_ATTR                       0: get_float
+                        124     LOAD_CONST                      9: 'BED_TEMP'
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       9: default_bed_temp
+                        130     LOAD_CONST                      10: 0
+                        132     LOAD_CONST                      11: 130
+                        134     LOAD_CONST                      4: ('default', 'minval', 'maxval')
+                        136     CALL_FUNCTION_KW                4
+                        138     LOAD_FAST                       0: self
+                        140     STORE_ATTR                      10: bed_temp
+                        142     LOAD_FAST                       1: gcmd
+                        144     LOAD_ATTR                       11: get_int
+                        146     LOAD_CONST                      12: 'LEVELING_CALIBRATION'
+                        148     LOAD_CONST                      13: 1
+                        150     LOAD_CONST                      14: 0
+                        152     LOAD_CONST                      13: 1
+                        154     LOAD_CONST                      4: ('default', 'minval', 'maxval')
+                        156     CALL_FUNCTION_KW                4
+                        158     LOAD_FAST                       0: self
+                        160     STORE_ATTR                      12: leveling_calibration
+                        162     LOAD_FAST                       0: self
+                        164     LOAD_ATTR                       13: gcode
+                        166     LOAD_METHOD                     14: run_script_from_command
+                        168     LOAD_CONST                      15: 'M104 S%d'
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       3: g28_ext_temp
+                        174     BINARY_MODULO                   
+                        176     CALL_METHOD                     1
+                        178     POP_TOP                         
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       13: gcode
+                        184     LOAD_METHOD                     14: run_script_from_command
+                        186     LOAD_CONST                      16: 'M140 S%d'
+                        188     LOAD_FAST                       0: self
+                        190     LOAD_ATTR                       10: bed_temp
+                        192     BINARY_MODULO                   
+                        194     CALL_METHOD                     1
+                        196     POP_TOP                         
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       13: gcode
+                        202     LOAD_METHOD                     14: run_script_from_command
+                        204     LOAD_CONST                      17: 'M204 S500'
+                        206     CALL_METHOD                     1
+                        208     POP_TOP                         
+                        210     LOAD_FAST                       0: self
+                        212     LOAD_ATTR                       13: gcode
+                        214     LOAD_METHOD                     14: run_script_from_command
+                        216     LOAD_CONST                      18: 'G28'
+                        218     CALL_METHOD                     1
+                        220     POP_TOP                         
+                        222     LOAD_CONST                      0: None
+                        224     RETURN_VALUE                    
+                'CUSTOM_MACRO.cmd_CX_ROUGH_G28'
+                'nozzle clear with temperature'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: cmd_CX_NOZZLE_CLEAR
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode'
+                        'run_script_from_command'
+                        'g28_ext_temp'
+                        'extruder_temp'
+                        'bed_temp'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'NOZZLE_CLEAR HOT_MIN_TEMP=%d HOT_MAX_TEMP=%d BED_MAX_TEMP=%d'
+                        20
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode
+                        4       LOAD_METHOD                     1: run_script_from_command
+                        6       LOAD_CONST                      1: 'NOZZLE_CLEAR HOT_MIN_TEMP=%d HOT_MAX_TEMP=%d BED_MAX_TEMP=%d'
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       2: g28_ext_temp
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       3: extruder_temp
+                        16      LOAD_CONST                      2: 20
+                        18      BINARY_SUBTRACT                 
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       4: bed_temp
+                        24      BUILD_TUPLE                     3
+                        26      BINARY_MODULO                   
+                        28      CALL_METHOD                     1
+                        30      POP_TOP                         
+                        32      LOAD_CONST                      0: None
+                        34      RETURN_VALUE                    
+                'CUSTOM_MACRO.cmd_CX_NOZZLE_CLEAR'
+                'set qmode flag'
+                [Code]
+                    File Name: /extras/custom_macro.py
+                    Object Name: cmd_SET_QMODE_FLAG
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 11
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_int'
+                        'qmode_flag'
+                        'respond_info'
+                        'format'
+                        'json'
+                        'logging'
+                        'printer'
+                        'lookup_object'
+                        'speed_mode_path'
+                        'state'
+                        'open'
+                        'write'
+                        'dumps'
+                        'flush'
+                        'Exception'
+                        'str'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'json'
+                        'logging'
+                        'print_stats'
+                        'v_sd'
+                        'speed_mode_path'
+                        'result'
+                        'f'
+                        'err'
+                        'err_msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'FLAG'
+                        1
+                        0
+                        (
+                            'default'
+                            'minval'
+                            'maxval'
+                        )
+                        '[cmd_SET_QMODE_FLAG] self.qmode_flag={}'
+                        'print_stats'
+                        'virtual_sdcard'
+                        'printing'
+                        2
+                        'speed_mode'
+                        'w'
+                        'cmd_SET_QMODE_FLAG err %s'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_ATTR                       0: get_int
+                        4       LOAD_CONST                      1: 'FLAG'
+                        6       LOAD_CONST                      2: 1
+                        8       LOAD_CONST                      3: 0
+                        10      LOAD_CONST                      2: 1
+                        12      LOAD_CONST                      4: ('default', 'minval', 'maxval')
+                        14      CALL_FUNCTION_KW                4
+                        16      LOAD_FAST                       0: self
+                        18      STORE_ATTR                      1: qmode_flag
+                        20      LOAD_FAST                       1: gcmd
+                        22      LOAD_METHOD                     2: respond_info
+                        24      LOAD_CONST                      5: '[cmd_SET_QMODE_FLAG] self.qmode_flag={}'
+                        26      LOAD_METHOD                     3: format
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       1: qmode_flag
+                        32      CALL_METHOD                     1
+                        34      CALL_METHOD                     1
+                        36      POP_TOP                         
+                        38      LOAD_CONST                      3: 0
+                        40      LOAD_CONST                      0: None
+                        42      IMPORT_NAME                     4: json
+                        44      STORE_FAST                      2: json
+                        46      LOAD_CONST                      3: 0
+                        48      LOAD_CONST                      0: None
+                        50      IMPORT_NAME                     5: logging
+                        52      STORE_FAST                      3: logging
+                        54      SETUP_FINALLY                   132 (to 188)
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       6: printer
+                        60      LOAD_METHOD                     7: lookup_object
+                        62      LOAD_CONST                      6: 'print_stats'
+                        64      CALL_METHOD                     1
+                        66      STORE_FAST                      4: print_stats
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       6: printer
+                        72      LOAD_METHOD                     7: lookup_object
+                        74      LOAD_CONST                      7: 'virtual_sdcard'
+                        76      CALL_METHOD                     1
+                        78      STORE_FAST                      5: v_sd
+                        80      LOAD_FAST                       5: v_sd
+                        82      LOAD_ATTR                       8: speed_mode_path
+                        84      STORE_FAST                      6: speed_mode_path
+                        86      LOAD_FAST                       4: print_stats
+                        88      LOAD_ATTR                       9: state
+                        90      LOAD_CONST                      8: 'printing'
+                        92      COMPARE_OP                      2 (==)
+                        94      POP_JUMP_IF_FALSE               184
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       1: qmode_flag
+                        100     LOAD_CONST                      2: 1
+                        102     COMPARE_OP                      2 (==)
+                        104     POP_JUMP_IF_FALSE               184
+                        106     BUILD_MAP                       0
+                        108     STORE_FAST                      7: result
+                        110     LOAD_CONST                      9: 2
+                        112     LOAD_FAST                       7: result
+                        114     LOAD_CONST                      10: 'speed_mode'
+                        116     STORE_SUBSCR                    
+                        118     LOAD_GLOBAL                     10: open
+                        120     LOAD_FAST                       6: speed_mode_path
+                        122     LOAD_CONST                      11: 'w'
+                        124     CALL_FUNCTION                   2
+                        126     SETUP_WITH                      40 (to 168)
+                        128     STORE_FAST                      8: f
+                        130     LOAD_FAST                       8: f
+                        132     LOAD_METHOD                     11: write
+                        134     LOAD_FAST                       2: json
+                        136     LOAD_METHOD                     12: dumps
+                        138     LOAD_FAST                       7: result
+                        140     CALL_METHOD                     1
+                        142     CALL_METHOD                     1
+                        144     POP_TOP                         
+                        146     LOAD_FAST                       8: f
+                        148     LOAD_METHOD                     13: flush
+                        150     CALL_METHOD                     0
+                        152     POP_TOP                         
+                        154     POP_BLOCK                       
+                        156     LOAD_CONST                      0: None
+                        158     DUP_TOP                         
+                        160     DUP_TOP                         
+                        162     CALL_FUNCTION                   3
+                        164     POP_TOP                         
+                        166     JUMP_FORWARD                    16 (to 184)
+                        168     WITH_EXCEPT_START               
+                        170     POP_JUMP_IF_TRUE                174
+                        172     RERAISE                         
+                        174     POP_TOP                         
+                        176     POP_TOP                         
+                        178     POP_TOP                         
+                        180     POP_EXCEPT                      
+                        182     POP_TOP                         
+                        184     POP_BLOCK                       
+                        186     JUMP_FORWARD                    58 (to 246)
+                        188     DUP_TOP                         
+                        190     LOAD_GLOBAL                     14: Exception
+                        192     JUMP_IF_NOT_EXC_MATCH           244
+                        194     POP_TOP                         
+                        196     STORE_FAST                      9: err
+                        198     POP_TOP                         
+                        200     SETUP_FINALLY                   34 (to 236)
+                        202     LOAD_CONST                      12: 'cmd_SET_QMODE_FLAG err %s'
+                        204     LOAD_GLOBAL                     15: str
+                        206     LOAD_FAST                       9: err
+                        208     CALL_FUNCTION                   1
+                        210     BINARY_MODULO                   
+                        212     STORE_FAST                      10: err_msg
+                        214     LOAD_FAST                       3: logging
+                        216     LOAD_METHOD                     16: error
+                        218     LOAD_FAST                       10: err_msg
+                        220     CALL_METHOD                     1
+                        222     POP_TOP                         
+                        224     POP_BLOCK                       
+                        226     POP_EXCEPT                      
+                        228     LOAD_CONST                      0: None
+                        230     STORE_FAST                      9: err
+                        232     DELETE_FAST                     9: err
+                        234     JUMP_FORWARD                    10 (to 246)
+                        236     LOAD_CONST                      0: None
+                        238     STORE_FAST                      9: err
+                        240     DELETE_FAST                     9: err
+                        242     RERAISE                         
+                        244     RERAISE                         
+                        246     LOAD_CONST                      0: None
+                        248     RETURN_VALUE                    
+                'CUSTOM_MACRO.cmd_SET_QMODE_FLAG'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'CUSTOM_MACRO'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'CUSTOM_MACRO.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_status
+                18      LOAD_CONST                      4: 'CUSTOM_MACRO.get_status'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_status
+                24      LOAD_CONST                      5: 'Start Print function,three parameter:EXTRUDER_TEMP(180-300),BED_TEMP(0-100),CALIBRATION(0 or 1)'
+                26      STORE_NAME                      5: cmd_CX_PRINT_LEVELING_CALIBRATION_help
+                28      LOAD_CONST                      6: <CODE> cmd_CX_PRINT_LEVELING_CALIBRATION
+                30      LOAD_CONST                      7: 'CUSTOM_MACRO.cmd_CX_PRINT_LEVELING_CALIBRATION'
+                32      MAKE_FUNCTION                   0
+                34      STORE_NAME                      6: cmd_CX_PRINT_LEVELING_CALIBRATION
+                36      LOAD_CONST                      8: 'Clean calibration flags'
+                38      STORE_NAME                      7: cmd_CX_CLEAN_CALIBRATION_FLAGS_help
+                40      LOAD_CONST                      9: <CODE> cmd_CX_CLEAN_CALIBRATION_FLAGS
+                42      LOAD_CONST                      10: 'CUSTOM_MACRO.cmd_CX_CLEAN_CALIBRATION_FLAGS'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      8: cmd_CX_CLEAN_CALIBRATION_FLAGS
+                48      LOAD_CONST                      11: 'Draw one line before printing'
+                50      STORE_NAME                      9: cmd_CX_PRINT_DRAW_ONE_LINE_help
+                52      LOAD_CONST                      12: <CODE> cmd_CX_PRINT_DRAW_ONE_LINE
+                54      LOAD_CONST                      13: 'CUSTOM_MACRO.cmd_CX_PRINT_DRAW_ONE_LINE'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      10: cmd_CX_PRINT_DRAW_ONE_LINE
+                60      LOAD_CONST                      14: 'rough G28'
+                62      STORE_NAME                      11: cmd_CX_ROUGH_G28_help
+                64      LOAD_CONST                      15: <CODE> cmd_CX_ROUGH_G28
+                66      LOAD_CONST                      16: 'CUSTOM_MACRO.cmd_CX_ROUGH_G28'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      12: cmd_CX_ROUGH_G28
+                72      LOAD_CONST                      17: 'nozzle clear with temperature'
+                74      STORE_NAME                      13: cmd_CX_NOZZLE_CLEAR_help
+                76      LOAD_CONST                      18: <CODE> cmd_CX_NOZZLE_CLEAR
+                78      LOAD_CONST                      19: 'CUSTOM_MACRO.cmd_CX_NOZZLE_CLEAR'
+                80      MAKE_FUNCTION                   0
+                82      STORE_NAME                      14: cmd_CX_NOZZLE_CLEAR
+                84      LOAD_CONST                      20: 'set qmode flag'
+                86      STORE_NAME                      15: cmd_SET_QMODE_FLAG_help
+                88      LOAD_CONST                      21: <CODE> cmd_SET_QMODE_FLAG
+                90      LOAD_CONST                      22: 'CUSTOM_MACRO.cmd_SET_QMODE_FLAG'
+                92      MAKE_FUNCTION                   0
+                94      STORE_NAME                      16: cmd_SET_QMODE_FLAG
+                96      LOAD_CONST                      23: None
+                98      RETURN_VALUE                    
+        'CUSTOM_MACRO'
+        [Code]
+            File Name: /extras/custom_macro.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'CUSTOM_MACRO'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: CUSTOM_MACRO
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: time
+        6       STORE_NAME                      0: time
+        8       LOAD_BUILD_CLASS                
+        10      LOAD_CONST                      2: <CODE> CUSTOM_MACRO
+        12      LOAD_CONST                      3: 'CUSTOM_MACRO'
+        14      MAKE_FUNCTION                   0
+        16      LOAD_CONST                      3: 'CUSTOM_MACRO'
+        18      CALL_FUNCTION                   2
+        20      STORE_NAME                      1: CUSTOM_MACRO
+        22      LOAD_CONST                      4: <CODE> load_config
+        24      LOAD_CONST                      5: 'load_config'
+        26      MAKE_FUNCTION                   0
+        28      STORE_NAME                      2: load_config
+        30      LOAD_CONST                      1: None
+        32      RETURN_VALUE                    

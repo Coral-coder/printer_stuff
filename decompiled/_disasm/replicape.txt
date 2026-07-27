@@ -1,0 +1,2372 @@
+replicape.pyc (Python 3.9)
+[Code]
+    File Name: /extras/replicape.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 11
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'os'
+        'pins'
+        'mcu'
+        ''
+        'bus'
+        'REPLICAPE_MAX_CURRENT'
+        'REPLICAPE_PCA9685_BUS'
+        'REPLICAPE_PCA9685_ADDRESS'
+        'REPLICAPE_PCA9685_CYCLE_TIME'
+        'PIN_MIN_TIME'
+        'pca9685_pwm'
+        'ReplicapeDACEnable'
+        'SERVO_PINS'
+        'servo_pwm'
+        'ReplicapeStepConfig'
+        'Replicape'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        (
+            'bus'
+        )
+        3.84
+        2
+        112
+        0.001
+        0.1
+        [Code]
+            File Name: /extras/replicape.py
+            Object Name: pca9685_pwm
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_mcu'
+                'setup_max_duration'
+                'setup_cycle_time'
+                'setup_start_value'
+                '_build_config'
+                'set_pwm'
+                'set_digital'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'pca9685_pwm'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: __init__
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_replicape'
+                        '_channel'
+                        'pins'
+                        'error'
+                        'host_mcu'
+                        '_mcu'
+                        'register_config_callback'
+                        '_build_config'
+                        'REPLICAPE_PCA9685_BUS'
+                        '_bus'
+                        'REPLICAPE_PCA9685_ADDRESS'
+                        '_address'
+                        'REPLICAPE_PCA9685_CYCLE_TIME'
+                        '_cycle_time'
+                        '_max_duration'
+                        '_oid'
+                        '_invert'
+                        'float'
+                        '_start_value'
+                        '_shutdown_value'
+                        '_is_static'
+                        '_last_clock'
+                        '_pwm_max'
+                        '_set_cmd'
+                    [Var Names]
+                        'self'
+                        'replicape'
+                        'channel'
+                        'pin_type'
+                        'pin_params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'digital_out'
+                            'pwm'
+                        )
+                        '{"code":"key276": "msg":"Pin type not supported on replicape", "values":[]}'
+                        2
+                        'invert'
+                        False
+                        0
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       1: replicape
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: _replicape
+                        6       LOAD_FAST                       2: channel
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: _channel
+                        12      LOAD_FAST                       3: pin_type
+                        14      LOAD_CONST                      1: ('digital_out', 'pwm')
+                        16      CONTAINS_OP                     1 (not in)
+                        18      POP_JUMP_IF_FALSE               30
+                        20      LOAD_GLOBAL                     2: pins
+                        22      LOAD_METHOD                     3: error
+                        24      LOAD_CONST                      2: '{"code":"key276": "msg":"Pin type not supported on replicape", "values":[]}'
+                        26      CALL_METHOD                     1
+                        28      RAISE_VARARGS                   1
+                        30      LOAD_FAST                       1: replicape
+                        32      LOAD_ATTR                       4: host_mcu
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      5: _mcu
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       5: _mcu
+                        42      LOAD_METHOD                     6: register_config_callback
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_ATTR                       7: _build_config
+                        48      CALL_METHOD                     1
+                        50      POP_TOP                         
+                        52      LOAD_GLOBAL                     8: REPLICAPE_PCA9685_BUS
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      9: _bus
+                        58      LOAD_GLOBAL                     10: REPLICAPE_PCA9685_ADDRESS
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      11: _address
+                        64      LOAD_GLOBAL                     12: REPLICAPE_PCA9685_CYCLE_TIME
+                        66      LOAD_FAST                       0: self
+                        68      STORE_ATTR                      13: _cycle_time
+                        70      LOAD_CONST                      3: 2
+                        72      LOAD_FAST                       0: self
+                        74      STORE_ATTR                      14: _max_duration
+                        76      LOAD_CONST                      0: None
+                        78      LOAD_FAST                       0: self
+                        80      STORE_ATTR                      15: _oid
+                        82      LOAD_FAST                       4: pin_params
+                        84      LOAD_CONST                      4: 'invert'
+                        86      BINARY_SUBSCR                   
+                        88      LOAD_FAST                       0: self
+                        90      STORE_ATTR                      16: _invert
+                        92      LOAD_GLOBAL                     17: float
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       16: _invert
+                        98      CALL_FUNCTION                   1
+                        100     DUP_TOP                         
+                        102     LOAD_FAST                       0: self
+                        104     STORE_ATTR                      18: _start_value
+                        106     LOAD_FAST                       0: self
+                        108     STORE_ATTR                      19: _shutdown_value
+                        110     LOAD_CONST                      5: False
+                        112     LOAD_FAST                       0: self
+                        114     STORE_ATTR                      20: _is_static
+                        116     LOAD_CONST                      6: 0
+                        118     LOAD_FAST                       0: self
+                        120     STORE_ATTR                      21: _last_clock
+                        122     LOAD_CONST                      7: 0
+                        124     LOAD_FAST                       0: self
+                        126     STORE_ATTR                      22: _pwm_max
+                        128     LOAD_CONST                      0: None
+                        130     LOAD_FAST                       0: self
+                        132     STORE_ATTR                      23: _set_cmd
+                        134     LOAD_CONST                      0: None
+                        136     RETURN_VALUE                    
+                'pca9685_pwm.__init__'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: get_mcu
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_mcu'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _mcu
+                        4       RETURN_VALUE                    
+                'pca9685_pwm.get_mcu'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: setup_max_duration
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_max_duration'
+                    [Var Names]
+                        'self'
+                        'max_duration'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       1: max_duration
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: _max_duration
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'pca9685_pwm.setup_max_duration'
+                False
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: setup_cycle_time
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pins'
+                        'error'
+                        '_cycle_time'
+                        'logging'
+                        'info'
+                    [Var Names]
+                        'self'
+                        'cycle_time'
+                        'hardware_pwm'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key216", "msg": "pca9685 does not support hardware_pwm parameter" "values": []}'
+                        'Ignoring pca9685 cycle time of %.6f (using %.6f)'
+                    [Disassembly]
+                        0       LOAD_FAST                       2: hardware_pwm
+                        2       POP_JUMP_IF_FALSE               14
+                        4       LOAD_GLOBAL                     0: pins
+                        6       LOAD_METHOD                     1: error
+                        8       LOAD_CONST                      1: '{"code":"key216", "msg": "pca9685 does not support hardware_pwm parameter" "values": []}'
+                        10      CALL_METHOD                     1
+                        12      RAISE_VARARGS                   1
+                        14      LOAD_FAST                       1: cycle_time
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: _cycle_time
+                        20      COMPARE_OP                      3 (!=)
+                        22      POP_JUMP_IF_FALSE               40
+                        24      LOAD_GLOBAL                     3: logging
+                        26      LOAD_METHOD                     4: info
+                        28      LOAD_CONST                      2: 'Ignoring pca9685 cycle time of %.6f (using %.6f)'
+                        30      LOAD_FAST                       1: cycle_time
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       2: _cycle_time
+                        36      CALL_METHOD                     3
+                        38      POP_TOP                         
+                        40      LOAD_CONST                      0: None
+                        42      RETURN_VALUE                    
+                'pca9685_pwm.setup_cycle_time'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: setup_start_value
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pins'
+                        'error'
+                        '_invert'
+                        'max'
+                        'min'
+                        '_start_value'
+                        '_shutdown_value'
+                        '_is_static'
+                        '_replicape'
+                        'note_pwm_start_value'
+                        '_channel'
+                    [Var Names]
+                        'self'
+                        'start_value'
+                        'shutdown_value'
+                        'is_static'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}'
+                        1
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       3: is_static
+                        2       POP_JUMP_IF_FALSE               22
+                        4       LOAD_FAST                       1: start_value
+                        6       LOAD_FAST                       2: shutdown_value
+                        8       COMPARE_OP                      3 (!=)
+                        10      POP_JUMP_IF_FALSE               22
+                        12      LOAD_GLOBAL                     0: pins
+                        14      LOAD_METHOD                     1: error
+                        16      LOAD_CONST                      1: '{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}'
+                        18      CALL_METHOD                     1
+                        20      RAISE_VARARGS                   1
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: _invert
+                        26      POP_JUMP_IF_FALSE               44
+                        28      LOAD_CONST                      2: 1
+                        30      LOAD_FAST                       1: start_value
+                        32      BINARY_SUBTRACT                 
+                        34      STORE_FAST                      1: start_value
+                        36      LOAD_CONST                      2: 1
+                        38      LOAD_FAST                       2: shutdown_value
+                        40      BINARY_SUBTRACT                 
+                        42      STORE_FAST                      2: shutdown_value
+                        44      LOAD_GLOBAL                     3: max
+                        46      LOAD_CONST                      3: 0
+                        48      LOAD_GLOBAL                     4: min
+                        50      LOAD_CONST                      2: 1
+                        52      LOAD_FAST                       1: start_value
+                        54      CALL_FUNCTION                   2
+                        56      CALL_FUNCTION                   2
+                        58      LOAD_FAST                       0: self
+                        60      STORE_ATTR                      5: _start_value
+                        62      LOAD_GLOBAL                     3: max
+                        64      LOAD_CONST                      3: 0
+                        66      LOAD_GLOBAL                     4: min
+                        68      LOAD_CONST                      2: 1
+                        70      LOAD_FAST                       2: shutdown_value
+                        72      CALL_FUNCTION                   2
+                        74      CALL_FUNCTION                   2
+                        76      LOAD_FAST                       0: self
+                        78      STORE_ATTR                      6: _shutdown_value
+                        80      LOAD_FAST                       3: is_static
+                        82      LOAD_FAST                       0: self
+                        84      STORE_ATTR                      7: _is_static
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       8: _replicape
+                        90      LOAD_METHOD                     9: note_pwm_start_value
+                        92      LOAD_FAST                       0: self
+                        94      LOAD_ATTR                       10: _channel
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       5: _start_value
+                        100     LOAD_FAST                       0: self
+                        102     LOAD_ATTR                       6: _shutdown_value
+                        104     CALL_METHOD                     3
+                        106     POP_TOP                         
+                        108     LOAD_CONST                      0: None
+                        110     RETURN_VALUE                    
+                'pca9685_pwm.setup_start_value'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: _build_config
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 13
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_mcu'
+                        'get_constant_float'
+                        '_pwm_max'
+                        'seconds_to_clock'
+                        '_cycle_time'
+                        '_is_static'
+                        'add_config_cmd'
+                        '_bus'
+                        '_address'
+                        '_channel'
+                        '_start_value'
+                        'request_move_queue_slot'
+                        'create_oid'
+                        '_oid'
+                        '_shutdown_value'
+                        '_max_duration'
+                        'alloc_command_queue'
+                        'lookup_command'
+                        '_set_cmd'
+                    [Var Names]
+                        'self'
+                        'cycle_ticks'
+                        'cmd_queue'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'PCA9685_MAX'
+                        'set_pca9685_out bus=%d addr=%d channel=%d cycle_ticks=%d value=%d'
+                        'config_pca9685 oid=%d bus=%d addr=%d channel=%d cycle_ticks=%d value=%d default_value=%d max_duration=%d'
+                        'queue_pca9685_out oid=%c clock=%u value=%hu'
+                        (
+                            'cq'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _mcu
+                        4       LOAD_METHOD                     1: get_constant_float
+                        6       LOAD_CONST                      1: 'PCA9685_MAX'
+                        8       CALL_METHOD                     1
+                        10      LOAD_FAST                       0: self
+                        12      STORE_ATTR                      2: _pwm_max
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       0: _mcu
+                        18      LOAD_METHOD                     3: seconds_to_clock
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       4: _cycle_time
+                        24      CALL_METHOD                     1
+                        26      STORE_FAST                      1: cycle_ticks
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       5: _is_static
+                        32      POP_JUMP_IF_FALSE               78
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       0: _mcu
+                        38      LOAD_METHOD                     6: add_config_cmd
+                        40      LOAD_CONST                      2: 'set_pca9685_out bus=%d addr=%d channel=%d cycle_ticks=%d value=%d'
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       7: _bus
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       8: _address
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       9: _channel
+                        54      LOAD_FAST                       1: cycle_ticks
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       10: _start_value
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       2: _pwm_max
+                        64      BINARY_MULTIPLY                 
+                        66      BUILD_TUPLE                     5
+                        68      BINARY_MODULO                   
+                        70      CALL_METHOD                     1
+                        72      POP_TOP                         
+                        74      LOAD_CONST                      0: None
+                        76      RETURN_VALUE                    
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       0: _mcu
+                        82      LOAD_METHOD                     11: request_move_queue_slot
+                        84      CALL_METHOD                     0
+                        86      POP_TOP                         
+                        88      LOAD_FAST                       0: self
+                        90      LOAD_ATTR                       0: _mcu
+                        92      LOAD_METHOD                     12: create_oid
+                        94      CALL_METHOD                     0
+                        96      LOAD_FAST                       0: self
+                        98      STORE_ATTR                      13: _oid
+                        100     LOAD_FAST                       0: self
+                        102     LOAD_ATTR                       0: _mcu
+                        104     LOAD_METHOD                     6: add_config_cmd
+                        106     LOAD_CONST                      3: 'config_pca9685 oid=%d bus=%d addr=%d channel=%d cycle_ticks=%d value=%d default_value=%d max_duration=%d'
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       13: _oid
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       7: _bus
+                        116     LOAD_FAST                       0: self
+                        118     LOAD_ATTR                       8: _address
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       9: _channel
+                        124     LOAD_FAST                       1: cycle_ticks
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       10: _start_value
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       2: _pwm_max
+                        134     BINARY_MULTIPLY                 
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       14: _shutdown_value
+                        140     LOAD_FAST                       0: self
+                        142     LOAD_ATTR                       2: _pwm_max
+                        144     BINARY_MULTIPLY                 
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       0: _mcu
+                        150     LOAD_METHOD                     3: seconds_to_clock
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       15: _max_duration
+                        156     CALL_METHOD                     1
+                        158     BUILD_TUPLE                     8
+                        160     BINARY_MODULO                   
+                        162     CALL_METHOD                     1
+                        164     POP_TOP                         
+                        166     LOAD_FAST                       0: self
+                        168     LOAD_ATTR                       0: _mcu
+                        170     LOAD_METHOD                     16: alloc_command_queue
+                        172     CALL_METHOD                     0
+                        174     STORE_FAST                      2: cmd_queue
+                        176     LOAD_FAST                       0: self
+                        178     LOAD_ATTR                       0: _mcu
+                        180     LOAD_ATTR                       17: lookup_command
+                        182     LOAD_CONST                      4: 'queue_pca9685_out oid=%c clock=%u value=%hu'
+                        184     LOAD_FAST                       2: cmd_queue
+                        186     LOAD_CONST                      5: ('cq',)
+                        188     CALL_FUNCTION_KW                2
+                        190     LOAD_FAST                       0: self
+                        192     STORE_ATTR                      18: _set_cmd
+                        194     LOAD_CONST                      0: None
+                        196     RETURN_VALUE                    
+                'pca9685_pwm._build_config'
+                None
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: set_pwm
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_mcu'
+                        'print_time_to_clock'
+                        '_invert'
+                        'int'
+                        'max'
+                        'min'
+                        '_pwm_max'
+                        '_replicape'
+                        'note_pwm_enable'
+                        '_channel'
+                        '_set_cmd'
+                        'send'
+                        '_oid'
+                        '_last_clock'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'value'
+                        'cycle_time'
+                        'clock'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1
+                        0
+                        0.5
+                        (
+                            'minclock'
+                            'reqclock'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: _mcu
+                        4       LOAD_METHOD                     1: print_time_to_clock
+                        6       LOAD_FAST                       1: print_time
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      4: clock
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: _invert
+                        16      POP_JUMP_IF_FALSE               26
+                        18      LOAD_CONST                      1: 1
+                        20      LOAD_FAST                       2: value
+                        22      BINARY_SUBTRACT                 
+                        24      STORE_FAST                      2: value
+                        26      LOAD_GLOBAL                     3: int
+                        28      LOAD_GLOBAL                     4: max
+                        30      LOAD_CONST                      2: 0
+                        32      LOAD_GLOBAL                     5: min
+                        34      LOAD_CONST                      1: 1
+                        36      LOAD_FAST                       2: value
+                        38      CALL_FUNCTION                   2
+                        40      CALL_FUNCTION                   2
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       6: _pwm_max
+                        46      BINARY_MULTIPLY                 
+                        48      LOAD_CONST                      3: 0.5
+                        50      BINARY_ADD                      
+                        52      CALL_FUNCTION                   1
+                        54      STORE_FAST                      2: value
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       7: _replicape
+                        60      LOAD_METHOD                     8: note_pwm_enable
+                        62      LOAD_FAST                       1: print_time
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       9: _channel
+                        68      LOAD_FAST                       2: value
+                        70      CALL_METHOD                     3
+                        72      POP_TOP                         
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_ATTR                       10: _set_cmd
+                        78      LOAD_ATTR                       11: send
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       12: _oid
+                        84      LOAD_FAST                       4: clock
+                        86      LOAD_FAST                       2: value
+                        88      BUILD_LIST                      3
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       13: _last_clock
+                        94      LOAD_FAST                       4: clock
+                        96      LOAD_CONST                      4: ('minclock', 'reqclock')
+                        98      CALL_FUNCTION_KW                3
+                        100     POP_TOP                         
+                        102     LOAD_FAST                       4: clock
+                        104     LOAD_FAST                       0: self
+                        106     STORE_ATTR                      13: _last_clock
+                        108     LOAD_CONST                      0: None
+                        110     RETURN_VALUE                    
+                'pca9685_pwm.set_pwm'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: set_digital
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'set_pwm'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'value'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       2: value
+                        2       POP_JUMP_IF_FALSE               18
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_METHOD                     0: set_pwm
+                        8       LOAD_FAST                       1: print_time
+                        10      LOAD_CONST                      1: 1
+                        12      CALL_METHOD                     2
+                        14      POP_TOP                         
+                        16      JUMP_FORWARD                    12 (to 30)
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_METHOD                     0: set_pwm
+                        22      LOAD_FAST                       1: print_time
+                        24      LOAD_CONST                      2: 0
+                        26      CALL_METHOD                     2
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                'pca9685_pwm.set_digital'
+                (
+                    False
+                )
+                (
+                    False
+                )
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'pca9685_pwm'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'pca9685_pwm.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_mcu
+                18      LOAD_CONST                      4: 'pca9685_pwm.get_mcu'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_mcu
+                24      LOAD_CONST                      5: <CODE> setup_max_duration
+                26      LOAD_CONST                      6: 'pca9685_pwm.setup_max_duration'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: setup_max_duration
+                32      LOAD_CONST                      19: (False,)
+                34      LOAD_CONST                      8: <CODE> setup_cycle_time
+                36      LOAD_CONST                      9: 'pca9685_pwm.setup_cycle_time'
+                38      MAKE_FUNCTION                   1
+                40      STORE_NAME                      6: setup_cycle_time
+                42      LOAD_CONST                      20: (False,)
+                44      LOAD_CONST                      10: <CODE> setup_start_value
+                46      LOAD_CONST                      11: 'pca9685_pwm.setup_start_value'
+                48      MAKE_FUNCTION                   1
+                50      STORE_NAME                      7: setup_start_value
+                52      LOAD_CONST                      12: <CODE> _build_config
+                54      LOAD_CONST                      13: 'pca9685_pwm._build_config'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      8: _build_config
+                60      LOAD_CONST                      21: (None,)
+                62      LOAD_CONST                      15: <CODE> set_pwm
+                64      LOAD_CONST                      16: 'pca9685_pwm.set_pwm'
+                66      MAKE_FUNCTION                   1
+                68      STORE_NAME                      9: set_pwm
+                70      LOAD_CONST                      17: <CODE> set_digital
+                72      LOAD_CONST                      18: 'pca9685_pwm.set_digital'
+                74      MAKE_FUNCTION                   0
+                76      STORE_NAME                      10: set_digital
+                78      LOAD_CONST                      14: None
+                80      RETURN_VALUE                    
+        'pca9685_pwm'
+        [Code]
+            File Name: /extras/replicape.py
+            Object Name: ReplicapeDACEnable
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_mcu'
+                'setup_max_duration'
+                'set_digital'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ReplicapeDACEnable'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: __init__
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pins'
+                        'error'
+                        'host_mcu'
+                        'mcu'
+                        'stepper_dacs'
+                        'value'
+                        'pca9685_pwm'
+                        'pwm'
+                    [Var Names]
+                        'self'
+                        'replicape'
+                        'channel'
+                        'pin_type'
+                        'pin_params'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'digital_out'
+                        '{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}'
+                        'invert'
+                        '{"code":"key278": "msg":"Replicape virtual enable pin can not be invertede", "values":[]}'
+                    [Disassembly]
+                        0       LOAD_FAST                       3: pin_type
+                        2       LOAD_CONST                      1: 'digital_out'
+                        4       COMPARE_OP                      3 (!=)
+                        6       POP_JUMP_IF_FALSE               18
+                        8       LOAD_GLOBAL                     0: pins
+                        10      LOAD_METHOD                     1: error
+                        12      LOAD_CONST                      2: '{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}'
+                        14      CALL_METHOD                     1
+                        16      RAISE_VARARGS                   1
+                        18      LOAD_FAST                       4: pin_params
+                        20      LOAD_CONST                      3: 'invert'
+                        22      BINARY_SUBSCR                   
+                        24      POP_JUMP_IF_FALSE               36
+                        26      LOAD_GLOBAL                     0: pins
+                        28      LOAD_METHOD                     1: error
+                        30      LOAD_CONST                      4: '{"code":"key278": "msg":"Replicape virtual enable pin can not be invertede", "values":[]}'
+                        32      CALL_METHOD                     1
+                        34      RAISE_VARARGS                   1
+                        36      LOAD_FAST                       1: replicape
+                        38      LOAD_ATTR                       2: host_mcu
+                        40      LOAD_FAST                       0: self
+                        42      STORE_ATTR                      3: mcu
+                        44      LOAD_FAST                       1: replicape
+                        46      LOAD_ATTR                       4: stepper_dacs
+                        48      LOAD_FAST                       2: channel
+                        50      BINARY_SUBSCR                   
+                        52      LOAD_FAST                       0: self
+                        54      STORE_ATTR                      5: value
+                        56      LOAD_GLOBAL                     6: pca9685_pwm
+                        58      LOAD_FAST                       1: replicape
+                        60      LOAD_FAST                       2: channel
+                        62      LOAD_FAST                       3: pin_type
+                        64      LOAD_FAST                       4: pin_params
+                        66      CALL_FUNCTION                   4
+                        68      LOAD_FAST                       0: self
+                        70      STORE_ATTR                      7: pwm
+                        72      LOAD_CONST                      0: None
+                        74      RETURN_VALUE                    
+                'ReplicapeDACEnable.__init__'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: get_mcu
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu
+                        4       RETURN_VALUE                    
+                'ReplicapeDACEnable.get_mcu'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: setup_max_duration
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pwm'
+                        'setup_max_duration'
+                    [Var Names]
+                        'self'
+                        'max_duration'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: pwm
+                        4       LOAD_METHOD                     1: setup_max_duration
+                        6       LOAD_FAST                       1: max_duration
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'ReplicapeDACEnable.setup_max_duration'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: set_digital
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pwm'
+                        'set_pwm'
+                        'value'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'value'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       2: value
+                        2       POP_JUMP_IF_FALSE               22
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       0: pwm
+                        8       LOAD_METHOD                     1: set_pwm
+                        10      LOAD_FAST                       1: print_time
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       2: value
+                        16      CALL_METHOD                     2
+                        18      POP_TOP                         
+                        20      JUMP_FORWARD                    14 (to 36)
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       0: pwm
+                        26      LOAD_METHOD                     1: set_pwm
+                        28      LOAD_FAST                       1: print_time
+                        30      LOAD_CONST                      1: 0
+                        32      CALL_METHOD                     2
+                        34      POP_TOP                         
+                        36      LOAD_CONST                      0: None
+                        38      RETURN_VALUE                    
+                'ReplicapeDACEnable.set_digital'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ReplicapeDACEnable'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ReplicapeDACEnable.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_mcu
+                18      LOAD_CONST                      4: 'ReplicapeDACEnable.get_mcu'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_mcu
+                24      LOAD_CONST                      5: <CODE> setup_max_duration
+                26      LOAD_CONST                      6: 'ReplicapeDACEnable.setup_max_duration'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: setup_max_duration
+                32      LOAD_CONST                      7: <CODE> set_digital
+                34      LOAD_CONST                      8: 'ReplicapeDACEnable.set_digital'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: set_digital
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'ReplicapeDACEnable'
+        (
+            '/pwm0'
+            'gpio0_30'
+            'gpio1_18'
+        )
+        (
+            '/pwm1'
+            'gpio3_17'
+            'gpio1_19'
+        )
+        (
+            'servo0'
+            'servo1'
+        )
+        [Code]
+            File Name: /extras/replicape.py
+            Object Name: servo_pwm
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'setup_cycle_time'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'servo_pwm'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 13
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'host_mcu'
+                        'is_fileoutput'
+                        'os'
+                        'listdir'
+                        'pins'
+                        'error'
+                        'SERVO_PINS'
+                        'dict'
+                        'setup_pin'
+                        'mcu_pwm'
+                        'get_mcu'
+                        'setup_max_duration'
+                        'setup_start_value'
+                        'set_pwm'
+                        'mcu_pwm_enable'
+                        'get_printer'
+                        'lookup_object'
+                        'get_pin_resolver'
+                        'get_name'
+                        'reserve_pin'
+                    [Var Names]
+                        'self'
+                        'replicape'
+                        'pin_params'
+                        'config_name'
+                        'pwmchip'
+                        'pwmdev'
+                        'pwm_pin'
+                        'resv1'
+                        'resv2'
+                        'pru_mcu'
+                        'printer'
+                        'ppins'
+                        'pin_resolver'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'pin'
+                        'pwmchip0'
+                        '/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/'
+                        [Code]
+                            File Name: /extras/replicape.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'startswith'
+                            [Var Names]
+                                '.0'
+                                'pc'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                'pwmchip'
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: pc
+                                8       LOAD_FAST                       1: pc
+                                10      LOAD_METHOD                     0: startswith
+                                12      LOAD_CONST                      0: 'pwmchip'
+                                14      CALL_METHOD                     1
+                                16      POP_JUMP_IF_FALSE               4
+                                18      LOAD_FAST                       1: pc
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        'servo_pwm.__init__.<locals>.<listcomp>'
+                        0
+                        '{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}'
+                        'pwm'
+                        'pins'
+                    [Disassembly]
+                        0       LOAD_FAST                       2: pin_params
+                        2       LOAD_CONST                      1: 'pin'
+                        4       BINARY_SUBSCR                   
+                        6       STORE_FAST                      3: config_name
+                        8       LOAD_CONST                      2: 'pwmchip0'
+                        10      STORE_FAST                      4: pwmchip
+                        12      LOAD_FAST                       1: replicape
+                        14      LOAD_ATTR                       0: host_mcu
+                        16      LOAD_METHOD                     1: is_fileoutput
+                        18      CALL_METHOD                     0
+                        20      POP_JUMP_IF_TRUE                78
+                        22      SETUP_FINALLY                   32 (to 56)
+                        24      LOAD_GLOBAL                     2: os
+                        26      LOAD_METHOD                     3: listdir
+                        28      LOAD_CONST                      3: '/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/'
+                        30      CALL_METHOD                     1
+                        32      STORE_FAST                      5: pwmdev
+                        34      LOAD_CONST                      4: <CODE> <listcomp>
+                        36      LOAD_CONST                      5: 'servo_pwm.__init__.<locals>.<listcomp>'
+                        38      MAKE_FUNCTION                   0
+                        40      LOAD_FAST                       5: pwmdev
+                        42      GET_ITER                        
+                        44      CALL_FUNCTION                   1
+                        46      LOAD_CONST                      6: 0
+                        48      BINARY_SUBSCR                   
+                        50      STORE_FAST                      4: pwmchip
+                        52      POP_BLOCK                       
+                        54      JUMP_FORWARD                    22 (to 78)
+                        56      POP_TOP                         
+                        58      POP_TOP                         
+                        60      POP_TOP                         
+                        62      LOAD_GLOBAL                     4: pins
+                        64      LOAD_METHOD                     5: error
+                        66      LOAD_CONST                      7: '{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}'
+                        68      CALL_METHOD                     1
+                        70      RAISE_VARARGS                   1
+                        72      POP_EXCEPT                      
+                        74      JUMP_FORWARD                    2 (to 78)
+                        76      RERAISE                         
+                        78      LOAD_GLOBAL                     6: SERVO_PINS
+                        80      LOAD_FAST                       3: config_name
+                        82      BINARY_SUBSCR                   
+                        84      UNPACK_SEQUENCE                 3
+                        86      STORE_FAST                      6: pwm_pin
+                        88      STORE_FAST                      7: resv1
+                        90      STORE_FAST                      8: resv2
+                        92      LOAD_GLOBAL                     7: dict
+                        94      LOAD_FAST                       2: pin_params
+                        96      CALL_FUNCTION                   1
+                        98      STORE_FAST                      2: pin_params
+                        100     LOAD_FAST                       4: pwmchip
+                        102     LOAD_FAST                       6: pwm_pin
+                        104     BINARY_ADD                      
+                        106     LOAD_FAST                       2: pin_params
+                        108     LOAD_CONST                      1: 'pin'
+                        110     STORE_SUBSCR                    
+                        112     LOAD_FAST                       1: replicape
+                        114     LOAD_ATTR                       0: host_mcu
+                        116     LOAD_METHOD                     8: setup_pin
+                        118     LOAD_CONST                      8: 'pwm'
+                        120     LOAD_FAST                       2: pin_params
+                        122     CALL_METHOD                     2
+                        124     LOAD_FAST                       0: self
+                        126     STORE_ATTR                      9: mcu_pwm
+                        128     LOAD_FAST                       0: self
+                        130     LOAD_ATTR                       9: mcu_pwm
+                        132     LOAD_ATTR                       10: get_mcu
+                        134     LOAD_FAST                       0: self
+                        136     STORE_ATTR                      10: get_mcu
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       9: mcu_pwm
+                        142     LOAD_ATTR                       11: setup_max_duration
+                        144     LOAD_FAST                       0: self
+                        146     STORE_ATTR                      11: setup_max_duration
+                        148     LOAD_FAST                       0: self
+                        150     LOAD_ATTR                       9: mcu_pwm
+                        152     LOAD_ATTR                       12: setup_start_value
+                        154     LOAD_FAST                       0: self
+                        156     STORE_ATTR                      12: setup_start_value
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       9: mcu_pwm
+                        162     LOAD_ATTR                       13: set_pwm
+                        164     LOAD_FAST                       0: self
+                        166     STORE_ATTR                      13: set_pwm
+                        168     LOAD_FAST                       1: replicape
+                        170     LOAD_ATTR                       14: mcu_pwm_enable
+                        172     LOAD_METHOD                     10: get_mcu
+                        174     CALL_METHOD                     0
+                        176     STORE_FAST                      9: pru_mcu
+                        178     LOAD_FAST                       9: pru_mcu
+                        180     LOAD_METHOD                     15: get_printer
+                        182     CALL_METHOD                     0
+                        184     STORE_FAST                      10: printer
+                        186     LOAD_FAST                       10: printer
+                        188     LOAD_METHOD                     16: lookup_object
+                        190     LOAD_CONST                      9: 'pins'
+                        192     CALL_METHOD                     1
+                        194     STORE_FAST                      11: ppins
+                        196     LOAD_FAST                       11: ppins
+                        198     LOAD_METHOD                     17: get_pin_resolver
+                        200     LOAD_FAST                       9: pru_mcu
+                        202     LOAD_METHOD                     18: get_name
+                        204     CALL_METHOD                     0
+                        206     CALL_METHOD                     1
+                        208     STORE_FAST                      12: pin_resolver
+                        210     LOAD_FAST                       12: pin_resolver
+                        212     LOAD_METHOD                     19: reserve_pin
+                        214     LOAD_FAST                       7: resv1
+                        216     LOAD_FAST                       3: config_name
+                        218     CALL_METHOD                     2
+                        220     POP_TOP                         
+                        222     LOAD_FAST                       12: pin_resolver
+                        224     LOAD_METHOD                     19: reserve_pin
+                        226     LOAD_FAST                       8: resv2
+                        228     LOAD_FAST                       3: config_name
+                        230     CALL_METHOD                     2
+                        232     POP_TOP                         
+                        234     LOAD_CONST                      0: None
+                        236     RETURN_VALUE                    
+                'servo_pwm.__init__'
+                False
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: setup_cycle_time
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu_pwm'
+                        'setup_cycle_time'
+                    [Var Names]
+                        'self'
+                        'cycle_time'
+                        'hardware_pwm'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu_pwm
+                        4       LOAD_METHOD                     1: setup_cycle_time
+                        6       LOAD_FAST                       1: cycle_time
+                        8       LOAD_CONST                      1: True
+                        10      CALL_METHOD                     2
+                        12      POP_TOP                         
+                        14      LOAD_CONST                      0: None
+                        16      RETURN_VALUE                    
+                'servo_pwm.setup_cycle_time'
+                None
+                (
+                    False
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'servo_pwm'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'servo_pwm.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      7: (False,)
+                18      LOAD_CONST                      4: <CODE> setup_cycle_time
+                20      LOAD_CONST                      5: 'servo_pwm.setup_cycle_time'
+                22      MAKE_FUNCTION                   1
+                24      STORE_NAME                      4: setup_cycle_time
+                26      LOAD_CONST                      6: None
+                28      RETURN_VALUE                    
+        'servo_pwm'
+        160
+        224
+        32
+        176
+        240
+        48
+        128
+        192
+        (
+            'disable'
+            '1'
+            '2'
+            'spread2'
+            '4'
+            '16'
+            'spread4'
+            'spread16'
+            'stealth4'
+            'stealth16'
+        )
+        [Code]
+            File Name: /extras/replicape.py
+            Object Name: Replicape
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'note_pwm_start_value'
+                'note_pwm_enable'
+                'setup_pin'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'Replicape'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 14
+                    Stack Size: 8
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'get_printer'
+                        'lookup_object'
+                        'register_chip'
+                        'getchoice'
+                        'mcu'
+                        'get_printer_mcu'
+                        'get'
+                        'host_mcu'
+                        'setup_pin'
+                        'mcu_pwm_enable'
+                        'setup_max_duration'
+                        'mcu_pwm_start_value'
+                        'mcu_pwm_shutdown_value'
+                        'pca9685_pwm'
+                        'pins'
+                        'servo_pins'
+                        'last_stepper_time'
+                        'stepper_dacs'
+                        'enumerate'
+                        'ReplicapeStepConfig'
+                        'getboolean'
+                        'getfloat'
+                        'REPLICAPE_MAX_CURRENT'
+                        'ReplicapeDACEnable'
+                        'values'
+                        'enabled_channels'
+                        'list'
+                        'reversed'
+                        'sr_disabled'
+                        'sr_enabled'
+                        'is_fileoutput'
+                        'os'
+                        'path'
+                        'exists'
+                        'bus'
+                        'MCU_SPI'
+                        'sr_spi'
+                        'setup_shutdown_msg'
+                        'spi_send'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'printer'
+                        'ppins'
+                        'revisions'
+                        'enable_pin'
+                        'shift_registers'
+                        'port'
+                        'name'
+                        'prefix'
+                        'sc'
+                        'channel'
+                        'cur'
+                        'sr_spi_bus'
+                    [Free Vars]
+                    [Cell Vars]
+                        'self'
+                    [Constants]
+                        None
+                        'pins'
+                        'replicape'
+                        'B3'
+                        'revision'
+                        'host_mcu'
+                        'enable_pin'
+                        '!gpio0_20'
+                        'digital_out'
+                        0
+                        False
+                        5
+                        3
+                        4
+                        7
+                        8
+                        9
+                        10
+                        (
+                            'power_e'
+                            'power_h'
+                            'power_hotbed'
+                            'power_fan0'
+                            'power_fan1'
+                            'power_fan2'
+                            'power_fan3'
+                        )
+                        2
+                        (
+                            'servo0'
+                            'servo1'
+                        )
+                        (
+                            1
+                            0
+                            0
+                            1
+                            1
+                        )
+                        'xyzeh'
+                        'stepper_%s_'
+                        'microstep_mode'
+                        'disable'
+                        'chopper_off_time_high'
+                        'chopper_hysteresis_high'
+                        'chopper_blank_time_high'
+                        True
+                        11
+                        'current'
+                        (
+                            'above'
+                            'maxval'
+                        )
+                        'enable'
+                        [Code]
+                            File Name: /extras/replicape.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'cl'
+                                'ch'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                False
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        14 (to 20)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: cl
+                                10      STORE_FAST                      2: ch
+                                12      LOAD_FAST                       2: ch
+                                14      LOAD_CONST                      0: False
+                                16      MAP_ADD                         2
+                                18      JUMP_ABSOLUTE                   4
+                                20      RETURN_VALUE                    
+                        'Replicape.__init__.<locals>.<dictcomp>'
+                        [Code]
+                            File Name: /extras/replicape.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'stepper_dacs'
+                            [Var Names]
+                                '.0'
+                                'i'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                11
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        22 (to 28)
+                                6       STORE_FAST                      1: i
+                                8       LOAD_CONST                      0: 11
+                                10      LOAD_FAST                       1: i
+                                12      BINARY_ADD                      
+                                14      LOAD_DEREF                      0: self
+                                16      LOAD_ATTR                       0: stepper_dacs
+                                18      CONTAINS_OP                     0 (in)
+                                20      POP_JUMP_IF_FALSE               4
+                                22      LOAD_FAST                       1: i
+                                24      LIST_APPEND                     2
+                                26      JUMP_ABSOLUTE                   4
+                                28      RETURN_VALUE                    
+                        'Replicape.__init__.<locals>.<listcomp>'
+                        (
+                            0
+                            1
+                            2
+                        )
+                        0
+                        -2
+                        [Code]
+                            File Name: /extras/replicape.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'stepper_dacs'
+                            [Var Names]
+                                '.0'
+                                'i'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                11
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        22 (to 28)
+                                6       STORE_FAST                      1: i
+                                8       LOAD_CONST                      0: 11
+                                10      LOAD_FAST                       1: i
+                                12      BINARY_ADD                      
+                                14      LOAD_DEREF                      0: self
+                                16      LOAD_ATTR                       0: stepper_dacs
+                                18      CONTAINS_OP                     0 (in)
+                                20      POP_JUMP_IF_FALSE               4
+                                22      LOAD_FAST                       1: i
+                                24      LIST_APPEND                     2
+                                26      JUMP_ABSOLUTE                   4
+                                28      RETURN_VALUE                    
+                        (
+                            3
+                            4
+                        )
+                        'standstill_power_down'
+                        'spidev1.1'
+                        '/sys/devices/platform/ocp/481a0000.spi/spi_master/spi2'
+                        'spidev2.1'
+                        50000000
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      2: printer
+                        8       LOAD_FAST                       2: printer
+                        10      LOAD_METHOD                     1: lookup_object
+                        12      LOAD_CONST                      1: 'pins'
+                        14      CALL_METHOD                     1
+                        16      STORE_FAST                      3: ppins
+                        18      LOAD_FAST                       3: ppins
+                        20      LOAD_METHOD                     2: register_chip
+                        22      LOAD_CONST                      2: 'replicape'
+                        24      LOAD_DEREF                      0: self
+                        26      CALL_METHOD                     2
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      3: 'B3'
+                        32      LOAD_CONST                      3: 'B3'
+                        34      BUILD_MAP                       1
+                        36      STORE_FAST                      4: revisions
+                        38      LOAD_FAST                       1: config
+                        40      LOAD_METHOD                     3: getchoice
+                        42      LOAD_CONST                      4: 'revision'
+                        44      LOAD_FAST                       4: revisions
+                        46      CALL_METHOD                     2
+                        48      POP_TOP                         
+                        50      LOAD_GLOBAL                     4: mcu
+                        52      LOAD_METHOD                     5: get_printer_mcu
+                        54      LOAD_FAST                       2: printer
+                        56      LOAD_FAST                       1: config
+                        58      LOAD_METHOD                     6: get
+                        60      LOAD_CONST                      5: 'host_mcu'
+                        62      CALL_METHOD                     1
+                        64      CALL_METHOD                     2
+                        66      LOAD_DEREF                      0: self
+                        68      STORE_ATTR                      7: host_mcu
+                        70      LOAD_FAST                       1: config
+                        72      LOAD_METHOD                     6: get
+                        74      LOAD_CONST                      6: 'enable_pin'
+                        76      LOAD_CONST                      7: '!gpio0_20'
+                        78      CALL_METHOD                     2
+                        80      STORE_FAST                      5: enable_pin
+                        82      LOAD_FAST                       3: ppins
+                        84      LOAD_METHOD                     8: setup_pin
+                        86      LOAD_CONST                      8: 'digital_out'
+                        88      LOAD_FAST                       5: enable_pin
+                        90      CALL_METHOD                     2
+                        92      LOAD_DEREF                      0: self
+                        94      STORE_ATTR                      9: mcu_pwm_enable
+                        96      LOAD_DEREF                      0: self
+                        98      LOAD_ATTR                       9: mcu_pwm_enable
+                        100     LOAD_METHOD                     10: setup_max_duration
+                        102     LOAD_CONST                      9: 0
+                        104     CALL_METHOD                     1
+                        106     POP_TOP                         
+                        108     LOAD_CONST                      10: False
+                        110     DUP_TOP                         
+                        112     LOAD_DEREF                      0: self
+                        114     STORE_ATTR                      11: mcu_pwm_start_value
+                        116     LOAD_DEREF                      0: self
+                        118     STORE_ATTR                      12: mcu_pwm_shutdown_value
+                        120     LOAD_GLOBAL                     13: pca9685_pwm
+                        122     LOAD_CONST                      11: 5
+                        124     BUILD_TUPLE                     2
+                        126     LOAD_GLOBAL                     13: pca9685_pwm
+                        128     LOAD_CONST                      12: 3
+                        130     BUILD_TUPLE                     2
+                        132     LOAD_GLOBAL                     13: pca9685_pwm
+                        134     LOAD_CONST                      13: 4
+                        136     BUILD_TUPLE                     2
+                        138     LOAD_GLOBAL                     13: pca9685_pwm
+                        140     LOAD_CONST                      14: 7
+                        142     BUILD_TUPLE                     2
+                        144     LOAD_GLOBAL                     13: pca9685_pwm
+                        146     LOAD_CONST                      15: 8
+                        148     BUILD_TUPLE                     2
+                        150     LOAD_GLOBAL                     13: pca9685_pwm
+                        152     LOAD_CONST                      16: 9
+                        154     BUILD_TUPLE                     2
+                        156     LOAD_GLOBAL                     13: pca9685_pwm
+                        158     LOAD_CONST                      17: 10
+                        160     BUILD_TUPLE                     2
+                        162     LOAD_CONST                      18: ('power_e', 'power_h', 'power_hotbed', 'power_fan0', 'power_fan1', 'power_fan2', 'power_fan3')
+                        164     BUILD_CONST_KEY_MAP             7
+                        166     LOAD_DEREF                      0: self
+                        168     STORE_ATTR                      14: pins
+                        170     LOAD_CONST                      12: 3
+                        172     LOAD_CONST                      19: 2
+                        174     LOAD_CONST                      20: ('servo0', 'servo1')
+                        176     BUILD_CONST_KEY_MAP             2
+                        178     LOAD_DEREF                      0: self
+                        180     STORE_ATTR                      15: servo_pins
+                        182     LOAD_CONST                      9: 0
+                        184     LOAD_DEREF                      0: self
+                        186     STORE_ATTR                      16: last_stepper_time
+                        188     BUILD_MAP                       0
+                        190     LOAD_DEREF                      0: self
+                        192     STORE_ATTR                      17: stepper_dacs
+                        194     BUILD_LIST                      0
+                        196     LOAD_CONST                      21: (1, 0, 0, 1, 1)
+                        198     LIST_EXTEND                     1
+                        200     STORE_FAST                      6: shift_registers
+                        202     LOAD_GLOBAL                     18: enumerate
+                        204     LOAD_CONST                      22: 'xyzeh'
+                        206     CALL_FUNCTION                   1
+                        208     GET_ITER                        
+                        210     FOR_ITER                        206 (to 418)
+                        212     UNPACK_SEQUENCE                 2
+                        214     STORE_FAST                      7: port
+                        216     STORE_FAST                      8: name
+                        218     LOAD_CONST                      23: 'stepper_%s_'
+                        220     LOAD_FAST                       8: name
+                        222     BUILD_TUPLE                     1
+                        224     BINARY_MODULO                   
+                        226     STORE_FAST                      9: prefix
+                        228     LOAD_FAST                       1: config
+                        230     LOAD_METHOD                     3: getchoice
+                        232     LOAD_FAST                       9: prefix
+                        234     LOAD_CONST                      24: 'microstep_mode'
+                        236     BINARY_ADD                      
+                        238     LOAD_GLOBAL                     19: ReplicapeStepConfig
+                        240     LOAD_CONST                      25: 'disable'
+                        242     CALL_METHOD                     3
+                        244     STORE_FAST                      10: sc
+                        246     LOAD_FAST                       10: sc
+                        248     LOAD_CONST                      0: None
+                        250     IS_OP                           0 (is)
+                        252     POP_JUMP_IF_FALSE               258
+                        256     JUMP_ABSOLUTE                   210
+                        258     LOAD_FAST                       10: sc
+                        260     LOAD_FAST                       6: shift_registers
+                        262     LOAD_FAST                       7: port
+                        264     BINARY_SUBSCR                   
+                        266     INPLACE_OR                      
+                        268     STORE_FAST                      10: sc
+                        270     LOAD_FAST                       1: config
+                        272     LOAD_METHOD                     20: getboolean
+                        274     LOAD_FAST                       9: prefix
+                        276     LOAD_CONST                      26: 'chopper_off_time_high'
+                        278     BINARY_ADD                      
+                        280     LOAD_CONST                      10: False
+                        282     CALL_METHOD                     2
+                        284     POP_JUMP_IF_FALSE               296
+                        288     LOAD_FAST                       10: sc
+                        290     LOAD_CONST                      15: 8
+                        292     INPLACE_OR                      
+                        294     STORE_FAST                      10: sc
+                        296     LOAD_FAST                       1: config
+                        298     LOAD_METHOD                     20: getboolean
+                        300     LOAD_FAST                       9: prefix
+                        302     LOAD_CONST                      27: 'chopper_hysteresis_high'
+                        304     BINARY_ADD                      
+                        306     LOAD_CONST                      10: False
+                        308     CALL_METHOD                     2
+                        310     POP_JUMP_IF_FALSE               322
+                        314     LOAD_FAST                       10: sc
+                        316     LOAD_CONST                      13: 4
+                        318     INPLACE_OR                      
+                        320     STORE_FAST                      10: sc
+                        322     LOAD_FAST                       1: config
+                        324     LOAD_METHOD                     20: getboolean
+                        326     LOAD_FAST                       9: prefix
+                        328     LOAD_CONST                      28: 'chopper_blank_time_high'
+                        330     BINARY_ADD                      
+                        332     LOAD_CONST                      29: True
+                        334     CALL_METHOD                     2
+                        336     POP_JUMP_IF_FALSE               348
+                        340     LOAD_FAST                       10: sc
+                        342     LOAD_CONST                      19: 2
+                        344     INPLACE_OR                      
+                        346     STORE_FAST                      10: sc
+                        348     LOAD_FAST                       10: sc
+                        350     LOAD_FAST                       6: shift_registers
+                        352     LOAD_FAST                       7: port
+                        354     STORE_SUBSCR                    
+                        356     LOAD_FAST                       7: port
+                        358     LOAD_CONST                      30: 11
+                        360     BINARY_ADD                      
+                        362     STORE_FAST                      11: channel
+                        364     LOAD_FAST                       1: config
+                        366     LOAD_ATTR                       21: getfloat
+                        368     LOAD_FAST                       9: prefix
+                        370     LOAD_CONST                      31: 'current'
+                        372     BINARY_ADD                      
+                        374     LOAD_CONST                      9: 0
+                        376     LOAD_GLOBAL                     22: REPLICAPE_MAX_CURRENT
+                        378     LOAD_CONST                      32: ('above', 'maxval')
+                        380     CALL_FUNCTION_KW                3
+                        382     STORE_FAST                      12: cur
+                        384     LOAD_FAST                       12: cur
+                        386     LOAD_GLOBAL                     22: REPLICAPE_MAX_CURRENT
+                        388     BINARY_TRUE_DIVIDE              
+                        390     LOAD_DEREF                      0: self
+                        392     LOAD_ATTR                       17: stepper_dacs
+                        394     LOAD_FAST                       11: channel
+                        396     STORE_SUBSCR                    
+                        398     LOAD_GLOBAL                     23: ReplicapeDACEnable
+                        400     LOAD_FAST                       11: channel
+                        402     BUILD_TUPLE                     2
+                        404     LOAD_DEREF                      0: self
+                        406     LOAD_ATTR                       14: pins
+                        408     LOAD_FAST                       9: prefix
+                        410     LOAD_CONST                      33: 'enable'
+                        412     BINARY_ADD                      
+                        414     STORE_SUBSCR                    
+                        416     JUMP_ABSOLUTE                   210
+                        418     LOAD_CONST                      34: <CODE> <dictcomp>
+                        420     LOAD_CONST                      35: 'Replicape.__init__.<locals>.<dictcomp>'
+                        422     MAKE_FUNCTION                   0
+                        424     LOAD_DEREF                      0: self
+                        426     LOAD_ATTR                       14: pins
+                        428     LOAD_METHOD                     24: values
+                        430     CALL_METHOD                     0
+                        432     GET_ITER                        
+                        434     CALL_FUNCTION                   1
+                        436     LOAD_DEREF                      0: self
+                        438     STORE_ATTR                      25: enabled_channels
+                        440     LOAD_GLOBAL                     26: list
+                        442     LOAD_GLOBAL                     27: reversed
+                        444     LOAD_FAST                       6: shift_registers
+                        446     CALL_FUNCTION                   1
+                        448     CALL_FUNCTION                   1
+                        450     LOAD_DEREF                      0: self
+                        452     STORE_ATTR                      28: sr_disabled
+                        454     LOAD_CLOSURE                    0: self
+                        456     BUILD_TUPLE                     1
+                        458     LOAD_CONST                      36: <CODE> <listcomp>
+                        460     LOAD_CONST                      37: 'Replicape.__init__.<locals>.<listcomp>'
+                        462     MAKE_FUNCTION                   8
+                        464     LOAD_CONST                      38: (0, 1, 2)
+                        466     GET_ITER                        
+                        468     CALL_FUNCTION                   1
+                        470     POP_JUMP_IF_FALSE               490
+                        474     LOAD_FAST                       6: shift_registers
+                        476     LOAD_CONST                      39: 0
+                        478     DUP_TOP_TWO                     
+                        480     BINARY_SUBSCR                   
+                        482     LOAD_CONST                      40: -2
+                        484     INPLACE_AND                     
+                        486     ROT_THREE                       
+                        488     STORE_SUBSCR                    
+                        490     LOAD_CLOSURE                    0: self
+                        492     BUILD_TUPLE                     1
+                        494     LOAD_CONST                      41: <CODE> <listcomp>
+                        496     LOAD_CONST                      37: 'Replicape.__init__.<locals>.<listcomp>'
+                        498     MAKE_FUNCTION                   8
+                        500     LOAD_CONST                      42: (3, 4)
+                        502     GET_ITER                        
+                        504     CALL_FUNCTION                   1
+                        506     POP_JUMP_IF_FALSE               526
+                        510     LOAD_FAST                       6: shift_registers
+                        512     LOAD_CONST                      12: 3
+                        514     DUP_TOP_TWO                     
+                        516     BINARY_SUBSCR                   
+                        518     LOAD_CONST                      40: -2
+                        520     INPLACE_AND                     
+                        522     ROT_THREE                       
+                        524     STORE_SUBSCR                    
+                        526     LOAD_FAST                       1: config
+                        528     LOAD_METHOD                     20: getboolean
+                        530     LOAD_CONST                      43: 'standstill_power_down'
+                        532     LOAD_CONST                      10: False
+                        534     CALL_METHOD                     2
+                        536     POP_JUMP_IF_FALSE               564
+                        540     LOAD_DEREF                      0: self
+                        542     LOAD_ATTR                       17: stepper_dacs
+                        544     POP_JUMP_IF_FALSE               564
+                        548     LOAD_FAST                       6: shift_registers
+                        550     LOAD_CONST                      13: 4
+                        552     DUP_TOP_TWO                     
+                        554     BINARY_SUBSCR                   
+                        556     LOAD_CONST                      40: -2
+                        558     INPLACE_AND                     
+                        560     ROT_THREE                       
+                        562     STORE_SUBSCR                    
+                        564     LOAD_GLOBAL                     26: list
+                        566     LOAD_GLOBAL                     27: reversed
+                        568     LOAD_FAST                       6: shift_registers
+                        570     CALL_FUNCTION                   1
+                        572     CALL_FUNCTION                   1
+                        574     LOAD_DEREF                      0: self
+                        576     STORE_ATTR                      29: sr_enabled
+                        578     LOAD_CONST                      44: 'spidev1.1'
+                        580     STORE_FAST                      13: sr_spi_bus
+                        582     LOAD_DEREF                      0: self
+                        584     LOAD_ATTR                       7: host_mcu
+                        586     LOAD_METHOD                     30: is_fileoutput
+                        588     CALL_METHOD                     0
+                        590     POP_JUMP_IF_TRUE                612
+                        594     LOAD_GLOBAL                     31: os
+                        596     LOAD_ATTR                       32: path
+                        598     LOAD_METHOD                     33: exists
+                        600     LOAD_CONST                      45: '/sys/devices/platform/ocp/481a0000.spi/spi_master/spi2'
+                        602     CALL_METHOD                     1
+                        604     POP_JUMP_IF_FALSE               612
+                        608     LOAD_CONST                      46: 'spidev2.1'
+                        610     STORE_FAST                      13: sr_spi_bus
+                        612     LOAD_GLOBAL                     34: bus
+                        614     LOAD_METHOD                     35: MCU_SPI
+                        616     LOAD_DEREF                      0: self
+                        618     LOAD_ATTR                       7: host_mcu
+                        620     LOAD_FAST                       13: sr_spi_bus
+                        622     LOAD_CONST                      0: None
+                        624     LOAD_CONST                      39: 0
+                        626     LOAD_CONST                      47: 50000000
+                        628     CALL_METHOD                     5
+                        630     LOAD_DEREF                      0: self
+                        632     STORE_ATTR                      36: sr_spi
+                        634     LOAD_DEREF                      0: self
+                        636     LOAD_ATTR                       36: sr_spi
+                        638     LOAD_METHOD                     37: setup_shutdown_msg
+                        640     LOAD_DEREF                      0: self
+                        642     LOAD_ATTR                       28: sr_disabled
+                        644     CALL_METHOD                     1
+                        646     POP_TOP                         
+                        648     LOAD_DEREF                      0: self
+                        650     LOAD_ATTR                       36: sr_spi
+                        652     LOAD_METHOD                     38: spi_send
+                        654     LOAD_DEREF                      0: self
+                        656     LOAD_ATTR                       28: sr_disabled
+                        658     CALL_METHOD                     1
+                        660     POP_TOP                         
+                        662     LOAD_CONST                      0: None
+                        664     RETURN_VALUE                    
+                'Replicape.__init__'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: note_pwm_start_value
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu_pwm_start_value'
+                        'mcu_pwm_shutdown_value'
+                        'mcu_pwm_enable'
+                        'setup_start_value'
+                        'enabled_channels'
+                    [Var Names]
+                        'self'
+                        'channel'
+                        'start_value'
+                        'shutdown_value'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       DUP_TOP                         
+                        4       LOAD_ATTR                       0: mcu_pwm_start_value
+                        6       LOAD_FAST                       2: start_value
+                        8       UNARY_NOT                       
+                        10      UNARY_NOT                       
+                        12      INPLACE_OR                      
+                        14      ROT_TWO                         
+                        16      STORE_ATTR                      0: mcu_pwm_start_value
+                        18      LOAD_FAST                       0: self
+                        20      DUP_TOP                         
+                        22      LOAD_ATTR                       1: mcu_pwm_shutdown_value
+                        24      LOAD_FAST                       3: shutdown_value
+                        26      UNARY_NOT                       
+                        28      UNARY_NOT                       
+                        30      INPLACE_OR                      
+                        32      ROT_TWO                         
+                        34      STORE_ATTR                      1: mcu_pwm_shutdown_value
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       2: mcu_pwm_enable
+                        40      LOAD_METHOD                     3: setup_start_value
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_ATTR                       0: mcu_pwm_start_value
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       1: mcu_pwm_shutdown_value
+                        50      CALL_METHOD                     2
+                        52      POP_TOP                         
+                        54      LOAD_FAST                       2: start_value
+                        56      UNARY_NOT                       
+                        58      UNARY_NOT                       
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       4: enabled_channels
+                        64      LOAD_FAST                       1: channel
+                        66      STORE_SUBSCR                    
+                        68      LOAD_CONST                      0: None
+                        70      RETURN_VALUE                    
+                'Replicape.note_pwm_start_value'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: note_pwm_enable
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 9
+                    Stack Size: 5
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'enabled_channels'
+                        'items'
+                        'mcu_pwm_enable'
+                        'set_digital'
+                        'len'
+                        'stepper_dacs'
+                        'keys'
+                        'sr_disabled'
+                        'sr_enabled'
+                        'max'
+                        'last_stepper_time'
+                        'PIN_MIN_TIME'
+                        'host_mcu'
+                        'print_time_to_clock'
+                        'sr_spi'
+                        'spi_send'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'channel'
+                        'value'
+                        'is_enable'
+                        'on_channels'
+                        'on_dacs'
+                        'sr'
+                        'clock'
+                    [Free Vars]
+                    [Cell Vars]
+                        'self'
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/replicape.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 4
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'c'
+                                'e'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        16 (to 22)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: c
+                                10      STORE_FAST                      2: e
+                                12      LOAD_FAST                       2: e
+                                14      POP_JUMP_IF_FALSE               4
+                                16      LOAD_CONST                      0: 1
+                                18      LIST_APPEND                     2
+                                20      JUMP_ABSOLUTE                   4
+                                22      RETURN_VALUE                    
+                        'Replicape.note_pwm_enable.<locals>.<listcomp>'
+                        0
+                        1
+                        [Code]
+                            File Name: /extras/replicape.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'enabled_channels'
+                            [Var Names]
+                                '.0'
+                                'c'
+                            [Free Vars]
+                                'self'
+                            [Cell Vars]
+                            [Constants]
+                                1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        18 (to 24)
+                                6       STORE_FAST                      1: c
+                                8       LOAD_DEREF                      0: self
+                                10      LOAD_ATTR                       0: enabled_channels
+                                12      LOAD_FAST                       1: c
+                                14      BINARY_SUBSCR                   
+                                16      POP_JUMP_IF_FALSE               4
+                                18      LOAD_CONST                      0: 1
+                                20      LIST_APPEND                     2
+                                22      JUMP_ABSOLUTE                   4
+                                24      RETURN_VALUE                    
+                        (
+                            'minclock'
+                            'reqclock'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       3: value
+                        2       UNARY_NOT                       
+                        4       UNARY_NOT                       
+                        6       STORE_FAST                      4: is_enable
+                        8       LOAD_DEREF                      0: self
+                        10      LOAD_ATTR                       0: enabled_channels
+                        12      LOAD_FAST                       2: channel
+                        14      BINARY_SUBSCR                   
+                        16      LOAD_FAST                       4: is_enable
+                        18      COMPARE_OP                      2 (==)
+                        20      POP_JUMP_IF_FALSE               26
+                        22      LOAD_CONST                      0: None
+                        24      RETURN_VALUE                    
+                        26      LOAD_FAST                       4: is_enable
+                        28      LOAD_DEREF                      0: self
+                        30      LOAD_ATTR                       0: enabled_channels
+                        32      LOAD_FAST                       2: channel
+                        34      STORE_SUBSCR                    
+                        36      LOAD_CONST                      1: <CODE> <listcomp>
+                        38      LOAD_CONST                      2: 'Replicape.note_pwm_enable.<locals>.<listcomp>'
+                        40      MAKE_FUNCTION                   0
+                        42      LOAD_DEREF                      0: self
+                        44      LOAD_ATTR                       0: enabled_channels
+                        46      LOAD_METHOD                     1: items
+                        48      CALL_METHOD                     0
+                        50      GET_ITER                        
+                        52      CALL_FUNCTION                   1
+                        54      STORE_FAST                      5: on_channels
+                        56      LOAD_FAST                       5: on_channels
+                        58      POP_JUMP_IF_TRUE                76
+                        60      LOAD_DEREF                      0: self
+                        62      LOAD_ATTR                       2: mcu_pwm_enable
+                        64      LOAD_METHOD                     3: set_digital
+                        66      LOAD_FAST                       1: print_time
+                        68      LOAD_CONST                      3: 0
+                        70      CALL_METHOD                     2
+                        72      POP_TOP                         
+                        74      JUMP_FORWARD                    30 (to 106)
+                        76      LOAD_FAST                       4: is_enable
+                        78      POP_JUMP_IF_FALSE               106
+                        80      LOAD_GLOBAL                     4: len
+                        82      LOAD_FAST                       5: on_channels
+                        84      CALL_FUNCTION                   1
+                        86      LOAD_CONST                      4: 1
+                        88      COMPARE_OP                      2 (==)
+                        90      POP_JUMP_IF_FALSE               106
+                        92      LOAD_DEREF                      0: self
+                        94      LOAD_ATTR                       2: mcu_pwm_enable
+                        96      LOAD_METHOD                     3: set_digital
+                        98      LOAD_FAST                       1: print_time
+                        100     LOAD_CONST                      4: 1
+                        102     CALL_METHOD                     2
+                        104     POP_TOP                         
+                        106     LOAD_FAST                       2: channel
+                        108     LOAD_DEREF                      0: self
+                        110     LOAD_ATTR                       5: stepper_dacs
+                        112     CONTAINS_OP                     1 (not in)
+                        114     POP_JUMP_IF_FALSE               120
+                        116     LOAD_CONST                      0: None
+                        118     RETURN_VALUE                    
+                        120     LOAD_CLOSURE                    0: self
+                        122     BUILD_TUPLE                     1
+                        124     LOAD_CONST                      5: <CODE> <listcomp>
+                        126     LOAD_CONST                      2: 'Replicape.note_pwm_enable.<locals>.<listcomp>'
+                        128     MAKE_FUNCTION                   8
+                        130     LOAD_DEREF                      0: self
+                        132     LOAD_ATTR                       5: stepper_dacs
+                        134     LOAD_METHOD                     6: keys
+                        136     CALL_METHOD                     0
+                        138     GET_ITER                        
+                        140     CALL_FUNCTION                   1
+                        142     STORE_FAST                      6: on_dacs
+                        144     LOAD_FAST                       6: on_dacs
+                        146     POP_JUMP_IF_TRUE                156
+                        148     LOAD_DEREF                      0: self
+                        150     LOAD_ATTR                       7: sr_disabled
+                        152     STORE_FAST                      7: sr
+                        154     JUMP_FORWARD                    28 (to 184)
+                        156     LOAD_FAST                       4: is_enable
+                        158     POP_JUMP_IF_FALSE               180
+                        160     LOAD_GLOBAL                     4: len
+                        162     LOAD_FAST                       6: on_dacs
+                        164     CALL_FUNCTION                   1
+                        166     LOAD_CONST                      4: 1
+                        168     COMPARE_OP                      2 (==)
+                        170     POP_JUMP_IF_FALSE               180
+                        172     LOAD_DEREF                      0: self
+                        174     LOAD_ATTR                       8: sr_enabled
+                        176     STORE_FAST                      7: sr
+                        178     JUMP_FORWARD                    4 (to 184)
+                        180     LOAD_CONST                      0: None
+                        182     RETURN_VALUE                    
+                        184     LOAD_GLOBAL                     9: max
+                        186     LOAD_FAST                       1: print_time
+                        188     LOAD_DEREF                      0: self
+                        190     LOAD_ATTR                       10: last_stepper_time
+                        192     LOAD_GLOBAL                     11: PIN_MIN_TIME
+                        194     BINARY_ADD                      
+                        196     CALL_FUNCTION                   2
+                        198     STORE_FAST                      1: print_time
+                        200     LOAD_DEREF                      0: self
+                        202     LOAD_ATTR                       12: host_mcu
+                        204     LOAD_METHOD                     13: print_time_to_clock
+                        206     LOAD_FAST                       1: print_time
+                        208     CALL_METHOD                     1
+                        210     STORE_FAST                      8: clock
+                        212     LOAD_DEREF                      0: self
+                        214     LOAD_ATTR                       14: sr_spi
+                        216     LOAD_ATTR                       15: spi_send
+                        218     LOAD_FAST                       7: sr
+                        220     LOAD_FAST                       8: clock
+                        222     LOAD_FAST                       8: clock
+                        224     LOAD_CONST                      6: ('minclock', 'reqclock')
+                        226     CALL_FUNCTION_KW                3
+                        228     POP_TOP                         
+                        230     LOAD_CONST                      0: None
+                        232     RETURN_VALUE                    
+                'Replicape.note_pwm_enable'
+                [Code]
+                    File Name: /extras/replicape.py
+                    Object Name: setup_pin
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'pins'
+                        'servo_pins'
+                        'sr_enabled'
+                        'sr_disabled'
+                        'sr_spi'
+                        'spi_send'
+                        'servo_pwm'
+                        'error'
+                    [Var Names]
+                        'self'
+                        'pin_type'
+                        'pin_params'
+                        'pin'
+                        'pclass'
+                        'channel'
+                        'index'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'pin'
+                        1
+                        'Unknown replicape pin %s'
+                    [Disassembly]
+                        0       LOAD_FAST                       2: pin_params
+                        2       LOAD_CONST                      1: 'pin'
+                        4       BINARY_SUBSCR                   
+                        6       STORE_FAST                      3: pin
+                        8       LOAD_FAST                       3: pin
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: pins
+                        14      CONTAINS_OP                     0 (in)
+                        16      POP_JUMP_IF_FALSE               46
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       0: pins
+                        22      LOAD_FAST                       3: pin
+                        24      BINARY_SUBSCR                   
+                        26      UNPACK_SEQUENCE                 2
+                        28      STORE_FAST                      4: pclass
+                        30      STORE_FAST                      5: channel
+                        32      LOAD_FAST                       4: pclass
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_FAST                       5: channel
+                        38      LOAD_FAST                       1: pin_type
+                        40      LOAD_FAST                       2: pin_params
+                        42      CALL_FUNCTION                   4
+                        44      RETURN_VALUE                    
+                        46      LOAD_FAST                       3: pin
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       1: servo_pins
+                        52      CONTAINS_OP                     0 (in)
+                        54      POP_JUMP_IF_FALSE               126
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       1: servo_pins
+                        60      LOAD_FAST                       3: pin
+                        62      BINARY_SUBSCR                   
+                        64      STORE_FAST                      6: index
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       2: sr_enabled
+                        70      LOAD_FAST                       6: index
+                        72      DUP_TOP_TWO                     
+                        74      BINARY_SUBSCR                   
+                        76      LOAD_CONST                      2: 1
+                        78      INPLACE_OR                      
+                        80      ROT_THREE                       
+                        82      STORE_SUBSCR                    
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       3: sr_disabled
+                        88      LOAD_FAST                       6: index
+                        90      DUP_TOP_TWO                     
+                        92      BINARY_SUBSCR                   
+                        94      LOAD_CONST                      2: 1
+                        96      INPLACE_OR                      
+                        98      ROT_THREE                       
+                        100     STORE_SUBSCR                    
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       4: sr_spi
+                        106     LOAD_METHOD                     5: spi_send
+                        108     LOAD_FAST                       0: self
+                        110     LOAD_ATTR                       3: sr_disabled
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     LOAD_GLOBAL                     6: servo_pwm
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_FAST                       2: pin_params
+                        122     CALL_FUNCTION                   2
+                        124     RETURN_VALUE                    
+                        126     LOAD_GLOBAL                     0: pins
+                        128     LOAD_METHOD                     7: error
+                        130     LOAD_CONST                      3: 'Unknown replicape pin %s'
+                        132     LOAD_FAST                       3: pin
+                        134     BUILD_TUPLE                     1
+                        136     BINARY_MODULO                   
+                        138     CALL_METHOD                     1
+                        140     RAISE_VARARGS                   1
+                        142     LOAD_CONST                      0: None
+                        144     RETURN_VALUE                    
+                'Replicape.setup_pin'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'Replicape'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'Replicape.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> note_pwm_start_value
+                18      LOAD_CONST                      4: 'Replicape.note_pwm_start_value'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: note_pwm_start_value
+                24      LOAD_CONST                      5: <CODE> note_pwm_enable
+                26      LOAD_CONST                      6: 'Replicape.note_pwm_enable'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: note_pwm_enable
+                32      LOAD_CONST                      7: <CODE> setup_pin
+                34      LOAD_CONST                      8: 'Replicape.setup_pin'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: setup_pin
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'Replicape'
+        [Code]
+            File Name: /extras/replicape.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'Replicape'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: Replicape
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: os
+        14      STORE_NAME                      1: os
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: pins
+        22      STORE_NAME                      2: pins
+        24      LOAD_CONST                      0: 0
+        26      LOAD_CONST                      1: None
+        28      IMPORT_NAME                     3: mcu
+        30      STORE_NAME                      3: mcu
+        32      LOAD_CONST                      2: 1
+        34      LOAD_CONST                      3: ('bus',)
+        36      IMPORT_NAME                     4: 
+        38      IMPORT_FROM                     5: bus
+        40      STORE_NAME                      5: bus
+        42      POP_TOP                         
+        44      LOAD_CONST                      4: 3.84
+        46      STORE_NAME                      6: REPLICAPE_MAX_CURRENT
+        48      LOAD_CONST                      5: 2
+        50      STORE_NAME                      7: REPLICAPE_PCA9685_BUS
+        52      LOAD_CONST                      6: 112
+        54      STORE_NAME                      8: REPLICAPE_PCA9685_ADDRESS
+        56      LOAD_CONST                      7: 0.001
+        58      STORE_NAME                      9: REPLICAPE_PCA9685_CYCLE_TIME
+        60      LOAD_CONST                      8: 0.1
+        62      STORE_NAME                      10: PIN_MIN_TIME
+        64      LOAD_BUILD_CLASS                
+        66      LOAD_CONST                      9: <CODE> pca9685_pwm
+        68      LOAD_CONST                      10: 'pca9685_pwm'
+        70      MAKE_FUNCTION                   0
+        72      LOAD_CONST                      10: 'pca9685_pwm'
+        74      CALL_FUNCTION                   2
+        76      STORE_NAME                      11: pca9685_pwm
+        78      LOAD_BUILD_CLASS                
+        80      LOAD_CONST                      11: <CODE> ReplicapeDACEnable
+        82      LOAD_CONST                      12: 'ReplicapeDACEnable'
+        84      MAKE_FUNCTION                   0
+        86      LOAD_CONST                      12: 'ReplicapeDACEnable'
+        88      CALL_FUNCTION                   2
+        90      STORE_NAME                      12: ReplicapeDACEnable
+        92      LOAD_CONST                      13: ('/pwm0', 'gpio0_30', 'gpio1_18')
+        94      LOAD_CONST                      14: ('/pwm1', 'gpio3_17', 'gpio1_19')
+        96      LOAD_CONST                      15: ('servo0', 'servo1')
+        98      BUILD_CONST_KEY_MAP             2
+        100     STORE_NAME                      13: SERVO_PINS
+        102     LOAD_BUILD_CLASS                
+        104     LOAD_CONST                      16: <CODE> servo_pwm
+        106     LOAD_CONST                      17: 'servo_pwm'
+        108     MAKE_FUNCTION                   0
+        110     LOAD_CONST                      17: 'servo_pwm'
+        112     CALL_FUNCTION                   2
+        114     STORE_NAME                      14: servo_pwm
+        116     LOAD_CONST                      1: None
+        118     LOAD_CONST                      18: 160
+        120     LOAD_CONST                      19: 224
+        122     LOAD_CONST                      20: 32
+        124     LOAD_CONST                      21: 176
+        126     LOAD_CONST                      22: 240
+        128     LOAD_CONST                      23: 48
+        130     LOAD_CONST                      24: 128
+        132     LOAD_CONST                      25: 192
+        134     LOAD_CONST                      0: 0
+        136     LOAD_CONST                      26: ('disable', '1', '2', 'spread2', '4', '16', 'spread4', 'spread16', 'stealth4', 'stealth16')
+        138     BUILD_CONST_KEY_MAP             10
+        140     STORE_NAME                      15: ReplicapeStepConfig
+        142     LOAD_BUILD_CLASS                
+        144     LOAD_CONST                      27: <CODE> Replicape
+        146     LOAD_CONST                      28: 'Replicape'
+        148     MAKE_FUNCTION                   0
+        150     LOAD_CONST                      28: 'Replicape'
+        152     CALL_FUNCTION                   2
+        154     STORE_NAME                      16: Replicape
+        156     LOAD_CONST                      29: <CODE> load_config
+        158     LOAD_CONST                      30: 'load_config'
+        160     MAKE_FUNCTION                   0
+        162     STORE_NAME                      17: load_config
+        164     LOAD_CONST                      1: None
+        166     RETURN_VALUE                    

@@ -95,11 +95,9 @@ class AccelQueryHelper:
         try:
             buffer[offset:offset + 8] = bytearray(bytes)
             del bytes
-        finally:
-            pass
-        gcode = self.printer.lookup_object('gcode')
-        gcode.respond_info('val: %f, bytes: %s, offset: %d' % (val, bytes.hex(), offset))
-        return None
+        except:
+            gcode = self.printer.lookup_object('gcode')
+            gcode.respond_info('val: %f, bytes: %s, offset: %d' % (val, bytes.hex(), offset))
 
 
     
@@ -110,11 +108,9 @@ class AccelQueryHelper:
             buffer[offset + 1] = val >> 8 & 255
             buffer[offset + 2] = val >> 16 & 255
             buffer[offset + 3] = val >> 24 & 255
-        finally:
-            pass
-        gcode = self.printer.lookup_object('gcode')
-        gcode.respond_info('val: %f, offset: %d' % (val, offset))
-        return None
+        except:
+            gcode = self.printer.lookup_object('gcode')
+            gcode.respond_info('val: %f, offset: %d' % (val, offset))
 
 
     
@@ -158,13 +154,13 @@ class AccelQueryHelper:
             
             try:
                 os.nice(20)
-            finally:
+            except:
                 pass
+
             f = open(filename, 'w')
             f.write('#time,accel_x,accel_y,accel_z\n')
             if not self.samples:
                 pass
-
             samples = self.get_samples()
             for t, accel_x, accel_y, accel_z in samples:
                 f.write('%.6f,%.6f,%.6f,%.6f\n' % (t, accel_x, accel_y, accel_z))
@@ -195,7 +191,29 @@ class AccelCommandHelper:
     
     def get_adxl345_status(self, web_request):
         adxl345_is_exist = True
-    # WARNING: Decompyle incomplete
+        
+        try:
+            aclient = self.chip.start_internal_client()
+            self.printer.lookup_object('toolhead').dwell(1)
+            aclient.finish_measurements()
+            values = aclient.get_samples()
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+                values = ''
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            if not values:
+                adxl345_is_exist = False
+
+
+        web_request.send({
+            'adxl345_is_exist': adxl345_is_exist })
 
     
     def register_commands(self, name):

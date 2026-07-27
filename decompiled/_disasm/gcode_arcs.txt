@@ -1,0 +1,1209 @@
+gcode_arcs.pyc (Python 3.9)
+[Code]
+    File Name: /extras/gcode_arcs.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'math'
+        'ARC_PLANE_X_Y'
+        'ARC_PLANE_X_Z'
+        'ARC_PLANE_Y_Z'
+        'X_AXIS'
+        'Y_AXIS'
+        'Z_AXIS'
+        'E_AXIS'
+        'ArcSupport'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        1
+        2
+        3
+        [Code]
+            File Name: /extras/gcode_arcs.py
+            Object Name: ArcSupport
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'cmd_G2'
+                'cmd_G3'
+                'cmd_G17'
+                'cmd_G18'
+                'cmd_G19'
+                '_cmd_inner'
+                'planArc'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'ArcSupport'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'getfloat'
+                        'accuracy'
+                        'mm_per_arc_segment'
+                        'min_mm_per_arc_segment'
+                        'n_arc_revise'
+                        'load_object'
+                        'gcode_move'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_G2'
+                        'cmd_G3'
+                        'cmd_G17'
+                        'cmd_G18'
+                        'cmd_G19'
+                        'Coord'
+                        'ARC_PLANE_X_Y'
+                        'plane'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'resolution'
+                        0.012
+                        0
+                        (
+                            'above'
+                        )
+                        'max_mm_per_arc_segment'
+                        1
+                        'min_mm_per_arc_segment'
+                        0.1
+                        'n_arc_revise'
+                        25
+                        'gcode_move'
+                        'gcode'
+                        'G2'
+                        'G3'
+                        'G17'
+                        'G18'
+                        'G19'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_ATTR                       2: getfloat
+                        14      LOAD_CONST                      1: 'resolution'
+                        16      LOAD_CONST                      2: 0.012
+                        18      LOAD_CONST                      3: 0
+                        20      LOAD_CONST                      4: ('above',)
+                        22      CALL_FUNCTION_KW                3
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      3: accuracy
+                        28      LOAD_FAST                       1: config
+                        30      LOAD_ATTR                       2: getfloat
+                        32      LOAD_CONST                      5: 'max_mm_per_arc_segment'
+                        34      LOAD_CONST                      6: 1
+                        36      LOAD_CONST                      3: 0
+                        38      LOAD_CONST                      4: ('above',)
+                        40      CALL_FUNCTION_KW                3
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      4: mm_per_arc_segment
+                        46      LOAD_FAST                       1: config
+                        48      LOAD_ATTR                       2: getfloat
+                        50      LOAD_CONST                      7: 'min_mm_per_arc_segment'
+                        52      LOAD_CONST                      8: 0.1
+                        54      LOAD_CONST                      3: 0
+                        56      LOAD_CONST                      4: ('above',)
+                        58      CALL_FUNCTION_KW                3
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      5: min_mm_per_arc_segment
+                        64      LOAD_FAST                       1: config
+                        66      LOAD_ATTR                       2: getfloat
+                        68      LOAD_CONST                      9: 'n_arc_revise'
+                        70      LOAD_CONST                      10: 25
+                        72      LOAD_CONST                      3: 0
+                        74      LOAD_CONST                      4: ('above',)
+                        76      CALL_FUNCTION_KW                3
+                        78      LOAD_FAST                       0: self
+                        80      STORE_ATTR                      6: n_arc_revise
+                        82      LOAD_FAST                       0: self
+                        84      LOAD_ATTR                       1: printer
+                        86      LOAD_METHOD                     7: load_object
+                        88      LOAD_FAST                       1: config
+                        90      LOAD_CONST                      11: 'gcode_move'
+                        92      CALL_METHOD                     2
+                        94      LOAD_FAST                       0: self
+                        96      STORE_ATTR                      8: gcode_move
+                        98      LOAD_FAST                       0: self
+                        100     LOAD_ATTR                       1: printer
+                        102     LOAD_METHOD                     9: lookup_object
+                        104     LOAD_CONST                      12: 'gcode'
+                        106     CALL_METHOD                     1
+                        108     LOAD_FAST                       0: self
+                        110     STORE_ATTR                      10: gcode
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       10: gcode
+                        116     LOAD_METHOD                     11: register_command
+                        118     LOAD_CONST                      13: 'G2'
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       12: cmd_G2
+                        124     CALL_METHOD                     2
+                        126     POP_TOP                         
+                        128     LOAD_FAST                       0: self
+                        130     LOAD_ATTR                       10: gcode
+                        132     LOAD_METHOD                     11: register_command
+                        134     LOAD_CONST                      14: 'G3'
+                        136     LOAD_FAST                       0: self
+                        138     LOAD_ATTR                       13: cmd_G3
+                        140     CALL_METHOD                     2
+                        142     POP_TOP                         
+                        144     LOAD_FAST                       0: self
+                        146     LOAD_ATTR                       10: gcode
+                        148     LOAD_METHOD                     11: register_command
+                        150     LOAD_CONST                      15: 'G17'
+                        152     LOAD_FAST                       0: self
+                        154     LOAD_ATTR                       14: cmd_G17
+                        156     CALL_METHOD                     2
+                        158     POP_TOP                         
+                        160     LOAD_FAST                       0: self
+                        162     LOAD_ATTR                       10: gcode
+                        164     LOAD_METHOD                     11: register_command
+                        166     LOAD_CONST                      16: 'G18'
+                        168     LOAD_FAST                       0: self
+                        170     LOAD_ATTR                       15: cmd_G18
+                        172     CALL_METHOD                     2
+                        174     POP_TOP                         
+                        176     LOAD_FAST                       0: self
+                        178     LOAD_ATTR                       10: gcode
+                        180     LOAD_METHOD                     11: register_command
+                        182     LOAD_CONST                      17: 'G19'
+                        184     LOAD_FAST                       0: self
+                        186     LOAD_ATTR                       16: cmd_G19
+                        188     CALL_METHOD                     2
+                        190     POP_TOP                         
+                        192     LOAD_FAST                       0: self
+                        194     LOAD_ATTR                       10: gcode
+                        196     LOAD_ATTR                       17: Coord
+                        198     LOAD_FAST                       0: self
+                        200     STORE_ATTR                      17: Coord
+                        202     LOAD_GLOBAL                     18: ARC_PLANE_X_Y
+                        204     LOAD_FAST                       0: self
+                        206     STORE_ATTR                      19: plane
+                        208     LOAD_CONST                      0: None
+                        210     RETURN_VALUE                    
+                'ArcSupport.__init__'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: cmd_G2
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_cmd_inner'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _cmd_inner
+                        4       LOAD_FAST                       1: gcmd
+                        6       LOAD_CONST                      1: True
+                        8       CALL_METHOD                     2
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'ArcSupport.cmd_G2'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: cmd_G3
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        '_cmd_inner'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: _cmd_inner
+                        4       LOAD_FAST                       1: gcmd
+                        6       LOAD_CONST                      1: False
+                        8       CALL_METHOD                     2
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'ArcSupport.cmd_G3'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: cmd_G17
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'ARC_PLANE_X_Y'
+                        'plane'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: ARC_PLANE_X_Y
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      1: plane
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'ArcSupport.cmd_G17'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: cmd_G18
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'ARC_PLANE_X_Z'
+                        'plane'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: ARC_PLANE_X_Z
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      1: plane
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'ArcSupport.cmd_G18'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: cmd_G19
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'ARC_PLANE_Y_Z'
+                        'plane'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: ARC_PLANE_Y_Z
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      1: plane
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'ArcSupport.cmd_G19'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: _cmd_inner
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 12
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'gcode_move'
+                        'get_status'
+                        'error'
+                        'get_float'
+                        'X_AXIS'
+                        'Y_AXIS'
+                        'Z_AXIS'
+                        'plane'
+                        'ARC_PLANE_X_Z'
+                        'ARC_PLANE_Y_Z'
+                        'planArc'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'clockwise'
+                        'gcodestatus'
+                        'currentPos'
+                        'absolut_extrude'
+                        'asTarget'
+                        'I'
+                        'J'
+                        'asPlanar'
+                        'axes'
+                        'K'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'absolute_coordinates'
+                        'G2/G3 does not support relative move mode'
+                        'gcode_position'
+                        'absolute_extrude'
+                        'X'
+                        0
+                        'Y'
+                        1
+                        'Z'
+                        2
+                        'R'
+                        'G2/G3 does not support R moves'
+                        'I'
+                        0
+                        'J'
+                        'K'
+                        'G2/G3 requires IJ, IK or JK parameters'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: gcode_move
+                        4       LOAD_METHOD                     1: get_status
+                        6       CALL_METHOD                     0
+                        8       STORE_FAST                      3: gcodestatus
+                        10      LOAD_FAST                       3: gcodestatus
+                        12      LOAD_CONST                      1: 'absolute_coordinates'
+                        14      BINARY_SUBSCR                   
+                        16      POP_JUMP_IF_TRUE                28
+                        18      LOAD_FAST                       1: gcmd
+                        20      LOAD_METHOD                     2: error
+                        22      LOAD_CONST                      2: 'G2/G3 does not support relative move mode'
+                        24      CALL_METHOD                     1
+                        26      RAISE_VARARGS                   1
+                        28      LOAD_FAST                       3: gcodestatus
+                        30      LOAD_CONST                      3: 'gcode_position'
+                        32      BINARY_SUBSCR                   
+                        34      STORE_FAST                      4: currentPos
+                        36      LOAD_FAST                       3: gcodestatus
+                        38      LOAD_CONST                      4: 'absolute_extrude'
+                        40      BINARY_SUBSCR                   
+                        42      STORE_FAST                      5: absolut_extrude
+                        44      LOAD_FAST                       1: gcmd
+                        46      LOAD_METHOD                     3: get_float
+                        48      LOAD_CONST                      5: 'X'
+                        50      LOAD_FAST                       4: currentPos
+                        52      LOAD_CONST                      6: 0
+                        54      BINARY_SUBSCR                   
+                        56      CALL_METHOD                     2
+                        58      LOAD_FAST                       1: gcmd
+                        60      LOAD_METHOD                     3: get_float
+                        62      LOAD_CONST                      7: 'Y'
+                        64      LOAD_FAST                       4: currentPos
+                        66      LOAD_CONST                      8: 1
+                        68      BINARY_SUBSCR                   
+                        70      CALL_METHOD                     2
+                        72      LOAD_FAST                       1: gcmd
+                        74      LOAD_METHOD                     3: get_float
+                        76      LOAD_CONST                      9: 'Z'
+                        78      LOAD_FAST                       4: currentPos
+                        80      LOAD_CONST                      10: 2
+                        82      BINARY_SUBSCR                   
+                        84      CALL_METHOD                     2
+                        86      BUILD_LIST                      3
+                        88      STORE_FAST                      6: asTarget
+                        90      LOAD_FAST                       1: gcmd
+                        92      LOAD_METHOD                     3: get_float
+                        94      LOAD_CONST                      11: 'R'
+                        96      LOAD_CONST                      0: None
+                        98      CALL_METHOD                     2
+                        100     LOAD_CONST                      0: None
+                        102     IS_OP                           1 (is not)
+                        104     POP_JUMP_IF_FALSE               116
+                        106     LOAD_FAST                       1: gcmd
+                        108     LOAD_METHOD                     2: error
+                        110     LOAD_CONST                      12: 'G2/G3 does not support R moves'
+                        112     CALL_METHOD                     1
+                        114     RAISE_VARARGS                   1
+                        116     LOAD_FAST                       1: gcmd
+                        118     LOAD_METHOD                     3: get_float
+                        120     LOAD_CONST                      13: 'I'
+                        122     LOAD_CONST                      14: 0
+                        124     CALL_METHOD                     2
+                        126     STORE_FAST                      7: I
+                        128     LOAD_FAST                       1: gcmd
+                        130     LOAD_METHOD                     3: get_float
+                        132     LOAD_CONST                      15: 'J'
+                        134     LOAD_CONST                      14: 0
+                        136     CALL_METHOD                     2
+                        138     STORE_FAST                      8: J
+                        140     LOAD_FAST                       7: I
+                        142     LOAD_FAST                       8: J
+                        144     BUILD_TUPLE                     2
+                        146     STORE_FAST                      9: asPlanar
+                        148     LOAD_GLOBAL                     4: X_AXIS
+                        150     LOAD_GLOBAL                     5: Y_AXIS
+                        152     LOAD_GLOBAL                     6: Z_AXIS
+                        154     BUILD_TUPLE                     3
+                        156     STORE_FAST                      10: axes
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       7: plane
+                        162     LOAD_GLOBAL                     8: ARC_PLANE_X_Z
+                        164     COMPARE_OP                      2 (==)
+                        166     POP_JUMP_IF_FALSE               200
+                        168     LOAD_FAST                       1: gcmd
+                        170     LOAD_METHOD                     3: get_float
+                        172     LOAD_CONST                      16: 'K'
+                        174     LOAD_CONST                      14: 0
+                        176     CALL_METHOD                     2
+                        178     STORE_FAST                      11: K
+                        180     LOAD_FAST                       7: I
+                        182     LOAD_FAST                       11: K
+                        184     BUILD_TUPLE                     2
+                        186     STORE_FAST                      9: asPlanar
+                        188     LOAD_GLOBAL                     4: X_AXIS
+                        190     LOAD_GLOBAL                     6: Z_AXIS
+                        192     LOAD_GLOBAL                     5: Y_AXIS
+                        194     BUILD_TUPLE                     3
+                        196     STORE_FAST                      10: axes
+                        198     JUMP_FORWARD                    40 (to 240)
+                        200     LOAD_FAST                       0: self
+                        202     LOAD_ATTR                       7: plane
+                        204     LOAD_GLOBAL                     9: ARC_PLANE_Y_Z
+                        206     COMPARE_OP                      2 (==)
+                        208     POP_JUMP_IF_FALSE               240
+                        210     LOAD_FAST                       1: gcmd
+                        212     LOAD_METHOD                     3: get_float
+                        214     LOAD_CONST                      16: 'K'
+                        216     LOAD_CONST                      14: 0
+                        218     CALL_METHOD                     2
+                        220     STORE_FAST                      11: K
+                        222     LOAD_FAST                       8: J
+                        224     LOAD_FAST                       11: K
+                        226     BUILD_TUPLE                     2
+                        228     STORE_FAST                      9: asPlanar
+                        230     LOAD_GLOBAL                     5: Y_AXIS
+                        232     LOAD_GLOBAL                     6: Z_AXIS
+                        234     LOAD_GLOBAL                     4: X_AXIS
+                        236     BUILD_TUPLE                     3
+                        238     STORE_FAST                      10: axes
+                        240     LOAD_FAST                       9: asPlanar
+                        242     LOAD_CONST                      6: 0
+                        244     BINARY_SUBSCR                   
+                        246     POP_JUMP_IF_TRUE                270
+                        250     LOAD_FAST                       9: asPlanar
+                        252     LOAD_CONST                      8: 1
+                        254     BINARY_SUBSCR                   
+                        256     POP_JUMP_IF_TRUE                270
+                        260     LOAD_FAST                       1: gcmd
+                        262     LOAD_METHOD                     2: error
+                        264     LOAD_CONST                      17: 'G2/G3 requires IJ, IK or JK parameters'
+                        266     CALL_METHOD                     1
+                        268     RAISE_VARARGS                   1
+                        270     LOAD_FAST                       0: self
+                        272     LOAD_ATTR                       10: planArc
+                        274     LOAD_FAST                       4: currentPos
+                        276     LOAD_FAST                       6: asTarget
+                        278     LOAD_FAST                       9: asPlanar
+                        280     LOAD_FAST                       2: clockwise
+                        282     LOAD_FAST                       1: gcmd
+                        284     LOAD_FAST                       5: absolut_extrude
+                        286     BUILD_LIST                      6
+                        288     LOAD_FAST                       10: axes
+                        290     LIST_EXTEND                     1
+                        292     LIST_TO_TUPLE                   
+                        294     CALL_FUNCTION_EX                0
+                        296     POP_TOP                         
+                        298     LOAD_CONST                      0: None
+                        300     RETURN_VALUE                    
+                'ArcSupport._cmd_inner'
+                [Code]
+                    File Name: /extras/gcode_arcs.py
+                    Object Name: planArc
+                    Arg Count: 10
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 46
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'math'
+                        'atan2'
+                        'pi'
+                        'abs'
+                        'hypot'
+                        'sqrt'
+                        'accuracy'
+                        'ceil'
+                        'fabs'
+                        'max'
+                        'floor'
+                        'mm_per_arc_segment'
+                        'min_mm_per_arc_segment'
+                        'get_float'
+                        'n_arc_revise'
+                        'range'
+                        'int'
+                        'cos'
+                        'sin'
+                        'gcode'
+                        'create_gcode_command'
+                        'gcode_move'
+                        'cmd_G1'
+                    [Var Names]
+                        'self'
+                        'currentPos'
+                        'targetPos'
+                        'offset'
+                        'clockwise'
+                        'gcmd'
+                        'absolut_extrude'
+                        'alpha_axis'
+                        'beta_axis'
+                        'helical_axis'
+                        'r_P'
+                        'r_Q'
+                        'center_P'
+                        'center_Q'
+                        'rt_Alpha'
+                        'rt_Beta'
+                        'angular_travel'
+                        'abs_angle_arc'
+                        'circle_factor'
+                        'linear_travel'
+                        'radius'
+                        'flat_mm'
+                        'min_segments'
+                        'mm_of_travel'
+                        'real_segments'
+                        'real_segments_mm'
+                        'segments'
+                        'asE'
+                        'asF'
+                        'e_per_move'
+                        'e_base'
+                        'theta_per_segment'
+                        'linear_per_segment'
+                        'theta_per_segment_sqr'
+                        'sin_T'
+                        'cos_T'
+                        'correct_count'
+                        'i'
+                        'dist_Helical'
+                        'r_new'
+                        'angle_i'
+                        'cos_Ti'
+                        'sin_Ti'
+                        'c'
+                        'g1_params'
+                        'g1_gcmd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1
+                        0
+                        2
+                        2
+                        8
+                        'E'
+                        'F'
+                        3
+                        6
+                        0.5
+                        (
+                            None
+                            None
+                            None
+                        )
+                        (
+                            'X'
+                            'Y'
+                            'Z'
+                        )
+                        'G1'
+                    [Disassembly]
+                        0       LOAD_FAST                       3: offset
+                        2       LOAD_CONST                      1: 0
+                        4       BINARY_SUBSCR                   
+                        6       UNARY_NEGATIVE                  
+                        8       STORE_FAST                      10: r_P
+                        10      LOAD_FAST                       3: offset
+                        12      LOAD_CONST                      2: 1
+                        14      BINARY_SUBSCR                   
+                        16      UNARY_NEGATIVE                  
+                        18      STORE_FAST                      11: r_Q
+                        20      LOAD_FAST                       1: currentPos
+                        22      LOAD_FAST                       7: alpha_axis
+                        24      BINARY_SUBSCR                   
+                        26      LOAD_FAST                       10: r_P
+                        28      BINARY_SUBTRACT                 
+                        30      STORE_FAST                      12: center_P
+                        32      LOAD_FAST                       1: currentPos
+                        34      LOAD_FAST                       8: beta_axis
+                        36      BINARY_SUBSCR                   
+                        38      LOAD_FAST                       11: r_Q
+                        40      BINARY_SUBTRACT                 
+                        42      STORE_FAST                      13: center_Q
+                        44      LOAD_FAST                       2: targetPos
+                        46      LOAD_FAST                       7: alpha_axis
+                        48      BINARY_SUBSCR                   
+                        50      LOAD_FAST                       12: center_P
+                        52      BINARY_SUBTRACT                 
+                        54      STORE_FAST                      14: rt_Alpha
+                        56      LOAD_FAST                       2: targetPos
+                        58      LOAD_FAST                       8: beta_axis
+                        60      BINARY_SUBSCR                   
+                        62      LOAD_FAST                       13: center_Q
+                        64      BINARY_SUBTRACT                 
+                        66      STORE_FAST                      15: rt_Beta
+                        68      LOAD_GLOBAL                     0: math
+                        70      LOAD_METHOD                     1: atan2
+                        72      LOAD_FAST                       10: r_P
+                        74      LOAD_FAST                       15: rt_Beta
+                        76      BINARY_MULTIPLY                 
+                        78      LOAD_FAST                       11: r_Q
+                        80      LOAD_FAST                       14: rt_Alpha
+                        82      BINARY_MULTIPLY                 
+                        84      BINARY_SUBTRACT                 
+                        86      LOAD_FAST                       10: r_P
+                        88      LOAD_FAST                       14: rt_Alpha
+                        90      BINARY_MULTIPLY                 
+                        92      LOAD_FAST                       11: r_Q
+                        94      LOAD_FAST                       15: rt_Beta
+                        96      BINARY_MULTIPLY                 
+                        98      BINARY_ADD                      
+                        100     CALL_METHOD                     2
+                        102     STORE_FAST                      16: angular_travel
+                        104     LOAD_FAST                       16: angular_travel
+                        106     LOAD_CONST                      3: 0
+                        108     COMPARE_OP                      0 (<)
+                        110     POP_JUMP_IF_FALSE               126
+                        112     LOAD_FAST                       16: angular_travel
+                        114     LOAD_CONST                      4: 2
+                        116     LOAD_GLOBAL                     0: math
+                        118     LOAD_ATTR                       2: pi
+                        120     BINARY_MULTIPLY                 
+                        122     INPLACE_ADD                     
+                        124     STORE_FAST                      16: angular_travel
+                        126     LOAD_FAST                       4: clockwise
+                        128     POP_JUMP_IF_FALSE               144
+                        130     LOAD_FAST                       16: angular_travel
+                        132     LOAD_CONST                      4: 2
+                        134     LOAD_GLOBAL                     0: math
+                        136     LOAD_ATTR                       2: pi
+                        138     BINARY_MULTIPLY                 
+                        140     INPLACE_SUBTRACT                
+                        142     STORE_FAST                      16: angular_travel
+                        144     LOAD_FAST                       16: angular_travel
+                        146     LOAD_CONST                      3: 0
+                        148     COMPARE_OP                      2 (==)
+                        150     POP_JUMP_IF_FALSE               194
+                        152     LOAD_FAST                       1: currentPos
+                        154     LOAD_FAST                       7: alpha_axis
+                        156     BINARY_SUBSCR                   
+                        158     LOAD_FAST                       2: targetPos
+                        160     LOAD_FAST                       7: alpha_axis
+                        162     BINARY_SUBSCR                   
+                        164     COMPARE_OP                      2 (==)
+                        166     POP_JUMP_IF_FALSE               194
+                        168     LOAD_FAST                       1: currentPos
+                        170     LOAD_FAST                       8: beta_axis
+                        172     BINARY_SUBSCR                   
+                        174     LOAD_FAST                       2: targetPos
+                        176     LOAD_FAST                       8: beta_axis
+                        178     BINARY_SUBSCR                   
+                        180     COMPARE_OP                      2 (==)
+                        182     POP_JUMP_IF_FALSE               194
+                        184     LOAD_CONST                      4: 2
+                        186     LOAD_GLOBAL                     0: math
+                        188     LOAD_ATTR                       2: pi
+                        190     BINARY_MULTIPLY                 
+                        192     STORE_FAST                      16: angular_travel
+                        194     LOAD_GLOBAL                     3: abs
+                        196     LOAD_FAST                       16: angular_travel
+                        198     CALL_FUNCTION                   1
+                        200     STORE_FAST                      17: abs_angle_arc
+                        202     LOAD_FAST                       17: abs_angle_arc
+                        204     LOAD_CONST                      5: 2
+                        206     LOAD_GLOBAL                     0: math
+                        208     LOAD_ATTR                       2: pi
+                        210     BINARY_MULTIPLY                 
+                        212     BINARY_TRUE_DIVIDE              
+                        214     STORE_FAST                      18: circle_factor
+                        216     LOAD_FAST                       2: targetPos
+                        218     LOAD_FAST                       9: helical_axis
+                        220     BINARY_SUBSCR                   
+                        222     LOAD_FAST                       1: currentPos
+                        224     LOAD_FAST                       9: helical_axis
+                        226     BINARY_SUBSCR                   
+                        228     BINARY_SUBTRACT                 
+                        230     STORE_FAST                      19: linear_travel
+                        232     LOAD_GLOBAL                     0: math
+                        234     LOAD_METHOD                     4: hypot
+                        236     LOAD_FAST                       10: r_P
+                        238     LOAD_FAST                       11: r_Q
+                        240     CALL_METHOD                     2
+                        242     STORE_FAST                      20: radius
+                        244     LOAD_FAST                       20: radius
+                        246     LOAD_FAST                       16: angular_travel
+                        248     BINARY_MULTIPLY                 
+                        250     STORE_FAST                      21: flat_mm
+                        252     LOAD_CONST                      5: 2
+                        254     LOAD_GLOBAL                     0: math
+                        256     LOAD_ATTR                       2: pi
+                        258     BINARY_MULTIPLY                 
+                        260     LOAD_GLOBAL                     0: math
+                        262     LOAD_METHOD                     5: sqrt
+                        264     LOAD_CONST                      6: 8
+                        266     LOAD_FAST                       0: self
+                        268     LOAD_ATTR                       6: accuracy
+                        270     BINARY_MULTIPLY                 
+                        272     LOAD_FAST                       20: radius
+                        274     BINARY_TRUE_DIVIDE              
+                        276     CALL_METHOD                     1
+                        278     BINARY_TRUE_DIVIDE              
+                        280     STORE_FAST                      22: min_segments
+                        282     LOAD_GLOBAL                     0: math
+                        284     LOAD_METHOD                     7: ceil
+                        286     LOAD_FAST                       22: min_segments
+                        288     LOAD_FAST                       18: circle_factor
+                        290     BINARY_MULTIPLY                 
+                        292     CALL_METHOD                     1
+                        294     STORE_FAST                      22: min_segments
+                        296     LOAD_FAST                       19: linear_travel
+                        298     POP_JUMP_IF_FALSE               316
+                        302     LOAD_GLOBAL                     0: math
+                        304     LOAD_METHOD                     4: hypot
+                        306     LOAD_FAST                       21: flat_mm
+                        308     LOAD_FAST                       19: linear_travel
+                        310     CALL_METHOD                     2
+                        312     STORE_FAST                      23: mm_of_travel
+                        314     JUMP_FORWARD                    10 (to 326)
+                        316     LOAD_GLOBAL                     0: math
+                        318     LOAD_METHOD                     8: fabs
+                        320     LOAD_FAST                       21: flat_mm
+                        322     CALL_METHOD                     1
+                        324     STORE_FAST                      23: mm_of_travel
+                        326     LOAD_GLOBAL                     9: max
+                        328     LOAD_GLOBAL                     0: math
+                        330     LOAD_METHOD                     10: floor
+                        332     LOAD_FAST                       23: mm_of_travel
+                        334     LOAD_FAST                       0: self
+                        336     LOAD_ATTR                       11: mm_per_arc_segment
+                        338     BINARY_TRUE_DIVIDE              
+                        340     CALL_METHOD                     1
+                        342     LOAD_FAST                       22: min_segments
+                        344     CALL_FUNCTION                   2
+                        346     STORE_FAST                      24: real_segments
+                        348     LOAD_FAST                       23: mm_of_travel
+                        350     LOAD_FAST                       24: real_segments
+                        352     BINARY_TRUE_DIVIDE              
+                        354     STORE_FAST                      25: real_segments_mm
+                        356     LOAD_CONST                      1: 0
+                        358     STORE_FAST                      26: segments
+                        360     LOAD_FAST                       25: real_segments_mm
+                        362     LOAD_FAST                       0: self
+                        364     LOAD_ATTR                       11: mm_per_arc_segment
+                        366     COMPARE_OP                      4 (>)
+                        368     POP_JUMP_IF_FALSE               390
+                        372     LOAD_GLOBAL                     0: math
+                        374     LOAD_METHOD                     7: ceil
+                        376     LOAD_FAST                       23: mm_of_travel
+                        378     LOAD_FAST                       0: self
+                        380     LOAD_ATTR                       11: mm_per_arc_segment
+                        382     BINARY_TRUE_DIVIDE              
+                        384     CALL_METHOD                     1
+                        386     STORE_FAST                      26: segments
+                        388     JUMP_FORWARD                    38 (to 428)
+                        390     LOAD_FAST                       24: real_segments
+                        392     STORE_FAST                      26: segments
+                        394     LOAD_FAST                       25: real_segments_mm
+                        396     LOAD_FAST                       0: self
+                        398     LOAD_ATTR                       12: min_mm_per_arc_segment
+                        400     COMPARE_OP                      0 (<)
+                        402     POP_JUMP_IF_FALSE               428
+                        406     LOAD_GLOBAL                     9: max
+                        408     LOAD_CONST                      2: 1
+                        410     LOAD_GLOBAL                     0: math
+                        412     LOAD_METHOD                     10: floor
+                        414     LOAD_FAST                       23: mm_of_travel
+                        416     LOAD_FAST                       0: self
+                        418     LOAD_ATTR                       12: min_mm_per_arc_segment
+                        420     BINARY_TRUE_DIVIDE              
+                        422     CALL_METHOD                     1
+                        424     CALL_FUNCTION                   2
+                        426     STORE_FAST                      26: segments
+                        428     LOAD_FAST                       5: gcmd
+                        430     LOAD_METHOD                     13: get_float
+                        432     LOAD_CONST                      7: 'E'
+                        434     LOAD_CONST                      0: None
+                        436     CALL_METHOD                     2
+                        438     STORE_FAST                      27: asE
+                        440     LOAD_FAST                       5: gcmd
+                        442     LOAD_METHOD                     13: get_float
+                        444     LOAD_CONST                      8: 'F'
+                        446     LOAD_CONST                      0: None
+                        448     CALL_METHOD                     2
+                        450     STORE_FAST                      28: asF
+                        452     LOAD_CONST                      3: 0
+                        454     DUP_TOP                         
+                        456     STORE_FAST                      29: e_per_move
+                        458     STORE_FAST                      30: e_base
+                        460     LOAD_FAST                       27: asE
+                        462     LOAD_CONST                      0: None
+                        464     IS_OP                           1 (is not)
+                        466     POP_JUMP_IF_FALSE               496
+                        470     LOAD_FAST                       6: absolut_extrude
+                        472     POP_JUMP_IF_FALSE               484
+                        476     LOAD_FAST                       1: currentPos
+                        478     LOAD_CONST                      9: 3
+                        480     BINARY_SUBSCR                   
+                        482     STORE_FAST                      30: e_base
+                        484     LOAD_FAST                       27: asE
+                        486     LOAD_FAST                       30: e_base
+                        488     BINARY_SUBTRACT                 
+                        490     LOAD_FAST                       26: segments
+                        492     BINARY_TRUE_DIVIDE              
+                        494     STORE_FAST                      29: e_per_move
+                        496     LOAD_FAST                       16: angular_travel
+                        498     LOAD_FAST                       26: segments
+                        500     BINARY_TRUE_DIVIDE              
+                        502     STORE_FAST                      31: theta_per_segment
+                        504     LOAD_FAST                       19: linear_travel
+                        506     LOAD_FAST                       26: segments
+                        508     BINARY_TRUE_DIVIDE              
+                        510     STORE_FAST                      32: linear_per_segment
+                        512     LOAD_FAST                       31: theta_per_segment
+                        514     LOAD_FAST                       31: theta_per_segment
+                        516     BINARY_MULTIPLY                 
+                        518     STORE_FAST                      33: theta_per_segment_sqr
+                        520     LOAD_FAST                       31: theta_per_segment
+                        522     LOAD_FAST                       33: theta_per_segment_sqr
+                        524     LOAD_FAST                       31: theta_per_segment
+                        526     BINARY_MULTIPLY                 
+                        528     LOAD_CONST                      10: 6
+                        530     BINARY_TRUE_DIVIDE              
+                        532     BINARY_SUBTRACT                 
+                        534     STORE_FAST                      34: sin_T
+                        536     LOAD_CONST                      2: 1
+                        538     LOAD_CONST                      11: 0.5
+                        540     LOAD_FAST                       33: theta_per_segment_sqr
+                        542     BINARY_MULTIPLY                 
+                        544     BINARY_SUBTRACT                 
+                        546     STORE_FAST                      35: cos_T
+                        548     LOAD_CONST                      1: 0
+                        550     STORE_FAST                      36: correct_count
+                        552     LOAD_FAST                       0: self
+                        554     LOAD_ATTR                       14: n_arc_revise
+                        556     POP_JUMP_IF_FALSE               566
+                        560     LOAD_FAST                       0: self
+                        562     LOAD_ATTR                       14: n_arc_revise
+                        564     STORE_FAST                      36: correct_count
+                        566     LOAD_GLOBAL                     15: range
+                        568     LOAD_CONST                      2: 1
+                        570     LOAD_GLOBAL                     16: int
+                        572     LOAD_FAST                       26: segments
+                        574     CALL_FUNCTION                   1
+                        576     LOAD_CONST                      2: 1
+                        578     BINARY_ADD                      
+                        580     CALL_FUNCTION                   2
+                        582     GET_ITER                        
+                        584     FOR_ITER                        320 (to 908)
+                        588     STORE_FAST                      37: i
+                        590     LOAD_FAST                       37: i
+                        592     LOAD_FAST                       32: linear_per_segment
+                        594     BINARY_MULTIPLY                 
+                        596     STORE_FAST                      38: dist_Helical
+                        598     LOAD_FAST                       36: correct_count
+                        600     LOAD_CONST                      2: 1
+                        602     INPLACE_SUBTRACT                
+                        604     STORE_FAST                      36: correct_count
+                        606     LOAD_FAST                       36: correct_count
+                        608     LOAD_CONST                      1: 0
+                        610     COMPARE_OP                      4 (>)
+                        612     POP_JUMP_IF_FALSE               654
+                        616     LOAD_FAST                       10: r_P
+                        618     LOAD_FAST                       34: sin_T
+                        620     BINARY_MULTIPLY                 
+                        622     LOAD_FAST                       11: r_Q
+                        624     LOAD_FAST                       35: cos_T
+                        626     BINARY_MULTIPLY                 
+                        628     BINARY_ADD                      
+                        630     STORE_FAST                      39: r_new
+                        632     LOAD_FAST                       10: r_P
+                        634     LOAD_FAST                       35: cos_T
+                        636     BINARY_MULTIPLY                 
+                        638     LOAD_FAST                       11: r_Q
+                        640     LOAD_FAST                       34: sin_T
+                        642     BINARY_MULTIPLY                 
+                        644     BINARY_SUBTRACT                 
+                        646     STORE_FAST                      10: r_P
+                        648     LOAD_FAST                       39: r_new
+                        650     STORE_FAST                      11: r_Q
+                        652     JUMP_FORWARD                    86 (to 740)
+                        654     LOAD_FAST                       0: self
+                        656     LOAD_ATTR                       14: n_arc_revise
+                        658     STORE_FAST                      36: correct_count
+                        660     LOAD_FAST                       37: i
+                        662     LOAD_FAST                       31: theta_per_segment
+                        664     BINARY_MULTIPLY                 
+                        666     STORE_FAST                      40: angle_i
+                        668     LOAD_GLOBAL                     0: math
+                        670     LOAD_METHOD                     17: cos
+                        672     LOAD_FAST                       40: angle_i
+                        674     CALL_METHOD                     1
+                        676     STORE_FAST                      41: cos_Ti
+                        678     LOAD_GLOBAL                     0: math
+                        680     LOAD_METHOD                     18: sin
+                        682     LOAD_FAST                       40: angle_i
+                        684     CALL_METHOD                     1
+                        686     STORE_FAST                      42: sin_Ti
+                        688     LOAD_FAST                       3: offset
+                        690     LOAD_CONST                      1: 0
+                        692     BINARY_SUBSCR                   
+                        694     UNARY_NEGATIVE                  
+                        696     LOAD_FAST                       41: cos_Ti
+                        698     BINARY_MULTIPLY                 
+                        700     LOAD_FAST                       3: offset
+                        702     LOAD_CONST                      2: 1
+                        704     BINARY_SUBSCR                   
+                        706     LOAD_FAST                       42: sin_Ti
+                        708     BINARY_MULTIPLY                 
+                        710     BINARY_ADD                      
+                        712     STORE_FAST                      10: r_P
+                        714     LOAD_FAST                       3: offset
+                        716     LOAD_CONST                      1: 0
+                        718     BINARY_SUBSCR                   
+                        720     UNARY_NEGATIVE                  
+                        722     LOAD_FAST                       42: sin_Ti
+                        724     BINARY_MULTIPLY                 
+                        726     LOAD_FAST                       3: offset
+                        728     LOAD_CONST                      2: 1
+                        730     BINARY_SUBSCR                   
+                        732     LOAD_FAST                       41: cos_Ti
+                        734     BINARY_MULTIPLY                 
+                        736     BINARY_SUBTRACT                 
+                        738     STORE_FAST                      11: r_Q
+                        740     BUILD_LIST                      0
+                        742     LOAD_CONST                      12: (None, None, None)
+                        744     LIST_EXTEND                     1
+                        746     STORE_FAST                      43: c
+                        748     LOAD_FAST                       12: center_P
+                        750     LOAD_FAST                       10: r_P
+                        752     BINARY_ADD                      
+                        754     LOAD_FAST                       43: c
+                        756     LOAD_FAST                       7: alpha_axis
+                        758     STORE_SUBSCR                    
+                        760     LOAD_FAST                       13: center_Q
+                        762     LOAD_FAST                       11: r_Q
+                        764     BINARY_ADD                      
+                        766     LOAD_FAST                       43: c
+                        768     LOAD_FAST                       8: beta_axis
+                        770     STORE_SUBSCR                    
+                        772     LOAD_FAST                       1: currentPos
+                        774     LOAD_FAST                       9: helical_axis
+                        776     BINARY_SUBSCR                   
+                        778     LOAD_FAST                       38: dist_Helical
+                        780     BINARY_ADD                      
+                        782     LOAD_FAST                       43: c
+                        784     LOAD_FAST                       9: helical_axis
+                        786     STORE_SUBSCR                    
+                        788     LOAD_FAST                       37: i
+                        790     LOAD_FAST                       26: segments
+                        792     COMPARE_OP                      2 (==)
+                        794     POP_JUMP_IF_FALSE               802
+                        798     LOAD_FAST                       2: targetPos
+                        800     STORE_FAST                      43: c
+                        802     LOAD_FAST                       43: c
+                        804     LOAD_CONST                      1: 0
+                        806     BINARY_SUBSCR                   
+                        808     LOAD_FAST                       43: c
+                        810     LOAD_CONST                      2: 1
+                        812     BINARY_SUBSCR                   
+                        814     LOAD_FAST                       43: c
+                        816     LOAD_CONST                      5: 2
+                        818     BINARY_SUBSCR                   
+                        820     LOAD_CONST                      13: ('X', 'Y', 'Z')
+                        822     BUILD_CONST_KEY_MAP             3
+                        824     STORE_FAST                      44: g1_params
+                        826     LOAD_FAST                       29: e_per_move
+                        828     POP_JUMP_IF_FALSE               858
+                        832     LOAD_FAST                       30: e_base
+                        834     LOAD_FAST                       29: e_per_move
+                        836     BINARY_ADD                      
+                        838     LOAD_FAST                       44: g1_params
+                        840     LOAD_CONST                      7: 'E'
+                        842     STORE_SUBSCR                    
+                        844     LOAD_FAST                       6: absolut_extrude
+                        846     POP_JUMP_IF_FALSE               858
+                        850     LOAD_FAST                       30: e_base
+                        852     LOAD_FAST                       29: e_per_move
+                        854     INPLACE_ADD                     
+                        856     STORE_FAST                      30: e_base
+                        858     LOAD_FAST                       28: asF
+                        860     LOAD_CONST                      0: None
+                        862     IS_OP                           1 (is not)
+                        864     POP_JUMP_IF_FALSE               876
+                        868     LOAD_FAST                       28: asF
+                        870     LOAD_FAST                       44: g1_params
+                        872     LOAD_CONST                      8: 'F'
+                        874     STORE_SUBSCR                    
+                        876     LOAD_FAST                       0: self
+                        878     LOAD_ATTR                       19: gcode
+                        880     LOAD_METHOD                     20: create_gcode_command
+                        882     LOAD_CONST                      14: 'G1'
+                        884     LOAD_CONST                      14: 'G1'
+                        886     LOAD_FAST                       44: g1_params
+                        888     CALL_METHOD                     3
+                        890     STORE_FAST                      45: g1_gcmd
+                        892     LOAD_FAST                       0: self
+                        894     LOAD_ATTR                       21: gcode_move
+                        896     LOAD_METHOD                     22: cmd_G1
+                        898     LOAD_FAST                       45: g1_gcmd
+                        900     CALL_METHOD                     1
+                        902     POP_TOP                         
+                        904     JUMP_ABSOLUTE                   584
+                        908     LOAD_CONST                      0: None
+                        910     RETURN_VALUE                    
+                'ArcSupport.planArc'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'ArcSupport'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'ArcSupport.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> cmd_G2
+                18      LOAD_CONST                      4: 'ArcSupport.cmd_G2'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: cmd_G2
+                24      LOAD_CONST                      5: <CODE> cmd_G3
+                26      LOAD_CONST                      6: 'ArcSupport.cmd_G3'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: cmd_G3
+                32      LOAD_CONST                      7: <CODE> cmd_G17
+                34      LOAD_CONST                      8: 'ArcSupport.cmd_G17'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: cmd_G17
+                40      LOAD_CONST                      9: <CODE> cmd_G18
+                42      LOAD_CONST                      10: 'ArcSupport.cmd_G18'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: cmd_G18
+                48      LOAD_CONST                      11: <CODE> cmd_G19
+                50      LOAD_CONST                      12: 'ArcSupport.cmd_G19'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: cmd_G19
+                56      LOAD_CONST                      13: <CODE> _cmd_inner
+                58      LOAD_CONST                      14: 'ArcSupport._cmd_inner'
+                60      MAKE_FUNCTION                   0
+                62      STORE_NAME                      9: _cmd_inner
+                64      LOAD_CONST                      15: <CODE> planArc
+                66      LOAD_CONST                      16: 'ArcSupport.planArc'
+                68      MAKE_FUNCTION                   0
+                70      STORE_NAME                      10: planArc
+                72      LOAD_CONST                      17: None
+                74      RETURN_VALUE                    
+        'ArcSupport'
+        [Code]
+            File Name: /extras/gcode_arcs.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'ArcSupport'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: ArcSupport
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: math
+        6       STORE_NAME                      0: math
+        8       LOAD_CONST                      0: 0
+        10      STORE_NAME                      1: ARC_PLANE_X_Y
+        12      LOAD_CONST                      2: 1
+        14      STORE_NAME                      2: ARC_PLANE_X_Z
+        16      LOAD_CONST                      3: 2
+        18      STORE_NAME                      3: ARC_PLANE_Y_Z
+        20      LOAD_CONST                      0: 0
+        22      STORE_NAME                      4: X_AXIS
+        24      LOAD_CONST                      2: 1
+        26      STORE_NAME                      5: Y_AXIS
+        28      LOAD_CONST                      3: 2
+        30      STORE_NAME                      6: Z_AXIS
+        32      LOAD_CONST                      4: 3
+        34      STORE_NAME                      7: E_AXIS
+        36      LOAD_BUILD_CLASS                
+        38      LOAD_CONST                      5: <CODE> ArcSupport
+        40      LOAD_CONST                      6: 'ArcSupport'
+        42      MAKE_FUNCTION                   0
+        44      LOAD_CONST                      6: 'ArcSupport'
+        46      CALL_FUNCTION                   2
+        48      STORE_NAME                      8: ArcSupport
+        50      LOAD_CONST                      7: <CODE> load_config
+        52      LOAD_CONST                      8: 'load_config'
+        54      MAKE_FUNCTION                   0
+        56      STORE_NAME                      9: load_config
+        58      LOAD_CONST                      1: None
+        60      RETURN_VALUE                    

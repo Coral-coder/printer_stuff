@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/homing.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: homing.pyc (Python 3.9)
 
@@ -102,7 +111,88 @@ class HomingMove:
         all_endstop_trigger = multi_complete(self.printer, endstop_triggers)
         self.toolhead.dwell(HOMING_START_DELAY)
         error = None
-    # WARNING: Decompyle incomplete
+        
+        try:
+            self.toolhead.drip_move(movepos, speed, all_endstop_trigger)
+        except self.printer.command_error:
+            e = None
+            
+            try:
+                error = '{"code":"key20", "msg":"Error during homing move: %s", "values": [%s]}' % (str(e), str(e))
+                logging.info('No trigger on %s after full movement, set MOTOR_STALL_MODE DATA=2' % name)
+                self.handle_force_stop()
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            trigger_times = { }
+            move_end_print_time = self.toolhead.get_last_move_time()
+            suspended_det_status = False
+            if self.prtouch_v3 is not None:
+                suspended_det_status = self.prtouch_v3.get_suspended_det_status()
+
+
+        for mcu_endstop, name in self.endstops:
+            trigger_time = mcu_endstop.home_wait(move_end_print_time)
+            if trigger_time > 0:
+                trigger_times[name] = trigger_time
+            elif trigger_time < 0 and error is None:
+                error = '{"code":"key21", "msg":"Communication timeout during homing %s", "values": ["%s"]}' % (name, name)
+                logging.info('Communication timeout during homing %s, set MOTOR_STALL_MODE DATA=2' % name)
+                self.handle_force_stop()
+            elif check_triggered and error is None and suspended_det_status is not True:
+                error = '{"code":"key22", "msg":"No trigger on %s after full movement", "values": ["%s"]}' % (name, name)
+                if name == 'z':
+                    error = None
+                    self.prtouch_v3.z_full_movement_flag = True
+                    logging.info('No trigger on z after full movement, set MOTOR_STALL_MODE DATA=2')
+                    gcode = self.printer.lookup_object('gcode')
+                    gcode.run_script_from_command('MOTOR_STALL_MODE DATA=2')
+            logging.info('No trigger on %s after full movement, set MOTOR_STALL_MODE DATA=2' % name)
+            self.handle_force_stop()
+        self.toolhead.flush_step_generation()
+        for sp in self.stepper_positions:
+            tt = trigger_times.get(sp.endstop_name, move_end_print_time)
+            sp.note_home_end(tt)
+        if probe_pos:
+            halt_steps = { sp.stepper_name: sp.halt_pos - sp.start_pos for sp in (self.stepper_positions) }
+            trig_steps = { sp.stepper_name: sp.trig_pos - sp.start_pos for sp in (self.stepper_positions) }
+            haltpos = trigpos = self.calc_toolhead_pos(kin_spos, trig_steps)
+            if trig_steps != halt_steps:
+                haltpos = self.calc_toolhead_pos(kin_spos, halt_steps)
+            else:
+                haltpos = trigpos = movepos
+                over_steps = { sp.stepper_name: sp.halt_pos - sp.trig_pos for sp in (self.stepper_positions) }
+                if any(over_steps.values()):
+                    self.toolhead.set_position(movepos)
+                    halt_kin_spos = { s.get_name(): s.get_commanded_position() for s in (kin.get_steppers()) }
+                    haltpos = self.calc_toolhead_pos(halt_kin_spos, over_steps)
+        self.toolhead.set_position(haltpos)
+        
+        try:
+            self.printer.send_event('homing:homing_move_end', self)
+        except self.printer.command_error:
+            e = None
+            
+            try:
+                if error is None:
+                    error = str(e)
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            if error is not None:
+                error_data = json.loads(error.replace("'", '"'))
+                if error_data.get('values') == 'probe':
+                    gcode = self.printer.lookup_object('gcode')
+                    gcode.run_script_from_command('Z_FAIL_PROTECT_HOTBED')
+                    logging.info('Homing move end, error:%s' % error)
+                raise self.printer.command_error(error)
+            return trigpos
+
+
 
     
     def check_no_movement(self):

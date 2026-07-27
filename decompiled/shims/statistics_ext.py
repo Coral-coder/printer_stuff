@@ -16,11 +16,10 @@ class PrinterSysStats:
         
         try:
             self.mem_file = open('/proc/meminfo', 'r')
-        finally:
+        except:
             pass
-        printer.register_event_handler('klippy:disconnect', self._disconnect)
-        return None
 
+        printer.register_event_handler('klippy:disconnect', self._disconnect)
 
     
     def _disconnect(self):
@@ -48,8 +47,10 @@ class PrinterSysStats:
                         msg = '%s memavail=%d' % (msg, self.last_mem_avail)
                         self
                     
-            return (False, msg)
+            except:
+                self
 
+            return (False, msg)
 
     
     def get_status(self, eventtime):

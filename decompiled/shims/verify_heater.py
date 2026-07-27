@@ -90,7 +90,26 @@ class HeaterCheck:
         elif self.heater_name == 'chamber_heater':
             code_key = 'key559'
         m = '{"code":"%s","msg":"Heater %s not heating at expected rate"}' % (code_key, self.heater_name)
-    # WARNING: Decompyle incomplete
+        
+        try:
+            gcode = self.printer.lookup_object('gcode')
+            if gcode:
+                gcode.run_script_from_command('M140 S0')
+                gcode.run_script_from_command('M104 S0')
+                gcode.run_script_from_command('M141 S0')
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return self.printer.get_reactor().NEVER
+
+
 
 
 

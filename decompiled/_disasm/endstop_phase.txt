@@ -1,0 +1,1933 @@
+endstop_phase.pyc (Python 3.9)
+[Code]
+    File Name: /extras/endstop_phase.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'math'
+        'logging'
+        'stepper'
+        'TRINAMIC_DRIVERS'
+        'PhaseCalc'
+        'EndstopPhase'
+        'EndstopPhases'
+        'load_config_prefix'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        (
+            'tmc2130'
+            'tmc2208'
+            'tmc2209'
+            'tmc2660'
+            'tmc5160'
+        )
+        [Code]
+            File Name: /extras/endstop_phase.py
+            Object Name: PhaseCalc
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'lookup_tmc'
+                'convert_phase'
+                'calc_phase'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PhaseCalc'
+                None
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: __init__
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'name'
+                        'phases'
+                        'tmc_module'
+                        'phase_history'
+                        'last_phase'
+                        'last_mcu_position'
+                        'is_primary'
+                        'stats_only'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'name'
+                        'phases'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: printer
+                        6       LOAD_FAST                       2: name
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: name
+                        12      LOAD_FAST                       3: phases
+                        14      LOAD_FAST                       0: self
+                        16      STORE_ATTR                      2: phases
+                        18      LOAD_CONST                      0: None
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: tmc_module
+                        24      LOAD_CONST                      0: None
+                        26      DUP_TOP                         
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      4: phase_history
+                        32      DUP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      5: last_phase
+                        38      LOAD_FAST                       0: self
+                        40      STORE_ATTR                      6: last_mcu_position
+                        42      LOAD_CONST                      1: False
+                        44      DUP_TOP                         
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      7: is_primary
+                        50      LOAD_FAST                       0: self
+                        52      STORE_ATTR                      8: stats_only
+                        54      LOAD_CONST                      0: None
+                        56      RETURN_VALUE                    
+                'PhaseCalc.__init__'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: lookup_tmc
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'TRINAMIC_DRIVERS'
+                        'name'
+                        'printer'
+                        'lookup_object'
+                        'tmc_module'
+                        'phases'
+                        'get_phase_offset'
+                        'phase_history'
+                    [Var Names]
+                        'self'
+                        'driver'
+                        'driver_name'
+                        'module'
+                        'phase_offset'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        '%s %s'
+                        0
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: TRINAMIC_DRIVERS
+                        2       GET_ITER                        
+                        4       FOR_ITER                        74 (to 80)
+                        6       STORE_FAST                      1: driver
+                        8       LOAD_CONST                      1: '%s %s'
+                        10      LOAD_FAST                       1: driver
+                        12      LOAD_FAST                       0: self
+                        14      LOAD_ATTR                       1: name
+                        16      BUILD_TUPLE                     2
+                        18      BINARY_MODULO                   
+                        20      STORE_FAST                      2: driver_name
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: printer
+                        26      LOAD_METHOD                     3: lookup_object
+                        28      LOAD_FAST                       2: driver_name
+                        30      LOAD_CONST                      0: None
+                        32      CALL_METHOD                     2
+                        34      STORE_FAST                      3: module
+                        36      LOAD_FAST                       3: module
+                        38      LOAD_CONST                      0: None
+                        40      IS_OP                           1 (is not)
+                        42      POP_JUMP_IF_FALSE               4
+                        44      LOAD_FAST                       3: module
+                        46      LOAD_FAST                       0: self
+                        48      STORE_ATTR                      4: tmc_module
+                        50      LOAD_FAST                       0: self
+                        52      LOAD_ATTR                       5: phases
+                        54      LOAD_CONST                      0: None
+                        56      IS_OP                           0 (is)
+                        58      POP_JUMP_IF_FALSE               74
+                        60      LOAD_FAST                       3: module
+                        62      LOAD_METHOD                     6: get_phase_offset
+                        64      CALL_METHOD                     0
+                        66      UNPACK_SEQUENCE                 2
+                        68      STORE_FAST                      4: phase_offset
+                        70      LOAD_FAST                       0: self
+                        72      STORE_ATTR                      5: phases
+                        74      POP_TOP                         
+                        76      JUMP_ABSOLUTE                   80
+                        78      JUMP_ABSOLUTE                   4
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       5: phases
+                        84      LOAD_CONST                      0: None
+                        86      IS_OP                           1 (is not)
+                        88      POP_JUMP_IF_FALSE               104
+                        90      LOAD_CONST                      2: 0
+                        92      BUILD_LIST                      1
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       5: phases
+                        98      BINARY_MULTIPLY                 
+                        100     LOAD_FAST                       0: self
+                        102     STORE_ATTR                      7: phase_history
+                        104     LOAD_CONST                      0: None
+                        106     RETURN_VALUE                    
+                'PhaseCalc.lookup_tmc'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: convert_phase
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'phases'
+                        'int'
+                        'float'
+                    [Var Names]
+                        'self'
+                        'driver_phase'
+                        'driver_phases'
+                        'phases'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0.5
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: phases
+                        4       STORE_FAST                      3: phases
+                        6       LOAD_GLOBAL                     1: int
+                        8       LOAD_GLOBAL                     2: float
+                        10      LOAD_FAST                       1: driver_phase
+                        12      CALL_FUNCTION                   1
+                        14      LOAD_FAST                       2: driver_phases
+                        16      BINARY_TRUE_DIVIDE              
+                        18      LOAD_FAST                       3: phases
+                        20      BINARY_MULTIPLY                 
+                        22      LOAD_CONST                      1: 0.5
+                        24      BINARY_ADD                      
+                        26      CALL_FUNCTION                   1
+                        28      LOAD_FAST                       3: phases
+                        30      BINARY_MODULO                   
+                        32      RETURN_VALUE                    
+                'PhaseCalc.convert_phase'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: calc_phase
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'tmc_module'
+                        'get_phase_offset'
+                        'printer'
+                        'get_start_args'
+                        'get'
+                        'command_error'
+                        'name'
+                        'phases'
+                        'phase_history'
+                        'last_phase'
+                        'last_mcu_position'
+                    [Var Names]
+                        'self'
+                        'stepper'
+                        'trig_mcu_pos'
+                        'mcu_phase_offset'
+                        'phases'
+                        'phase'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'debugoutput'
+                        'Stepper %s phase unknown'
+                        1
+                    [Disassembly]
+                        0       LOAD_CONST                      1: 0
+                        2       STORE_FAST                      3: mcu_phase_offset
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       0: tmc_module
+                        8       LOAD_CONST                      0: None
+                        10      IS_OP                           1 (is not)
+                        12      POP_JUMP_IF_FALSE               80
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       0: tmc_module
+                        18      LOAD_METHOD                     1: get_phase_offset
+                        20      CALL_METHOD                     0
+                        22      UNPACK_SEQUENCE                 2
+                        24      STORE_FAST                      3: mcu_phase_offset
+                        26      STORE_FAST                      4: phases
+                        28      LOAD_FAST                       3: mcu_phase_offset
+                        30      LOAD_CONST                      0: None
+                        32      IS_OP                           0 (is)
+                        34      POP_JUMP_IF_FALSE               80
+                        36      LOAD_FAST                       0: self
+                        38      LOAD_ATTR                       2: printer
+                        40      LOAD_METHOD                     3: get_start_args
+                        42      CALL_METHOD                     0
+                        44      LOAD_METHOD                     4: get
+                        46      LOAD_CONST                      2: 'debugoutput'
+                        48      CALL_METHOD                     1
+                        50      LOAD_CONST                      0: None
+                        52      IS_OP                           0 (is)
+                        54      POP_JUMP_IF_FALSE               76
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_ATTR                       2: printer
+                        60      LOAD_METHOD                     5: command_error
+                        62      LOAD_CONST                      3: 'Stepper %s phase unknown'
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       6: name
+                        68      BUILD_TUPLE                     1
+                        70      BINARY_MODULO                   
+                        72      CALL_METHOD                     1
+                        74      RAISE_VARARGS                   1
+                        76      LOAD_CONST                      1: 0
+                        78      STORE_FAST                      3: mcu_phase_offset
+                        80      LOAD_FAST                       2: trig_mcu_pos
+                        82      LOAD_FAST                       3: mcu_phase_offset
+                        84      BINARY_ADD                      
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       7: phases
+                        90      BINARY_MODULO                   
+                        92      STORE_FAST                      5: phase
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       8: phase_history
+                        98      LOAD_FAST                       5: phase
+                        100     DUP_TOP_TWO                     
+                        102     BINARY_SUBSCR                   
+                        104     LOAD_CONST                      4: 1
+                        106     INPLACE_ADD                     
+                        108     ROT_THREE                       
+                        110     STORE_SUBSCR                    
+                        112     LOAD_FAST                       5: phase
+                        114     LOAD_FAST                       0: self
+                        116     STORE_ATTR                      9: last_phase
+                        118     LOAD_FAST                       2: trig_mcu_pos
+                        120     LOAD_FAST                       0: self
+                        122     STORE_ATTR                      10: last_mcu_position
+                        124     LOAD_FAST                       5: phase
+                        126     RETURN_VALUE                    
+                'PhaseCalc.calc_phase'
+                (
+                    None
+                )
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PhaseCalc'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      10: (None,)
+                10      LOAD_CONST                      2: <CODE> __init__
+                12      LOAD_CONST                      3: 'PhaseCalc.__init__'
+                14      MAKE_FUNCTION                   1
+                16      STORE_NAME                      3: __init__
+                18      LOAD_CONST                      4: <CODE> lookup_tmc
+                20      LOAD_CONST                      5: 'PhaseCalc.lookup_tmc'
+                22      MAKE_FUNCTION                   0
+                24      STORE_NAME                      4: lookup_tmc
+                26      LOAD_CONST                      6: <CODE> convert_phase
+                28      LOAD_CONST                      7: 'PhaseCalc.convert_phase'
+                30      MAKE_FUNCTION                   0
+                32      STORE_NAME                      5: convert_phase
+                34      LOAD_CONST                      8: <CODE> calc_phase
+                36      LOAD_CONST                      9: 'PhaseCalc.calc_phase'
+                38      MAKE_FUNCTION                   0
+                40      STORE_NAME                      6: calc_phase
+                42      LOAD_CONST                      1: None
+                44      RETURN_VALUE                    
+        'PhaseCalc'
+        [Code]
+            File Name: /extras/endstop_phase.py
+            Object Name: EndstopPhase
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'align_endstop'
+                'get_homed_offset'
+                'handle_home_rails_end'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'EndstopPhase'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'get_name'
+                        'split'
+                        'name'
+                        'getsection'
+                        'stepper'
+                        'parse_step_distance'
+                        'step_dist'
+                        'getint'
+                        'phases'
+                        'PhaseCalc'
+                        'phase_calc'
+                        'register_event_handler'
+                        'lookup_tmc'
+                        'handle_home_rails_end'
+                        'load_object'
+                        'endstop_phase'
+                        'get'
+                        'getintlist'
+                        'error'
+                        'convert_phase'
+                        'getboolean'
+                        'endstop_align_zero'
+                        'getfloat'
+                        'endstop_accuracy'
+                        'endstop_phase_accuracy'
+                        'int'
+                        'math'
+                        'ceil'
+                        'get_start_args'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'sconfig'
+                        'rotation_dist'
+                        'steps_per_rotation'
+                        'trigger_phase'
+                        'p'
+                        'ps'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        1
+                        'microsteps'
+                        False
+                        (
+                            'note_valid'
+                        )
+                        4
+                        'klippy:connect'
+                        'homing:home_rails_end'
+                        'endstop_phase'
+                        'trigger_phase'
+                        '/'
+                        2
+                        (
+                            'sep'
+                            'count'
+                        )
+                        '{"code":"key157", "msg": "Invalid trigger_phase \'%s\'", "values": ["%s"]}'
+                        'endstop_align_zero'
+                        'endstop_accuracy'
+                        0
+                        (
+                            'above'
+                        )
+                        0.5
+                        '{"code":"key158", "msg": "Endstop for %s is not accurate enough for stepper phase adjustment", "values": ["%s"]}'
+                        'debugoutput'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      LOAD_FAST                       1: config
+                        12      LOAD_METHOD                     2: get_name
+                        14      CALL_METHOD                     0
+                        16      LOAD_METHOD                     3: split
+                        18      CALL_METHOD                     0
+                        20      LOAD_CONST                      1: 1
+                        22      BINARY_SUBSCR                   
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: name
+                        28      LOAD_FAST                       1: config
+                        30      LOAD_METHOD                     5: getsection
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       4: name
+                        36      CALL_METHOD                     1
+                        38      STORE_FAST                      2: sconfig
+                        40      LOAD_GLOBAL                     6: stepper
+                        42      LOAD_METHOD                     7: parse_step_distance
+                        44      LOAD_FAST                       2: sconfig
+                        46      CALL_METHOD                     1
+                        48      UNPACK_SEQUENCE                 2
+                        50      STORE_FAST                      3: rotation_dist
+                        52      STORE_FAST                      4: steps_per_rotation
+                        54      LOAD_FAST                       3: rotation_dist
+                        56      LOAD_FAST                       4: steps_per_rotation
+                        58      BINARY_TRUE_DIVIDE              
+                        60      LOAD_FAST                       0: self
+                        62      STORE_ATTR                      8: step_dist
+                        64      LOAD_FAST                       2: sconfig
+                        66      LOAD_ATTR                       9: getint
+                        68      LOAD_CONST                      2: 'microsteps'
+                        70      LOAD_CONST                      3: False
+                        72      LOAD_CONST                      4: ('note_valid',)
+                        74      CALL_FUNCTION_KW                2
+                        76      LOAD_CONST                      5: 4
+                        78      BINARY_MULTIPLY                 
+                        80      LOAD_FAST                       0: self
+                        82      STORE_ATTR                      10: phases
+                        84      LOAD_GLOBAL                     11: PhaseCalc
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       1: printer
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       4: name
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       10: phases
+                        98      CALL_FUNCTION                   3
+                        100     LOAD_FAST                       0: self
+                        102     STORE_ATTR                      12: phase_calc
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       1: printer
+                        108     LOAD_METHOD                     13: register_event_handler
+                        110     LOAD_CONST                      6: 'klippy:connect'
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       12: phase_calc
+                        116     LOAD_ATTR                       14: lookup_tmc
+                        118     CALL_METHOD                     2
+                        120     POP_TOP                         
+                        122     LOAD_FAST                       0: self
+                        124     LOAD_ATTR                       1: printer
+                        126     LOAD_METHOD                     13: register_event_handler
+                        128     LOAD_CONST                      7: 'homing:home_rails_end'
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       15: handle_home_rails_end
+                        134     CALL_METHOD                     2
+                        136     POP_TOP                         
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_ATTR                       1: printer
+                        142     LOAD_METHOD                     16: load_object
+                        144     LOAD_FAST                       1: config
+                        146     LOAD_CONST                      8: 'endstop_phase'
+                        148     CALL_METHOD                     2
+                        150     POP_TOP                         
+                        152     LOAD_CONST                      0: None
+                        154     LOAD_FAST                       0: self
+                        156     STORE_ATTR                      17: endstop_phase
+                        158     LOAD_FAST                       1: config
+                        160     LOAD_METHOD                     18: get
+                        162     LOAD_CONST                      9: 'trigger_phase'
+                        164     LOAD_CONST                      0: None
+                        166     CALL_METHOD                     2
+                        168     STORE_FAST                      5: trigger_phase
+                        170     LOAD_FAST                       5: trigger_phase
+                        172     LOAD_CONST                      0: None
+                        174     IS_OP                           1 (is not)
+                        176     POP_JUMP_IF_FALSE               240
+                        178     LOAD_FAST                       1: config
+                        180     LOAD_ATTR                       19: getintlist
+                        182     LOAD_CONST                      9: 'trigger_phase'
+                        184     LOAD_CONST                      10: '/'
+                        186     LOAD_CONST                      11: 2
+                        188     LOAD_CONST                      12: ('sep', 'count')
+                        190     CALL_FUNCTION_KW                3
+                        192     UNPACK_SEQUENCE                 2
+                        194     STORE_FAST                      6: p
+                        196     STORE_FAST                      7: ps
+                        198     LOAD_FAST                       6: p
+                        200     LOAD_FAST                       7: ps
+                        202     COMPARE_OP                      5 (>=)
+                        204     POP_JUMP_IF_FALSE               224
+                        206     LOAD_FAST                       1: config
+                        208     LOAD_METHOD                     20: error
+                        210     LOAD_CONST                      13: '{"code":"key157", "msg": "Invalid trigger_phase \'%s\'", "values": ["%s"]}'
+                        212     LOAD_FAST                       5: trigger_phase
+                        214     LOAD_FAST                       5: trigger_phase
+                        216     BUILD_TUPLE                     2
+                        218     BINARY_MODULO                   
+                        220     CALL_METHOD                     1
+                        222     RAISE_VARARGS                   1
+                        224     LOAD_FAST                       0: self
+                        226     LOAD_ATTR                       12: phase_calc
+                        228     LOAD_METHOD                     21: convert_phase
+                        230     LOAD_FAST                       6: p
+                        232     LOAD_FAST                       7: ps
+                        234     CALL_METHOD                     2
+                        236     LOAD_FAST                       0: self
+                        238     STORE_ATTR                      17: endstop_phase
+                        240     LOAD_FAST                       1: config
+                        242     LOAD_METHOD                     22: getboolean
+                        244     LOAD_CONST                      14: 'endstop_align_zero'
+                        246     LOAD_CONST                      3: False
+                        248     CALL_METHOD                     2
+                        250     LOAD_FAST                       0: self
+                        252     STORE_ATTR                      23: endstop_align_zero
+                        254     LOAD_FAST                       1: config
+                        256     LOAD_ATTR                       24: getfloat
+                        258     LOAD_CONST                      15: 'endstop_accuracy'
+                        260     LOAD_CONST                      0: None
+                        262     LOAD_CONST                      16: 0
+                        264     LOAD_CONST                      17: ('above',)
+                        266     CALL_FUNCTION_KW                3
+                        268     LOAD_FAST                       0: self
+                        270     STORE_ATTR                      25: endstop_accuracy
+                        272     LOAD_FAST                       0: self
+                        274     LOAD_ATTR                       25: endstop_accuracy
+                        276     LOAD_CONST                      0: None
+                        278     IS_OP                           0 (is)
+                        280     POP_JUMP_IF_FALSE               302
+                        284     LOAD_FAST                       0: self
+                        286     LOAD_ATTR                       10: phases
+                        288     LOAD_CONST                      11: 2
+                        290     BINARY_FLOOR_DIVIDE             
+                        292     LOAD_CONST                      1: 1
+                        294     BINARY_SUBTRACT                 
+                        296     LOAD_FAST                       0: self
+                        298     STORE_ATTR                      26: endstop_phase_accuracy
+                        300     JUMP_FORWARD                    66 (to 368)
+                        302     LOAD_FAST                       0: self
+                        304     LOAD_ATTR                       17: endstop_phase
+                        306     LOAD_CONST                      0: None
+                        308     IS_OP                           1 (is not)
+                        310     POP_JUMP_IF_FALSE               344
+                        314     LOAD_GLOBAL                     27: int
+                        316     LOAD_GLOBAL                     28: math
+                        318     LOAD_METHOD                     29: ceil
+                        320     LOAD_FAST                       0: self
+                        322     LOAD_ATTR                       25: endstop_accuracy
+                        324     LOAD_CONST                      18: 0.5
+                        326     BINARY_MULTIPLY                 
+                        328     LOAD_FAST                       0: self
+                        330     LOAD_ATTR                       8: step_dist
+                        332     BINARY_TRUE_DIVIDE              
+                        334     CALL_METHOD                     1
+                        336     CALL_FUNCTION                   1
+                        338     LOAD_FAST                       0: self
+                        340     STORE_ATTR                      26: endstop_phase_accuracy
+                        342     JUMP_FORWARD                    24 (to 368)
+                        344     LOAD_GLOBAL                     27: int
+                        346     LOAD_GLOBAL                     28: math
+                        348     LOAD_METHOD                     29: ceil
+                        350     LOAD_FAST                       0: self
+                        352     LOAD_ATTR                       25: endstop_accuracy
+                        354     LOAD_FAST                       0: self
+                        356     LOAD_ATTR                       8: step_dist
+                        358     BINARY_TRUE_DIVIDE              
+                        360     CALL_METHOD                     1
+                        362     CALL_FUNCTION                   1
+                        364     LOAD_FAST                       0: self
+                        366     STORE_ATTR                      26: endstop_phase_accuracy
+                        368     LOAD_FAST                       0: self
+                        370     LOAD_ATTR                       26: endstop_phase_accuracy
+                        372     LOAD_FAST                       0: self
+                        374     LOAD_ATTR                       10: phases
+                        376     LOAD_CONST                      11: 2
+                        378     BINARY_FLOOR_DIVIDE             
+                        380     COMPARE_OP                      5 (>=)
+                        382     POP_JUMP_IF_FALSE               408
+                        386     LOAD_FAST                       1: config
+                        388     LOAD_METHOD                     20: error
+                        390     LOAD_CONST                      19: '{"code":"key158", "msg": "Endstop for %s is not accurate enough for stepper phase adjustment", "values": ["%s"]}'
+                        392     LOAD_FAST                       0: self
+                        394     LOAD_ATTR                       4: name
+                        396     LOAD_FAST                       0: self
+                        398     LOAD_ATTR                       4: name
+                        400     BUILD_TUPLE                     2
+                        402     BINARY_MODULO                   
+                        404     CALL_METHOD                     1
+                        406     RAISE_VARARGS                   1
+                        408     LOAD_FAST                       0: self
+                        410     LOAD_ATTR                       1: printer
+                        412     LOAD_METHOD                     30: get_start_args
+                        414     CALL_METHOD                     0
+                        416     LOAD_METHOD                     18: get
+                        418     LOAD_CONST                      20: 'debugoutput'
+                        420     CALL_METHOD                     1
+                        422     LOAD_CONST                      0: None
+                        424     IS_OP                           1 (is not)
+                        426     POP_JUMP_IF_FALSE               438
+                        430     LOAD_FAST                       0: self
+                        432     LOAD_ATTR                       10: phases
+                        434     LOAD_FAST                       0: self
+                        436     STORE_ATTR                      26: endstop_phase_accuracy
+                        438     LOAD_CONST                      0: None
+                        440     RETURN_VALUE                    
+                'EndstopPhase.__init__'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: align_endstop
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'endstop_align_zero'
+                        'endstop_phase'
+                        'phases'
+                        'step_dist'
+                        'get_homing_info'
+                        'position_endstop'
+                        'int'
+                    [Var Names]
+                        'self'
+                        'rail'
+                        'microsteps'
+                        'half_microsteps'
+                        'phase_offset'
+                        'full_step'
+                        'pe'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        4
+                        2
+                        0.5
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: endstop_align_zero
+                        4       POP_JUMP_IF_FALSE               16
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: endstop_phase
+                        10      LOAD_CONST                      0: None
+                        12      IS_OP                           0 (is)
+                        14      POP_JUMP_IF_FALSE               20
+                        16      LOAD_CONST                      1: 0
+                        18      RETURN_VALUE                    
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_ATTR                       2: phases
+                        24      LOAD_CONST                      2: 4
+                        26      BINARY_FLOOR_DIVIDE             
+                        28      STORE_FAST                      2: microsteps
+                        30      LOAD_FAST                       2: microsteps
+                        32      LOAD_CONST                      3: 2
+                        34      BINARY_FLOOR_DIVIDE             
+                        36      STORE_FAST                      3: half_microsteps
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       1: endstop_phase
+                        42      LOAD_FAST                       3: half_microsteps
+                        44      BINARY_ADD                      
+                        46      LOAD_FAST                       2: microsteps
+                        48      BINARY_MODULO                   
+                        50      LOAD_FAST                       3: half_microsteps
+                        52      BINARY_SUBTRACT                 
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       3: step_dist
+                        58      BINARY_MULTIPLY                 
+                        60      STORE_FAST                      4: phase_offset
+                        62      LOAD_FAST                       2: microsteps
+                        64      LOAD_FAST                       0: self
+                        66      LOAD_ATTR                       3: step_dist
+                        68      BINARY_MULTIPLY                 
+                        70      STORE_FAST                      5: full_step
+                        72      LOAD_FAST                       1: rail
+                        74      LOAD_METHOD                     4: get_homing_info
+                        76      CALL_METHOD                     0
+                        78      LOAD_ATTR                       5: position_endstop
+                        80      STORE_FAST                      6: pe
+                        82      LOAD_GLOBAL                     6: int
+                        84      LOAD_FAST                       6: pe
+                        86      LOAD_FAST                       5: full_step
+                        88      BINARY_TRUE_DIVIDE              
+                        90      LOAD_CONST                      4: 0.5
+                        92      BINARY_ADD                      
+                        94      CALL_FUNCTION                   1
+                        96      LOAD_FAST                       5: full_step
+                        98      BINARY_MULTIPLY                 
+                        100     LOAD_FAST                       6: pe
+                        102     BINARY_SUBTRACT                 
+                        104     LOAD_FAST                       4: phase_offset
+                        106     BINARY_ADD                      
+                        108     RETURN_VALUE                    
+                'EndstopPhase.align_endstop'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: get_homed_offset
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 9
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'phase_calc'
+                        'calc_phase'
+                        'endstop_phase'
+                        'logging'
+                        'info'
+                        'name'
+                        'phases'
+                        'endstop_phase_accuracy'
+                        'printer'
+                        'command_error'
+                        'step_dist'
+                    [Var Names]
+                        'self'
+                        'stepper'
+                        'trig_mcu_pos'
+                        'phase'
+                        'delta'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'Setting %s endstop phase to %d'
+                        0
+                        '{"code":"key161", "msg": "Endstop %s incorrect phase (got %d vs %d)", "values": ["%s", %d, %d]}'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: phase_calc
+                        4       LOAD_METHOD                     1: calc_phase
+                        6       LOAD_FAST                       1: stepper
+                        8       LOAD_FAST                       2: trig_mcu_pos
+                        10      CALL_METHOD                     2
+                        12      STORE_FAST                      3: phase
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: endstop_phase
+                        18      LOAD_CONST                      0: None
+                        20      IS_OP                           0 (is)
+                        22      POP_JUMP_IF_FALSE               50
+                        24      LOAD_GLOBAL                     3: logging
+                        26      LOAD_METHOD                     4: info
+                        28      LOAD_CONST                      1: 'Setting %s endstop phase to %d'
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       5: name
+                        34      LOAD_FAST                       3: phase
+                        36      CALL_METHOD                     3
+                        38      POP_TOP                         
+                        40      LOAD_FAST                       3: phase
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      2: endstop_phase
+                        46      LOAD_CONST                      2: 0
+                        48      RETURN_VALUE                    
+                        50      LOAD_FAST                       3: phase
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_ATTR                       2: endstop_phase
+                        56      BINARY_SUBTRACT                 
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       6: phases
+                        62      BINARY_MODULO                   
+                        64      STORE_FAST                      4: delta
+                        66      LOAD_FAST                       4: delta
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       6: phases
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       7: endstop_phase_accuracy
+                        76      BINARY_SUBTRACT                 
+                        78      COMPARE_OP                      5 (>=)
+                        80      POP_JUMP_IF_FALSE               94
+                        82      LOAD_FAST                       4: delta
+                        84      LOAD_FAST                       0: self
+                        86      LOAD_ATTR                       6: phases
+                        88      INPLACE_SUBTRACT                
+                        90      STORE_FAST                      4: delta
+                        92      JUMP_FORWARD                    46 (to 140)
+                        94      LOAD_FAST                       4: delta
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       7: endstop_phase_accuracy
+                        100     COMPARE_OP                      4 (>)
+                        102     POP_JUMP_IF_FALSE               140
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       8: printer
+                        108     LOAD_METHOD                     9: command_error
+                        110     LOAD_CONST                      3: '{"code":"key161", "msg": "Endstop %s incorrect phase (got %d vs %d)", "values": ["%s", %d, %d]}'
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       5: name
+                        116     LOAD_FAST                       3: phase
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       2: endstop_phase
+                        122     LOAD_FAST                       0: self
+                        124     LOAD_ATTR                       5: name
+                        126     LOAD_FAST                       3: phase
+                        128     LOAD_FAST                       0: self
+                        130     LOAD_ATTR                       2: endstop_phase
+                        132     BUILD_TUPLE                     6
+                        134     BINARY_MODULO                   
+                        136     CALL_METHOD                     1
+                        138     RAISE_VARARGS                   1
+                        140     LOAD_FAST                       4: delta
+                        142     LOAD_FAST                       0: self
+                        144     LOAD_ATTR                       10: step_dist
+                        146     BINARY_MULTIPLY                 
+                        148     RETURN_VALUE                    
+                'EndstopPhase.get_homed_offset'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: handle_home_rails_end
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_steppers'
+                        'get_name'
+                        'name'
+                        'get_trigger_position'
+                        'align_endstop'
+                        'get_homed_offset'
+                        'set_stepper_adjustment'
+                    [Var Names]
+                        'self'
+                        'homing_state'
+                        'rails'
+                        'rail'
+                        'stepper'
+                        'trig_mcu_pos'
+                        'align'
+                        'offset'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                    [Disassembly]
+                        0       LOAD_FAST                       2: rails
+                        2       GET_ITER                        
+                        4       FOR_ITER                        88 (to 94)
+                        6       STORE_FAST                      3: rail
+                        8       LOAD_FAST                       3: rail
+                        10      LOAD_METHOD                     0: get_steppers
+                        12      CALL_METHOD                     0
+                        14      LOAD_CONST                      1: 0
+                        16      BINARY_SUBSCR                   
+                        18      STORE_FAST                      4: stepper
+                        20      LOAD_FAST                       4: stepper
+                        22      LOAD_METHOD                     1: get_name
+                        24      CALL_METHOD                     0
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       2: name
+                        30      COMPARE_OP                      2 (==)
+                        32      POP_JUMP_IF_FALSE               4
+                        34      LOAD_FAST                       1: homing_state
+                        36      LOAD_METHOD                     3: get_trigger_position
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       2: name
+                        42      CALL_METHOD                     1
+                        44      STORE_FAST                      5: trig_mcu_pos
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_METHOD                     4: align_endstop
+                        50      LOAD_FAST                       3: rail
+                        52      CALL_METHOD                     1
+                        54      STORE_FAST                      6: align
+                        56      LOAD_FAST                       0: self
+                        58      LOAD_METHOD                     5: get_homed_offset
+                        60      LOAD_FAST                       4: stepper
+                        62      LOAD_FAST                       5: trig_mcu_pos
+                        64      CALL_METHOD                     2
+                        66      STORE_FAST                      7: offset
+                        68      LOAD_FAST                       1: homing_state
+                        70      LOAD_METHOD                     6: set_stepper_adjustment
+                        72      LOAD_FAST                       0: self
+                        74      LOAD_ATTR                       2: name
+                        76      LOAD_FAST                       6: align
+                        78      LOAD_FAST                       7: offset
+                        80      BINARY_ADD                      
+                        82      CALL_METHOD                     2
+                        84      POP_TOP                         
+                        86      POP_TOP                         
+                        88      LOAD_CONST                      0: None
+                        90      RETURN_VALUE                    
+                        92      JUMP_ABSOLUTE                   4
+                        94      LOAD_CONST                      0: None
+                        96      RETURN_VALUE                    
+                'EndstopPhase.handle_home_rails_end'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'EndstopPhase'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'EndstopPhase.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> align_endstop
+                18      LOAD_CONST                      4: 'EndstopPhase.align_endstop'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: align_endstop
+                24      LOAD_CONST                      5: <CODE> get_homed_offset
+                26      LOAD_CONST                      6: 'EndstopPhase.get_homed_offset'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: get_homed_offset
+                32      LOAD_CONST                      7: <CODE> handle_home_rails_end
+                34      LOAD_CONST                      8: 'EndstopPhase.handle_home_rails_end'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: handle_home_rails_end
+                40      LOAD_CONST                      9: None
+                42      RETURN_VALUE                    
+        'EndstopPhase'
+        [Code]
+            File Name: /extras/endstop_phase.py
+            Object Name: EndstopPhases
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'update_stepper'
+                'handle_home_rails_end'
+                'cmd_ENDSTOP_PHASE_CALIBRATE_help'
+                'cmd_ENDSTOP_PHASE_CALIBRATE'
+                'generate_stats'
+                'report_stats'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'EndstopPhases'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'tracking'
+                        'register_event_handler'
+                        'handle_home_rails_end'
+                        'lookup_object'
+                        'gcode'
+                        'register_command'
+                        'cmd_ENDSTOP_PHASE_CALIBRATE'
+                        'cmd_ENDSTOP_PHASE_CALIBRATE_help'
+                    [Var Names]
+                        'self'
+                        'config'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'homing:home_rails_end'
+                        'gcode'
+                        'ENDSTOP_PHASE_CALIBRATE'
+                        (
+                            'desc'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      BUILD_MAP                       0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: tracking
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       1: printer
+                        20      LOAD_METHOD                     3: register_event_handler
+                        22      LOAD_CONST                      1: 'homing:home_rails_end'
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       4: handle_home_rails_end
+                        28      CALL_METHOD                     2
+                        30      POP_TOP                         
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       1: printer
+                        36      LOAD_METHOD                     5: lookup_object
+                        38      LOAD_CONST                      2: 'gcode'
+                        40      CALL_METHOD                     1
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      6: gcode
+                        46      LOAD_FAST                       0: self
+                        48      LOAD_ATTR                       6: gcode
+                        50      LOAD_ATTR                       7: register_command
+                        52      LOAD_CONST                      3: 'ENDSTOP_PHASE_CALIBRATE'
+                        54      LOAD_FAST                       0: self
+                        56      LOAD_ATTR                       8: cmd_ENDSTOP_PHASE_CALIBRATE
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       9: cmd_ENDSTOP_PHASE_CALIBRATE_help
+                        62      LOAD_CONST                      4: ('desc',)
+                        64      CALL_FUNCTION_KW                3
+                        66      POP_TOP                         
+                        68      LOAD_CONST                      0: None
+                        70      RETURN_VALUE                    
+                'EndstopPhases.__init__'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: update_stepper
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_name'
+                        'tracking'
+                        'get'
+                        'printer'
+                        'lookup_object'
+                        'phase_calc'
+                        'PhaseCalc'
+                        'stats_only'
+                        'lookup_tmc'
+                        'phase_history'
+                        'is_primary'
+                        'calc_phase'
+                    [Var Names]
+                        'self'
+                        'stepper'
+                        'trig_mcu_pos'
+                        'is_primary'
+                        'stepper_name'
+                        'phase_calc'
+                        'mod_name'
+                        'm'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'endstop_phase %s'
+                        True
+                    [Disassembly]
+                        0       LOAD_FAST                       1: stepper
+                        2       LOAD_METHOD                     0: get_name
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      4: stepper_name
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: tracking
+                        12      LOAD_METHOD                     2: get
+                        14      LOAD_FAST                       4: stepper_name
+                        16      CALL_METHOD                     1
+                        18      STORE_FAST                      5: phase_calc
+                        20      LOAD_FAST                       5: phase_calc
+                        22      LOAD_CONST                      0: None
+                        24      IS_OP                           0 (is)
+                        26      POP_JUMP_IF_FALSE               104
+                        28      LOAD_CONST                      1: 'endstop_phase %s'
+                        30      LOAD_FAST                       4: stepper_name
+                        32      BUILD_TUPLE                     1
+                        34      BINARY_MODULO                   
+                        36      STORE_FAST                      6: mod_name
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       3: printer
+                        42      LOAD_METHOD                     4: lookup_object
+                        44      LOAD_FAST                       6: mod_name
+                        46      LOAD_CONST                      0: None
+                        48      CALL_METHOD                     2
+                        50      STORE_FAST                      7: m
+                        52      LOAD_FAST                       7: m
+                        54      LOAD_CONST                      0: None
+                        56      IS_OP                           1 (is not)
+                        58      POP_JUMP_IF_FALSE               68
+                        60      LOAD_FAST                       7: m
+                        62      LOAD_ATTR                       5: phase_calc
+                        64      STORE_FAST                      5: phase_calc
+                        66      JUMP_FORWARD                    26 (to 94)
+                        68      LOAD_GLOBAL                     6: PhaseCalc
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       3: printer
+                        74      LOAD_FAST                       4: stepper_name
+                        76      CALL_FUNCTION                   2
+                        78      STORE_FAST                      5: phase_calc
+                        80      LOAD_CONST                      2: True
+                        82      LOAD_FAST                       5: phase_calc
+                        84      STORE_ATTR                      7: stats_only
+                        86      LOAD_FAST                       5: phase_calc
+                        88      LOAD_METHOD                     8: lookup_tmc
+                        90      CALL_METHOD                     0
+                        92      POP_TOP                         
+                        94      LOAD_FAST                       5: phase_calc
+                        96      LOAD_FAST                       0: self
+                        98      LOAD_ATTR                       1: tracking
+                        100     LOAD_FAST                       4: stepper_name
+                        102     STORE_SUBSCR                    
+                        104     LOAD_FAST                       5: phase_calc
+                        106     LOAD_ATTR                       9: phase_history
+                        108     LOAD_CONST                      0: None
+                        110     IS_OP                           0 (is)
+                        112     POP_JUMP_IF_FALSE               118
+                        114     LOAD_CONST                      0: None
+                        116     RETURN_VALUE                    
+                        118     LOAD_FAST                       3: is_primary
+                        120     POP_JUMP_IF_FALSE               128
+                        122     LOAD_CONST                      2: True
+                        124     LOAD_FAST                       5: phase_calc
+                        126     STORE_ATTR                      10: is_primary
+                        128     LOAD_FAST                       5: phase_calc
+                        130     LOAD_ATTR                       7: stats_only
+                        132     POP_JUMP_IF_FALSE               146
+                        134     LOAD_FAST                       5: phase_calc
+                        136     LOAD_METHOD                     11: calc_phase
+                        138     LOAD_FAST                       1: stepper
+                        140     LOAD_FAST                       2: trig_mcu_pos
+                        142     CALL_METHOD                     2
+                        144     POP_TOP                         
+                        146     LOAD_CONST                      0: None
+                        148     RETURN_VALUE                    
+                'EndstopPhases.update_stepper'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: handle_home_rails_end
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_steppers'
+                        'get_name'
+                        'get_trigger_position'
+                        'update_stepper'
+                    [Var Names]
+                        'self'
+                        'homing_state'
+                        'rails'
+                        'rail'
+                        'is_primary'
+                        'stepper'
+                        'sname'
+                        'trig_mcu_pos'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       2: rails
+                        2       GET_ITER                        
+                        4       FOR_ITER                        58 (to 64)
+                        6       STORE_FAST                      3: rail
+                        8       LOAD_CONST                      1: True
+                        10      STORE_FAST                      4: is_primary
+                        12      LOAD_FAST                       3: rail
+                        14      LOAD_METHOD                     0: get_steppers
+                        16      CALL_METHOD                     0
+                        18      GET_ITER                        
+                        20      FOR_ITER                        40 (to 62)
+                        22      STORE_FAST                      5: stepper
+                        24      LOAD_FAST                       5: stepper
+                        26      LOAD_METHOD                     1: get_name
+                        28      CALL_METHOD                     0
+                        30      STORE_FAST                      6: sname
+                        32      LOAD_FAST                       1: homing_state
+                        34      LOAD_METHOD                     2: get_trigger_position
+                        36      LOAD_FAST                       6: sname
+                        38      CALL_METHOD                     1
+                        40      STORE_FAST                      7: trig_mcu_pos
+                        42      LOAD_FAST                       0: self
+                        44      LOAD_METHOD                     3: update_stepper
+                        46      LOAD_FAST                       5: stepper
+                        48      LOAD_FAST                       7: trig_mcu_pos
+                        50      LOAD_FAST                       4: is_primary
+                        52      CALL_METHOD                     3
+                        54      POP_TOP                         
+                        56      LOAD_CONST                      2: False
+                        58      STORE_FAST                      4: is_primary
+                        60      JUMP_ABSOLUTE                   20
+                        62      JUMP_ABSOLUTE                   4
+                        64      LOAD_CONST                      0: None
+                        66      RETURN_VALUE                    
+                'EndstopPhases.handle_home_rails_end'
+                'Calibrate stepper phase'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: cmd_ENDSTOP_PHASE_CALIBRATE
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get'
+                        'report_stats'
+                        'tracking'
+                        'phase_history'
+                        'error'
+                        'generate_stats'
+                        'is_primary'
+                        'printer'
+                        'lookup_object'
+                        'remove_section'
+                        'set'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'gcmd'
+                        'stepper_name'
+                        'phase_calc'
+                        'endstop_phase'
+                        'phases'
+                        'configfile'
+                        'section'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'STEPPER'
+                        'Stats not available for stepper %s'
+                        'configfile'
+                        'endstop_phase %s'
+                        'trigger_phase'
+                        '%s/%s'
+                        'The SAVE_CONFIG command will update the printer config\nfile with these parameters and restart the printer.'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: gcmd
+                        2       LOAD_METHOD                     0: get
+                        4       LOAD_CONST                      1: 'STEPPER'
+                        6       LOAD_CONST                      0: None
+                        8       CALL_METHOD                     2
+                        10      STORE_FAST                      2: stepper_name
+                        12      LOAD_FAST                       2: stepper_name
+                        14      LOAD_CONST                      0: None
+                        16      IS_OP                           0 (is)
+                        18      POP_JUMP_IF_FALSE               32
+                        20      LOAD_FAST                       0: self
+                        22      LOAD_METHOD                     1: report_stats
+                        24      CALL_METHOD                     0
+                        26      POP_TOP                         
+                        28      LOAD_CONST                      0: None
+                        30      RETURN_VALUE                    
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       2: tracking
+                        36      LOAD_METHOD                     0: get
+                        38      LOAD_FAST                       2: stepper_name
+                        40      CALL_METHOD                     1
+                        42      STORE_FAST                      3: phase_calc
+                        44      LOAD_FAST                       3: phase_calc
+                        46      LOAD_CONST                      0: None
+                        48      IS_OP                           0 (is)
+                        50      POP_JUMP_IF_TRUE                62
+                        52      LOAD_FAST                       3: phase_calc
+                        54      LOAD_ATTR                       3: phase_history
+                        56      LOAD_CONST                      0: None
+                        58      IS_OP                           0 (is)
+                        60      POP_JUMP_IF_FALSE               78
+                        62      LOAD_FAST                       1: gcmd
+                        64      LOAD_METHOD                     4: error
+                        66      LOAD_CONST                      2: 'Stats not available for stepper %s'
+                        68      LOAD_FAST                       2: stepper_name
+                        70      BUILD_TUPLE                     1
+                        72      BINARY_MODULO                   
+                        74      CALL_METHOD                     1
+                        76      RAISE_VARARGS                   1
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_METHOD                     5: generate_stats
+                        82      LOAD_FAST                       2: stepper_name
+                        84      LOAD_FAST                       3: phase_calc
+                        86      CALL_METHOD                     2
+                        88      UNPACK_SEQUENCE                 2
+                        90      STORE_FAST                      4: endstop_phase
+                        92      STORE_FAST                      5: phases
+                        94      LOAD_FAST                       3: phase_calc
+                        96      LOAD_ATTR                       6: is_primary
+                        98      POP_JUMP_IF_TRUE                104
+                        100     LOAD_CONST                      0: None
+                        102     RETURN_VALUE                    
+                        104     LOAD_FAST                       0: self
+                        106     LOAD_ATTR                       7: printer
+                        108     LOAD_METHOD                     8: lookup_object
+                        110     LOAD_CONST                      3: 'configfile'
+                        112     CALL_METHOD                     1
+                        114     STORE_FAST                      6: configfile
+                        116     LOAD_CONST                      4: 'endstop_phase %s'
+                        118     LOAD_FAST                       2: stepper_name
+                        120     BUILD_TUPLE                     1
+                        122     BINARY_MODULO                   
+                        124     STORE_FAST                      7: section
+                        126     LOAD_FAST                       6: configfile
+                        128     LOAD_METHOD                     9: remove_section
+                        130     LOAD_FAST                       7: section
+                        132     CALL_METHOD                     1
+                        134     POP_TOP                         
+                        136     LOAD_FAST                       6: configfile
+                        138     LOAD_METHOD                     10: set
+                        140     LOAD_FAST                       7: section
+                        142     LOAD_CONST                      5: 'trigger_phase'
+                        144     LOAD_CONST                      6: '%s/%s'
+                        146     LOAD_FAST                       4: endstop_phase
+                        148     LOAD_FAST                       5: phases
+                        150     BUILD_TUPLE                     2
+                        152     BINARY_MODULO                   
+                        154     CALL_METHOD                     3
+                        156     POP_TOP                         
+                        158     LOAD_FAST                       1: gcmd
+                        160     LOAD_METHOD                     11: respond_info
+                        162     LOAD_CONST                      7: 'The SAVE_CONFIG command will update the printer config\nfile with these parameters and restart the printer.'
+                        164     CALL_METHOD                     1
+                        166     POP_TOP                         
+                        168     LOAD_CONST                      0: None
+                        170     RETURN_VALUE                    
+                'EndstopPhases.cmd_ENDSTOP_PHASE_CALIBRATE'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: generate_stats
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 15
+                    Stack Size: 8
+                    Flags: 0x00000003 (CO_OPTIMIZED | CO_NEWLOCALS)
+                    [Names]
+                        'phase_history'
+                        'sum'
+                        'len'
+                        'range'
+                        'append'
+                        'sort'
+                        'gcode'
+                        'respond_info'
+                    [Var Names]
+                        'self'
+                        'stepper_name'
+                        'phase_calc'
+                        'phase_history'
+                        'count'
+                        'phases'
+                        'half_phases'
+                        'res'
+                        'i'
+                        'cost'
+                        'best'
+                        'found'
+                        'best_phase'
+                        'lo'
+                        'hi'
+                    [Free Vars]
+                    [Cell Vars]
+                        'phase'
+                        'wph'
+                    [Constants]
+                        None
+                        2
+                        [Code]
+                            File Name: /extras/endstop_phase.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 6
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                                'abs'
+                            [Var Names]
+                                '.0'
+                                'j'
+                            [Free Vars]
+                                'phase'
+                                'wph'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        24 (to 30)
+                                6       STORE_FAST                      1: j
+                                8       LOAD_DEREF                      1: wph
+                                10      LOAD_FAST                       1: j
+                                12      BINARY_SUBSCR                   
+                                14      LOAD_GLOBAL                     0: abs
+                                16      LOAD_FAST                       1: j
+                                18      LOAD_DEREF                      0: phase
+                                20      BINARY_SUBTRACT                 
+                                22      CALL_FUNCTION                   1
+                                24      BINARY_MULTIPLY                 
+                                26      LIST_APPEND                     2
+                                28      JUMP_ABSOLUTE                   4
+                                30      RETURN_VALUE                    
+                        'EndstopPhases.generate_stats.<locals>.<listcomp>'
+                        0
+                        1
+                        [Code]
+                            File Name: /extras/endstop_phase.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 4
+                            Flags: 0x00000013 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED)
+                            [Names]
+                            [Var Names]
+                                '.0'
+                                'j'
+                            [Free Vars]
+                                'wph'
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        16 (to 22)
+                                6       STORE_FAST                      1: j
+                                8       LOAD_DEREF                      0: wph
+                                10      LOAD_FAST                       1: j
+                                12      BINARY_SUBSCR                   
+                                14      POP_JUMP_IF_FALSE               4
+                                16      LOAD_FAST                       1: j
+                                18      LIST_APPEND                     2
+                                20      JUMP_ABSOLUTE                   4
+                                22      RETURN_VALUE                    
+                        -1
+                        '%s: trigger_phase=%d/%d (range %d to %d)'
+                    [Disassembly]
+                        0       LOAD_FAST                       2: phase_calc
+                        2       LOAD_ATTR                       0: phase_history
+                        4       STORE_FAST                      3: phase_history
+                        6       LOAD_FAST                       3: phase_history
+                        8       LOAD_FAST                       3: phase_history
+                        10      BINARY_ADD                      
+                        12      STORE_DEREF                     1: wph
+                        14      LOAD_GLOBAL                     1: sum
+                        16      LOAD_FAST                       3: phase_history
+                        18      CALL_FUNCTION                   1
+                        20      STORE_FAST                      4: count
+                        22      LOAD_GLOBAL                     2: len
+                        24      LOAD_FAST                       3: phase_history
+                        26      CALL_FUNCTION                   1
+                        28      STORE_FAST                      5: phases
+                        30      LOAD_FAST                       5: phases
+                        32      LOAD_CONST                      1: 2
+                        34      BINARY_FLOOR_DIVIDE             
+                        36      STORE_FAST                      6: half_phases
+                        38      BUILD_LIST                      0
+                        40      STORE_FAST                      7: res
+                        42      LOAD_GLOBAL                     3: range
+                        44      LOAD_FAST                       5: phases
+                        46      CALL_FUNCTION                   1
+                        48      GET_ITER                        
+                        50      FOR_ITER                        60 (to 112)
+                        52      STORE_FAST                      8: i
+                        54      LOAD_FAST                       8: i
+                        56      LOAD_FAST                       6: half_phases
+                        58      BINARY_ADD                      
+                        60      STORE_DEREF                     0: phase
+                        62      LOAD_GLOBAL                     1: sum
+                        64      LOAD_CLOSURE                    0: phase
+                        66      LOAD_CLOSURE                    1: wph
+                        68      BUILD_TUPLE                     2
+                        70      LOAD_CONST                      2: <CODE> <listcomp>
+                        72      LOAD_CONST                      3: 'EndstopPhases.generate_stats.<locals>.<listcomp>'
+                        74      MAKE_FUNCTION                   8
+                        76      LOAD_GLOBAL                     3: range
+                        78      LOAD_FAST                       8: i
+                        80      LOAD_FAST                       8: i
+                        82      LOAD_FAST                       5: phases
+                        84      BINARY_ADD                      
+                        86      CALL_FUNCTION                   2
+                        88      GET_ITER                        
+                        90      CALL_FUNCTION                   1
+                        92      CALL_FUNCTION                   1
+                        94      STORE_FAST                      9: cost
+                        96      LOAD_FAST                       7: res
+                        98      LOAD_METHOD                     4: append
+                        100     LOAD_FAST                       9: cost
+                        102     LOAD_DEREF                      0: phase
+                        104     BUILD_TUPLE                     2
+                        106     CALL_METHOD                     1
+                        108     POP_TOP                         
+                        110     JUMP_ABSOLUTE                   50
+                        112     LOAD_FAST                       7: res
+                        114     LOAD_METHOD                     5: sort
+                        116     CALL_METHOD                     0
+                        118     POP_TOP                         
+                        120     LOAD_FAST                       7: res
+                        122     LOAD_CONST                      4: 0
+                        124     BINARY_SUBSCR                   
+                        126     LOAD_CONST                      5: 1
+                        128     BINARY_SUBSCR                   
+                        130     STORE_FAST                      10: best
+                        132     LOAD_CLOSURE                    1: wph
+                        134     BUILD_TUPLE                     1
+                        136     LOAD_CONST                      6: <CODE> <listcomp>
+                        138     LOAD_CONST                      3: 'EndstopPhases.generate_stats.<locals>.<listcomp>'
+                        140     MAKE_FUNCTION                   8
+                        142     LOAD_GLOBAL                     3: range
+                        144     LOAD_FAST                       10: best
+                        146     LOAD_FAST                       6: half_phases
+                        148     BINARY_SUBTRACT                 
+                        150     LOAD_FAST                       10: best
+                        152     LOAD_FAST                       6: half_phases
+                        154     BINARY_ADD                      
+                        156     CALL_FUNCTION                   2
+                        158     GET_ITER                        
+                        160     CALL_FUNCTION                   1
+                        162     STORE_FAST                      11: found
+                        164     LOAD_FAST                       10: best
+                        166     LOAD_FAST                       5: phases
+                        168     BINARY_MODULO                   
+                        170     STORE_FAST                      12: best_phase
+                        172     LOAD_FAST                       11: found
+                        174     LOAD_CONST                      4: 0
+                        176     BINARY_SUBSCR                   
+                        178     LOAD_FAST                       5: phases
+                        180     BINARY_MODULO                   
+                        182     LOAD_FAST                       11: found
+                        184     LOAD_CONST                      7: -1
+                        186     BINARY_SUBSCR                   
+                        188     LOAD_FAST                       5: phases
+                        190     BINARY_MODULO                   
+                        192     ROT_TWO                         
+                        194     STORE_FAST                      13: lo
+                        196     STORE_FAST                      14: hi
+                        198     LOAD_FAST                       0: self
+                        200     LOAD_ATTR                       6: gcode
+                        202     LOAD_METHOD                     7: respond_info
+                        204     LOAD_CONST                      8: '%s: trigger_phase=%d/%d (range %d to %d)'
+                        206     LOAD_FAST                       1: stepper_name
+                        208     LOAD_FAST                       12: best_phase
+                        210     LOAD_FAST                       5: phases
+                        212     LOAD_FAST                       13: lo
+                        214     LOAD_FAST                       14: hi
+                        216     BUILD_TUPLE                     5
+                        218     BINARY_MODULO                   
+                        220     CALL_METHOD                     1
+                        222     POP_TOP                         
+                        224     LOAD_FAST                       12: best_phase
+                        226     LOAD_FAST                       5: phases
+                        228     BUILD_TUPLE                     2
+                        230     RETURN_VALUE                    
+                'EndstopPhases.generate_stats'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: report_stats
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'tracking'
+                        'gcode'
+                        'respond_info'
+                        'sorted'
+                        'keys'
+                        'is_primary'
+                        'generate_stats'
+                    [Var Names]
+                        'self'
+                        'stepper_name'
+                        'phase_calc'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'No steppers found. (Be sure to home at least once.)'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: tracking
+                        4       POP_JUMP_IF_TRUE                22
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       1: gcode
+                        10      LOAD_METHOD                     2: respond_info
+                        12      LOAD_CONST                      1: 'No steppers found. (Be sure to home at least once.)'
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                        22      LOAD_GLOBAL                     3: sorted
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       0: tracking
+                        28      LOAD_METHOD                     4: keys
+                        30      CALL_METHOD                     0
+                        32      CALL_FUNCTION                   1
+                        34      GET_ITER                        
+                        36      FOR_ITER                        42 (to 80)
+                        38      STORE_FAST                      1: stepper_name
+                        40      LOAD_FAST                       0: self
+                        42      LOAD_ATTR                       0: tracking
+                        44      LOAD_FAST                       1: stepper_name
+                        46      BINARY_SUBSCR                   
+                        48      STORE_FAST                      2: phase_calc
+                        50      LOAD_FAST                       2: phase_calc
+                        52      LOAD_CONST                      0: None
+                        54      IS_OP                           0 (is)
+                        56      POP_JUMP_IF_TRUE                36
+                        58      LOAD_FAST                       2: phase_calc
+                        60      LOAD_ATTR                       5: is_primary
+                        62      POP_JUMP_IF_TRUE                66
+                        64      JUMP_ABSOLUTE                   36
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_METHOD                     6: generate_stats
+                        70      LOAD_FAST                       1: stepper_name
+                        72      LOAD_FAST                       2: phase_calc
+                        74      CALL_METHOD                     2
+                        76      POP_TOP                         
+                        78      JUMP_ABSOLUTE                   36
+                        80      LOAD_CONST                      0: None
+                        82      RETURN_VALUE                    
+                'EndstopPhases.report_stats'
+                [Code]
+                    File Name: /extras/endstop_phase.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'tracking'
+                        'items'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'lh'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/endstop_phase.py
+                            Object Name: <dictcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 3
+                            Stack Size: 7
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'phase_history'
+                                'last_phase'
+                                'phases'
+                                'last_mcu_position'
+                            [Var Names]
+                                '.0'
+                                'name'
+                                'pc'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                                (
+                                    'phase'
+                                    'phases'
+                                    'mcu_position'
+                                )
+                            [Disassembly]
+                                0       BUILD_MAP                       0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        38 (to 44)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: name
+                                10      STORE_FAST                      2: pc
+                                12      LOAD_FAST                       2: pc
+                                14      LOAD_ATTR                       0: phase_history
+                                16      LOAD_CONST                      0: None
+                                18      IS_OP                           1 (is not)
+                                20      POP_JUMP_IF_FALSE               4
+                                22      LOAD_FAST                       1: name
+                                24      LOAD_FAST                       2: pc
+                                26      LOAD_ATTR                       1: last_phase
+                                28      LOAD_FAST                       2: pc
+                                30      LOAD_ATTR                       2: phases
+                                32      LOAD_FAST                       2: pc
+                                34      LOAD_ATTR                       3: last_mcu_position
+                                36      LOAD_CONST                      1: ('phase', 'phases', 'mcu_position')
+                                38      BUILD_CONST_KEY_MAP             3
+                                40      MAP_ADD                         2
+                                42      JUMP_ABSOLUTE                   4
+                                44      RETURN_VALUE                    
+                        'EndstopPhases.get_status.<locals>.<dictcomp>'
+                        'last_home'
+                    [Disassembly]
+                        0       LOAD_CONST                      1: <CODE> <dictcomp>
+                        2       LOAD_CONST                      2: 'EndstopPhases.get_status.<locals>.<dictcomp>'
+                        4       MAKE_FUNCTION                   0
+                        6       LOAD_FAST                       0: self
+                        8       LOAD_ATTR                       0: tracking
+                        10      LOAD_METHOD                     1: items
+                        12      CALL_METHOD                     0
+                        14      GET_ITER                        
+                        16      CALL_FUNCTION                   1
+                        18      STORE_FAST                      2: lh
+                        20      LOAD_CONST                      3: 'last_home'
+                        22      LOAD_FAST                       2: lh
+                        24      BUILD_MAP                       1
+                        26      RETURN_VALUE                    
+                'EndstopPhases.get_status'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'EndstopPhases'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'EndstopPhases.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> update_stepper
+                18      LOAD_CONST                      4: 'EndstopPhases.update_stepper'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: update_stepper
+                24      LOAD_CONST                      5: <CODE> handle_home_rails_end
+                26      LOAD_CONST                      6: 'EndstopPhases.handle_home_rails_end'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: handle_home_rails_end
+                32      LOAD_CONST                      7: 'Calibrate stepper phase'
+                34      STORE_NAME                      6: cmd_ENDSTOP_PHASE_CALIBRATE_help
+                36      LOAD_CONST                      8: <CODE> cmd_ENDSTOP_PHASE_CALIBRATE
+                38      LOAD_CONST                      9: 'EndstopPhases.cmd_ENDSTOP_PHASE_CALIBRATE'
+                40      MAKE_FUNCTION                   0
+                42      STORE_NAME                      7: cmd_ENDSTOP_PHASE_CALIBRATE
+                44      LOAD_CONST                      10: <CODE> generate_stats
+                46      LOAD_CONST                      11: 'EndstopPhases.generate_stats'
+                48      MAKE_FUNCTION                   0
+                50      STORE_NAME                      8: generate_stats
+                52      LOAD_CONST                      12: <CODE> report_stats
+                54      LOAD_CONST                      13: 'EndstopPhases.report_stats'
+                56      MAKE_FUNCTION                   0
+                58      STORE_NAME                      9: report_stats
+                60      LOAD_CONST                      14: <CODE> get_status
+                62      LOAD_CONST                      15: 'EndstopPhases.get_status'
+                64      MAKE_FUNCTION                   0
+                66      STORE_NAME                      10: get_status
+                68      LOAD_CONST                      16: None
+                70      RETURN_VALUE                    
+        'EndstopPhases'
+        [Code]
+            File Name: /extras/endstop_phase.py
+            Object Name: load_config_prefix
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'EndstopPhase'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: EndstopPhase
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config_prefix'
+        [Code]
+            File Name: /extras/endstop_phase.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'EndstopPhases'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: EndstopPhases
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: math
+        6       STORE_NAME                      0: math
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: logging
+        14      STORE_NAME                      1: logging
+        16      LOAD_CONST                      0: 0
+        18      LOAD_CONST                      1: None
+        20      IMPORT_NAME                     2: stepper
+        22      STORE_NAME                      2: stepper
+        24      BUILD_LIST                      0
+        26      LOAD_CONST                      2: ('tmc2130', 'tmc2208', 'tmc2209', 'tmc2660', 'tmc5160')
+        28      LIST_EXTEND                     1
+        30      STORE_NAME                      3: TRINAMIC_DRIVERS
+        32      LOAD_BUILD_CLASS                
+        34      LOAD_CONST                      3: <CODE> PhaseCalc
+        36      LOAD_CONST                      4: 'PhaseCalc'
+        38      MAKE_FUNCTION                   0
+        40      LOAD_CONST                      4: 'PhaseCalc'
+        42      CALL_FUNCTION                   2
+        44      STORE_NAME                      4: PhaseCalc
+        46      LOAD_BUILD_CLASS                
+        48      LOAD_CONST                      5: <CODE> EndstopPhase
+        50      LOAD_CONST                      6: 'EndstopPhase'
+        52      MAKE_FUNCTION                   0
+        54      LOAD_CONST                      6: 'EndstopPhase'
+        56      CALL_FUNCTION                   2
+        58      STORE_NAME                      5: EndstopPhase
+        60      LOAD_BUILD_CLASS                
+        62      LOAD_CONST                      7: <CODE> EndstopPhases
+        64      LOAD_CONST                      8: 'EndstopPhases'
+        66      MAKE_FUNCTION                   0
+        68      LOAD_CONST                      8: 'EndstopPhases'
+        70      CALL_FUNCTION                   2
+        72      STORE_NAME                      6: EndstopPhases
+        74      LOAD_CONST                      9: <CODE> load_config_prefix
+        76      LOAD_CONST                      10: 'load_config_prefix'
+        78      MAKE_FUNCTION                   0
+        80      STORE_NAME                      7: load_config_prefix
+        82      LOAD_CONST                      11: <CODE> load_config
+        84      LOAD_CONST                      12: 'load_config'
+        86      MAKE_FUNCTION                   0
+        88      STORE_NAME                      8: load_config
+        90      LOAD_CONST                      1: None
+        92      RETURN_VALUE                    

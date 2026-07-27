@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/virtual_sdcard.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: virtual_sdcard.pyc (Python 3.9)
 
@@ -60,8 +69,24 @@ def capture(end_print, frame = (False, 15)):
     capture_shell = ''
     
     def run_cmd(capture_shell = None):
-        pass
-    # WARNING: Decompyle incomplete
+        
+        try:
+            logging.info(capture_shell)
+            capture_ret = subprocess.check_output(capture_shell, shell=True).decode('utf-8')
+            logging.info('%s return:#%s#' % (capture_shell, str(capture_ret)))
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
 
     if system_info_instance._h264_encoder_flag == 'NO_H264_ENCODER' and end_print == True:
         capture_shell = 'capture 0 1'
@@ -113,4 +138,70 @@ class VirtualSD:
         for cmd in ('M28', 'M29', 'M30'):
             self.gcode.register_command(cmd, self.cmd_error)
         self.gcode.register_command('SDCARD_RESET_FILE', self.cmd_SDCARD_RESET_FILE, desc=self.cmd_SDCARD_RESET_FILE_help)
-        self.gcode.register_command('SDCARD_PRINT_FILE', self.cmd_SDCARD_PRINT_FILE, self.cmd
+        self.gcode.register_command('SDCARD_PRINT_FILE', self.cmd_SDCARD_PRINT_FILE, desc=self.cmd_SDCARD_PRINT_FILE_help)
+        self.gcode.register_command('SHOW_GCODE_FLUSH', self.cmd_SHOW_GCODE_FLUSH, desc=self.cmd_SHOW_GCODE_FLUSH_help)
+        self.gcode.register_command('CLEAR_EEPROM_INFO', self.cmd_CLEAR_EEPROM_INFO)
+        self.gcode.register_command('SET_MAINTENANCE_ITEM_VARIABLE', self.cmd_SET_MAINTENANCE_ITEM_VARIABLE)
+        self.count_G1 = 0
+        self.count_line = 0
+        self.do_resume_status = False
+        self.eepromWriteCount = 1
+        self.fan_state = { }
+        self.gcode_layer_path = os.path.join(base_dir, 'creality/userdata/config/gcode_layer.json')
+        self.user_print_refer_path = os.path.join(base_dir, 'creality/userdata/config/user_print_refer.json')
+        self.print_file_name_path = os.path.join(base_dir, 'creality/userdata/config/print_file_name.json')
+        self.speed_mode_path = os.path.join(base_dir, 'creality/userdata/config/speed_mode.json')
+        self.flow_rate_path = os.path.join(base_dir, 'creality/userdata/config/flow_rate.json')
+        self.maintenance_item_path = os.path.join(base_dir, 'creality/userdata/config/maintenance_item.json')
+        self.print_first_layer = False
+        self.first_layer_stop = False
+        self.count_M204 = 0
+        self.layer = 0
+        self.layer_count = 0
+        self.is_continue_print = False
+        self.restore_err = False
+        self.restore_print_timer = None
+        self.print_info = None
+        self.XYZET = None
+        self.slow_print = False
+        self.slow_count = 0
+        self.speed_factor = 0.0166667
+        self.run_dis = 0
+        self.print_id = ''
+        self.cur_print_data = { }
+        self.gcode_metadata = None
+        self.end_print_state = False
+        self.last_layer = 0
+        self.is_cancel = False
+        self.bed_mesh_calibate_state = False
+        self.run_bed_mesh_calibate = False
+        self.layer_key = ''
+        self.lock = threading.Lock()
+        self.is_move_out_of_range_in_printing = False
+        self.ignore_M = False
+
+    
+    def _handle_ready(self):
+        self._maintenance_item_timer = self.reactor.register_timer(self.update_maintenance_item_timer)
+        self.reactor.update_timer(self._maintenance_item_timer, self.reactor.NOW)
+        self.printer.register_event_handler('v_sd:update_cut_used', self.update_cut_used)
+        self.printer.register_event_handler('v_sd:update_filament_used', self.update_filament_used)
+        self.printer.register_event_handler('v_sd:cancel_power_loss_update_filament_used', self.cancel_power_loss_update_filament_used)
+        self.printer.register_event_handler('v_sd:reset_cut_calibration_count', self.reset_cut_calibration_count)
+        self.printer.register_event_handler('v_sd:reset_shaper_calibrate_count', self.reset_shaper_calibrate_count)
+        webhooks = self.printer.lookup_object('webhooks')
+        webhooks.register_endpoint('get_maintenance_item', self.get_maintenance_item)
+
+    
+    def notify_maintenance_item(self):
+        maintenance_item_param = self.printer.lookup_object('gcode_macro MAINTENANCE_ITEM_PARAM', None)
+        if maintenance_item_param and self.config.has_section('gcode_macro MAINTENANCE_ITEM') and os.path.exists(self.maintenance_item_path):
+            
+            try:
+                obj = self.printer.lookup_object('gcode_macro MAINTENANCE_ITEM')
+                with open(self.maintenance_item_path, 'r') as f:
+                    result = json.loads(f.read())
+                    result = self.maintenance_item_add_threshold(result)
+                    result = self.maintenance_item_add_timeout(result)
+                    obj.variables = result
+         

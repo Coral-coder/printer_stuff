@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/gcode_move.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: gcode_move.pyc (Python 3.9)
 
@@ -191,4 +200,184 @@ class GCodeMove:
             'extrude_factor': self.extrude_factor,
             'absolute_coordinates': self.absolute_coord,
             'absolute_extrude': self.absolute_extrude,
-            'homing
+            'homing_origin': self.Coord(*self.homing_position),
+            'position': self.Coord(*self.last_position),
+            'gcode_position': self.Coord(*move_position) }
+
+    
+    def reset_last_position(self):
+        if self.is_printer_ready:
+            self.last_position = self.position_with_transform()
+
+    
+    def auto_protect_coordinate_system(self):
+        gcode = self.printer.lookup_object('gcode')
+        (bx, by, bz) = self.base_position[:3]
+        (px, py, pz) = self.last_position[:3]
+        if bx == 0 and by == 0 and bz == 0:
+            return False
+        None.info('Coordinate pollution detected, auto recovering: physical=(%.3f, %.3f, %.3f)', px, py, pz)
+        gcode_speed = self._get_gcode_speed()
+        toolhead = self.printer.lookup_object('toolhead')
+        (min_z, max_z) = toolhead.kin.limits[2]
+        current_pos = toolhead.get_position()
+        current_physical_z = current_pos[2]
+        z_lift_height = 5
+        if min_z <= max_z:
+            lift_target_z = current_physical_z + z_lift_height
+            if lift_target_z > max_z:
+                z_lift_height = max(0, max_z - current_physical_z - 0.1)
+                if z_lift_height < 1:
+                    z_lift_height = 0
+        gcode.run_script_from_command('G91')
+        if z_lift_height > 0.01:
+            gcode.run_script_from_command(f'''G1 Z{z_lift_height:.5f} F3000''')
+        cmd = f'''G1 X{-px:.5f} Y{-py:.5f} F3000'''
+        gcode.run_script_from_command(cmd)
+        gcode.run_script_from_command('G90')
+        gcode.run_script_from_command('G92')
+        if z_lift_height > 0.01:
+            if min_z <= max_z:
+                restore_target_z = current_physical_z
+                if restore_target_z < min_z:
+                    restore_z_move = z_lift_height - ((current_physical_z - min_z) + 0.1)
+                    if restore_z_move > 0.01:
+                        gcode.run_script_from_command('G91')
+                        gcode.run_script_from_command(f'''G1 Z{-restore_z_move:.5f} F3000''')
+                        gcode.run_script_from_command('G90')
+                    else:
+                        gcode.run_script_from_command('G91')
+                        gcode.run_script_from_command(f'''G1 Z{-z_lift_height:.5f} F3000''')
+                        gcode.run_script_from_command('G90')
+                else:
+                    gcode.run_script_from_command('G91')
+                    gcode.run_script_from_command(f'''G1 Z{-z_lift_height:.5f} F3000''')
+                    gcode.run_script_from_command('G90')
+            else:
+                gcode.run_script_from_command('G90')
+        self.speed = gcode_speed * self.speed_factor
+        return True
+
+    
+    def simple_cmd_G1(self, line):
+        cpos = line.find(';')
+        if cpos > 0:
+            line = line[:cpos]
+        parts = line.split()
+        
+        try:
+            for part in parts[1:]:
+                if part[0] == 'E' or part[0] == 'e':
+                    if not self.absolute_coord or self.absolute_extrude:
+                        self.last_position[3] += float(part[1:]) * self.extrude_factor
+                    else:
+                        self.last_position[3] = float(part[1:]) * self.extrude_factor + self.base_position[3]
+                    continue
+                if part[0] == 'X' or part[0] == 'x':
+                    if not self.absolute_coord:
+                        self.last_position[0] += float(part[1:])
+                    else:
+                        self.last_position[0] = float(part[1:]) + self.base_position[0]
+                    continue
+                if part[0] == 'Y' or part[0] == 'y':
+                    if not self.absolute_coord:
+                        self.last_position[1] += float(part[1:])
+                    else:
+                        self.last_position[1] = float(part[1:]) + self.base_position[1]
+                    continue
+                if part[0] == 'Z' or part[0] == 'z':
+                    toolhead = self.printer.lookup_object('toolhead')
+                    print_stats = self.printer.lookup_object('print_stats')
+                    max_z = toolhead.kin.limits[2][1] + 5
+                    curtime = self.printer.get_reactor().monotonic()
+                    if ('z' in toolhead.get_status(curtime)['homed_axes'] or float(part[1:]) > max_z or self.absolute_coord) and self.last_position[2] + float(part[1:]) > max_z:
+                        m = '{"code":"587","msg":"Move out of range %s", "values":[]}' % str(part)
+                        self.printer.lookup_object('gcode')._respond_error(m)
+                        if print_stats.state == 'printing' and self.printer.lookup_object('pause_resume').pause_start == False and self.printer.lookup_object('virtual_sdcard').is_move_out_of_range_in_printing == False:
+                            self.printer.lookup_object('virtual_sdcard').is_move_out_of_range_in_printing = True
+                    return None
+                if not None.absolute_coord:
+                    self.last_position[2] += float(part[1:])
+                else:
+                    self.last_position[2] = float(part[1:]) + self.base_position[2]
+            if not part[0] == 'F':
+                if part[0] == 'f':
+                    gcode_speed = float(part[1:])
+                    if gcode_speed <= 0:
+                        raise Exception('{"code":"key272": "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (line, line))
+                    self.speed = gcode_speed * self.speed_factor
+            else:
+                except ValueError:
+                    e = None
+                    
+                    try:
+                        raise Exception('{"code":"key273": "msg":"Unable to parse move \'%s\'", "values":["%s"]}' % (line, line))
+                    finally:
+                        e = None
+                        del e
+                    e = None
+                    del e
+                    return None
+
+
+
+    
+    def cmd_G1(self, gcmd):
+        params = gcmd.get_command_parameters()
+        
+        try:
+            for pos, axis in enumerate('XYZ'):
+                if axis in params:
+                    v = float(params[axis])
+                    if not self.absolute_coord:
+                        self.last_position[pos] += v
+                        continue
+                self.last_position[pos] = v + self.base_position[pos]
+            if 'Z' in params:
+                print_stats = self.printer.lookup_object('print_stats')
+                if print_stats.state != 'printing':
+                    toolhead = self.printer.lookup_object('toolhead')
+                    curtime = self.printer.get_reactor().monotonic()
+                    if 'z' in toolhead.get_status(curtime)['homed_axes'] and self.last_position[2] < -2:
+                        logging.info('Minimum Limit -2 last_position[2]:%s' % self.last_position[2])
+                        self.last_position[2] = -2
+            if 'E' in params:
+                v = float(params['E']) * self.extrude_factor
+                if not self.absolute_coord or self.absolute_extrude:
+                    self.last_position[3] += v
+                else:
+                    self.last_position[3] = v + self.base_position[3]
+            if 'F' in params:
+                gcode_speed = float(params['F'])
+                if gcode_speed <= 0:
+                    raise gcmd.error('{"code":"key272": "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
+                self.speed = gcode_speed * self.speed_factor
+        except ValueError:
+            e = None
+            
+            try:
+                raise gcmd.error('{"code":"key273": "msg":"Unable to parse move \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
+            finally:
+                e = None
+                del e
+            e = None
+            del e
+            return None
+
+
+
+    
+    def cmd_G20(self, gcmd):
+        raise gcmd.error('Machine does not support G20 (inches) command')
+
+    
+    def cmd_G21(self, gcmd):
+        pass
+
+    
+    def cmd_M82(self, gcmd):
+        self.absolute_extrude = True
+
+    
+    def cmd_M83(self, gcmd):
+ 
