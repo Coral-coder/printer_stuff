@@ -74,17 +74,9 @@ def capture(end_print = False, frame = 15):
             logging.info(capture_shell)
             capture_ret = subprocess.check_output(capture_shell, shell=True).decode('utf-8')
             logging.info('%s return:#%s#' % (capture_shell, str(capture_ret)))
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+        except Exception as err:
+            logging.error(err)
+        return None
 
 
 
@@ -101,13 +93,12 @@ def capture(end_print = False, frame = 15):
     elif system_info_instance._h264_encoder_flag == 'H264_ENCODER' and end_print == True:
         interval_time = 1.0 / frame
         start_time = 1
-        if start_time > 0:
+        while start_time > 0:
             run_cmd('capture 0')
             time.sleep(interval_time)
             start_time = start_time - interval_time
-            continue
-        else:
-            capture_shell = 'capture 0'
+    else:
+        capture_shell = 'capture 0'
     if capture_shell:
         run_cmd(capture_shell)
 
@@ -204,21 +195,13 @@ class VirtualSD:
                     result = self.maintenance_item_add_threshold(result)
                     result = self.maintenance_item_add_timeout(result)
                     obj.variables = result
-            except Exception:
-                err = None
-                
-                try:
-                    logging.exception(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return None
+            except Exception as err:
+                logging.exception(err)
+        return None
 
 
 
-    
+
     def calculate_filament_weight(self, filament_used, filament_diameter = 1.75, filament_density = 0.00125):
         import math
         radius = filament_diameter / 2
@@ -249,21 +232,13 @@ class VirtualSD:
             if filament_used > 0:
                 weight = self.calculate_filament_weight(filament_used)
                 self.update_maintenance_item(update_filament_used=True, filament_used=weight)
-        except Exception:
-            err = None
-            
-            try:
-                pass
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+        except Exception as err:
+            pass
+        return None
 
 
 
-    
+
     def reset_cut_calibration_count(self):
         self.gcode.run_script_from_command('SET_MAINTENANCE_ITEM_VARIABLE NAME=calibrate VARIABLE=cut_calibration VALUE=0')
 
@@ -283,21 +258,13 @@ class VirtualSD:
             print_stats = self.printer.lookup_object('print_stats')
             if print_stats.state == 'printing':
                 self.update_maintenance_item()
-        except Exception:
-            e = None
-            
-            try:
-                logging.error('Error in update_maintenance_item: %s' % str(e))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return eventtime + 6e+01
+        except Exception as e:
+            logging.error('Error in update_maintenance_item: %s' % str(e))
+        return eventtime + 6e+01
 
 
 
-    
+
     def update_maintenance_item(self, update_cut_used = False, update_filament_used = False, filament_used = 0, variable_update = False, update_item_name = '', variable_update_obj = '', reset_value = 0):
         interval = 60
         with self.lock:
@@ -307,40 +274,29 @@ class VirtualSD:
                     f.flush()
             else:
                 result = { }
-                
+
                 try:
                     with open(self.maintenance_item_path, 'r') as f:
                         result = json.loads(f.read())
                     if not result:
                         os.remove(self.maintenance_item_path)
-                return None
-                if variable_update:
-                    if result.get(update_item_name) and result.get(update_item_name).get(variable_update_obj):
-                        result[update_item_name][variable_update_obj]['cur_value'] = reset_value
-                        with open(self.maintenance_item_path, 'w') as f:
-                            f.write(json.dumps(result))
-                            f.flush()
-                        self.notify_maintenance_item()
-                None(None, None, None)
-                return None
-                result = self.check_item(result=result, interval=interval, update_cut_used=update_cut_used, update_filament_used=update_filament_used, filament_used=filament_used)
-                with open(self.maintenance_item_path, 'w') as f:
-                    f.write(json.dumps(result))
-                    f.flush()
-                self.notify_maintenance_item()
-                except Exception:
-                    err = None
-                    
-                    try:
-                        logging.error('open maintenance_item_path err:%s' % str(err))
-                        os.remove(self.maintenance_item_path)
-                    finally:
-                        err = None
-                        del err
-                    err = None
-                    del err
-                    if not None:
-                        pass
+                        return None
+                    if variable_update:
+                        if result.get(update_item_name) and result.get(update_item_name).get(variable_update_obj):
+                            result[update_item_name][variable_update_obj]['cur_value'] = reset_value
+                            with open(self.maintenance_item_path, 'w') as f:
+                                f.write(json.dumps(result))
+                                f.flush()
+                            self.notify_maintenance_item()
+                        return None
+                    result = self.check_item(result=result, interval=interval, update_cut_used=update_cut_used, update_filament_used=update_filament_used, filament_used=filament_used)
+                    with open(self.maintenance_item_path, 'w') as f:
+                        f.write(json.dumps(result))
+                        f.flush()
+                    self.notify_maintenance_item()
+                except Exception as err:
+                    logging.error('open maintenance_item_path err:%s' % str(err))
+                    os.remove(self.maintenance_item_path)
 
 
 
@@ -390,21 +346,13 @@ class VirtualSD:
                 with open(box.box_state.tn_save_data_path, 'r') as f:
                     data = json.load(f)
                     box_enable = data.get('enable', 0)
-        except Exception:
-            err = None
-            
-            try:
-                pass
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return box_enable
+        except Exception as err:
+            pass
+        return box_enable
 
 
 
-    
+
     def get_maintenance_item(self, web_request):
         response = { }
         maintenance_item_param = self.printer.lookup_object('gcode_macro MAINTENANCE_ITEM_PARAM', None)
@@ -416,21 +364,14 @@ class VirtualSD:
                     result = self.maintenance_item_add_threshold(result)
                     result = self.maintenance_item_add_timeout(result)
                     response = result
-            except Exception:
-                err = None
-                
-                try:
-                    logging.exception(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return response
+            except Exception as err:
+                logging.exception(err)
+        web_request.send(response)
+        return response
 
 
 
-    
+
     def maintenance_item_add_threshold(self, result):
         maintenance_item_param = self.printer.lookup_object('gcode_macro MAINTENANCE_ITEM_PARAM', None).variables
         result['calibrate']['cut_calibration']['threshold'] = maintenance_item_param.get('cut_calibration')
@@ -542,12 +483,13 @@ class VirtualSD:
                     flist.append((r_path, size))
             return sorted(flist, key=(lambda f: f[0].lower()))
         dname = self.sdcard_dirname
-        
+
         try:
             filenames = os.listdir(self.sdcard_dirname)
-        return None
-        logging.exception('virtual_sdcard get_file_list')
-        raise self.gcode.error('Unable to get file list')
+            return [ (fname, os.path.getsize(os.path.join(dname, fname))) for fname in sorted(filenames, key=str.lower) if not fname.startswith('.') and os.path.isfile(os.path.join(dname, fname)) ]
+        except:
+            logging.exception('virtual_sdcard get_file_list')
+            raise self.gcode.error('Unable to get file list')
 
 
     
@@ -575,7 +517,8 @@ class VirtualSD:
     def progress(self):
         if self.file_size:
             return float(self.file_position) / self.file_size
-        return 0.0
+        else:
+            return 0.0
 
     
     def is_active(self):
@@ -585,9 +528,8 @@ class VirtualSD:
     def do_pause(self):
         if self.work_timer is not None:
             self.must_pause_work = True
-            if not self.work_timer is not None and self.cmd_from_sd:
+            while self.work_timer is not None and not self.cmd_from_sd:
                 self.reactor.pause(self.reactor.monotonic() + 0.001)
-                continue
 
     
     def do_resume(self):
@@ -620,8 +562,7 @@ class VirtualSD:
 
     
     def cmd_CLEAR_EEPROM_INFO(self, gcmd):
-        call = call
-        import subprocess
+        from subprocess import call
         if os.path.exists(self.print_file_name_path):
             os.remove(self.print_file_name_path)
         if os.path.exists(self.gcode.exclude_object_info):
@@ -637,21 +578,14 @@ class VirtualSD:
             bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
             if power_loss_switch and bl24c16f:
                 bl24c16f.setEepromDisable()
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+        except Exception as err:
+            logging.error(err)
+        self.update_print_history_info(only_update_status=True, state='cancelled')
+        return None
 
 
 
-    
+
     def cmd_error(self, gcmd):
         raise gcmd.error('SD write not supported')
 
@@ -757,18 +691,9 @@ class VirtualSD:
                     'jobs': [
                         data] }
                 self.cur_print_data = result
-        return None
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+                return None
+        except Exception as err:
+            logging.error(err)
 
 
 
@@ -791,33 +716,25 @@ class VirtualSD:
                                 update_obj['filament_used'] = self.print_stats.filament_used
                                 update_obj['print_duration'] = self.print_stats.print_duration
                                 update_obj['total_duration'] = self.print_stats.total_duration
-                        update_obj['end_time'] = time.time()
-                        if not state:
-                            state = 'in_progress'
-                        if error_msg:
-                            update_obj['error_msg'] = error_msg
-                        update_obj['status'] = state
+                            update_obj['end_time'] = time.time()
+                            if not state:
+                                state = 'in_progress'
+                            if error_msg:
+                                update_obj['error_msg'] = error_msg
+                            update_obj['status'] = state
                 if index != -1:
                     print_list[index] = update_obj
                     ret['jobs'] = print_list
                     self.cur_print_data = ret
-            except Exception:
-                err = None
-                
-                try:
-                    logging.error(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return None
+            except Exception as err:
+                logging.error(err)
+        return None
 
 
 
-    
+
     def rm_power_loss_info(self):
-        if self.is_continue_print and os.path.exists(self.print_file_name_path):
+        if not self.is_continue_print and os.path.exists(self.print_file_name_path):
             
             try:
                 power_loss_switch = False
@@ -831,21 +748,13 @@ class VirtualSD:
                         os.remove(self.gcode.exclude_object_info)
                     self.gcode.run_script_from_command('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
                     logging.info('rm power_loss info success')
-            except Exception:
-                err = None
-                
-                try:
-                    logging.error('rm power_loss info fail, err:%s' % err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return None
+            except Exception as err:
+                logging.error('rm power_loss info fail, err:%s' % err)
+        return None
 
 
 
-    
+
     def cmd_M20(self, gcmd):
         files = self.get_file_list()
         gcmd.respond_raw('Begin file list')
@@ -884,7 +793,7 @@ class VirtualSD:
             f.seek(0)
         except:
             logging.exception('virtual_sdcard file open')
-            return None
+            return gcmd.warning('{"code":"key121", "msg": "Unable to open file", "values": []}')
 
         gcmd.respond_raw('File opened:%s Size:%d' % (filename, fsize))
         gcmd.respond_raw('File selected')
@@ -931,40 +840,32 @@ class VirtualSD:
     def tail_read(self, f):
         cur_pos = f.tell()
         buf = ''
-        
-        try:
-            b = str(f.read(1))
-        except UnicodeDecodeError:
-            err = None
-            
+        while True:
+
             try:
+                b = str(f.read(1))
+            except UnicodeDecodeError as err:
                 logging.error('UnicodeDecodeError err:%s' % str(err))
                 cur_pos -= 1
                 if cur_pos < 0:
                     f.seek(0)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            continue
-            err = None
-            del err
-            err = None
-            del err
+                    break
+                f.seek(cur_pos)
+                continue
             buf = b + buf
             cur_pos -= 1
             if cur_pos < 0:
                 f.seek(0)
-            else:
-                f.seek(cur_pos)
-                if b.startswith('\n') or b.startswith('\r'):
-                    buf = '\n'
-                if not buf.startswith('G1'):
-                    if buf.startswith('G0') and buf.endswith('\n') or ';' in buf:
+                break
+            f.seek(cur_pos)
+            if b.startswith('\n') or b.startswith('\r'):
+                buf = '\n'
+            if buf.startswith('G1') or buf.startswith('G0'):
+                if buf.endswith('\n'):
+                    if ';' in buf:
                         buf = buf.split(';')[0] + '\n'
-                    
-                    return buf
+                    break
+        return buf
 
 
 
@@ -975,7 +876,7 @@ class VirtualSD:
         result = 0
         count = 5
         with open(file_path, 'r') as f:
-            if count > 0:
+            while count > 0:
                 count -= 1
                 header_data = f.read(int(READ_SIZE))
                 pattern_T = '(?m)^\\s*T(\\d+)\\s*$'
@@ -986,12 +887,10 @@ class VirtualSD:
                 value_T = re.findall(pattern_T, header_data)
                 if len(value_T) == 1 and result == 0:
                     result = 1
-                elif len(value_T) > 1 and result >= 0:
+                    break
+                if len(value_T) > 1 and result >= 0:
                     result = 2
-                
-            None(None, None, None)
-        if not None:
-            pass
+                break
         return result
 
     
@@ -1015,13 +914,13 @@ class VirtualSD:
             import io
             with io.open(file_path, 'r', encoding='utf-8') as f:
                 f.seek(file_position)
-                cur_pos = f.tell()
-                if cur_pos <= 0:
-                    pass
-                else:
+                while True:
+                    cur_pos = f.tell()
+                    if cur_pos <= 0:
+                        break
                     line = self.tail_read(f)
                     line_list = line.split(' ')
-                    if result['E'] and 'E' in line:
+                    if not result['E'] and 'E' in line:
                         for obj in line_list:
                             if obj.startswith('E'):
                                 ret = obj[1:].split('\r')[0]
@@ -1030,8 +929,8 @@ class VirtualSD:
                                     result['E'] = float('0' + ret.strip(' '))
                                 else:
                                     result['E'] = float(ret.strip(' '))
-                            save_flag['E'] = 1
-                    if save_flag['X'] and save_flag['Y'] and 'X' in line and 'Y' in line:
+                                save_flag['E'] = 1
+                    if not save_flag['X'] and not save_flag['Y'] and 'X' in line and 'Y' in line:
                         for obj in line_list:
                             if obj.startswith('X'):
                                 logging.info('power_loss getXYZET X:%s' % obj)
@@ -1041,27 +940,21 @@ class VirtualSD:
                                 logging.info('power_loss getXYZET Y:%s' % obj)
                                 result['Y'] = float(obj.split('\r')[0][1:])
                                 save_flag['Y'] = 1
-                                continue
-                                if save_flag['Z'] and 'Z' in line:
-                                    for obj in line_list:
-                                        if obj.startswith('Z'):
-                                            logging.info('power_loss getXYZET Z:%s' % obj)
-                                            result['Z'] = float(obj.split('\r')[0][1:])
-                                            save_flag['Z'] = 1
-                                            continue
-                                            if save_flag['X'] and save_flag['Y'] and save_flag['Z'] and save_flag['E']:
-                                                pass
-                                            else:
-                                                self.reactor.pause(self.reactor.monotonic() + 0.001)
-                                        None(None, None, None)
-                                    if not None:
-                                        pass
+                    if not save_flag['Z'] and 'Z' in line:
+                        for obj in line_list:
+                            if obj.startswith('Z'):
+                                logging.info('power_loss getXYZET Z:%s' % obj)
+                                result['Z'] = float(obj.split('\r')[0][1:])
+                                save_flag['Z'] = 1
+                    if save_flag['X'] and save_flag['Y'] and save_flag['Z'] and save_flag['E']:
+                        break
+                    self.reactor.pause(self.reactor.monotonic() + 0.001)
             if Tn >= 1:
                 READ_SIZE = 524288
                 pattern = '(?m)^\\s*T(\\d+)\\s*$'
                 pattern_M = '(?m)^\\s*M8200\\s*L\\s*I(\\d+)\\s*$'
                 with io.open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                    if file_position > 0:
+                    while file_position > 0:
                         pos = max(file_position - READ_SIZE, 0)
                         read_size = min(READ_SIZE, file_position)
                         f.seek(pos)
@@ -1075,43 +968,25 @@ class VirtualSD:
                             if values_M:
                                 result['M'] = 'T%s' % values_M[-1]
                                 logging.info('power_loss get XYZET M:%s' % str(result['M']))
-                        if not result['T'] or self.gcode_metadata['metadata']['model_info']['multicolor_method'] == 0:
-                            if result['M']:
-                                pass
-                            else:
-                                file_position = pos
-                                if pos == 0:
-                                    logging.info('read the file without finding a match')
-                                else:
-                                    self.reactor.pause(self.reactor.monotonic() + 0.001)
-                            None(None, None, None)
-                        elif not None:
-                            pass
+                        if result['T'] and (self.gcode_metadata['metadata']['model_info']['multicolor_method'] == 0 or result['M']):
+                            break
+                        file_position = pos
+                        if pos == 0:
+                            logging.info('read the file without finding a match')
+                            break
+                        self.reactor.pause(self.reactor.monotonic() + 0.001)
             else:
                 result['T'] = 'T0'
                 logging.info('power_loss get XYZET T:%s' % str(result))
             logging.info('power_loss get Tn: %s, get XYZET:%s' % (Tn, str(result)))
-        except UnicodeDecodeError:
-            err = None
-            
-            try:
-                logging.exception(err)
-                err_msg = '{"code": "key572", "msg": "File UnicodeDecodeError"}'
-                self.gcode.respond_info(err_msg)
-                raise self.printer.command_error(err_msg)
-            err = None
-            del err
-            except Exception:
-                err = None
-                
-                try:
-                    logging.exception(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return result
+        except UnicodeDecodeError as err:
+            logging.exception(err)
+            err_msg = '{"code": "key572", "msg": "File UnicodeDecodeError"}'
+            self.gcode.respond_info(err_msg)
+            raise self.printer.command_error(err_msg)
+        except Exception as err:
+            logging.exception(err)
+        return result
 
 
 
@@ -1131,20 +1006,10 @@ class VirtualSD:
                         bed = float(result.get('bed', 0))
                         extruder = float(result.get('extruder', 201.0))
                         chamber_heater = float(result.get('chamber_heater', 0))
-                    None(None, None, None)
-                if not None:
-                    pass
-            except Exception:
-                err = None
-                
-                try:
-                    logging.error('get_print_temperature: %s' % err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return (bed, extruder, chamber_heater)
+            except Exception as err:
+                logging.error('get_print_temperature: %s' % err)
+        logging.info('power_loss get_print_temperature: bed:%s, extruder:%s, chamber_heater:%s' % (bed, extruder, chamber_heater))
+        return (bed, extruder, chamber_heater)
 
 
 
@@ -1169,25 +1034,16 @@ class VirtualSD:
             try:
                 with open(self.gcode_layer_path, 'r') as f:
                     layer = int(json.loads(f.read()).get('layer'))
-            except Exception:
-                err = None
-                
-                try:
-                    logging.error(err)
-                    os.remove(self.gcode_layer_path)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return layer
+            except Exception as err:
+                logging.error(err)
+                os.remove(self.gcode_layer_path)
+        return layer
 
 
 
-    
+
     def get_print_file_metadata(self, filename, filepath = ''):
-        check_output = check_output
-        import subprocess
+        from subprocess import check_output
         if not filepath:
             filepath = os.path.join(base_dir, 'printer_data/gcodes')
         result = { }
@@ -1196,21 +1052,13 @@ class VirtualSD:
         
         try:
             result = json.loads(check_output(cmd, shell=True).decode('utf-8'))
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return result
+        except Exception as err:
+            logging.error(err)
+        return result
 
 
 
-    
+
     def get_file_layer_count(self, filename, metadata_info = None):
         filename = filename.split('/')[-1]
         import math
@@ -1227,19 +1075,11 @@ class VirtualSD:
             first_layer_height = result.get('metadata').get('first_layer_height', 0)
             object_height = result.get('metadata').get('object_height', 0)
             layer_height = result.get('metadata').get('layer_height', 0)
-            if layer_count and object_height > 0 and layer_height > 0:
+            if not layer_count and object_height > 0 and layer_height > 0:
                 layer_count = math.ceil((object_height - first_layer_height) / layer_height + 1)
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return layer_count
+        except Exception as err:
+            logging.error(err)
+        return layer_count
 
 
 
@@ -1249,17 +1089,9 @@ class VirtualSD:
         
         try:
             flush_para = self.gcode_metadata.get('metadata').get('flush_para', None)
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return flush_para
+        except Exception as err:
+            logging.error(err)
+        return flush_para
 
 
 
@@ -1288,18 +1120,9 @@ class VirtualSD:
                         self.gcode.run_script_from_command(speed_cmd)
                         self.gcode.run_script_from_command('M400')
                         logging.info('power_loss slow_print speed_mode:%s Resume' % speed_cmd)
-                else:
-                    except Exception:
-                        err = None
-                        
-                        try:
-                            logging.error('resume_print_speed err:%s' % err)
-                        finally:
-                            err = None
-                            del err
-                        err = None
-                        del err
-                        return None
+            except Exception as err:
+                logging.error('resume_print_speed err:%s' % err)
+            self.resume_flow_rate()
 
 
 
@@ -1319,21 +1142,13 @@ class VirtualSD:
                 self.gcode.run_script_from_command(speed_cmd)
                 self.gcode.run_script_from_command('M400')
                 logging.info('power_loss slow_print resume_flow_rate:%s Resume' % speed_cmd)
-        except Exception:
-            err = None
-            
-            try:
-                logging.error('resume_flow_rate err:%s' % err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+        except Exception as err:
+            logging.error('resume_flow_rate err:%s' % err)
+        return None
 
 
 
-    
+
     def get_delay_photography_info(self):
         delay_photography_switch = 1
         location = 0
@@ -1350,37 +1165,24 @@ class VirtualSD:
                     frame = data.get('delay_image', { }).get('frame', 15)
                     interval = data.get('delay_image', { }).get('interval', 1)
                     power_loss_switch = data.get('power_loss', { }).get('switch', False)
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return (delay_photography_switch, location, frame, interval, power_loss_switch)
+        except Exception as err:
+            logging.error(err)
+        return (delay_photography_switch, location, frame, interval, power_loss_switch)
 
 
 
-    
+
     def check_same_file_name(self, power_loss_switch, bl24c16f):
         if self.is_continue_print and os.path.exists(self.print_file_name_path):
             with open(self.print_file_name_path, 'r') as f:
                 result = json.loads(f.read())
                 if result.get('file_path', '') == self.current_file.name:
-                    pass
-                None(None, None, None)
-                return True
+                    return True
                 os.remove(self.print_file_name_path)
                 if os.path.exists(self.gcode.exclude_object_info):
                     os.remove(self.gcode.exclude_object_info)
                 if power_loss_switch and bl24c16f:
                     bl24c16f.setEepromDisable()
-                None(None, None, None)
-            if not None:
-                pass
         return False
 
     
@@ -1412,11 +1214,11 @@ class VirtualSD:
     def get_restore_info(self, power_loss_switch, bl24c16f, eepromState):
         print_info = None
         XYZET = None
-        if power_loss_switch and self.is_continue_print and self.do_resume_status and self.check_same_file_name(power_loss_switch, bl24c16f) and bl24c16f:
+        if power_loss_switch and self.is_continue_print and not self.do_resume_status and self.check_same_file_name(power_loss_switch, bl24c16f) and bl24c16f:
             eepromState = bl24c16f.checkEepromFirstEnable() if power_loss_switch and bl24c16f else True
             if not eepromState:
                 with self.gcode.mutex:
-                    
+
                     try:
                         self.print_stats.note_start(info_path=self.print_file_name_path)
                         logging.info('power_loss start do_resume...')
@@ -1437,14 +1239,13 @@ class VirtualSD:
                         logging.info('power_loss XYZET:%s, file_position:%s  ' % (str(XYZET), self.file_position))
                         if XYZET.get('Z') == 0:
                             logging.error('power_loss gcode Z == 0 err')
-                            call = call
-                            import subprocess
+                            from subprocess import call
                             if os.path.exists(self.print_file_name_path):
                                 os.remove(self.print_file_name_path)
                             if os.path.exists(self.gcode.exclude_object_info):
                                 os.remove(self.gcode.exclude_object_info)
                             call('sync', shell=True)
-                            
+
                             try:
                                 power_loss_switch = False
                                 if os.path.exists(self.user_print_refer_path):
@@ -1454,39 +1255,19 @@ class VirtualSD:
                                 bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
                                 if power_loss_switch and bl24c16f:
                                     bl24c16f.setEepromDisable()
-                            except Exception:
-                                err = None
-                                
-                                try:
-                                    logging.error('power_loss gcode Z == 0: %s' % err)
-                                finally:
-                                    err = None
-                                    del err
-                                err = None
-                                del err
-                                error_message = 'power_loss gcode Z == 0, stop print'
-                                raise 
-                                except Exception:
-                                    err = None
-                                    
-                                    try:
-                                        self.print_stats.power_loss = 0
-                                        logging.error(err)
-                                    finally:
-                                        err = None
-                                        del err
-                                    err = None
-                                    del err
-                                    if not None:
-                                        pass
-
-
-
-                    except:
-                        self.gcode.run_script('G90')
-
+                            except Exception as err:
+                                logging.error('power_loss gcode Z == 0: %s' % err)
+                            error_message = 'power_loss gcode Z == 0, stop print'
+                            self.print_stats.note_error(error_message)
+                            raise
+                    except Exception as err:
+                        self.print_stats.power_loss = 0
+                        logging.error(err)
+            else:
                 self.gcode.run_script('G90')
-                return (eepromState, print_info, XYZET)
+        else:
+            self.gcode.run_script('G90')
+        return (eepromState, print_info, XYZET)
 
     
     def record_power_loss_info(self, power_loss_switch, bl24c16f, eepromState, gcode_move, start_time, end_time, interval_start_time, interval_end_time):
@@ -1500,7 +1281,7 @@ class VirtualSD:
             if state == True and self.printer.lookup_object('box', None) and self.printer.lookup_object('box').box_state.need_update_power_loss_info == False:
                 state = False
             if power_loss_switch and bl24c16f:
-                if (self.layer > 6 or self.count_G1 > 18) and gcode_move.last_position[2] > 1.0 and state and self.file_position > 0:
+                if (self.layer > 6 or self.count_G1 > 18 and gcode_move.last_position[2] > 1.0) and state and self.file_position > 0:
                     logging.info('record_power_loss_info to eeprom layer:%s last_position[2]:%s' % (self.layer, gcode_move.last_position[2]))
                     self.last_layer = self.layer
                     start_time = end_time
@@ -1524,25 +1305,15 @@ class VirtualSD:
                         self.gcode.run_script('EEPROM_WRITE_FLOAT ADDR=%s VAL=%s' % (pos * 8 + 4, base_position_e))
                         self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=0 VAL=%d' % pos)
                     self.eepromWriteCount += 1
-            else:
-                except Exception:
-                    err = None
-                    
-                    try:
-                        logging.error('EEPROM_WRITE ERROR:%s' % str(err))
-                    finally:
-                        err = None
-                        del err
-                    err = None
-                    del err
-                    if power_loss_switch and bl24c16f and self.count_G1 == 19:
-                        gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name, fan_state=self.fan_state, filament_used=self.print_stats.filament_used, last_print_duration=self.print_stats.print_duration)
-
-            if power_loss_switch and bl24c16f:
-                if (self.layer > 6 or gcode_move.last_position[2] > 3) and self.current_file and interval_end_time - interval_start_time > 15:
-                    interval_start_time = interval_end_time
-                    gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name, fan_state=self.fan_state, filament_used=self.print_stats.filament_used, last_print_duration=self.print_stats.print_duration)
-            return (start_time, end_time, interval_start_time, interval_end_time)
+        except Exception as err:
+            logging.error('EEPROM_WRITE ERROR:%s' % str(err))
+        if power_loss_switch and bl24c16f and self.count_G1 == 19:
+            gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name, fan_state=self.fan_state, filament_used=self.print_stats.filament_used, last_print_duration=self.print_stats.print_duration)
+        if power_loss_switch and bl24c16f:
+            if (self.layer > 6 or gcode_move.last_position[2] > 3) and self.current_file and interval_end_time - interval_start_time > 15:
+                interval_start_time = interval_end_time
+                gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name, fan_state=self.fan_state, filament_used=self.print_stats.filament_used, last_print_duration=self.print_stats.print_duration)
+        return (start_time, end_time, interval_start_time, interval_end_time)
 
 
     
@@ -1559,16 +1330,16 @@ class VirtualSD:
                 self.fan_state['M106 P1'] = M106_line
             elif M106_line.startswith('M106 P2'):
                 self.fan_state['M106 P2'] = M106_line
-            elif line.startswith('END_PRINT'):
-                self.end_print_state = True
-                if os.path.exists(self.print_file_name_path):
-                    os.remove(self.print_file_name_path)
-                if os.path.exists(self.gcode.exclude_object_info):
-                    os.remove(self.gcode.exclude_object_info)
-                if power_loss_switch and bl24c16f:
-                    self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
-                elif line.startswith('M600'):
-                    line = 'PAUSE'
+        elif line.startswith('END_PRINT'):
+            self.end_print_state = True
+            if os.path.exists(self.print_file_name_path):
+                os.remove(self.print_file_name_path)
+            if os.path.exists(self.gcode.exclude_object_info):
+                os.remove(self.gcode.exclude_object_info)
+            if power_loss_switch and bl24c16f:
+                self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+        elif line.startswith('M600'):
+            line = 'PAUSE'
         return line
 
     
@@ -1588,8 +1359,7 @@ class VirtualSD:
                     self.reactor.pause(self.reactor.monotonic() + 0.001)
                     if not self.layer_key:
                         self.layer_key = layer_key
-                self
-            continue
+                    break
 
     
     def first_floor_pause(self, line, toolhead):
@@ -1600,8 +1370,6 @@ class VirtualSD:
                     (X, Y, Z, E) = toolhead.get_position()
                     self.gcode.run_script('FIRST_FLOOR_PAUSE')
                     self.first_layer_stop = True
-                    continue
-                    return None
 
     
     def check_end_print(self, line, power_loss_switch, delay_photography_switch, frame):
@@ -1633,7 +1401,8 @@ class VirtualSD:
             ignore = True
             logging.info('hys: catpure M8200 P, start ignore line[%s]' % line)
             return (True, ignore)
-        return (False, ignore)
+        else:
+            return (False, ignore)
 
     
     def work_handler(self, eventtime):
@@ -1650,19 +1419,11 @@ class VirtualSD:
         try:
             if self.restore_err is False:
                 (eepromState, self.print_info, self.XYZET) = self.get_restore_info(power_loss_switch, bl24c16f, eepromState)
-        except Exception:
-            err = None
-            
-            try:
-                self.print_stats.power_loss = 0
-                logging.exception('work_handler RESTORE_GCODE_STATE error: %s' % err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            if power_loss_switch and bl24c16f and self.current_file and self.is_continue_print is False:
-                gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name)
+        except Exception as err:
+            self.print_stats.power_loss = 0
+            logging.exception('work_handler RESTORE_GCODE_STATE error: %s' % err)
+        if power_loss_switch and bl24c16f and self.current_file and self.is_continue_print is False:
+            gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name)
 
 
         logging.info('Starting SD card print (position %d)', self.file_position)
@@ -1673,7 +1434,7 @@ class VirtualSD:
         except:
             logging.exception('virtual_sdcard seek')
             self.work_timer = None
-            return None
+            return self.reactor.NEVER
 
         self.print_stats.note_start()
         gcode_mutex = self.gcode.get_mutex()
@@ -1691,191 +1452,145 @@ class VirtualSD:
                 default_bed_temp = custom_macro.default_bed_temp
                 if target_temp > default_bed_temp:
                     cmd += ' BED_TEMP=%s' % target_temp
-            except Exception:
-                err = None
-                
+            except Exception as err:
+                logging.exception('run_bed_mesh_calibate error: %s' % err)
+            self.gcode.run_script(cmd)
+        toolhead = self.printer.lookup_object('toolhead')
+        pause_resume = self.printer.lookup_object('pause_resume')
+        toolhead.extrude_below_min_temp_err_is_report = False
+        start_time = interval_start_time = self.reactor.monotonic()
+        self.last_layer = self.layer
+        while not self.must_pause_work:
+            if self.is_continue_print and not self.restore_print_timer:
+
                 try:
-                    logging.exception('run_bed_mesh_calibate error: %s' % err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                toolhead = self.printer.lookup_object('toolhead')
-                pause_resume = self.printer.lookup_object('pause_resume')
-                toolhead.extrude_below_min_temp_err_is_report = False
-                start_time = interval_start_time = self.reactor.monotonic()
-                self.last_layer = self.layer
-                if not self.must_pause_work:
-                    if not self.is_continue_print and self.restore_print_timer:
-                        
-                        try:
-                            self.gcode.check_cancel_running()
-                        except self.gcode.cancel_error:
-                            e = None
-                            
-                            try:
-                                self.is_continue_print = False
-                                self.restore_print_timer = None
-                                logging.warning('should be canceled, skip restore print')
-                            finally:
-                                e = None
-                                del e
-                                continue
-                                e = None
-                                del e
-                            e = None
-                            del e
-                            self.restore_print_timer = self.reactor.register_timer(self.restore_print, self.reactor.NOW)
-                            if self.restore_print_timer:
-                                self.reactor.pause(self.reactor.monotonic() + 0.5)
-                                continue
-
-
-                    if not lines:
-                        
-                        try:
-                            data = self.current_file.read(8192)
-                        except UnicodeDecodeError:
-                            err = None
-                            
-                            try:
-                                logging.exception(err)
-                                self.gcode._respond_error('{"code": "key571", "msg": "File UnicodeDecodeError"}')
-                                self.gcode.run_script('CANCEL_PRINT')
-                            err = None
-                            del err
-                            except:
-                                err = None
-                                del err
-                                logging.exception('virtual_sdcard read')
-                            except:
-                                pass
-
-                            if not data:
-                                self.current_file.close()
-                                self.current_file = None
-                                logging.info('Finished SD card print')
-                                self.gcode.respond_raw('Done printing file')
-                                if os.path.exists(self.print_file_name_path):
-                                    os.remove(self.print_file_name_path)
-                                if os.path.exists(self.gcode.exclude_object_info):
-                                    os.remove(self.gcode.exclude_object_info)
-                                if power_loss_switch and bl24c16f:
-                                    self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
-                                self.first_layer_stop = False
-                                self.print_first_layer = False
-                                self.count_M204 = 0
-                                self.layer = 0
-                                self.layer_count = 0
-                                self.fan_state = { }
-                                self.update_print_history_info(only_update_status=True, state='completed')
-                                self.reactor.pause(self.reactor.monotonic() + 0.3)
-                            else:
-                                lines = data.split('\n')
-                                lines[0] = partial_input + lines[0]
-                                partial_input = lines.pop()
-                                lines.reverse()
-                                self.reactor.pause(self.reactor.NOW)
-                            if gcode_mutex.test():
-                                self.reactor.pause(self.reactor.monotonic() + 0.05)
-                                continue
-
-                    self.cmd_from_sd = True
-                    line = lines.pop()
-                    next_file_position = self.file_position + len(line.encode('utf-8')) + 1
-                    self.next_file_position = next_file_position
-                    end_time = interval_end_time = self.reactor.monotonic()
-                    (ret, self.ignore_M) = self.ignore_M8200_code(line, self.ignore_M)
-                    if ret:
-                        self.file_position = self.next_file_position
-                        continue
-                    if power_loss_switch and self.count_line % 4999 == 0:
-                        self.update_print_history_info()
-                    
-                    try:
-                        (start_time, end_time, interval_start_time, interval_end_time) = self.record_power_loss_info(power_loss_switch, bl24c16f, eepromState, gcode_move, start_time, end_time, interval_start_time, interval_end_time)
-                        line = self.judge_line_starts_with(line, power_loss_switch, bl24c16f)
-                        self.record_layer_info(line, power_loss_switch)
-                        self.first_floor_pause(line, toolhead)
-                        if self.slow_print == True and self.layer > 0 and self.slow_count < self.layer:
-                            self.resume_print_speed()
-                        self.check_end_print(line, power_loss_switch, delay_photography_switch, frame)
-                        if self.ignore_t_code(line):
-                            pass
+                    self.gcode.check_cancel_running()
+                except self.gcode.cancel_error as e:
+                    self.is_continue_print = False
+                    self.restore_print_timer = None
+                    logging.warning('should be canceled, skip restore print')
                     continue
-                    if self.is_move_out_of_range_in_printing and pause_resume.pause_start == False:
-                        self.is_move_out_of_range_in_printing = False
-                        self.gcode.run_script_from_command('PAUSE')
-                        self.is_move_out_of_range_in_printing = False
-                    else:
-                        self.gcode.run_script(line)
+                self.restore_print_timer = self.reactor.register_timer(self.restore_print, self.reactor.NOW)
+            if self.restore_print_timer:
+                self.reactor.pause(self.reactor.monotonic() + 0.5)
+                continue
+            if not lines:
 
-                    if power_loss_switch:
-                        self.count_line += 1
-                    if self.count_G1 < 20 and line.startswith('G1'):
-                        self.count_G1 += 1
+                try:
+                    data = self.current_file.read(8192)
+                except UnicodeDecodeError as err:
+                    logging.exception(err)
+                    self.gcode._respond_error('{"code": "key571", "msg": "File UnicodeDecodeError"}')
+                    self.gcode.run_script('CANCEL_PRINT')
+                except:
+                    logging.exception('virtual_sdcard read')
+                    break
+                if not data:
+                    self.current_file.close()
+                    self.current_file = None
+                    logging.info('Finished SD card print')
+                    self.gcode.respond_raw('Done printing file')
+                    if os.path.exists(self.print_file_name_path):
+                        os.remove(self.print_file_name_path)
+                    if os.path.exists(self.gcode.exclude_object_info):
+                        os.remove(self.gcode.exclude_object_info)
+                    if power_loss_switch and bl24c16f:
+                        self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+                    self.first_layer_stop = False
+                    self.print_first_layer = False
+                    self.count_M204 = 0
+                    self.layer = 0
+                    self.layer_count = 0
+                    self.fan_state = { }
+                    self.update_print_history_info(only_update_status=True, state='completed')
+                    self.reactor.pause(self.reactor.monotonic() + 0.3)
+                    break
+                lines = data.split('\n')
+                lines[0] = partial_input + lines[0]
+                partial_input = lines.pop()
+                lines.reverse()
+                self.reactor.pause(self.reactor.NOW)
+                continue
+            if gcode_mutex.test():
+                self.reactor.pause(self.reactor.monotonic() + 0.05)
+                continue
+            self.cmd_from_sd = True
+            line = lines.pop()
+            next_file_position = self.file_position + len(line.encode('utf-8')) + 1
+            self.next_file_position = next_file_position
+            end_time = interval_end_time = self.reactor.monotonic()
+            (ret, self.ignore_M) = self.ignore_M8200_code(line, self.ignore_M)
+            if ret:
+                self.file_position = self.next_file_position
+                continue
+            if power_loss_switch and self.count_line % 4999 == 0:
+                self.update_print_history_info()
+
+            try:
+                (start_time, end_time, interval_start_time, interval_end_time) = self.record_power_loss_info(power_loss_switch, bl24c16f, eepromState, gcode_move, start_time, end_time, interval_start_time, interval_end_time)
+                line = self.judge_line_starts_with(line, power_loss_switch, bl24c16f)
+                self.record_layer_info(line, power_loss_switch)
+                self.first_floor_pause(line, toolhead)
+                if self.slow_print == True and self.layer > 0 and self.slow_count < self.layer:
+                    self.resume_print_speed()
+                self.check_end_print(line, power_loss_switch, delay_photography_switch, frame)
+                if self.ignore_t_code(line):
+                    continue
+                if self.is_move_out_of_range_in_printing and pause_resume.pause_start == False:
+                    self.is_move_out_of_range_in_printing = False
+                    self.gcode.run_script_from_command('PAUSE')
+                    self.is_move_out_of_range_in_printing = False
                 else:
-                    except self.gcode.error:
-                        self
-                        e = self
-                        
-                        try:
-                            error_message = str(e)
-                            
-                            try:
-                                self.gcode.run_script(self.on_error_gcode.render())
-                            except:
-                                logging.exception('virtual_sdcard on_error')
+                    self.gcode.run_script(line)
+                if power_loss_switch:
+                    self.count_line += 1
+                if self.count_G1 < 20 and line.startswith('G1'):
+                    self.count_G1 += 1
+            except self.gcode.error as e:
+                error_message = str(e)
+                try:
+                    self.gcode.run_script(self.on_error_gcode.render())
+                except:
+                    logging.exception('virtual_sdcard on_error')
+                self.layer = 0
+                self.layer_count = 0
+                self.resume_print_speed()
+                break
+            except:
+                logging.exception('virtual_sdcard dispatch')
+                self.layer = 0
+                self.layer_count = 0
+                self.resume_print_speed()
+                break
+            self.cmd_from_sd = False
+            self.file_position = self.next_file_position
+            if self.next_file_position != next_file_position:
 
-                            self.layer = 0
-                            self.layer_count = 0
-                            self.resume_print_speed()
-                        finally:
-                            e = None
-                            del e
-                        e = None
-                        del e
-                        e = None
-                        del e
-                        logging.exception('virtual_sdcard dispatch')
-                        self.layer = 0
-                        self.layer_count = 0
-                        self.resume_print_speed()
-                        self.cmd_from_sd = False
-                        self.file_position = self.next_file_position
-                        if self.next_file_position != next_file_position:
-                            
-                            try:
-                                self.current_file.seek(self.file_position)
-                            except:
-                                logging.exception('virtual_sdcard seek')
-                                self.work_timer = None
-                                return None
-
-                            lines = []
-                            partial_input = ''
-                            continue
-                            logging.info('Exiting SD card print (position %d)', self.file_position)
-                            self.count_line = 0
-                            self.count_G1 = 0
-                            self.do_resume_status = False
-                            self.eepromWriteCount = 1
-                            self.work_timer = None
-                            self.cmd_from_sd = False
-                            toolhead.extrude_below_min_temp_err_is_report = False
-                            if error_message is not None:
-                                self.print_stats.note_error(error_message)
-                            elif self.current_file is not None:
-                                if self.is_cancel:
-                                    self.print_stats.note_cancel()
-                                else:
-                                    self.print_stats.note_pause()
-                            else:
-                                self.print_stats.note_complete()
-
-
-
+                try:
+                    self.current_file.seek(self.file_position)
+                except:
+                    logging.exception('virtual_sdcard seek')
+                    self.work_timer = None
+                    return self.reactor.NEVER
+                lines = []
+                partial_input = ''
+        logging.info('Exiting SD card print (position %d)', self.file_position)
+        self.count_line = 0
+        self.count_G1 = 0
+        self.do_resume_status = False
+        self.eepromWriteCount = 1
+        self.work_timer = None
+        self.cmd_from_sd = False
+        toolhead.extrude_below_min_temp_err_is_report = False
+        if error_message is not None:
+            self.print_stats.note_error(error_message)
+        elif self.current_file is not None:
+            if self.is_cancel:
+                self.print_stats.note_cancel()
+            else:
+                self.print_stats.note_pause()
+        else:
+            self.print_stats.note_complete()
         return self.reactor.NEVER
 
 
