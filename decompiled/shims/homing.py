@@ -26,8 +26,7 @@ def multi_complete(printer, completions):
     cp = reactor.register_callback((lambda e: [ c.wait() for c in (completions) ]
 ))
     for c in completions:
-        reactor.register_callback((lambda e, c = c: if c.wait():
-cp.complete(1)0))
+        reactor.register_callback((lambda e, c = c: cp.complete(1) if c.wait() else 0))
     return cp
 
 
@@ -38,8 +37,7 @@ class StepperPosition:
         self.endstop_name = endstop_name
         self.stepper_name = stepper.get_name()
         self.start_pos = stepper.get_mcu_position()
-        self.halt_pos = None
-        self.trig_pos = None
+        self.halt_pos = self.trig_pos = None
 
     
     def note_home_end(self, trigger_time):
@@ -201,7 +199,7 @@ class HomingMove:
         for sp in self.stepper_positions:
             if sp.start_pos == sp.trig_pos:
                 return sp.endstop_name
-            return None
+        return None
 
 
 
@@ -239,8 +237,7 @@ class Homing:
         for i in range(len(coord)):
             if coord[i] is not None:
                 thcoord[i] = coord[i]
-                continue
-                return thcoord
+        return thcoord
 
     
     def set_homed_position(self, pos):
@@ -257,7 +254,7 @@ class Homing:
                 return [
                     sp.start_pos,
                     halt_step_dist[sp.stepper_name]]
-            return None
+        return None
 
     
     def home_rails(self, rails, forcepos, movepos):
@@ -390,12 +387,11 @@ class PrinterHoming:
         for pos, axis in enumerate('XYZ'):
             if gcmd.get(axis, None) is not None:
                 axes.append(pos)
-                continue
-                if not axes:
-                    axes = [
-                        0,
-                        1,
-                        2]
+        if not axes:
+            axes = [
+                0,
+                1,
+                2]
         homing_state = Homing(self.printer)
         homing_state.set_axes(axes)
         toolhead = self.printer.lookup_object('toolhead')
@@ -465,31 +461,17 @@ class PrinterHoming:
                         gcode.run_script_from_command('SET_Z_LIMIT')
                         continue
                     kin.home(homing_state)
-        except self.printer.command_error:
-            err = None
-            
-            try:
-                logging.exception(err)
-                self.set_stall_mode(gcode)
-                if self.printer.is_shutdown():
-                    raise self.printer.command_error('Homing failed due to printer shutdown')
-                self.printer.lookup_object('stepper_enable').motor_off()
-                raise 
-            err = None
-            del err
-            except Exception:
-                err = None
-                
-                try:
-                    logging.exception(err)
-                    self.set_stall_mode(gcode)
-                    raise 
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return None
+        except self.printer.command_error as err:
+            logging.exception(err)
+            self.set_stall_mode(gcode)
+            if self.printer.is_shutdown():
+                raise self.printer.command_error('Homing failed due to printer shutdown')
+            self.printer.lookup_object('stepper_enable').motor_off()
+            raise
+        except Exception as err:
+            logging.exception(err)
+            self.set_stall_mode(gcode)
+            raise
 
 
 
@@ -517,7 +499,7 @@ class PrinterHoming:
 
     
     def run_G28_two_Z(self):
-        
+
         try:
             gcode = self.printer.lookup_object('gcode')
             gcmd = gcode.create_gcode_command('', '', { })
@@ -526,33 +508,22 @@ class PrinterHoming:
             gcode = self.printer.lookup_object('gcode')
             gcode.respond_info('ZDOWN ret:%s' % ret)
             if ret == MOTOR_PROTECT_ERROR:
-                pass
-        return None
-        max_z = self.config.getsection('stepper_z').getfloat('position_max')
-        distance_ratio = self.printer.lookup_object('z_align').distance_ratio
-        if ret == MOTOR_ZDOWN_TIMEOUT:
-            distance_ratio = 0
-
-        self.z_move = max_z * distance_ratio
-        self.move_z(speed=30, height=self.z_move)
-        if self.config.has_section('motor_control') and self.config.getsection('motor_control').getint('switch') == 1:
-            motor_error_code = self.printer.lookup_object('motor_control').motor_error_code
-            for i in range(1, 5):
-                if motor_error_code.get(str(i), 0):
-                    gcode.respond_info('%s motor_error_code...' % str(i))
-                return None
-        else:
-            except Exception:
-                err = None
-                
-                try:
-                    logging.exception(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return 0
+                return MOTOR_PROTECT_ERROR
+            max_z = self.config.getsection('stepper_z').getfloat('position_max')
+            distance_ratio = self.printer.lookup_object('z_align').distance_ratio
+            if ret == MOTOR_ZDOWN_TIMEOUT:
+                distance_ratio = 0
+            self.z_move = max_z * distance_ratio
+            self.move_z(speed=30, height=self.z_move)
+            if self.config.has_section('motor_control') and self.config.getsection('motor_control').getint('switch') == 1:
+                motor_error_code = self.printer.lookup_object('motor_control').motor_error_code
+                for i in range(1, 5):
+                    if motor_error_code.get(str(i), 0):
+                        gcode.respond_info('%s motor_error_code...' % str(i))
+                        return MOTOR_PROTECT_ERROR
+        except Exception as err:
+            logging.exception(err)
+        return 0
 
 
     
@@ -561,22 +532,11 @@ class PrinterHoming:
         if os.path.exists(z_tilt.stepper_adjustment_path):
             result = { }
             with open(z_tilt.stepper_adjustment_path, 'r') as f:
-                
+
                 try:
                     result = json.loads(f.read())
-                except Exception:
-                    err = None
-                    
-                    try:
-                        pass
-                    finally:
-                        err = None
-                        del err
-                    err = None
-                    del err
-                    if not None:
-                        pass
-
+                except Exception as err:
+                    pass
 
             if result:
                 self.move_z(speed=20, height=9)
