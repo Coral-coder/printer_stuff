@@ -32,26 +32,38 @@ timestamps) but the bytecode itself is standard, un-remapped CPython 3.9.
 
 ## Results
 
-### Python bytecode → source (`decompiled/`)
+### Python bytecode → source + verification
 
-All **105** modules were run through the decompiler; **70** reconstruct to valid Python:
+All **105** modules are decompiled into `decompiled/` and then put through the
+**reassembly pipeline** (`tools/reassemble.py`): each recovered `.py` is recompiled
+to a `.pyc` under **CPython 3.9** (the printer's runtime — magic matches exactly) and
+its code objects are compared opcode-for-opcode against the *original* bytecode. That
+bytecode-match ratio is the authoritative correctness gate — a high match is a *proof*
+that the recovered source round-trips to the same program.
 
-| Category | Count | Meaning |
-|----------|------:|---------|
-| **clean** | 57 | ast-valid, no known defects |
-| **flagged** | 13 | ast-valid, but pycdc dropped a called builtin, rendered `None(...)` — see disasm |
-| **partial** | 35 | did not fully round-trip; best-effort source + a `# PARTIAL` header |
+| Category (by bytecode match) | Count | Meaning |
+|------------------------------|------:|---------|
+| **faithful** (≥99.5%) | 35 | provably drop-in — recompiles to essentially identical bytecode |
+| **high** (90–99.5%) | 28 | correct structure, minor decompiler divergences |
+| **partial** (<90%) | 4 | recompiles but has real divergences — review vs disasm |
+| **broken** | 38 | won't recompile under 3.9 (decompiler bug) or empty (segfault) |
 
-Every non-clean module also gets a ground-truth bytecode disassembly under
-[`decompiled/_disasm/`](decompiled/_disasm) so the exact logic is always recoverable
-by hand. Full per-module table: [`decompiled/STATUS.md`](decompiled/STATUS.md);
-machine-readable detail: `decompiled/_report.json`.
+Full per-module table: [`reassembled/FAITHFULNESS.md`](reassembled/FAITHFULNESS.md);
+decompile-side status: [`decompiled/STATUS.md`](decompiled/STATUS.md). Every non-clean
+module also ships a ground-truth disassembly under `decompiled/_disasm/`.
 
-The 35 partials are blocked by decompiler control-flow bugs that go beyond the opcode
-support added here (misplaced `return` inside `try`, generator expressions with a
-dropped builtin, exception-variable cleanup that doesn't collapse, a couple of
-functions the decompiler bails on entirely). These are documented, not silently
-shipped as if complete.
+**Honest note on correctness:** pycdc — even patched — has *silent* correctness bugs on
+this obfuscated 3.9 bytecode (independently confirmed by an adversarial verification
+pass): dropped operands rendered as `None` (`None.printer...`, `x = None`), blocks
+mis-nested into `except:`, inverted boolean guards, misplaced `return`s, and outright
+segfaults on two modules. This is why the reassembly bytecode-match — not "does it
+parse" — is used as the correctness gate. The 35 faithful modules are drop-in; the
+`high`/`partial`/`broken` ones need review or repair before use, and their divergences
+are pinpointed by diffing the reassembled vs original bytecode.
+
+Upstream Klipper source was evaluated as a shortcut for the stock modules but rejected:
+the printer runs an older fork (upstream `master` matched the original bytecode only
+~50–66%), so the on-device decompilation is the more faithful basis.
 
 ### Native artifacts (not decompilable)
 
@@ -91,8 +103,12 @@ catalogued in [`proprietary/NATIVE_ARTIFACTS.md`](proprietary/NATIVE_ARTIFACTS.m
 - [x] 4. Decompile all 105 `.pyc` into a mirrored `decompiled/` tree.
 - [x] 5. Repair systematic pycdc artifacts (kwargs, imports, comprehensions).
 - [x] 6. Patch pycdc for missing 3.9 opcodes (dict-comp, call-ex, **try/except**, …).
-- [x] 7. Document non-decompilable native artifacts + ship disassembly for imperfect modules.
-- [x] 8. Republish to `main`.
+- [x] 7. **Reassembly pipeline** (`tools/reassemble.py`) — recompile under CPython 3.9,
+      verify against original bytecode; drop-in `.pyc` written to `reassembled/`.
+- [x] 8. Document native artifacts + ship disassembly for imperfect modules.
+- [ ] 9. Drive `high`/`partial`/`broken` Python modules to faithful (in progress).
+- [ ] 10. Reconstruct the compiled binaries to source (Cython `.so`, C helper, firmware) + rebuild rules.
+- [x] 11. Republish to `main` (incremental checkpoints).
 
 ## Known limitations (honest caveats)
 

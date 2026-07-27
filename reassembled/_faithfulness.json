@@ -1,0 +1,632 @@
+[
+  {
+    "module": "so/auto_addr_wrapper.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/so/auto_addr_wrapper.py\", line 55\n    DataPackage = dataclass(<NODE:12>)\n   "
+  },
+  {
+    "module": "shims/__init__.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/adc_scaled.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/adc_temperature.py",
+    "compiled": true,
+    "match": 97.9,
+    "note": ""
+  },
+  {
+    "module": "shims/adxl345.py",
+    "compiled": true,
+    "match": 96.5,
+    "note": ""
+  },
+  {
+    "module": "shims/auto_addr.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/auto_addr_wrapper.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/auto_addr_wrapper.py\", line 55\n    DataPackage = dataclass(<NODE:12>)\n"
+  },
+  {
+    "module": "shims/base_info.py",
+    "compiled": true,
+    "match": 2.2,
+    "note": ""
+  },
+  {
+    "module": "shims/bed_mesh.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/bed_mesh.py\", line 221\n    self.splitter.initialize(mesh.info_array_ad"
+  },
+  {
+    "module": "shims/belt_mdl.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/belt_mdl.py\", line 184\n    continue\n    ^\nSyntaxError: 'continue' not "
+  },
+  {
+    "module": "shims/bl24c16f.py",
+    "compiled": true,
+    "match": 99.7,
+    "note": ""
+  },
+  {
+    "module": "shims/board_pins.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/box.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/bus.py",
+    "compiled": true,
+    "match": 99.4,
+    "note": ""
+  },
+  {
+    "module": "shims/buttons.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (buttons.py, line 75)"
+  },
+  {
+    "module": "shims/controller_fan.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/controller_fan.py\", line 42\n    if not None(for x in (self.stepper_nam"
+  },
+  {
+    "module": "shims/custom_macro.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/custom_macro.py\", line 84\n    self.gcode.run_script_from_command('SET_"
+  },
+  {
+    "module": "shims/delayed_gcode.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/delta_calibrate.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/delta_calibrate.py\", line 173\n    return None\n    ^\nSyntaxError: inval"
+  },
+  {
+    "module": "shims/dirzctl.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (dirzctl.py, line 41)"
+  },
+  {
+    "module": "shims/display_status.py",
+    "compiled": true,
+    "match": 98.6,
+    "note": ""
+  },
+  {
+    "module": "shims/dotstar.py",
+    "compiled": true,
+    "match": 98.8,
+    "note": ""
+  },
+  {
+    "module": "shims/duplicate_pin_override.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/endstop_phase.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/endstop_phase.py\", line 35\n    continue\n    ^\nSyntaxError: 'continue' "
+  },
+  {
+    "module": "shims/exclude_object.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/exclude_object.py\", line 196\n    if not None(for obj in (self.objects)"
+  },
+  {
+    "module": "shims/extruder_stepper.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/fan.py",
+    "compiled": true,
+    "match": 99.6,
+    "note": ""
+  },
+  {
+    "module": "shims/fan_feedback.py",
+    "compiled": true,
+    "match": 99.9,
+    "note": ""
+  },
+  {
+    "module": "shims/fan_generic.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/filament_motion_sensor.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/filament_rack.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/filament_switch_sensor.py",
+    "compiled": true,
+    "match": 98.8,
+    "note": ""
+  },
+  {
+    "module": "shims/filter.py",
+    "compiled": true,
+    "match": 99.5,
+    "note": ""
+  },
+  {
+    "module": "shims/firmware_retraction.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/force_move.py",
+    "compiled": true,
+    "match": 99.2,
+    "note": ""
+  },
+  {
+    "module": "shims/gcode_arcs.py",
+    "compiled": true,
+    "match": 99.2,
+    "note": ""
+  },
+  {
+    "module": "shims/gcode_button.py",
+    "compiled": true,
+    "match": 99.1,
+    "note": ""
+  },
+  {
+    "module": "shims/gcode_macro.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (gcode_macro.py, line 60)"
+  },
+  {
+    "module": "shims/gcode_move.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/gcode_move.py\", line 310\n    except ValueError:\n    ^\nSyntaxError: inv"
+  },
+  {
+    "module": "shims/hall_filament_width_sensor.py",
+    "compiled": true,
+    "match": 99.0,
+    "note": ""
+  },
+  {
+    "module": "shims/heater_bed.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/heater_bed.py\", line 101\n    if n_temp = self.heater.last_temp < e_tem"
+  },
+  {
+    "module": "shims/heater_fan.py",
+    "compiled": true,
+    "match": 99.8,
+    "note": ""
+  },
+  {
+    "module": "shims/heater_generic.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/heaters.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (heaters.py, line 435)"
+  },
+  {
+    "module": "shims/homing.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/homing.py\", line 29\n    None((lambda e = None, c = None: if c.wait():\n"
+  },
+  {
+    "module": "shims/homing_heaters.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/homing_heaters.py\", line 32\n    elif not None(for x in (self.disable_h"
+  },
+  {
+    "module": "shims/homing_override.py",
+    "compiled": true,
+    "match": 96.1,
+    "note": ""
+  },
+  {
+    "module": "shims/hx711s.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/hx711s.py\", line 86\n    continue\n    ^\nSyntaxError: 'continue' not pro"
+  },
+  {
+    "module": "shims/idle_timeout.py",
+    "compiled": true,
+    "match": 97.5,
+    "note": ""
+  },
+  {
+    "module": "shims/input_shaper.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (input_shaper.py, line 158)"
+  },
+  {
+    "module": "shims/io_remap.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/lis2dw.py",
+    "compiled": true,
+    "match": 93.9,
+    "note": ""
+  },
+  {
+    "module": "shims/load_ai.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/load_ai.py\", line 147\n    return None\n    ^\nSyntaxError: invalid synta"
+  },
+  {
+    "module": "shims/manual_probe.py",
+    "compiled": true,
+    "match": 98.3,
+    "note": ""
+  },
+  {
+    "module": "shims/manual_stepper.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/metadata.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/metadata.py\", line 815\n    :\n    ^\nSyntaxError: invalid syntax\n"
+  },
+  {
+    "module": "shims/motion_report.py",
+    "compiled": true,
+    "match": 0.2,
+    "note": ""
+  },
+  {
+    "module": "shims/motor_control.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/ms3200x.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/ms3200x.py\", line 162\n    return None\n    ^\nSyntaxError: invalid synta"
+  },
+  {
+    "module": "shims/multi_pin.py",
+    "compiled": true,
+    "match": 99.6,
+    "note": ""
+  },
+  {
+    "module": "shims/neopixel.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/neopixel.py\", line 76\n    diffs = (lambda \n                    ^\nSynta"
+  },
+  {
+    "module": "shims/output_pin.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (output_pin.py, line 66)"
+  },
+  {
+    "module": "shims/pause_resume.py",
+    "compiled": true,
+    "match": 87.8,
+    "note": ""
+  },
+  {
+    "module": "shims/photograph.py",
+    "compiled": true,
+    "match": 93.0,
+    "note": ""
+  },
+  {
+    "module": "shims/pid_calibrate.py",
+    "compiled": true,
+    "match": 96.0,
+    "note": ""
+  },
+  {
+    "module": "shims/print_stats.py",
+    "compiled": true,
+    "match": 93.1,
+    "note": ""
+  },
+  {
+    "module": "shims/probe.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/probe.py\", line 175\n    return [ None((lambda (range(3)) = None: [ pos"
+  },
+  {
+    "module": "shims/prtouch.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/prtouch.py\", line 255\n    fit_vals_t = (lambda \n                      "
+  },
+  {
+    "module": "shims/prtouch_v2.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/prtouch_v3.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/pulse_counter.py",
+    "compiled": true,
+    "match": 99.7,
+    "note": ""
+  },
+  {
+    "module": "shims/quad_gantry_level.py",
+    "compiled": true,
+    "match": 99.6,
+    "note": ""
+  },
+  {
+    "module": "shims/query_adc.py",
+    "compiled": true,
+    "match": 99.4,
+    "note": ""
+  },
+  {
+    "module": "shims/query_endstops.py",
+    "compiled": true,
+    "match": 95.5,
+    "note": ""
+  },
+  {
+    "module": "shims/replicape.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/replicape.py\", line 235\n    self.enabled_channels = pass# WARNING: Dec"
+  },
+  {
+    "module": "shims/resonance_tester.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: unexpected unindent (resonance_tester.py, line 152)"
+  },
+  {
+    "module": "shims/respond.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/save_variables.py",
+    "compiled": true,
+    "match": 93.8,
+    "note": ""
+  },
+  {
+    "module": "shims/sdcard_loop.py",
+    "compiled": true,
+    "match": 98.5,
+    "note": ""
+  },
+  {
+    "module": "shims/serial_485.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/shaper_calibrate.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/shaper_calibrate.py\", line 221\n    x = window[(:, None)] * (x - np.mea"
+  },
+  {
+    "module": "shims/shaper_defs.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/skew_correction.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (skew_correction.py, line 120)"
+  },
+  {
+    "module": "shims/smart_effector.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/static_digital_output.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/statistics_ext.py",
+    "compiled": true,
+    "match": 99.2,
+    "note": ""
+  },
+  {
+    "module": "shims/stepper_enable.py",
+    "compiled": true,
+    "match": 99.5,
+    "note": ""
+  },
+  {
+    "module": "shims/temperature_fan.py",
+    "compiled": true,
+    "match": 99.7,
+    "note": ""
+  },
+  {
+    "module": "shims/temperature_mcu.py",
+    "compiled": true,
+    "match": 99.0,
+    "note": ""
+  },
+  {
+    "module": "shims/temperature_sensor.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/thermistor.py",
+    "compiled": true,
+    "match": 96.8,
+    "note": ""
+  },
+  {
+    "module": "shims/tmc.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (tmc.py, line 74)"
+  },
+  {
+    "module": "shims/tmc2130.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tmc2130.py\", line 191\n    'i_scale_analog': (lambda v: if v:\n         "
+  },
+  {
+    "module": "shims/tmc2208.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tmc2208.py\", line 181\n    's2vsa': (lambda v: if v:\n                  "
+  },
+  {
+    "module": "shims/tmc2209.py",
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
+  },
+  {
+    "module": "shims/tmc2262.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tmc2262.py\", line 475\n    'shaft': (lambda v: if v:\n                  "
+  },
+  {
+    "module": "shims/tmc_uart.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (tmc_uart.py, line 47)"
+  },
+  {
+    "module": "shims/tool.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (tool.py, line 24)"
+  },
+  {
+    "module": "shims/tsl1401cl_filament_width_sensor.py",
+    "compiled": true,
+    "match": 99.0,
+    "note": ""
+  },
+  {
+    "module": "shims/tuning_tower.py",
+    "compiled": true,
+    "match": 98.4,
+    "note": ""
+  },
+  {
+    "module": "shims/verify_heater.py",
+    "compiled": true,
+    "match": 86.7,
+    "note": ""
+  },
+  {
+    "module": "shims/virtual_sdcard.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/virtual_sdcard.py\", line 207\n    \n    ^\nSyntaxError: unexpected EOF wh"
+  },
+  {
+    "module": "shims/z_align.py",
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/z_align.py\", line 67\n    return for i in (range(self.pin_len)):\n      "
+  },
+  {
+    "module": "shims/z_thermal_adjust.py",
+    "compiled": true,
+    "match": 97.9,
+    "note": ""
+  },
+  {
+    "module": "shims/z_tilt.py",
+    "compiled": true,
+    "match": 96.0,
+    "note": ""
+  }
+]

@@ -1,9 +1,9 @@
 # Decompilation status
 
 - Modules: **105**
-- Clean (ast-valid, no known defects): **57**
+- Clean (ast-valid, no known defects): **55**
 - Ast-valid but flagged (`None(...)` dropped builtin -- see disasm): **13**
-- Partial (did not fully round-trip -- see disasm): **35**
+- Partial (did not fully round-trip -- see disasm): **37**
 
 | module | status | lines |
 |--------|--------|-------|
@@ -23,6 +23,7 @@
 | `shaper_calibrate.pyc` | partial | 355 |
 | `tmc2130.pyc` | partial | 434 |
 | `auto_addr_wrapper.pyc` | partial | 179 |
+| `base_info.pyc` | partial | 1 |
 | `bed_mesh.pyc` | partial | 212 |
 | `buttons.pyc` | partial | 67 |
 | `custom_macro.pyc` | partial | 75 |
@@ -31,6 +32,7 @@
 | `gcode_macro.pyc` | partial | 52 |
 | `gcode_move.pyc` | partial | 374 |
 | `heater_bed.pyc` | partial | 141 |
+| `motion_report.pyc` | partial | 1 |
 | `prtouch.pyc` | partial | 246 |
 | `resonance_tester.pyc` | partial | 374 |
 | `skew_correction.pyc` | partial | 112 |
@@ -59,7 +61,6 @@
 | `adc_scaled.pyc` | clean | 97 |
 | `adc_temperature.pyc` | clean | 610 |
 | `auto_addr.pyc` | clean | 10 |
-| `base_info.pyc` | clean | 1 |
 | `bl24c16f.pyc` | clean | 282 |
 | `board_pins.pyc` | clean | 32 |
 | `box.pyc` | clean | 9 |
@@ -86,7 +87,6 @@
 | `io_remap.pyc` | clean | 59 |
 | `manual_probe.pyc` | clean | 269 |
 | `manual_stepper.pyc` | clean | 164 |
-| `motion_report.pyc` | clean | 1 |
 | `motor_control.pyc` | clean | 9 |
 | `multi_pin.pyc` | clean | 72 |
 | `photograph.pyc` | clean | 30 |

@@ -282,6 +282,11 @@ def main():
             best, engine = cands[1], "orig"
         raw, warn = best["raw"], best["warn"]
         raw_ok, rep_ok, final = best["raw_ok"], best["rep_ok"], best["final"]
+        # Empty output means pycdc crashed/segfaulted before emitting anything;
+        # an empty string trivially "parses", so guard against a false clean.
+        if _content_lines(final) == 0:
+            rep_ok = raw_ok = False
+            warn = (warn + "\n[empty output -- decompiler crash/segfault]").strip()
         out_rel = os.path.relpath(pyc, os.path.join(ROOT, "proprietary"))
         out_rel = out_rel[:-1]  # .pyc -> .py
         out_path = os.path.join(OUT, out_rel)

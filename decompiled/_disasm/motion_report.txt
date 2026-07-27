@@ -1,0 +1,2890 @@
+motion_report.pyc (Python 3.9)
+[Code]
+    File Name: /extras/motion_report.py
+    Object Name: <module>
+    Arg Count: 0
+    Pos Only Arg Count: 0
+    KW Only Arg Count: 0
+    Locals: 0
+    Stack Size: 3
+    Flags: 0x00000040 (CO_NOFREE)
+    [Names]
+        'logging'
+        'chelper'
+        'API_UPDATE_INTERVAL'
+        'APIDumpHelper'
+        'InternalDumpClient'
+        'DumpStepper'
+        'NEVER_TIME'
+        'DumpTrapQ'
+        'STATUS_REFRESH_TIME'
+        'PrinterMotionReport'
+        'load_config'
+    [Var Names]
+    [Free Vars]
+    [Cell Vars]
+    [Constants]
+        0
+        None
+        0.5
+        [Code]
+            File Name: /extras/motion_report.py
+            Object Name: APIDumpHelper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 3
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                'API_UPDATE_INTERVAL'
+                '__init__'
+                '_stop'
+                '_start'
+                'add_client'
+                'add_internal_client'
+                '_update'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'APIDumpHelper'
+                None
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: __init__
+                    Arg Count: 5
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'data_cb'
+                        'startstop_cb'
+                        'is_started'
+                        'update_interval'
+                        'update_timer'
+                        'clients'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'data_cb'
+                        'startstop_cb'
+                        'update_interval'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        [Code]
+                            File Name: /extras/motion_report.py
+                            Object Name: <lambda>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 1
+                            Stack Size: 1
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                            [Var Names]
+                                'is_start'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                None
+                            [Disassembly]
+                                0       LOAD_CONST                      0: None
+                                2       RETURN_VALUE                    
+                        'APIDumpHelper.__init__.<locals>.<lambda>'
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: printer
+                        6       LOAD_FAST                       2: data_cb
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: data_cb
+                        12      LOAD_FAST                       3: startstop_cb
+                        14      LOAD_CONST                      0: None
+                        16      IS_OP                           0 (is)
+                        18      POP_JUMP_IF_FALSE               28
+                        20      LOAD_CONST                      1: <CODE> <lambda>
+                        22      LOAD_CONST                      2: 'APIDumpHelper.__init__.<locals>.<lambda>'
+                        24      MAKE_FUNCTION                   0
+                        26      STORE_FAST                      3: startstop_cb
+                        28      LOAD_FAST                       3: startstop_cb
+                        30      LOAD_FAST                       0: self
+                        32      STORE_ATTR                      2: startstop_cb
+                        34      LOAD_CONST                      3: False
+                        36      LOAD_FAST                       0: self
+                        38      STORE_ATTR                      3: is_started
+                        40      LOAD_FAST                       4: update_interval
+                        42      LOAD_FAST                       0: self
+                        44      STORE_ATTR                      4: update_interval
+                        46      LOAD_CONST                      0: None
+                        48      LOAD_FAST                       0: self
+                        50      STORE_ATTR                      5: update_timer
+                        52      BUILD_MAP                       0
+                        54      LOAD_FAST                       0: self
+                        56      STORE_ATTR                      6: clients
+                        58      LOAD_CONST                      0: None
+                        60      RETURN_VALUE                    
+                'APIDumpHelper.__init__'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _stop
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'clients'
+                        'clear'
+                        'printer'
+                        'get_reactor'
+                        'unregister_timer'
+                        'update_timer'
+                        'is_started'
+                        'NEVER'
+                        'startstop_cb'
+                        'command_error'
+                        'logging'
+                        'exception'
+                        '_start'
+                    [Var Names]
+                        'self'
+                        'reactor'
+                        'e'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                        'API Dump Helper stop callback error'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: clients
+                        4       LOAD_METHOD                     1: clear
+                        6       CALL_METHOD                     0
+                        8       POP_TOP                         
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       2: printer
+                        14      LOAD_METHOD                     3: get_reactor
+                        16      CALL_METHOD                     0
+                        18      STORE_FAST                      1: reactor
+                        20      LOAD_FAST                       1: reactor
+                        22      LOAD_METHOD                     4: unregister_timer
+                        24      LOAD_FAST                       0: self
+                        26      LOAD_ATTR                       5: update_timer
+                        28      CALL_METHOD                     1
+                        30      POP_TOP                         
+                        32      LOAD_CONST                      0: None
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      5: update_timer
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       6: is_started
+                        42      POP_JUMP_IF_TRUE                50
+                        44      LOAD_FAST                       1: reactor
+                        46      LOAD_ATTR                       7: NEVER
+                        48      RETURN_VALUE                    
+                        50      SETUP_FINALLY                   14 (to 66)
+                        52      LOAD_FAST                       0: self
+                        54      LOAD_METHOD                     8: startstop_cb
+                        56      LOAD_CONST                      1: False
+                        58      CALL_METHOD                     1
+                        60      POP_TOP                         
+                        62      POP_BLOCK                       
+                        64      JUMP_FORWARD                    60 (to 126)
+                        66      DUP_TOP                         
+                        68      LOAD_FAST                       0: self
+                        70      LOAD_ATTR                       2: printer
+                        72      LOAD_ATTR                       9: command_error
+                        74      JUMP_IF_NOT_EXC_MATCH           124
+                        76      POP_TOP                         
+                        78      STORE_FAST                      2: e
+                        80      POP_TOP                         
+                        82      SETUP_FINALLY                   32 (to 116)
+                        84      LOAD_GLOBAL                     10: logging
+                        86      LOAD_METHOD                     11: exception
+                        88      LOAD_CONST                      2: 'API Dump Helper stop callback error'
+                        90      CALL_METHOD                     1
+                        92      POP_TOP                         
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       0: clients
+                        98      LOAD_METHOD                     1: clear
+                        100     CALL_METHOD                     0
+                        102     POP_TOP                         
+                        104     POP_BLOCK                       
+                        106     POP_EXCEPT                      
+                        108     LOAD_CONST                      0: None
+                        110     STORE_FAST                      2: e
+                        112     DELETE_FAST                     2: e
+                        114     JUMP_FORWARD                    10 (to 126)
+                        116     LOAD_CONST                      0: None
+                        118     STORE_FAST                      2: e
+                        120     DELETE_FAST                     2: e
+                        122     RERAISE                         
+                        124     RERAISE                         
+                        126     LOAD_CONST                      1: False
+                        128     LOAD_FAST                       0: self
+                        130     STORE_ATTR                      6: is_started
+                        132     LOAD_FAST                       0: self
+                        134     LOAD_ATTR                       0: clients
+                        136     POP_JUMP_IF_FALSE               146
+                        138     LOAD_FAST                       0: self
+                        140     LOAD_METHOD                     12: _start
+                        142     CALL_METHOD                     0
+                        144     POP_TOP                         
+                        146     LOAD_FAST                       1: reactor
+                        148     LOAD_ATTR                       7: NEVER
+                        150     RETURN_VALUE                    
+                'APIDumpHelper._stop'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _start
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_started'
+                        'startstop_cb'
+                        'printer'
+                        'command_error'
+                        'logging'
+                        'exception'
+                        'clients'
+                        'clear'
+                        'get_reactor'
+                        'monotonic'
+                        'update_interval'
+                        'register_timer'
+                        '_update'
+                        'update_timer'
+                    [Var Names]
+                        'self'
+                        'e'
+                        'reactor'
+                        'systime'
+                        'waketime'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                        'API Dump Helper start callback error'
+                        False
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: is_started
+                        4       POP_JUMP_IF_FALSE               10
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                        10      LOAD_CONST                      1: True
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      0: is_started
+                        16      SETUP_FINALLY                   14 (to 32)
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_METHOD                     1: startstop_cb
+                        22      LOAD_CONST                      1: True
+                        24      CALL_METHOD                     1
+                        26      POP_TOP                         
+                        28      POP_BLOCK                       
+                        30      JUMP_FORWARD                    68 (to 100)
+                        32      DUP_TOP                         
+                        34      LOAD_FAST                       0: self
+                        36      LOAD_ATTR                       2: printer
+                        38      LOAD_ATTR                       3: command_error
+                        40      JUMP_IF_NOT_EXC_MATCH           98
+                        42      POP_TOP                         
+                        44      STORE_FAST                      1: e
+                        46      POP_TOP                         
+                        48      SETUP_FINALLY                   40 (to 90)
+                        50      LOAD_GLOBAL                     4: logging
+                        52      LOAD_METHOD                     5: exception
+                        54      LOAD_CONST                      2: 'API Dump Helper start callback error'
+                        56      CALL_METHOD                     1
+                        58      POP_TOP                         
+                        60      LOAD_CONST                      3: False
+                        62      LOAD_FAST                       0: self
+                        64      STORE_ATTR                      0: is_started
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       6: clients
+                        70      LOAD_METHOD                     7: clear
+                        72      CALL_METHOD                     0
+                        74      POP_TOP                         
+                        76      RAISE_VARARGS                   0
+                        78      POP_BLOCK                       
+                        80      POP_EXCEPT                      
+                        82      LOAD_CONST                      0: None
+                        84      STORE_FAST                      1: e
+                        86      DELETE_FAST                     1: e
+                        88      JUMP_FORWARD                    10 (to 100)
+                        90      LOAD_CONST                      0: None
+                        92      STORE_FAST                      1: e
+                        94      DELETE_FAST                     1: e
+                        96      RERAISE                         
+                        98      RERAISE                         
+                        100     LOAD_FAST                       0: self
+                        102     LOAD_ATTR                       2: printer
+                        104     LOAD_METHOD                     8: get_reactor
+                        106     CALL_METHOD                     0
+                        108     STORE_FAST                      2: reactor
+                        110     LOAD_FAST                       2: reactor
+                        112     LOAD_METHOD                     9: monotonic
+                        114     CALL_METHOD                     0
+                        116     STORE_FAST                      3: systime
+                        118     LOAD_FAST                       3: systime
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       10: update_interval
+                        124     BINARY_ADD                      
+                        126     STORE_FAST                      4: waketime
+                        128     LOAD_FAST                       2: reactor
+                        130     LOAD_METHOD                     11: register_timer
+                        132     LOAD_FAST                       0: self
+                        134     LOAD_ATTR                       12: _update
+                        136     LOAD_FAST                       4: waketime
+                        138     CALL_METHOD                     2
+                        140     LOAD_FAST                       0: self
+                        142     STORE_ATTR                      13: update_timer
+                        144     LOAD_CONST                      0: None
+                        146     RETURN_VALUE                    
+                'APIDumpHelper._start'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: add_client
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_client_connection'
+                        'get_dict'
+                        'clients'
+                        '_start'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'cconn'
+                        'template'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'response_template'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: web_request
+                        2       LOAD_METHOD                     0: get_client_connection
+                        4       CALL_METHOD                     0
+                        6       STORE_FAST                      2: cconn
+                        8       LOAD_FAST                       1: web_request
+                        10      LOAD_METHOD                     1: get_dict
+                        12      LOAD_CONST                      1: 'response_template'
+                        14      BUILD_MAP                       0
+                        16      CALL_METHOD                     2
+                        18      STORE_FAST                      3: template
+                        20      LOAD_FAST                       3: template
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       2: clients
+                        26      LOAD_FAST                       2: cconn
+                        28      STORE_SUBSCR                    
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_METHOD                     3: _start
+                        34      CALL_METHOD                     0
+                        36      POP_TOP                         
+                        38      LOAD_CONST                      0: None
+                        40      RETURN_VALUE                    
+                'APIDumpHelper.add_client'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: add_internal_client
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'InternalDumpClient'
+                        'clients'
+                        '_start'
+                    [Var Names]
+                        'self'
+                        'cconn'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: InternalDumpClient
+                        2       CALL_FUNCTION                   0
+                        4       STORE_FAST                      1: cconn
+                        6       BUILD_MAP                       0
+                        8       LOAD_FAST                       0: self
+                        10      LOAD_ATTR                       1: clients
+                        12      LOAD_FAST                       1: cconn
+                        14      STORE_SUBSCR                    
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_METHOD                     2: _start
+                        20      CALL_METHOD                     0
+                        22      POP_TOP                         
+                        24      LOAD_FAST                       1: cconn
+                        26      RETURN_VALUE                    
+                'APIDumpHelper.add_internal_client'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _update
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'data_cb'
+                        'printer'
+                        'command_error'
+                        'logging'
+                        'exception'
+                        '_stop'
+                        'update_interval'
+                        'list'
+                        'clients'
+                        'items'
+                        'is_closed'
+                        'dict'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'msg'
+                        'e'
+                        'cconn'
+                        'template'
+                        'tmp'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'API Dump Helper data callback error'
+                        'params'
+                    [Disassembly]
+                        0       SETUP_FINALLY                   14 (to 16)
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_METHOD                     0: data_cb
+                        6       LOAD_FAST                       1: eventtime
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      2: msg
+                        12      POP_BLOCK                       
+                        14      JUMP_FORWARD                    58 (to 74)
+                        16      DUP_TOP                         
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       1: printer
+                        22      LOAD_ATTR                       2: command_error
+                        24      JUMP_IF_NOT_EXC_MATCH           72
+                        26      POP_TOP                         
+                        28      STORE_FAST                      3: e
+                        30      POP_TOP                         
+                        32      SETUP_FINALLY                   30 (to 64)
+                        34      LOAD_GLOBAL                     3: logging
+                        36      LOAD_METHOD                     4: exception
+                        38      LOAD_CONST                      1: 'API Dump Helper data callback error'
+                        40      CALL_METHOD                     1
+                        42      POP_TOP                         
+                        44      LOAD_FAST                       0: self
+                        46      LOAD_METHOD                     5: _stop
+                        48      CALL_METHOD                     0
+                        50      POP_BLOCK                       
+                        52      ROT_FOUR                        
+                        54      POP_EXCEPT                      
+                        56      LOAD_CONST                      0: None
+                        58      STORE_FAST                      3: e
+                        60      DELETE_FAST                     3: e
+                        62      RETURN_VALUE                    
+                        64      LOAD_CONST                      0: None
+                        66      STORE_FAST                      3: e
+                        68      DELETE_FAST                     3: e
+                        70      RERAISE                         
+                        72      RERAISE                         
+                        74      LOAD_FAST                       2: msg
+                        76      POP_JUMP_IF_TRUE                88
+                        78      LOAD_FAST                       1: eventtime
+                        80      LOAD_FAST                       0: self
+                        82      LOAD_ATTR                       6: update_interval
+                        84      BINARY_ADD                      
+                        86      RETURN_VALUE                    
+                        88      LOAD_GLOBAL                     7: list
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       8: clients
+                        94      LOAD_METHOD                     9: items
+                        96      CALL_METHOD                     0
+                        98      CALL_FUNCTION                   1
+                        100     GET_ITER                        
+                        102     FOR_ITER                        70 (to 174)
+                        104     UNPACK_SEQUENCE                 2
+                        106     STORE_FAST                      4: cconn
+                        108     STORE_FAST                      5: template
+                        110     LOAD_FAST                       4: cconn
+                        112     LOAD_METHOD                     10: is_closed
+                        114     CALL_METHOD                     0
+                        116     POP_JUMP_IF_FALSE               146
+                        118     LOAD_FAST                       0: self
+                        120     LOAD_ATTR                       8: clients
+                        122     LOAD_FAST                       4: cconn
+                        124     DELETE_SUBSCR                   
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       8: clients
+                        130     POP_JUMP_IF_TRUE                102
+                        132     LOAD_FAST                       0: self
+                        134     LOAD_METHOD                     5: _stop
+                        136     CALL_METHOD                     0
+                        138     ROT_TWO                         
+                        140     POP_TOP                         
+                        142     RETURN_VALUE                    
+                        144     JUMP_ABSOLUTE                   102
+                        146     LOAD_GLOBAL                     11: dict
+                        148     LOAD_FAST                       5: template
+                        150     CALL_FUNCTION                   1
+                        152     STORE_FAST                      6: tmp
+                        154     LOAD_FAST                       2: msg
+                        156     LOAD_FAST                       6: tmp
+                        158     LOAD_CONST                      2: 'params'
+                        160     STORE_SUBSCR                    
+                        162     LOAD_FAST                       4: cconn
+                        164     LOAD_METHOD                     12: send
+                        166     LOAD_FAST                       6: tmp
+                        168     CALL_METHOD                     1
+                        170     POP_TOP                         
+                        172     JUMP_ABSOLUTE                   102
+                        174     LOAD_FAST                       1: eventtime
+                        176     LOAD_FAST                       0: self
+                        178     LOAD_ATTR                       6: update_interval
+                        180     BINARY_ADD                      
+                        182     RETURN_VALUE                    
+                'APIDumpHelper._update'
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'APIDumpHelper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: None
+                10      LOAD_NAME                       3: API_UPDATE_INTERVAL
+                12      BUILD_TUPLE                     2
+                14      LOAD_CONST                      2: <CODE> __init__
+                16      LOAD_CONST                      3: 'APIDumpHelper.__init__'
+                18      MAKE_FUNCTION                   1
+                20      STORE_NAME                      4: __init__
+                22      LOAD_CONST                      4: <CODE> _stop
+                24      LOAD_CONST                      5: 'APIDumpHelper._stop'
+                26      MAKE_FUNCTION                   0
+                28      STORE_NAME                      5: _stop
+                30      LOAD_CONST                      6: <CODE> _start
+                32      LOAD_CONST                      7: 'APIDumpHelper._start'
+                34      MAKE_FUNCTION                   0
+                36      STORE_NAME                      6: _start
+                38      LOAD_CONST                      8: <CODE> add_client
+                40      LOAD_CONST                      9: 'APIDumpHelper.add_client'
+                42      MAKE_FUNCTION                   0
+                44      STORE_NAME                      7: add_client
+                46      LOAD_CONST                      10: <CODE> add_internal_client
+                48      LOAD_CONST                      11: 'APIDumpHelper.add_internal_client'
+                50      MAKE_FUNCTION                   0
+                52      STORE_NAME                      8: add_internal_client
+                54      LOAD_CONST                      12: <CODE> _update
+                56      LOAD_CONST                      13: 'APIDumpHelper._update'
+                58      MAKE_FUNCTION                   0
+                60      STORE_NAME                      9: _update
+                62      LOAD_CONST                      1: None
+                64      RETURN_VALUE                    
+        'APIDumpHelper'
+        [Code]
+            File Name: /extras/motion_report.py
+            Object Name: InternalDumpClient
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_messages'
+                'finalize'
+                'is_closed'
+                'send'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'InternalDumpClient'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: __init__
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'msgs'
+                        'is_done'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        False
+                    [Disassembly]
+                        0       BUILD_LIST                      0
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: msgs
+                        6       LOAD_CONST                      1: False
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: is_done
+                        12      LOAD_CONST                      0: None
+                        14      RETURN_VALUE                    
+                'InternalDumpClient.__init__'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: get_messages
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'msgs'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: msgs
+                        4       RETURN_VALUE                    
+                'InternalDumpClient.get_messages'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: finalize
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 2
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_done'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        True
+                    [Disassembly]
+                        0       LOAD_CONST                      1: True
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: is_done
+                        6       LOAD_CONST                      0: None
+                        8       RETURN_VALUE                    
+                'InternalDumpClient.finalize'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: is_closed
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 1
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'is_done'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: is_done
+                        4       RETURN_VALUE                    
+                'InternalDumpClient.is_closed'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: send
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 2
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'msgs'
+                        'append'
+                        'len'
+                        'finalize'
+                    [Var Names]
+                        'self'
+                        'msg'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        10000
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: msgs
+                        4       LOAD_METHOD                     1: append
+                        6       LOAD_FAST                       1: msg
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_GLOBAL                     2: len
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       0: msgs
+                        18      CALL_FUNCTION                   1
+                        20      LOAD_CONST                      1: 10000
+                        22      COMPARE_OP                      5 (>=)
+                        24      POP_JUMP_IF_FALSE               34
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_METHOD                     3: finalize
+                        30      CALL_METHOD                     0
+                        32      POP_TOP                         
+                        34      LOAD_CONST                      0: None
+                        36      RETURN_VALUE                    
+                'InternalDumpClient.send'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'InternalDumpClient'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'InternalDumpClient.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_messages
+                18      LOAD_CONST                      4: 'InternalDumpClient.get_messages'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_messages
+                24      LOAD_CONST                      5: <CODE> finalize
+                26      LOAD_CONST                      6: 'InternalDumpClient.finalize'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: finalize
+                32      LOAD_CONST                      7: <CODE> is_closed
+                34      LOAD_CONST                      8: 'InternalDumpClient.is_closed'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: is_closed
+                40      LOAD_CONST                      9: <CODE> send
+                42      LOAD_CONST                      10: 'InternalDumpClient.send'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: send
+                48      LOAD_CONST                      11: None
+                50      RETURN_VALUE                    
+        'InternalDumpClient'
+        [Code]
+            File Name: /extras/motion_report.py
+            Object Name: DumpStepper
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'get_step_queue'
+                'log_steps'
+                '_api_update'
+                '_add_api_client'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'DumpStepper'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: __init__
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'mcu_stepper'
+                        'last_api_clock'
+                        'APIDumpHelper'
+                        '_api_update'
+                        'api_dump'
+                        'lookup_object'
+                        'register_mux_endpoint'
+                        'get_name'
+                        '_add_api_client'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'mcu_stepper'
+                        'wh'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'webhooks'
+                        'motion_report/dump_stepper'
+                        'name'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: printer
+                        6       LOAD_FAST                       2: mcu_stepper
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: mcu_stepper
+                        12      LOAD_CONST                      1: 0
+                        14      LOAD_FAST                       0: self
+                        16      STORE_ATTR                      2: last_api_clock
+                        18      LOAD_GLOBAL                     3: APIDumpHelper
+                        20      LOAD_FAST                       1: printer
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       4: _api_update
+                        26      CALL_FUNCTION                   2
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      5: api_dump
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       0: printer
+                        36      LOAD_METHOD                     6: lookup_object
+                        38      LOAD_CONST                      2: 'webhooks'
+                        40      CALL_METHOD                     1
+                        42      STORE_FAST                      3: wh
+                        44      LOAD_FAST                       3: wh
+                        46      LOAD_METHOD                     7: register_mux_endpoint
+                        48      LOAD_CONST                      3: 'motion_report/dump_stepper'
+                        50      LOAD_CONST                      4: 'name'
+                        52      LOAD_FAST                       2: mcu_stepper
+                        54      LOAD_METHOD                     8: get_name
+                        56      CALL_METHOD                     0
+                        58      LOAD_FAST                       0: self
+                        60      LOAD_ATTR                       9: _add_api_client
+                        62      CALL_METHOD                     4
+                        64      POP_TOP                         
+                        66      LOAD_CONST                      0: None
+                        68      RETURN_VALUE                    
+                'DumpStepper.__init__'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: get_step_queue
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'mcu_stepper'
+                        'dump_steps'
+                        'append'
+                        'len'
+                        'first_clock'
+                        'reverse'
+                    [Var Names]
+                        'self'
+                        'start_clock'
+                        'end_clock'
+                        'mcu_stepper'
+                        'res'
+                        'data'
+                        'count'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        128
+                        1
+                        [Code]
+                            File Name: /extras/motion_report.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 4
+                            Stack Size: 6
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'range'
+                            [Var Names]
+                                '.0'
+                                'd'
+                                'cnt'
+                                'i'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                1
+                                -1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        38 (to 44)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: d
+                                10      STORE_FAST                      2: cnt
+                                12      LOAD_GLOBAL                     0: range
+                                14      LOAD_FAST                       2: cnt
+                                16      LOAD_CONST                      0: 1
+                                18      BINARY_SUBTRACT                 
+                                20      LOAD_CONST                      1: -1
+                                22      LOAD_CONST                      1: -1
+                                24      CALL_FUNCTION                   3
+                                26      GET_ITER                        
+                                28      FOR_ITER                        12 (to 42)
+                                30      STORE_FAST                      3: i
+                                32      LOAD_FAST                       1: d
+                                34      LOAD_FAST                       3: i
+                                36      BINARY_SUBSCR                   
+                                38      LIST_APPEND                     3
+                                40      JUMP_ABSOLUTE                   28
+                                42      JUMP_ABSOLUTE                   4
+                                44      RETURN_VALUE                    
+                        'DumpStepper.get_step_queue.<locals>.<listcomp>'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: mcu_stepper
+                        4       STORE_FAST                      3: mcu_stepper
+                        6       BUILD_LIST                      0
+                        8       STORE_FAST                      4: res
+                        10      LOAD_FAST                       3: mcu_stepper
+                        12      LOAD_METHOD                     1: dump_steps
+                        14      LOAD_CONST                      1: 128
+                        16      LOAD_FAST                       1: start_clock
+                        18      LOAD_FAST                       2: end_clock
+                        20      CALL_METHOD                     3
+                        22      UNPACK_SEQUENCE                 2
+                        24      STORE_FAST                      5: data
+                        26      STORE_FAST                      6: count
+                        28      LOAD_FAST                       6: count
+                        30      POP_JUMP_IF_TRUE                34
+                        32      JUMP_ABSOLUTE                   78
+                        34      LOAD_FAST                       4: res
+                        36      LOAD_METHOD                     2: append
+                        38      LOAD_FAST                       5: data
+                        40      LOAD_FAST                       6: count
+                        42      BUILD_TUPLE                     2
+                        44      CALL_METHOD                     1
+                        46      POP_TOP                         
+                        48      LOAD_FAST                       6: count
+                        50      LOAD_GLOBAL                     3: len
+                        52      LOAD_FAST                       5: data
+                        54      CALL_FUNCTION                   1
+                        56      COMPARE_OP                      0 (<)
+                        58      POP_JUMP_IF_FALSE               62
+                        60      JUMP_ABSOLUTE                   78
+                        62      LOAD_FAST                       5: data
+                        64      LOAD_FAST                       6: count
+                        66      LOAD_CONST                      2: 1
+                        68      BINARY_SUBTRACT                 
+                        70      BINARY_SUBSCR                   
+                        72      LOAD_ATTR                       4: first_clock
+                        74      STORE_FAST                      2: end_clock
+                        76      JUMP_ABSOLUTE                   10
+                        78      LOAD_FAST                       4: res
+                        80      LOAD_METHOD                     5: reverse
+                        82      CALL_METHOD                     0
+                        84      POP_TOP                         
+                        86      LOAD_CONST                      3: <CODE> <listcomp>
+                        88      LOAD_CONST                      4: 'DumpStepper.get_step_queue.<locals>.<listcomp>'
+                        90      MAKE_FUNCTION                   0
+                        92      LOAD_FAST                       4: res
+                        94      GET_ITER                        
+                        96      CALL_FUNCTION                   1
+                        98      LOAD_FAST                       4: res
+                        100     BUILD_TUPLE                     2
+                        102     RETURN_VALUE                    
+                'DumpStepper.get_step_queue'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: log_steps
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 10
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'append'
+                        'mcu_stepper'
+                        'get_name'
+                        'get_mcu'
+                        'len'
+                        'enumerate'
+                        'first_clock'
+                        'start_position'
+                        'interval'
+                        'step_count'
+                        'add'
+                        'logging'
+                        'info'
+                        'join'
+                    [Var Names]
+                        'self'
+                        'data'
+                        'out'
+                        'i'
+                        's'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        "Dumping stepper '%s' (%s) %d queue_step:"
+                        'queue_step %d: t=%d p=%d i=%d c=%d a=%d'
+                        '\n'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: data
+                        2       POP_JUMP_IF_TRUE                8
+                        4       LOAD_CONST                      0: None
+                        6       RETURN_VALUE                    
+                        8       BUILD_LIST                      0
+                        10      STORE_FAST                      2: out
+                        12      LOAD_FAST                       2: out
+                        14      LOAD_METHOD                     0: append
+                        16      LOAD_CONST                      1: "Dumping stepper '%s' (%s) %d queue_step:"
+                        18      LOAD_FAST                       0: self
+                        20      LOAD_ATTR                       1: mcu_stepper
+                        22      LOAD_METHOD                     2: get_name
+                        24      CALL_METHOD                     0
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       1: mcu_stepper
+                        30      LOAD_METHOD                     3: get_mcu
+                        32      CALL_METHOD                     0
+                        34      LOAD_METHOD                     2: get_name
+                        36      CALL_METHOD                     0
+                        38      LOAD_GLOBAL                     4: len
+                        40      LOAD_FAST                       1: data
+                        42      CALL_FUNCTION                   1
+                        44      BUILD_TUPLE                     3
+                        46      BINARY_MODULO                   
+                        48      CALL_METHOD                     1
+                        50      POP_TOP                         
+                        52      LOAD_GLOBAL                     5: enumerate
+                        54      LOAD_FAST                       1: data
+                        56      CALL_FUNCTION                   1
+                        58      GET_ITER                        
+                        60      FOR_ITER                        44 (to 106)
+                        62      UNPACK_SEQUENCE                 2
+                        64      STORE_FAST                      3: i
+                        66      STORE_FAST                      4: s
+                        68      LOAD_FAST                       2: out
+                        70      LOAD_METHOD                     0: append
+                        72      LOAD_CONST                      2: 'queue_step %d: t=%d p=%d i=%d c=%d a=%d'
+                        74      LOAD_FAST                       3: i
+                        76      LOAD_FAST                       4: s
+                        78      LOAD_ATTR                       6: first_clock
+                        80      LOAD_FAST                       4: s
+                        82      LOAD_ATTR                       7: start_position
+                        84      LOAD_FAST                       4: s
+                        86      LOAD_ATTR                       8: interval
+                        88      LOAD_FAST                       4: s
+                        90      LOAD_ATTR                       9: step_count
+                        92      LOAD_FAST                       4: s
+                        94      LOAD_ATTR                       10: add
+                        96      BUILD_TUPLE                     6
+                        98      BINARY_MODULO                   
+                        100     CALL_METHOD                     1
+                        102     POP_TOP                         
+                        104     JUMP_ABSOLUTE                   60
+                        106     LOAD_GLOBAL                     11: logging
+                        108     LOAD_METHOD                     12: info
+                        110     LOAD_CONST                      3: '\n'
+                        112     LOAD_METHOD                     13: join
+                        114     LOAD_FAST                       2: out
+                        116     CALL_METHOD                     1
+                        118     CALL_METHOD                     1
+                        120     POP_TOP                         
+                        122     LOAD_CONST                      0: None
+                        124     RETURN_VALUE                    
+                'DumpStepper.log_steps'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _api_update
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 14
+                    Stack Size: 9
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_step_queue'
+                        'last_api_clock'
+                        'mcu_stepper'
+                        'get_mcu'
+                        'clock_to_print_time'
+                        'first_clock'
+                        'last_clock'
+                        'start_position'
+                        'mcu_to_commanded_position'
+                        'get_step_dist'
+                        'get_dir_inverted'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'data'
+                        'cdata'
+                        'clock_to_print_time'
+                        'first'
+                        'first_clock'
+                        'first_time'
+                        'last_clock'
+                        'last_time'
+                        'mcu_pos'
+                        'start_position'
+                        'step_dist'
+                        'd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0x8000000000000000
+                        0
+                        -1
+                        [Code]
+                            File Name: /extras/motion_report.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 5
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'interval'
+                                'step_count'
+                                'add'
+                            [Var Names]
+                                '.0'
+                                's'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        20 (to 26)
+                                6       STORE_FAST                      1: s
+                                8       LOAD_FAST                       1: s
+                                10      LOAD_ATTR                       0: interval
+                                12      LOAD_FAST                       1: s
+                                14      LOAD_ATTR                       1: step_count
+                                16      LOAD_FAST                       1: s
+                                18      LOAD_ATTR                       2: add
+                                20      BUILD_TUPLE                     3
+                                22      LIST_APPEND                     2
+                                24      JUMP_ABSOLUTE                   4
+                                26      RETURN_VALUE                    
+                        'DumpStepper._api_update.<locals>.<listcomp>'
+                        (
+                            'data'
+                            'start_position'
+                            'start_mcu_position'
+                            'step_distance'
+                            'first_clock'
+                            'first_step_time'
+                            'last_clock'
+                            'last_step_time'
+                        )
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_METHOD                     0: get_step_queue
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: last_api_clock
+                        8       LOAD_CONST                      1: 0x8000000000000000
+                        10      CALL_METHOD                     2
+                        12      UNPACK_SEQUENCE                 2
+                        14      STORE_FAST                      2: data
+                        16      STORE_FAST                      3: cdata
+                        18      LOAD_FAST                       2: data
+                        20      POP_JUMP_IF_TRUE                26
+                        22      BUILD_MAP                       0
+                        24      RETURN_VALUE                    
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       2: mcu_stepper
+                        30      LOAD_METHOD                     3: get_mcu
+                        32      CALL_METHOD                     0
+                        34      LOAD_ATTR                       4: clock_to_print_time
+                        36      STORE_FAST                      4: clock_to_print_time
+                        38      LOAD_FAST                       2: data
+                        40      LOAD_CONST                      2: 0
+                        42      BINARY_SUBSCR                   
+                        44      STORE_FAST                      5: first
+                        46      LOAD_FAST                       5: first
+                        48      LOAD_ATTR                       5: first_clock
+                        50      STORE_FAST                      6: first_clock
+                        52      LOAD_FAST                       4: clock_to_print_time
+                        54      LOAD_FAST                       6: first_clock
+                        56      CALL_FUNCTION                   1
+                        58      STORE_FAST                      7: first_time
+                        60      LOAD_FAST                       2: data
+                        62      LOAD_CONST                      3: -1
+                        64      BINARY_SUBSCR                   
+                        66      LOAD_ATTR                       6: last_clock
+                        68      DUP_TOP                         
+                        70      LOAD_FAST                       0: self
+                        72      STORE_ATTR                      1: last_api_clock
+                        74      STORE_FAST                      8: last_clock
+                        76      LOAD_FAST                       4: clock_to_print_time
+                        78      LOAD_FAST                       8: last_clock
+                        80      CALL_FUNCTION                   1
+                        82      STORE_FAST                      9: last_time
+                        84      LOAD_FAST                       5: first
+                        86      LOAD_ATTR                       7: start_position
+                        88      STORE_FAST                      10: mcu_pos
+                        90      LOAD_FAST                       0: self
+                        92      LOAD_ATTR                       2: mcu_stepper
+                        94      LOAD_METHOD                     8: mcu_to_commanded_position
+                        96      LOAD_FAST                       10: mcu_pos
+                        98      CALL_METHOD                     1
+                        100     STORE_FAST                      11: start_position
+                        102     LOAD_FAST                       0: self
+                        104     LOAD_ATTR                       2: mcu_stepper
+                        106     LOAD_METHOD                     9: get_step_dist
+                        108     CALL_METHOD                     0
+                        110     STORE_FAST                      12: step_dist
+                        112     LOAD_FAST                       0: self
+                        114     LOAD_ATTR                       2: mcu_stepper
+                        116     LOAD_METHOD                     10: get_dir_inverted
+                        118     CALL_METHOD                     0
+                        120     LOAD_CONST                      2: 0
+                        122     BINARY_SUBSCR                   
+                        124     POP_JUMP_IF_FALSE               132
+                        126     LOAD_FAST                       12: step_dist
+                        128     UNARY_NEGATIVE                  
+                        130     STORE_FAST                      12: step_dist
+                        132     LOAD_CONST                      4: <CODE> <listcomp>
+                        134     LOAD_CONST                      5: 'DumpStepper._api_update.<locals>.<listcomp>'
+                        136     MAKE_FUNCTION                   0
+                        138     LOAD_FAST                       2: data
+                        140     GET_ITER                        
+                        142     CALL_FUNCTION                   1
+                        144     STORE_FAST                      13: d
+                        146     LOAD_FAST                       13: d
+                        148     LOAD_FAST                       11: start_position
+                        150     LOAD_FAST                       10: mcu_pos
+                        152     LOAD_FAST                       12: step_dist
+                        154     LOAD_FAST                       6: first_clock
+                        156     LOAD_FAST                       7: first_time
+                        158     LOAD_FAST                       8: last_clock
+                        160     LOAD_FAST                       9: last_time
+                        162     LOAD_CONST                      6: ('data', 'start_position', 'start_mcu_position', 'step_distance', 'first_clock', 'first_step_time', 'last_clock', 'last_step_time')
+                        164     BUILD_CONST_KEY_MAP             8
+                        166     RETURN_VALUE                    
+                'DumpStepper._api_update'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _add_api_client
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'api_dump'
+                        'add_client'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'hdr'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'interval'
+                            'count'
+                            'add'
+                        )
+                        'header'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: api_dump
+                        4       LOAD_METHOD                     1: add_client
+                        6       LOAD_FAST                       1: web_request
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      1: ('interval', 'count', 'add')
+                        14      STORE_FAST                      2: hdr
+                        16      LOAD_FAST                       1: web_request
+                        18      LOAD_METHOD                     2: send
+                        20      LOAD_CONST                      2: 'header'
+                        22      LOAD_FAST                       2: hdr
+                        24      BUILD_MAP                       1
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                'DumpStepper._add_api_client'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'DumpStepper'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'DumpStepper.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> get_step_queue
+                18      LOAD_CONST                      4: 'DumpStepper.get_step_queue'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: get_step_queue
+                24      LOAD_CONST                      5: <CODE> log_steps
+                26      LOAD_CONST                      6: 'DumpStepper.log_steps'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: log_steps
+                32      LOAD_CONST                      7: <CODE> _api_update
+                34      LOAD_CONST                      8: 'DumpStepper._api_update'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _api_update
+                40      LOAD_CONST                      9: <CODE> _add_api_client
+                42      LOAD_CONST                      10: 'DumpStepper._add_api_client'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _add_api_client
+                48      LOAD_CONST                      11: None
+                50      RETURN_VALUE                    
+        'DumpStepper'
+        1e+16
+        [Code]
+            File Name: /extras/motion_report.py
+            Object Name: DumpTrapQ
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'extract_trapq'
+                'log_trapq'
+                'get_trapq_position'
+                '_api_update'
+                '_add_api_client'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'DumpTrapQ'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: __init__
+                    Arg Count: 4
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'name'
+                        'trapq'
+                        'last_api_msg'
+                        'APIDumpHelper'
+                        '_api_update'
+                        'api_dump'
+                        'lookup_object'
+                        'register_mux_endpoint'
+                        '_add_api_client'
+                    [Var Names]
+                        'self'
+                        'printer'
+                        'name'
+                        'trapq'
+                        'wh'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            0
+                            0
+                        )
+                        'webhooks'
+                        'motion_report/dump_trapq'
+                        'name'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: printer
+                        2       LOAD_FAST                       0: self
+                        4       STORE_ATTR                      0: printer
+                        6       LOAD_FAST                       2: name
+                        8       LOAD_FAST                       0: self
+                        10      STORE_ATTR                      1: name
+                        12      LOAD_FAST                       3: trapq
+                        14      LOAD_FAST                       0: self
+                        16      STORE_ATTR                      2: trapq
+                        18      LOAD_CONST                      1: (0, 0)
+                        20      LOAD_FAST                       0: self
+                        22      STORE_ATTR                      3: last_api_msg
+                        24      LOAD_GLOBAL                     4: APIDumpHelper
+                        26      LOAD_FAST                       1: printer
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       5: _api_update
+                        32      CALL_FUNCTION                   2
+                        34      LOAD_FAST                       0: self
+                        36      STORE_ATTR                      6: api_dump
+                        38      LOAD_FAST                       0: self
+                        40      LOAD_ATTR                       0: printer
+                        42      LOAD_METHOD                     7: lookup_object
+                        44      LOAD_CONST                      2: 'webhooks'
+                        46      CALL_METHOD                     1
+                        48      STORE_FAST                      4: wh
+                        50      LOAD_FAST                       4: wh
+                        52      LOAD_METHOD                     8: register_mux_endpoint
+                        54      LOAD_CONST                      3: 'motion_report/dump_trapq'
+                        56      LOAD_CONST                      4: 'name'
+                        58      LOAD_FAST                       2: name
+                        60      LOAD_FAST                       0: self
+                        62      LOAD_ATTR                       9: _add_api_client
+                        64      CALL_METHOD                     4
+                        66      POP_TOP                         
+                        68      LOAD_CONST                      0: None
+                        70      RETURN_VALUE                    
+                'DumpTrapQ.__init__'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: extract_trapq
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 8
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'chelper'
+                        'get_ffi'
+                        'new'
+                        'trapq_extract_old'
+                        'trapq'
+                        'len'
+                        'append'
+                        'print_time'
+                        'reverse'
+                    [Var Names]
+                        'self'
+                        'start_time'
+                        'end_time'
+                        'ffi_main'
+                        'ffi_lib'
+                        'res'
+                        'data'
+                        'count'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'struct pull_move[128]'
+                        1
+                        [Code]
+                            File Name: /extras/motion_report.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 4
+                            Stack Size: 6
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'range'
+                            [Var Names]
+                                '.0'
+                                'd'
+                                'cnt'
+                                'i'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                                1
+                                -1
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        38 (to 44)
+                                6       UNPACK_SEQUENCE                 2
+                                8       STORE_FAST                      1: d
+                                10      STORE_FAST                      2: cnt
+                                12      LOAD_GLOBAL                     0: range
+                                14      LOAD_FAST                       2: cnt
+                                16      LOAD_CONST                      0: 1
+                                18      BINARY_SUBTRACT                 
+                                20      LOAD_CONST                      1: -1
+                                22      LOAD_CONST                      1: -1
+                                24      CALL_FUNCTION                   3
+                                26      GET_ITER                        
+                                28      FOR_ITER                        12 (to 42)
+                                30      STORE_FAST                      3: i
+                                32      LOAD_FAST                       1: d
+                                34      LOAD_FAST                       3: i
+                                36      BINARY_SUBSCR                   
+                                38      LIST_APPEND                     3
+                                40      JUMP_ABSOLUTE                   28
+                                42      JUMP_ABSOLUTE                   4
+                                44      RETURN_VALUE                    
+                        'DumpTrapQ.extract_trapq.<locals>.<listcomp>'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: chelper
+                        2       LOAD_METHOD                     1: get_ffi
+                        4       CALL_METHOD                     0
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      3: ffi_main
+                        10      STORE_FAST                      4: ffi_lib
+                        12      BUILD_LIST                      0
+                        14      STORE_FAST                      5: res
+                        16      LOAD_FAST                       3: ffi_main
+                        18      LOAD_METHOD                     2: new
+                        20      LOAD_CONST                      1: 'struct pull_move[128]'
+                        22      CALL_METHOD                     1
+                        24      STORE_FAST                      6: data
+                        26      LOAD_FAST                       4: ffi_lib
+                        28      LOAD_METHOD                     3: trapq_extract_old
+                        30      LOAD_FAST                       0: self
+                        32      LOAD_ATTR                       4: trapq
+                        34      LOAD_FAST                       6: data
+                        36      LOAD_GLOBAL                     5: len
+                        38      LOAD_FAST                       6: data
+                        40      CALL_FUNCTION                   1
+                        42      LOAD_FAST                       1: start_time
+                        44      LOAD_FAST                       2: end_time
+                        46      CALL_METHOD                     5
+                        48      STORE_FAST                      7: count
+                        50      LOAD_FAST                       7: count
+                        52      POP_JUMP_IF_TRUE                56
+                        54      JUMP_ABSOLUTE                   100
+                        56      LOAD_FAST                       5: res
+                        58      LOAD_METHOD                     6: append
+                        60      LOAD_FAST                       6: data
+                        62      LOAD_FAST                       7: count
+                        64      BUILD_TUPLE                     2
+                        66      CALL_METHOD                     1
+                        68      POP_TOP                         
+                        70      LOAD_FAST                       7: count
+                        72      LOAD_GLOBAL                     5: len
+                        74      LOAD_FAST                       6: data
+                        76      CALL_FUNCTION                   1
+                        78      COMPARE_OP                      0 (<)
+                        80      POP_JUMP_IF_FALSE               84
+                        82      JUMP_ABSOLUTE                   100
+                        84      LOAD_FAST                       6: data
+                        86      LOAD_FAST                       7: count
+                        88      LOAD_CONST                      2: 1
+                        90      BINARY_SUBTRACT                 
+                        92      BINARY_SUBSCR                   
+                        94      LOAD_ATTR                       7: print_time
+                        96      STORE_FAST                      2: end_time
+                        98      JUMP_ABSOLUTE                   16
+                        100     LOAD_FAST                       5: res
+                        102     LOAD_METHOD                     8: reverse
+                        104     CALL_METHOD                     0
+                        106     POP_TOP                         
+                        108     LOAD_CONST                      3: <CODE> <listcomp>
+                        110     LOAD_CONST                      4: 'DumpTrapQ.extract_trapq.<locals>.<listcomp>'
+                        112     MAKE_FUNCTION                   0
+                        114     LOAD_FAST                       5: res
+                        116     GET_ITER                        
+                        118     CALL_FUNCTION                   1
+                        120     LOAD_FAST                       5: res
+                        122     BUILD_TUPLE                     2
+                        124     RETURN_VALUE                    
+                'DumpTrapQ.extract_trapq'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: log_trapq
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 5
+                    Stack Size: 15
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'name'
+                        'len'
+                        'enumerate'
+                        'append'
+                        'print_time'
+                        'move_t'
+                        'start_v'
+                        'accel'
+                        'start_x'
+                        'start_y'
+                        'start_z'
+                        'x_r'
+                        'y_r'
+                        'z_r'
+                        'logging'
+                        'info'
+                        'join'
+                    [Var Names]
+                        'self'
+                        'data'
+                        'out'
+                        'i'
+                        'm'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        "Dumping trapq '%s' %d moves:"
+                        'move %d: pt=%.6f mt=%.6f sv=%.6f a=%.6f sp=(%.6f,%.6f,%.6f) ar=(%.6f,%.6f,%.6f)'
+                        '\n'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: data
+                        2       POP_JUMP_IF_TRUE                8
+                        4       LOAD_CONST                      0: None
+                        6       RETURN_VALUE                    
+                        8       LOAD_CONST                      1: "Dumping trapq '%s' %d moves:"
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: name
+                        14      LOAD_GLOBAL                     1: len
+                        16      LOAD_FAST                       1: data
+                        18      CALL_FUNCTION                   1
+                        20      BUILD_TUPLE                     2
+                        22      BINARY_MODULO                   
+                        24      BUILD_LIST                      1
+                        26      STORE_FAST                      2: out
+                        28      LOAD_GLOBAL                     2: enumerate
+                        30      LOAD_FAST                       1: data
+                        32      CALL_FUNCTION                   1
+                        34      GET_ITER                        
+                        36      FOR_ITER                        64 (to 102)
+                        38      UNPACK_SEQUENCE                 2
+                        40      STORE_FAST                      3: i
+                        42      STORE_FAST                      4: m
+                        44      LOAD_FAST                       2: out
+                        46      LOAD_METHOD                     3: append
+                        48      LOAD_CONST                      2: 'move %d: pt=%.6f mt=%.6f sv=%.6f a=%.6f sp=(%.6f,%.6f,%.6f) ar=(%.6f,%.6f,%.6f)'
+                        50      LOAD_FAST                       3: i
+                        52      LOAD_FAST                       4: m
+                        54      LOAD_ATTR                       4: print_time
+                        56      LOAD_FAST                       4: m
+                        58      LOAD_ATTR                       5: move_t
+                        60      LOAD_FAST                       4: m
+                        62      LOAD_ATTR                       6: start_v
+                        64      LOAD_FAST                       4: m
+                        66      LOAD_ATTR                       7: accel
+                        68      LOAD_FAST                       4: m
+                        70      LOAD_ATTR                       8: start_x
+                        72      LOAD_FAST                       4: m
+                        74      LOAD_ATTR                       9: start_y
+                        76      LOAD_FAST                       4: m
+                        78      LOAD_ATTR                       10: start_z
+                        80      LOAD_FAST                       4: m
+                        82      LOAD_ATTR                       11: x_r
+                        84      LOAD_FAST                       4: m
+                        86      LOAD_ATTR                       12: y_r
+                        88      LOAD_FAST                       4: m
+                        90      LOAD_ATTR                       13: z_r
+                        92      BUILD_TUPLE                     11
+                        94      BINARY_MODULO                   
+                        96      CALL_METHOD                     1
+                        98      POP_TOP                         
+                        100     JUMP_ABSOLUTE                   36
+                        102     LOAD_GLOBAL                     14: logging
+                        104     LOAD_METHOD                     15: info
+                        106     LOAD_CONST                      3: '\n'
+                        108     LOAD_METHOD                     16: join
+                        110     LOAD_FAST                       2: out
+                        112     CALL_METHOD                     1
+                        114     CALL_METHOD                     1
+                        116     POP_TOP                         
+                        118     LOAD_CONST                      0: None
+                        120     RETURN_VALUE                    
+                'DumpTrapQ.log_trapq'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: get_trapq_position
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 11
+                    Stack Size: 7
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'chelper'
+                        'get_ffi'
+                        'new'
+                        'trapq_extract_old'
+                        'trapq'
+                        'max'
+                        'min'
+                        'move_t'
+                        'print_time'
+                        'start_v'
+                        'accel'
+                        'start_x'
+                        'x_r'
+                        'start_y'
+                        'y_r'
+                        'start_z'
+                        'z_r'
+                    [Var Names]
+                        'self'
+                        'print_time'
+                        'ffi_main'
+                        'ffi_lib'
+                        'data'
+                        'count'
+                        'move'
+                        'move_time'
+                        'dist'
+                        'pos'
+                        'velocity'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'struct pull_move[1]'
+                        1
+                        0
+                        (
+                            None
+                            None
+                        )
+                        0
+                        0.5
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: chelper
+                        2       LOAD_METHOD                     1: get_ffi
+                        4       CALL_METHOD                     0
+                        6       UNPACK_SEQUENCE                 2
+                        8       STORE_FAST                      2: ffi_main
+                        10      STORE_FAST                      3: ffi_lib
+                        12      LOAD_FAST                       2: ffi_main
+                        14      LOAD_METHOD                     2: new
+                        16      LOAD_CONST                      1: 'struct pull_move[1]'
+                        18      CALL_METHOD                     1
+                        20      STORE_FAST                      4: data
+                        22      LOAD_FAST                       3: ffi_lib
+                        24      LOAD_METHOD                     3: trapq_extract_old
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_ATTR                       4: trapq
+                        30      LOAD_FAST                       4: data
+                        32      LOAD_CONST                      2: 1
+                        34      LOAD_CONST                      3: 0
+                        36      LOAD_FAST                       1: print_time
+                        38      CALL_METHOD                     5
+                        40      STORE_FAST                      5: count
+                        42      LOAD_FAST                       5: count
+                        44      POP_JUMP_IF_TRUE                50
+                        46      LOAD_CONST                      4: (None, None)
+                        48      RETURN_VALUE                    
+                        50      LOAD_FAST                       4: data
+                        52      LOAD_CONST                      5: 0
+                        54      BINARY_SUBSCR                   
+                        56      STORE_FAST                      6: move
+                        58      LOAD_GLOBAL                     5: max
+                        60      LOAD_CONST                      3: 0
+                        62      LOAD_GLOBAL                     6: min
+                        64      LOAD_FAST                       6: move
+                        66      LOAD_ATTR                       7: move_t
+                        68      LOAD_FAST                       1: print_time
+                        70      LOAD_FAST                       6: move
+                        72      LOAD_ATTR                       8: print_time
+                        74      BINARY_SUBTRACT                 
+                        76      CALL_FUNCTION                   2
+                        78      CALL_FUNCTION                   2
+                        80      STORE_FAST                      7: move_time
+                        82      LOAD_FAST                       6: move
+                        84      LOAD_ATTR                       9: start_v
+                        86      LOAD_CONST                      6: 0.5
+                        88      LOAD_FAST                       6: move
+                        90      LOAD_ATTR                       10: accel
+                        92      BINARY_MULTIPLY                 
+                        94      LOAD_FAST                       7: move_time
+                        96      BINARY_MULTIPLY                 
+                        98      BINARY_ADD                      
+                        100     LOAD_FAST                       7: move_time
+                        102     BINARY_MULTIPLY                 
+                        104     STORE_FAST                      8: dist
+                        106     LOAD_FAST                       6: move
+                        108     LOAD_ATTR                       11: start_x
+                        110     LOAD_FAST                       6: move
+                        112     LOAD_ATTR                       12: x_r
+                        114     LOAD_FAST                       8: dist
+                        116     BINARY_MULTIPLY                 
+                        118     BINARY_ADD                      
+                        120     LOAD_FAST                       6: move
+                        122     LOAD_ATTR                       13: start_y
+                        124     LOAD_FAST                       6: move
+                        126     LOAD_ATTR                       14: y_r
+                        128     LOAD_FAST                       8: dist
+                        130     BINARY_MULTIPLY                 
+                        132     BINARY_ADD                      
+                        134     LOAD_FAST                       6: move
+                        136     LOAD_ATTR                       15: start_z
+                        138     LOAD_FAST                       6: move
+                        140     LOAD_ATTR                       16: z_r
+                        142     LOAD_FAST                       8: dist
+                        144     BINARY_MULTIPLY                 
+                        146     BINARY_ADD                      
+                        148     BUILD_TUPLE                     3
+                        150     STORE_FAST                      9: pos
+                        152     LOAD_FAST                       6: move
+                        154     LOAD_ATTR                       9: start_v
+                        156     LOAD_FAST                       6: move
+                        158     LOAD_ATTR                       10: accel
+                        160     LOAD_FAST                       7: move_time
+                        162     BINARY_MULTIPLY                 
+                        164     BINARY_ADD                      
+                        166     STORE_FAST                      10: velocity
+                        168     LOAD_FAST                       9: pos
+                        170     LOAD_FAST                       10: velocity
+                        172     BUILD_TUPLE                     2
+                        174     RETURN_VALUE                    
+                'DumpTrapQ.get_trapq_position'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _api_update
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 6
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'last_api_msg'
+                        'min'
+                        'extract_trapq'
+                        'NEVER_TIME'
+                        'pop'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'qtime'
+                        'data'
+                        'cdata'
+                        'd'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        1
+                        0.1
+                        [Code]
+                            File Name: /extras/motion_report.py
+                            Object Name: <listcomp>
+                            Arg Count: 1
+                            Pos Only Arg Count: 0
+                            KW Only Arg Count: 0
+                            Locals: 2
+                            Stack Size: 10
+                            Flags: 0x00000053 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NESTED | CO_NOFREE)
+                            [Names]
+                                'print_time'
+                                'move_t'
+                                'start_v'
+                                'accel'
+                                'start_x'
+                                'start_y'
+                                'start_z'
+                                'x_r'
+                                'y_r'
+                                'z_r'
+                            [Var Names]
+                                '.0'
+                                'm'
+                            [Free Vars]
+                            [Cell Vars]
+                            [Constants]
+                            [Disassembly]
+                                0       BUILD_LIST                      0
+                                2       LOAD_FAST                       0: .0
+                                4       FOR_ITER                        52 (to 58)
+                                6       STORE_FAST                      1: m
+                                8       LOAD_FAST                       1: m
+                                10      LOAD_ATTR                       0: print_time
+                                12      LOAD_FAST                       1: m
+                                14      LOAD_ATTR                       1: move_t
+                                16      LOAD_FAST                       1: m
+                                18      LOAD_ATTR                       2: start_v
+                                20      LOAD_FAST                       1: m
+                                22      LOAD_ATTR                       3: accel
+                                24      LOAD_FAST                       1: m
+                                26      LOAD_ATTR                       4: start_x
+                                28      LOAD_FAST                       1: m
+                                30      LOAD_ATTR                       5: start_y
+                                32      LOAD_FAST                       1: m
+                                34      LOAD_ATTR                       6: start_z
+                                36      BUILD_TUPLE                     3
+                                38      LOAD_FAST                       1: m
+                                40      LOAD_ATTR                       7: x_r
+                                42      LOAD_FAST                       1: m
+                                44      LOAD_ATTR                       8: y_r
+                                46      LOAD_FAST                       1: m
+                                48      LOAD_ATTR                       9: z_r
+                                50      BUILD_TUPLE                     3
+                                52      BUILD_TUPLE                     6
+                                54      LIST_APPEND                     2
+                                56      JUMP_ABSOLUTE                   4
+                                58      RETURN_VALUE                    
+                        'DumpTrapQ._api_update.<locals>.<listcomp>'
+                        -1
+                        'data'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: last_api_msg
+                        4       LOAD_CONST                      1: 0
+                        6       BINARY_SUBSCR                   
+                        8       LOAD_GLOBAL                     1: min
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       0: last_api_msg
+                        14      LOAD_CONST                      2: 1
+                        16      BINARY_SUBSCR                   
+                        18      LOAD_CONST                      3: 0.1
+                        20      CALL_FUNCTION                   2
+                        22      BINARY_ADD                      
+                        24      STORE_FAST                      2: qtime
+                        26      LOAD_FAST                       0: self
+                        28      LOAD_METHOD                     2: extract_trapq
+                        30      LOAD_FAST                       2: qtime
+                        32      LOAD_GLOBAL                     3: NEVER_TIME
+                        34      CALL_METHOD                     2
+                        36      UNPACK_SEQUENCE                 2
+                        38      STORE_FAST                      3: data
+                        40      STORE_FAST                      4: cdata
+                        42      LOAD_CONST                      4: <CODE> <listcomp>
+                        44      LOAD_CONST                      5: 'DumpTrapQ._api_update.<locals>.<listcomp>'
+                        46      MAKE_FUNCTION                   0
+                        48      LOAD_FAST                       3: data
+                        50      GET_ITER                        
+                        52      CALL_FUNCTION                   1
+                        54      STORE_FAST                      5: d
+                        56      LOAD_FAST                       5: d
+                        58      POP_JUMP_IF_FALSE               84
+                        60      LOAD_FAST                       5: d
+                        62      LOAD_CONST                      1: 0
+                        64      BINARY_SUBSCR                   
+                        66      LOAD_FAST                       0: self
+                        68      LOAD_ATTR                       0: last_api_msg
+                        70      COMPARE_OP                      2 (==)
+                        72      POP_JUMP_IF_FALSE               84
+                        74      LOAD_FAST                       5: d
+                        76      LOAD_METHOD                     4: pop
+                        78      LOAD_CONST                      1: 0
+                        80      CALL_METHOD                     1
+                        82      POP_TOP                         
+                        84      LOAD_FAST                       5: d
+                        86      POP_JUMP_IF_TRUE                92
+                        88      BUILD_MAP                       0
+                        90      RETURN_VALUE                    
+                        92      LOAD_FAST                       5: d
+                        94      LOAD_CONST                      6: -1
+                        96      BINARY_SUBSCR                   
+                        98      LOAD_FAST                       0: self
+                        100     STORE_ATTR                      0: last_api_msg
+                        102     LOAD_CONST                      7: 'data'
+                        104     LOAD_FAST                       5: d
+                        106     BUILD_MAP                       1
+                        108     RETURN_VALUE                    
+                'DumpTrapQ._api_update'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _add_api_client
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'api_dump'
+                        'add_client'
+                        'send'
+                    [Var Names]
+                        'self'
+                        'web_request'
+                        'hdr'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            'time'
+                            'duration'
+                            'start_velocity'
+                            'acceleration'
+                            'start_position'
+                            'direction'
+                        )
+                        'header'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: api_dump
+                        4       LOAD_METHOD                     1: add_client
+                        6       LOAD_FAST                       1: web_request
+                        8       CALL_METHOD                     1
+                        10      POP_TOP                         
+                        12      LOAD_CONST                      1: ('time', 'duration', 'start_velocity', 'acceleration', 'start_position', 'direction')
+                        14      STORE_FAST                      2: hdr
+                        16      LOAD_FAST                       1: web_request
+                        18      LOAD_METHOD                     2: send
+                        20      LOAD_CONST                      2: 'header'
+                        22      LOAD_FAST                       2: hdr
+                        24      BUILD_MAP                       1
+                        26      CALL_METHOD                     1
+                        28      POP_TOP                         
+                        30      LOAD_CONST                      0: None
+                        32      RETURN_VALUE                    
+                'DumpTrapQ._add_api_client'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'DumpTrapQ'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'DumpTrapQ.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> extract_trapq
+                18      LOAD_CONST                      4: 'DumpTrapQ.extract_trapq'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: extract_trapq
+                24      LOAD_CONST                      5: <CODE> log_trapq
+                26      LOAD_CONST                      6: 'DumpTrapQ.log_trapq'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: log_trapq
+                32      LOAD_CONST                      7: <CODE> get_trapq_position
+                34      LOAD_CONST                      8: 'DumpTrapQ.get_trapq_position'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: get_trapq_position
+                40      LOAD_CONST                      9: <CODE> _api_update
+                42      LOAD_CONST                      10: 'DumpTrapQ._api_update'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _api_update
+                48      LOAD_CONST                      11: <CODE> _add_api_client
+                50      LOAD_CONST                      12: 'DumpTrapQ._add_api_client'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: _add_api_client
+                56      LOAD_CONST                      13: None
+                58      RETURN_VALUE                    
+        'DumpTrapQ'
+        0.25
+        [Code]
+            File Name: /extras/motion_report.py
+            Object Name: PrinterMotionReport
+            Arg Count: 0
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 0
+            Stack Size: 2
+            Flags: 0x00000040 (CO_NOFREE)
+            [Names]
+                '__name__'
+                '__module__'
+                '__qualname__'
+                '__init__'
+                'register_stepper'
+                '_connect'
+                '_dump_shutdown'
+                '_shutdown'
+                'get_status'
+            [Var Names]
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                'PrinterMotionReport'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: __init__
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 3
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'get_printer'
+                        'printer'
+                        'steppers'
+                        'trapqs'
+                        'next_status_time'
+                        'lookup_object'
+                        'Coord'
+                        'last_status'
+                        'register_event_handler'
+                        '_connect'
+                        '_shutdown'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'gcode'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0
+                        'gcode'
+                        (
+                            'live_position'
+                            'live_velocity'
+                            'live_extruder_velocity'
+                            'steppers'
+                            'trapq'
+                        )
+                        'klippy:connect'
+                        'klippy:shutdown'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: config
+                        2       LOAD_METHOD                     0: get_printer
+                        4       CALL_METHOD                     0
+                        6       LOAD_FAST                       0: self
+                        8       STORE_ATTR                      1: printer
+                        10      BUILD_MAP                       0
+                        12      LOAD_FAST                       0: self
+                        14      STORE_ATTR                      2: steppers
+                        16      BUILD_MAP                       0
+                        18      LOAD_FAST                       0: self
+                        20      STORE_ATTR                      3: trapqs
+                        22      LOAD_CONST                      1: 0
+                        24      LOAD_FAST                       0: self
+                        26      STORE_ATTR                      4: next_status_time
+                        28      LOAD_FAST                       0: self
+                        30      LOAD_ATTR                       1: printer
+                        32      LOAD_METHOD                     5: lookup_object
+                        34      LOAD_CONST                      2: 'gcode'
+                        36      CALL_METHOD                     1
+                        38      STORE_FAST                      2: gcode
+                        40      LOAD_FAST                       2: gcode
+                        42      LOAD_METHOD                     6: Coord
+                        44      LOAD_CONST                      1: 0
+                        46      LOAD_CONST                      1: 0
+                        48      LOAD_CONST                      1: 0
+                        50      LOAD_CONST                      1: 0
+                        52      CALL_METHOD                     4
+                        54      LOAD_CONST                      1: 0
+                        56      LOAD_CONST                      1: 0
+                        58      BUILD_LIST                      0
+                        60      BUILD_LIST                      0
+                        62      LOAD_CONST                      3: ('live_position', 'live_velocity', 'live_extruder_velocity', 'steppers', 'trapq')
+                        64      BUILD_CONST_KEY_MAP             5
+                        66      LOAD_FAST                       0: self
+                        68      STORE_ATTR                      7: last_status
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       1: printer
+                        74      LOAD_METHOD                     8: register_event_handler
+                        76      LOAD_CONST                      4: 'klippy:connect'
+                        78      LOAD_FAST                       0: self
+                        80      LOAD_ATTR                       9: _connect
+                        82      CALL_METHOD                     2
+                        84      POP_TOP                         
+                        86      LOAD_FAST                       0: self
+                        88      LOAD_ATTR                       1: printer
+                        90      LOAD_METHOD                     8: register_event_handler
+                        92      LOAD_CONST                      5: 'klippy:shutdown'
+                        94      LOAD_FAST                       0: self
+                        96      LOAD_ATTR                       10: _shutdown
+                        98      CALL_METHOD                     2
+                        100     POP_TOP                         
+                        102     LOAD_CONST                      0: None
+                        104     RETURN_VALUE                    
+                'PrinterMotionReport.__init__'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: register_stepper
+                    Arg Count: 3
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 4
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'DumpStepper'
+                        'printer'
+                        'steppers'
+                        'get_name'
+                    [Var Names]
+                        'self'
+                        'config'
+                        'mcu_stepper'
+                        'ds'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: DumpStepper
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       1: printer
+                        6       LOAD_FAST                       2: mcu_stepper
+                        8       CALL_FUNCTION                   2
+                        10      STORE_FAST                      3: ds
+                        12      LOAD_FAST                       3: ds
+                        14      LOAD_FAST                       0: self
+                        16      LOAD_ATTR                       2: steppers
+                        18      LOAD_FAST                       2: mcu_stepper
+                        20      LOAD_METHOD                     3: get_name
+                        22      CALL_METHOD                     0
+                        24      STORE_SUBSCR                    
+                        26      LOAD_CONST                      0: None
+                        28      RETURN_VALUE                    
+                'PrinterMotionReport.register_stepper'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _connect
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 7
+                    Stack Size: 5
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'lookup_object'
+                        'get_trapq'
+                        'DumpTrapQ'
+                        'trapqs'
+                        'range'
+                        'list'
+                        'sorted'
+                        'steppers'
+                        'keys'
+                        'last_status'
+                    [Var Names]
+                        'self'
+                        'toolhead'
+                        'trapq'
+                        'i'
+                        'ename'
+                        'extruder'
+                        'etrapq'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        'toolhead'
+                        99
+                        'extruder%d'
+                        'extruder0'
+                        'extruder'
+                        'steppers'
+                        'trapq'
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: lookup_object
+                        6       LOAD_CONST                      1: 'toolhead'
+                        8       CALL_METHOD                     1
+                        10      STORE_FAST                      1: toolhead
+                        12      LOAD_FAST                       1: toolhead
+                        14      LOAD_METHOD                     2: get_trapq
+                        16      CALL_METHOD                     0
+                        18      STORE_FAST                      2: trapq
+                        20      LOAD_GLOBAL                     3: DumpTrapQ
+                        22      LOAD_FAST                       0: self
+                        24      LOAD_ATTR                       0: printer
+                        26      LOAD_CONST                      1: 'toolhead'
+                        28      LOAD_FAST                       2: trapq
+                        30      CALL_FUNCTION                   3
+                        32      LOAD_FAST                       0: self
+                        34      LOAD_ATTR                       4: trapqs
+                        36      LOAD_CONST                      1: 'toolhead'
+                        38      STORE_SUBSCR                    
+                        40      LOAD_GLOBAL                     5: range
+                        42      LOAD_CONST                      2: 99
+                        44      CALL_FUNCTION                   1
+                        46      GET_ITER                        
+                        48      FOR_ITER                        80 (to 130)
+                        50      STORE_FAST                      3: i
+                        52      LOAD_CONST                      3: 'extruder%d'
+                        54      LOAD_FAST                       3: i
+                        56      BUILD_TUPLE                     1
+                        58      BINARY_MODULO                   
+                        60      STORE_FAST                      4: ename
+                        62      LOAD_FAST                       4: ename
+                        64      LOAD_CONST                      4: 'extruder0'
+                        66      COMPARE_OP                      2 (==)
+                        68      POP_JUMP_IF_FALSE               74
+                        70      LOAD_CONST                      5: 'extruder'
+                        72      STORE_FAST                      4: ename
+                        74      LOAD_FAST                       0: self
+                        76      LOAD_ATTR                       0: printer
+                        78      LOAD_METHOD                     1: lookup_object
+                        80      LOAD_FAST                       4: ename
+                        82      LOAD_CONST                      0: None
+                        84      CALL_METHOD                     2
+                        86      STORE_FAST                      5: extruder
+                        88      LOAD_FAST                       5: extruder
+                        90      LOAD_CONST                      0: None
+                        92      IS_OP                           0 (is)
+                        94      POP_JUMP_IF_FALSE               100
+                        96      POP_TOP                         
+                        98      JUMP_ABSOLUTE                   130
+                        100     LOAD_FAST                       5: extruder
+                        102     LOAD_METHOD                     2: get_trapq
+                        104     CALL_METHOD                     0
+                        106     STORE_FAST                      6: etrapq
+                        108     LOAD_GLOBAL                     3: DumpTrapQ
+                        110     LOAD_FAST                       0: self
+                        112     LOAD_ATTR                       0: printer
+                        114     LOAD_FAST                       4: ename
+                        116     LOAD_FAST                       6: etrapq
+                        118     CALL_FUNCTION                   3
+                        120     LOAD_FAST                       0: self
+                        122     LOAD_ATTR                       4: trapqs
+                        124     LOAD_FAST                       4: ename
+                        126     STORE_SUBSCR                    
+                        128     JUMP_ABSOLUTE                   48
+                        130     LOAD_GLOBAL                     6: list
+                        132     LOAD_GLOBAL                     7: sorted
+                        134     LOAD_FAST                       0: self
+                        136     LOAD_ATTR                       8: steppers
+                        138     LOAD_METHOD                     9: keys
+                        140     CALL_METHOD                     0
+                        142     CALL_FUNCTION                   1
+                        144     CALL_FUNCTION                   1
+                        146     LOAD_FAST                       0: self
+                        148     LOAD_ATTR                       10: last_status
+                        150     LOAD_CONST                      6: 'steppers'
+                        152     STORE_SUBSCR                    
+                        154     LOAD_GLOBAL                     6: list
+                        156     LOAD_GLOBAL                     7: sorted
+                        158     LOAD_FAST                       0: self
+                        160     LOAD_ATTR                       4: trapqs
+                        162     LOAD_METHOD                     9: keys
+                        164     CALL_METHOD                     0
+                        166     CALL_FUNCTION                   1
+                        168     CALL_FUNCTION                   1
+                        170     LOAD_FAST                       0: self
+                        172     LOAD_ATTR                       10: last_status
+                        174     LOAD_CONST                      7: 'trapq'
+                        176     STORE_SUBSCR                    
+                        178     LOAD_CONST                      0: None
+                        180     RETURN_VALUE                    
+                'PrinterMotionReport._connect'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _dump_shutdown
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 14
+                    Stack Size: 6
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'NEVER_TIME'
+                        'steppers'
+                        'values'
+                        'mcu_stepper'
+                        'get_mcu'
+                        'get_shutdown_clock'
+                        'min'
+                        'clock_to_print_time'
+                        'seconds_to_clock'
+                        'max'
+                        'get_step_queue'
+                        'log_steps'
+                        'trapqs'
+                        'extract_trapq'
+                        'log_trapq'
+                        'get'
+                        'get_trapq_position'
+                        'logging'
+                        'info'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'shutdown_time'
+                        'dstepper'
+                        'mcu'
+                        'sc'
+                        'clock_100ms'
+                        'start_clock'
+                        'end_clock'
+                        'data'
+                        'cdata'
+                        'dtrapq'
+                        'pos'
+                        'velocity'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        0.1
+                        0
+                        'toolhead'
+                        'Requested toolhead position at shutdown time %.6f: %s'
+                    [Disassembly]
+                        0       LOAD_GLOBAL                     0: NEVER_TIME
+                        2       STORE_FAST                      2: shutdown_time
+                        4       LOAD_FAST                       0: self
+                        6       LOAD_ATTR                       1: steppers
+                        8       LOAD_METHOD                     2: values
+                        10      CALL_METHOD                     0
+                        12      GET_ITER                        
+                        14      FOR_ITER                        102 (to 118)
+                        16      STORE_FAST                      3: dstepper
+                        18      LOAD_FAST                       3: dstepper
+                        20      LOAD_ATTR                       3: mcu_stepper
+                        22      LOAD_METHOD                     4: get_mcu
+                        24      CALL_METHOD                     0
+                        26      STORE_FAST                      4: mcu
+                        28      LOAD_FAST                       4: mcu
+                        30      LOAD_METHOD                     5: get_shutdown_clock
+                        32      CALL_METHOD                     0
+                        34      STORE_FAST                      5: sc
+                        36      LOAD_FAST                       5: sc
+                        38      POP_JUMP_IF_TRUE                42
+                        40      JUMP_ABSOLUTE                   14
+                        42      LOAD_GLOBAL                     6: min
+                        44      LOAD_FAST                       2: shutdown_time
+                        46      LOAD_FAST                       4: mcu
+                        48      LOAD_METHOD                     7: clock_to_print_time
+                        50      LOAD_FAST                       5: sc
+                        52      CALL_METHOD                     1
+                        54      CALL_FUNCTION                   2
+                        56      STORE_FAST                      2: shutdown_time
+                        58      LOAD_FAST                       4: mcu
+                        60      LOAD_METHOD                     8: seconds_to_clock
+                        62      LOAD_CONST                      1: 0.1
+                        64      CALL_METHOD                     1
+                        66      STORE_FAST                      6: clock_100ms
+                        68      LOAD_GLOBAL                     9: max
+                        70      LOAD_CONST                      2: 0
+                        72      LOAD_FAST                       5: sc
+                        74      LOAD_FAST                       6: clock_100ms
+                        76      BINARY_SUBTRACT                 
+                        78      CALL_FUNCTION                   2
+                        80      STORE_FAST                      7: start_clock
+                        82      LOAD_FAST                       5: sc
+                        84      LOAD_FAST                       6: clock_100ms
+                        86      BINARY_ADD                      
+                        88      STORE_FAST                      8: end_clock
+                        90      LOAD_FAST                       3: dstepper
+                        92      LOAD_METHOD                     10: get_step_queue
+                        94      LOAD_FAST                       7: start_clock
+                        96      LOAD_FAST                       8: end_clock
+                        98      CALL_METHOD                     2
+                        100     UNPACK_SEQUENCE                 2
+                        102     STORE_FAST                      9: data
+                        104     STORE_FAST                      10: cdata
+                        106     LOAD_FAST                       3: dstepper
+                        108     LOAD_METHOD                     11: log_steps
+                        110     LOAD_FAST                       9: data
+                        112     CALL_METHOD                     1
+                        114     POP_TOP                         
+                        116     JUMP_ABSOLUTE                   14
+                        118     LOAD_FAST                       2: shutdown_time
+                        120     LOAD_GLOBAL                     0: NEVER_TIME
+                        122     COMPARE_OP                      5 (>=)
+                        124     POP_JUMP_IF_FALSE               130
+                        126     LOAD_CONST                      0: None
+                        128     RETURN_VALUE                    
+                        130     LOAD_FAST                       0: self
+                        132     LOAD_ATTR                       12: trapqs
+                        134     LOAD_METHOD                     2: values
+                        136     CALL_METHOD                     0
+                        138     GET_ITER                        
+                        140     FOR_ITER                        38 (to 180)
+                        142     STORE_FAST                      11: dtrapq
+                        144     LOAD_FAST                       11: dtrapq
+                        146     LOAD_METHOD                     13: extract_trapq
+                        148     LOAD_FAST                       2: shutdown_time
+                        150     LOAD_CONST                      1: 0.1
+                        152     BINARY_SUBTRACT                 
+                        154     LOAD_FAST                       2: shutdown_time
+                        156     LOAD_CONST                      1: 0.1
+                        158     BINARY_ADD                      
+                        160     CALL_METHOD                     2
+                        162     UNPACK_SEQUENCE                 2
+                        164     STORE_FAST                      9: data
+                        166     STORE_FAST                      10: cdata
+                        168     LOAD_FAST                       11: dtrapq
+                        170     LOAD_METHOD                     14: log_trapq
+                        172     LOAD_FAST                       9: data
+                        174     CALL_METHOD                     1
+                        176     POP_TOP                         
+                        178     JUMP_ABSOLUTE                   140
+                        180     LOAD_FAST                       0: self
+                        182     LOAD_ATTR                       12: trapqs
+                        184     LOAD_METHOD                     15: get
+                        186     LOAD_CONST                      3: 'toolhead'
+                        188     CALL_METHOD                     1
+                        190     STORE_FAST                      11: dtrapq
+                        192     LOAD_FAST                       11: dtrapq
+                        194     LOAD_CONST                      0: None
+                        196     IS_OP                           0 (is)
+                        198     POP_JUMP_IF_FALSE               204
+                        200     LOAD_CONST                      0: None
+                        202     RETURN_VALUE                    
+                        204     LOAD_FAST                       11: dtrapq
+                        206     LOAD_METHOD                     16: get_trapq_position
+                        208     LOAD_FAST                       2: shutdown_time
+                        210     CALL_METHOD                     1
+                        212     UNPACK_SEQUENCE                 2
+                        214     STORE_FAST                      12: pos
+                        216     STORE_FAST                      13: velocity
+                        218     LOAD_FAST                       12: pos
+                        220     LOAD_CONST                      0: None
+                        222     IS_OP                           1 (is not)
+                        224     POP_JUMP_IF_FALSE               240
+                        226     LOAD_GLOBAL                     17: logging
+                        228     LOAD_METHOD                     18: info
+                        230     LOAD_CONST                      4: 'Requested toolhead position at shutdown time %.6f: %s'
+                        232     LOAD_FAST                       2: shutdown_time
+                        234     LOAD_FAST                       12: pos
+                        236     CALL_METHOD                     3
+                        238     POP_TOP                         
+                        240     LOAD_CONST                      0: None
+                        242     RETURN_VALUE                    
+                'PrinterMotionReport._dump_shutdown'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: _shutdown
+                    Arg Count: 1
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 1
+                    Stack Size: 3
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'printer'
+                        'get_reactor'
+                        'register_callback'
+                        '_dump_shutdown'
+                    [Var Names]
+                        'self'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                    [Disassembly]
+                        0       LOAD_FAST                       0: self
+                        2       LOAD_ATTR                       0: printer
+                        4       LOAD_METHOD                     1: get_reactor
+                        6       CALL_METHOD                     0
+                        8       LOAD_METHOD                     2: register_callback
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       3: _dump_shutdown
+                        14      CALL_METHOD                     1
+                        16      POP_TOP                         
+                        18      LOAD_CONST                      0: None
+                        20      RETURN_VALUE                    
+                'PrinterMotionReport._shutdown'
+                [Code]
+                    File Name: /extras/motion_report.py
+                    Object Name: get_status
+                    Arg Count: 2
+                    Pos Only Arg Count: 0
+                    KW Only Arg Count: 0
+                    Locals: 12
+                    Stack Size: 4
+                    Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+                    [Names]
+                        'next_status_time'
+                        'trapqs'
+                        'last_status'
+                        'STATUS_REFRESH_TIME'
+                        'printer'
+                        'lookup_object'
+                        'estimated_print_time'
+                        'get_trapq_position'
+                        'get'
+                        'get_extruder'
+                        'get_name'
+                        'dict'
+                        'Coord'
+                    [Var Names]
+                        'self'
+                        'eventtime'
+                        'xyzpos'
+                        'epos'
+                        'xyzvelocity'
+                        'evelocity'
+                        'mcu'
+                        'print_time'
+                        'pos'
+                        'velocity'
+                        'toolhead'
+                        'ehandler'
+                    [Free Vars]
+                    [Cell Vars]
+                    [Constants]
+                        None
+                        (
+                            0
+                            0
+                            0
+                        )
+                        (
+                            0
+                        )
+                        0
+                        'mcu'
+                        'toolhead'
+                        3
+                        0
+                        'live_position'
+                        'live_velocity'
+                        'live_extruder_velocity'
+                    [Disassembly]
+                        0       LOAD_FAST                       1: eventtime
+                        2       LOAD_FAST                       0: self
+                        4       LOAD_ATTR                       0: next_status_time
+                        6       COMPARE_OP                      0 (<)
+                        8       POP_JUMP_IF_TRUE                16
+                        10      LOAD_FAST                       0: self
+                        12      LOAD_ATTR                       1: trapqs
+                        14      POP_JUMP_IF_TRUE                22
+                        16      LOAD_FAST                       0: self
+                        18      LOAD_ATTR                       2: last_status
+                        20      RETURN_VALUE                    
+                        22      LOAD_FAST                       1: eventtime
+                        24      LOAD_GLOBAL                     3: STATUS_REFRESH_TIME
+                        26      BINARY_ADD                      
+                        28      LOAD_FAST                       0: self
+                        30      STORE_ATTR                      0: next_status_time
+                        32      LOAD_CONST                      1: (0, 0, 0)
+                        34      STORE_FAST                      2: xyzpos
+                        36      LOAD_CONST                      2: (0,)
+                        38      STORE_FAST                      3: epos
+                        40      LOAD_CONST                      3: 0
+                        42      DUP_TOP                         
+                        44      STORE_FAST                      4: xyzvelocity
+                        46      STORE_FAST                      5: evelocity
+                        48      LOAD_FAST                       0: self
+                        50      LOAD_ATTR                       4: printer
+                        52      LOAD_METHOD                     5: lookup_object
+                        54      LOAD_CONST                      4: 'mcu'
+                        56      CALL_METHOD                     1
+                        58      STORE_FAST                      6: mcu
+                        60      LOAD_FAST                       6: mcu
+                        62      LOAD_METHOD                     6: estimated_print_time
+                        64      LOAD_FAST                       1: eventtime
+                        66      CALL_METHOD                     1
+                        68      STORE_FAST                      7: print_time
+                        70      LOAD_FAST                       0: self
+                        72      LOAD_ATTR                       1: trapqs
+                        74      LOAD_CONST                      5: 'toolhead'
+                        76      BINARY_SUBSCR                   
+                        78      LOAD_METHOD                     7: get_trapq_position
+                        80      LOAD_FAST                       7: print_time
+                        82      CALL_METHOD                     1
+                        84      UNPACK_SEQUENCE                 2
+                        86      STORE_FAST                      8: pos
+                        88      STORE_FAST                      9: velocity
+                        90      LOAD_FAST                       8: pos
+                        92      LOAD_CONST                      0: None
+                        94      IS_OP                           1 (is not)
+                        96      POP_JUMP_IF_FALSE               114
+                        98      LOAD_FAST                       8: pos
+                        100     LOAD_CONST                      0: None
+                        102     LOAD_CONST                      6: 3
+                        104     BUILD_SLICE                     2
+                        106     BINARY_SUBSCR                   
+                        108     STORE_FAST                      2: xyzpos
+                        110     LOAD_FAST                       9: velocity
+                        112     STORE_FAST                      4: xyzvelocity
+                        114     LOAD_FAST                       0: self
+                        116     LOAD_ATTR                       4: printer
+                        118     LOAD_METHOD                     5: lookup_object
+                        120     LOAD_CONST                      5: 'toolhead'
+                        122     CALL_METHOD                     1
+                        124     STORE_FAST                      10: toolhead
+                        126     LOAD_FAST                       0: self
+                        128     LOAD_ATTR                       1: trapqs
+                        130     LOAD_METHOD                     8: get
+                        132     LOAD_FAST                       10: toolhead
+                        134     LOAD_METHOD                     9: get_extruder
+                        136     CALL_METHOD                     0
+                        138     LOAD_METHOD                     10: get_name
+                        140     CALL_METHOD                     0
+                        142     CALL_METHOD                     1
+                        144     STORE_FAST                      11: ehandler
+                        146     LOAD_FAST                       11: ehandler
+                        148     LOAD_CONST                      0: None
+                        150     IS_OP                           1 (is not)
+                        152     POP_JUMP_IF_FALSE               190
+                        154     LOAD_FAST                       11: ehandler
+                        156     LOAD_METHOD                     7: get_trapq_position
+                        158     LOAD_FAST                       7: print_time
+                        160     CALL_METHOD                     1
+                        162     UNPACK_SEQUENCE                 2
+                        164     STORE_FAST                      8: pos
+                        166     STORE_FAST                      9: velocity
+                        168     LOAD_FAST                       8: pos
+                        170     LOAD_CONST                      0: None
+                        172     IS_OP                           1 (is not)
+                        174     POP_JUMP_IF_FALSE               190
+                        176     LOAD_FAST                       8: pos
+                        178     LOAD_CONST                      7: 0
+                        180     BINARY_SUBSCR                   
+                        182     BUILD_TUPLE                     1
+                        184     STORE_FAST                      3: epos
+                        186     LOAD_FAST                       9: velocity
+                        188     STORE_FAST                      5: evelocity
+                        190     LOAD_GLOBAL                     11: dict
+                        192     LOAD_FAST                       0: self
+                        194     LOAD_ATTR                       2: last_status
+                        196     CALL_FUNCTION                   1
+                        198     LOAD_FAST                       0: self
+                        200     STORE_ATTR                      2: last_status
+                        202     LOAD_FAST                       10: toolhead
+                        204     LOAD_ATTR                       12: Coord
+                        206     LOAD_FAST                       2: xyzpos
+                        208     LOAD_FAST                       3: epos
+                        210     BINARY_ADD                      
+                        212     CALL_FUNCTION_EX                0
+                        214     LOAD_FAST                       0: self
+                        216     LOAD_ATTR                       2: last_status
+                        218     LOAD_CONST                      8: 'live_position'
+                        220     STORE_SUBSCR                    
+                        222     LOAD_FAST                       4: xyzvelocity
+                        224     LOAD_FAST                       0: self
+                        226     LOAD_ATTR                       2: last_status
+                        228     LOAD_CONST                      9: 'live_velocity'
+                        230     STORE_SUBSCR                    
+                        232     LOAD_FAST                       5: evelocity
+                        234     LOAD_FAST                       0: self
+                        236     LOAD_ATTR                       2: last_status
+                        238     LOAD_CONST                      10: 'live_extruder_velocity'
+                        240     STORE_SUBSCR                    
+                        242     LOAD_FAST                       0: self
+                        244     LOAD_ATTR                       2: last_status
+                        246     RETURN_VALUE                    
+                'PrinterMotionReport.get_status'
+                None
+            [Disassembly]
+                0       LOAD_NAME                       0: __name__
+                2       STORE_NAME                      1: __module__
+                4       LOAD_CONST                      0: 'PrinterMotionReport'
+                6       STORE_NAME                      2: __qualname__
+                8       LOAD_CONST                      1: <CODE> __init__
+                10      LOAD_CONST                      2: 'PrinterMotionReport.__init__'
+                12      MAKE_FUNCTION                   0
+                14      STORE_NAME                      3: __init__
+                16      LOAD_CONST                      3: <CODE> register_stepper
+                18      LOAD_CONST                      4: 'PrinterMotionReport.register_stepper'
+                20      MAKE_FUNCTION                   0
+                22      STORE_NAME                      4: register_stepper
+                24      LOAD_CONST                      5: <CODE> _connect
+                26      LOAD_CONST                      6: 'PrinterMotionReport._connect'
+                28      MAKE_FUNCTION                   0
+                30      STORE_NAME                      5: _connect
+                32      LOAD_CONST                      7: <CODE> _dump_shutdown
+                34      LOAD_CONST                      8: 'PrinterMotionReport._dump_shutdown'
+                36      MAKE_FUNCTION                   0
+                38      STORE_NAME                      6: _dump_shutdown
+                40      LOAD_CONST                      9: <CODE> _shutdown
+                42      LOAD_CONST                      10: 'PrinterMotionReport._shutdown'
+                44      MAKE_FUNCTION                   0
+                46      STORE_NAME                      7: _shutdown
+                48      LOAD_CONST                      11: <CODE> get_status
+                50      LOAD_CONST                      12: 'PrinterMotionReport.get_status'
+                52      MAKE_FUNCTION                   0
+                54      STORE_NAME                      8: get_status
+                56      LOAD_CONST                      13: None
+                58      RETURN_VALUE                    
+        'PrinterMotionReport'
+        [Code]
+            File Name: /extras/motion_report.py
+            Object Name: load_config
+            Arg Count: 1
+            Pos Only Arg Count: 0
+            KW Only Arg Count: 0
+            Locals: 1
+            Stack Size: 2
+            Flags: 0x00000043 (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)
+            [Names]
+                'PrinterMotionReport'
+            [Var Names]
+                'config'
+            [Free Vars]
+            [Cell Vars]
+            [Constants]
+                None
+            [Disassembly]
+                0       LOAD_GLOBAL                     0: PrinterMotionReport
+                2       LOAD_FAST                       0: config
+                4       CALL_FUNCTION                   1
+                6       RETURN_VALUE                    
+        'load_config'
+    [Disassembly]
+        0       LOAD_CONST                      0: 0
+        2       LOAD_CONST                      1: None
+        4       IMPORT_NAME                     0: logging
+        6       STORE_NAME                      0: logging
+        8       LOAD_CONST                      0: 0
+        10      LOAD_CONST                      1: None
+        12      IMPORT_NAME                     1: chelper
+        14      STORE_NAME                      1: chelper
+        16      LOAD_CONST                      2: 0.5
+        18      STORE_NAME                      2: API_UPDATE_INTERVAL
+        20      LOAD_BUILD_CLASS                
+        22      LOAD_CONST                      3: <CODE> APIDumpHelper
+        24      LOAD_CONST                      4: 'APIDumpHelper'
+        26      MAKE_FUNCTION                   0
+        28      LOAD_CONST                      4: 'APIDumpHelper'
+        30      CALL_FUNCTION                   2
+        32      STORE_NAME                      3: APIDumpHelper
+        34      LOAD_BUILD_CLASS                
+        36      LOAD_CONST                      5: <CODE> InternalDumpClient
+        38      LOAD_CONST                      6: 'InternalDumpClient'
+        40      MAKE_FUNCTION                   0
+        42      LOAD_CONST                      6: 'InternalDumpClient'
+        44      CALL_FUNCTION                   2
+        46      STORE_NAME                      4: InternalDumpClient
+        48      LOAD_BUILD_CLASS                
+        50      LOAD_CONST                      7: <CODE> DumpStepper
+        52      LOAD_CONST                      8: 'DumpStepper'
+        54      MAKE_FUNCTION                   0
+        56      LOAD_CONST                      8: 'DumpStepper'
+        58      CALL_FUNCTION                   2
+        60      STORE_NAME                      5: DumpStepper
+        62      LOAD_CONST                      9: 1e+16
+        64      STORE_NAME                      6: NEVER_TIME
+        66      LOAD_BUILD_CLASS                
+        68      LOAD_CONST                      10: <CODE> DumpTrapQ
+        70      LOAD_CONST                      11: 'DumpTrapQ'
+        72      MAKE_FUNCTION                   0
+        74      LOAD_CONST                      11: 'DumpTrapQ'
+        76      CALL_FUNCTION                   2
+        78      STORE_NAME                      7: DumpTrapQ
+        80      LOAD_CONST                      12: 0.25
+        82      STORE_NAME                      8: STATUS_REFRESH_TIME
+        84      LOAD_BUILD_CLASS                
+        86      LOAD_CONST                      13: <CODE> PrinterMotionReport
+        88      LOAD_CONST                      14: 'PrinterMotionReport'
+        90      MAKE_FUNCTION                   0
+        92      LOAD_CONST                      14: 'PrinterMotionReport'
+        94      CALL_FUNCTION                   2
+        96      STORE_NAME                      9: PrinterMotionReport
+        98      LOAD_CONST                      15: <CODE> load_config
+        100     LOAD_CONST                      16: 'load_config'
+        102     MAKE_FUNCTION                   0
+        104     STORE_NAME                      10: load_config
+        106     LOAD_CONST                      1: None
+        108     RETURN_VALUE                    

@@ -81,13 +81,13 @@
     "pyc": "proprietary/shims/base_info.pyc",
     "out": "decompiled/shims/base_info.py",
     "engine": "patched",
-    "raw_parses": true,
-    "repaired_parses": true,
+    "raw_parses": false,
+    "repaired_parses": false,
     "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "",
+    "warn": "[empty output -- decompiler crash/segfault]",
     "lines": 1
   },
   {
@@ -718,13 +718,13 @@
     "pyc": "proprietary/shims/motion_report.pyc",
     "out": "decompiled/shims/motion_report.py",
     "engine": "patched",
-    "raw_parses": true,
-    "repaired_parses": true,
+    "raw_parses": false,
+    "repaired_parses": false,
     "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "",
+    "warn": "[empty output -- decompiler crash/segfault]",
     "lines": 1
   },
   {
