@@ -1,8 +1,8 @@
 diff --git a/ASTNode.h b/ASTNode.h
-index 98760db..c711b2f 100644
+index 98760db..67899e2 100644
 --- a/ASTNode.h
 +++ b/ASTNode.h
-@@ -647,6 +647,12 @@ public:
+@@ -647,16 +647,26 @@ public:
      ASTComprehension(PycRef<ASTNode> result)
          : ASTNode(NODE_COMPREHENSION), m_result(std::move(result)) { }
  
@@ -14,17 +14,23 @@ index 98760db..c711b2f 100644
 +    PycRef<ASTNode> key() const { return m_key; }
      PycRef<ASTNode> result() const { return m_result; }
      generator_t generators() const { return m_generators; }
++    bool isGenExpr() const { return m_genexpr; }
++    void setGenExpr(bool g) { m_genexpr = g; }
  
-@@ -655,6 +661,7 @@ public:
+     void addGenerator(PycRef<ASTIterBlock> gen) {
+         m_generators.emplace_front(std::move(gen));
      }
  
  private:
 +    PycRef<ASTNode> m_key;    // non-null only for dict comprehensions
      PycRef<ASTNode> m_result;
      generator_t m_generators;
++    bool m_genexpr = false;   // true for generator expressions
+ 
+ };
  
 diff --git a/ASTree.cpp b/ASTree.cpp
-index f837152..d8e7625 100644
+index f837152..35ca0e7 100644
 --- a/ASTree.cpp
 +++ b/ASTree.cpp
 @@ -73,6 +73,35 @@ static void CheckIfExpr(FastStack& stack, PycRef<ASTBlock> curblock)
@@ -317,13 +323,14 @@ index f837152..d8e7625 100644
                  blocks.push(next.cast<ASTBlock>());
                  curblock = blocks.top();
  
-@@ -3052,7 +3270,12 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3052,7 +3270,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
          {
              PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
  
 -            pyc_output << "[ ";
 +            bool isDict = comp->key() != nullptr;
-+            pyc_output << (isDict ? "{ " : "[ ");
++            bool isGen = comp->isGenExpr();
++            pyc_output << (isGen ? "(" : isDict ? "{ " : "[ ");
 +            if (isDict) {
 +                print_src(comp->key(), mod, pyc_output);
 +                pyc_output << ": ";
@@ -331,16 +338,16 @@ index f837152..d8e7625 100644
              print_src(comp->result(), mod, pyc_output);
  
              for (const auto& gen : comp->generators()) {
-@@ -3065,7 +3288,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3065,7 +3289,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                      print_src(gen->condition(), mod, pyc_output);
                  }
              }
 -            pyc_output << " ]";
-+            pyc_output << (isDict ? " }" : " ]");
++            pyc_output << (isGen ? ")" : isDict ? " }" : " ]");
          }
          break;
      case ASTNode::NODE_MAP:
-@@ -3079,9 +3302,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3079,9 +3303,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                  else
                      pyc_output << ",\n";
                  start_line(cur_indent, pyc_output);

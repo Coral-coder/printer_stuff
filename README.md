@@ -41,16 +41,26 @@ its code objects are compared opcode-for-opcode against the *original* bytecode.
 bytecode-match ratio is the authoritative correctness gate — a high match is a *proof*
 that the recovered source round-trips to the same program.
 
-| Category (by bytecode match) | Count | Meaning |
-|------------------------------|------:|---------|
-| **faithful** (≥99.5%) | 35 | provably drop-in — recompiles to essentially identical bytecode |
-| **high** (90–99.5%) | 28 | correct structure, minor decompiler divergences |
-| **partial** (<90%) | 4 | recompiles but has real divergences — review vs disasm |
-| **broken** | 38 | won't recompile under 3.9 (decompiler bug) or empty (segfault) |
+Two gates measure this (`tools/reassemble.py` = tolerant ratio;
+`tools/bcdiff.py` = strict, byte-exact functional match ignoring only
+code-object metadata):
 
-Full per-module table: [`reassembled/FAITHFULNESS.md`](reassembled/FAITHFULNESS.md);
-decompile-side status: [`decompiled/STATUS.md`](decompiled/STATUS.md). Every non-clean
-module also ships a ground-truth disassembly under `decompiled/_disasm/`.
+| Gate | Count | Meaning |
+|------|------:|---------|
+| **byte-exact faithful** (`bcdiff`) | **24** | recompiles to *identical* bytecode — provably drop-in |
+| ≥99.5% near-faithful (`reassemble`) | 35 | one or two trivial divergences from exact |
+| recompiles at all (`ast_ok`) | 81 | valid 3.9 source |
+| won't recompile | 24 | residual decompiler bug (see below) |
+
+The 24 byte-exact count climbed from 13 during this pass via decompiler fixes
+(float constants, 3.9 `with`, and a conditional-return opcode-drop — see the
+`pycdc` commits). Full tables: [`reassembled/FAITHFULNESS.md`](reassembled/FAITHFULNESS.md),
+[`decompiled/STATUS.md`](decompiled/STATUS.md); every non-clean module also ships a
+ground-truth disassembly under `decompiled/_disasm/`.
+
+The residual non-faithful modules are blocked by known, catalogued decompiler
+bugs (generator-expression rendering, `except … as e` cleanup, some mis-nested
+control flow, two segfaults) — documented, not shipped as if complete.
 
 **Honest note on correctness:** pycdc — even patched — has *silent* correctness bugs on
 this obfuscated 3.9 bytecode (independently confirmed by an adversarial verification
