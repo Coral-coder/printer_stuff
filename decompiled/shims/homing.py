@@ -134,7 +134,8 @@ class HomingMove:
                 error = '{"code":"key22", "msg":"No trigger on %s after full movement", "values": ["%s"]}' % (name, name)
                 if name == 'z':
                     error = None
-                    self.prtouch_v3.z_full_movement_flag = True
+                    if self.prtouch_v3 is not None:
+                        self.prtouch_v3.z_full_movement_flag = True
                     logging.info('No trigger on z after full movement, set MOTOR_STALL_MODE DATA=2')
                     gcode = self.printer.lookup_object('gcode')
                     gcode.run_script_from_command('MOTOR_STALL_MODE DATA=2')
@@ -272,7 +273,8 @@ class Homing:
             hmove = HomingMove(self.printer, endstops)
             hmove.homing_move(homepos, hi.second_homing_speed)
             if hmove.check_no_movement() is not None and rails[0].get_name() == 'stepper_z':
-                hmove.prtouch_v3.z_full_movement_flag = True
+                if hmove.prtouch_v3 is not None:
+                    hmove.prtouch_v3.z_full_movement_flag = True
                 self.printer.send_event('homing:homing_move_end', hmove)
             _homez_info = self.get_step(endstops)
             if _homez_info is not None:
