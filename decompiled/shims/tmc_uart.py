@@ -265,6 +265,9 @@ class MCU_TMC_uart:
                     pass
                 None(None, None, None)
                 return None
+            None(None, None, None)
+        if not None:
+            pass
         raise self.printer.command_error('{"code":"key570", "msg":"Unable to write tmc uart \'%s\' register %s"}' % (self.name, reg_name))
 
 

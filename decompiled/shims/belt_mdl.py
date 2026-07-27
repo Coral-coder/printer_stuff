@@ -183,7 +183,6 @@ class BELT_MDL:
             self.adc_to_num(self.mdl.current_place_adc)
             continue
         return 1
-        continue
 
     
     def set_tension(self):

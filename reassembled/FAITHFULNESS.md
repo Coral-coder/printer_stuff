@@ -67,7 +67,7 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/idle_timeout.py` | high | 99.0% |  |
 | `shims/input_shaper.py` | high | 99.0% |  |
 | `shims/pause_resume.py` | high | 98.9% |  |
-| `shims/tmc_uart.py` | high | 98.9% |  |
+| `shims/tmc_uart.py` | high | 98.7% |  |
 | `shims/display_status.py` | high | 98.6% |  |
 | `shims/manual_probe.py` | high | 98.6% |  |
 | `shims/tuning_tower.py` | high | 98.6% |  |

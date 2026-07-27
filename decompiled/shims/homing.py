@@ -541,6 +541,19 @@ class PrinterHoming:
                 if motor_error_code.get(str(i), 0):
                     gcode.respond_info('%s motor_error_code...' % str(i))
                 return None
+        else:
+            except Exception:
+                err = None
+                
+                try:
+                    logging.exception(err)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                return 0
+
 
     
     def resume_adjustment(self):

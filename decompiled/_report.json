@@ -114,7 +114,7 @@
     "none_calls": 0,
     "unsupported": true,
     "warn": "Unsupported opcode: LOAD_ASSERTION_ERROR (101)",
-    "lines": 538
+    "lines": 537
   },
   {
     "pyc": "proprietary/shims/bl24c16f.pyc",
@@ -569,7 +569,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 621
+    "lines": 634
   },
   {
     "pyc": "proprietary/shims/homing_heaters.pyc",
@@ -1242,10 +1242,10 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 2,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!\nWarning: block stack is not empty!",
-    "lines": 271
+    "lines": 274
   },
   {
     "pyc": "proprietary/shims/tool.pyc",

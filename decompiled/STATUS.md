@@ -18,7 +18,7 @@
 | `gcode_macro.pyc` | partial | 316 |
 | `gcode_move.pyc` | partial | 497 |
 | `heater_bed.pyc` | partial | 199 |
-| `homing.pyc` | partial | 621 |
+| `homing.pyc` | partial | 634 |
 | `load_ai.pyc` | partial | 626 |
 | `motion_report.pyc` | partial | 403 |
 | `ms3200x.pyc` | partial | 564 |
@@ -31,14 +31,14 @@
 | `auto_addr_wrapper.pyc` | partial | 616 |
 | `gcode_arcs.pyc` | flagged (1x None-call) | 171 |
 | `lis2dw.pyc` | flagged (5x None-call) | 271 |
-| `tmc_uart.pyc` | flagged (1x None-call) | 271 |
+| `tmc_uart.pyc` | flagged (2x None-call) | 274 |
 | `__init__.pyc` | clean | 8 |
 | `adc_scaled.pyc` | clean | 97 |
 | `adc_temperature.pyc` | clean | 610 |
 | `adxl345.pyc` | clean | 558 |
 | `auto_addr.pyc` | clean | 10 |
 | `bed_mesh.pyc` | clean | 212 |
-| `belt_mdl.pyc` | clean | 538 |
+| `belt_mdl.pyc` | clean | 537 |
 | `bl24c16f.pyc` | clean | 282 |
 | `board_pins.pyc` | clean | 32 |
 | `box.pyc` | clean | 9 |

@@ -30,7 +30,7 @@ index 98760db..67899e2 100644
  };
  
 diff --git a/ASTree.cpp b/ASTree.cpp
-index f837152..d99e4d7 100644
+index f837152..7fae658 100644
 --- a/ASTree.cpp
 +++ b/ASTree.cpp
 @@ -73,6 +73,35 @@ static void CheckIfExpr(FastStack& stack, PycRef<ASTBlock> curblock)
@@ -356,7 +356,7 @@ index f837152..d99e4d7 100644
                  curblock->append(new ASTReturn(value));
  
                  if ((curblock->blktype() == ASTBlock::BLK_IF
-@@ -1954,7 +2190,23 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1954,7 +2190,41 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                      curblock = blocks.top();
                      curblock->append(prev.cast<ASTNode>());
  
@@ -378,10 +378,28 @@ index f837152..d99e4d7 100644
 +                                || pop_ == Pyc::JUMP_BACKWARD_A)
 +                            bc_next(source, mod, opcode, operand, pos);
 +                    }
++                } else if (pos < (int)code->code()->length()) {
++                    /* A `return` that is the last statement of a loop body is
++                     * followed by a dead loop-back JUMP_ABSOLUTE; pycdc would
++                     * render it as a stray `continue` *outside* the loop
++                     * (SyntaxError). Skip a backward JUMP_ABSOLUTE here -- it is
++                     * unreachable dead code after the unconditional return. */
++                    PycBuffer peek((char*)code->code()->value() + pos,
++                                   code->code()->length() - pos);
++                    int pop_ = 0, poarg_ = 0, ppos_ = 0;
++                    if (!peek.atEof())
++                        bc_next(peek, mod, pop_, poarg_, ppos_);
++                    if (pop_ == Pyc::JUMP_ABSOLUTE_A) {
++                        int tgt = poarg_;
++                        if (mod->verCompare(3, 10) >= 0)
++                            tgt *= sizeof(uint16_t);
++                        if (tgt < pos)
++                            bc_next(source, mod, opcode, operand, pos);
++                    }
                  }
              }
              break;
-@@ -2018,13 +2270,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2018,13 +2288,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              // Ignore
              break;
          case Pyc::SETUP_WITH_A:
@@ -399,7 +417,7 @@ index f837152..d99e4d7 100644
          case Pyc::BEFORE_WITH:
              /* Python 3.11: setup for with block; ignore. */
              break;
-@@ -2075,7 +2330,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2075,7 +2348,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              break;
          case Pyc::SETUP_FINALLY_A:
              {
@@ -416,7 +434,7 @@ index f837152..d99e4d7 100644
                  blocks.push(next.cast<ASTBlock>());
                  curblock = blocks.top();
  
-@@ -2578,7 +2841,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2578,7 +2859,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              {
                  PycRef<ASTNode> value = stack.top();
                  stack.pop();
@@ -433,7 +451,7 @@ index f837152..d99e4d7 100644
              }
              break;
          case Pyc::SETUP_ANNOTATIONS:
-@@ -3052,7 +3323,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3052,7 +3341,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
          {
              PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
  
@@ -448,7 +466,7 @@ index f837152..d99e4d7 100644
              print_src(comp->result(), mod, pyc_output);
  
              for (const auto& gen : comp->generators()) {
-@@ -3065,7 +3342,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3065,7 +3360,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                      print_src(gen->condition(), mod, pyc_output);
                  }
              }
@@ -457,7 +475,7 @@ index f837152..d99e4d7 100644
          }
          break;
      case ASTNode::NODE_MAP:
-@@ -3079,9 +3356,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3079,9 +3374,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                  else
                      pyc_output << ",\n";
                  start_line(cur_indent, pyc_output);
