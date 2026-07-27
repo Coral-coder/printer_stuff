@@ -96,17 +96,9 @@ def verify_no_manual_probe(printer):
     
     try:
         gcode.register_command('ACCEPT', 'dummy')
-    except printer.config_error:
-        e = None
-        
-        try:
-            raise gcode.error('Already in a manual Z probe. Use ABORT to abort it.')
-        finally:
-            e = None
-            del e
-        e = None
-        del e
-        return None
+    except printer.config_error as e:
+        raise gcode.error('Already in a manual Z probe. Use ABORT to abort it.')
+    gcode.register_command('ACCEPT', None)
 
 
 
