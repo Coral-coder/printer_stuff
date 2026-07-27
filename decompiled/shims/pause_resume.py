@@ -1,0 +1,225 @@
+# Source Generated with Decompyle++
+# File: pause_resume.pyc (Python 3.9)
+
+import os
+import json
+import logging
+
+class PauseResume:
+    
+    def __init__(self, config):
+        self.printer = config.get_printer()
+        self.reactor = self.printer.get_reactor()
+        self.gcode = self.printer.lookup_object('gcode')
+        self.recover_velocity = config.getfloat('recover_velocity', 50)
+        self.v_sd = None
+        self.is_paused = False
+        self.sd_paused = False
+        self.pause_command_sent = False
+        self.config = config
+        self.printer.register_event_handler('klippy:connect', self.handle_connect)
+        self.gcode.register_command('PAUSE', self.cmd_PAUSE, desc=self.cmd_PAUSE_help)
+        self.gcode.register_command('RESUME', self.cmd_RESUME, desc=self.cmd_RESUME_help)
+        self.gcode.register_command('CLEAR_PAUSE', self.cmd_CLEAR_PAUSE, desc=self.cmd_CLEAR_PAUSE_help)
+        self.gcode.register_command('CANCEL_PRINT', self.cmd_CANCEL_PRINT, desc=self.cmd_CANCEL_PRINT_help)
+        webhooks = self.printer.lookup_object('webhooks')
+        webhooks.register_endpoint('pause_resume/cancel_continue_print', self._handle_cancel_continue_print_request)
+        webhooks.register_endpoint('pause_resume/check_continue_print_state', self._check_power_loss_state_request)
+        webhooks.register_endpoint('pause_resume/set_print_first_layer', self._set_print_first_layer_request)
+        webhooks.register_endpoint('pause_resume/cancel', self._handle_cancel_request)
+        webhooks.register_endpoint('pause_resume/pause', self._handle_pause_request)
+        webhooks.register_endpoint('pause_resume/resume', self._handle_resume_request)
+        webhooks.register_endpoint('getBootLoaderVersion', self._getBootLoaderVersion)
+        webhooks.register_endpoint('fast/response', self._handle_fast_response)
+        webhooks.register_endpoint('fast/stop', self._handle_fast_stop)
+        self._setBootLoaderStateCmdOid = None
+        self.pause_start = False
+        self.motor_cancel_print_start = False
+        self.resume_err = False
+
+    
+    def handle_connect(self):
+        self.v_sd = self.printer.lookup_object('virtual_sdcard', None)
+
+    
+    def _getBootLoaderVersion(self, web_request):
+        mcu = self.printer.lookup_object('mcu')
+        result = mcu.get_constants().get('software_version', '')
+        web_request.send({
+            'software_version': result })
+        return {
+            'software_version': result }
+
+    
+    def _setBootLoaderState(self, web_request):
+        mcu = self.printer.lookup_object('mcu')
+        oid = mcu.create_oid() if not self._setBootLoaderStateCmdOid else self._setBootLoaderStateCmdOid
+        self._setBootLoaderStateCmdOid = oid
+        mcu.add_config_cmd('config_usrboot oid=%d' % (oid,))
+        result = mcu.lookup_query_command('jump_to_usrboot_query oid=%c', 'usrboot_ack oid=%c enter_boot_status=%c', oid=oid).send()
+        return {
+            'result': result }
+
+    
+    def _set_print_first_layer_request(self, web_request):
+        self.v_sd.first_layer_stop = False
+        self.v_sd.print_first_layer = False
+        response = {
+            'state': 'success' }
+        web_request.send(response)
+        return response
+
+    
+    def _check_power_loss_state_request(self, web_request):
+        call = call
+        import subprocess
+        response = {
+            'file_state': False,
+            'eeprom_state': False }
+    # WARNING: Decompyle incomplete
+
+    
+    def _handle_cancel_continue_print_request(self, web_request):
+        self.printer.send_event('v_sd:cancel_power_loss_update_filament_used')
+        reactor = self.printer.get_reactor()
+        reactor.pause(reactor.monotonic() + 0.2)
+        call = call
+        import subprocess
+        if os.path.exists(self.v_sd.print_file_name_path):
+            os.remove(self.v_sd.print_file_name_path)
+        if os.path.exists(self.gcode.exclude_object_info):
+            os.remove(self.gcode.exclude_object_info)
+        call('sync', shell=True)
+        bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
+        power_loss_switch = False
+        if os.path.exists(self.v_sd.user_print_refer_path):
+            with open(self.v_sd.user_print_refer_path, 'r') as f:
+                data = json.loads(f.read())
+                power_loss_switch = data.get('power_loss', { }).get('switch', False)
+                None(None, None, None)
+            with None:
+                if not None:
+                    pass
+        bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
+        if power_loss_switch and bl24c16f:
+            self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+            self.gcode.respond_info('cancel_continue_print:success')
+        print_stats = self.printer.lookup_object('print_stats', None)
+        if print_stats:
+            print_stats.power_loss = 0
+
+    
+    def _handle_cancel_request(self, web_request):
+        self.gcode.invoke_action()
+        self.gcode.fast_stop_complete()
+        self.gcode.run_script('CANCEL_PRINT')
+
+    
+    def _handle_pause_request(self, web_request):
+        self.gcode.run_script('PAUSE')
+
+    
+    def _handle_resume_request(self, web_request):
+        self.gcode.run_script('RESUME')
+
+    
+    def _handle_fast_stop(self, web_request):
+        self.gcode.fast_stop_complete()
+
+    
+    def _handle_fast_response(self, web_request):
+        self.gcode.invoke_action()
+
+    
+    def get_status(self, eventtime):
+        return {
+            'is_paused': self.is_paused,
+            'resume_err': self.resume_err }
+
+    
+    def is_sd_active(self):
+        if self.v_sd is not None:
+            pass
+        return self.v_sd.is_active()
+
+    
+    def send_pause_command(self):
+        if not self.pause_command_sent:
+            if self.is_sd_active():
+                self.sd_paused = True
+                self.v_sd.do_pause()
+            else:
+                self.sd_paused = False
+                self.gcode.respond_info('action:paused')
+            self.pause_command_sent = True
+
+    cmd_PAUSE_help = 'Pauses the current print'
+    
+    def cmd_PAUSE(self, gcmd):
+        if self.is_paused:
+            gcmd.respond_info('{"code":"key211", "msg": "Print already paused", "values": []}')
+            return None
+        None.send_pause_command()
+        self.gcode.run_script_from_command('SAVE_GCODE_STATE NAME=PAUSE_STATE')
+        self.is_paused = True
+
+    
+    def send_resume_command(self):
+        if self.sd_paused:
+            self.v_sd.do_resume_status = True
+            self.v_sd.do_resume()
+            self.sd_paused = False
+        else:
+            self.gcode.respond_info('action:resumed')
+        self.pause_command_sent = False
+
+    cmd_RESUME_help = 'Resumes the print from a pause'
+    
+    def cmd_RESUME(self, gcmd):
+        if not self.is_paused:
+            return gcmd.warning('{"code": "key16", "msg": "Print is not paused, resume aborted"}')
+        if None.resume_err == True:
+            logging.info('resume_err is True')
+            self.reactor.pause(self.reactor.monotonic() + 0.5)
+            self.resume_err = False
+            return None
+        velocity = None.get_float('VELOCITY', self.recover_velocity)
+        self.gcode.run_script_from_command('RESTORE_GCODE_STATE NAME=PAUSE_STATE MOVE=1 MOVE_SPEED=%.4f' % velocity)
+        self.send_resume_command()
+        self.is_paused = False
+        result = { }
+        if os.path.exists(self.v_sd.print_file_name_path):
+            with open(self.v_sd.print_file_name_path, 'r') as f:
+                result = json.loads(f.read())
+                result['variable_z_safe_pause'] = 0
+                None(None, None, None)
+            with None:
+                if not None:
+                    pass
+            with open(self.v_sd.print_file_name_path, 'w') as f:
+                f.write(json.dumps(result))
+                f.flush()
+                None(None, None, None)
+            with None:
+                if not None:
+                    pass
+
+    cmd_CLEAR_PAUSE_help = 'Clears the current paused state without resuming the print'
+    
+    def cmd_CLEAR_PAUSE(self, gcmd):
+        self.is_paused = self.pause_command_sent = False
+
+    cmd_CANCEL_PRINT_help = 'Cancel the current print'
+    
+    def cmd_CANCEL_PRINT(self, gcmd):
+        if self.is_sd_active() or self.sd_paused:
+            self.v_sd.do_cancel()
+        else:
+            gcmd.respond_info('action:cancel')
+        self.cmd_CLEAR_PAUSE(gcmd)
+
+
+
+def load_config(config):
+    return PauseResume(config)
+

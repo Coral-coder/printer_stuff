@@ -1,0 +1,173 @@
+# Source Generated with Decompyle++
+# File: z_align.pyc (Python 3.9)
+
+import mcu
+import logging
+import os
+from extras.base_info import base_dir
+MOTOR_ZDOWN_TIMEOUT = -10000
+MOTOR_PROTECT_ERROR = -10001
+
+class CommandError(Exception):
+    pass
+
+
+class Zalign:
+    error = CommandError
+    
+    def __init__(self, config):
+        self.config = config
+        self.printer = config.get_printer()
+        self.full_steps_pre_rev = 200
+        self.distance_ratio = self.config.getsection('z_align').getfloat('distance_ratio')
+        self.quickSpeed = self.config.getsection('z_align').getint('quick_speed')
+        self.slowSpeed = self.config.getsection('z_align').getint('slow_speed')
+        self.risingDist = self.config.getsection('z_align').getint('rising_dist')
+        self.safeDist = self.config.getsection('z_align').getint('safe_dist')
+        self.filterCnt = self.config.getsection('z_align').getint('filter_cnt')
+        self.timeout = self.config.getsection('z_align').getint('timeout')
+        self.retries = self.config.getsection('z_align').getint('retries')
+        self.retry_tolerance = self.config.getsection('z_align').getint('retry_tolerance')
+        self.endstop_pin_z = self.config.getsection('z_align').getlist('endstop_pin_z')
+        self.zd_up = self.config.getsection('z_align').getint('zd_up')
+        self.zes_untrig = self.config.getsection('z_align').getint('zes_untrig')
+        self.zmax_safe_pox_diff = self.config.getsection('z_align').getint('zmax_safe_pox_diff')
+        self.mcu = mcu.get_printer_mcu(self.printer, 'mcu')
+        self.oidz = self.mcu.create_oid()
+        self.mcu.register_config_callback(self._build_config)
+        self.cur_retries = 0
+        self.gcode = config.get_printer().lookup_object('gcode')
+        self.gcode.register_command('GET_MAX_Z', self.cmd_GET_MAX_Z)
+        self.gcode.register_command('ZDOWN', self.cmd_ZDOWN)
+        self.gcode.register_command('ZDOWN_SWITCH', self.cmd_ZDOWN_SWITCH)
+        self.gcode.register_command('ZDOWN_FORCE_STOP', self.cmd_ZDOWN_FORCE_STOP)
+        self.zdown_switch_enable = 0
+        self.z_align_force_stop = None
+        self.force_stop_flag = False
+        self.is_already_zodwn = False
+        self.endstop_pin_status = []
+        webhooks = self.printer.lookup_object('webhooks')
+        webhooks.register_endpoint('zdown_force_stop', self.zdown_force_stop)
+        self.real_zmax_path = os.path.join(base_dir, 'creality/userdata/config/real_zmax.json')
+        buttons = self.printer.load_object(config, 'buttons')
+        buttons.register_buttons(self.endstop_pin_z, self._button_handler)
+        self.pin_len = min(len(self.endstop_pin_z), 8)
+
+    
+    def get_switch_states(self, state):
+        return for i in (range(self.pin_len)):
+passcontinue1[0]
+
+    
+    def _button_handler(self, eventtime, state):
+        get_state = self.get_switch_states(state)
+        for i, val in enumerate(get_state):
+            if val != self.endstop_pin_status[i] or val == 1:
+                self.gcode.respond_info('z%s Photoelectric switch triggered' % (i + 1))
+                continue
+            self.gcode.respond_info('z%s Photoelectric switch not triggered' % (i + 1))
+        self.endstop_pin_status = get_state
+
+    
+    def zdown_force_stop(self, web_request):
+        self.force_stop_flag = True
+        self.gcode.respond_info('zdown_force_stop start')
+        self.z_align_force_stop.send([
+            self.oidz])
+        self.gcode.respond_info('zdown_force_stop end')
+        web_request.send({
+            'result': 'success' })
+
+    
+    def get_status(self, eventtime = (None,)):
+        return {
+            'endstop_pin_status': self.endstop_pin_status }
+
+    
+    def _build_config(self):
+        config_z_align = 'config_z_align oid=%d' % self.oidz
+        logging.info(config_z_align)
+        self.mcu.add_config_cmd(config_z_align)
+        for stepper_indx_z, endstop_pin in enumerate(self.endstop_pin_z):
+            step_pin_z = self.config.getsection(f'''stepper_z{stepper_indx_z}''' if stepper_indx_z > 0 else 'stepper_z').get('step_pin')
+            dir_pin_z = self.config.getsection(f'''stepper_z{stepper_indx_z}''' if stepper_indx_z > 0 else 'stepper_z').get('dir_pin')
+            if dir_pin_z.startswith('!'):
+                dir_pin_z = dir_pin_z[1:]
+            config_z_align_add_z = 'config_z_align_add oid=%d z_indx=%d zs_pin=%s zd_pin=%s zd_up=%d zes_pin=%s zes_untrig=%d' % (self.oidz, stepper_indx_z, step_pin_z, dir_pin_z, self.zd_up, endstop_pin, self.zes_untrig)
+            self.mcu.add_config_cmd(config_z_align_add_z)
+            logging.info('[stepper_indx_z=%d] config_z_align_add oid=%d z_indx=%d zs_pin=%s zd_pin=%s zd_up=%d zes_pin=%s zes_untrig=%d' % (stepper_indx_z, self.oidz, stepper_indx_z, step_pin_z, dir_pin_z, self.zd_up, endstop_pin, self.zes_untrig))
+        self.z_align_force_stop = self.mcu.lookup_command('z_align_force_stop oid=%c', cq=None)
+        for _ in range(len(self.endstop_pin_z)):
+            self.endstop_pin_status.append(0)
+
+    
+    def get_real_zmax_path(self):
+        return self.real_zmax_path
+
+    
+    def cmd_ZDOWN_FORCE_STOP(self, gcmd):
+        self.force_stop_flag = True
+        self.gcode.respond_info('zdown_force_stop start')
+        self.z_align_force_stop.send([
+            self.oidz])
+        self.gcode.respond_info('zdown_force_stop end')
+
+    
+    def cmd_ZDOWN_SWITCH(self, gcmd):
+        self.zdown_switch_enable = gcmd.get_int('ENABLE', default=1)
+
+    
+    def cmd_GET_MAX_Z(self, gcmd):
+        self.gcode.run_script_from_command('BED_MESH_CLEAR')
+        query_finetuning = self.mcu.lookup_query_command('query_finetuning oid=%c enable=%c speed=%u maxDist=%u filterCnt=%c', 'finetuning_status oid=%c flag=%i steps=%u', oid=self.oidz)
+        rotation_distance = self.config.getsection('stepper_z').getfloat('rotation_distance')
+        microsteps = self.config.getsection('stepper_z').getfloat('microsteps')
+        mcu_freq = self.mcu._serial.msgparser.get_constant_float('CLOCK_FREQ')
+        subdivision = self.full_steps_pre_rev * microsteps
+        step_distance = rotation_distance / subdivision
+        quickSpeedTicks = int((1 / self.quickSpeed / step_distance) * mcu_freq / 2)
+        enable = 1
+        maxDist = int(288000)
+        self.filterCnt
+        self.gcode.run_script_from_command('M84')
+        self.gcode.run_script_from_command('G28')
+        self.gcode.run_script_from_command('G4 P3000')
+        query_finetuning.send([
+            self.oidz,
+            enable,
+            quickSpeedTicks,
+            maxDist,
+            self.filterCnt])
+        gcode_move = self.printer.lookup_object('gcode_move')
+        cur_z_pos = gcode_move.last_position[2]
+        reactor = self.printer.get_reactor()
+        self.mcu._serial.finetuning_status = { }
+        curtime = reactor.monotonic()
+        steps = 0
+        self.gcode.respond_info(str(self.mcu._serial.finetuning_status))
+        nowtime = reactor.monotonic()
+        usetime = nowtime - curtime
+        flag = self.mcu._serial.finetuning_status.get('flag', 0)
+        if flag == 1:
+            steps = int(self.mcu._serial.finetuning_status.get('steps', 0))
+        
+        if flag == 2:
+            self.gcode.respond_info('finetuning_status mcu timeout')
+        
+        if usetime > self.timeout:
+            self.gcode.respond_info('finetuning_status 30s timeout')
+        else:
+            reactor.pause(reactor.monotonic() + 1)
+        self.gcode.respond_info('finetuning_status result: %s+%s=%s' % (cur_z_pos, steps * 0.0025 / 2, steps * 0.0025 / 2 + 5))
+        toolhead = self.printer.lookup_object('toolhead')
+        now_pos = toolhead.get_position()
+        now_pos[2] = self.config.getsection('stepper_z').getfloat('position_max')
+        toolhead.set_position(now_pos, homing_axes=(2,))
+        now_pos = toolhead.get_position()
+        toolhead.set_position(now_pos, homing_axes=(2,))
+        now_pos[2] = now_pos[2] - 306
+        gcmd = 'G1 F%d X%.3f Y%.3f Z%.3f' % (1800, now_pos[0], now_pos[1], now_pos[2])
+        self.gcode.run_script_from_command(gcmd)
+        self.gcode.run_script_from_command('G28 Z')
+
+    

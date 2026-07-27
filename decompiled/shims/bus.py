@@ -1,0 +1,261 @@
+# Source Generated with Decompyle++
+# File: bus.pyc (Python 3.9)
+
+import mcu
+
+def resolve_bus_name(mcu, param, bus):
+    enumerations = mcu.get_enumerations()
+    enums = enumerations.get(param, enumerations.get('bus'))
+    if enums is None:
+        if bus is None:
+            return 0
+        return None
+    ppins = None.get_printer().lookup_object('pins')
+    mcu_name = mcu.get_name()
+    if bus is None:
+        rev_enums = (lambda .0: pass# WARNING: Decompyle incomplete
+)(enums.items())
+        if 0 not in rev_enums:
+            raise ppins.error('{"code": "key310", "msg": "Must specify %s on mcu \'%s\'", "values":["%s", "%s"]}' % (param, mcu_name, param, mcu_name))
+        bus = rev_enums[0]
+    if bus not in enums:
+        raise ppins.error('{"code": "key311", "msg": "Unknown %s \'%s\'", "values":["%s", "%s"]}' % (param, bus, param, bus))
+    constants = mcu.get_constants()
+    reserve_pins = constants.get('BUS_PINS_%s' % (bus,), None)
+    pin_resolver = ppins.get_pin_resolver(mcu_name)
+    if reserve_pins is not None:
+        for pin in reserve_pins.split(','):
+            pin_resolver.reserve_pin(pin, bus)
+    return bus
+
+
+class MCU_SPI:
+    
+    def __init__(self, mcu, bus, pin, mode, speed, sw_pins, cs_active_high = (None, False)):
+        self.mcu = mcu
+        self.bus = bus
+        self.oid = mcu.create_oid()
+        if pin is None:
+            mcu.add_config_cmd('config_spi_without_cs oid=%d' % (self.oid,))
+        else:
+            mcu.add_config_cmd('config_spi oid=%d pin=%s cs_active_high=%d' % (self.oid, pin, cs_active_high))
+        if sw_pins is not None:
+            self.config_fmt = 'spi_set_software_bus oid=%d miso_pin=%s mosi_pin=%s sclk_pin=%s mode=%d rate=%d' % (self.oid, sw_pins[0], sw_pins[1], sw_pins[2], mode, speed)
+        else:
+            self.config_fmt = 'spi_set_bus oid=%d spi_bus=%%s mode=%d rate=%d' % (self.oid, mode, speed)
+        self.cmd_queue = mcu.alloc_command_queue()
+        mcu.register_config_callback(self.build_config)
+        self.spi_send_cmd = None
+        self.spi_transfer_cmd = None
+
+    
+    def setup_shutdown_msg(self, shutdown_seq):
+        shutdown_msg = ''.join((lambda .0: [ '%02x' % (x,) for x in .0 ])(shutdown_seq))
+        self.mcu.add_config_cmd('config_spi_shutdown oid=%d spi_oid=%d shutdown_msg=%s' % (self.mcu.create_oid(), self.oid, shutdown_msg))
+
+    
+    def get_oid(self):
+        return self.oid
+
+    
+    def get_mcu(self):
+        return self.mcu
+
+    
+    def get_command_queue(self):
+        return self.cmd_queue
+
+    
+    def build_config(self):
+        if '%' in self.config_fmt:
+            bus = resolve_bus_name(self.mcu, 'spi_bus', self.bus)
+            self.config_fmt = self.config_fmt % (bus,)
+        self.mcu.add_config_cmd(self.config_fmt)
+        self.spi_send_cmd = self.mcu.lookup_command('spi_send oid=%c data=%*s', cq=self.cmd_queue)
+        self.spi_transfer_cmd = self.mcu.lookup_query_command('spi_transfer oid=%c data=%*s', 'spi_transfer_response oid=%c response=%*s', oid=self.oid, cq=self.cmd_queue)
+
+    
+    def spi_send(self, data, minclock, reqclock = (0, 0)):
+        if self.spi_send_cmd is None:
+            data_msg = ''.join((lambda .0: [ '%02x' % (x,) for x in .0 ])(data))
+            self.mcu.add_config_cmd('spi_send oid=%d data=%s' % (self.oid, data_msg), is_init=True)
+            return None
+        None.spi_send_cmd.send([
+            self.oid,
+            data], minclock=minclock, reqclock=reqclock)
+
+    
+    def spi_transfer(self, data, minclock, reqclock = (0, 0)):
+        return self.spi_transfer_cmd.send([
+            self.oid,
+            data], minclock=minclock, reqclock=reqclock)
+
+    
+    def spi_transfer_with_preface(self, preface_data, data, minclock, reqclock = (0, 0)):
+        return self.spi_transfer_cmd.send_with_preface(self.spi_send_cmd, [
+            self.oid,
+            preface_data], [
+            self.oid,
+            data], minclock=minclock, reqclock=reqclock)
+
+
+
+def MCU_SPI_from_config(config, mode, pin_option, default_speed, share_type, cs_active_high = ('cs_pin', 100000, None, False)):
+    ppins = config.get_printer().lookup_object('pins')
+    cs_pin = config.get(pin_option)
+    cs_pin_params = ppins.lookup_pin(cs_pin, share_type=share_type)
+    pin = cs_pin_params['pin']
+    if pin == 'None':
+        ppins.reset_pin_sharing(cs_pin_params)
+        pin = None
+    mcu = cs_pin_params['chip']
+    speed = config.getint('spi_speed', default_speed, minval=100000)
+    if config.get('spi_software_sclk_pin', None) is not None:
+        sw_pin_names = (lambda .0: [ 'spi_software_%s_pin' % (name,) for name in .0 ])(('miso', 'mosi', 'sclk'))
+        sw_pin_params = [ ppins.lookup_pin(config.get(name), share_type=name) for name in (sw_pin_names) ]
+        for pin_params in sw_pin_params:
+            if pin_params['chip'] != mcu:
+                raise ppins.error('{"code":"key231", "msg":"%s spi pins must be on same mcu", "values": ["%s"]}' % (config.get_name(), config.get_name()))
+        sw_pins = tuple((lambda .0: [ pin_params['pin'] for pin_params in .0 ])(sw_pin_params))
+        bus = None
+    else:
+        bus = config.get('spi_bus', None)
+        sw_pins = None
+    return MCU_SPI(mcu, bus, pin, mode, speed, sw_pins, cs_active_high)
+
+
+class MCU_I2C:
+    
+    def __init__(self, mcu, bus, addr, speed, sw_pins = (None,)):
+        self.mcu = mcu
+        self.bus = bus
+        self.i2c_address = addr
+        self.oid = self.mcu.create_oid()
+        self.speed = speed
+        self.config_fmt_ticks = None
+        mcu.add_config_cmd('config_i2c oid=%d' % (self.oid,))
+        if sw_pins is not None:
+            self.config_fmt = 'i2c_set_software_bus oid=%d scl_pin=%s sda_pin=%s rate=%d address=%d' % (self.oid, sw_pins[0], sw_pins[1], speed, addr)
+            self.config_fmt_ticks = 'i2c_set_sw_bus oid=%d scl_pin=%s sda_pin=%s pulse_ticks=%%d address=%d' % (self.oid, sw_pins[0], sw_pins[1], addr)
+        else:
+            self.config_fmt = 'i2c_set_bus oid=%d i2c_bus=%%s rate=%d address=%d' % (self.oid, speed, addr)
+        self.cmd_queue = self.mcu.alloc_command_queue()
+        self.mcu.register_config_callback(self.build_config)
+        self.i2c_write_cmd = None
+        self.i2c_read_cmd = None
+
+    
+    def get_oid(self):
+        return self.oid
+
+    
+    def get_mcu(self):
+        return self.mcu
+
+    
+    def get_i2c_address(self):
+        return self.i2c_address
+
+    
+    def get_command_queue(self):
+        return self.cmd_queue
+
+    
+    def build_config(self):
+        if '%' in self.config_fmt:
+            bus = resolve_bus_name(self.mcu, 'i2c_bus', self.bus)
+            self.config_fmt = self.config_fmt % (bus,)
+        if self.config_fmt_ticks and self.mcu.try_lookup_command('i2c_set_sw_bus oid=%c scl_pin=%u sda_pin=%u pulse_ticks=%u address=%u'):
+            pulse_ticks = self.mcu.seconds_to_clock(1 / self.speed / 2)
+            self.config_fmt = self.config_fmt_ticks % (pulse_ticks,)
+        self.mcu.add_config_cmd(self.config_fmt)
+        self.i2c_write_cmd = self.mcu.lookup_command('i2c_write oid=%c data=%*s', cq=self.cmd_queue)
+        self.i2c_read_cmd = self.mcu.lookup_query_command('i2c_read oid=%c reg=%*s read_len=%u', 'i2c_read_response oid=%c response=%*s', oid=self.oid, cq=self.cmd_queue)
+
+    
+    def i2c_write(self, data, minclock, reqclock = (0, 0)):
+        if self.i2c_write_cmd is None:
+            data_msg = ''.join((lambda .0: [ '%02x' % (x,) for x in .0 ])(data))
+            self.mcu.add_config_cmd('i2c_write oid=%d data=%s' % (self.oid, data_msg), is_init=True)
+            return None
+        None.i2c_write_cmd.send([
+            self.oid,
+            data], minclock=minclock, reqclock=reqclock)
+
+    
+    def i2c_write_wait_ack(self, data, minclock, reqclock = (0, 0)):
+        self.i2c_write_cmd.send_wait_ack([
+            self.oid,
+            data], minclock=minclock, reqclock=reqclock)
+
+    
+    def i2c_read(self, write, read_len, retry = (True,)):
+        return self.i2c_read_cmd.send([
+            self.oid,
+            write,
+            read_len], retry)
+
+
+
+def MCU_I2C_from_config(config, default_addr, default_speed = (None, 100000)):
+    printer = config.get_printer()
+    i2c_mcu = mcu.get_printer_mcu(printer, config.get('i2c_mcu', 'mcu'))
+    speed = config.getint('i2c_speed', default_speed, minval=100000)
+    if default_addr is None:
+        addr = config.getint('i2c_address', minval=0, maxval=127)
+    else:
+        addr = config.getint('i2c_address', default_addr, minval=0, maxval=127)
+    ppins = config.get_printer().lookup_object('pins')
+    if config.get('i2c_software_scl_pin', None) is not None:
+        sw_pin_names = (lambda .0: [ 'i2c_software_%s_pin' % (name,) for name in .0 ])(('scl', 'sda'))
+        sw_pin_params = [ ppins.lookup_pin(config.get(name), share_type=name) for name in (sw_pin_names) ]
+        sw_pins = tuple((lambda .0: [ pin_params['pin'] for pin_params in .0 ])(sw_pin_params))
+        bus = None
+    else:
+        bus = config.get('i2c_bus', None)
+        sw_pins = None
+    return MCU_I2C(i2c_mcu, bus, addr, speed, sw_pins)
+
+
+class MCU_bus_digital_out:
+    
+    def __init__(self, mcu, pin_desc, cmd_queue, value = (None, 0)):
+        self.mcu = mcu
+        self.oid = mcu.create_oid()
+        ppins = mcu.get_printer().lookup_object('pins')
+        pin_params = ppins.lookup_pin(pin_desc)
+        if pin_params['chip'] is not mcu:
+            raise ppins.error('Pin %s must be on mcu %s' % (pin_desc, mcu.get_name()))
+        mcu.add_config_cmd('config_digital_out oid=%d pin=%s value=%d default_value=%d max_duration=%d' % (self.oid, pin_params['pin'], value, value, 0))
+        mcu.register_config_callback(self.build_config)
+        if cmd_queue is None:
+            cmd_queue = mcu.alloc_command_queue()
+        self.cmd_queue = cmd_queue
+        self.update_pin_cmd = None
+
+    
+    def get_oid(self):
+        return self.oid
+
+    
+    def get_mcu(self):
+        return self.mcu
+
+    
+    def get_command_queue(self):
+        return self.cmd_queue
+
+    
+    def build_config(self):
+        self.update_pin_cmd = self.mcu.lookup_command('update_digital_out oid=%c value=%c', cq=self.cmd_queue)
+
+    
+    def update_digital_out(self, value, minclock, reqclock = (0, 0)):
+        if self.update_pin_cmd is None:
+            self.mcu.add_config_cmd('update_digital_out oid=%c value=%c' % (self.oid, not (not value)))
+            return None
+        None.update_pin_cmd.send([
+            self.oid,
+            not (not value)], minclock=minclock, reqclock=reqclock)
+
+
