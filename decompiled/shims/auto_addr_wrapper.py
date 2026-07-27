@@ -45,16 +45,40 @@ TIMEOUT_SHORT_TIME = 0.05
 TIMEOUT_MEDIUM_TIME = 0.1
 TIMEOUT_LONG_TIME = 1.0
 cmd_timeout = {
-    CMD_LOADER_TO_APP: TIMEOUT_SHORT_TIME,
-    CMD_ONLINE_CHECK: TIMEOUT_MEDIUM_TIME,
-    CMD_GET_ADDR_TABLE: TIMEOUT_SHORT_TIME,
+    CMD_GET_SLAVE_INFO: TIMEOUT_LONG_TIME,
     CMD_SET_SLAVE_ADDR: TIMEOUT_SHORT_TIME,
-    CMD_GET_SLAVE_INFO: TIMEOUT_LONG_TIME }
+    CMD_GET_ADDR_TABLE: TIMEOUT_SHORT_TIME,
+    CMD_ONLINE_CHECK: TIMEOUT_MEDIUM_TIME,
+    CMD_LOADER_TO_APP: TIMEOUT_SHORT_TIME }
 name_map = {
     DEV_TYPE_MB: 'mb_addr_table_uniids' }
-DataPackage = dataclass(<NODE:12>)
-FcAckData = dataclass(<NODE:12>)
-AddrManager = dataclass(<NODE:12>)
+@dataclass
+class DataPackage:
+    head: int
+    slave_addr: int
+    length: int
+    status: int
+    function_code: int
+    data: List[Union[int, float]]
+    crc: int
+
+
+@dataclass
+class FcAckData:
+    dev_type: int
+    mode: int
+    uniid: List[int]
+
+
+@dataclass
+class AddrManager:
+    addr: int
+    uniid: List[int]
+    mapped: int
+    online: int
+    acked: int
+    lost_cnt: int
+    mode: int
 addr_manager_table_mb = [
     AddrManager(1, [
         0], 0, 0, 0, 0, 0),
@@ -120,25 +144,13 @@ class AutoAddrWrapper:
         if self.config.get(name, None) is not None:
             
             def custom_int_parser(value):
-                
                 try:
                     if value.startswith('0x') or value.startswith('0X'):
-                        pass
-                return None
-                return int(value)
-                except ValueError:
-                    e = None
-                    
-                    try:
-                        raise ValueError(f'''Invalid literal for int with base 10 or 16: \'{value}\''''), e
-                    finally:
-                        e = None
-                        del e
-                    e = None
-                    del e
-                    return None
-
-
+                        return int(value, 16)
+                    else:
+                        return int(value)
+                except ValueError as e:
+                    raise ValueError(f"Invalid literal for int with base 10 or 16: '{value}'") from e
 
             uniids = self.config.getlists(name, seps=(',', '\n'), parser=custom_int_parser)
             if len(uniids) != dev_table_map.size:
@@ -187,34 +199,37 @@ class AutoAddrWrapper:
     def addr_allocate(self, uniid, addr_manager_table):
         size = len(addr_manager_table)
         for i in range(size):
-            if addr_manager_table[i].mapped == 1 or addr_manager_table[i].online == ONLINE_STATE_OFFLINE or addr_manager_table[i].online == ONLINE_STATE_INIT or uniid == addr_manager_table[i].uniid:
+            if addr_manager_table[i].mapped == 1:
+                if addr_manager_table[i].online == ONLINE_STATE_OFFLINE or addr_manager_table[i].online == ONLINE_STATE_INIT:
+                    if uniid == addr_manager_table[i].uniid:
+                        addr_manager_table[i].mapped = 1
+                        addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
+                        self.dprintf('alloc method 1 addr %d' % addr_manager_table[i].addr)
+                        return addr_manager_table[i].addr
+                elif addr_manager_table[i].online == ONLINE_STATE_ONLINE and uniid == addr_manager_table[i].uniid:
+                    self.dprintf('Error: addr already allocated, but broadcast ack happened, maybe slave restarted, clear the arcked flag and try to allocate the addr again')
+                    addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
+                    addr_manager_table[i].acked = 0
+                    return -1
+        for i in range(size):
+            if addr_manager_table[i].mapped == 0:
                 addr_manager_table[i].mapped = 1
                 addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
-                self.dprintf('alloc method 1 addr %d' % addr_manager_table[i].addr)
+                addr_manager_table[i].uniid = uniid
+                self.uniid_changed = True
+                self.dprintf('alloc method 2 addr %d' % addr_manager_table[i].addr)
                 return addr_manager_table[i].addr
-            if addr_manager_table[i].online == ONLINE_STATE_ONLINE and uniid == addr_manager_table[i].uniid:
-                self.dprintf('Error: addr already allocated, but broadcast ack happened, maybe slave restarted, clear the arcked flag and try to allocate the addr again')
-                addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
-                addr_manager_table[i].acked = 0
-                return -1
-            for i in range(size):
-                if addr_manager_table[i].mapped == 0:
-                    addr_manager_table[i].mapped = 1
-                    addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
-                    addr_manager_table[i].uniid = uniid
-                    self.uniid_changed = True
-                    self.dprintf('alloc method 2 addr %d' % addr_manager_table[i].addr)
-                    return addr_manager_table[i].addr
-                for i in range(size):
-                    if not addr_manager_table[i].mapped == 1 or addr_manager_table[i].online == ONLINE_STATE_OFFLINE:
-                        if addr_manager_table[i].online == ONLINE_STATE_INIT and addr_manager_table[i].uniid != uniid:
-                            addr_manager_table[i].uniid = uniid
-                            addr_manager_table[i].mapped = 1
-                            addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
-                            self.uniid_changed = True
-                            self.dprintf('alloc method 3 addr %d' % addr_manager_table[i].addr)
-                            return addr_manager_table[i].addr
-                        return -1
+        for i in range(size):
+            if addr_manager_table[i].mapped == 1:
+                if addr_manager_table[i].online == ONLINE_STATE_OFFLINE or addr_manager_table[i].online == ONLINE_STATE_INIT:
+                    if addr_manager_table[i].uniid != uniid:
+                        addr_manager_table[i].uniid = uniid
+                        addr_manager_table[i].mapped = 1
+                        addr_manager_table[i].online = ONLINE_STATE_WAIT_FOR_ACK
+                        self.uniid_changed = True
+                        self.dprintf('alloc method 3 addr %d' % addr_manager_table[i].addr)
+                        return addr_manager_table[i].addr
+        return -1
 
     
     def print_buff(self, buff):
@@ -248,16 +263,17 @@ class AutoAddrWrapper:
 
     
     def is_dev_type_valid(self, dev_type):
-        if dev_type == DEV_TYPE_BTM and dev_type == DEV_TYPE_CLM or dev_type == DEV_TYPE_MB:
+        if dev_type == DEV_TYPE_BTM or dev_type == DEV_TYPE_CLM or dev_type == DEV_TYPE_MB:
             return 1
-        return 0
+        else:
+            return 0
 
     
     def function_code_cb(self, package):
         function_code = package.function_code
         size = 0
         ack_data = None
-        if function_code == CMD_SET_SLAVE_ADDR and function_code == CMD_GET_SLAVE_INFO and function_code == CMD_ONLINE_CHECK or function_code == CMD_GET_ADDR_TABLE:
+        if function_code == CMD_SET_SLAVE_ADDR or function_code == CMD_GET_SLAVE_INFO or function_code == CMD_ONLINE_CHECK or function_code == CMD_GET_ADDR_TABLE:
             ack_data = FcAckData(package.data[0], package.data[1], package.data[2:])
         if ack_data is not None:
             addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
@@ -268,63 +284,67 @@ class AutoAddrWrapper:
                     addr_manager_table[i].mode = ack_data.mode
                     if ack_data.mode == MODE_LOADER:
                         self.dprintf('addr 0x%02X in loader mode' % addr_manager_table[i].addr)
-            continue
-        if function_code == CMD_SET_SLAVE_ADDR or self.is_dev_type_valid(ack_data.dev_type):
-            addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
-            size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
-            addr = package.slave_addr
-            uniid = ack_data.uniid
-            self.dprintf('received addr %d uniid %s' % (addr, uniid))
-            for i in range(size):
-                self.dprintf('table[%d]: online %d addr %d uniid %s acked %d' % (i, addr_manager_table[i].online, addr_manager_table[i].addr, addr_manager_table[i].uniid, addr_manager_table[i].acked))
-                if not addr_manager_table[i].online == ONLINE_STATE_INIT:
-                    if addr_manager_table[i].online == ONLINE_STATE_WAIT_FOR_ACK and addr_manager_table[i].addr == addr and addr_manager_table[i].uniid == uniid and addr_manager_table[i].acked == 0:
+                    break
+        if function_code == CMD_SET_SLAVE_ADDR:
+            if self.is_dev_type_valid(ack_data.dev_type):
+                addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
+                size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
+                addr = package.slave_addr
+                uniid = ack_data.uniid
+                self.dprintf('received addr %d uniid %s' % (addr, uniid))
+                for i in range(size):
+                    self.dprintf('table[%d]: online %d addr %d uniid %s acked %d' % (i, addr_manager_table[i].online, addr_manager_table[i].addr, addr_manager_table[i].uniid, addr_manager_table[i].acked))
+                    if (addr_manager_table[i].online == ONLINE_STATE_INIT or addr_manager_table[i].online == ONLINE_STATE_WAIT_FOR_ACK) and addr_manager_table[i].addr == addr and addr_manager_table[i].uniid == uniid and addr_manager_table[i].acked == 0:
                         addr_manager_table[i].acked = 1
                         addr_manager_table[i].online = ONLINE_STATE_ONLINE
                         addr_manager_table[i].lost_cnt = 0
                         self.dprintf('addr %d acked' % addr_manager_table[i].addr)
-                    
-                elif function_code == CMD_GET_SLAVE_INFO or self.is_dev_type_valid(ack_data.dev_type):
-                    self.dprintf('dev_type: %d' % ack_data.dev_type)
-                    self.dprintf('mode: %d' % ack_data.mode)
-                    self.dprintf('uniid:')
-                    self.print_buff(ack_data.uniid)
-                    addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
-                    size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
-                    addr = self.addr_allocate(ack_data.uniid, addr_manager_table)
-                    self.dprintf('addr: %d' % addr)
-                elif function_code == CMD_ONLINE_CHECK or self.is_dev_type_valid(ack_data.dev_type):
-                    self.dprintf('uniid:')
-                    self.print_buff(ack_data.uniid)
-                    addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
-                    size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
-                    addr = package.slave_addr
-                    uniid = ack_data.uniid
-                    for i in range(size):
-                        if addr_manager_table[i].addr == addr and addr_manager_table[i].uniid == uniid:
-                            addr_manager_table[i].acked = 1
-                            addr_manager_table[i].online = ONLINE_STATE_ONLINE
-                            addr_manager_table[i].lost_cnt = 0
-                            self.dprintf('addr %d acked' % addr_manager_table[i].addr)
-                        
-                    if function_code == CMD_GET_ADDR_TABLE or self.is_dev_type_valid(ack_data.dev_type):
-                        self.dprintf('uniid:')
-                        self.print_buff(ack_data.uniid)
-                        addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
-                        size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
-                        addr = package.slave_addr
-                        uniid = ack_data.uniid
-                        for i in range(size):
-                            if addr_manager_table[i].addr == addr:
-                                addr_manager_table[i].uniid = uniid
-                                addr_manager_table[i].mapped = 1
-                                addr_manager_table[i].acked = 1
-                                addr_manager_table[i].online = ONLINE_STATE_ONLINE
-                                addr_manager_table[i].lost_cnt = 0
-                                self.uniid_changed = True
-                                self.dprintf('addr %d acked' % addr_manager_table[i].addr)
-                            
-                        self.dprintf('unknown function code: %d' % function_code)
+                        break
+        elif function_code == CMD_GET_SLAVE_INFO:
+            if self.is_dev_type_valid(ack_data.dev_type):
+                self.dprintf('dev_type: %d' % ack_data.dev_type)
+                self.dprintf('mode: %d' % ack_data.mode)
+                self.dprintf('uniid:')
+                self.print_buff(ack_data.uniid)
+                addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
+                size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
+                addr = self.addr_allocate(ack_data.uniid, addr_manager_table)
+                self.dprintf('addr: %d' % addr)
+        elif function_code == CMD_ONLINE_CHECK:
+            if self.is_dev_type_valid(ack_data.dev_type):
+                self.dprintf('uniid:')
+                self.print_buff(ack_data.uniid)
+                addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
+                size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
+                addr = package.slave_addr
+                uniid = ack_data.uniid
+                for i in range(size):
+                    if addr_manager_table[i].addr == addr and addr_manager_table[i].uniid == uniid:
+                        addr_manager_table[i].acked = 1
+                        addr_manager_table[i].online = ONLINE_STATE_ONLINE
+                        addr_manager_table[i].lost_cnt = 0
+                        self.dprintf('addr %d acked' % addr_manager_table[i].addr)
+                        break
+        elif function_code == CMD_GET_ADDR_TABLE:
+            if self.is_dev_type_valid(ack_data.dev_type):
+                self.dprintf('uniid:')
+                self.print_buff(ack_data.uniid)
+                addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
+                size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
+                addr = package.slave_addr
+                uniid = ack_data.uniid
+                for i in range(size):
+                    if addr_manager_table[i].addr == addr:
+                        addr_manager_table[i].uniid = uniid
+                        addr_manager_table[i].mapped = 1
+                        addr_manager_table[i].acked = 1
+                        addr_manager_table[i].online = ONLINE_STATE_ONLINE
+                        addr_manager_table[i].lost_cnt = 0
+                        self.uniid_changed = True
+                        self.dprintf('addr %d acked' % addr_manager_table[i].addr)
+                        break
+        else:
+            self.dprintf('unknown function code: %d' % function_code)
         if self.uniid_changed:
             self.uniid_changed = False
             self.save_addr_table_uniids(dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET])
@@ -414,19 +434,17 @@ class AutoAddrWrapper:
             for j in range(size):
                 if dev_table_map.addr_manager_table[j].online != ONLINE_STATE_ONLINE:
                     self.communication_get_addr_table(dev_table_map.addr_manager_table[j].addr)
-                    continue
-                    online_slave_num = 0
-                    for k in range(size):
-                        if dev_table_map.addr_manager_table[k].online == ONLINE_STATE_ONLINE:
-                            online_slave_num += 1
-                            continue
-                            self.dprintf('online slave num: %d' % online_slave_num)
-                            if online_slave_num == size:
-                                self.print_addr_manager_table(dev_table_map.addr_manager_table)
-                                self.dprintf('online slave num is max: %d' % online_slave_num)
-                                return None
-                            self.print_addr_manager_table(dev_table_map.addr_manager_table)
-                            return None
+            online_slave_num = 0
+            for k in range(size):
+                if dev_table_map.addr_manager_table[k].online == ONLINE_STATE_ONLINE:
+                    online_slave_num += 1
+            self.dprintf('online slave num: %d' % online_slave_num)
+            if online_slave_num == size:
+                self.print_addr_manager_table(dev_table_map.addr_manager_table)
+                self.dprintf('online slave num is max: %d' % online_slave_num)
+                return None
+        self.print_addr_manager_table(dev_table_map.addr_manager_table)
+        return None
 
     
     def set_addr_table(self, dev_table_map):
@@ -443,19 +461,17 @@ class AutoAddrWrapper:
                 if addr_manager_table[i].mapped == 1 and addr_manager_table[i].online == ONLINE_STATE_INIT:
                     mapped_cnt += 1
                     self.communication_set_slave_addr(broadcast_addr, addr_manager_table[i].addr, addr_manager_table[i].uniid)
-                    continue
-                    valid_slave_num = 0
-                    for k in range(size):
-                        if addr_manager_table[k].online == ONLINE_STATE_ONLINE:
-                            valid_slave_num += 1
-                            continue
-                            self.dprintf('valid slave num: %d' % valid_slave_num)
-                            if valid_slave_num == mapped_cnt:
-                                self.print_addr_manager_table(addr_manager_table)
-                                self.dprintf('valid slave num is max: %d' % valid_slave_num)
-                                return None
-                            self.print_addr_manager_table(addr_manager_table)
-                            return None
+            valid_slave_num = 0
+            for k in range(size):
+                if addr_manager_table[k].online == ONLINE_STATE_ONLINE:
+                    valid_slave_num += 1
+            self.dprintf('valid slave num: %d' % valid_slave_num)
+            if valid_slave_num == mapped_cnt:
+                self.print_addr_manager_table(addr_manager_table)
+                self.dprintf('valid slave num is max: %d' % valid_slave_num)
+                return None
+        self.print_addr_manager_table(addr_manager_table)
+        return None
 
     
     def get_slave_info(self, dev_table_map):
@@ -468,15 +484,13 @@ class AutoAddrWrapper:
         size = dev_table_map.size
         self.dprintf('**************************** get slave info ****************************')
         for i in range(size):
-            if not addr_manager_table[i].online == ONLINE_STATE_ONLINE:
-                if addr_manager_table[i].online == ONLINE_STATE_WAIT_FOR_ACK:
-                    online_slave_num += 1
-                    continue
-                    if online_slave_num == size:
-                        self.dprintf('online slave num is max %d' % online_slave_num)
-                        return None
-                    self.communication_get_slave_info(broadcast_addr, send_data)
-                    return None
+            if addr_manager_table[i].online == ONLINE_STATE_ONLINE or addr_manager_table[i].online == ONLINE_STATE_WAIT_FOR_ACK:
+                online_slave_num += 1
+        if online_slave_num == size:
+            self.dprintf('online slave num is max %d' % online_slave_num)
+            return None
+        self.communication_get_slave_info(broadcast_addr, send_data)
+        return None
 
     
     def set_slave_addr(self, dev_table_map):
@@ -487,8 +501,6 @@ class AutoAddrWrapper:
         for i in range(size):
             if addr_manager_table[i].mapped == 1 and addr_manager_table[i].online == ONLINE_STATE_WAIT_FOR_ACK:
                 self.communication_set_slave_addr(broadcast_addr, addr_manager_table[i].addr, addr_manager_table[i].uniid)
-                continue
-                return None
 
     
     def online_check(self, dev_table_map):
@@ -507,11 +519,10 @@ class AutoAddrWrapper:
                     addr_manager_table[i].acked = 0
                     self.dprintf('Error: addr %.2X offline' % addr_manager_table[i].addr)
                     lost_flag = 1
-                    continue
-                    if mapped_exist == 1:
-                        self.print_addr_manager_table(addr_manager_table)
-                        if lost_flag == 0:
-                            self.dprintf('***************** all online ********************')
+        if mapped_exist == 1:
+            self.print_addr_manager_table(addr_manager_table)
+            if lost_flag == 0:
+                self.dprintf('***************** all online ********************')
 
     
     def loader_check(self, dev_table_map):
@@ -522,7 +533,7 @@ class AutoAddrWrapper:
             if addr_manager_table[i].mode == MODE_LOADER:
                 self.communication_loader_check(BROADCAST_ADDR)
                 return True
-            return False
+        return False
 
     
     def reg_auto_addr_get(self):
@@ -556,69 +567,67 @@ class AutoAddrWrapper:
 
     
     def process_set_slave_addr(self, eventtime):
-        if self.printer.is_shutdown():
-            return None
-        self.dprintf('set slave addr')
-        for i in range(len(dev_table_map_table)):
-            dev_table_map = dev_table_map_table[i]
-            self.get_slave_info(dev_table_map)
-            self.set_slave_addr(dev_table_map)
-        self.reactor.pause(self.reactor.monotonic() + 3.0)
-        continue
+        while 1:
+            if self.printer.is_shutdown():
+                return None
+            self.dprintf('set slave addr')
+            for i in range(len(dev_table_map_table)):
+                dev_table_map = dev_table_map_table[i]
+                self.get_slave_info(dev_table_map)
+                self.set_slave_addr(dev_table_map)
+            self.reactor.pause(self.reactor.monotonic() + 3.0)
 
     
     def process_online_check(self, eventtime):
-        time_interval = 1.5
-        if self.print_stats.state == 'printing' or self.print_stats.state == 'pause':
-            time_interval = 10
-        if self.printer.is_shutdown():
-            return None
-        self.dprintf('online check')
-        for i in range(len(dev_table_map_table)):
-            dev_table_map = dev_table_map_table[i]
-            self.online_check(dev_table_map)
-        self.reactor.pause(self.reactor.monotonic() + time_interval)
-        continue
+        while 1:
+            time_interval = 1.5
+            if self.print_stats.state == 'printing' or self.print_stats.state == 'pause':
+                time_interval = 10
+            if self.printer.is_shutdown():
+                return None
+            self.dprintf('online check')
+            for i in range(len(dev_table_map_table)):
+                dev_table_map = dev_table_map_table[i]
+                self.online_check(dev_table_map)
+            self.reactor.pause(self.reactor.monotonic() + time_interval)
 
     
     def process_loader_check(self, eventtime):
-        time_interval = 2.0
-        if self.print_stats.state == 'printing' or self.print_stats.state == 'pause':
-            time_interval = 10
-        if self.printer.is_shutdown():
-            return None
-        self.dprintf('loader check')
-        for i in range(len(dev_table_map_table)):
-            dev_table_map = dev_table_map_table[i]
-            if True == self.loader_check(dev_table_map):
-                pass
-            
+        while 1:
+            time_interval = 2.0
+            if self.print_stats.state == 'printing' or self.print_stats.state == 'pause':
+                time_interval = 10
+            if self.printer.is_shutdown():
+                return None
+            self.dprintf('loader check')
+            for i in range(len(dev_table_map_table)):
+                dev_table_map = dev_table_map_table[i]
+                if True == self.loader_check(dev_table_map):
+                    break
             self.reactor.pause(self.reactor.monotonic() + time_interval)
-            return None
 
     
     def process_all(self, eventtime):
-        time_interval = 1.0
-        if self.print_stats.state == 'printing' or self.print_stats.state == 'pause':
-            time_interval = 10
-        if self.printer.is_shutdown():
-            return None
-        self.dprintf('set slave addr')
-        for i in range(len(dev_table_map_table)):
-            dev_table_map = dev_table_map_table[i]
-            self.get_slave_info(dev_table_map)
-            self.set_slave_addr(dev_table_map)
-        self.dprintf('online check')
-        for i in range(len(dev_table_map_table)):
-            dev_table_map = dev_table_map_table[i]
-            self.online_check(dev_table_map)
-        self.dprintf('loader check')
-        for i in range(len(dev_table_map_table)):
-            dev_table_map = dev_table_map_table[i]
-            if True == self.loader_check(dev_table_map):
-                pass
-            
+        while 1:
+            time_interval = 1.0
+            if self.print_stats.state == 'printing' or self.print_stats.state == 'pause':
+                time_interval = 10
+            if self.printer.is_shutdown():
+                return None
+            self.dprintf('set slave addr')
+            for i in range(len(dev_table_map_table)):
+                dev_table_map = dev_table_map_table[i]
+                self.get_slave_info(dev_table_map)
+                self.set_slave_addr(dev_table_map)
+            self.dprintf('online check')
+            for i in range(len(dev_table_map_table)):
+                dev_table_map = dev_table_map_table[i]
+                self.online_check(dev_table_map)
+            self.dprintf('loader check')
+            for i in range(len(dev_table_map_table)):
+                dev_table_map = dev_table_map_table[i]
+                if True == self.loader_check(dev_table_map):
+                    break
             self.reactor.pause(self.reactor.monotonic() + time_interval)
-            return None
 
 
