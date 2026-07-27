@@ -81,7 +81,8 @@ class DirZCtl:
             step_us,
             step_cnt])
         t_start = time.time()
-        while not self.is_shutdown and not self.is_timeout and wait_finish and time.time() - t_start < 1.5e+06 * step_us * step_cnt and len(self.all_params) != 2:
+        # fixed: was 1.5e6 (unit error)
+        while not self.is_shutdown and not self.is_timeout and wait_finish and time.time() - t_start < step_us * step_cnt * 1e-06 * 3 + 10 and len(self.all_params) != 2:
             self.hx711s.delay_s(0.05)
 
     

@@ -93,7 +93,7 @@ class EEPROMCommandHelper:
         pos = self.chip.read_reg(0, 1)
         gcmd.respond_info('EEPROM_POS int_pos:%s' % int.from_bytes(pos, 'little'))
         addr = gcmd.get('ADDR', minval=0, maxval=2047, parser=(lambda x: int(x, 0)))
-        val = gcmd.get('VAL', minval=0, maxval=0x100000000, parser=(lambda x: int(x, 0)))
+        val = gcmd.get('VAL', minval=0, maxval=0xFFFFFFFF, parser=(lambda x: int(x, 0)))
         gcmd.respond_info('EEPROM_DEBUG_WRITE_INT : val = %d' % val)
         vals = [
             val & 255]
@@ -132,6 +132,7 @@ class EEPROMCommandHelper:
             if i % 16 == 0:
                 reg_vals += '\n'
             reg_vals += '0x%x ' % vals[i]
+        gcmd.respond_info(reg_vals)
 
     cmd_EEPROM_READ_help = 'Read data bytes from eeprom'
     
@@ -144,7 +145,7 @@ class EEPROMCommandHelper:
     
     def cmd_EEPROM_WRITE_INT(self, gcmd):
         addr = gcmd.get('ADDR', minval=0, maxval=2047, parser=(lambda x: int(x, 0)))
-        val = gcmd.get('VAL', minval=0, maxval=0x100000000, parser=(lambda x: int(x, 0)))
+        val = gcmd.get('VAL', minval=0, maxval=0xFFFFFFFF, parser=(lambda x: int(x, 0)))
         vals = [
             val & 255]
         vals += [

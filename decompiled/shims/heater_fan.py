@@ -37,7 +37,6 @@ class PrinterHeaterFan:
             if target_temp or current_temp > self.heater_temp:
                 speed = self.fan_speed
         chamber_heater = self.printer.lookup_object('heater_generic chamber_heater', None)
-        heater_bed_state = self.printer.lookup_object('heater_bed').heater_bed_state
         if self.is_ptc_fan == 1 and target_temp > 40 and chamber_heater and hasattr(chamber_heater.control, 'max_delta'):
             if chamber_heater.last_pwm_value == 0:
                 speed = 0

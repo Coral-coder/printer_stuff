@@ -302,8 +302,8 @@ class Zalign:
 
             try:
                 with open(self.real_zmax_path, 'r') as f:
-                    data = json.loads(f.read()).get('zmax', 0)
-                    if data > max_z:
+                    data = json.loads(f.read()).get('zmax', max_z - 10)
+                    if data > max_z or data <= 0:
                         data = max_z - 10
             except Exception as err:
                 logging.error(err)

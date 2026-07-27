@@ -56,12 +56,17 @@ class CUSTOM_MACRO:
         self.pheaters = self.printer.lookup_object('heaters')
         self.heater_hot = self.printer.lookup_object('extruder').heater
         self.gcode.respond_info('can_break_flag = %d' % self.pheaters.can_break_flag)
+        if self.extruder_temp is None:
+            self.extruder_temp = self.default_extruder_temp
+        if self.bed_temp is None:
+            self.bed_temp = self.default_bed_temp
         self.gcode.run_script_from_command('M104 S%d' % self.extruder_temp)
         self.gcode.run_script_from_command('M140 S%d' % self.bed_temp)
         self.pheaters.set_temperature(self.heater_hot, self.extruder_temp, True)
         self.gcode.respond_info('can_break_flag = %d' % self.pheaters.can_break_flag)
+        reactor = self.printer.get_reactor()
         while self.pheaters.can_break_flag == 1:
-            time.sleep(1)
+            reactor.pause(reactor.monotonic() + 1)
         self.gcode.respond_info('can_break_flag = %d' % self.pheaters.can_break_flag)
         if self.pheaters.can_break_flag == 3:
             self.pheaters.can_break_flag = 0
@@ -112,6 +117,10 @@ class CUSTOM_MACRO:
     cmd_CX_NOZZLE_CLEAR_help = 'nozzle clear with temperature'
     
     def cmd_CX_NOZZLE_CLEAR(self, gcmd):
+        if self.extruder_temp is None:
+            self.extruder_temp = self.default_extruder_temp
+        if self.bed_temp is None:
+            self.bed_temp = self.default_bed_temp
         self.gcode.run_script_from_command('NOZZLE_CLEAR HOT_MIN_TEMP=%d HOT_MAX_TEMP=%d BED_MAX_TEMP=%d' % (self.g28_ext_temp, self.extruder_temp - 20, self.bed_temp))
 
     cmd_SET_QMODE_FLAG_help = 'set qmode flag'

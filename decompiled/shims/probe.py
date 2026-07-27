@@ -129,6 +129,7 @@ class PrinterProbe:
         phoming = self.printer.lookup_object('homing')
         pos = toolhead.get_position()
         self.prtouch_v3 = self.printer.lookup_object('prtouch_v3') if self.printer.objects.get('prtouch_v3') else None
+        target_z = self.z_position
         if self.prtouch_v3 is not None:
             suspended_det_status = self.prtouch_v3.get_suspended_det_status()
             target_z = self.z_position

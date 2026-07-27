@@ -287,7 +287,12 @@ class ShaperCalibrate:
         np = self.numpy
         array = np.ndarray((shm.size // 8,), dtype=np.float64, buffer=shm.buf, offset=0)
         shm.unlink()
-        return array.copy()
+        try:
+            result = array.copy()
+        finally:
+            del array
+            shm.close()
+        return result
 
     
     def lowmem_process_accelerometer_data(self, data):

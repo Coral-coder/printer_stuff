@@ -126,7 +126,7 @@ class PrinterTemperatureMCU:
         
         def get1v(val):
             if val & 128:
-                val = 256 - val
+                val = val - 256
             return 1.0 - val / 1e+03
 
         cal1 = self.read32(addr)

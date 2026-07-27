@@ -36,14 +36,15 @@ class ZAdjustHelper:
         stepstrs = [ '%s = %.6f' % (s.get_name(), a) for s, a in (zip(self.z_steppers, adjustments)) ]
         msg = 'Making the following Z adjustments:\n%s' % ('\n'.join(stepstrs),)
         gcode.respond_info(msg)
-        z_tilt = self.printer.lookup_object('z_tilt')
-        for s, a in zip(self.z_steppers, adjustments):
-            if s.get_name() == 'stepper_z':
-                z_tilt.stepper_z_adjustment += a
-                continue
-            if s.get_name() == 'stepper_z1':
-                z_tilt.stepper_z1_adjustment += a
-        gcode.respond_info('stepper_z_adjustment:%s stepper_z1_adjustment:%s' % (z_tilt.stepper_z_adjustment, z_tilt.stepper_z1_adjustment))
+        z_tilt = self.printer.lookup_object('z_tilt', None)
+        if z_tilt is not None:
+            for s, a in zip(self.z_steppers, adjustments):
+                if s.get_name() == 'stepper_z':
+                    z_tilt.stepper_z_adjustment += a
+                    continue
+                if s.get_name() == 'stepper_z1':
+                    z_tilt.stepper_z1_adjustment += a
+            gcode.respond_info('stepper_z_adjustment:%s stepper_z1_adjustment:%s' % (z_tilt.stepper_z_adjustment, z_tilt.stepper_z1_adjustment))
         toolhead.flush_step_generation()
         for s in self.z_steppers:
             s.set_trapq(None)

@@ -146,6 +146,7 @@ class InputShaper:
         self.toolhead.flush_step_generation()
         new_delay = max([ s.get_step_generation_window() for s in (self.shapers) ])
         self.toolhead.note_step_generation_scan_time(new_delay, old_delay=self.old_delay)
+        self.old_delay = new_delay
         failed = []
         for sk in self.stepper_kinematics:
             for shaper in self.shapers:

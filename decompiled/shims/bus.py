@@ -249,7 +249,7 @@ class MCU_bus_digital_out:
     
     def update_digital_out(self, value, minclock = 0, reqclock = 0):
         if self.update_pin_cmd is None:
-            self.mcu.add_config_cmd('update_digital_out oid=%c value=%c' % (self.oid, not (not value)))
+            self.mcu.add_config_cmd('update_digital_out oid=%d value=%d' % (self.oid, not (not value)))
             return None
         self.update_pin_cmd.send([
             self.oid,

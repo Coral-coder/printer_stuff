@@ -523,7 +523,7 @@ class MS32008:
     
     def gcmd_move(self, gcmd):
         ch = gcmd.get('CH', 'A')
-        pps = gcmd.get_int('PPS')
+        pps = gcmd.get_int('PPS', minval=1)
         steps = gcmd.get_int('STEPS')
         dirv = gcmd.get('DIR', 'CW')
         cw = dirv.upper() == 'CW'
@@ -539,7 +539,7 @@ class MS32008:
             gcmd.respond_info('CURRENT set')
             return None
         if gcmd.has('PPS'):
-            pps = gcmd.get_int('PPS')
+            pps = gcmd.get_int('PPS', minval=1)
             self.set_ch_pps(ch, pps)
             gcmd.respond_info('PPS set')
             return None

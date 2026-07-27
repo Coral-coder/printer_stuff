@@ -184,6 +184,8 @@ class HX711S:
             for j in range(self.s_count):
                 del vals[j][0:int(len(vals[j]) / 2)]
             for j in range(self.s_count):
+                if len(vals[j]) - 4 < 1:
+                    continue
                 del vals[j][vals[j].index(min(vals[j]))]
                 del vals[j][vals[j].index(min(vals[j]))]
                 del vals[j][vals[j].index(max(vals[j]))]

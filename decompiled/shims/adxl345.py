@@ -120,8 +120,10 @@ class AccelQueryHelper:
         if not raw_samples:
             return self.samples
         total = sum([ len(m['params']['data']) for m in (raw_samples) ])
+        if total == 0:
+            return self.samples
         count = 0
-        shm_size = 32 * total
+        shm_size = 32 * total + 4
         shm = shared_memory.SharedMemory(name='psm_samples', create=True, size=shm_size)
         buffer = shm.buf
         self.copy_int_to_buffer(buffer, 0, count)

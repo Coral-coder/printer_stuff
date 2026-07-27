@@ -150,6 +150,8 @@ class BedMesh:
 
     
     def update_mesh(self, web_request):
+        if self.z_mesh is None:
+            return
         probed_matrix = web_request.get('probed_matrix', [
             []])
         self.z_mesh.update_mesh_probed_matrix(probed_matrix)
@@ -920,7 +922,7 @@ class ZMesh:
             self.info_array[4] = 0
         else:
             self.info_array[4] = 1
-            self.__mesh_matrix[0:] = self.mesh_matrix
+            self.__mesh_matrix[0:] = [item for row in self.mesh_matrix for item in row]
 
     def _sample_lagrange(self, z_matrix):
         x_mult = self.x_mult

@@ -92,10 +92,13 @@ class PauseResume:
                 logging.exception(err)
         power_loss_switch = False
         if os.path.exists(self.v_sd.user_print_refer_path):
-            with open(self.v_sd.user_print_refer_path, 'r') as f:
-                data = json.loads(f.read())
-                logging.info('[user_print_refer_path] POWER_LOSS_DATA: \n %s', data)
-                power_loss_switch = data.get('power_loss', { }).get('switch', False)
+            try:
+                with open(self.v_sd.user_print_refer_path, 'r') as f:
+                    data = json.loads(f.read())
+                    logging.info('[user_print_refer_path] POWER_LOSS_DATA: \n %s', data)
+                    power_loss_switch = data.get('power_loss', { }).get('switch', False)
+            except Exception as err:
+                logging.exception(err)
         bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
         eepromState = bl24c16f.checkEepromFirstEnable() if power_loss_switch and bl24c16f else True
         self.gcode.run_script('EEPROM_DEBUG_READ ADDR=0 SIZE=56')
@@ -220,12 +223,15 @@ class PauseResume:
         self.is_paused = False
         result = { }
         if os.path.exists(self.v_sd.print_file_name_path):
-            with open(self.v_sd.print_file_name_path, 'r') as f:
-                result = json.loads(f.read())
-                result['variable_z_safe_pause'] = 0
-            with open(self.v_sd.print_file_name_path, 'w') as f:
-                f.write(json.dumps(result))
-                f.flush()
+            try:
+                with open(self.v_sd.print_file_name_path, 'r') as f:
+                    result = json.loads(f.read())
+                    result['variable_z_safe_pause'] = 0
+                with open(self.v_sd.print_file_name_path, 'w') as f:
+                    f.write(json.dumps(result))
+                    f.flush()
+            except Exception as err:
+                logging.exception(err)
 
     cmd_CLEAR_PAUSE_help = 'Clears the current paused state without resuming the print'
     
