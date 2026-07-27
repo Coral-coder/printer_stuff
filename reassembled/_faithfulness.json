@@ -1,9 +1,9 @@
 [
   {
     "module": "so/auto_addr_wrapper.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/so/auto_addr_wrapper.py\", line 55\n    DataPackage = dataclass(<NODE:12>)\n   "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/__init__.py",
@@ -20,13 +20,13 @@
   {
     "module": "shims/adc_temperature.py",
     "compiled": true,
-    "match": 98.0,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/adxl345.py",
     "compiled": true,
-    "match": 99.0,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -37,32 +37,32 @@
   },
   {
     "module": "shims/auto_addr_wrapper.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/auto_addr_wrapper.py\", line 55\n    DataPackage = dataclass(<NODE:12>)\n"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/base_info.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/base_info.py\", line 59\n    return __classcell__ = <NODE:0>\n           "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/bed_mesh.py",
     "compiled": true,
-    "match": 14.8,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/belt_mdl.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/belt_mdl.py\", line 184\n    continue\n    ^\nSyntaxError: 'continue' not "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/bl24c16f.py",
     "compiled": true,
-    "match": 99.7,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -80,26 +80,26 @@
   {
     "module": "shims/bus.py",
     "compiled": true,
-    "match": 99.8,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/buttons.py",
     "compiled": true,
-    "match": 98.6,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/controller_fan.py",
     "compiled": true,
-    "match": 99.6,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/custom_macro.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/custom_macro.py\", line 65\n    continue\n    ^\nSyntaxError: 'continue' n"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/delayed_gcode.py",
@@ -109,26 +109,26 @@
   },
   {
     "module": "shims/delta_calibrate.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/delta_calibrate.py\", line 173\n    return None\n    ^\nSyntaxError: inval"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/dirzctl.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/dirzctl.py\", line 87\n    continue\n    ^\nSyntaxError: 'continue' not pr"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/display_status.py",
     "compiled": true,
-    "match": 98.6,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/dotstar.py",
     "compiled": true,
-    "match": 99.1,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -139,14 +139,14 @@
   },
   {
     "module": "shims/endstop_phase.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/endstop_phase.py\", line 35\n    continue\n    ^\nSyntaxError: 'continue' "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/exclude_object.py",
     "compiled": true,
-    "match": 98.4,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -158,13 +158,13 @@
   {
     "module": "shims/fan.py",
     "compiled": true,
-    "match": 99.8,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/fan_feedback.py",
     "compiled": true,
-    "match": 99.9,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -188,13 +188,13 @@
   {
     "module": "shims/filament_switch_sensor.py",
     "compiled": true,
-    "match": 99.1,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/filter.py",
     "compiled": true,
-    "match": 99.6,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -206,13 +206,13 @@
   {
     "module": "shims/force_move.py",
     "compiled": true,
-    "match": 99.4,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/gcode_arcs.py",
     "compiled": true,
-    "match": 99.2,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -223,32 +223,32 @@
   },
   {
     "module": "shims/gcode_macro.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/gcode_macro.py\", line 103\n    return None\n    ^\nSyntaxError: invalid s"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/gcode_move.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/gcode_move.py\", line 310\n    except ValueError:\n    ^\nSyntaxError: inv"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/hall_filament_width_sensor.py",
     "compiled": true,
-    "match": 99.1,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/heater_bed.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/heater_bed.py\", line 101\n    if n_temp = self.heater.last_temp < e_tem"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/heater_fan.py",
     "compiled": true,
-    "match": 99.8,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -259,15 +259,15 @@
   },
   {
     "module": "shims/heaters.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/heaters.py\", line 553\n    toolhead.register_lookahead_callback((lambda"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/homing.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/homing.py\", line 29\n    reactor.register_callback((lambda e, c = c: if"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/homing_heaters.py",
@@ -278,25 +278,25 @@
   {
     "module": "shims/homing_override.py",
     "compiled": true,
-    "match": 96.7,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/hx711s.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/hx711s.py\", line 86\n    continue\n    ^\nSyntaxError: 'continue' not pro"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/idle_timeout.py",
     "compiled": true,
-    "match": 99.0,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/input_shaper.py",
     "compiled": true,
-    "match": 99.0,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -308,19 +308,19 @@
   {
     "module": "shims/lis2dw.py",
     "compiled": true,
-    "match": 93.9,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/load_ai.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/load_ai.py\", line 143\n    return None\n    ^\nSyntaxError: invalid synta"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/manual_probe.py",
     "compiled": true,
-    "match": 98.6,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -331,15 +331,15 @@
   },
   {
     "module": "shims/metadata.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/metadata.py\", line 44\n    return None\n    ^\nSyntaxError: invalid synta"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/motion_report.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/motion_report.py\", line 24\n    startstop_cb = lambda is_start: pass\n  "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/motor_control.py",
@@ -349,9 +349,9 @@
   },
   {
     "module": "shims/ms3200x.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/ms3200x.py\", line 162\n    return None\n    ^\nSyntaxError: invalid synta"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/multi_pin.py",
@@ -362,50 +362,50 @@
   {
     "module": "shims/neopixel.py",
     "compiled": true,
-    "match": 96.8,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/output_pin.py",
     "compiled": true,
-    "match": 98.4,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/pause_resume.py",
     "compiled": true,
-    "match": 98.9,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/photograph.py",
     "compiled": true,
-    "match": 93.0,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/pid_calibrate.py",
     "compiled": true,
-    "match": 96.1,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/print_stats.py",
     "compiled": true,
-    "match": 97.0,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/probe.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/probe.py\", line 175\n    return [ sum((lambda (range(3)): [ pos[i] for "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/prtouch.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/prtouch.py\", line 301\n    continue\n    ^\nSyntaxError: 'continue' not p"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/prtouch_v2.py",
@@ -422,7 +422,7 @@
   {
     "module": "shims/pulse_counter.py",
     "compiled": true,
-    "match": 99.7,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -446,14 +446,14 @@
   {
     "module": "shims/replicape.py",
     "compiled": true,
-    "match": 99.9,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/resonance_tester.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError: Sorry: IndentationError: unexpected unindent (resonance_tester.py, line 153)"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/respond.py",
@@ -464,7 +464,7 @@
   {
     "module": "shims/save_variables.py",
     "compiled": true,
-    "match": 93.8,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -481,9 +481,9 @@
   },
   {
     "module": "shims/shaper_calibrate.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/shaper_calibrate.py\", line 221\n    x = window[(:, None)] * (x - np.mea"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/shaper_defs.py",
@@ -494,7 +494,7 @@
   {
     "module": "shims/skew_correction.py",
     "compiled": true,
-    "match": 99.7,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -512,7 +512,7 @@
   {
     "module": "shims/statistics_ext.py",
     "compiled": true,
-    "match": 99.2,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -524,13 +524,13 @@
   {
     "module": "shims/temperature_fan.py",
     "compiled": true,
-    "match": 99.8,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/temperature_mcu.py",
     "compiled": true,
-    "match": 99.1,
+    "match": 100.0,
     "note": ""
   },
   {
@@ -542,26 +542,26 @@
   {
     "module": "shims/thermistor.py",
     "compiled": true,
-    "match": 97.2,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/tmc.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError: Sorry: IndentationError: expected an indented block (tmc.py, line 394)"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/tmc2130.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tmc2130.py\", line 191\n    'i_scale_analog': (lambda v: if v:\n         "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/tmc2208.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tmc2208.py\", line 181\n    's2vsa': (lambda v: if v:\n                  "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/tmc2209.py",
@@ -571,62 +571,62 @@
   },
   {
     "module": "shims/tmc2262.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tmc2262.py\", line 475\n    'shaft': (lambda v: if v:\n                  "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/tmc_uart.py",
     "compiled": true,
-    "match": 98.7,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/tool.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/tool.py\", line 72\n    return None\n    ^\nSyntaxError: invalid syntax\n"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/tsl1401cl_filament_width_sensor.py",
     "compiled": true,
-    "match": 99.2,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/tuning_tower.py",
     "compiled": true,
-    "match": 98.6,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/verify_heater.py",
     "compiled": true,
-    "match": 89.9,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/virtual_sdcard.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/virtual_sdcard.py\", line 316\n    return None\n    ^\nSyntaxError: invali"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/z_align.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/z_align.py\", line 67\n    return for i in (range(self.pin_len)):\n      "
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/z_thermal_adjust.py",
     "compiled": true,
-    "match": 97.9,
+    "match": 100.0,
     "note": ""
   },
   {
     "module": "shims/z_tilt.py",
     "compiled": true,
-    "match": 97.9,
+    "match": 100.0,
     "note": ""
   }
 ]
