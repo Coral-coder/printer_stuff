@@ -381,3 +381,4 @@ class TMCCommandHelper:
             (prev_cur, prev_hold_cur, req_hold_cur, max_cur) = ch.get_current()
         if prev_hold_cur is None:
             gcmd.respond_info('Run Current: %0.2fA' % (prev_cur,))
+      

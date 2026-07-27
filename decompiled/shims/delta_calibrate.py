@@ -155,7 +155,7 @@ class DeltaCalibrate:
         if distances:
             z_weight = len(distances) / (MEASURE_WEIGHT * len(probe_positions))
         
-        def delta_errorfunc(params = None):
+        def delta_errorfunc(params):
             
             try:
                 delta_params = orig_delta_params.new_calibration(params)

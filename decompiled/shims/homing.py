@@ -23,10 +23,10 @@ def multi_complete(printer, completions):
     if len(completions) == 1:
         return completions[0]
     reactor = printer.get_reactor()
-    cp = None((lambda e = None: [ c.wait() for c in (completions) ]
+    cp = reactor.register_callback((lambda e: [ c.wait() for c in (completions) ]
 ))
     for c in completions:
-        None((lambda e = None, c = None: if c.wait():
+        reactor.register_callback((lambda e, c = (c,): if c.wait():
 cp.complete(1)0))
     return cp
 
@@ -70,7 +70,7 @@ class HomingMove:
         axes_d = [ mp - sp for mp, sp in (zip(movepos, startpos)) ]
         move_d = math.sqrt(sum([ d * d for d in (axes_d[:3]) ]))
         move_t = move_d / speed
-        max_steps = None([ abs(s.calc_position_from_coord(startpos) - s.calc_position_from_coord(movepos)) / s.get_step_dist() for s in (mcu_endstop.get_steppers()) ])
+        max_steps = max([ abs(s.calc_position_from_coord(startpos) - s.calc_position_from_coord(movepos)) / s.get_step_dist() for s in (mcu_endstop.get_steppers()) ])
         if max_steps <= 0.0:
             return 0.001
         return move_t / max_steps

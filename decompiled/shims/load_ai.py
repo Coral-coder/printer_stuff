@@ -599,8 +599,7 @@ class LoadAI:
                 7.0,
                 3.0]]
         cnt = len(detection_results)
-        detection_results_str = '\n'.join(for result in (detection_results):
-'\t'.join(map(str, result)))
+        detection_results_str = '\n'.join(('\t'.join(map(str, result)) for result in (detection_results)))
         self.cx_ai_engine_status = {
             'ai_switch': 1,
             'ai_waste_switch': 1,

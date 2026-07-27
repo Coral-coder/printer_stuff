@@ -266,11 +266,11 @@ class MS32008:
             val])
 
     
-    def hard_sleep(self = None, enable = None):
+    def hard_sleep(self, enable):
         return self.soft_standby(enable)
 
     
-    def soft_standby(self = None, enable = None):
+    def soft_standby(self, enable):
         r = self._i2c_read_reg(0, 1)
         val = r[0]
         if enable:
@@ -289,7 +289,7 @@ class MS32008:
             val])
 
     
-    def ext_clk(self = None, enable = None):
+    def ext_clk(self, enable):
         r = self._i2c_read_reg(0, 1)
         val = r[0]
         if enable:
@@ -300,7 +300,7 @@ class MS32008:
             val])
 
     
-    def osc_off(self = None, enable = None):
+    def osc_off(self, enable):
         r = self._i2c_read_reg(0, 1)
         val = r[0]
         if enable:
@@ -331,7 +331,7 @@ class MS32008:
             mask])
 
     
-    def watch_sel(self = None, enable = None, sel = None):
+    def watch_sel(self, enable, sel):
         if enable:
             self._i2c_write_reg(14, [
                 128 | sel & 127])
@@ -352,7 +352,7 @@ class MS32008:
         raise MS32008Error("Unknown channel '{}'".format(ch))
 
     
-    def set_ch_pd_out(self = None, ch = None, enable = None):
+    def set_ch_pd_out(self, ch, enable):
         base = self._ch_base(ch)
         r = self._i2c_read_reg(base + 0, 1)
         val = r[0]
@@ -364,7 +364,7 @@ class MS32008:
             val])
 
     
-    def set_ch_record_rev(self = None, ch = None, enable = None):
+    def set_ch_record_rev(self, ch, enable):
         base = self._ch_base(ch)
         r = self._i2c_read_reg(base + 0, 1)
         val = r[0]
@@ -376,7 +376,7 @@ class MS32008:
             val])
 
     
-    def set_ch_dir(self = None, ch = None, cw = None):
+    def set_ch_dir(self, ch, cw):
         base = self._ch_base(ch)
         r = self._i2c_read_reg(base + 1, 1)
         val = r[0]
@@ -511,8 +511,7 @@ class MS32008:
         reg = gcmd.get_int('REG')
         count = gcmd.get_int('COUNT')
         data = self._i2c_read_reg(reg, count)
-        hexstr = ' '.join(for b in (data):
-'0x%02X' % b)
+        hexstr = ' '.join(('0x%02X' % b for b in (data)))
         gcmd.respond_info('MS32008 READ: ' + hexstr)
 
     

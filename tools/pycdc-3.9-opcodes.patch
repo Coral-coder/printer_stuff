@@ -30,7 +30,7 @@ index 98760db..67899e2 100644
  };
  
 diff --git a/ASTree.cpp b/ASTree.cpp
-index f837152..35ca0e7 100644
+index f837152..d99e4d7 100644
 --- a/ASTree.cpp
 +++ b/ASTree.cpp
 @@ -73,6 +73,35 @@ static void CheckIfExpr(FastStack& stack, PycRef<ASTBlock> curblock)
@@ -69,7 +69,7 @@ index f837152..35ca0e7 100644
  PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
  {
      PycBuffer source(code->code()->value(), code->code()->length());
-@@ -999,7 +1028,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -999,7 +1028,13 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                      if (mod->verCompare(3, 10) >= 0)
                          end *= sizeof(uint16_t); // // BPO-27129
                      end += pos;
@@ -78,12 +78,13 @@ index f837152..35ca0e7 100644
 +                        const char* cn = code->name()->value();
 +                        comprehension = strcmp(cn, "<listcomp>") == 0
 +                                || strcmp(cn, "<dictcomp>") == 0
-+                                || strcmp(cn, "<setcomp>") == 0;
++                                || strcmp(cn, "<setcomp>") == 0
++                                || strcmp(cn, "<genexpr>") == 0;
 +                    }
                  } else {
                      PycRef<ASTBlock> top = blocks.top();
                      end = top->end(); // block end position from SETUP_LOOP
-@@ -1120,6 +1154,48 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1120,6 +1155,48 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  stack.push(new ASTCompare(left, right, operand ? ASTCompare::CMP_IS_NOT : ASTCompare::CMP_IS));
              }
              break;
@@ -132,7 +133,7 @@ index f837152..35ca0e7 100644
          case Pyc::JUMP_IF_FALSE_A:
          case Pyc::JUMP_IF_TRUE_A:
          case Pyc::JUMP_IF_FALSE_OR_POP_A:
-@@ -1507,6 +1583,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1507,6 +1584,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  }
              }
              break;
@@ -223,7 +224,67 @@ index f837152..35ca0e7 100644
          case Pyc::SET_UPDATE_A:
              {
                  PycRef<ASTNode> rhs = stack.top();
-@@ -1686,7 +1846,38 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1585,7 +1746,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+             stack.push(new ASTLoadBuildClass(new PycObject()));
+             break;
+         case Pyc::LOAD_CLOSURE_A:
+-            /* Ignore this */
++            /* Pushes a free/cell variable's cell. The value is not needed in the
++             * output, but a placeholder MUST be pushed so the following
++             * BUILD_TUPLE (closure tuple) doesn't consume a real operand (e.g.
++             * the callee of `any(x for x in y if <freevar>)`). The tuple is
++             * discarded by MAKE_FUNCTION's closure flag. */
++            stack.push(new ASTNode(ASTNode::NODE_INVALID));
+             break;
+         case Pyc::LOAD_CONST_A:
+             {
+@@ -1662,15 +1828,36 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+                 }
+ 
+                 ASTFunction::defarg_t defArgs, kwDefArgs;
+-                const int defCount = operand & 0xFF;
+-                const int kwDefCount = (operand >> 8) & 0xFF;
+-                for (int i = 0; i < defCount; ++i) {
+-                    defArgs.push_front(stack.top());
+-                    stack.pop();
+-                }
+-                for (int i = 0; i < kwDefCount; ++i) {
+-                    kwDefArgs.push_front(stack.top());
+-                    stack.pop();
++                if (mod->verCompare(3, 6) >= 0) {
++                    /* 3.6+: oparg is a FLAG bitmask, not a count. Each set flag
++                     * corresponds to exactly one item on the stack (below the
++                     * code/qualname). Popping `operand & 0xFF` items -- as the
++                     * old count logic did -- corrupted the stack for closures
++                     * (0x08) and annotations (0x04), e.g. dropping the callee of
++                     * `any(x for x in y if <freevar>)`. */
++                    if (operand & 0x08)          // tuple of closure cells
++                        stack.pop();
++                    if (operand & 0x04)          // annotation dict/tuple
++                        stack.pop();
++                    if (operand & 0x02) {        // kw-only defaults dict
++                        kwDefArgs.push_front(stack.top());
++                        stack.pop();
++                    }
++                    if (operand & 0x01) {        // positional defaults tuple
++                        defArgs.push_front(stack.top());
++                        stack.pop();
++                    }
++                } else {
++                    const int defCount = operand & 0xFF;
++                    const int kwDefCount = (operand >> 8) & 0xFF;
++                    for (int i = 0; i < defCount; ++i) {
++                        defArgs.push_front(stack.top());
++                        stack.pop();
++                    }
++                    for (int i = 0; i < kwDefCount; ++i) {
++                        kwDefArgs.push_front(stack.top());
++                        stack.pop();
++                    }
+                 }
+                 stack.push(new ASTFunction(fun_code, defArgs, kwDefArgs));
+             }
+@@ -1686,7 +1873,38 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                  }
  
                  if (curblock->blktype() == ASTBlock::BLK_WITH) {
@@ -263,7 +324,39 @@ index f837152..35ca0e7 100644
                      break;
                  }
  
-@@ -1954,7 +2145,23 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1819,6 +2037,14 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+         case Pyc::POP_TOP:
+             {
+                 PycRef<ASTNode> value = stack.top();
++                /* Generator expression: the POP_TOP following YIELD_VALUE must
++                 * not consume the comprehension we just pushed. */
++                if (value.type() == ASTNode::NODE_COMPREHENSION
++                        && value.cast<ASTComprehension>()->isGenExpr()
++                        && curblock->blktype() == ASTBlock::BLK_FOR
++                        && curblock.cast<ASTIterBlock>()->isComprehension()) {
++                    break;
++                }
+                 stack.pop();
+ 
+                 if (!curblock->inited()) {
+@@ -1940,6 +2166,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+             {
+                 PycRef<ASTNode> value = stack.top();
+                 stack.pop();
++                /* A generator expression's code object ends with the implicit
++                 * `LOAD_CONST None; RETURN_VALUE`; the real result is the
++                 * genexpr comprehension the loop left on the stack -- and only a
++                 * genexpr ever leaves one there, so this is unambiguous. */
++                if (!stack.empty() && stack.top() != nullptr
++                        && stack.top().type() == ASTNode::NODE_COMPREHENSION
++                        && stack.top().cast<ASTComprehension>()->isGenExpr()) {
++                    value = stack.top();
++                    stack.pop();
++                }
+                 curblock->append(new ASTReturn(value));
+ 
+                 if ((curblock->blktype() == ASTBlock::BLK_IF
+@@ -1954,7 +2190,23 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
                      curblock = blocks.top();
                      curblock->append(prev.cast<ASTNode>());
  
@@ -288,7 +381,7 @@ index f837152..35ca0e7 100644
                  }
              }
              break;
-@@ -2018,13 +2225,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2018,13 +2270,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              // Ignore
              break;
          case Pyc::SETUP_WITH_A:
@@ -306,7 +399,7 @@ index f837152..35ca0e7 100644
          case Pyc::BEFORE_WITH:
              /* Python 3.11: setup for with block; ignore. */
              break;
-@@ -2075,7 +2285,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -2075,7 +2330,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              break;
          case Pyc::SETUP_FINALLY_A:
              {
@@ -323,7 +416,24 @@ index f837152..35ca0e7 100644
                  blocks.push(next.cast<ASTBlock>());
                  curblock = blocks.top();
  
-@@ -3052,7 +3270,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -2578,7 +2841,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+             {
+                 PycRef<ASTNode> value = stack.top();
+                 stack.pop();
+-                curblock->append(new ASTReturn(value, ASTReturn::YIELD));
++                if (curblock->blktype() == ASTBlock::BLK_FOR
++                        && curblock.cast<ASTIterBlock>()->isComprehension()) {
++                    /* generator expression */
++                    PycRef<ASTComprehension> comp = new ASTComprehension(value);
++                    comp->setGenExpr(true);
++                    stack.push(comp.cast<ASTNode>());
++                } else {
++                    curblock->append(new ASTReturn(value, ASTReturn::YIELD));
++                }
+             }
+             break;
+         case Pyc::SETUP_ANNOTATIONS:
+@@ -3052,7 +3323,13 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
          {
              PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
  
@@ -338,7 +448,7 @@ index f837152..35ca0e7 100644
              print_src(comp->result(), mod, pyc_output);
  
              for (const auto& gen : comp->generators()) {
-@@ -3065,7 +3289,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3065,7 +3342,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                      print_src(gen->condition(), mod, pyc_output);
                  }
              }
@@ -347,7 +457,7 @@ index f837152..35ca0e7 100644
          }
          break;
      case ASTNode::NODE_MAP:
-@@ -3079,9 +3303,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3079,9 +3356,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                  else
                      pyc_output << ",\n";
                  start_line(cur_indent, pyc_output);

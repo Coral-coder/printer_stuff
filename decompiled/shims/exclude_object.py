@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/exclude_object.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: exclude_object.pyc (Python 3.9)
 
@@ -193,8 +184,7 @@ class ExcludeObject:
     
     def cmd_EXCLUDE_OBJECT_START(self, gcmd):
         name = gcmd.get('NAME').upper()
-        if not None(for obj in (self.objects):
-obj['name'] == name):
+        if not any((obj['name'] == name for obj in (self.objects))):
             self._add_object_definition({
                 'name': name })
         self.current_object = name
@@ -311,8 +301,7 @@ obj['name'] == name):
         if gcmd.get('JSON', None) is not None:
             object_list = json.dumps(self.objects)
         else:
-            object_list = ' '.join(for obj in (self.objects):
-obj['name'])
+            object_list = ' '.join((obj['name'] for obj in (self.objects)))
         gcmd.respond_info('Known objects: {}'.format(object_list))
 
     

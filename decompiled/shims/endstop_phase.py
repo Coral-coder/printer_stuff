@@ -200,7 +200,7 @@ class EndstopPhases:
         res = []
         for i in range(phases):
             phase = i + half_phases
-            cost = None([ wph[j] * abs(j - phase) for j in (range(i, i + phases)) ])
+            cost = sum([ wph[j] * abs(j - phase) for j in (range(i, i + phases)) ])
             res.append((cost, phase))
         res.sort()
         best = res[0][1]

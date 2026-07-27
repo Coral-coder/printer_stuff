@@ -503,4 +503,4 @@ class GCodeMove:
             self.move_with_transform(self.last_position, speed)
 
     
-    def recordPrintFileName(self, path, fi
+    def recordPrintFileName(self, path, file_name

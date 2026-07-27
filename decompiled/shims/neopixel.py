@@ -32,7 +32,7 @@ class PrinterNeoPixel:
         for lidx, co in enumerate(color_order):
             if sorted(co) not in (sorted('RGB'), sorted('RGBW')):
                 raise config.error("Invalid color_order '%s'" % (co,))
-            None([ (lidx, 'RGBW'.index(c)) for c in (co) ])
+            color_indexes.extend([ (lidx, 'RGBW'.index(c)) for c in (co) ])
         self.color_map = list(enumerate(color_indexes))
         if len(self.color_map) > MAX_MCU_SIZE:
             raise config.error('neopixel chain too long')
@@ -99,7 +99,7 @@ i,
     
     def update_leds(self, led_state, print_time):
         
-        def reactor_bgfunc(eventtime = None):
+        def reactor_bgfunc(eventtime):
             with self.mutex:
                 self.update_color_data(led_state)
                 self.send_data(print_time)

@@ -82,14 +82,14 @@ class PrinterHeaterBed:
         :return:
         '''
         
-        def set_temperature(temperature = None, power = None, wait = None):
+        def set_temperature(temperature, power, wait = (1, True)):
             pheaters = self.printer.lookup_object('heaters')
             self.heater.max_power = power
             self.heater.control.heater_max_power = power
             pheaters.set_temperature(self.heater, temperature, wait)
 
         
-        def get_heater_slope(b_temp = None, e_temp = None, max_power_ = None, wait_even_heating = None):
+        def get_heater_slope(b_temp, e_temp, max_power_, wait_even_heating = (1, False)):
             gcode_obj.respond_info(f'''get_heater_slope b_temp:{b_temp},e_temp:{e_temp},max_power_:{max_power_}''')
             set_temperature(b_temp, 1, True)
             if wait_even_heating:
@@ -190,7 +190,7 @@ class PrinterHeaterBed:
             if self.heater.control.__class__.__name__ == 'ControlPID':
                 raw_pid = for k, v in (self.pid.items()):
 passcontinuek[v[int(self.heater.max_power)]]
-                (lambda Kp = None, Ki = None, Kd = None: (setattr(self.heater.control, 'Kp', Kp), setattr(self.heater.control, 'Ki', Ki), setattr(self.heater.control, 'Kd', Kd)))(**{ k: v / 255.0 for k, v in (raw_pid.items()) })
+                (lambda Kp, Ki, Kd: (setattr(self.heater.control, 'Kp', Kp), setattr(self.heater.control, 'Ki', Ki), setattr(self.heater.control, 'Kd', Kd)))(**{ k: v / 255.0 for k, v in (raw_pid.items()) })
                 configfile.set('heater_bed', 'control', 'pid')
                 configfile.set('heater_bed', 'pid_kp', f'''{raw_pid['Kp']:.6f}''')
                 configfile.set('heater_bed', 'pid_ki', f'''{raw_pid['Ki']:.6f}''')

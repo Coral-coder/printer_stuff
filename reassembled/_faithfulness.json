@@ -26,7 +26,7 @@
   {
     "module": "shims/adxl345.py",
     "compiled": true,
-    "match": 98.9,
+    "match": 99.0,
     "note": ""
   },
   {
@@ -43,9 +43,9 @@
   },
   {
     "module": "shims/base_info.py",
-    "compiled": true,
-    "match": 95.9,
-    "note": ""
+    "compiled": false,
+    "match": null,
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/base_info.py\", line 59\n    return __classcell__ = <NODE:0>\n           "
   },
   {
     "module": "shims/bed_mesh.py",
@@ -91,9 +91,9 @@
   },
   {
     "module": "shims/controller_fan.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/controller_fan.py\", line 42\n    if not None(for x in (self.stepper_nam"
+    "compiled": true,
+    "match": 99.6,
+    "note": ""
   },
   {
     "module": "shims/custom_macro.py",
@@ -145,9 +145,9 @@
   },
   {
     "module": "shims/exclude_object.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/exclude_object.py\", line 196\n    if not None(for obj in (self.objects)"
+    "compiled": true,
+    "match": 98.4,
+    "note": ""
   },
   {
     "module": "shims/extruder_stepper.py",
@@ -267,13 +267,13 @@
     "module": "shims/homing.py",
     "compiled": false,
     "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/homing.py\", line 29\n    None((lambda e = None, c = None: if c.wait():\n"
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/homing.py\", line 29\n    reactor.register_callback((lambda e, c = (c,):"
   },
   {
     "module": "shims/homing_heaters.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/homing_heaters.py\", line 32\n    elif not None(for x in (self.disable_h"
+    "compiled": true,
+    "match": 100.0,
+    "note": ""
   },
   {
     "module": "shims/homing_override.py",
@@ -296,7 +296,7 @@
   {
     "module": "shims/input_shaper.py",
     "compiled": true,
-    "match": 98.8,
+    "match": 99.0,
     "note": ""
   },
   {
@@ -362,13 +362,13 @@
   {
     "module": "shims/neopixel.py",
     "compiled": true,
-    "match": 96.3,
+    "match": 96.8,
     "note": ""
   },
   {
     "module": "shims/output_pin.py",
     "compiled": true,
-    "match": 97.5,
+    "match": 98.4,
     "note": ""
   },
   {
@@ -399,7 +399,7 @@
     "module": "shims/probe.py",
     "compiled": false,
     "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/probe.py\", line 175\n    return [ None((lambda (range(3)) = None: [ pos"
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/probe.py\", line 175\n    return [ sum((lambda (range(3)): [ pos[i] for "
   },
   {
     "module": "shims/prtouch.py",
@@ -428,7 +428,7 @@
   {
     "module": "shims/quad_gantry_level.py",
     "compiled": true,
-    "match": 99.8,
+    "match": 100.0,
     "note": ""
   },
   {

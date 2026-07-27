@@ -51,7 +51,7 @@ class PrinterOutputPin:
         value /= self.scale
         cycle_time = self.default_cycle_time
         toolhead = self.printer.lookup_object('toolhead')
-        None((lambda print_time = None: self._set_pin(print_time, value, cycle_time)))
+        toolhead.register_lookahead_callback((lambda print_time: self._set_pin(print_time, value, cycle_time)))
 
     
     def checkpwm(self, eventtime):
@@ -108,7 +108,7 @@ class PrinterOutputPin:
             self._set_pin(print_time + 0.1, value, cycle_time)
         else:
             logging.info('SET_PIN sync=0')
-            None((lambda print_time = None: self._set_pin(print_time, value, cycle_time)))
+            toolhead.register_lookahead_callback((lambda print_time: self._set_pin(print_time, value, cycle_time)))
 
     
     def _resend_current_val(self, eventtime):

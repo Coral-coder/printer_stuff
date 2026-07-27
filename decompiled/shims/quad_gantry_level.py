@@ -32,7 +32,7 @@ class QuadGantryLevel:
     
     def probe_finalize(self, offsets, positions):
         z_positions = [ self.horizontal_move_z - p[2] for p in (positions) ]
-        points_message = None % None([ '%s: %.6f' % (z_id, z_positions[z_id]) for z_id in (range(len(z_positions))) ])
+        points_message = 'Gantry-relative probe points:\n%s\n' % ' '.join([ '%s: %.6f' % (z_id, z_positions[z_id]) for z_id in (range(len(z_positions))) ])
         self.gcode.respond_info(points_message)
         ppx0 = [
             positions[0][0] + offsets[0],

@@ -355,8 +355,7 @@ class AutoAddrWrapper:
             package.slave_addr]) + bytes([
             package.length]) + bytes([
             package.status]) + bytes([
-            package.function_code]) + bytes(for c in (package.data):
-int(c))
+            package.function_code]) + bytes((int(c) for c in (package.data)))
         timeout = cmd_timeout[package.function_code]
         ret = self._serial.cmd_send_data_with_response(data_send, timeout, False)
         if ret is None:

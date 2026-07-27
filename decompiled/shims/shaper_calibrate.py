@@ -349,7 +349,7 @@ class ShaperCalibrate:
         (A, T) = shaper
         inv_D = 1.0 / sum(A)
         n = len(T)
-        ts = None([ A[i] * T[i] for i in (range(n)) ]) * inv_D
+        ts = sum([ A[i] * T[i] for i in (range(n)) ]) * inv_D
         offset_90 = offset_180 = 0.0
         for i in range(n):
             if T[i] >= ts:
@@ -417,7 +417,7 @@ class ShaperCalibrate:
     
     def find_shaper_max_accel(self, shaper):
         TARGET_SMOOTHING = 0.12
-        max_accel = None((lambda test_accel = None: self._get_shaper_smoothing(shaper, test_accel) <= TARGET_SMOOTHING))
+        max_accel = self._bisect((lambda test_accel: self._get_shaper_smoothing(shaper, test_accel) <= TARGET_SMOOTHING))
         return max_accel
 
     

@@ -68,7 +68,7 @@ def capture(end_print, frame = (False, 15)):
     cmd_path = '/usr/share/klipper/klippy/extras/photograph.py'
     capture_shell = ''
     
-    def run_cmd(capture_shell = None):
+    def run_cmd(capture_shell):
         
         try:
             logging.info(capture_shell)

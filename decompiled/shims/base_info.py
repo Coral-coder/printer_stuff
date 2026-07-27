@@ -1,3 +1,12 @@
+# =====================================================================
+# PARTIAL DECOMPILATION -- this module did not fully round-trip.
+# The 3.9 bytecode uses control flow the decompiler could not fully
+# reconstruct (e.g. try/except/else with returns, or a generator with a
+# dropped builtin rendered as `None(...)`). The code below is best-effort
+# and will not import as-is. Ground-truth disassembly for repair:
+#     decompiled/_disasm/base_info.txt
+# =====================================================================
+
 # Source Generated with Decompyle++
 # File: base_info.pyc (Python 3.9)
 
@@ -8,7 +17,7 @@ import logging
 class BaseDirSystemInfo:
     _instance = None
     
-    def __new__(cls = None):
+    def __new__(cls):
         if not cls._instance:
             cls._instance = super(BaseDirSystemInfo, cls).__new__(cls)
             cls._instance._base_dir = '/usr/data'
@@ -47,7 +56,7 @@ class BaseDirSystemInfo:
     def get_base_dir(self):
         return self._base_dir
 
-    __classcell__ = None
+    return __classcell__ = <NODE:0>
 
 system_info_instance = BaseDirSystemInfo()
 base_dir = system_info_instance.get_base_dir()

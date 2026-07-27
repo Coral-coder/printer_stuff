@@ -46,7 +46,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!",
     "lines": 558
@@ -75,19 +75,19 @@
     "none_calls": 0,
     "unsupported": true,
     "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 617
+    "lines": 616
   },
   {
     "pyc": "proprietary/shims/base_info.pyc",
     "out": "decompiled/shims/base_info.py",
     "engine": "patched",
-    "raw_parses": true,
-    "repaired_parses": true,
+    "raw_parses": false,
+    "repaired_parses": false,
     "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": false,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "unsupported": true,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported Node type: 0",
     "lines": 54
   },
   {
@@ -186,13 +186,13 @@
     "out": "decompiled/shims/controller_fan.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
-    "lines": 75
+    "lines": 74
   },
   {
     "pyc": "proprietary/shims/custom_macro.pyc",
@@ -293,7 +293,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: block stack is not empty!",
     "lines": 243
@@ -303,13 +303,13 @@
     "out": "decompiled/shims/exclude_object.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 319
+    "lines": 317
   },
   {
     "pyc": "proprietary/shims/extruder_stepper.pyc",
@@ -566,7 +566,7 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
     "lines": 621
@@ -576,13 +576,13 @@
     "out": "decompiled/shims/homing_heaters.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
-    "lines": 64
+    "lines": 61
   },
   {
     "pyc": "proprietary/shims/homing_override.pyc",
@@ -631,7 +631,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!",
     "lines": 202
@@ -673,7 +673,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWar",
-    "lines": 627
+    "lines": 626
   },
   {
     "pyc": "proprietary/shims/manual_probe.pyc",
@@ -712,7 +712,7 @@
     "none_calls": 9,
     "unsupported": false,
     "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack",
-    "lines": 1352
+    "lines": 1343
   },
   {
     "pyc": "proprietary/shims/motion_report.pyc",
@@ -751,7 +751,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "",
-    "lines": 565
+    "lines": 564
   },
   {
     "pyc": "proprietary/shims/multi_pin.pyc",
@@ -774,7 +774,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!",
     "lines": 118
@@ -787,7 +787,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 2,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!",
     "lines": 132
@@ -852,7 +852,7 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!",
     "lines": 537
@@ -917,7 +917,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
     "lines": 116
@@ -1034,7 +1034,7 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
+    "none_calls": 1,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
     "lines": 496
@@ -1180,7 +1180,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 383
+    "lines": 384
   },
   {
     "pyc": "proprietary/shims/tmc2130.pyc",
@@ -1323,7 +1323,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "",
-    "lines": 173
+    "lines": 174
   },
   {
     "pyc": "proprietary/shims/z_thermal_adjust.pyc",
@@ -1362,6 +1362,6 @@
     "none_calls": 0,
     "unsupported": true,
     "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 617
+    "lines": 616
   }
 ]

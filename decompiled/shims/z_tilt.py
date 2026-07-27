@@ -266,7 +266,7 @@ class ZTilt:
             return z - x * params['x_adjust'] - y * params['y_adjust'] - params['z_adjust']
 
         
-        def errorfunc(params = None):
+        def errorfunc(params):
             total_error = 0.0
             for pos in positions:
                 total_error += adjusted_height(pos, params) ** 2

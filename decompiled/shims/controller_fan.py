@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/controller_fan.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: controller_fan.pyc (Python 3.9)
 
@@ -39,8 +30,7 @@ class ControllerFan:
         if self.stepper_names is None:
             self.stepper_names = all_steppers
             return None
-        if not None(for x in (self.stepper_names):
-x in all_steppers):
+        if not all((x in all_steppers for x in (self.stepper_names))):
             raise self.printer.config_error('{"code":"key66", "msg":"One or more of these steppers are unknown: %s (valid steppers are: %s)", "values": ["%s", "%s"]}' % (self.stepper_names, ', '.join(all_steppers), self.stepper_names, ', '.join(all_steppers)))
 
     

@@ -172,7 +172,7 @@ class PrinterProbe:
     
     def _calc_mean(self, positions):
         count = float(len(positions))
-        return [ None((lambda (range(3)) = None: [ pos[i] for pos in (range(3)) ])(positions)) / count for None in (range(3)) ]
+        return [ sum((lambda (range(3)): [ pos[i] for pos in (range(3)) ])(positions)) / count for None in (range(3)) ]
 
     
     def _calc_median(self, positions):

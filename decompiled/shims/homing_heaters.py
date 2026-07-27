@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/homing_heaters.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: homing_heaters.pyc (Python 3.9)
 
@@ -29,15 +20,13 @@ class HomingHeaters:
         all_heaters = self.pheaters.get_all_heaters()
         if self.disable_heaters is None:
             self.disable_heaters = all_heaters
-        elif not None(for x in (self.disable_heaters):
-x in all_heaters):
+        elif not all((x in all_heaters for x in (self.disable_heaters))):
             raise self.printer.config_error('{"code":"key68", "msg": "One or more of these heaters are unknown: %s", "values": ["%s"]}' % (self.disable_heaters, self.disable_heaters))
         kin = self.printer.lookup_object('toolhead').get_kinematics()
         all_steppers = [ s.get_name() for s in (kin.get_steppers()) ]
         if self.flaky_steppers is None:
             return None
-        if not None(for x in (self.flaky_steppers):
-x in all_steppers):
+        if not all((x in all_steppers for x in (self.flaky_steppers))):
             raise self.printer.config_error('{"code":"key67", "msg":"One or more of these steppers are unknown: %s", "values": ["%s"]}' % (self.flaky_steppers, self.flaky_steppers))
 
     
@@ -45,8 +34,7 @@ x in all_steppers):
         if self.flaky_steppers is None:
             return True
         steppers_being_homed = [ s.get_name() for es in (endstops) for s in es.get_steppers() ]
-        return None(for x in (steppers_being_homed):
-x in self.flaky_steppers)
+        return any((x in self.flaky_steppers for x in (steppers_being_homed)))
 
     
     def handle_homing_move_begin(self, hmove):

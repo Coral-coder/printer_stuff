@@ -103,7 +103,7 @@ class AxisInputShaper:
 
     
     def report(self, gcmd):
-        info = None([ '%s_%s:%s' % (key, self.axis, value) for key, value in (self.params.get_status().items()) ])
+        info = ' '.join([ '%s_%s:%s' % (key, self.axis, value) for key, value in (self.params.get_status().items()) ])
         gcmd.respond_info(info)
 
 

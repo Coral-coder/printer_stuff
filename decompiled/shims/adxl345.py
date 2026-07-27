@@ -343,7 +343,7 @@ class ADXL345:
             '-y': (1, -SCALE_XY),
             '-z': (2, -SCALE_Z) }
         axes_map = config.getlist('axes_map', ('x', 'y', 'z'), count=3)
-        if None([ a not in am for a in (axes_map) ]):
+        if any([ a not in am for a in (axes_map) ]):
             raise config.error('{"code": "key9", "msg": "Invalid adxl345 axes_map parameter"}')
         self.axes_map = [ am[a.strip()] for a in (axes_map) ]
         self.data_rate = config.getint('rate', 3200)

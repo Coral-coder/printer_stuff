@@ -1,50 +1,42 @@
 # Decompilation status
 
 - Modules: **105**
-- Clean (ast-valid, no known defects): **72**
-- Ast-valid but flagged (`None(...)` dropped builtin -- see disasm): **9**
-- Partial (did not fully round-trip -- see disasm): **24**
+- Clean (ast-valid, no known defects): **80**
+- Ast-valid but flagged (`None(...)` dropped builtin -- see disasm): **3**
+- Partial (did not fully round-trip -- see disasm): **22**
 
 | module | status | lines |
 |--------|--------|-------|
-| `controller_fan.pyc` | partial | 75 |
-| `exclude_object.pyc` | partial | 319 |
 | `heaters.pyc` | partial | 597 |
-| `homing.pyc` | partial | 621 |
-| `homing_heaters.pyc` | partial | 64 |
-| `metadata.pyc` | partial | 1352 |
-| `probe.pyc` | partial | 537 |
+| `metadata.pyc` | partial | 1343 |
 | `shaper_calibrate.pyc` | partial | 496 |
 | `tmc2130.pyc` | partial | 434 |
 | `virtual_sdcard.pyc` | partial | 1877 |
-| `auto_addr_wrapper.pyc` | partial | 617 |
+| `auto_addr_wrapper.pyc` | partial | 616 |
+| `base_info.pyc` | partial | 54 |
 | `delta_calibrate.pyc` | partial | 254 |
 | `gcode_macro.pyc` | partial | 316 |
 | `gcode_move.pyc` | partial | 497 |
 | `heater_bed.pyc` | partial | 199 |
-| `load_ai.pyc` | partial | 627 |
+| `homing.pyc` | partial | 621 |
+| `load_ai.pyc` | partial | 626 |
 | `motion_report.pyc` | partial | 403 |
-| `ms3200x.pyc` | partial | 565 |
+| `ms3200x.pyc` | partial | 564 |
+| `probe.pyc` | partial | 537 |
 | `resonance_tester.pyc` | partial | 375 |
 | `tmc2208.pyc` | partial | 247 |
 | `tmc2262.pyc` | partial | 639 |
 | `tool.pyc` | partial | 78 |
-| `z_align.pyc` | partial | 173 |
-| `auto_addr_wrapper.pyc` | partial | 617 |
-| `adxl345.pyc` | flagged (1x None-call) | 558 |
-| `endstop_phase.pyc` | flagged (1x None-call) | 243 |
+| `z_align.pyc` | partial | 174 |
+| `auto_addr_wrapper.pyc` | partial | 616 |
 | `gcode_arcs.pyc` | flagged (1x None-call) | 171 |
-| `input_shaper.pyc` | flagged (1x None-call) | 202 |
 | `lis2dw.pyc` | flagged (5x None-call) | 271 |
-| `neopixel.pyc` | flagged (1x None-call) | 118 |
-| `output_pin.pyc` | flagged (2x None-call) | 132 |
-| `quad_gantry_level.pyc` | flagged (1x None-call) | 116 |
 | `tmc_uart.pyc` | flagged (1x None-call) | 271 |
 | `__init__.pyc` | clean | 8 |
 | `adc_scaled.pyc` | clean | 97 |
 | `adc_temperature.pyc` | clean | 610 |
+| `adxl345.pyc` | clean | 558 |
 | `auto_addr.pyc` | clean | 10 |
-| `base_info.pyc` | clean | 54 |
 | `bed_mesh.pyc` | clean | 212 |
 | `belt_mdl.pyc` | clean | 538 |
 | `bl24c16f.pyc` | clean | 282 |
@@ -52,12 +44,15 @@
 | `box.pyc` | clean | 9 |
 | `bus.pyc` | clean | 261 |
 | `buttons.pyc` | clean | 253 |
+| `controller_fan.pyc` | clean | 74 |
 | `custom_macro.pyc` | clean | 156 |
 | `delayed_gcode.pyc` | clean | 60 |
 | `dirzctl.pyc` | clean | 107 |
 | `display_status.pyc` | clean | 62 |
 | `dotstar.pyc` | clean | 59 |
 | `duplicate_pin_override.pyc` | clean | 18 |
+| `endstop_phase.pyc` | clean | 243 |
+| `exclude_object.pyc` | clean | 317 |
 | `extruder_stepper.pyc` | clean | 28 |
 | `fan.pyc` | clean | 125 |
 | `fan_feedback.pyc` | clean | 144 |
@@ -72,14 +67,18 @@
 | `hall_filament_width_sensor.pyc` | clean | 184 |
 | `heater_fan.pyc` | clean | 62 |
 | `heater_generic.pyc` | clean | 9 |
+| `homing_heaters.pyc` | clean | 61 |
 | `homing_override.pyc` | clean | 70 |
 | `hx711s.pyc` | clean | 243 |
 | `idle_timeout.pyc` | clean | 112 |
+| `input_shaper.pyc` | clean | 202 |
 | `io_remap.pyc` | clean | 59 |
 | `manual_probe.pyc` | clean | 269 |
 | `manual_stepper.pyc` | clean | 164 |
 | `motor_control.pyc` | clean | 9 |
 | `multi_pin.pyc` | clean | 72 |
+| `neopixel.pyc` | clean | 118 |
+| `output_pin.pyc` | clean | 132 |
 | `pause_resume.pyc` | clean | 263 |
 | `photograph.pyc` | clean | 30 |
 | `pid_calibrate.pyc` | clean | 182 |
@@ -88,6 +87,7 @@
 | `prtouch_v2.pyc` | clean | 17 |
 | `prtouch_v3.pyc` | clean | 13 |
 | `pulse_counter.pyc` | clean | 81 |
+| `quad_gantry_level.pyc` | clean | 116 |
 | `query_adc.pyc` | clean | 40 |
 | `query_endstops.pyc` | clean | 52 |
 | `replicape.pyc` | clean | 291 |
@@ -105,7 +105,7 @@
 | `temperature_mcu.pyc` | clean | 224 |
 | `temperature_sensor.pyc` | clean | 49 |
 | `thermistor.pyc` | clean | 127 |
-| `tmc.pyc` | clean | 383 |
+| `tmc.pyc` | clean | 384 |
 | `tmc2209.pyc` | clean | 77 |
 | `tsl1401cl_filament_width_sensor.pyc` | clean | 124 |
 | `tuning_tower.pyc` | clean | 113 |
