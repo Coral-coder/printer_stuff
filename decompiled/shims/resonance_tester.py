@@ -102,7 +102,7 @@ class VibrationPulseTest:
         max_accel = self.freq_end * self.accel_per_hz
         self.gcode.run_script_from_command('SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f' % (max_accel, max_accel))
         input_shaper = self.printer.lookup_object('input_shaper', None)
-        if not input_shaper is not None and gcmd.get_int('INPUT_SHAPING', 0):
+        if input_shaper is not None and not gcmd.get_int('INPUT_SHAPING', 0):
             input_shaper.disable_shaping()
             gcmd.respond_info('Disabled [input_shaper] for resonance testing')
         else:
@@ -110,7 +110,7 @@ class VibrationPulseTest:
         gcmd.respond_info('Testing frequency %.0f Hz' % (freq,))
         
         try:
-            if freq <= self.freq_end + 1e-06:
+            while freq <= self.freq_end + 1e-06:
                 self.gcode.check_cancel_running()
                 t_seg = 0.25 / freq
                 accel = self.accel_per_hz * freq
@@ -136,16 +136,11 @@ class VibrationPulseTest:
                 freq += 2.0 * t_seg * self.hz_per_sec
                 if math.floor(freq) > math.floor(old_freq):
                     gcmd.respond_info('Testing frequency %.0f Hz' % (freq,))
-                self.gcode.run_script_from_command('SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f' % (old_max_accel, old_max_accel_to_decel))
-                if input_shaper is not None:
-                    input_shaper.enable_shaping()
-                    gcmd.respond_info('Re-enabled [input_shaper]')
-                else:
-                    self.gcode.run_script_from_command('SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f' % (old_max_accel, old_max_accel_to_decel))
-                    if input_shaper is not None:
-                        input_shaper.enable_shaping()
-                        gcmd.respond_info('Re-enabled [input_shaper]')
-            return None
+        finally:
+            self.gcode.run_script_from_command('SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f' % (old_max_accel, old_max_accel_to_decel))
+            if input_shaper is not None:
+                input_shaper.enable_shaping()
+                gcmd.respond_info('Re-enabled [input_shaper]')
 
 
 
@@ -202,25 +197,19 @@ class ResonanceTester:
                         if axis.matches(chip_axis):
                             aclient = chip.start_internal_client()
                             raw_values.append((chip_axis, aclient, chip.name))
-                            continue
-                        else:
-                            for chip in accel_chips:
-                                aclient = chip.start_internal_client()
-                                raw_values.append((axis, aclient, chip.name))
-                
+                else:
+                    for chip in accel_chips:
+                        aclient = chip.start_internal_client()
+                        raw_values.append((axis, aclient, chip.name))
                 try:
                     self.test.run_test(axis, gcmd)
                 finally:
                     for chip_axis, aclient, chip_name in raw_values:
                         aclient.finish_measurements()
-                        raw_name = self.get_filename('raw_data', raw_name_suffix, axis, point if raw_name_suffix is not None or len(test_points) > 1 else None, chip_name if accel_chips is not None else None)
-                        aclient.write_to_file(raw_name)
-                        gcmd.respond_info('Writing raw accelerometer data to %s file' % (raw_name,))
-                for chip_axis, aclient, chip_name in raw_values:
-                    aclient.finish_measurements()
-                    raw_name = self.get_filename('raw_data', raw_name_suffix, axis, point if raw_name_suffix is not None or len(test_points) > 1 else None, chip_name if accel_chips is not None else None)
-                    aclient.write_to_file(raw_name)
-                    gcmd.respond_info('Writing raw accelerometer data to %s file' % (raw_name,))
+                        if raw_name_suffix is not None:
+                            raw_name = self.get_filename('raw_data', raw_name_suffix, axis, point if len(test_points) > 1 else None, chip_name if accel_chips is not None else None)
+                            aclient.write_to_file(raw_name)
+                            gcmd.respond_info('Writing raw accelerometer data to %s file' % (raw_name,))
                 if helper is None:
                     continue
 
@@ -253,15 +242,15 @@ class ResonanceTester:
             except ValueError:
                 raise gcmd.error("Invalid POINT parameter, must be 'x,y,z' where x, y and z are valid floating point numbers")
 
-            if accel_chips:
-                parsed_chips = []
-                for chip_name in accel_chips.split(','):
-                    if 'adxl345' in chip_name:
-                        chip_lookup_name = chip_name.strip()
-                    else:
-                        chip_lookup_name = 'adxl345 ' + chip_name.strip()
-                    chip = self.printer.lookup_object(chip_lookup_name)
-                    parsed_chips.append(chip)
+        if accel_chips:
+            parsed_chips = []
+            for chip_name in accel_chips.split(','):
+                if 'adxl345' in chip_name:
+                    chip_lookup_name = chip_name.strip()
+                else:
+                    chip_lookup_name = 'adxl345 ' + chip_name.strip()
+                chip = self.printer.lookup_object(chip_lookup_name)
+                parsed_chips.append(chip)
         outputs = gcmd.get('OUTPUT', 'resonances').lower().split(',')
         for output in outputs:
             if output not in ('resonances', 'raw_data'):
