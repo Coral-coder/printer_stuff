@@ -59,21 +59,22 @@ class HeaterCheck:
         if not self.approaching_target:
             if target != self.last_target:
                 logging.info('Heater %s approaching new target of %.3f', self.heater_name, target)
+                self.approaching_target = self.starting_approach = True
                 self.goal_temp = temp + self.heating_gain
                 self.goal_systime = eventtime + self.check_gain_time
             elif self.error >= self.max_error:
                 logging.error('verify_heater:heater_fault heater_name:%s, temp:%s, target:%s, hysteresis:%s, self.error:%s, self.max_error:%s' % (self.heater_name, temp, target, self.hysteresis, self.error, self.max_error))
                 return self.heater_fault()
-            elif temp >= self.goal_temp:
-                self.starting_approach = False
-                self.error = 0.0
-                self.goal_temp = temp + self.heating_gain
-                self.goal_systime = eventtime + self.check_gain_time
-            elif eventtime >= self.goal_systime:
-                self.approaching_target = False
-                logging.info('Heater %s no longer approaching target %.3f', self.heater_name, target)
-            elif self.starting_approach:
-                self.goal_temp = min(self.goal_temp, temp + self.heating_gain)
+        elif temp >= self.goal_temp:
+            self.starting_approach = False
+            self.error = 0.0
+            self.goal_temp = temp + self.heating_gain
+            self.goal_systime = eventtime + self.check_gain_time
+        elif eventtime >= self.goal_systime:
+            self.approaching_target = False
+            logging.info('Heater %s no longer approaching target %.3f', self.heater_name, target)
+        elif self.starting_approach:
+            self.goal_temp = min(self.goal_temp, temp + self.heating_gain)
         self.last_target = target
         return eventtime + 1.0
 
@@ -96,17 +97,10 @@ class HeaterCheck:
                 gcode.run_script_from_command('M140 S0')
                 gcode.run_script_from_command('M104 S0')
                 gcode.run_script_from_command('M141 S0')
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return self.printer.get_reactor().NEVER
+        except Exception as err:
+            logging.error(err)
+        self.printer.invoke_shutdown(m)
+        return self.printer.get_reactor().NEVER
 
 
 

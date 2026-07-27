@@ -60,9 +60,8 @@ class CUSTOM_MACRO:
         self.gcode.run_script_from_command('M140 S%d' % self.bed_temp)
         self.pheaters.set_temperature(self.heater_hot, self.extruder_temp, True)
         self.gcode.respond_info('can_break_flag = %d' % self.pheaters.can_break_flag)
-        if self.pheaters.can_break_flag == 1:
+        while self.pheaters.can_break_flag == 1:
             time.sleep(1)
-            continue
         self.gcode.respond_info('can_break_flag = %d' % self.pheaters.can_break_flag)
         if self.pheaters.can_break_flag == 3:
             self.pheaters.can_break_flag = 0
@@ -133,18 +132,9 @@ class CUSTOM_MACRO:
                 with open(speed_mode_path, 'w') as f:
                     f.write(json.dumps(result))
                     f.flush()
-        except Exception:
-            err = None
-            
-            try:
-                err_msg = 'cmd_SET_QMODE_FLAG err %s' % str(err)
-                logging.error(err_msg)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+        except Exception as err:
+            err_msg = 'cmd_SET_QMODE_FLAG err %s' % str(err)
+            logging.error(err_msg)
 
 
 

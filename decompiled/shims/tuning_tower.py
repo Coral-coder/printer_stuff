@@ -38,7 +38,7 @@ class TuningTower:
         if self.factor:
             if self.step_height or self.step_delta:
                 raise gcmd.error('Cannot specify both FACTOR and STEP_DELTA/STEP_HEIGHT')
-        if self.step_delta != 0.0 != self.step_height != 0.0:
+        if (self.step_delta != 0.0) != (self.step_height != 0.0):
             raise gcmd.error('Must specify both STEP_DELTA and STEP_HEIGHT')
         if self.gcode.is_traditional_gcode(command):
             self.command_fmt = '%s %s%%.9f' % (command, parameter)
@@ -55,9 +55,9 @@ class TuningTower:
             message_parts.append('factor=%.6f' % (self.factor,))
             if self.band:
                 message_parts.append('band=%.6f' % (self.band,))
-            else:
-                message_parts.append('step_delta=%.6f' % (self.step_delta,))
-                message_parts.append('step_height=%.6f' % (self.step_height,))
+        else:
+            message_parts.append('step_delta=%.6f' % (self.step_delta,))
+            message_parts.append('step_height=%.6f' % (self.step_height,))
         if self.skip:
             message_parts.append('skip=%.6f' % (self.skip,))
         gcmd.respond_info('Starting tuning test (' + ' '.join(message_parts) + ')')

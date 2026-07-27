@@ -45,7 +45,7 @@ class LIS2DW:
             '-y': (1, -SCALE),
             '-z': (2, -SCALE) }
         axes_map = config.getlist('axes_map', ('x', 'y', 'z'), count=3)
-        if None([ a not in am for a in (axes_map) ]):
+        if any([ a not in am for a in (axes_map) ]):
             raise config.error('Invalid lis2dw axes_map parameter')
         self.axes_map = [ am[a.strip()] for a in (axes_map) ]
         self.data_rate = 1600
@@ -54,8 +54,7 @@ class LIS2DW:
         self.spi = bus.MCU_SPI_from_config(config, 3, default_speed=5000000)
         self.mcu = mcu = self.spi.get_mcu()
         self.oid = oid = mcu.create_oid()
-        self.query_lis2dw_cmd = None
-        self.query_lis2dw_end_cmd = None
+        self.query_lis2dw_cmd = self.query_lis2dw_end_cmd = None
         self.query_lis2dw_status_cmd = None
         mcu.add_config_cmd('config_lis2dw oid=%d spi_oid=%d' % (oid, self.spi.get_oid()))
         mcu.add_config_cmd('query_lis2dw oid=%d clock=0 rest_ticks=0' % (oid,), on_restart=True)
@@ -85,7 +84,7 @@ class LIS2DW:
         return response[1]
 
     
-    def set_reg(self, reg, val, minclock = (0,)):
+    def set_reg(self, reg, val, minclock = 0):
         self.spi.spi_send([
             reg,
             val & 255], minclock=minclock)
@@ -101,21 +100,15 @@ class LIS2DW:
     def _handle_lis2dw_data(self, params):
         with self.lock:
             self.raw_samples.append(params)
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
 
     
     def _extract_samples(self, raw_samples):
-        (x_pos, x_scale) = ()
-        (y_pos, y_scale) = self.axes_map
-        (z_pos, z_scale) = None
+        (x_pos, x_scale), (y_pos, y_scale), (z_pos, z_scale) = self.axes_map
         last_sequence = self.last_sequence
         (time_base, chip_base, inv_freq) = self.clock_sync.get_time_translation()
         count = seq = 0
         samples = [
-            None] * len(raw_samples) * SAMPLES_PER_BLOCK
+            None] * (len(raw_samples) * SAMPLES_PER_BLOCK)
         for params in raw_samples:
             seq_diff = last_sequence - params['sequence'] & 65535
             seq_diff -= (seq_diff & 32768) << 1
@@ -140,19 +133,19 @@ class LIS2DW:
         return samples
 
     
-    def _update_clock(self, minclock = (0,)):
+    def _update_clock(self, minclock = 0):
         for retry in range(5):
             params = self.query_lis2dw_status_cmd.send([
                 self.oid], minclock=minclock)
             fifo = params['fifo'] & 31
             if fifo <= 32:
-                pass
-            
+                break
+        else:
             raise self.printer.command_error('Unable to query lis2dw fifo')
-            mcu_clock = self.mcu.clock32_to_clock64(params['clock'])
-            sequence = self.last_sequence & -65536 | params['next_sequence']
-            if sequence < self.last_sequence:
-                sequence += 65536
+        mcu_clock = self.mcu.clock32_to_clock64(params['clock'])
+        sequence = self.last_sequence & -65536 | params['next_sequence']
+        if sequence < self.last_sequence:
+            sequence += 65536
         self.last_sequence = sequence
         buffered = params['buffered']
         limit_count = self.last_limit_count & -65536 | params['limit_count']
@@ -163,7 +156,7 @@ class LIS2DW:
         if duration > self.max_query_duration:
             self.max_query_duration = max(2 * self.max_query_duration, self.mcu.seconds_to_clock(5e-06))
             return None
-        self.max_query_duration = None * duration
+        self.max_query_duration = 2 * duration
         msg_count = sequence * SAMPLES_PER_BLOCK + buffered // BYTES_PER_SAMPLE + fifo
         chip_clock = msg_count + 1
         self.clock_sync.update(mcu_clock + duration // 2, chip_clock)
@@ -172,7 +165,7 @@ class LIS2DW:
     def _start_measurements(self):
         if self.is_measuring():
             return None
-        dev_id = None.read_reg(REG_LIS2DW_WHO_AM_I_ADDR)
+        dev_id = self.read_reg(REG_LIS2DW_WHO_AM_I_ADDR)
         logging.info('lis2dw_dev_id: %x', dev_id)
         if dev_id != LIS2DW_DEV_ID:
             raise self.printer.command_error('Invalid lis2dw id (got %x vs %x).\nThis is generally indicative of connection problems\n(e.g. faulty wiring) or a faulty lis2dw chip.' % (dev_id, LIS2DW_DEV_ID))
@@ -181,10 +174,6 @@ class LIS2DW:
         self.set_reg(REG_LIS2DW_CTRL_REG1_ADDR, 148)
         with self.lock:
             self.raw_samples = []
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         systime = self.printer.get_reactor().monotonic()
         print_time = self.mcu.estimated_print_time(systime) + MIN_MSG_TIME
         reqclock = self.mcu.print_time_to_clock(print_time)
@@ -206,17 +195,13 @@ class LIS2DW:
     def _finish_measurements(self):
         if not self.is_measuring():
             return None
-        params = None.query_lis2dw_end_cmd.send([
+        params = self.query_lis2dw_end_cmd.send([
             self.oid,
             0,
             0])
         self.query_rate = 0
         with self.lock:
             self.raw_samples = []
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         logging.info("LIS2DW finished '%s' measurements", self.name)
         self.set_reg(REG_LIS2DW_FIFO_CTRL, 0)
 
@@ -226,17 +211,13 @@ class LIS2DW:
         with self.lock:
             raw_samples = self.raw_samples
             self.raw_samples = []
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         if not raw_samples:
             return { }
-        samples = None._extract_samples(raw_samples)
+        samples = self._extract_samples(raw_samples)
         if not samples:
             return { }
         return {
-            'data': None,
+            'data': samples,
             'errors': self.last_error_count,
             'overflows': self.last_limit_count }
 

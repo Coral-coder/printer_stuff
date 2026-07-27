@@ -39,8 +39,11 @@ def split_to_bytes(data):
 
 
 def bytes_to_int(byte_array):
-    pass
-# WARNING: Decompyle incomplete
+    assert len(byte_array) == 4
+    result = 0
+    for i, byte in enumerate(byte_array):
+        result |= (byte & 255) << 8 * (3 - i)
+    return result
 
 
 class MDL:
@@ -152,37 +155,38 @@ class BELT_MDL:
     
     def run_tension(self):
         movetimes = 0
-        movetimes += 1
-        self.gcode.respond_info('times:%s' % movetimes)
-        if movetimes > 200:
-            return 0
-        aimpull = self.target_tension - self.mdl.current_tension
-        aimpull = abs(aimpull)
-        aimpull = 10 if aimpull > 10 else aimpull
-        aimmove = int(aimpull) + 2
-        if aimmove > movetimes:
-            aimmove = aimmove - movetimes
-        elif movetimes > 110:
-            aimmove = 1
-        elif movetimes > 70:
-            aimmove = 2
-        elif movetimes > 50:
-            aimmove = 3
-        elif movetimes > 40:
-            aimmove = 4
-        elif movetimes > 20 and aimmove > movetimes - 20:
-            aimmove = aimmove + 20 - movetimes
-        if self.target_tension * (1 + self.mdl.mistake) < self.mdl.current_tension:
-            self.get_adc()
-            self.adc_to_num(self.mdl.current_place_adc)
-            return 1
-        if self.target_tension * (1 - self.mdl.mistake) > self.mdl.current_tension:
-            self.set_move(1, aimmove)
-            self.mdl.current_place = self.mdl.current_place + aimmove
-            self.get_adc()
-            self.adc_to_num(self.mdl.current_place_adc)
-            continue
-        return 1
+        while True:
+            movetimes += 1
+            self.gcode.respond_info('times:%s' % movetimes)
+            if movetimes > 200:
+                return 0
+            aimpull = self.target_tension - self.mdl.current_tension
+            aimpull = abs(aimpull)
+            aimpull = 10 if aimpull > 10 else aimpull
+            aimmove = int(aimpull) + 2
+            if aimmove > movetimes:
+                aimmove = aimmove - movetimes
+            elif movetimes > 110:
+                aimmove = 1
+            elif movetimes > 70:
+                aimmove = 2
+            elif movetimes > 50:
+                aimmove = 3
+            elif movetimes > 40:
+                aimmove = 4
+            elif movetimes > 20 and aimmove > movetimes - 20:
+                aimmove = aimmove + 20 - movetimes
+            if self.target_tension * (1 + self.mdl.mistake) < self.mdl.current_tension:
+                self.get_adc()
+                self.adc_to_num(self.mdl.current_place_adc)
+                return 1
+            if self.target_tension * (1 - self.mdl.mistake) > self.mdl.current_tension:
+                self.set_move(1, aimmove)
+                self.mdl.current_place = self.mdl.current_place + aimmove
+                self.get_adc()
+                self.adc_to_num(self.mdl.current_place_adc)
+            else:
+                return 1
 
     
     def set_tension(self):
@@ -427,7 +431,8 @@ class BELT_MDL:
                 self.gcode.respond_info('move_num:%s' % move_num)
                 self.gcode.respond_info('current_place:%s' % self.mdl.current_place)
                 return move_num
-        self.gcode.respond_info('move_num error:%s' % move_num)
+        else:
+            self.gcode.respond_info('move_num error:%s' % move_num)
 
     
     def init_adc_to_num(self):

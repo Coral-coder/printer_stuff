@@ -141,25 +141,15 @@ class PrinterProbe:
         
         try:
             epos = phoming.probing_move(self.mcu_probe, pos, speed)
-        except self.printer.command_error:
-            e = None
-            
-            try:
-                reason = str(e)
-                if 'Timeout during endstop homing' in reason:
-                    reason += HINT_TIMEOUT
-                raise self.printer.command_error(reason)
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            axis_twist_compensation = self.printer.lookup_object('axis_twist_compensation', None)
-            z_compensation = 0
-            if axis_twist_compensation is not None:
-                z_compensation = axis_twist_compensation.get_z_compensation_value(pos)
-
-
+        except self.printer.command_error as e:
+            reason = str(e)
+            if 'Timeout during endstop homing' in reason:
+                reason += HINT_TIMEOUT
+            raise self.printer.command_error(reason)
+        axis_twist_compensation = self.printer.lookup_object('axis_twist_compensation', None)
+        z_compensation = 0
+        if axis_twist_compensation is not None:
+            z_compensation = axis_twist_compensation.get_z_compensation_value(pos)
         self.gcode.respond_info('probe at %.3f,%.3f is z=%.6f z_compensation=%.6f' % (epos[0], epos[1], epos[2], z_compensation))
         epos[2] += z_compensation
         self.gcode.respond_info('probe at %.3f,%.3f is z=%.6f' % (epos[0], epos[1], epos[2]))
@@ -172,7 +162,7 @@ class PrinterProbe:
     
     def _calc_mean(self, positions):
         count = float(len(positions))
-        return [ sum((lambda (range(3)): [ pos[i] for pos in (range(3)) ])(positions)) / count for None in (range(3)) ]
+        return [ sum([ pos[i] for pos in positions ]) / count for i in range(3) ]
 
     
     def _calc_median(self, positions):
@@ -199,14 +189,14 @@ class PrinterProbe:
         retries = 0
         positions = []
         gcode = self.printer.lookup_object('gcode')
-        if len(positions) < sample_count:
+        while len(positions) < sample_count:
             gcode.check_cancel_running()
             if zmax_dist is not None:
                 pos = self._probe(speed, max_z_dist=zmax_dist)
             else:
                 pos = self._probe(speed)
             positions.append(pos)
-            z_positions = [ p[2] for p in (positions) ]
+            z_positions = [ p[2] for p in positions ]
             if max(z_positions) - min(z_positions) > samples_tolerance:
                 if retries >= samples_retries:
                     raise gcmd.error('Probe samples exceed samples_tolerance')
@@ -216,9 +206,8 @@ class PrinterProbe:
             if len(positions) < sample_count:
                 self._move(probexy + [
                     pos[2] + sample_retract_dist], lift_speed)
-                continue
-                if must_notify_multi_probe:
-                    self.multi_probe_end()
+        if must_notify_multi_probe:
+            self.multi_probe_end()
         if samples_result == 'median':
             return self._calc_median(positions)
         return self._calc_mean(positions)
@@ -260,7 +249,7 @@ class PrinterProbe:
         gcmd.respond_info('PROBE_ACCURACY at X:%.3f Y:%.3f Z:%.3f (samples=%d retract=%.3f speed=%.1f lift_speed=%.1f)\n' % (pos[0], pos[1], pos[2], sample_count, sample_retract_dist, speed, lift_speed))
         self.multi_probe_begin()
         positions = []
-        if len(positions) < sample_count:
+        while len(positions) < sample_count:
             pos = self._probe(speed)
             positions.append(pos)
             liftpos = [
@@ -268,7 +257,6 @@ class PrinterProbe:
                 None,
                 pos[2] + sample_retract_dist]
             self._move(liftpos, lift_speed)
-            continue
         self.multi_probe_end()
         max_value = max([ p[2] for p in (positions) ])
         min_value = min([ p[2] for p in (positions) ])
@@ -334,17 +322,8 @@ class PrinterProbe:
                 with open(v_sd.print_file_name_path, 'w') as f:
                     f.write(json.dumps(result))
                     f.flush()
-        except Exception:
-            err = None
-            
-            try:
-                logging.error('record_gcode_offset_when_printing error: %s' % err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+        except Exception as err:
+            logging.error('record_gcode_offset_when_printing error: %s' % err)
 
 
 
@@ -379,8 +358,6 @@ class ProbeEndstopWrapper:
         for stepper in kin.get_steppers():
             if stepper.is_active_axis('z'):
                 self.add_stepper(stepper)
-                continue
-                return None
 
     
     def raise_probe(self):
@@ -512,14 +489,14 @@ class ProbePointsHelper:
         if self.horizontal_move_z < self.probe_offsets[2]:
             raise gcmd.error('{"code": "key15", "msg": "horizontal_move_z can\'t be less than probe\'s z_offset"}')
         probe.multi_probe_begin()
-        done = self._move_next()
-        wait_time = gcmd.get_float('WAITTIME', default=0)
-        if wait_time != 0:
-            logging.info('Z_TILT_ADJUST wait_time: %s' % wait_time)
-            self.printer.get_reactor().pause(self.printer.get_reactor().monotonic() + wait_time)
-        if done:
-            pass
-        else:
+        while True:
+            done = self._move_next()
+            wait_time = gcmd.get_float('WAITTIME', default=0)
+            if wait_time != 0:
+                logging.info('Z_TILT_ADJUST wait_time: %s' % wait_time)
+                self.printer.get_reactor().pause(self.printer.get_reactor().monotonic() + wait_time)
+            if done:
+                break
             pos = probe.run_probe(gcmd)
             self.results.append(pos)
         probe.multi_probe_end()

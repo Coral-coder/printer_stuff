@@ -12,8 +12,7 @@ class IdleTimeout:
         self.printer = config.get_printer()
         self.reactor = self.printer.get_reactor()
         self.gcode = self.printer.lookup_object('gcode')
-        self.toolhead = None
-        self.timeout_timer = None
+        self.toolhead = self.timeout_timer = None
         self.printer.register_event_handler('klippy:ready', self.handle_ready)
         self.idle_timeout = config.getfloat('timeout', 6e+02, above=0.0)
         gcode_macro = self.printer.load_object(config, 'gcode_macro')
@@ -47,7 +46,7 @@ class IdleTimeout:
         except:
             logging.exception('idle timeout gcode execution')
             self.state = 'Ready'
-            return None
+            return eventtime + 1.0
 
         print_time = self.toolhead.get_last_move_time()
         self.state = 'Idle'
@@ -58,7 +57,7 @@ class IdleTimeout:
     def check_idle_timeout(self, eventtime):
         (print_time, est_print_time, lookahead_empty) = self.toolhead.check_busy(eventtime)
         idle_time = est_print_time - print_time
-        if lookahead_empty or idle_time < 1.0:
+        if not lookahead_empty or idle_time < 1.0:
             return eventtime + self.idle_timeout
         if idle_time < self.idle_timeout:
             return eventtime + self.idle_timeout - idle_time
