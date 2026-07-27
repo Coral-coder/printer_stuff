@@ -28,10 +28,6 @@ class PrintStats:
             try:
                 with open(self.z_pos_filepath, 'r') as f:
                     z_pos = float(json.loads(f.read()).get('z_pos', 0))
-                    None(None, None, None)
-                with None:
-                    if not None:
-                        pass
             except Exception:
                 err = None
                 
@@ -69,10 +65,6 @@ class PrintStats:
                 with open(info_path, 'r') as f:
                     ret = json.loads(f.read())
                     self.filament_used = ret.get('filament_used', 0)
-                    None(None, None, None)
-                with None:
-                    if not None:
-                        pass
             except Exception:
                 err = None
                 

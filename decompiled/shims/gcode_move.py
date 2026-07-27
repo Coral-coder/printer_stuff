@@ -375,4 +375,132 @@ class GCodeMove:
         pass
 
     
-    def cmd_M82(self, 
+    def cmd_M82(self, gcmd):
+        self.absolute_extrude = True
+
+    
+    def cmd_M83(self, gcmd):
+        self.absolute_extrude = False
+
+    
+    def cmd_G90(self, gcmd):
+        self.absolute_coord = True
+
+    
+    def cmd_G91(self, gcmd):
+        self.absolute_coord = False
+
+    
+    def cmd_G92(self, gcmd):
+        offsets = [ gcmd.get_float(a, None) for a in ('XYZE') ]
+        for i, offset in enumerate(offsets):
+            if offset is not None or i == 3:
+                offset *= self.extrude_factor
+            self.base_position[i] = self.last_position[i] - offset
+        if offsets == [
+            None,
+            None,
+            None,
+            None]:
+            self.base_position = list(self.last_position)
+
+    
+    def cmd_M114(self, gcmd):
+        p = self._get_gcode_position()
+        gcmd.respond_raw('X:%.3f Y:%.3f Z:%.3f E:%.3f' % tuple(p))
+
+    
+    def cmd_M220(self, gcmd):
+        value = gcmd.get_float('S', 1e+02, above=0.0) / 6e+03
+        self.speed = self._get_gcode_speed() * value
+        self.speed_factor = value
+        import json
+        
+        try:
+            SAVE = int(gcmd.get('SAVE', 0))
+            speed_S = int(gcmd.get_float('S', 1e+02, above=0.0))
+            v_sd = self.printer.lookup_object('virtual_sdcard')
+            speed_mode_path = v_sd.speed_mode_path
+            if SAVE == 1:
+                result = { }
+                result['speed_mode'] = 1
+                result['value'] = speed_S
+                with open(speed_mode_path, 'w') as f:
+                    f.write(json.dumps(result))
+                    f.flush()
+        except Exception:
+            err = None
+            
+            try:
+                err_msg = 'cmd_M220 err %s' % str(err)
+                logging.error(err_msg)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
+
+    
+    def cmd_M221(self, gcmd):
+        new_extrude_factor = gcmd.get_float('S', 1e+02, above=0.0) / 1e+02
+        last_e_pos = self.last_position[3]
+        e_value = (last_e_pos - self.base_position[3]) / self.extrude_factor
+        self.base_position[3] = last_e_pos - e_value * new_extrude_factor
+        self.extrude_factor = new_extrude_factor
+        import json
+        
+        try:
+            SAVE = int(gcmd.get('SAVE', 0))
+            speed_S = int(gcmd.get_float('S', 1e+02, above=0.0))
+            v_sd = self.printer.lookup_object('virtual_sdcard')
+            if SAVE == 1:
+                result = { }
+                result['value'] = speed_S
+                with open(v_sd.flow_rate_path, 'w') as f:
+                    f.write(json.dumps(result))
+                    f.flush()
+        except Exception:
+            err = None
+            
+            try:
+                err_msg = 'cmd_M221 err %s' % str(err)
+                logging.error(err_msg)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
+
+    cmd_SET_GCODE_OFFSET_help = 'Set a virtual offset to g-code positions'
+    
+    def cmd_SET_GCODE_OFFSET(self, gcmd):
+        move_delta = [
+            0.0,
+            0.0,
+            0.0,
+            0.0]
+        for pos, axis in enumerate('XYZE'):
+            offset = gcmd.get_float(axis, None)
+            if offset is None:
+                offset = gcmd.get_float(axis + '_ADJUST', None)
+                if offset is None:
+                    continue
+                offset += self.homing_position[pos]
+            delta = offset - self.homing_position[pos]
+            move_delta[pos] = delta
+            self.base_position[pos] += delta
+            self.homing_position[pos] = offset
+        if gcmd.get_int('MOVE', 0):
+            speed = gcmd.get_float('MOVE_SPEED', self.speed, above=0.0)
+            for pos, delta in enumerate(move_delta):
+                self.last_position[pos] += delta
+            self.move_with_transform(self.last_position, speed)
+
+    
+    def recordPrintFileName(self, path, file_n

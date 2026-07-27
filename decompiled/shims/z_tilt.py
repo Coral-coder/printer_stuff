@@ -173,10 +173,6 @@ class RetryHelper:
                 'stepper_z_adjustment': z_tilt.stepper_z_adjustment,
                 'stepper_z1_adjustment': z_tilt.stepper_z1_adjustment }))
             f.flush()
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
 
 
 
@@ -247,9 +243,8 @@ class ZTilt:
                         del err
                     err = None
                     del err
-                    with None:
-                        if not None:
-                            pass
+                    if not None:
+                        pass
 
 
         if stepper_z_adjustment != -10 and stepper_z1_adjustment != -10:

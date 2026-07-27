@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/custom_macro.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: custom_macro.pyc (Python 3.9)
 
@@ -81,4 +72,84 @@ class CUSTOM_MACRO:
             self.gcode.run_script_from_command('SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=5')
             self.gcode.run_script_from_command('M204 S12000')
             self.gcode.run_script_from_command('G21')
-            self.gcode.run_script_from_command('SET_VELOCI
+            self.gcode.run_script_from_command('SET_VELOCITY_LIMIT ACCEL_TO_DECEL=6000')
+            self.gcode.run_script_from_command('M220 S100')
+            self.gcode.run_script_from_command('G1 Z2.0 F1200')
+            self.gcode.run_script_from_command('G1 X0.1 Y20 Z0.3 F6000.0')
+            self.gcode.run_script_from_command('G1 X0.1 Y180.0 Z0.3 F3000.0 E10.0')
+            self.gcode.run_script_from_command('G1 X0.4 Y180.0 Z0.3 F3000.0')
+            self.gcode.run_script_from_command('G1 X0.4 Y20.0 Z0.3 F3000.0 E10.0')
+            self.gcode.run_script_from_command('G1 Y10.0 F3000.0')
+            self.gcode.run_script_from_command('G1 Z2.0 F600.0')
+            self.gcode.run_script_from_command('G1 Z0.3 F600.0')
+            self.gcode.run_script_from_command('G1 Z2.0 F600.0')
+            self.gcode.run_script_from_command('M82')
+            self.gcode.run_script_from_command('G92 E0')
+            self.gcode.run_script_from_command('G1 F12000')
+            self.gcode.run_script_from_command('G21')
+
+    cmd_CX_ROUGH_G28_help = 'rough G28'
+    
+    def cmd_CX_ROUGH_G28(self, gcmd):
+        self.extruder_temp = gcmd.get_float('EXTRUDER_TEMP', default=self.default_extruder_temp, minval=1.8e+02, maxval=3.2e+02)
+        self.g28_ext_temp = self.extruder_temp - 70
+        if self.g28_ext_temp > 1.8e+02:
+            self.g28_ext_temp = 1.8e+02
+        
+        try:
+            self.prtouch = self.printer.lookup_object('prtouch_v2')
+        except:
+            self.prtouch = self.printer.lookup_object('prtouch')
+            gcmd.respond_info('self.prtouch = prtouch')
+
+        self.prtouch.change_hot_min_temp(self.g28_ext_temp)
+        self.bed_temp = gcmd.get_float('BED_TEMP', default=self.default_bed_temp, minval=0.0, maxval=1.3e+02)
+        self.leveling_calibration = gcmd.get_int('LEVELING_CALIBRATION', default=1, minval=0, maxval=1)
+        self.gcode.run_script_from_command('M104 S%d' % self.g28_ext_temp)
+        self.gcode.run_script_from_command('M140 S%d' % self.bed_temp)
+        self.gcode.run_script_from_command('M204 S500')
+        self.gcode.run_script_from_command('G28')
+
+    cmd_CX_NOZZLE_CLEAR_help = 'nozzle clear with temperature'
+    
+    def cmd_CX_NOZZLE_CLEAR(self, gcmd):
+        self.gcode.run_script_from_command('NOZZLE_CLEAR HOT_MIN_TEMP=%d HOT_MAX_TEMP=%d BED_MAX_TEMP=%d' % (self.g28_ext_temp, self.extruder_temp - 20, self.bed_temp))
+
+    cmd_SET_QMODE_FLAG_help = 'set qmode flag'
+    
+    def cmd_SET_QMODE_FLAG(self, gcmd):
+        self.qmode_flag = gcmd.get_int('FLAG', default=1, minval=0, maxval=1)
+        gcmd.respond_info('[cmd_SET_QMODE_FLAG] self.qmode_flag={}'.format(self.qmode_flag))
+        import json
+        import logging
+        
+        try:
+            print_stats = self.printer.lookup_object('print_stats')
+            v_sd = self.printer.lookup_object('virtual_sdcard')
+            speed_mode_path = v_sd.speed_mode_path
+            if print_stats.state == 'printing' and self.qmode_flag == 1:
+                result = { }
+                result['speed_mode'] = 2
+                with open(speed_mode_path, 'w') as f:
+                    f.write(json.dumps(result))
+                    f.flush()
+        except Exception:
+            err = None
+            
+            try:
+                err_msg = 'cmd_SET_QMODE_FLAG err %s' % str(err)
+                logging.error(err_msg)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
+
+
+
+def load_config(config):
+    return CUSTOM_MACRO(config)
+

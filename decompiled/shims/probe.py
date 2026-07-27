@@ -277,4 +277,101 @@ class PrinterProbe:
         median = self._calc_median(positions)[2]
         deviation_sum = 0
         for i in range(len(positions)):
-            deviation_sum += pow(positions[i][2] - avg_v
+            deviation_sum += pow(positions[i][2] - avg_value, 2.0)
+        sigma = (deviation_sum / len(positions)) ** 0.5
+        z_values = [ pos[2] for pos in (positions) ]
+        gcmd.respond_info('probe accuracy results: maximum %.6f, minimum %.6f, range %.6f, average %.6f, median %.6f, standard deviation %.6f' % (max_value, min_value, range_value, avg_value, median, sigma))
+        return (max_value, min_value, range_value, avg_value, median, sigma, positions)
+
+    
+    def probe_calibrate_finalize(self, kin_pos):
+        if kin_pos is None:
+            return None
+        z_offset = None.probe_calibrate_z - kin_pos[2]
+        self.gcode.respond_info('%s: z_offset: %.3f\nThe SAVE_CONFIG command will update the printer config file\nwith the above and restart the printer.' % (self.name, z_offset))
+        configfile = self.printer.lookup_object('configfile')
+        configfile.set(self.name, 'z_offset', '%.3f' % (z_offset,))
+
+    cmd_PROBE_CALIBRATE_help = "Calibrate the probe's z_offset"
+    
+    def cmd_PROBE_CALIBRATE(self, gcmd):
+        manual_probe.verify_no_manual_probe(self.printer)
+        lift_speed = self.get_lift_speed(gcmd)
+        curpos = self.run_probe(gcmd)
+        self.probe_calibrate_z = curpos[2]
+        curpos[2] += 5.0
+        self._move(curpos, lift_speed)
+        curpos[0] += self.x_offset
+        curpos[1] += self.y_offset
+        self._move(curpos, self.speed)
+        manual_probe.ManualProbeHelper(self.printer, gcmd, self.probe_calibrate_finalize)
+
+    
+    def cmd_Z_OFFSET_APPLY_PROBE(self, gcmd):
+        offset = self.gcode_move.get_status()['homing_origin'].z
+        configfile = self.printer.lookup_object('configfile')
+        new_calibrate = self.z_offset - offset
+        self.gcode.respond_info('%s: z_offset: %.3f\nThe SAVE_CONFIG command will update the printer config file\nwith the above and restart the printer.' % (self.name, new_calibrate))
+        configfile.set(self.name, 'z_offset', '%.3f' % (new_calibrate,))
+        self.z_offset_calibrate = new_calibrate
+        self.z_offset_change_flag = True
+        self.record_gcode_offset_when_printing()
+
+    cmd_Z_OFFSET_APPLY_PROBE_help = "Adjust the probe's z_offset"
+    
+    def record_gcode_offset_when_printing(self):
+        import os
+        import json
+        
+        try:
+            configfile = self.printer.lookup_object('configfile')
+            print_stats = self.printer.load_object(configfile, 'print_stats')
+            v_sd = self.printer.lookup_object('virtual_sdcard')
+            if print_stats and print_stats.state == 'printing' and os.path.exists(v_sd.print_file_name_path) and self.z_offset_change_flag:
+                with open(v_sd.print_file_name_path, 'r') as f:
+                    result = json.loads(f.read())
+                    result['SET_GCODE_OFFSET'] = self.z_offset_calibrate
+                with open(v_sd.print_file_name_path, 'w') as f:
+                    f.write(json.dumps(result))
+                    f.flush()
+        except Exception:
+            err = None
+            
+            try:
+                logging.error('record_gcode_offset_when_printing error: %s' % err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
+
+
+
+class ProbeEndstopWrapper:
+    
+    def __init__(self, config):
+        self.printer = config.get_printer()
+        self.position_endstop = config.getfloat('z_offset')
+        self.stow_on_each_sample = config.getboolean('deactivate_on_each_sample', True)
+        gcode_macro = self.printer.load_object(config, 'gcode_macro')
+        self.activate_gcode = gcode_macro.load_template(config, 'activate_gcode', '')
+        self.deactivate_gcode = gcode_macro.load_template(config, 'deactivate_gcode', '')
+        ppins = self.printer.lookup_object('pins')
+        pin = config.get('pin')
+        pin_params = ppins.lookup_pin(pin, can_invert=True, can_pullup=True)
+        mcu = pin_params['chip']
+        self.mcu_endstop = mcu.setup_pin('endstop', pin_params)
+        self.printer.register_event_handler('klippy:mcu_identify', self._handle_mcu_identify)
+        self.get_mcu = self.mcu_endstop.get_mcu
+        self.add_stepper = self.mcu_endstop.add_stepper
+        self.get_steppers = self.mcu_endstop.get_steppers
+        self.home_start = self.mcu_endstop.home_start
+        self.home_wait = self.mcu_endstop.home_wait
+        self.query_endstop = self.mcu_endstop.query_endstop
+        self.multi = 'OFF'
+
+    
+    def _handle_mcu_identify(self):

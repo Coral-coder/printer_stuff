@@ -4,9 +4,9 @@ Each recovered `.py` is recompiled to a 3.9 `.pyc` and its code objects are
 compared opcode-for-opcode against the original. **faithful** = the recovered
 source round-trips to essentially the same bytecode (a proof of correctness).
 
-- faithful (>=99.5%): **35**
-- high (90-99.5%): **28**
-- partial (<90%): **5**
+- faithful (>=99.5%): **36**
+- high (90-99.5%): **29**
+- partial (<90%): **3**
 - broken (won't recompile under 3.9 / empty): **37**
 
 | module | category | bytecode match | note |
@@ -29,6 +29,7 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/motor_control.py` | faithful | 100.0% |  |
 | `shims/prtouch_v2.py` | faithful | 100.0% |  |
 | `shims/prtouch_v3.py` | faithful | 100.0% |  |
+| `shims/query_endstops.py` | faithful | 100.0% |  |
 | `shims/respond.py` | faithful | 100.0% |  |
 | `shims/serial_485.py` | faithful | 100.0% |  |
 | `shims/shaper_defs.py` | faithful | 100.0% |  |
@@ -57,27 +58,26 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/tsl1401cl_filament_width_sensor.py` | high | 99.0% |  |
 | `shims/dotstar.py` | high | 98.8% |  |
 | `shims/filament_switch_sensor.py` | high | 98.8% |  |
+| `shims/pause_resume.py` | high | 98.7% |  |
+| `shims/adxl345.py` | high | 98.6% |  |
 | `shims/display_status.py` | high | 98.6% |  |
 | `shims/sdcard_loop.py` | high | 98.5% |  |
 | `shims/tuning_tower.py` | high | 98.4% |  |
 | `shims/manual_probe.py` | high | 98.3% |  |
 | `shims/adc_temperature.py` | high | 97.9% |  |
 | `shims/z_thermal_adjust.py` | high | 97.9% |  |
+| `shims/z_tilt.py` | high | 97.7% |  |
 | `shims/idle_timeout.py` | high | 97.5% |  |
+| `shims/print_stats.py` | high | 96.8% |  |
 | `shims/thermistor.py` | high | 96.8% |  |
-| `shims/adxl345.py` | high | 96.5% |  |
 | `shims/homing_override.py` | high | 96.1% |  |
 | `shims/pid_calibrate.py` | high | 96.0% |  |
-| `shims/z_tilt.py` | high | 96.0% |  |
-| `shims/query_endstops.py` | high | 95.5% |  |
+| `shims/base_info.py` | high | 95.9% |  |
 | `shims/lis2dw.py` | high | 93.9% |  |
 | `shims/save_variables.py` | high | 93.8% |  |
-| `shims/print_stats.py` | high | 93.1% |  |
 | `shims/photograph.py` | high | 93.0% |  |
-| `shims/pause_resume.py` | partial | 87.8% |  |
 | `shims/verify_heater.py` | partial | 86.7% |  |
 | `shims/bed_mesh.py` | partial | 14.8% |  |
-| `shims/base_info.py` | partial | 2.2% |  |
 | `shims/motion_report.py` | partial | 0.2% |  |
 | `shims/auto_addr_wrapper.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/belt_mdl.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
@@ -112,7 +112,7 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/tmc2208.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/tmc2262.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/tmc_uart.py` | broken | — | compile-failed: PyCompileError: Sorry: IndentationError: expected an i |
-| `shims/tool.py` | broken | — | compile-failed: PyCompileError: Sorry: IndentationError: expected an i |
+| `shims/tool.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/virtual_sdcard.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/z_align.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `so/auto_addr_wrapper.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |

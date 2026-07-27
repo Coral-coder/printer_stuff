@@ -85,10 +85,6 @@ class PauseResume:
                     if len(data) == 0:
                         logging.error('%s f.read()==None read fail!!!' % self.v_sd.print_file_name_path)
                     response['file_state'] = True if json.loads(data) else False
-                    None(None, None, None)
-                with None:
-                    if not None:
-                        pass
             except Exception:
                 err = None
                 
@@ -109,10 +105,6 @@ class PauseResume:
                         data = json.loads(f.read())
                         logging.info('[user_print_refer_path] POWER_LOSS_DATA: \n %s', data)
                         power_loss_switch = data.get('power_loss', { }).get('switch', False)
-                        None(None, None, None)
-                    with None:
-                        if not None:
-                            pass
 
 
         bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
@@ -153,10 +145,6 @@ class PauseResume:
             with open(self.v_sd.user_print_refer_path, 'r') as f:
                 data = json.loads(f.read())
                 power_loss_switch = data.get('power_loss', { }).get('switch', False)
-                None(None, None, None)
-            with None:
-                if not None:
-                    pass
         bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
         if power_loss_switch and bl24c16f:
             self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
@@ -249,17 +237,9 @@ class PauseResume:
             with open(self.v_sd.print_file_name_path, 'r') as f:
                 result = json.loads(f.read())
                 result['variable_z_safe_pause'] = 0
-                None(None, None, None)
-            with None:
-                if not None:
-                    pass
             with open(self.v_sd.print_file_name_path, 'w') as f:
                 f.write(json.dumps(result))
                 f.flush()
-                None(None, None, None)
-            with None:
-                if not None:
-                    pass
 
     cmd_CLEAR_PAUSE_help = 'Clears the current paused state without resuming the print'
     

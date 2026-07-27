@@ -60,10 +60,6 @@ class LoadAI:
         try:
             with open(json_file, 'r') as file:
                 data = json.load(file)
-                None(None, None, None)
-            with None:
-                if not None:
-                    pass
         except Exception:
             e = None
             
@@ -533,11 +529,6 @@ class LoadAI:
                 body.append(b'\r\n')
                 body.append(part.get_payload(decode=True))
                 body.append(b'\r\n')
-                None(None, None, None)
-                continue
-                with None:
-                    if not None:
-                        pass
         body.append(f'''--{boundary}--\r\n'''.encode('utf-8'))
         return (b''.join(body), boundary)
 

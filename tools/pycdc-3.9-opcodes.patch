@@ -24,7 +24,7 @@ index 98760db..c711b2f 100644
      generator_t m_generators;
  
 diff --git a/ASTree.cpp b/ASTree.cpp
-index f837152..1d52aab 100644
+index f837152..0c099a5 100644
 --- a/ASTree.cpp
 +++ b/ASTree.cpp
 @@ -73,6 +73,35 @@ static void CheckIfExpr(FastStack& stack, PycRef<ASTBlock> curblock)
@@ -217,7 +217,65 @@ index f837152..1d52aab 100644
          case Pyc::SET_UPDATE_A:
              {
                  PycRef<ASTNode> rhs = stack.top();
-@@ -2075,7 +2235,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+@@ -1686,7 +1846,38 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+                 }
+ 
+                 if (curblock->blktype() == ASTBlock::BLK_WITH) {
+-                    // This should only be popped by a WITH_CLEANUP
++                    if (mod->verCompare(3, 9) >= 0) {
++                        /* Python 3.9 `with` has no WITH_CLEANUP; the body ends at
++                         * this POP_BLOCK, followed by the implicit exit protocol
++                         *   LOAD_CONST None; DUP_TOP; DUP_TOP; CALL_FUNCTION 3;
++                         *   POP_TOP; JUMP_FORWARD; WITH_EXCEPT_START; ...;
++                         *   POP_EXCEPT; POP_TOP
++                         * which must be suppressed. Close the with block and skip
++                         * the protocol (up to and including the trailing POP_TOP
++                         * after POP_EXCEPT). */
++                        PycRef<ASTBlock> w = curblock;
++                        blocks.pop();
++                        curblock = blocks.top();
++                        curblock->append(w.cast<ASTNode>());
++                        /* Consume the normal-exit part up to its JUMP_FORWARD,
++                         * whose target is where real code resumes; then consume
++                         * the exception handler up to that target. */
++                        int op2 = 0, arg2 = 0, resume = -1, guard = 0;
++                        while (!source.atEof() && guard++ < 12) {
++                            bc_next(source, mod, op2, arg2, pos);
++                            if (op2 == Pyc::JUMP_FORWARD_A) {
++                                int delta = arg2;
++                                if (mod->verCompare(3, 10) >= 0)
++                                    delta *= sizeof(uint16_t);
++                                resume = pos + delta;
++                                break;
++                            }
++                        }
++                        while (resume >= 0 && pos < resume && !source.atEof())
++                            bc_next(source, mod, op2, arg2, pos);
++                        break;
++                    }
++                    // <=3.7: popped by a WITH_CLEANUP
+                     break;
+                 }
+ 
+@@ -2018,13 +2209,16 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+             // Ignore
+             break;
+         case Pyc::SETUP_WITH_A:
+-        case Pyc::WITH_EXCEPT_START:
+             {
+                 PycRef<ASTBlock> withblock = new ASTWithBlock(pos+operand);
+                 blocks.push(withblock);
+                 curblock = blocks.top();
+             }
+             break;
++        case Pyc::WITH_EXCEPT_START:
++            /* 3.9 with exception-path __exit__ call; the POP_BLOCK handler skips
++             * the whole exit protocol, so this is only reached defensively. */
++            break;
+         case Pyc::BEFORE_WITH:
+             /* Python 3.11: setup for with block; ignore. */
+             break;
+@@ -2075,7 +2269,15 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
              break;
          case Pyc::SETUP_FINALLY_A:
              {
@@ -234,7 +292,7 @@ index f837152..1d52aab 100644
                  blocks.push(next.cast<ASTBlock>());
                  curblock = blocks.top();
  
-@@ -3052,7 +3220,12 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3052,7 +3254,12 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
          {
              PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
  
@@ -248,7 +306,7 @@ index f837152..1d52aab 100644
              print_src(comp->result(), mod, pyc_output);
  
              for (const auto& gen : comp->generators()) {
-@@ -3065,7 +3238,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3065,7 +3272,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                      print_src(gen->condition(), mod, pyc_output);
                  }
              }
@@ -257,7 +315,7 @@ index f837152..1d52aab 100644
          }
          break;
      case ASTNode::NODE_MAP:
-@@ -3079,9 +3252,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+@@ -3079,9 +3286,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
                  else
                      pyc_output << ",\n";
                  start_line(cur_indent, pyc_output);

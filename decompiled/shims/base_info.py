@@ -1,9 +1,53 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/base_info.txt
-# =====================================================================
+# Source Generated with Decompyle++
+# File: base_info.pyc (Python 3.9)
 
+import os
+import re
+import logging
+
+class BaseDirSystemInfo:
+    _instance = None
+    
+    def __new__(cls = None):
+        if not cls._instance:
+            cls._instance = super(BaseDirSystemInfo, cls).__new__(cls)
+            cls._instance._base_dir = '/usr/data'
+            cls._instance._h264_encoder_flag = 'H264_ENCODER'
+            cls._instance._initialize_base_dir()
+        return cls._instance
+
+    
+    def _initialize_base_dir(self):
+        path = '/etc/openwrt_release'
+        if os.path.exists(path):
+            self._base_dir = '/mnt/UDISK'
+            
+            try:
+                text = ''
+                with open(path, 'r') as f:
+                    text = f.read()
+                match = re.search("DISTRIB_TARGET='(.*?)'", text)
+                if match and 't113' in match.group(0):
+                    self._h264_encoder_flag = 'NO_H264_ENCODER'
+            except Exception:
+                err = None
+                
+                try:
+                    logging.error(err)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                return None
+
+
+
+    
+    def get_base_dir(self):
+        return self._base_dir
+
+    __classcell__ = None
+
+system_info_instance = BaseDirSystemInfo()
+base_dir = system_info_instance.get_base_dir()

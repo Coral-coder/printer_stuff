@@ -401,10 +401,6 @@ class ADXL345:
     def _handle_adxl345_data(self, params):
         with self.lock:
             self.raw_samples.append(params)
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
 
     
     def _extract_samples(self, raw_samples):
@@ -485,10 +481,6 @@ class ADXL345:
         self.set_reg(REG_FIFO_CTL, SET_FIFO_CTL)
         with self.lock:
             self.raw_samples = []
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         systime = self.printer.get_reactor().monotonic()
         print_time = self.mcu.estimated_print_time(systime) + MIN_MSG_TIME
         reqclock = self.mcu.print_time_to_clock(print_time)
@@ -517,10 +509,6 @@ class ADXL345:
         self.query_rate = 0
         with self.lock:
             self.raw_samples = []
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         logging.info("ADXL345 finished '%s' measurements", self.name)
 
     
@@ -529,10 +517,6 @@ class ADXL345:
         with self.lock:
             raw_samples = self.raw_samples
             self.raw_samples = []
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         if not raw_samples:
             return { }
         samples = None._extract_samples(raw_samples)

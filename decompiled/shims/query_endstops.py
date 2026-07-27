@@ -30,10 +30,6 @@ class QueryEndstops:
         with gc_mutex:
             print_time = toolhead.get_last_move_time()
             self.last_state = [ (name, mcu_endstop.query_endstop(print_time)) for mcu_endstop, name in (self.endstops) ]
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         web_request.send({ name: [
 'open',
 'TRIGGERED'][not (not t)] for name, t in (self.last_state) })
