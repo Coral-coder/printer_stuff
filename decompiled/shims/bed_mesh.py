@@ -737,3 +737,462 @@ class BedMeshCalibrate:
             if i < len(corrected_pts):
                 corr_pt = '(%.2f, %.2f, %.4f)' % tuple(corrected_pts[i])
             logging.info('  %-4d| %-17s| %-25s| %s' % (i, gen_pt, probed_pt, corr_pt))
+
+class ZMesh:
+
+    def __init__(self, params, printer):
+        self._info_array = [0.0] * 13
+        self.info_array = np.array(self._info_array, dtype=np.float64)
+        self.info_array_addr_int = self.info_array.ctypes.data
+        self.printer = printer
+        self.isenable = True
+        self.info_array[1] = self.isenable
+        self.probed_matrix = self.mesh_matrix = None
+        if self.mesh_matrix is None:
+            self.info_array[4] = 0
+        else:
+            self.info_array[4] = 1
+            self.__mesh_matrix[0:] = self.mesh_matrix
+        self.mesh_params = params
+        self.uuid = self.info_array[0] = printer.get_reactor().monotonic()
+        self.avg_z = 0.0
+        self.mesh_offsets = [0.0, 0.0]
+        self.info_array[2:4] = self.mesh_offsets
+        for key, value in self.mesh_params.items():
+            logging.debug('%s :  %s' % (key, value))
+        self.mesh_x_min = params['min_x']
+        self.mesh_x_max = params['max_x']
+        self.mesh_y_min = params['min_y']
+        self.mesh_y_max = params['max_y']
+        logging.debug('bed_mesh: Mesh Min: (%.2f,%.2f) Mesh Max: (%.2f,%.2f)' % (self.mesh_x_min, self.mesh_y_min, self.mesh_x_max, self.mesh_y_max))
+        interpolation_algos = {
+            'lagrange': self._sample_lagrange,
+            'bicubic': self._sample_bicubic,
+            'direct': self._sample_direct }
+        self._sample = interpolation_algos.get(params['algo'])
+        mesh_x_pps = params['mesh_x_pps']
+        mesh_y_pps = params['mesh_y_pps']
+        px_cnt = params['x_count']
+        py_cnt = params['y_count']
+        self.mesh_x_count = (px_cnt - 1) * mesh_x_pps + px_cnt
+        self.mesh_y_count = (py_cnt - 1) * mesh_y_pps + py_cnt
+        self.__mesh_matrix = np.full(self.mesh_y_count * self.mesh_x_count, 0.0, dtype=np.float64)
+        self.__mesh_matrix_addr = self.__mesh_matrix.ctypes.data
+        self.info_array[12] = self.__mesh_matrix_addr
+        self.x_mult = mesh_x_pps + 1
+        self.y_mult = mesh_y_pps + 1
+        logging.debug('bed_mesh: Mesh grid size - X:%d, Y:%d' % (self.mesh_x_count, self.mesh_y_count))
+        self.mesh_x_dist = (self.mesh_x_max - self.mesh_x_min) / (self.mesh_x_count - 1)
+        self.mesh_y_dist = (self.mesh_y_max - self.mesh_y_min) / (self.mesh_y_count - 1)
+        self.gcode = self.printer.lookup_object('gcode')
+        if 'BED_MESH_SET_DISABLE' not in self.gcode.ready_gcode_handlers:
+            self.gcode.register_command('BED_MESH_SET_DISABLE', self.cmd_BED_MESH_SET_DISABLE, desc=self.cmd_BED_MESH_SET_DISABLE_helper)
+        if 'BED_MESH_SET_ENABLE' not in self.gcode.ready_gcode_handlers:
+            self.gcode.register_command('BED_MESH_SET_ENABLE', self.cmd_BED_MESH_SET_ENABLE, desc=self.cmd_BED_MESH_SET_ENABLE_helper)
+        self.info_array[5:11] = [self.mesh_x_min, self.mesh_x_count, self.mesh_x_dist, self.mesh_y_min, self.mesh_y_count, self.mesh_y_dist]
+        self.info_array[11] = 0.0
+        self.last_z_temp_compensation = self.info_array[11]
+        self.z_temp_compensation_callbak = None
+
+    def get_mesh_matrix(self):
+        if self.mesh_matrix is not None:
+            return [[round(z, 6) for z in line] for line in self.mesh_matrix]
+        return [[]]
+
+    def get_probed_matrix(self):
+        if self.probed_matrix is not None:
+            return [[round(z, 6) for z in line] for line in self.probed_matrix]
+        return [[]]
+
+    def update_mesh_probed_matrix(self, probed_matrix):
+        if self.probed_matrix is not None:
+            self.probed_matrix = tuple(map(tuple, probed_matrix))
+
+    def get_mesh_params(self):
+        return self.mesh_params
+
+    def print_probed_matrix(self, print_func):
+        if self.probed_matrix is not None:
+            msg = 'Mesh Leveling Probed Z positions:\n'
+            for line in self.probed_matrix:
+                for x in line:
+                    msg += ' %f' % x
+                msg += '\n'
+            print_func(msg)
+        else:
+            print_func('bed_mesh: bed has not been probed')
+
+    def print_mesh(self, print_func, move_z=None):
+        matrix = self.get_mesh_matrix()
+        if matrix is not None:
+            msg = 'Mesh X,Y: %d,%d\n' % (self.mesh_x_count, self.mesh_y_count)
+            if move_z is not None:
+                msg += 'Search Height: %d\n' % move_z
+            msg += 'Mesh Offsets: X=%.4f, Y=%.4f\n' % (self.mesh_offsets[0], self.mesh_offsets[1])
+            msg += 'Mesh Average: %.2f\n' % self.avg_z
+            rng = self.get_z_range()
+            msg += 'Mesh Range: min=%.4f max=%.4f\n' % (rng[0], rng[1])
+            msg += 'Interpolation Algorithm: %s\n' % self.mesh_params['algo']
+            msg += 'Measured points:\n'
+            for y_line in range(self.mesh_y_count - 1, -1, -1):
+                for z in matrix[y_line]:
+                    msg += '  %f' % z
+                msg += '\n'
+            print_func(msg)
+        else:
+            print_func('bed_mesh: Z Mesh not generated')
+
+    def build_mesh(self, z_matrix):
+        self.probed_matrix = z_matrix
+        self._sample(z_matrix)
+        self.avg_z = sum([sum(x) for x in self.mesh_matrix]) / sum([len(x) for x in self.mesh_matrix])
+        self.avg_z = round(self.avg_z, 2)
+        self.print_mesh(logging.debug)
+
+    def set_mesh_offsets(self, offsets):
+        for i, o in enumerate(offsets):
+            if o is not None:
+                self.mesh_offsets[i] = o
+        self.info_array[2:4] = self.mesh_offsets
+
+    def get_x_coordinate(self, index):
+        return self.mesh_x_min + self.mesh_x_dist * index
+
+    def get_y_coordinate(self, index):
+        return self.mesh_y_min + self.mesh_y_dist * index
+
+    def cmd_BED_MESH_SET_DISABLE(self, gcmd):
+        self.isenable = False
+        self.info_array[1] = self.isenable
+    cmd_BED_MESH_SET_DISABLE_helper = ' set  MESH disable'
+
+    def cmd_BED_MESH_SET_ENABLE(self, gcmd):
+        self.isenable = True
+        self.info_array[1] = self.isenable
+    cmd_BED_MESH_SET_ENABLE_helper = 'set  MESH enable '
+
+    def calc_z(self, x, y):
+        return mymovie.Py_zmesh_calc_c(x, y, self.info_array_addr_int)
+        if x:
+            y = 1
+        return 0.0
+
+    def set_z_temp_compensation_callbak(self, ck):
+        self.z_temp_compensation_callbak = ck
+
+    def set_z_temp_compensation(self):
+        if self.z_temp_compensation_callbak is not None:
+            temp = self.z_temp_compensation_callbak()
+        else:
+            temp = 0.0
+        if self.last_z_temp_compensation != temp:
+            self.last_z_temp_compensation = temp
+            self.info_array[11] = self.last_z_temp_compensation
+
+    def get_z_range(self):
+        if self.mesh_matrix is not None:
+            mesh_min = min([min(x) for x in self.mesh_matrix])
+            mesh_max = max([max(x) for x in self.mesh_matrix])
+            return (mesh_min, mesh_max)
+        else:
+            return (0.0, 0.0)
+
+    def _get_linear_index(self, coord, axis):
+        if axis == 0:
+            mesh_min = self.mesh_x_min
+            mesh_cnt = self.mesh_x_count
+            mesh_dist = self.mesh_x_dist
+            cfunc = self.get_x_coordinate
+        else:
+            mesh_min = self.mesh_y_min
+            mesh_cnt = self.mesh_y_count
+            mesh_dist = self.mesh_y_dist
+            cfunc = self.get_y_coordinate
+        t = 0.0
+        idx = int(math.floor((coord - mesh_min) / mesh_dist))
+        idx = constrain(idx, 0, mesh_cnt - 2)
+        t = (coord - cfunc(idx)) / mesh_dist
+        return (constrain(t, 0.0, 1.0), idx)
+
+    def _sample_direct(self, z_matrix):
+        self.mesh_matrix = z_matrix
+        if self.mesh_matrix is None:
+            self.info_array[4] = 0
+        else:
+            self.info_array[4] = 1
+            self.__mesh_matrix[0:] = self.mesh_matrix
+
+    def _sample_lagrange(self, z_matrix):
+        x_mult = self.x_mult
+        y_mult = self.y_mult
+        self.mesh_matrix = [[0.0 if i % x_mult or j % y_mult else z_matrix[j // y_mult][i // x_mult] for i in range(self.mesh_x_count)] for j in range(self.mesh_y_count)]
+        xpts, ypts = self._get_lagrange_coords()
+        for i in range(self.mesh_y_count):
+            if i % y_mult != 0:
+                continue
+            for j in range(self.mesh_x_count):
+                if j % x_mult == 0:
+                    continue
+                x = self.get_x_coordinate(j)
+                self.mesh_matrix[i][j] = self._calc_lagrange(xpts, x, i, 0)
+        for i in range(self.mesh_x_count):
+            for j in range(self.mesh_y_count):
+                if j % y_mult == 0:
+                    continue
+                y = self.get_y_coordinate(j)
+                self.mesh_matrix[j][i] = self._calc_lagrange(ypts, y, i, 1)
+        if self.mesh_matrix is None:
+            self.info_array[4] = 0
+        else:
+            self.info_array[4] = 1
+            self.__mesh_matrix[0:] = [item for row in self.mesh_matrix for item in row]
+
+    def _get_lagrange_coords(self):
+        xpts = []
+        ypts = []
+        for i in range(self.mesh_params['x_count']):
+            xpts.append(self.get_x_coordinate(i * self.x_mult))
+        for j in range(self.mesh_params['y_count']):
+            ypts.append(self.get_y_coordinate(j * self.y_mult))
+        return (xpts, ypts)
+
+    def _calc_lagrange(self, lpts, c, vec, axis=0):
+        pt_cnt = len(lpts)
+        total = 0.0
+        for i in range(pt_cnt):
+            n = 1.0
+            d = 1.0
+            for j in range(pt_cnt):
+                if j == i:
+                    continue
+                n *= c - lpts[j]
+                d *= lpts[i] - lpts[j]
+            if axis == 0:
+                z = self.mesh_matrix[vec][i * self.x_mult]
+            else:
+                z = self.mesh_matrix[i * self.y_mult][vec]
+            total += z * n / d
+        return total
+
+    def _sample_bicubic(self, z_matrix):
+        x_mult = self.x_mult
+        y_mult = self.y_mult
+        c = self.mesh_params['tension']
+        self.mesh_matrix = [[0.0 if i % x_mult or j % y_mult else z_matrix[j // y_mult][i // x_mult] for i in range(self.mesh_x_count)] for j in range(self.mesh_y_count)]
+        for y in range(self.mesh_y_count):
+            if y % y_mult != 0:
+                continue
+            for x in range(self.mesh_x_count):
+                if x % x_mult == 0:
+                    continue
+                pts = self._get_x_ctl_pts(x, y)
+                self.mesh_matrix[y][x] = self._cardinal_spline(pts, c)
+        for x in range(self.mesh_x_count):
+            for y in range(self.mesh_y_count):
+                if y % y_mult == 0:
+                    continue
+                pts = self._get_y_ctl_pts(x, y)
+                self.mesh_matrix[y][x] = self._cardinal_spline(pts, c)
+        if self.mesh_matrix is None:
+            self.info_array[4] = 0
+        else:
+            self.info_array[4] = 1
+            self.__mesh_matrix[0:] = [item for row in self.mesh_matrix for item in row]
+
+    def _get_x_ctl_pts(self, x, y):
+        x_mult = self.x_mult
+        x_row = self.mesh_matrix[y]
+        last_pt = self.mesh_x_count - 1 - x_mult
+        if x < x_mult:
+            p0 = p1 = x_row[0]
+            p2 = x_row[x_mult]
+            p3 = x_row[2 * x_mult]
+            t = x / float(x_mult)
+        elif x > last_pt:
+            p0 = x_row[last_pt - x_mult]
+            p1 = x_row[last_pt]
+            p2 = p3 = x_row[last_pt + x_mult]
+            t = (x - last_pt) / float(x_mult)
+        else:
+            found = False
+            for i in range(x_mult, last_pt, x_mult):
+                if x > i and x < i + x_mult:
+                    p0 = x_row[i - x_mult]
+                    p1 = x_row[i]
+                    p2 = x_row[i + x_mult]
+                    p3 = x_row[i + 2 * x_mult]
+                    t = (x - i) / float(x_mult)
+                    found = True
+                    break
+            if not found:
+                raise BedMeshError('bed_mesh: Error finding x control points')
+        return (p0, p1, p2, p3, t)
+
+    def _get_y_ctl_pts(self, x, y):
+        y_mult = self.y_mult
+        last_pt = self.mesh_y_count - 1 - y_mult
+        y_col = self.mesh_matrix
+        if y < y_mult:
+            p0 = p1 = y_col[0][x]
+            p2 = y_col[y_mult][x]
+            p3 = y_col[2 * y_mult][x]
+            t = y / float(y_mult)
+        elif y > last_pt:
+            p0 = y_col[last_pt - y_mult][x]
+            p1 = y_col[last_pt][x]
+            p2 = p3 = y_col[last_pt + y_mult][x]
+            t = (y - last_pt) / float(y_mult)
+        else:
+            found = False
+            for i in range(y_mult, last_pt, y_mult):
+                if y > i and y < i + y_mult:
+                    p0 = y_col[i - y_mult][x]
+                    p1 = y_col[i][x]
+                    p2 = y_col[i + y_mult][x]
+                    p3 = y_col[i + 2 * y_mult][x]
+                    t = (y - i) / float(y_mult)
+                    found = True
+                    break
+            if not found:
+                raise BedMeshError('bed_mesh: Error finding y control points')
+        return (p0, p1, p2, p3, t)
+
+    def _cardinal_spline(self, p, tension):
+        t = p[4]
+        t2 = t * t
+        t3 = t2 * t
+        m1 = tension * (p[2] - p[0])
+        m2 = tension * (p[3] - p[1])
+        a = p[1] * (2 * t3 - 3 * t2 + 1)
+        b = p[2] * (-2 * t3 + 3 * t2)
+        c = m1 * (t3 - 2 * t2 + t)
+        d = m2 * (t3 - t2)
+        return a + b + c + d
+
+
+class ProfileManager:
+
+    def __init__(self, config, bedmesh):
+        self.name = config.get_name()
+        self.printer = config.get_printer()
+        self.gcode = self.printer.lookup_object('gcode')
+        self.bedmesh = bedmesh
+        self.profiles = {}
+        self.current_profile = ''
+        self.incompatible_profiles = []
+        stored_profs = config.get_prefix_sections(self.name)
+        stored_profs = [s for s in stored_profs if s.get_name() != self.name]
+        for profile in stored_profs:
+            name = profile.get_name().split(' ', 1)[1]
+            version = profile.getint('version', 0)
+            if version != PROFILE_VERSION:
+                logging.info('bed_mesh: Profile [%s] not compatible with this version\nof bed_mesh.  Profile Version: %d Current Version: %d ' % (name, version, PROFILE_VERSION))
+                self.incompatible_profiles.append(name)
+                continue
+            self.profiles[name] = {}
+            zvals = profile.getlists('points', seps=(',', '\n'), parser=float)
+            self.profiles[name]['points'] = zvals
+            self.profiles[name]['mesh_params'] = params = collections.OrderedDict()
+            for key, t in PROFILE_OPTIONS.items():
+                if t is int:
+                    params[key] = profile.getint(key)
+                elif t is float:
+                    params[key] = profile.getfloat(key)
+                elif t is str:
+                    params[key] = profile.get(key)
+        self.gcode.register_command('BED_MESH_PROFILE', self.cmd_BED_MESH_PROFILE, desc=self.cmd_BED_MESH_PROFILE_help)
+
+    def initialize(self):
+        self._check_incompatible_profiles()
+        if 'default' in self.profiles:
+            self.load_profile('default')
+
+    def get_profiles(self):
+        return self.profiles
+
+    def get_current_profile(self):
+        return self.current_profile
+
+    def _check_incompatible_profiles(self):
+        if self.incompatible_profiles:
+            configfile = self.printer.lookup_object('configfile')
+            for profile in self.incompatible_profiles:
+                configfile.remove_section('bed_mesh ' + profile)
+            self.gcode.respond_info('The following incompatible profiles have been detected\nand are scheduled for removal:\n%s\nThe SAVE_CONFIG command will update the printer config\nfile and restart the printer' % '\n'.join(self.incompatible_profiles))
+
+    def save_profile(self, prof_name):
+        z_mesh = self.bedmesh.get_mesh()
+        if z_mesh is None:
+            self.gcode.respond_info('Unable to save to profile [%s], the bed has not been probed' % prof_name)
+            return
+        probed_matrix = z_mesh.get_probed_matrix()
+        mesh_params = z_mesh.get_mesh_params()
+        configfile = self.printer.lookup_object('configfile')
+        cfg_name = self.name + ' ' + prof_name
+        z_values = ''
+        for line in probed_matrix:
+            z_values += '\n  '
+            for p in line:
+                z_values += '%.6f, ' % p
+            z_values = z_values[:-2]
+        configfile.set(cfg_name, 'version', PROFILE_VERSION)
+        configfile.set(cfg_name, 'points', z_values)
+        for key, value in mesh_params.items():
+            configfile.set(cfg_name, key, value)
+        profiles = dict(self.profiles)
+        profiles[prof_name] = profile = {}
+        profile['points'] = probed_matrix
+        profile['mesh_params'] = collections.OrderedDict(mesh_params)
+        self.profiles = profiles
+        self.current_profile = prof_name
+        self.bedmesh.update_status()
+        self.gcode.respond_info('Bed Mesh state has been saved to profile [%s]\nfor the current session.  The SAVE_CONFIG command will\nupdate the printer config file and restart the printer.' % prof_name)
+
+    def load_profile(self, prof_name):
+        profile = self.profiles.get(prof_name, None)
+        if profile is not None:
+            probed_matrix = profile['points']
+            mesh_params = profile['mesh_params']
+            z_mesh = ZMesh(mesh_params, self.printer)
+            try:
+                z_mesh.build_mesh(probed_matrix)
+            except BedMeshError as e:
+                raise self.gcode.error(str(e))
+            self.current_profile = prof_name
+            self.bedmesh.set_mesh(z_mesh)
+        else:
+            self.gcode.respond_info('bed_mesh: Unknown profile [%s]' % (prof_name,))
+
+    def remove_profile(self, prof_name):
+        if prof_name in self.profiles:
+            configfile = self.printer.lookup_object('configfile')
+            configfile.remove_section('bed_mesh ' + prof_name)
+            profiles = dict(self.profiles)
+            del profiles[prof_name]
+            self.profiles = profiles
+            self.bedmesh.update_status()
+            self.gcode.respond_info('Profile [%s] removed from storage for this session.\nThe SAVE_CONFIG command will update the printer\nconfiguration and restart the printer' % prof_name)
+        else:
+            self.gcode.respond_info('No profile named [%s] to remove' % prof_name)
+    cmd_BED_MESH_PROFILE_help = 'Bed Mesh Persistent Storage management'
+
+    def cmd_BED_MESH_PROFILE(self, gcmd):
+        options = collections.OrderedDict({
+            'LOAD': self.load_profile,
+            'SAVE': self.save_profile,
+            'REMOVE': self.remove_profile })
+        for key in options:
+            name = gcmd.get(key, None)
+            if name is not None:
+                if not name.strip():
+                    raise gcmd.error("Value for parameter '%s' must be specified" % key)
+                if name == 'default' and key == 'SAVE':
+                    gcmd.respond_info("Profile 'default' is reserved, please choose another profile name.")
+                else:
+                    options[key](name)
+                return
+        gcmd.respond_info("Invalid syntax '%s'" % (gcmd.get_commandline(),))
+
+
+def load_config(config):
+    return BedMesh(config)
