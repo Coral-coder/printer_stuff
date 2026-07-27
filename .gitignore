@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 !proprietary/**/*.pyc
 !reassembled/**/*.pyc
+
+# firmware build output (regenerate with tools/build_firmware.py)
+/dist/
