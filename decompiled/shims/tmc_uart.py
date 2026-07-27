@@ -41,9 +41,7 @@ class MCU_analog_mux:
                 self.update_pin_cmd.send([
                     oid,
                     new])
-                continue
-                self.pin_values = instance_id
-                return None
+        self.pin_values = instance_id
 
 
 
@@ -98,7 +96,7 @@ class MCU_TMC_uart_bitbang:
 
     
     def register_instance(self, rx_pin_params, tx_pin_params, select_pins_desc, addr):
-        if rx_pin_params['pin'] != self.rx_pin and tx_pin_params['pin'] != self.tx_pin or (select_pins_desc is None) != (self.analog_mux is None):
+        if rx_pin_params['pin'] != self.rx_pin or tx_pin_params['pin'] != self.tx_pin or (select_pins_desc is None) != (self.analog_mux is None):
             raise self.mcu.get_printer().config_error('Shared TMC uarts must use the same pins')
         instance_id = None
         if self.analog_mux is not None:
@@ -240,14 +238,12 @@ class MCU_TMC_uart:
             val = self.mcu_uart.reg_read(self.instance_id, self.addr, reg)
             if val is not None:
                 return val
-            raise self.printer.command_error("Unable to read tmc uart '%s' register %s" % (self.name, reg_name))
-            return None
+        raise self.printer.command_error("Unable to read tmc uart '%s' register %s" % (self.name, reg_name))
 
     
     def get_register(self, reg_name):
         with self.mutex:
-            pass
-        self._do_get_register(reg_name)
+            return self._do_get_register(reg_name)
 
     
     def set_register(self, reg_name, val, print_time = None):
@@ -262,12 +258,7 @@ class MCU_TMC_uart:
                 self.mcu_uart.reg_write(self.instance_id, self.addr, reg, val, print_time)
                 self.ifcnt = self._do_get_register('IFCNT')
                 if self.ifcnt == ifcnt + 1 & 255:
-                    pass
-                None(None, None, None)
-                return None
-            None(None, None, None)
-        if not None:
-            pass
+                    return None
         raise self.printer.command_error('{"code":"key570", "msg":"Unable to write tmc uart \'%s\' register %s"}' % (self.name, reg_name))
 
 

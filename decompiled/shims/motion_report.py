@@ -20,8 +20,7 @@ class APIDumpHelper:
         self.printer = printer
         self.data_cb = data_cb
         if startstop_cb is None:
-            
-            startstop_cb = lambda is_start: pass
+            startstop_cb = lambda is_start: None
         self.startstop_cb = startstop_cb
         self.is_started = False
         self.update_interval = update_interval
@@ -36,25 +35,14 @@ class APIDumpHelper:
         self.update_timer = None
         if not self.is_started:
             return reactor.NEVER
-        
         try:
             self.startstop_cb(False)
-        except self.printer.command_error:
-            e = None
-            
-            try:
-                logging.exception('API Dump Helper stop callback error')
-                self.clients.clear()
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            self.is_started = False
-            if self.clients:
-                self._start()
-
-
+        except self.printer.command_error as e:
+            logging.exception('API Dump Helper stop callback error')
+            self.clients.clear()
+        self.is_started = False
+        if self.clients:
+            self._start()
         return reactor.NEVER
 
     
@@ -62,27 +50,17 @@ class APIDumpHelper:
         if self.is_started:
             return None
         self.is_started = True
-        
         try:
             self.startstop_cb(True)
-        except self.printer.command_error:
-            e = None
-            
-            try:
-                logging.exception('API Dump Helper start callback error')
-                self.is_started = False
-                self.clients.clear()
-                raise 
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            reactor = self.printer.get_reactor()
-            systime = reactor.monotonic()
-            waketime = systime + self.update_interval
-            self.update_timer = reactor.register_timer(self._update, waketime)
-            return None
+        except self.printer.command_error as e:
+            logging.exception('API Dump Helper start callback error')
+            self.is_started = False
+            self.clients.clear()
+            raise
+        reactor = self.printer.get_reactor()
+        systime = reactor.monotonic()
+        waketime = systime + self.update_interval
+        self.update_timer = reactor.register_timer(self._update, waketime)
 
 
 
@@ -105,28 +83,21 @@ class APIDumpHelper:
         
         try:
             msg = self.data_cb(eventtime)
-        except self.printer.command_error:
-            e = None
-            
-            try:
-                logging.exception('API Dump Helper data callback error')
-            finally:
-                e = None
-                del e
-                return None
-                e = None
-                del e
-                if not msg:
-                    return eventtime + self.update_interval
-                for cconn, template in list(self.clients.items()):
-                    if cconn.is_closed():
-                        del self.clients[cconn]
-                        if not self.clients:
-                            return self._stop()
-                    tmp = dict(template)
-                    tmp['params'] = msg
-                    cconn.send(tmp)
-                return eventtime + self.update_interval
+        except self.printer.command_error as e:
+            logging.exception('API Dump Helper data callback error')
+            return self._stop()
+        if not msg:
+            return eventtime + self.update_interval
+        for cconn, template in list(self.clients.items()):
+            if cconn.is_closed():
+                del self.clients[cconn]
+                if not self.clients:
+                    return self._stop()
+                continue
+            tmp = dict(template)
+            tmp['params'] = msg
+            cconn.send(tmp)
+        return eventtime + self.update_interval
 
 
 
@@ -172,17 +143,16 @@ class DumpStepper:
     def get_step_queue(self, start_clock, end_clock):
         mcu_stepper = self.mcu_stepper
         res = []
-        (data, count) = mcu_stepper.dump_steps(128, start_clock, end_clock)
-        if not count:
-            pass
-        else:
+        while 1:
+            (data, count) = mcu_stepper.dump_steps(128, start_clock, end_clock)
+            if not count:
+                break
             res.append((data, count))
             if count < len(data):
-                pass
-            else:
-                end_clock = data[count - 1].first_clock
-            res.reverse()
-            return ([ d[i] for d, cnt in (res) for i in range(cnt - 1, -1, -1) ], res)
+                break
+            end_clock = data[count - 1].first_clock
+        res.reverse()
+        return ([ d[i] for d, cnt in (res) for i in range(cnt - 1, -1, -1) ], res)
 
     
     def log_steps(self, data):
@@ -246,18 +216,17 @@ class DumpTrapQ:
     def extract_trapq(self, start_time, end_time):
         (ffi_main, ffi_lib) = chelper.get_ffi()
         res = []
-        data = ffi_main.new('struct pull_move[128]')
-        count = ffi_lib.trapq_extract_old(self.trapq, data, len(data), start_time, end_time)
-        if not count:
-            pass
-        else:
+        while 1:
+            data = ffi_main.new('struct pull_move[128]')
+            count = ffi_lib.trapq_extract_old(self.trapq, data, len(data), start_time, end_time)
+            if not count:
+                break
             res.append((data, count))
             if count < len(data):
-                pass
-            else:
-                end_time = data[count - 1].print_time
-            res.reverse()
-            return ([ d[i] for d, cnt in (res) for i in range(cnt - 1, -1, -1) ], res)
+                break
+            end_time = data[count - 1].print_time
+        res.reverse()
+        return ([ d[i] for d, cnt in (res) for i in range(cnt - 1, -1, -1) ], res)
 
     
     def log_trapq(self, data):
@@ -339,13 +308,11 @@ class PrinterMotionReport:
                 ename = 'extruder'
             extruder = self.printer.lookup_object(ename, None)
             if extruder is None:
-                pass
-            else:
-                etrapq = extruder.get_trapq()
-                self.trapqs[ename] = DumpTrapQ(self.printer, ename, etrapq)
-            self.last_status['steppers'] = list(sorted(self.steppers.keys()))
-            self.last_status['trapq'] = list(sorted(self.trapqs.keys()))
-            return None
+                break
+            etrapq = extruder.get_trapq()
+            self.trapqs[ename] = DumpTrapQ(self.printer, ename, etrapq)
+        self.last_status['steppers'] = list(sorted(self.steppers.keys()))
+        self.last_status['trapq'] = list(sorted(self.trapqs.keys()))
 
     
     def _dump_shutdown(self, eventtime):
@@ -379,7 +346,7 @@ class PrinterMotionReport:
 
     
     def get_status(self, eventtime):
-        if not eventtime < self.next_status_time or self.trapqs:
+        if eventtime < self.next_status_time or not self.trapqs:
             return self.last_status
         self.next_status_time = eventtime + STATUS_REFRESH_TIME
         xyzpos = (0.0, 0.0, 0.0)

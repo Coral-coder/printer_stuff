@@ -21,15 +21,10 @@ class Thermistor:
         ln_r1 = math.log(r1)
         ln_r2 = math.log(r2)
         ln_r3 = math.log(r3)
-        ln3_r1 = ln_r1 ** 3
-        ln3_r2 = ln_r2 ** 3
-        ln3_r3 = ln_r3 ** 3
-        inv_t12 = inv_t1 - inv_t2
-        inv_t13 = inv_t1 - inv_t3
-        ln_r12 = ln_r1 - ln_r2
-        ln_r13 = ln_r1 - ln_r3
-        ln3_r12 = ln3_r1 - ln3_r2
-        ln3_r13 = ln3_r1 - ln3_r3
+        ln3_r1, ln3_r2, ln3_r3 = ln_r1 ** 3, ln_r2 ** 3, ln_r3 ** 3
+        inv_t12, inv_t13 = inv_t1 - inv_t2, inv_t1 - inv_t3
+        ln_r12, ln_r13 = ln_r1 - ln_r2, ln_r1 - ln_r3
+        ln3_r12, ln3_r13 = ln3_r1 - ln3_r2, ln3_r1 - ln3_r3
         self.c3 = (inv_t12 - inv_t13 * ln_r12 / ln_r13) / (ln3_r12 - ln3_r13 * ln_r12 / ln_r13)
         if self.c3 <= 0.0:
             beta = ln_r13 / inv_t13
@@ -99,12 +94,10 @@ class CustomThermistor:
         r2 = config.getfloat('resistance2', minval=0.0)
         t3 = config.getfloat('temperature3', minval=KELVIN_TO_CELSIUS)
         r3 = config.getfloat('resistance3', minval=0.0)
-        (t1, r1) = ()
-        (t2, r2) = sorted([
+        (t1, r1), (t2, r2), (t3, r3) = sorted([
             (t1, r1),
             (t2, r2),
             (t3, r3)])
-        (t3, r3) = None
         self.params = {
             't1': t1,
             'r1': r1,

@@ -34,7 +34,7 @@ class MCU_buttons:
             return None
         self.oid = self.mcu.create_oid()
         self.mcu.add_config_cmd('config_buttons oid=%d button_count=%d' % (self.oid, len(self.pin_list)))
-        for pin, pull_up in enumerate(self.pin_list):
+        for i, (pin, pull_up) in enumerate(self.pin_list):
             self.mcu.add_config_cmd('buttons_add oid=%d pos=%d pin=%s pull_up=%d' % (self.oid, i, pin, pull_up), is_init=True)
         cmd_queue = self.mcu.alloc_command_queue()
         self.ack_cmd = self.mcu.lookup_command('buttons_ack oid=%c count=%c', cq=cmd_queue)
@@ -69,9 +69,7 @@ class MCU_buttons:
         for mask, shift, callback in self.callbacks:
             if changed & mask:
                 callback(eventtime, (button & mask) >> shift)
-                continue
-                self.last_button = button
-                return None
+        self.last_button = button
 
 
 ADC_REPORT_TIME = 0.015
@@ -109,21 +107,13 @@ class MCU_ADC_buttons:
         adc = max(1e-05, min(0.99999, read_value))
         value = self.pullup * adc / (1.0 - adc)
         btn = None
-        if value <= value or value <= self.max_value:
-            pass
-        else:
-            self.min_value
-        for min_value, max_value, cb in enumerate(self.buttons):
-            if value < value:
-                if value < max_value:
-                    pass
-                else:
-                    min_value
-                btn = i
-                min_value
-            
-            if btn != self.last_button:
-                self.last_debouncetime = read_time
+        if self.min_value <= value <= self.max_value:
+            for i, (min_value, max_value, cb) in enumerate(self.buttons):
+                if min_value < value < max_value:
+                    btn = i
+                    break
+        if btn != self.last_button:
+            self.last_debouncetime = read_time
         if read_time - self.last_debouncetime >= ADC_DEBOUNCE_TIME and self.last_button == btn and self.last_pressed != btn:
             if self.last_pressed is not None:
                 self.call_button(self.last_pressed, False)
@@ -208,8 +198,7 @@ class PrinterButtons:
     
     def register_buttons(self, pins, callback):
         ppins = self.printer.lookup_object('pins')
-        mcu = None
-        mcu_name = None
+        mcu = mcu_name = None
         pin_params_list = []
         for pin in pins:
             pin_params = ppins.lookup_pin(pin, can_invert=True, can_pullup=True)

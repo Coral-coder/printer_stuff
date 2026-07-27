@@ -81,9 +81,8 @@ class HX711S:
 
     
     def _handle_result_hx711s(self, params):
-        if self.need_wait:
+        while self.need_wait:
             self.delay_s(0.001)
-            continue
         self.start_tick = self.start_tick if len(self.all_params) != 0 else params['nt']
         if self.del_dirty:
             if (params['vd'] != 0 or params['it'] > 20) and self.index_dirty == 0:
@@ -102,7 +101,7 @@ class HX711S:
 
     
     def query_start(self, pi_count, cycle_count, del_dirty = False, show_msg = False, is_ck_con = False):
-        if self.is_shutdown and self.is_timeout:
+        if not self.is_shutdown and self.is_timeout:
             pass
         if cycle_count != 0:
             self.pi_count = pi_count
@@ -177,9 +176,8 @@ class HX711S:
                 0]
             self.query_start(cnt, cnt + 5, del_dirty=True, show_msg=False)
             t_last = time.time()
-            if self.is_shutdown and self.is_timeout and len(self.get_vals()[0]) < cnt and time.time() - t_last < cnt * 0.01 * 15:
+            while not self.is_shutdown and not self.is_timeout and len(self.get_vals()[0]) < cnt and time.time() - t_last < cnt * 0.01 * 15:
                 self.delay_s(0.01)
-                continue
             vals = self.get_vals()
             if len(vals[0]) < cnt:
                 raise self.printer.command_error('{"code":"key503", "msg":"z-Touch::read_base: Can not read z-Touch data."}')
@@ -211,9 +209,8 @@ class HX711S:
             for j in range(self.s_count):
                 sum_max += math.fabs(rvs[j][2] - rvs[j][0])
             if sum_max < max_hold * 2:
-                pass
-            
-            return (avgs, rvs)
+                break
+        return (avgs, rvs)
 
     cmd_READ_HX711_help = 'Read hx711s vals'
     

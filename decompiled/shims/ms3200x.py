@@ -156,12 +156,10 @@ class MS32008Error(Exception):
 
 
 def load_config_prefix(config, name, default = None):
-    
     try:
-        pass
-    return None
+        return config.get(name, default)
     except Exception:
-        return None
+        return default
 
 
 
@@ -189,11 +187,9 @@ class MS32008:
         try:
             i2c = bus.MCU_I2C_from_config(config, default_addr=i2c_addr)
             if hasattr(i2c, 'i2c_write') and hasattr(i2c, 'i2c_read'):
-                pass
-        return None
+                return i2c
         except Exception:
             pass
-
         raise MS32008Error(f'''Could not find I2C bus object for \'{i2c_addr}\' - adjust i2c_bus in config''')
 
     
@@ -266,11 +262,11 @@ class MS32008:
             val])
 
     
-    def hard_sleep(self, enable):
+    def hard_sleep(self, enable: bool):
         return self.soft_standby(enable)
 
     
-    def soft_standby(self, enable):
+    def soft_standby(self, enable: bool):
         r = self._i2c_read_reg(0, 1)
         val = r[0]
         if enable:
@@ -289,7 +285,7 @@ class MS32008:
             val])
 
     
-    def ext_clk(self, enable):
+    def ext_clk(self, enable: bool):
         r = self._i2c_read_reg(0, 1)
         val = r[0]
         if enable:
@@ -300,7 +296,7 @@ class MS32008:
             val])
 
     
-    def osc_off(self, enable):
+    def osc_off(self, enable: bool):
         r = self._i2c_read_reg(0, 1)
         val = r[0]
         if enable:
@@ -331,7 +327,7 @@ class MS32008:
             mask])
 
     
-    def watch_sel(self, enable, sel):
+    def watch_sel(self, enable: bool, sel):
         if enable:
             self._i2c_write_reg(14, [
                 128 | sel & 127])
@@ -352,7 +348,7 @@ class MS32008:
         raise MS32008Error("Unknown channel '{}'".format(ch))
 
     
-    def set_ch_pd_out(self, ch, enable):
+    def set_ch_pd_out(self, ch, enable: bool):
         base = self._ch_base(ch)
         r = self._i2c_read_reg(base + 0, 1)
         val = r[0]
@@ -364,7 +360,7 @@ class MS32008:
             val])
 
     
-    def set_ch_record_rev(self, ch, enable):
+    def set_ch_record_rev(self, ch, enable: bool):
         base = self._ch_base(ch)
         r = self._i2c_read_reg(base + 0, 1)
         val = r[0]
@@ -376,7 +372,7 @@ class MS32008:
             val])
 
     
-    def set_ch_dir(self, ch, cw):
+    def set_ch_dir(self, ch, cw: bool):
         base = self._ch_base(ch)
         r = self._i2c_read_reg(base + 1, 1)
         val = r[0]

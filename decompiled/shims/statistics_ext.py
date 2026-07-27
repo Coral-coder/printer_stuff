@@ -37,7 +37,6 @@ class PrinterSysStats:
         self.last_load_avg = os.getloadavg()[0]
         msg = 'sysload=%.2f cputime=%.3f' % (self.last_load_avg, self.total_process_time)
         if self.mem_file is not None:
-            
             try:
                 self.mem_file.seek(0)
                 data = self.mem_file.read()
@@ -45,12 +44,10 @@ class PrinterSysStats:
                     if line.startswith('MemAvailable:'):
                         self.last_mem_avail = int(line.split()[1])
                         msg = '%s memavail=%d' % (msg, self.last_mem_avail)
-                        self
-                    
+                        break
             except:
-                self
-
-            return (False, msg)
+                pass
+        return (False, msg)
 
     
     def get_status(self, eventtime):

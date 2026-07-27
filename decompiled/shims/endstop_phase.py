@@ -18,9 +18,7 @@ class PhaseCalc:
         self.name = name
         self.phases = phases
         self.tmc_module = None
-        self.phase_history = None
-        self.last_phase = None
-        self.last_mcu_position = None
+        self.phase_history = self.last_phase = self.last_mcu_position = None
         self.is_primary = self.stats_only = False
 
     
@@ -32,7 +30,7 @@ class PhaseCalc:
                 self.tmc_module = module
                 if self.phases is None:
                     (phase_offset, self.phases) = module.get_phase_offset()
-        continue
+                break
         if self.phases is not None:
             self.phase_history = [
                 0] * self.phases
@@ -94,7 +92,7 @@ class EndstopPhase:
 
     
     def align_endstop(self, rail):
-        if self.endstop_align_zero or self.endstop_phase is None:
+        if not self.endstop_align_zero or self.endstop_phase is None:
             return 0.0
         microsteps = self.phases // 4
         half_microsteps = microsteps // 2
@@ -127,7 +125,6 @@ class EndstopPhase:
                 offset = self.get_homed_offset(stepper, trig_mcu_pos)
                 homing_state.set_stepper_adjustment(self.name, align + offset)
                 return None
-            return None
 
 
 
@@ -206,8 +203,7 @@ class EndstopPhases:
         best = res[0][1]
         found = [ j for j in (range(best - half_phases, best + half_phases)) if wph[j] ]
         best_phase = best % phases
-        lo = found[0] % phases
-        hi = found[-1] % phases
+        (lo, hi) = (found[0] % phases, found[-1] % phases)
         self.gcode.respond_info('%s: trigger_phase=%d/%d (range %d to %d)' % (stepper_name, best_phase, phases, lo, hi))
         return (best_phase, phases)
 
@@ -218,7 +214,7 @@ class EndstopPhases:
             return None
         for stepper_name in sorted(self.tracking.keys()):
             phase_calc = self.tracking[stepper_name]
-            if not phase_calc is None or phase_calc.is_primary:
+            if phase_calc is None or not phase_calc.is_primary:
                 continue
             self.generate_stats(stepper_name, phase_calc)
 
