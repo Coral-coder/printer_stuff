@@ -132,28 +132,27 @@ class servo_pwm:
         config_name = pin_params['pin']
         pwmchip = 'pwmchip0'
         if not replicape.host_mcu.is_fileoutput():
-            
+
             try:
                 pwmdev = os.listdir('/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/')
                 pwmchip = [ pc for pc in (pwmdev) if pc.startswith('pwmchip') ][0]
             except:
                 raise pins.error('{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}')
 
-            (pwm_pin, resv1, resv2) = SERVO_PINS[config_name]
-            pin_params = dict(pin_params)
-            pin_params['pin'] = pwmchip + pwm_pin
-            self.mcu_pwm = replicape.host_mcu.setup_pin('pwm', pin_params)
-            self.get_mcu = self.mcu_pwm.get_mcu
-            self.setup_max_duration = self.mcu_pwm.setup_max_duration
-            self.setup_start_value = self.mcu_pwm.setup_start_value
-            self.set_pwm = self.mcu_pwm.set_pwm
-            pru_mcu = replicape.mcu_pwm_enable.get_mcu()
-            printer = pru_mcu.get_printer()
-            ppins = printer.lookup_object('pins')
-            pin_resolver = ppins.get_pin_resolver(pru_mcu.get_name())
-            pin_resolver.reserve_pin(resv1, config_name)
-            pin_resolver.reserve_pin(resv2, config_name)
-            return None
+        (pwm_pin, resv1, resv2) = SERVO_PINS[config_name]
+        pin_params = dict(pin_params)
+        pin_params['pin'] = pwmchip + pwm_pin
+        self.mcu_pwm = replicape.host_mcu.setup_pin('pwm', pin_params)
+        self.get_mcu = self.mcu_pwm.get_mcu
+        self.setup_max_duration = self.mcu_pwm.setup_max_duration
+        self.setup_start_value = self.mcu_pwm.setup_start_value
+        self.set_pwm = self.mcu_pwm.set_pwm
+        pru_mcu = replicape.mcu_pwm_enable.get_mcu()
+        printer = pru_mcu.get_printer()
+        ppins = printer.lookup_object('pins')
+        pin_resolver = ppins.get_pin_resolver(pru_mcu.get_name())
+        pin_resolver.reserve_pin(resv1, config_name)
+        pin_resolver.reserve_pin(resv2, config_name)
 
     
     def setup_cycle_time(self, cycle_time, hardware_pwm = False):
@@ -232,7 +231,7 @@ class Replicape:
             shift_registers[4] &= -2
         self.sr_enabled = list(reversed(shift_registers))
         sr_spi_bus = 'spidev1.1'
-        if self.host_mcu.is_fileoutput() and os.path.exists('/sys/devices/platform/ocp/481a0000.spi/spi_master/spi2'):
+        if not self.host_mcu.is_fileoutput() and os.path.exists('/sys/devices/platform/ocp/481a0000.spi/spi_master/spi2'):
             sr_spi_bus = 'spidev2.1'
         self.sr_spi = bus.MCU_SPI(self.host_mcu, sr_spi_bus, None, 0, 50000000)
         self.sr_spi.setup_shutdown_msg(self.sr_disabled)

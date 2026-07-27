@@ -11,17 +11,8 @@ def main():
         logging.info(capture_shell)
         capture_ret = check_output(capture_shell, shell=True).decode('utf-8')
         logging.info('capture 0 return:#%s#' % str(capture_ret))
-    except Exception:
-        err = None
-        
-        try:
-            logging.error(err)
-        finally:
-            err = None
-            del err
-        err = None
-        del err
-        return None
+    except Exception as err:
+        logging.error(err)
 
 
 

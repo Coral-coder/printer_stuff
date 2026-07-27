@@ -23,7 +23,7 @@ class EEPROMCommandHelper:
         self.name = name_parts[-1]
         self.register_commands(self.name)
         if len(name_parts) == 1:
-            if not self.name == 'bl24c16f' or config.has_section('bl24c16f'):
+            if self.name == 'bl24c16f' or not config.has_section('bl24c16f'):
                 self.register_commands(None)
 
     
@@ -48,7 +48,8 @@ class EEPROMCommandHelper:
         gcmd.respond_info('EEPROM_IS_USED val:%s state:%s' % (int.from_bytes(val, 'little'), state))
         if int.from_bytes(val, 'little') != 255:
             return False
-        return True
+        else:
+            return True
 
     
     def cmd_EEPROM_POS(self, gcmd):
@@ -255,7 +256,8 @@ class BL24C16F:
         val = self.read_reg(1, 1)
         if int.from_bytes(val, 'little') != 255:
             return False
-        return True
+        else:
+            return True
 
     
     def eepromReadHeader(self):

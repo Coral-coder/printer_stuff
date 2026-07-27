@@ -43,8 +43,7 @@ class LinearInterpolate:
     def __init__(self, samples):
         self.keys = []
         self.slopes = []
-        last_key = None
-        last_value = None
+        last_key = last_value = None
         for key, value in sorted(samples):
             if last_key is None:
                 last_key = key
@@ -73,7 +72,7 @@ class LinearInterpolate:
 
     
     def reverse_interpolate(self, value):
-        values = [ key * gain + offset for gain, offset in (zip(self.keys, self.slopes)) ]
+        values = [ key * gain + offset for key, (gain, offset) in (zip(self.keys, self.slopes)) ]
         if values[0] < values[-2]:
             valid = [ i for i in (range(len(values))) if values[i] >= value ]
         else:
@@ -96,22 +95,12 @@ class LinearVoltage:
                 logging.warn('Ignoring adc sample %.3f/%.3f in heater %s', temp, volt, config.get_name())
                 continue
             samples.append((adc, temp))
-        
         try:
             li = LinearInterpolate(samples)
-        except ValueError:
-            e = None
-            
-            try:
-                raise config.error('{"code":"key28", "msg":"adc_temperature %s in heater %s", "values": ["%s", "%s"]}' % (str(e), config.get_name(), str(e), config.get_name()))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            self.calc_temp = li.interpolate
-            self.calc_adc = li.reverse_interpolate
-            return None
+        except ValueError as e:
+            raise config.error('{"code":"key28", "msg":"adc_temperature %s in heater %s", "values": ["%s", "%s"]}' % (str(e), config.get_name(), str(e), config.get_name()))
+        self.calc_temp = li.interpolate
+        self.calc_adc = li.reverse_interpolate
 
 
 
@@ -125,11 +114,9 @@ class CustomLinearVoltage:
         for i in range(1, 1000):
             t = config.getfloat('temperature%d' % (i,), None)
             if t is None:
-                pass
-            else:
-                v = config.getfloat('voltage%d' % (i,))
-                self.params.append((t, v))
-            return None
+                break
+            v = config.getfloat('voltage%d' % (i,))
+            self.params.append((t, v))
 
     
     def create(self, config):
@@ -142,20 +129,10 @@ class LinearResistance:
     
     def __init__(self, config, samples):
         self.pullup = config.getfloat('pullup_resistor', 4.7e+03, above=0.0)
-        
         try:
             self.li = LinearInterpolate([ (r, t) for t, r in (samples) ])
-        except ValueError:
-            e = None
-            
-            try:
-                raise config.error('{"code":"key28", "msg":"adc_temperature %s in heater %s", "values": ["%s", "%s"]}' % (str(e), config.get_name(), str(e), config.get_name()))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+        except ValueError as e:
+            raise config.error('{"code":"key28", "msg":"adc_temperature %s in heater %s", "values": ["%s", "%s"]}' % (str(e), config.get_name(), str(e), config.get_name()))
 
 
 
@@ -180,11 +157,9 @@ class CustomLinearResistance:
         for i in range(1, 1000):
             t = config.getfloat('temperature%d' % (i,), None)
             if t is None:
-                pass
-            else:
-                r = config.getfloat('resistance%d' % (i,))
-                self.samples.append((t, r))
-            return None
+                break
+            r = config.getfloat('resistance%d' % (i,))
+            self.samples.append((t, r))
 
     
     def create(self, config):

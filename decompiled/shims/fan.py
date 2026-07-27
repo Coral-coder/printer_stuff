@@ -48,7 +48,7 @@ class Fan:
             elif value == 0 and self.last_fan_value > 0:
                 self.enable_pin.set_digital(print_time, 0)
         if value and value < self.max_power and self.kick_start_time:
-            if self.last_fan_value or value - self.last_fan_value > 0.5:
+            if not self.last_fan_value or value - self.last_fan_value > 0.5:
                 self.mcu_fan.set_pwm(print_time, self.max_power)
                 print_time += self.kick_start_time
         self.mcu_fan.set_pwm(print_time, value)

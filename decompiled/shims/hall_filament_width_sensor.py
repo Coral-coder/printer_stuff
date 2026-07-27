@@ -33,9 +33,7 @@ class HallFilamentWidthSensor:
         self.lastFilamentWidthReading2 = 0
         self.firstExtruderUpdatePosition = 0
         self.filament_width = self.nominal_filament_dia
-        self.toolhead = None
-        self.ppins = None
-        self.mcu_adc = None
+        self.toolhead = self.ppins = self.mcu_adc = None
         self.printer.register_event_handler('klippy:ready', self.handle_ready)
         self.ppins = self.printer.lookup_object('pins')
         self.mcu_adc = self.ppins.setup_pin('adc', self.pin1)
@@ -80,11 +78,11 @@ class HallFilamentWidthSensor:
                     self.diameter])
                 if self.is_log:
                     self.gcode.respond_info('Filament width:%.3f' % self.diameter)
-                else:
-                    self.filament_array.append([
-                        self.measurement_delay + last_epos,
-                        self.diameter])
-                    self.firstExtruderUpdatePosition = self.measurement_delay + last_epos
+        else:
+            self.filament_array.append([
+                self.measurement_delay + last_epos,
+                self.diameter])
+            self.firstExtruderUpdatePosition = self.measurement_delay + last_epos
 
     
     def extrude_factor_update_event(self, eventtime):
@@ -107,12 +105,13 @@ class HallFilamentWidthSensor:
                     self.gcode.run_script('M221 S' + str(percentage))
                 else:
                     self.gcode.run_script('M221 S100')
-            else:
-                self.gcode.run_script('M221 S100')
-                self.filament_array = []
+        else:
+            self.gcode.run_script('M221 S100')
+            self.filament_array = []
         if self.is_active:
             return eventtime + 1
-        return self.reactor.NEVER
+        else:
+            return self.reactor.NEVER
 
     
     def cmd_M407(self, gcmd):

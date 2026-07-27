@@ -115,8 +115,7 @@ class ManualProbeHelper:
         self.manual_probe = self.printer.lookup_object('manual_probe')
         self.speed = gcmd.get_float('SPEED', 5.0)
         self.past_positions = []
-        self.last_toolhead_pos = None
-        self.last_kinematics_pos = None
+        self.last_toolhead_pos = self.last_kinematics_pos = None
         verify_no_manual_probe(printer)
         self.gcode.register_command('ACCEPT', self.cmd_ACCEPT, desc=self.cmd_ACCEPT_help)
         self.gcode.register_command('NEXT', self.cmd_ACCEPT)
@@ -154,18 +153,9 @@ class ManualProbeHelper:
                 None,
                 None,
                 z_pos], self.speed)
-        except self.printer.command_error:
-            e = None
-            
-            try:
-                self.finalize(False)
-                raise 
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+        except self.printer.command_error as e:
+            self.finalize(False)
+            raise
 
 
 
@@ -180,8 +170,7 @@ class ManualProbeHelper:
         prev_pos = next_pos - 1
         if next_pos < len(pp) and pp[next_pos] == z_pos:
             next_pos += 1
-        prev_pos_val = None
-        next_pos_val = None
+        prev_pos_val = next_pos_val = None
         prev_str = next_str = '??????'
         if prev_pos >= 0:
             prev_pos_val = pp[prev_pos]

@@ -18,8 +18,7 @@ class PrinterNeoPixel:
         self.oid = self.mcu.create_oid()
         self.pin = pin_params['pin']
         self.mcu.register_config_callback(self.build_config)
-        self.neopixel_update_cmd = None
-        self.neopixel_send_cmd = None
+        self.neopixel_update_cmd = self.neopixel_send_cmd = None
         chain_count = config.getint('chain_count', 1, minval=1)
         color_order = config.getlist('color_order', [
             'GRB'])
@@ -55,35 +54,33 @@ class PrinterNeoPixel:
     
     def update_color_data(self, led_state):
         color_data = self.color_data
-        for lidx, cidx in self.color_map:
+        for cdidx, (lidx, cidx) in self.color_map:
             color_data[cdidx] = int(led_state[lidx][cidx] * 255.0 + 0.5)
 
     
     def send_data(self, print_time = None):
-        old_data = self.old_color_data
-        new_data = self.color_data
+        old_data, new_data = self.old_color_data, self.color_data
         if new_data == old_data:
             return None
         diffs = [ [
 i,
-1] for n, o in (enumerate(zip(new_data, old_data))) if n != o ]
+1] for i, (n, o) in (enumerate(zip(new_data, old_data))) if n != o ]
         for i in range(len(diffs) - 2, -1, -1):
             (pos, count) = diffs[i]
             (nextpos, nextcount) = diffs[i + 1]
             if pos + 5 >= nextpos and nextcount < 16:
                 diffs[i][1] = nextcount + (nextpos - pos)
                 del diffs[i + 1]
-                continue
-                ucmd = self.neopixel_update_cmd.send
-                for pos, count in diffs:
-                    ucmd([
-                        self.oid,
-                        pos,
-                        new_data[pos:pos + count]], reqclock=BACKGROUND_PRIORITY_CLOCK)
-                old_data[:] = new_data
-                minclock = 0
-                if print_time is not None:
-                    minclock = self.mcu.print_time_to_clock(print_time)
+        ucmd = self.neopixel_update_cmd.send
+        for pos, count in diffs:
+            ucmd([
+                self.oid,
+                pos,
+                new_data[pos:pos + count]], reqclock=BACKGROUND_PRIORITY_CLOCK)
+        old_data[:] = new_data
+        minclock = 0
+        if print_time is not None:
+            minclock = self.mcu.print_time_to_clock(print_time)
         scmd = self.neopixel_send_cmd.send
         if self.printer.get_start_args().get('debugoutput') is not None:
             return None
@@ -91,10 +88,9 @@ i,
             params = scmd([
                 self.oid], minclock=minclock, reqclock=BACKGROUND_PRIORITY_CLOCK)
             if params['success']:
-                pass
-            
+                break
+        else:
             logging.info('Neopixel update did not succeed')
-            return None
 
     
     def update_leds(self, led_state, print_time):

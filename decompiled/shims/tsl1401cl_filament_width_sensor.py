@@ -20,9 +20,7 @@ class FilamentWidthSensor:
         self.is_active = True
         self.filament_array = []
         self.lastFilamentWidthReading = 0
-        self.toolhead = None
-        self.ppins = None
-        self.mcu_adc = None
+        self.toolhead = self.ppins = self.mcu_adc = None
         self.printer.register_event_handler('klippy:ready', self.handle_ready)
         self.ppins = self.printer.lookup_object('pins')
         self.mcu_adc = self.ppins.setup_pin('adc', self.pin)
@@ -52,32 +50,34 @@ class FilamentWidthSensor:
                 self.filament_array.append([
                     last_epos + self.measurement_delay,
                     self.lastFilamentWidthReading])
-            else:
-                self.filament_array.append([
-                    self.measurement_delay + last_epos,
-                    self.lastFilamentWidthReading])
+        else:
+            self.filament_array.append([
+                self.measurement_delay + last_epos,
+                self.lastFilamentWidthReading])
 
     
     def extrude_factor_update_event(self, eventtime):
         pos = self.toolhead.get_position()
         last_epos = pos[3]
         self.update_filament_array(last_epos)
-        if self.lastFilamentWidthReading > 0.5 or len(self.filament_array) > 0:
-            pending_position = self.filament_array[0][0]
-            if pending_position <= last_epos:
-                item = self.filament_array.pop(0)
-                filament_width = item[1]
-                if filament_width <= self.max_diameter and filament_width >= self.min_diameter:
-                    percentage = round((self.nominal_filament_dia ** 2 / filament_width ** 2) * 100)
-                    self.gcode.run_script('M221 S' + str(percentage))
-                else:
-                    self.gcode.run_script('M221 S100')
-            else:
-                self.gcode.run_script('M221 S100')
-                self.filament_array = []
+        if self.lastFilamentWidthReading > 0.5:
+            if len(self.filament_array) > 0:
+                pending_position = self.filament_array[0][0]
+                if pending_position <= last_epos:
+                    item = self.filament_array.pop(0)
+                    filament_width = item[1]
+                    if filament_width <= self.max_diameter and filament_width >= self.min_diameter:
+                        percentage = round((self.nominal_filament_dia ** 2 / filament_width ** 2) * 100)
+                        self.gcode.run_script('M221 S' + str(percentage))
+                    else:
+                        self.gcode.run_script('M221 S100')
+        else:
+            self.gcode.run_script('M221 S100')
+            self.filament_array = []
         if self.is_active:
             return eventtime + 1
-        return self.reactor.NEVER
+        else:
+            return self.reactor.NEVER
 
     
     def cmd_M407(self, gcmd):

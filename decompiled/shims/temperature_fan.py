@@ -55,7 +55,7 @@ class TemperatureFan:
             value = self.min_speed
         if self.target_temp <= 0.0:
             value = 0.0
-        if (read_time < self.next_speed_time or self.last_speed_value) and abs(value - self.last_speed_value) < 0.05:
+        if (read_time < self.next_speed_time or not self.last_speed_value) and abs(value - self.last_speed_value) < 0.05:
             return None
         speed_time = read_time + self.speed_delay
         self.next_speed_time = speed_time + 0.75 * MAX_FAN_TIME
@@ -141,7 +141,7 @@ class ControlBangBang:
         (current_temp, target_temp) = self.temperature_fan.get_temp(read_time)
         if self.heating and temp >= target_temp + self.max_delta:
             self.heating = False
-        elif self.heating and temp <= target_temp - self.max_delta:
+        elif not self.heating and temp <= target_temp - self.max_delta:
             self.heating = True
         if self.heating:
             self.temperature_fan.set_speed(read_time, 0.0)

@@ -43,48 +43,35 @@ class ZAdjustHelper:
                 continue
             if s.get_name() == 'stepper_z1':
                 z_tilt.stepper_z1_adjustment += a
-                continue
-                gcode.respond_info('stepper_z_adjustment:%s stepper_z1_adjustment:%s' % (z_tilt.stepper_z_adjustment, z_tilt.stepper_z1_adjustment))
+        gcode.respond_info('stepper_z_adjustment:%s stepper_z1_adjustment:%s' % (z_tilt.stepper_z_adjustment, z_tilt.stepper_z1_adjustment))
+        toolhead.flush_step_generation()
+        for s in self.z_steppers:
+            s.set_trapq(None)
+        positions = [ (-a, s) for a, s in (zip(adjustments, self.z_steppers)) ]
+        positions.sort(key=(lambda k: k[0]))
+        (first_stepper_offset, first_stepper) = positions[0]
+        z_low = curpos[2] - first_stepper_offset
+        for i in range(len(positions) - 1):
+            (stepper_offset, stepper) = positions[i]
+            (next_stepper_offset, next_stepper) = positions[i + 1]
+            toolhead.flush_step_generation()
+            stepper.set_trapq(toolhead.get_trapq())
+            curpos[2] = z_low + next_stepper_offset
+            try:
+                toolhead.move(curpos, speed)
+                toolhead.set_position(curpos)
+            except Exception as err:
+                logging.exception('ZAdjustHelper adjust_steppers')
                 toolhead.flush_step_generation()
                 for s in self.z_steppers:
-                    s.set_trapq(None)
-                positions = [ (-a, s) for a, s in (zip(adjustments, self.z_steppers)) ]
-                positions.sort(key=(lambda k: k[0]))
-                (first_stepper_offset, first_stepper) = positions[0]
-                z_low = curpos[2] - first_stepper_offset
-                for i in range(len(positions) - 1):
-                    (stepper_offset, stepper) = positions[i]
-                    (next_stepper_offset, next_stepper) = positions[i + 1]
-                    toolhead.flush_step_generation()
-                    stepper.set_trapq(toolhead.get_trapq())
-                    curpos[2] = z_low + next_stepper_offset
-                    
-                    try:
-                        toolhead.move(curpos, speed)
-                        toolhead.set_position(curpos)
-                    except Exception:
-                        z_tilt
-                        err = z_tilt
-                        z_tilt
-                        
-                        try:
-                            logging.exception('ZAdjustHelper adjust_steppers')
-                            toolhead.flush_step_generation()
-                            for s in self.z_steppers:
-                                s.set_trapq(toolhead.get_trapq())
-                            err_msg = '{"code":"key348", "msg":"toolhead.move(%s, %s) ZAdjustHelper adjust_steppers error:%s", "values":[]}' % (str(curpos), speed, str(err))
-                            raise gcode.error(err_msg)
-                        finally:
-                            err = None
-                            del err
-                        err = None
-                        del err
-                        continue
-                        (last_stepper_offset, last_stepper) = positions[-1]
-                        last_stepper.set_trapq(toolhead.get_trapq())
-                        curpos[2] += first_stepper_offset
-                        toolhead.set_position(curpos)
-                        return None
+                    s.set_trapq(toolhead.get_trapq())
+                err_msg = '{"code":"key348", "msg":"toolhead.move(%s, %s) ZAdjustHelper adjust_steppers error:%s", "values":[]}' % (str(curpos), speed, str(err))
+                raise gcode.error(err_msg)
+        (last_stepper_offset, last_stepper) = positions[-1]
+        toolhead.flush_step_generation()
+        last_stepper.set_trapq(toolhead.get_trapq())
+        curpos[2] += first_stepper_offset
+        toolhead.set_position(curpos)
 
 
 
@@ -228,25 +215,12 @@ class ZTilt:
         if os.path.exists(self.stepper_adjustment_path):
             result = { }
             with open(self.stepper_adjustment_path, 'r') as f:
-                
                 try:
                     result = json.loads(f.read())
                     stepper_z_adjustment = result.get('stepper_z_adjustment', -10)
                     stepper_z1_adjustment = result.get('stepper_z1_adjustment', -10)
-                except Exception:
-                    err = None
-                    
-                    try:
-                        logging.exception(err)
-                    finally:
-                        err = None
-                        del err
-                    err = None
-                    del err
-                    if not None:
-                        pass
-
-
+                except Exception as err:
+                    logging.exception(err)
         if stepper_z_adjustment != -10 and stepper_z1_adjustment != -10:
             return [
                 stepper_z_adjustment,

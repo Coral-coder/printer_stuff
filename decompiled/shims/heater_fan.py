@@ -34,19 +34,17 @@ class PrinterHeaterFan:
         speed = 0.0
         for heater in self.heaters:
             (current_temp, target_temp) = heater.get_temp(eventtime)
-            if not target_temp:
-                if current_temp > self.heater_temp:
-                    speed = self.fan_speed
-                    continue
-                    chamber_heater = self.printer.lookup_object('heater_generic chamber_heater', None)
-                    heater_bed_state = self.printer.lookup_object('heater_bed').heater_bed_state
-                    if self.is_ptc_fan == 1 and target_temp > 40 and chamber_heater and hasattr(chamber_heater.control, 'max_delta'):
-                        if chamber_heater.last_pwm_value == 0:
-                            speed = 0
-                        else:
-                            speed = 0.3
-                        if chamber_heater.control.count != 20:
-                            speed = 0
+            if target_temp or current_temp > self.heater_temp:
+                speed = self.fan_speed
+        chamber_heater = self.printer.lookup_object('heater_generic chamber_heater', None)
+        heater_bed_state = self.printer.lookup_object('heater_bed').heater_bed_state
+        if self.is_ptc_fan == 1 and target_temp > 40 and chamber_heater and hasattr(chamber_heater.control, 'max_delta'):
+            if chamber_heater.last_pwm_value == 0:
+                speed = 0
+            else:
+                speed = 0.3
+            if chamber_heater.control.count != 20:
+                speed = 0
         if speed != self.last_speed:
             self.last_speed = speed
             curtime = self.printer.get_reactor().monotonic()

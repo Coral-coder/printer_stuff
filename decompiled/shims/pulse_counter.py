@@ -50,8 +50,7 @@ class FrequencyCounter:
     
     def __init__(self, printer, pin, sample_time, poll_time):
         self._callback = None
-        self._last_time = None
-        self._last_count = None
+        self._last_time = self._last_count = None
         self._freq = 0.0
         self._counter = MCU_counter(printer, pin, sample_time, poll_time)
         self._counter.setup_callback(self._counter_callback)

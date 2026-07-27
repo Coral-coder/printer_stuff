@@ -15,7 +15,7 @@ def calc_move_time(dist, speed, accel):
     if dist < 0.0:
         axis_r = -1.0
         dist = -dist
-    if not accel or dist:
+    if not accel or not dist:
         return (axis_r, 0.0, dist / speed, speed)
     max_cruise_v2 = dist * accel
     if max_cruise_v2 < speed ** 2:
@@ -108,11 +108,9 @@ class ForceMove:
         logging.info('Stepper buzz %s', stepper.get_name())
         was_enable = self._force_enable(stepper)
         toolhead = self.printer.lookup_object('toolhead')
-        dist = BUZZ_DISTANCE
-        speed = BUZZ_VELOCITY
+        (dist, speed) = (BUZZ_DISTANCE, BUZZ_VELOCITY)
         if stepper.units_in_radians():
-            dist = BUZZ_RADIANS_DISTANCE
-            speed = BUZZ_RADIANS_VELOCITY
+            (dist, speed) = (BUZZ_RADIANS_DISTANCE, BUZZ_RADIANS_VELOCITY)
         for i in range(10):
             self.manual_move(stepper, dist, speed)
             toolhead.dwell(0.05)

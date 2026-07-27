@@ -108,7 +108,7 @@ class ZThermalAdjuster:
 
     
     def move(self, newpos, speed):
-        if not newpos[0:2] == self.last_position[0:2] or self.adjust_enable:
+        if newpos[0:2] == self.last_position[0:2] or not self.adjust_enable:
             z = newpos[2] + self.last_z_adjust_mm
             adjusted_pos = [
                 newpos[0],
@@ -133,10 +133,6 @@ class ZThermalAdjuster:
             self.smoothed_temp += temp_diff * adj_time
             self.measured_min = min(self.measured_min, self.smoothed_temp)
             self.measured_max = max(self.measured_max, self.smoothed_temp)
-            self(None, None, None)
-        with None:
-            if not None:
-                pass
 
     
     def get_temp(self, eventtime):

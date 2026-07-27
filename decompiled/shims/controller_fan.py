@@ -52,13 +52,12 @@ class ControllerFan:
             (_, target_temp) = heater.get_temp(eventtime)
             if target_temp:
                 active = True
-                continue
-                if active:
-                    self.last_on = 0
-                    speed = self.fan_speed
-                elif self.last_on < self.idle_timeout:
-                    speed = self.idle_speed
-                    self.last_on += 1
+        if active:
+            self.last_on = 0
+            speed = self.fan_speed
+        elif self.last_on < self.idle_timeout:
+            speed = self.idle_speed
+            self.last_on += 1
         if speed != self.last_speed:
             self.last_speed = speed
             curtime = self.printer.get_reactor().monotonic()

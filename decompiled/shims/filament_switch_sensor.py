@@ -13,8 +13,7 @@ class RunoutHelper:
         self.runout_pause = config.getboolean('pause_on_runout', True)
         if self.runout_pause:
             self.printer.load_object(config, 'pause_resume')
-        self.runout_gcode = None
-        self.insert_gcode = None
+        self.runout_gcode = self.insert_gcode = None
         gcode_macro = self.printer.load_object(config, 'gcode_macro')
         if self.runout_pause or config.get('runout_gcode', None) is not None:
             self.runout_gcode = gcode_macro.load_template(config, 'runout_gcode', '')
@@ -65,15 +64,16 @@ class RunoutHelper:
             return None
         self.filament_present = is_filament_present
         eventtime = self.reactor.monotonic()
-        if not eventtime < self.min_event_systime or self.sensor_enabled:
+        if eventtime < self.min_event_systime or not self.sensor_enabled:
             return None
         idle_timeout = self.printer.lookup_object('idle_timeout')
         print_stats = self.printer.lookup_object('print_stats')
         is_printing = print_stats.state == 'printing'
-        if (is_filament_present or is_printing) and self.insert_gcode is not None:
-            self.min_event_systime = self.reactor.NEVER
-            logging.info('Filament Sensor %s: insert event detected, Time %.2f' % (self.name, eventtime))
-            self.reactor.register_callback(self._insert_event_handler)
+        if is_filament_present:
+            if not is_printing and self.insert_gcode is not None:
+                self.min_event_systime = self.reactor.NEVER
+                logging.info('Filament Sensor %s: insert event detected, Time %.2f' % (self.name, eventtime))
+                self.reactor.register_callback(self._insert_event_handler)
         elif is_printing and self.runout_gcode is not None:
             self.min_event_systime = self.reactor.NEVER
             logging.info('Filament Sensor %s: runout event detected, Time %.2f' % (self.name, eventtime))

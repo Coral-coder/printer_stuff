@@ -113,9 +113,8 @@ class FanFeedback:
                 self.ptc_fan_speed[fan_key] = fan_x_speed = params.get(fan_key, 0)
                 if fan_x_speed == 0:
                     ptc_fan_abnormal = True
-                    continue
-                    if ptc_fan_abnormal:
-                        fan0_speed = 0
+            if ptc_fan_abnormal:
+                fan0_speed = 0
         self.cx_fan_status = {
             'fan0_speed': fan0_speed,
             'fan1_speed': self.cx_fan_status.get('fan1_speed', 0),

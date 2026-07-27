@@ -17,18 +17,10 @@ class SaveVariables:
             if not os.path.exists(self.filename):
                 open(self.filename, 'w').close()
             self.loadVariables()
-        except self.printer.command_error:
-            e = None
-            
-            try:
-                raise config.error(str(e))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            gcode = self.printer.lookup_object('gcode')
-            return None
+        except self.printer.command_error as e:
+            raise config.error(str(e))
+        gcode = self.printer.lookup_object('gcode')
+        gcode.register_command('SAVE_VARIABLE', self.cmd_SAVE_VARIABLE, desc=self.cmd_SAVE_VARIABLE_help)
 
 
 
@@ -57,33 +49,24 @@ class SaveVariables:
         
         try:
             value = ast.literal_eval(value)
-        except ValueError:
-            e = None
-            
-            try:
-                raise gcmd.error('{"code": "key285", "msg": "Unable to parse \'%s\' as a literal", "values": ["%s"]}' % (value, value))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            newvars = dict(self.allVariables)
-            newvars[varname] = value
-            varfile = configparser.ConfigParser()
-            for name, val in sorted(newvars.items()):
-                varfile.set('Variables', name, repr(val))
-            
-            try:
-                f = open(self.filename, 'w')
-                varfile.write(f)
-                f.close()
-            except:
-                msg = '{"code": "key286", "msg": "Unable to save variable", "values": []}'
-                logging.exception(msg)
-                raise gcmd.error(msg)
+        except ValueError as e:
+            raise gcmd.error('{"code": "key285", "msg": "Unable to parse \'%s\' as a literal", "values": ["%s"]}' % (value, value))
+        newvars = dict(self.allVariables)
+        newvars[varname] = value
+        varfile = configparser.ConfigParser()
+        varfile.add_section('Variables')
+        for name, val in sorted(newvars.items()):
+            varfile.set('Variables', name, repr(val))
 
-            self.loadVariables()
-            return None
+        try:
+            f = open(self.filename, 'w')
+            varfile.write(f)
+            f.close()
+        except:
+            msg = '{"code": "key286", "msg": "Unable to save variable", "values": []}'
+            logging.exception(msg)
+            raise gcmd.error(msg)
+        self.loadVariables()
 
 
 

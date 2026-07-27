@@ -33,8 +33,8 @@ class PrinterDotstar:
             return None
         self.prev_data = led_state
         data = [
-            0] * (len(led_state) + 2) * 4
-        for red, green, blue, white in enumerate(led_state):
+            0] * ((len(led_state) + 2) * 4)
+        for i, (red, green, blue, white) in enumerate(led_state):
             idx = (i + 1) * 4
             data[idx] = 255
             data[idx + 1] = int(blue * 255.0 + 0.5)

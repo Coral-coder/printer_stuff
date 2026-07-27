@@ -130,8 +130,6 @@ class PrinterSkew:
 
                 factor = plane.lower() + '_factor'
                 setattr(self, factor, calc_skew_factor(*lengths))
-                continue
-                return None
 
     cmd_SKEW_PROFILE_help = 'Profile management for skew_correction'
     

@@ -28,17 +28,9 @@ class PrintStats:
             try:
                 with open(self.z_pos_filepath, 'r') as f:
                     z_pos = float(json.loads(f.read()).get('z_pos', 0))
-            except Exception:
-                err = None
-                
-                try:
-                    logging.error(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                return z_pos
+            except Exception as err:
+                logging.error(err)
+        return z_pos
 
 
 
@@ -60,32 +52,22 @@ class PrintStats:
         gc_status = self.gcode_move.get_status(curtime)
         ret = { }
         if info_path and os.path.exists(info_path):
-            
+
             try:
                 with open(info_path, 'r') as f:
                     ret = json.loads(f.read())
                     self.filament_used = ret.get('filament_used', 0)
-            except Exception:
-                err = None
-                
-                try:
-                    pass
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                if self.print_start_time is None:
-                    if info_path and ret and ret.get('last_print_duration'):
-                        self.print_start_time = curtime - int(ret.get('last_print_duration', 0))
-                    else:
-                        self.print_start_time = curtime
-                elif self.last_pause_time is not None:
-                    pause_duration = curtime - self.last_pause_time
-                    self.prev_pause_duration += pause_duration
-                    self.last_pause_time = None
-
-
+            except Exception as err:
+                pass
+        if self.print_start_time is None:
+            if info_path and ret and ret.get('last_print_duration'):
+                self.print_start_time = curtime - int(ret.get('last_print_duration', 0))
+            else:
+                self.print_start_time = curtime
+        elif self.last_pause_time is not None:
+            pause_duration = curtime - self.last_pause_time
+            self.prev_pause_duration += pause_duration
+            self.last_pause_time = None
         self.printer.send_event('box:clear_box_color_count')
         logging.info('box:clear_box_color_count start')
         self.last_epos = gc_status['position'].e
@@ -150,8 +132,7 @@ class PrintStats:
         self.state = 'standby'
         self.prev_pause_duration = self.last_epos = 0.0
         self.filament_used = self.total_duration = 0.0
-        self.print_start_time = None
-        self.last_pause_time = None
+        self.print_start_time = self.last_pause_time = None
         self.init_duration = 0.0
         self.info_total_layer = None
         self.info_current_layer = None

@@ -8,8 +8,7 @@ class DisplayStatus:
     def __init__(self, config):
         self.printer = config.get_printer()
         self.expire_progress = 0.0
-        self.progress = None
-        self.message = None
+        self.progress = self.message = None
         gcode = self.printer.lookup_object('gcode')
         gcode.register_command('M73', self.cmd_M73)
         gcode.register_command('M117', self.cmd_M117)
@@ -22,8 +21,7 @@ class DisplayStatus:
             idle_timeout = self.printer.lookup_object('idle_timeout')
             idle_timeout_info = idle_timeout.get_status(eventtime)
             if idle_timeout_info['state'] != 'Printing':
-                self.progress = None
-                progress = None
+                self.progress = progress = None
         if progress is None:
             progress = 0.0
             sdcard = self.printer.lookup_object('virtual_sdcard', None)
@@ -44,9 +42,7 @@ class DisplayStatus:
 
     
     def cmd_M117(self, gcmd):
-        if not gcmd.get_raw_command_parameters():
-            pass
-        msg = None
+        msg = gcmd.get_raw_command_parameters() or None
         self.message = msg
 
     cmd_SET_DISPLAY_TEXT_help = 'Set or clear the display message'

@@ -65,9 +65,7 @@ class AxisInputShaper:
     
     def update(self, gcmd):
         self.params.update(gcmd)
-        old_n = self.n
-        old_A = self.A
-        old_T = self.T
+        (old_n, old_A, old_T) = (self.n, self.A, self.T)
         (self.n, self.A, self.T) = self.params.get_shaper()
         return (old_n, old_A, old_T) != (self.n, self.A, self.T)
 
@@ -90,9 +88,7 @@ class AxisInputShaper:
         if self.saved is None and self.n:
             self.saved = (self.n, self.A, self.T)
         (A, T) = shaper_defs.get_none_shaper()
-        self.n = len(A)
-        self.A = A
-        self.T = T
+        (self.n, self.A, self.T) = (len(A), A, T)
 
     
     def enable_shaping(self):
@@ -157,14 +153,9 @@ class InputShaper:
                     continue
                 if not shaper.set_shaper_kinematics(sk):
                     failed.append(shaper)
-                    continue
-                    continue
-                    if failed:
-                        if not error:
-                            pass
-                        error = self.printer.command_error
-                        raise error('{"code":"key25", "msg":"Failed to configure shaper(s) %s with given parameters", "values": ["%s"]}' % (', '.join([ s.get_name() for s in (failed) ]), ', '.join([ s.get_name() for s in (failed) ])))
-                    return None
+        if failed:
+            error = error or self.printer.command_error
+            raise error('{"code":"key25", "msg":"Failed to configure shaper(s) %s with given parameters", "values": ["%s"]}' % (', '.join([ s.get_name() for s in (failed) ]), ', '.join([ s.get_name() for s in (failed) ])))
 
     
     def disable_shaping(self):

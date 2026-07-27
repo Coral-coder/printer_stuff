@@ -101,11 +101,9 @@ class Filter:
             for j in range(s_count):
                 if i < len(tmp_vals[j]):
                     sums += math.fabs(tmp_vals[j][i])
-                    continue
-                    out_vals.append(sums)
-                    continue
-                    if len(out_vals) > cut_len:
-                        del out_vals[0:len(out_vals) - cut_len]
+            out_vals.append(sums)
+        if len(out_vals) > cut_len:
+            del out_vals[0:len(out_vals) - cut_len]
         for i in range(s_count):
             if len(tmp_vals[i]) > cut_len:
                 del tmp_vals[i][0:len(tmp_vals[i]) - cut_len]
@@ -113,7 +111,7 @@ class Filter:
                 tmp_vals[i][j] = abs(tmp_vals[i][j])
         return (out_vals, tmp_vals)
 
-    
+
     def cal_filter_by_vals(self, s_count, now_valss, hft_hz, lft_k1, cut_len):
         out_vals = []
         tmp_vals = [
@@ -133,11 +131,9 @@ class Filter:
             for j in range(s_count):
                 if i < len(tmp_vals[j]):
                     sums += math.fabs(tmp_vals[j][i])
-                    continue
-                    out_vals.append(sums)
-                    continue
-                    if len(out_vals) > cut_len:
-                        del out_vals[0:len(out_vals) - cut_len]
+            out_vals.append(sums)
+        if len(out_vals) > cut_len:
+            del out_vals[0:len(out_vals) - cut_len]
         for i in range(s_count):
             if len(tmp_vals[i]) > cut_len:
                 del tmp_vals[i][0:len(tmp_vals[i]) - cut_len]

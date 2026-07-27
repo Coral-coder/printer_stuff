@@ -44,8 +44,7 @@ class MCU_SPI:
             self.config_fmt = 'spi_set_bus oid=%d spi_bus=%%s mode=%d rate=%d' % (self.oid, mode, speed)
         self.cmd_queue = mcu.alloc_command_queue()
         mcu.register_config_callback(self.build_config)
-        self.spi_send_cmd = None
-        self.spi_transfer_cmd = None
+        self.spi_send_cmd = self.spi_transfer_cmd = None
 
     
     def setup_shutdown_msg(self, shutdown_seq):
@@ -140,8 +139,7 @@ class MCU_I2C:
             self.config_fmt = 'i2c_set_bus oid=%d i2c_bus=%%s rate=%d address=%d' % (self.oid, speed, addr)
         self.cmd_queue = self.mcu.alloc_command_queue()
         self.mcu.register_config_callback(self.build_config)
-        self.i2c_write_cmd = None
-        self.i2c_read_cmd = None
+        self.i2c_write_cmd = self.i2c_read_cmd = None
 
     
     def get_oid(self):
