@@ -135,23 +135,12 @@ class ShaperCalibrate:
                     'ei',
                     '2hump_ei',
                     '3hump_ei'])))
-        except Exception:
-            err = None
-            
-            try:
-                logging.error('gcode_macro_path: %s, configfile.read_config error:%s' % (gcode_macro_path, err))
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            
-            try:
-                self.numpy = importlib.import_module('numpy')
-            except ImportError:
-                raise self.error('Failed to import `numpy` module, make sure it was installed via `~/klippy-env/bin/pip install` (refer to docs/Measuring_Resonances.md for more details).')
-
-            return None
+        except Exception as err:
+            logging.error('gcode_macro_path: %s, configfile.read_config error:%s' % (gcode_macro_path, err))
+        try:
+            self.numpy = importlib.import_module('numpy')
+        except ImportError:
+            raise self.error('Failed to import `numpy` module, make sure it was installed via `~/klippy-env/bin/pip install` (refer to docs/Measuring_Resonances.md for more details).')
 
 
 
@@ -190,12 +179,11 @@ class ShaperCalibrate:
         reactor = self.printer.get_reactor()
         gcode = self.printer.lookup_object('gcode')
         eventtime = last_report_time = reactor.monotonic()
-        if calc_proc.is_alive():
+        while calc_proc.is_alive():
             if eventtime > last_report_time + 5.0:
                 last_report_time = eventtime
                 gcode.respond_info('Wait for calculations..', log=False)
             eventtime = reactor.pause(eventtime + 0.1)
-            continue
         (is_err, res) = parent_conn.recv()
         if is_err:
             raise self.error('{"code": "key312", "msg": "Error in remote calculation: %s", "values":["%s"]}' % (res, res))
@@ -218,11 +206,11 @@ class ShaperCalibrate:
         scale = 1.0 / (window ** 2).sum()
         overlap = nfft // 2
         x = self._split_into_windows(x, nfft, overlap)
-        x = window[(:, None)] * (x - np.mean(x, axis=0))
+        x = window[:, None] * (x - np.mean(x, axis=0))
         result = np.fft.rfft(x, n=nfft, axis=0)
         result = np.conjugate(result) * result
         result *= scale / fs
-        result[(1:-1, :)] *= 2.0
+        result[1:-1, :] *= 2.0
         psd = result.real.mean(axis=-1)
         freqs = np.fft.rfftfreq(nfft, 1.0 / fs)
         return (freqs, psd)
@@ -245,9 +233,9 @@ class ShaperCalibrate:
         M = 1 << int(SAMPLING_FREQ * WINDOW_T_SEC - 1).bit_length()
         if N <= M:
             return None
-        (fx, px) = self._psd(data[(:, 1)], SAMPLING_FREQ, M)
-        (fy, py) = self._psd(data[(:, 2)], SAMPLING_FREQ, M)
-        (fz, pz) = self._psd(data[(:, 3)], SAMPLING_FREQ, M)
+        (fx, px) = self._psd(data[:, 1], SAMPLING_FREQ, M)
+        (fy, py) = self._psd(data[:, 2], SAMPLING_FREQ, M)
+        (fz, pz) = self._psd(data[:, 3], SAMPLING_FREQ, M)
         return CalibrationData(fx, px + py + pz, px, py, pz)
 
     
@@ -270,12 +258,11 @@ class ShaperCalibrate:
         reactor = self.printer.get_reactor()
         gcode = self.printer.lookup_object('gcode')
         eventtime = last_report_time = reactor.monotonic()
-        if calc_proc.is_alive():
+        while calc_proc.is_alive():
             if eventtime > last_report_time + 5.0:
                 last_report_time = eventtime
                 gcode.respond_info('Wait for calculations..')
             eventtime = reactor.pause(eventtime + 0.1)
-            continue
         (is_err, res) = parent_conn.recv()
         if is_err:
             raise self.error('{"code": "key312", "msg": "Error in remote calculation: %s", "values":["%s"]}' % (res, res))
@@ -324,8 +311,7 @@ class ShaperCalibrate:
     
     def _estimate_shaper(self, shaper, test_damping_ratio, test_freqs):
         np = self.numpy
-        A = np.array(shaper[0])
-        T = np.array(shaper[1])
+        A, T = np.array(shaper[0]), np.array(shaper[1])
         inv_D = 1.0 / A.sum()
         omega = 2.0 * math.pi * test_freqs
         damping = test_damping_ratio * omega
@@ -380,38 +366,32 @@ class ShaperCalibrate:
                 shaper_vals = np.maximum(shaper_vals, vals)
                 if vibrations > shaper_vibrations:
                     shaper_vibrations = vibrations
-                    continue
-                    max_accel = self.find_shaper_max_accel(shaper)
-                    shaper_score = shaper_smoothing * (shaper_vibrations ** 1.5 + shaper_vibrations * 0.2 + 0.01)
-                    results.append(CalibrationResult(name=shaper_cfg.name, freq=test_freq, vals=shaper_vals, vibrs=shaper_vibrations, smoothing=shaper_smoothing, score=shaper_score, max_accel=max_accel))
-                    if not best_res is None:
-                        if best_res.vibrs > results[-1].vibrs:
-                            best_res = results[-1]
-                            continue
-                            selected = best_res
-                            for res in results[::-1]:
-                                if res.vibrs < best_res.vibrs * 1.1 and res.score < selected.score:
-                                    selected = res
-                                    continue
-                                    return selected
+            max_accel = self.find_shaper_max_accel(shaper)
+            shaper_score = shaper_smoothing * (shaper_vibrations ** 1.5 + shaper_vibrations * 0.2 + 0.01)
+            results.append(CalibrationResult(name=shaper_cfg.name, freq=test_freq, vals=shaper_vals, vibrs=shaper_vibrations, smoothing=shaper_smoothing, score=shaper_score, max_accel=max_accel))
+            if best_res is None or best_res.vibrs > results[-1].vibrs:
+                best_res = results[-1]
+        selected = best_res
+        for res in results[::-1]:
+            if res.vibrs < best_res.vibrs * 1.1 and res.score < selected.score:
+                selected = res
+        return selected
 
     
     def _bisect(self, func):
         left = right = 1.0
-        if not func(left):
+        while not func(left):
             right = left
             left *= 0.5
-            continue
-        if right == left and func(right):
-            right *= 2.0
-            continue
-        if right - left > 1e-08:
+        if right == left:
+            while func(right):
+                right *= 2.0
+        while right - left > 1e-08:
             middle = (left + right) * 0.5
             if func(middle):
                 left = middle
-                continue
-            right = middle
-            continue
+            else:
+                right = middle
         return left
 
     
@@ -432,11 +412,9 @@ class ShaperCalibrate:
                 logger("Fitted shaper '%s' frequency = %.1f Hz (vibrations = %.1f%%, smoothing ~= %.3f)" % (shaper.name, shaper.freq, shaper.vibrs * 1e+02, shaper.smoothing))
                 logger("To avoid too much smoothing with '%s', suggested max_accel <= %.0f mm/sec^2" % (shaper.name, round(shaper.max_accel / 1e+02) * 1e+02))
             all_shapers.append(shaper)
-            if not best_shaper is None and shaper.score * 1.2 < best_shaper.score:
-                if shaper.score * 1.05 < best_shaper.score and shaper.smoothing * 1.1 < best_shaper.smoothing:
-                    best_shaper = shaper
-                    continue
-                    return (best_shaper, all_shapers)
+            if best_shaper is None or shaper.score * 1.2 < best_shaper.score or shaper.score * 1.05 < best_shaper.score and shaper.smoothing * 1.1 < best_shaper.smoothing:
+                best_shaper = shaper
+        return (best_shaper, all_shapers)
 
     
     def save_params(self, configfile, axis, shaper_name, shaper_freq):
@@ -456,8 +434,8 @@ class ShaperCalibrate:
         gcode = self.printer.lookup_object('gcode')
         axis = axis.upper()
         input_shaper.cmd_SET_INPUT_SHAPER(gcode.create_gcode_command('SET_INPUT_SHAPER', 'SET_INPUT_SHAPER', {
-            'SHAPER_FREQ_' + axis: shaper_freq,
-            'SHAPER_TYPE_' + axis: shaper_name }))
+            'SHAPER_TYPE_' + axis: shaper_name,
+            'SHAPER_FREQ_' + axis: shaper_freq }))
 
     
     def save_calibration_data(self, output, calibration_data, shapers = None):
@@ -472,32 +450,19 @@ class ShaperCalibrate:
                 num_freqs = calibration_data.freq_bins.shape[0]
                 for i in range(num_freqs):
                     if calibration_data.freq_bins[i] >= MAX_FREQ:
-                        pass
-                    else:
-                        csvfile.write('%.1f,%.3e,%.3e,%.3e,%.3e' % (calibration_data.freq_bins[i], calibration_data.psd_x[i], calibration_data.psd_y[i], calibration_data.psd_z[i], calibration_data.psd_sum[i]))
-                        if shapers:
-                            for shaper in shapers:
-                                csvfile.write(',%.3f' % (shaper.vals[i],))
-                        csvfile.write('\n')
-                None(None, None, None)
-            if not None:
-                pass
-        except IOError:
-            e = None
-            
-            try:
-                raise self.error({
-                    'code': 'key314',
-                    'msg': "Error writing to file '%s': %s",
-                    'values': [
-                        '%s',
-                        '%s'] }, output, str(e), output, str(e))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+                        break
+                    csvfile.write('%.1f,%.3e,%.3e,%.3e,%.3e' % (calibration_data.freq_bins[i], calibration_data.psd_x[i], calibration_data.psd_y[i], calibration_data.psd_z[i], calibration_data.psd_sum[i]))
+                    if shapers:
+                        for shaper in shapers:
+                            csvfile.write(',%.3f' % (shaper.vals[i],))
+                    csvfile.write('\n')
+        except IOError as e:
+            raise self.error({
+                'code': 'key314',
+                'msg': "Error writing to file '%s': %s",
+                'values': [
+                    '%s',
+                    '%s'] }, output, str(e), output, str(e))
 
 
 

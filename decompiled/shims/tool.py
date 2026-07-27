@@ -41,17 +41,8 @@ def send(msg, data = { }):
                 f.write(json.dumps(send_data))
                 f.write(chr(3))
                 f.flush()
-    except Exception:
-        err = None
-        
-        try:
-            logging.error('reportInformation err:%s' % err)
-        finally:
-            err = None
-            del err
-        err = None
-        del err
-        return None
+    except Exception as err:
+        logging.error('reportInformation err:%s' % err)
 
 
 
@@ -68,19 +59,17 @@ def compress_key701(code, data):
             data = data.get('jobs', [])[0] if data.get('jobs', []) else { }
             metadata = data.get('metadata', { })
             model_info = metadata.get('model_info', { })
-            result = '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s' % (data.get('end_time', 0), data.get('filament_used', 0), data.get('filename', ''), data.get('print_duration', 0), data.get('start_time', 0), data.get('status', ''), data.get('error_msg', ''), data.get('total_duration', 0), metadata.get('estimated_time', 0), metadata.get('filament_total', 0), metadata.get('filament_weight_total', 0), metadata.get('first_layer_bed_temp', 0), metadata.get('first_layer_extr_temp', 0), metadata.get('first_layer_height', 0), metadata.get('gcode_end_byte', 0), metadata.get('gcode_start_byte', 0), metadata.get('layer_count', 0), metadata.get('layer_height', 0), metadata.get('modified', 0), metadata.get('object_height', 0), metadata.get('size', 0), metadata.get('slicer', ''), metadata.get('slicer_version', ''), model_info.get('MaterialType', ''), model_info.get('MaterialName', ''), model_info.get('MAXX', 0), model_info.get('MAXY', 0), model_info.get('MAXZ', 0), model_info.get('MINX', 0), model_info.get('MINY', 0), model_info.get('MINZ', 0))
-        return None
-        except Exception:
-            err = None
-            
-            try:
-                logging.exception(err)
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            return None
+            result = '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s' % (
+                data.get('end_time', 0), data.get('filament_used', 0), data.get('filename', ''), data.get('print_duration', 0),
+                data.get('start_time', 0), data.get('status', ''), data.get('error_msg', ''), data.get('total_duration', 0),
+                metadata.get('estimated_time', 0), metadata.get('filament_total', 0), metadata.get('filament_weight_total', 0), metadata.get('first_layer_bed_temp', 0), metadata.get('first_layer_extr_temp', 0),
+                metadata.get('first_layer_height', 0), metadata.get('gcode_end_byte', 0), metadata.get('gcode_start_byte', 0), metadata.get('layer_count', 0),
+                metadata.get('layer_height', 0), metadata.get('modified', 0), metadata.get('object_height', 0), metadata.get('size', 0),
+                metadata.get('slicer', ''), metadata.get('slicer_version', ''), model_info.get('MaterialType', ''), model_info.get('MaterialName', ''),
+                model_info.get('MAXX', 0), model_info.get('MAXY', 0), model_info.get('MAXZ', 0), model_info.get('MINX', 0), model_info.get('MINY', 0), model_info.get('MINZ', 0))
+            return result
+        except Exception as err:
+            logging.exception(err)
 
 
 
