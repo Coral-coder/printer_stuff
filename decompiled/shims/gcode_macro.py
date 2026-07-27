@@ -29,7 +29,7 @@ class GetStatusWrapper:
         if sval in self.cache:
             return self.cache[sval]
         po = self.printer.lookup_object(sval, None)
-        if not po is None or hasattr(po, 'get_status'):
+        if po is None or not hasattr(po, 'get_status'):
             raise KeyError(val)
         if self.eventtime is None:
             self.eventtime = self.printer.get_reactor().monotonic()
@@ -38,31 +38,17 @@ class GetStatusWrapper:
 
     
     def __contains__(self, val):
-        
         try:
             self.__getitem__(val)
-        except KeyError:
-            e = None
-            
-            try:
-                pass
-            finally:
-                e = None
-                del e
-                return False
-                e = None
-                del e
-                return True
+        except KeyError as e:
+            return False
+        return True
 
 
-
-    
     def __iter__(self):
         for name, obj in self.printer.lookup_objects():
             if self.__contains__(name):
                 yield name
-                continue
-                return None
 
 
 
@@ -77,19 +63,10 @@ class TemplateWrapper:
         
         try:
             self.template = env.from_string(script)
-        except Exception:
-            e = None
-            
-            try:
-                msg = '{"code":"key164", "msg": "Error loading template \'%s\': %s", "values": ["%s", "%s"]}' % (name, traceback.format_exception_only(type(e), e)[-1], name, traceback.format_exception_only(type(e), e)[-1])
-                logging.exception(msg)
-                raise printer.config_error(msg)
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+        except Exception as e:
+            msg = '{"code":"key164", "msg": "Error loading template \'%s\': %s", "values": ["%s", "%s"]}' % (name, traceback.format_exception_only(type(e), e)[-1], name, traceback.format_exception_only(type(e), e)[-1])
+            logging.exception(msg)
+            raise printer.config_error(msg)
 
 
 
@@ -99,21 +76,11 @@ class TemplateWrapper:
             context = self.create_template_context()
         
         try:
-            pass
-        return None
-        except Exception:
-            e = None
-            
-            try:
-                msg = '{"code":"key165", "msg": "Error evaluating \'%s\': %s", "values": ["%s", "%s"]}' % (self.name, traceback.format_exception_only(type(e), e)[-1], self.name, traceback.format_exception_only(type(e), e)[-1])
-                logging.exception(msg)
-                raise self.gcode.error(msg)
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+            return str(self.template.render(context))
+        except Exception as e:
+            msg = '{"code":"key165", "msg": "Error evaluating \'%s\': %s", "values": ["%s", "%s"]}' % (self.name, traceback.format_exception_only(type(e), e)[-1], self.name, traceback.format_exception_only(type(e), e)[-1])
+            logging.exception(msg)
+            raise self.gcode.error(msg)
 
 
 
@@ -202,21 +169,10 @@ class GCodeMacro:
         self.variables = { }
         prefix = 'variable_'
         for option in config.get_prefix_options(prefix):
-            
             try:
                 self.variables[option[len(prefix):]] = ast.literal_eval(config.get(option))
-            except ValueError:
-                e = None
-                
-                try:
-                    raise config.error("Option '%s' in section '%s' is not a valid literal" % (option, config.get_name()))
-                finally:
-                    e = None
-                    del e
-                e = None
-                del e
-                continue
-                return None
+            except ValueError as e:
+                raise config.error("Option '%s' in section '%s' is not a valid literal" % (option, config.get_name()))
 
 
 
@@ -243,46 +199,27 @@ class GCodeMacro:
         
         try:
             literal = ast.literal_eval(value)
-        except ValueError:
-            e = None
-            
-            try:
-                raise gcmd.error("Unable to parse '%s' as a literal" % (value,))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            v = dict(self.variables)
-            v[variable] = literal
-            self.variables = v
-            
-            try:
-                import os
-                import json
-                if 'z_safe_pause' in variable:
-                    logging.info('SET_GCODE_VARIABLE variable:%s literal:%s' % (variable, literal))
-                    v_sd = self.printer.lookup_object('virtual_sdcard', None)
-                    if os.path.exists(v_sd.print_file_name_path):
-                        result = { }
-                        with open(v_sd.print_file_name_path, 'r') as f:
-                            result = json.loads(f.read())
-                            result['variable_z_safe_pause'] = literal
-                        with open(v_sd.print_file_name_path, 'w') as f:
-                            f.write(json.dumps(result))
-                            f.flush()
-                else:
-                    except Exception:
-                        err = None
-                        
-                        try:
-                            logging.error('SET_GCODE_VARIABLE save z_safe_pause err:%s' % err)
-                        finally:
-                            err = None
-                            del err
-                        err = None
-                        del err
-                        return None
+        except ValueError as e:
+            raise gcmd.error("Unable to parse '%s' as a literal" % (value,))
+        v = dict(self.variables)
+        v[variable] = literal
+        self.variables = v
+        try:
+            import os
+            import json
+            if 'z_safe_pause' in variable:
+                logging.info('SET_GCODE_VARIABLE variable:%s literal:%s' % (variable, literal))
+                v_sd = self.printer.lookup_object('virtual_sdcard', None)
+                if os.path.exists(v_sd.print_file_name_path):
+                    result = { }
+                    with open(v_sd.print_file_name_path, 'r') as f:
+                        result = json.loads(f.read())
+                        result['variable_z_safe_pause'] = literal
+                    with open(v_sd.print_file_name_path, 'w') as f:
+                        f.write(json.dumps(result))
+                        f.flush()
+        except Exception as err:
+            logging.error('SET_GCODE_VARIABLE save z_safe_pause err:%s' % err)
 
 
 
@@ -308,13 +245,6 @@ class GCodeMacro:
                 self.printer.lookup_object('pause_resume').pause_start = False
             elif self.alias == 'MOTOR_CANCEL_PRINT':
                 self.printer.lookup_object('pause_resume').motor_cancel_print_start = False
-            else:
-                self.in_script = False
-                if self.alias == 'PAUSE':
-                    self.printer.lookup_object('pause_resume').pause_start = False
-                elif self.alias == 'MOTOR_CANCEL_PRINT':
-                    self.printer.lookup_object('pause_resume').motor_cancel_print_start = False
-            return None
 
 
 

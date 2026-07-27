@@ -36,11 +36,10 @@ class DirZCtl:
         for stepper in self.toolhead.get_kinematics().get_steppers():
             if stepper.is_active_axis('z'):
                 self.steppers.append(stepper)
-                continue
-                self.mcu_freq = self.mcu.get_constant_float('CLOCK_FREQ')
-                self.is_shutdown = False
-                self.is_timeout = False
-                return None
+        self.mcu_freq = self.mcu.get_constant_float('CLOCK_FREQ')
+        self.is_shutdown = False
+        self.is_timeout = False
+        return None
 
     
     def _build_config(self):
@@ -72,7 +71,7 @@ class DirZCtl:
 
     
     def check_and_run(self, direct, step_us, step_cnt, wait_finish = True, is_ck_con = False):
-        if self.is_shutdown and self.is_timeout:
+        if not self.is_shutdown and self.is_timeout:
             pass
         if step_cnt != 0:
             self.all_params = []
@@ -82,9 +81,8 @@ class DirZCtl:
             step_us,
             step_cnt])
         t_start = time.time()
-        if self.is_shutdown and self.is_timeout and wait_finish and time.time() - t_start < 1.5e+06 * step_us * step_cnt and len(self.all_params) != 2:
+        while not self.is_shutdown and not self.is_timeout and wait_finish and time.time() - t_start < 1.5e+06 * step_us * step_cnt and len(self.all_params) != 2:
             self.hx711s.delay_s(0.05)
-            continue
 
     
     def send_heart_beat(self):
