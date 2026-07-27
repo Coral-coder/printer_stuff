@@ -19,7 +19,7 @@ class QueryADC:
     def cmd_QUERY_ADC(self, gcmd):
         name = gcmd.get('NAME', None)
         if name not in self.adc:
-            objs = (lambda .0: [ '"%s"' % (n,) for n in .0 ])(sorted(self.adc.keys()))
+            objs = [ '"%s"' % (n,) for n in (sorted(self.adc.keys())) ]
             msg = 'Available ADC objects: %s' % (', '.join(objs),)
             gcmd.respond_info(msg)
             return None

@@ -13,8 +13,7 @@ def resolve_bus_name(mcu, param, bus):
     ppins = None.get_printer().lookup_object('pins')
     mcu_name = mcu.get_name()
     if bus is None:
-        rev_enums = (lambda .0: pass# WARNING: Decompyle incomplete
-)(enums.items())
+        rev_enums = { v: k for k, v in (enums.items()) }
         if 0 not in rev_enums:
             raise ppins.error('{"code": "key310", "msg": "Must specify %s on mcu \'%s\'", "values":["%s", "%s"]}' % (param, mcu_name, param, mcu_name))
         bus = rev_enums[0]
@@ -50,7 +49,7 @@ class MCU_SPI:
 
     
     def setup_shutdown_msg(self, shutdown_seq):
-        shutdown_msg = ''.join((lambda .0: [ '%02x' % (x,) for x in .0 ])(shutdown_seq))
+        shutdown_msg = ''.join([ '%02x' % (x,) for x in (shutdown_seq) ])
         self.mcu.add_config_cmd('config_spi_shutdown oid=%d spi_oid=%d shutdown_msg=%s' % (self.mcu.create_oid(), self.oid, shutdown_msg))
 
     
@@ -77,7 +76,7 @@ class MCU_SPI:
     
     def spi_send(self, data, minclock, reqclock = (0, 0)):
         if self.spi_send_cmd is None:
-            data_msg = ''.join((lambda .0: [ '%02x' % (x,) for x in .0 ])(data))
+            data_msg = ''.join([ '%02x' % (x,) for x in (data) ])
             self.mcu.add_config_cmd('spi_send oid=%d data=%s' % (self.oid, data_msg), is_init=True)
             return None
         None.spi_send_cmd.send([
@@ -111,12 +110,12 @@ def MCU_SPI_from_config(config, mode, pin_option, default_speed, share_type, cs_
     mcu = cs_pin_params['chip']
     speed = config.getint('spi_speed', default_speed, minval=100000)
     if config.get('spi_software_sclk_pin', None) is not None:
-        sw_pin_names = (lambda .0: [ 'spi_software_%s_pin' % (name,) for name in .0 ])(('miso', 'mosi', 'sclk'))
+        sw_pin_names = [ 'spi_software_%s_pin' % (name,) for name in (('miso', 'mosi', 'sclk')) ]
         sw_pin_params = [ ppins.lookup_pin(config.get(name), share_type=name) for name in (sw_pin_names) ]
         for pin_params in sw_pin_params:
             if pin_params['chip'] != mcu:
                 raise ppins.error('{"code":"key231", "msg":"%s spi pins must be on same mcu", "values": ["%s"]}' % (config.get_name(), config.get_name()))
-        sw_pins = tuple((lambda .0: [ pin_params['pin'] for pin_params in .0 ])(sw_pin_params))
+        sw_pins = tuple([ pin_params['pin'] for pin_params in (sw_pin_params) ])
         bus = None
     else:
         bus = config.get('spi_bus', None)
@@ -175,7 +174,7 @@ class MCU_I2C:
     
     def i2c_write(self, data, minclock, reqclock = (0, 0)):
         if self.i2c_write_cmd is None:
-            data_msg = ''.join((lambda .0: [ '%02x' % (x,) for x in .0 ])(data))
+            data_msg = ''.join([ '%02x' % (x,) for x in (data) ])
             self.mcu.add_config_cmd('i2c_write oid=%d data=%s' % (self.oid, data_msg), is_init=True)
             return None
         None.i2c_write_cmd.send([
@@ -207,9 +206,9 @@ def MCU_I2C_from_config(config, default_addr, default_speed = (None, 100000)):
         addr = config.getint('i2c_address', default_addr, minval=0, maxval=127)
     ppins = config.get_printer().lookup_object('pins')
     if config.get('i2c_software_scl_pin', None) is not None:
-        sw_pin_names = (lambda .0: [ 'i2c_software_%s_pin' % (name,) for name in .0 ])(('scl', 'sda'))
+        sw_pin_names = [ 'i2c_software_%s_pin' % (name,) for name in (('scl', 'sda')) ]
         sw_pin_params = [ ppins.lookup_pin(config.get(name), share_type=name) for name in (sw_pin_names) ]
-        sw_pins = tuple((lambda .0: [ pin_params['pin'] for pin_params in .0 ])(sw_pin_params))
+        sw_pins = tuple([ pin_params['pin'] for pin_params in (sw_pin_params) ])
         bus = None
     else:
         bus = config.get('i2c_bus', None)

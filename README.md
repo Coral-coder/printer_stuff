@@ -41,24 +41,25 @@ timestamps) but the bytecode itself is standard, un-remapped CPython 3.9.
   - keyword args `f(a, b, **('k1','k2'))` → `f(a, k1=b, k2=c)`
   - relative imports `from  import x` → `from . import x`
   - comprehensions `(lambda .0=None: [...])(it)` → real `[... for ... in it]`
-- [ ] **6. Patch pycdc for missing 3.9 opcodes** *(in progress)* — the remaining failures
-      are blocked by opcodes pycdc's ASTree doesn't implement for 3.9:
-      `JUMP_IF_NOT_EXC_MATCH` (`try/except`), `MAP_ADD` (dict comprehensions),
-      `DICT_MERGE`, `CALL_FUNCTION_EX`, `LOAD_ASSERTION_ERROR`, `LIST_TO_TUPLE`.
+- [~] **6. Patch pycdc for missing 3.9 opcodes** *(in progress)* — implemented and
+      building: `MAP_ADD` (dict comprehensions), `DICT_MERGE`/`DICT_UPDATE`,
+      `CALL_FUNCTION_EX` (`f(*a, **kw)`), `LIST_TO_TUPLE`. The patch lives at
+      [`tools/pycdc-3.9-opcodes.patch`](tools/pycdc-3.9-opcodes.patch) (against pycdc
+      `b428976`). **Still to do:** `JUMP_IF_NOT_EXC_MATCH` (`try/except`) — the last
+      remaining blocker, affecting all 34 files below.
 - [ ] **7. Document non-decompilable native artifacts** (`.so` / `.o` / `.bin`) with
       symbol/strings summaries and honest recoverability notes.
 - [ ] **8. Final republish** with the complete recovered source tree.
 
 ## Decompilation results (current)
 
-**57 / 105** modules recovered to syntactically valid Python (`ast.parse`-clean) so far.
-The remaining **48** are blocked as follows and are the subject of step 6:
+**71 / 105** modules recovered to syntactically valid Python (`ast.parse`-clean).
+The remaining **34** are **all** blocked by 3.9 `try/except`, which pycdc does not yet
+reconstruct (`JUMP_IF_NOT_EXC_MATCH`, plus dropped-handler partial renders):
 
 | Blocker | Files | Notes |
 |---------|-------|-------|
-| `try/except` (`JUMP_IF_NOT_EXC_MATCH`, incl. dropped-handler renders) | ~41 | pycdc has no 3.9 `try/except` support |
-| dict comprehension (`MAP_ADD`) | 5 | modelled on existing list/set-comp handling |
-| `DICT_MERGE` / `CALL_FUNCTION_EX` / misc | ~2 | additive ASTree cases |
+| `try/except` (`JUMP_IF_NOT_EXC_MATCH` + dropped-handler renders) | 34 | next patch target |
 
 Per-file machine-readable detail lives in [`decompiled/_report.json`](decompiled/_report.json).
 

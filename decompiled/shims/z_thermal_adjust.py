@@ -49,7 +49,7 @@ class ZThermalAdjuster:
         gcode_move = self.printer.lookup_object('gcode_move')
         self.next_transform = gcode_move.set_move_transform(self, force=True)
         kin = self.printer.lookup_object('toolhead').get_kinematics()
-        steppers = (lambda .0: [ s.get_name() for s in .0 ])(kin.get_steppers())
+        steppers = [ s.get_name() for s in (kin.get_steppers()) ]
         z_stepper = kin.get_steppers()[steppers.index('stepper_z')]
         self.z_step_dist = z_stepper.get_step_dist()
 

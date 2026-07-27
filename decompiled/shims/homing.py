@@ -14,7 +14,7 @@ def multi_complete(printer, completions):
     if len(completions) == 1:
         return completions[0]
     reactor = None.get_reactor()
-    cp = None((lambda e = None: (lambda .0: [ c.wait() for c in .0 ])(completions)
+    cp = None((lambda e = None: [ c.wait() for c in (completions) ]
 ))
     for c in completions:
         None((lambda e = None, c = None: if c.wait():
@@ -53,13 +53,13 @@ class HomingMove:
 
     
     def get_mcu_endstops(self):
-        return (lambda .0: [ es for es, name in .0 ])(self.endstops)
+        return [ es for es, name in (self.endstops) ]
 
     
     def _calc_endstop_rate(self, mcu_endstop, movepos, speed):
         startpos = self.toolhead.get_position()
-        axes_d = (lambda .0: [ mp - sp for mp, sp in .0 ])(zip(movepos, startpos))
-        move_d = math.sqrt(sum((lambda .0: [ d * d for d in .0 ])(axes_d[:3])))
+        axes_d = [ mp - sp for mp, sp in (zip(movepos, startpos)) ]
+        move_d = math.sqrt(sum([ d * d for d in (axes_d[:3]) ]))
         move_t = move_d / speed
         max_steps = None([ abs(s.calc_position_from_coord(startpos) - s.calc_position_from_coord(movepos)) / s.get_step_dist() for s in (mcu_endstop.get_steppers()) ])
         if max_steps <= 0:
@@ -91,9 +91,8 @@ class HomingMove:
         self.printer.send_event('homing:homing_move_begin', self)
         self.toolhead.flush_step_generation()
         kin = self.toolhead.get_kinematics()
-        kin_spos = (lambda .0: pass# WARNING: Decompyle incomplete
-)(kin.get_steppers())
-        self.stepper_positions = (lambda .0: [ StepperPosition(s, name) for es, name in .0 for s in es.get_steppers() ])(self.endstops)
+        kin_spos = { s.get_name(): s.get_commanded_position() for s in (kin.get_steppers()) }
+        self.stepper_positions = [ StepperPosition(s, name) for es, name in (self.endstops) for s in es.get_steppers() ]
         print_time = self.toolhead.get_last_move_time()
         endstop_triggers = []
         for mcu_endstop, name in self.endstops:

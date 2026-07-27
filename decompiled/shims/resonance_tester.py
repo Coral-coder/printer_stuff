@@ -18,7 +18,7 @@ class TestAxis:
         if vib_dir is None:
             self._vib_dir = (1, 0) if axis == 'x' else (0, 1)
         else:
-            s = math.sqrt(sum((lambda .0: [ d * d for d in .0 ])(vib_dir)))
+            s = math.sqrt(sum([ d * d for d in (vib_dir) ]))
             self._vib_dir = [ d / s for d in (vib_dir) ]
 
     
@@ -171,8 +171,7 @@ class ResonanceTester:
     
     def _run_test(self, gcmd, axes, helper, raw_name_suffix, accel_chips, test_point = (None, None, None)):
         toolhead = self.printer.lookup_object('toolhead')
-        calibration_data = (lambda .0: pass# WARNING: Decompyle incomplete
-)(axes)
+        calibration_data = { axis: None for axis in (axes) }
         self.test.prepare_test(gcmd)
         if test_point is not None:
             test_points = [
@@ -294,7 +293,7 @@ class ResonanceTester:
     
     def cmd_MEASURE_AXES_NOISE(self, gcmd):
         meas_time = gcmd.get_float('MEAS_TIME', 2)
-        raw_values = (lambda .0: [ (chip_axis, chip.start_internal_client()) for chip_axis, chip in .0 ])(self.accel_chips)
+        raw_values = [ (chip_axis, chip.start_internal_client()) for chip_axis, chip in (self.accel_chips) ]
         self.printer.lookup_object('toolhead').dwell(meas_time)
         for chip_axis, aclient in raw_values:
             aclient.finish_measurements()

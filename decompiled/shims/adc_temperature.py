@@ -73,7 +73,7 @@ class LinearInterpolate:
 
     
     def reverse_interpolate(self, value):
-        values = (lambda .0: [ key * gain + offset for gain, offset in .0 ])(zip(self.keys, self.slopes))
+        values = [ key * gain + offset for gain, offset in (zip(self.keys, self.slopes)) ]
         if values[0] < values[-2]:
             valid = [ i for i in (range(len(values))) if values[i] >= value ]
         else:
@@ -542,7 +542,7 @@ def calc_pt100(base = (100,)):
 
 
 def calc_ina826_pt100():
-    return (lambda .0: [ (t, 50 * r / (4400 + r)) for t, r in .0 ])(calc_pt100())
+    return [ (t, 50 * r / (4400 + r)) for t, r in (calc_pt100()) ]
 
 DefaultVoltageSensors = [
     ('AD595', AD595),

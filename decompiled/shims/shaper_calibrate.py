@@ -120,8 +120,54 @@ class ShaperCalibrate:
 
     
     def background_process_exec(self, method, args):
-        pass
-    # WARNING: Decompyle incomplete
+        if self.printer is None:
+            return method(*args)
+        import queuelogger
+        (parent_conn, child_conn) = multiprocessing.Pipe()
+        
+        def wrapper():
+            
+            try:
+                gcode = self.printer.lookup_object('gcode')
+                gcode.respond_info('current nice: %d' % os.nice(0), log=False)
+                val = os.nice(10)
+                gcode.respond_info('process id: %d, current nice: %d' % (os.getpid(), val), log=False)
+            finally:
+                pass
+            gcode.respond_info('nice process failed', log=False)
+            queuelogger.clear_bg_logging()
+            
+            try:
+                res = method(*args)
+            finally:
+                pass
+            child_conn.send((True, traceback.format_exc()))
+            child_conn.close()
+            return None
+            child_conn.send((False, res))
+            child_conn.close()
+            return None
+
+
+
+        calc_proc = multiprocessing.Process(target=wrapper)
+        calc_proc.daemon = True
+        calc_proc.start()
+        reactor = self.printer.get_reactor()
+        gcode = self.printer.lookup_object('gcode')
+        eventtime = last_report_time = reactor.monotonic()
+        if calc_proc.is_alive():
+            if eventtime > last_report_time + 5:
+                last_report_time = eventtime
+                gcode.respond_info('Wait for calculations..', log=False)
+            eventtime = reactor.pause(eventtime + 0.1)
+            continue
+        (is_err, res) = parent_conn.recv()
+        if is_err:
+            raise self.error('{"code": "key312", "msg": "Error in remote calculation: %s", "values":["%s"]}' % (res, res))
+        calc_proc.join()
+        parent_conn.close()
+        return res
 
     
     def _split_into_windows(self, x, window_size, overlap):

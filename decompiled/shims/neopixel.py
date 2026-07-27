@@ -40,7 +40,7 @@ class PrinterNeoPixel:
         self.led_helper = pled.setup_helper(config, self.update_leds, chain_count)
         self.color_data = bytearray(len(self.color_map))
         self.update_color_data(self.led_helper.get_status()['color_data'])
-        self.old_color_data = bytearray((lambda .0: [ d ^ 1 for d in .0 ])(self.color_data))
+        self.old_color_data = bytearray([ d ^ 1 for d in (self.color_data) ])
         printer.register_event_handler('klippy:connect', self.send_data)
 
     

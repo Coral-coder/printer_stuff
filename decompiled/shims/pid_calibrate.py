@@ -107,8 +107,8 @@ class ControlAutoTune:
 
     
     def write_file(self, filename):
-        pwm = (lambda .0: [ 'pwm: %.3f %.3f' % (time, value) for time, value in .0 ])(self.pwm_samples)
-        out = (lambda .0: [ '%.3f %.3f' % (time, temp) for time, temp in .0 ])(self.temp_samples)
+        pwm = [ 'pwm: %.3f %.3f' % (time, value) for time, value in (self.pwm_samples) ]
+        out = [ '%.3f %.3f' % (time, temp) for time, temp in (self.temp_samples) ]
         f = open(filename, 'w')
         f.write('\n'.join(pwm + out))
         f.close()

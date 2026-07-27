@@ -73,7 +73,7 @@ class AccelQueryHelper:
         raw_samples = self._get_raw_samples()
         if not raw_samples:
             return self.samples
-        total = None((lambda .0: [ len(m['params']['data']) for m in .0 ])(raw_samples))
+        total = None([ len(m['params']['data']) for m in (raw_samples) ])
         count = 0
         self.samples = samples = [
             None] * total
@@ -123,7 +123,7 @@ class AccelQueryHelper:
         raw_samples = self._get_raw_samples()
         if not raw_samples:
             return self.samples
-        total = None((lambda .0: [ len(m['params']['data']) for m in .0 ])(raw_samples))
+        total = None([ len(m['params']['data']) for m in (raw_samples) ])
         count = 0
         shm_size = 32 * total
         shm = shared_memory.SharedMemory(name='psm_samples', create=True, size=shm_size)

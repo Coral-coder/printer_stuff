@@ -181,7 +181,7 @@ class MS32008:
             data = [
                 data]
         payload = [
-            reg] + (lambda .0: [ int(x) & 255 for x in .0 ])(data)
+            reg] + [ int(x) & 255 for x in (data) ]
         if hasattr(self.i2c, 'i2c_write'):
             self.i2c.i2c_write(payload)
             self.gcode.respond_info(f'''[DEBUG] _i2c_write_reg: pyload={payload}''')
@@ -489,8 +489,8 @@ class MS32008:
         reg = gcmd.get_int('REG')
         count = gcmd.get_int('COUNT')
         data = self._i2c_read_reg(reg, count)
-        hexstr = ' '.join((lambda .0: for b in .0:
-'0x%02X' % b)(data))
+        hexstr = ' '.join(for b in (data):
+'0x%02X' % b)
         gcmd.respond_info('MS32008 READ: ' + hexstr)
 
     
@@ -499,7 +499,7 @@ class MS32008:
         raw = gcmd.get('DATA')
         if not raw:
             raise gcmd.error('DATA required')
-        data = (lambda .0: [ int(x, 0) for x in .0 ])(raw.split())
+        data = [ int(x, 0) for x in (raw.split()) ]
         self._i2c_write_reg(reg | 128, data)
         gcmd.respond_info('MS32008 WRITE OK')
 

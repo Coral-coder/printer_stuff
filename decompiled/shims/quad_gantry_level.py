@@ -78,7 +78,7 @@ class QuadGantryLevel:
             'z1',
             'z2',
             'z3'], z_height[0:4])
-        apos = ' '.join((lambda .0: [ '%s: %06f' % x for x in .0 ])(ainfo))
+        apos = ' '.join([ '%s: %06f' % x for x in (ainfo) ])
         self.gcode.respond_info('Actuator Positions:\n' + apos)
         z_ave = sum(z_height) / len(z_height)
         self.gcode.respond_info('Average: %0.6f' % z_ave)

@@ -63,13 +63,13 @@ class PrinterProbe:
 
     
     def _handle_home_rails_begin(self, homing_state, rails):
-        endstops = (lambda .0: [ es for rail in .0 for es, name in rail.get_endstops() ])(rails)
+        endstops = [ es for rail in (rails) for es, name in rail.get_endstops() ]
         if self.mcu_probe in endstops:
             self.multi_probe_begin()
 
     
     def _handle_home_rails_end(self, homing_state, rails):
-        endstops = (lambda .0: [ es for rail in .0 for es, name in rail.get_endstops() ])(rails)
+        endstops = [ es for rail in (rails) for es, name in rail.get_endstops() ]
         if self.mcu_probe in endstops:
             self.multi_probe_end()
 
@@ -174,7 +174,7 @@ class PrinterProbe:
             else:
                 pos = self._probe(speed)
             positions.append(pos)
-            z_positions = (lambda .0: [ p[2] for p in .0 ])(positions)
+            z_positions = [ p[2] for p in (positions) ]
             if max(z_positions) - min(z_positions) > samples_tolerance:
                 if retries >= samples_retries:
                     raise gcmd.error('Probe samples exceed samples_tolerance')
@@ -238,8 +238,8 @@ class PrinterProbe:
             self._move(liftpos, lift_speed)
             continue
         self.multi_probe_end()
-        max_value = max((lambda .0: [ p[2] for p in .0 ])(positions))
-        min_value = min((lambda .0: [ p[2] for p in .0 ])(positions))
+        max_value = max([ p[2] for p in (positions) ])
+        min_value = min([ p[2] for p in (positions) ])
         range_value = max_value - min_value
         avg_value = self._calc_mean(positions)[2]
         median = self._calc_median(positions)[2]
@@ -247,7 +247,7 @@ class PrinterProbe:
         for i in range(len(positions)):
             deviation_sum += pow(positions[i][2] - avg_value, 2)
         sigma = (deviation_sum / len(positions)) ** 0.5
-        z_values = (lambda .0: [ pos[2] for pos in .0 ])(positions)
+        z_values = [ pos[2] for pos in (positions) ]
         gcmd.respond_info('probe accuracy results: maximum %.6f, minimum %.6f, range %.6f, average %.6f, median %.6f, standard deviation %.6f' % (max_value, min_value, range_value, avg_value, median, sigma))
         return (max_value, min_value, range_value, avg_value, median, sigma, positions)
 

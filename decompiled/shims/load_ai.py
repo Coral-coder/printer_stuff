@@ -258,7 +258,7 @@ class LoadAI:
                     f'''Content-Disposition: form-data; name="{name}"; filename="{os.path.basename(filepath)}"''',
                     f'''Content-Type: {part.get_content_type()}''',
                     'Content-Transfer-Encoding: base64']
-                headers_bytes = (lambda .0: [ header.encode('utf-8') + b'\r\n' for header in .0 ])(part_headers)
+                headers_bytes = [ header.encode('utf-8') + b'\r\n' for header in (part_headers) ]
                 body.append(f'''--{boundary}\r\n'''.encode('utf-8'))
                 body.extend(headers_bytes)
                 body.append(b'\r\n')

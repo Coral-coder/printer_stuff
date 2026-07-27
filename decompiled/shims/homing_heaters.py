@@ -24,7 +24,7 @@ class HomingHeaters:
 x in all_heaters):
             raise self.printer.config_error('{"code":"key68", "msg": "One or more of these heaters are unknown: %s", "values": ["%s"]}' % (self.disable_heaters, self.disable_heaters))
         kin = self.printer.lookup_object('toolhead').get_kinematics()
-        all_steppers = (lambda .0: [ s.get_name() for s in .0 ])(kin.get_steppers())
+        all_steppers = [ s.get_name() for s in (kin.get_steppers()) ]
         if self.flaky_steppers is None:
             return None
         if not None(for x in (self.flaky_steppers):

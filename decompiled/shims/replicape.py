@@ -135,7 +135,7 @@ class servo_pwm:
             
             try:
                 pwmdev = os.listdir('/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/')
-                pwmchip = (lambda .0: [ pc for pc in .0 if pc.startswith('pwmchip') ])(pwmdev)[0]
+                pwmchip = [ pc for pc in (pwmdev) if pc.startswith('pwmchip') ][0]
             finally:
                 pass
             raise pins.error('{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}')
@@ -223,8 +223,7 @@ class Replicape:
             cur = config.getfloat(prefix + 'current', above=0, maxval=REPLICAPE_MAX_CURRENT)
             self.stepper_dacs[channel] = cur / REPLICAPE_MAX_CURRENT
             self.pins[prefix + 'enable'] = (ReplicapeDACEnable, channel)
-        self.enabled_channels = (lambda .0: pass# WARNING: Decompyle incomplete
-)(self.pins.values())
+        self.enabled_channels = { ch: False for cl, ch in (self.pins.values()) }
         self.sr_disabled = list(reversed(shift_registers))
         if [ i for i in ((0, 1, 2)) if 11 + i in self.stepper_dacs ]:
             shift_registers[0] &= -2
@@ -253,7 +252,7 @@ class Replicape:
         if self.enabled_channels[channel] == is_enable:
             return None
         self.enabled_channels[channel] = None
-        on_channels = (lambda .0: [ 1 for c, e in .0 if e ])(self.enabled_channels.items())
+        on_channels = [ 1 for c, e in (self.enabled_channels.items()) if e ]
         if not on_channels:
             self.mcu_pwm_enable.set_digital(print_time, 0)
         elif is_enable and len(on_channels) == 1:

@@ -122,7 +122,7 @@ class HX711S:
     
     def get_params(self):
         self.need_wait = True
-        tmps = (lambda .0: [ x for x in .0 ])(self.all_params)
+        tmps = [ x for x in (self.all_params) ]
         self.need_wait = False
         return (tmps, self.start_tick)
 
@@ -135,7 +135,7 @@ class HX711S:
             [],
             []]
         for i in range(self.s_count):
-            tmps[i] = (lambda .0: [ x for x in .0 ])(self.all_vals[i])
+            tmps[i] = [ x for x in (self.all_vals[i]) ]
         self.need_wait = False
         return tmps
 

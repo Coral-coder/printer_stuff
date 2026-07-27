@@ -337,7 +337,7 @@ class PrusaSlicer(BaseSlicer):
             flush_multiplier = float(flush_multiplier_match.group(1))
         flush_volumes_matrix_match = re.search('; flush_volumes_matrix\\s*=\\s*([^;]+)', self.footer_data)
         if flush_volumes_matrix_match:
-            flush_volumes_matrix = (lambda .0: [ int(x) for x in .0 ])(flush_volumes_matrix_match.group(1).strip().split(','))
+            flush_volumes_matrix = [ int(x) for x in (flush_volumes_matrix_match.group(1).strip().split(',')) ]
         if flush_multiplier is not None or flush_volumes_matrix is not None:
             return {
                 'flush_multiplier': flush_multiplier,
@@ -954,7 +954,7 @@ class Creality(BaseSlicer):
         if not flush_volumes_matrix_match:
             flush_volumes_matrix_match = re.search('; flush_volumes_matrix\\s*=\\s*([^;]+)', self.footer_data)
         if flush_volumes_matrix_match:
-            flush_volumes_matrix = (lambda .0: [ int(float(x)) for x in .0 ])(flush_volumes_matrix_match.group(1).strip().split(','))
+            flush_volumes_matrix = [ int(float(x)) for x in (flush_volumes_matrix_match.group(1).strip().split(',')) ]
         if flush_multiplier is not None or flush_volumes_matrix is not None:
             return {
                 'flush_multiplier': flush_multiplier,

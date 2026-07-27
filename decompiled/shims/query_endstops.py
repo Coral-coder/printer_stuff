@@ -21,8 +21,7 @@ class QueryEndstops:
     
     def get_status(self, eventtime):
         return {
-            'last_query': (lambda .0: pass# WARNING: Decompyle incomplete
-)(self.last_state) }
+            'last_query': { name: value for name, value in (self.last_state) } }
 
     
     def _handle_web_request(self, web_request):
@@ -35,17 +34,18 @@ class QueryEndstops:
         with None:
             if not None:
                 pass
-        web_request.send((lambda .0: pass# WARNING: Decompyle incomplete
-)(self.last_state))
+        web_request.send({ name: [
+'open',
+'TRIGGERED'][not (not t)] for name, t in (self.last_state) })
 
     cmd_QUERY_ENDSTOPS_help = 'Report on the status of each endstop'
     
     def cmd_QUERY_ENDSTOPS(self, gcmd):
         print_time = self.printer.lookup_object('toolhead').get_last_move_time()
         self.last_state = [ (name, mcu_endstop.query_endstop(print_time)) for mcu_endstop, name in (self.endstops) ]
-        msg = ' '.join((lambda .0: [ '%s:%s' % (name, [
+        msg = ' '.join([ '%s:%s' % (name, [
 'open',
-'TRIGGERED'][not (not t)]) for name, t in .0 ])(self.last_state))
+'TRIGGERED'][not (not t)]) for name, t in (self.last_state) ])
         gcmd.respond_raw(msg)
 
 

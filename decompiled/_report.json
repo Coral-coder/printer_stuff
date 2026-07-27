@@ -27,7 +27,7 @@
     "pyc": "proprietary/shims/adc_temperature.pyc",
     "out": "decompiled/shims/adc_temperature.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
@@ -39,7 +39,7 @@
     "pyc": "proprietary/shims/adxl345.pyc",
     "out": "decompiled/shims/adxl345.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 7,
@@ -147,13 +147,13 @@
     "pyc": "proprietary/shims/bus.pyc",
     "out": "decompiled/shims/bus.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: MAP_ADD (188)",
-    "lines": 262
+    "unsupported": false,
+    "warn": "",
+    "lines": 261
   },
   {
     "pyc": "proprietary/shims/buttons.pyc",
@@ -207,13 +207,13 @@
     "pyc": "proprietary/shims/delta_calibrate.pyc",
     "out": "decompiled/shims/delta_calibrate.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: MAP_ADD (188)",
-    "lines": 241
+    "warn": "Warning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
+    "lines": 240
   },
   {
     "pyc": "proprietary/shims/dirzctl.pyc",
@@ -267,13 +267,13 @@
     "pyc": "proprietary/shims/endstop_phase.pyc",
     "out": "decompiled/shims/endstop_phase.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 2,
-    "unsupported": true,
-    "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: block stack is not empty!\nUnsupported opcode: MAP_ADD (188)",
-    "lines": 241
+    "unsupported": false,
+    "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: block stack is not empty!",
+    "lines": 243
   },
   {
     "pyc": "proprietary/shims/exclude_object.pyc",
@@ -414,9 +414,9 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 0,
+    "none_calls": 1,
     "unsupported": true,
-    "warn": "Unsupported argument found for LIST_EXTEND\nUnsupported opcode: LIST_TO_TUPLE (102)",
+    "warn": "Unsupported argument found for LIST_EXTEND",
     "lines": 171
   },
   {
@@ -452,8 +452,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Unsupported opcode: CALL_FUNCTION_EX (170)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: Stack history is empty, something wrong might have happened",
-    "lines": 198
+    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: Stack history is empty, something wrong might have happened",
+    "lines": 194
   },
   {
     "pyc": "proprietary/shims/hall_filament_width_sensor.pyc",
@@ -475,8 +475,8 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: DICT_MERGE (213)\nPycBuffer::getByte(): Unexpected end of stream",
+    "unsupported": false,
+    "warn": "PycBuffer::getByte(): Unexpected end of stream",
     "lines": 141
   },
   {
@@ -524,8 +524,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 3,
     "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: MAP_ADD (188)\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 149
+    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 148
   },
   {
     "pyc": "proprietary/shims/homing_heaters.pyc",
@@ -555,7 +555,7 @@
     "pyc": "proprietary/shims/hx711s.pyc",
     "out": "decompiled/shims/hx711s.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
@@ -583,9 +583,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
-    "unsupported": true,
-    "warn": "Unsupported opcode: MAP_ADD (188)\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 151
+    "unsupported": false,
+    "warn": "PycBuffer::getByte(): Unexpected end of stream",
+    "lines": 150
   },
   {
     "pyc": "proprietary/shims/io_remap.pyc",
@@ -627,13 +627,13 @@
     "pyc": "proprietary/shims/manual_probe.pyc",
     "out": "decompiled/shims/manual_probe.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: MAP_ADD (188)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 230
+    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
+    "lines": 229
   },
   {
     "pyc": "proprietary/shims/manual_stepper.pyc",
@@ -759,7 +759,7 @@
     "pyc": "proprietary/shims/pid_calibrate.pyc",
     "out": "decompiled/shims/pid_calibrate.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
@@ -843,7 +843,7 @@
     "pyc": "proprietary/shims/quad_gantry_level.pyc",
     "out": "decompiled/shims/quad_gantry_level.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
@@ -855,7 +855,7 @@
     "pyc": "proprietary/shims/query_adc.pyc",
     "out": "decompiled/shims/query_adc.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
@@ -867,25 +867,25 @@
     "pyc": "proprietary/shims/query_endstops.pyc",
     "out": "decompiled/shims/query_endstops.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
-    "unsupported": true,
-    "warn": "Unsupported opcode: MAP_ADD (188)\nUnsupported opcode: MAP_ADD (188)",
+    "unsupported": false,
+    "warn": "",
     "lines": 56
   },
   {
     "pyc": "proprietary/shims/replicape.pyc",
     "out": "decompiled/shims/replicape.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
-    "unsupported": true,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: MAP_ADD (188)",
-    "lines": 293
+    "unsupported": false,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 292
   },
   {
     "pyc": "proprietary/shims/resonance_tester.pyc",
@@ -896,8 +896,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Warning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: MAP_ADD (188)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
-    "lines": 338
+    "warn": "Warning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)",
+    "lines": 337
   },
   {
     "pyc": "proprietary/shims/respond.pyc",
@@ -956,8 +956,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 2,
     "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: CALL_FUNCTION_EX (170)\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 285
+    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
+    "lines": 331
   },
   {
     "pyc": "proprietary/shims/shaper_defs.pyc",
@@ -1087,9 +1087,9 @@
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
-    "unsupported": true,
-    "warn": "Unsupported opcode: MAP_ADD (188)\nUnsupported opcode: MAP_ADD (188)\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 68
+    "unsupported": false,
+    "warn": "PycBuffer::getByte(): Unexpected end of stream",
+    "lines": 66
   },
   {
     "pyc": "proprietary/shims/tmc2130.pyc",
@@ -1227,7 +1227,7 @@
     "pyc": "proprietary/shims/z_thermal_adjust.pyc",
     "out": "decompiled/shims/z_thermal_adjust.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
@@ -1239,7 +1239,7 @@
     "pyc": "proprietary/shims/z_tilt.pyc",
     "out": "decompiled/shims/z_tilt.py",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 2,

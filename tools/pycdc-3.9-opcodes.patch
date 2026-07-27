@@ -1,0 +1,176 @@
+diff --git a/ASTNode.h b/ASTNode.h
+index 98760db..c711b2f 100644
+--- a/ASTNode.h
++++ b/ASTNode.h
+@@ -647,6 +647,12 @@ public:
+     ASTComprehension(PycRef<ASTNode> result)
+         : ASTNode(NODE_COMPREHENSION), m_result(std::move(result)) { }
+ 
++    // Dict comprehension: carries both a key and a value (MAP_ADD).
++    ASTComprehension(PycRef<ASTNode> key, PycRef<ASTNode> value)
++        : ASTNode(NODE_COMPREHENSION), m_key(std::move(key)),
++          m_result(std::move(value)) { }
++
++    PycRef<ASTNode> key() const { return m_key; }
+     PycRef<ASTNode> result() const { return m_result; }
+     generator_t generators() const { return m_generators; }
+ 
+@@ -655,6 +661,7 @@ public:
+     }
+ 
+ private:
++    PycRef<ASTNode> m_key;    // non-null only for dict comprehensions
+     PycRef<ASTNode> m_result;
+     generator_t m_generators;
+ 
+diff --git a/ASTree.cpp b/ASTree.cpp
+index f837152..029cd3a 100644
+--- a/ASTree.cpp
++++ b/ASTree.cpp
+@@ -999,7 +999,12 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+                     if (mod->verCompare(3, 10) >= 0)
+                         end *= sizeof(uint16_t); // // BPO-27129
+                     end += pos;
+-                    comprehension = strcmp(code->name()->value(), "<listcomp>") == 0;
++                    {
++                        const char* cn = code->name()->value();
++                        comprehension = strcmp(cn, "<listcomp>") == 0
++                                || strcmp(cn, "<dictcomp>") == 0
++                                || strcmp(cn, "<setcomp>") == 0;
++                    }
+                 } else {
+                     PycRef<ASTBlock> top = blocks.top();
+                     end = top->end(); // block end position from SETUP_LOOP
+@@ -1507,6 +1512,90 @@ PycRef<ASTNode> BuildFromCode(PycRef<PycCode> code, PycModule* mod)
+                 }
+             }
+             break;
++        case Pyc::MAP_ADD_A:
++            {
++                /* Dict comprehension: TOS is the value, TOS1 is the key
++                 * (CPython 3.8+ order).  Mirrors LIST_APPEND for lists. */
++                PycRef<ASTNode> value = stack.top();
++                stack.pop();
++                PycRef<ASTNode> key = stack.top();
++                stack.pop();
++
++                PycRef<ASTNode> map = stack.top();
++                if (curblock->blktype() == ASTBlock::BLK_FOR
++                        && curblock.cast<ASTIterBlock>()->isComprehension()) {
++                    stack.pop();
++                    stack.push(new ASTComprehension(key, value));
++                } else {
++                    /* dict[key] = value inside a plain loop (rare) */
++                    stack.push(new ASTSubscr(map, key));
++                }
++            }
++            break;
++        case Pyc::LIST_TO_TUPLE:
++            {
++                PycRef<ASTNode> list = stack.top();
++                stack.pop();
++                if (list.type() == ASTNode::NODE_LIST) {
++                    const ASTList::value_t& src = list.cast<ASTList>()->values();
++                    ASTTuple::value_t vals(src.begin(), src.end());
++                    stack.push(new ASTTuple(vals));
++                } else {
++                    stack.push(list);
++                }
++            }
++            break;
++        case Pyc::DICT_UPDATE_A:
++        case Pyc::DICT_MERGE_A:
++            {
++                /* Merge/update the dict below TOS with TOS.
++                 * DICT_MERGE is emitted while building **kwargs for a call and
++                 * for {**a, **b} displays; DICT_UPDATE for dict displays. */
++                PycRef<ASTNode> rhs = stack.top();
++                stack.pop();
++                PycRef<ASTNode> mapNode = stack.top();
++                if (mapNode.type() == ASTNode::NODE_MAP
++                        && mapNode.cast<ASTMap>()->values().empty()) {
++                    /* {} merged with X is just X */
++                    stack.pop();
++                    stack.push(rhs);
++                } else if (mapNode.type() == ASTNode::NODE_MAP) {
++                    /* record a **rhs unpack entry (null key) */
++                    mapNode.cast<ASTMap>()->add(nullptr, rhs);
++                }
++                /* otherwise: best-effort, leave the map in place */
++            }
++            break;
++        case Pyc::CALL_FUNCTION_EX_A:
++            {
++                /* func(*args[, **kwargs]).  Low bit of operand => kwargs present. */
++                PycRef<ASTNode> kw;
++                if (operand & 0x01) {
++                    kw = stack.top();
++                    stack.pop();
++                }
++                PycRef<ASTNode> args = stack.top();
++                stack.pop();
++                PycRef<ASTNode> func = stack.top();
++                stack.pop();
++
++                ASTCall::pparam_t pparamList;
++                ASTCall::kwparam_t kwparamList;
++                PycRef<ASTCall> call = new ASTCall(func, pparamList, kwparamList);
++
++                bool argsEmpty = args.type() == ASTNode::NODE_TUPLE
++                        && args.cast<ASTTuple>()->values().empty();
++                if (!argsEmpty)
++                    call->setVar(args);
++                if (kw != nullptr) {
++                    bool kwEmpty = kw.type() == ASTNode::NODE_MAP
++                            && kw.cast<ASTMap>()->values().empty();
++                    if (!kwEmpty)
++                        call->setKW(kw);
++                }
++                stack.push(call.cast<ASTNode>());
++            }
++            break;
+         case Pyc::SET_UPDATE_A:
+             {
+                 PycRef<ASTNode> rhs = stack.top();
+@@ -3052,7 +3141,12 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+         {
+             PycRef<ASTComprehension> comp = node.cast<ASTComprehension>();
+ 
+-            pyc_output << "[ ";
++            bool isDict = comp->key() != nullptr;
++            pyc_output << (isDict ? "{ " : "[ ");
++            if (isDict) {
++                print_src(comp->key(), mod, pyc_output);
++                pyc_output << ": ";
++            }
+             print_src(comp->result(), mod, pyc_output);
+ 
+             for (const auto& gen : comp->generators()) {
+@@ -3065,7 +3159,7 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+                     print_src(gen->condition(), mod, pyc_output);
+                 }
+             }
+-            pyc_output << " ]";
++            pyc_output << (isDict ? " }" : " ]");
+         }
+         break;
+     case ASTNode::NODE_MAP:
+@@ -3079,9 +3173,15 @@ void print_src(PycRef<ASTNode> node, PycModule* mod, std::ostream& pyc_output)
+                 else
+                     pyc_output << ",\n";
+                 start_line(cur_indent, pyc_output);
+-                print_src(val.first, mod, pyc_output);
+-                pyc_output << ": ";
+-                print_src(val.second, mod, pyc_output);
++                if (val.first == nullptr) {
++                    /* **unpack entry from DICT_MERGE / DICT_UPDATE */
++                    pyc_output << "**";
++                    print_src(val.second, mod, pyc_output);
++                } else {
++                    print_src(val.first, mod, pyc_output);
++                    pyc_output << ": ";
++                    print_src(val.second, mod, pyc_output);
++                }
+                 first = false;
+             }
+             cur_indent--;

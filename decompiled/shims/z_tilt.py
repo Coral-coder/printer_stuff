@@ -19,7 +19,7 @@ class ZAdjustHelper:
     
     def handle_connect(self):
         kin = self.printer.lookup_object('toolhead').get_kinematics()
-        z_steppers = (lambda .0: [ s for s in .0 if s.is_active_axis('z') ])(kin.get_steppers())
+        z_steppers = [ s for s in (kin.get_steppers()) if s.is_active_axis('z') ]
         if len(z_steppers) != self.z_count:
             err_msg = '{"code":"key346", "msg":"%s z_positions needs exactly %d items", "values":[]}' % (self.name, len(z_steppers))
             raise self.printer.config_error(err_msg)
@@ -33,7 +33,7 @@ class ZAdjustHelper:
         toolhead = self.printer.lookup_object('toolhead')
         gcode = self.printer.lookup_object('gcode')
         curpos = toolhead.get_position()
-        stepstrs = (lambda .0: [ '%s = %.6f' % (s.get_name(), a) for s, a in .0 ])(zip(self.z_steppers, adjustments))
+        stepstrs = [ '%s = %.6f' % (s.get_name(), a) for s, a in (zip(self.z_steppers, adjustments)) ]
         msg = 'Making the following Z adjustments:\n%s' % ('\n'.join(stepstrs),)
         gcode.respond_info(msg)
         z_tilt = self.printer.lookup_object('z_tilt')
@@ -210,7 +210,7 @@ class ZTilt:
         z_adjust = new_params['z_adjust'] - z_offset - x_adjust * offsets[0] - y_adjust * offsets[1]
         adjustments = [ x * x_adjust + y * y_adjust + z_adjust for x, y in (self.z_positions) ]
         self.z_helper.adjust_steppers(adjustments, speed)
-        return self.z_status.check_retry_result(self.retry_helper.check_retry((lambda .0: [ p[2] for p in .0 ])(positions)))
+        return self.z_status.check_retry_result(self.retry_helper.check_retry([ p[2] for p in (positions) ]))
 
     
     def get_status(self, eventtime):

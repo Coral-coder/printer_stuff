@@ -261,8 +261,8 @@ obj['name'] == name):
         if gcmd.get('JSON', None) is not None:
             object_list = json.dumps(self.objects)
         else:
-            object_list = ' '.join((lambda .0: for obj in .0:
-obj['name'])(self.objects))
+            object_list = ' '.join(for obj in (self.objects):
+obj['name'])
         gcmd.respond_info('Known objects: {}'.format(object_list))
 
     

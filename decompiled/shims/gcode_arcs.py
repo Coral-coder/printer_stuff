@@ -75,7 +75,7 @@ class ArcSupport:
             axes = (Y_AXIS, Z_AXIS, X_AXIS)
         if not asPlanar[0] and asPlanar[1]:
             raise gcmd.error('G2/G3 requires IJ, IK or JK parameters')
-    # WARNING: Decompyle incomplete
+        None(*self.planArc)
 
     
     def planArc(self, currentPos, targetPos, offset, clockwise, gcmd, absolut_extrude, alpha_axis, beta_axis, helical_axis):

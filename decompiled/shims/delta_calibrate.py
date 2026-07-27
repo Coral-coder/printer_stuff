@@ -33,8 +33,8 @@ def measurements_to_distances(measured_params, delta_params):
         cpw[0],
         cpw[2],
         cpw[1]]
-    center_dists = (lambda .0: [ od - cw for od, cw in .0 ])(zip(mp['CENTER_DISTS'], center_widths))
-    outer_dists = (lambda .0: [ od - opw for od, opw in .0 ])(zip(mp['OUTER_DISTS'], mp['OUTER_PILLAR_WIDTHS']))
+    center_dists = [ od - cw for od, cw in (zip(mp['CENTER_DISTS'], center_widths)) ]
+    outer_dists = [ od - opw for od, opw in (zip(mp['OUTER_DISTS'], mp['OUTER_PILLAR_WIDTHS'])) ]
     obj_angles = list(map(math.radians, MeasureAngles))
     xy_angles = list(zip(map(math.cos, obj_angles), map(math.sin, obj_angles)))
     inner_ridge = MeasureRidgeRadius * scale
@@ -176,8 +176,7 @@ class DeltaCalibrate:
         toolhead = self.printer.lookup_object('toolhead')
         toolhead.flush_step_generation()
         kin = toolhead.get_kinematics()
-        kin_spos = (lambda .0: pass# WARNING: Decompyle incomplete
-)(kin.get_steppers())
+        kin_spos = { s.get_name(): s.get_commanded_position() for s in (kin.get_steppers()) }
         kin_pos = kin.calc_position(kin_spos)
         delta_params = kin.get_calibration()
         stable_pos = tuple(delta_params.calc_stable_position(kin_pos))

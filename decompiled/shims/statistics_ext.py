@@ -72,7 +72,7 @@ class PrinterStats:
 
     
     def handle_ready(self):
-        self.stats_cb = (lambda .0: [ o.stats for n, o in .0 if hasattr(o, 'stats') ])(self.printer.lookup_objects())
+        self.stats_cb = [ o.stats for n, o in (self.printer.lookup_objects()) if hasattr(o, 'stats') ]
         if self.printer.get_start_args().get('debugoutput') is None:
             reactor = self.printer.get_reactor()
             reactor.update_timer(self.stats_timer, reactor.NOW)
@@ -80,8 +80,8 @@ class PrinterStats:
     
     def generate_stats(self, eventtime):
         stats = [ cb(eventtime) for cb in (self.stats_cb) ]
-        if max((lambda .0: [ s[0] for s in .0 ])(stats)):
-            logging.info('Stats %.1f: %s', eventtime, ' '.join((lambda .0: [ s[1] for s in .0 ])(stats)))
+        if max([ s[0] for s in (stats) ]):
+            logging.info('Stats %.1f: %s', eventtime, ' '.join([ s[1] for s in (stats) ]))
         return eventtime + 3
 
 

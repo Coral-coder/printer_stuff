@@ -126,8 +126,7 @@ class ManualProbeHelper:
             return self.last_kinematics_pos
         None.toolhead.flush_step_generation()
         kin = self.toolhead.get_kinematics()
-        kin_spos = (lambda .0: pass# WARNING: Decompyle incomplete
-)(kin.get_steppers())
+        kin_spos = { s.get_name(): s.get_commanded_position() for s in (kin.get_steppers()) }
         kin_pos = kin.calc_position(kin_spos)
         self.last_toolhead_pos = toolhead_pos
         self.last_kinematics_pos = kin_pos

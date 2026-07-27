@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""Decompile all .pyc under proprietary/ with pycdc, then repair the two
+"""Decompile all .pyc under proprietary/ with pycdc, then repair the
 systematic, mechanically-safe pycdc artifacts:
 
   1. `f(a, b, c, **('k1','k2'))`  ->  `f(a, k1=b, k2=c)`
      (pycdc renders CALL_FUNCTION_KW keyword names as a trailing **tuple)
   2. `from  import x`             ->  `from . import x`
      (pycdc drops the leading dot on level-1 relative imports)
+  3. `(lambda .0=None: [...])(it)` -> `[... for ... in it]`
+     (pycdc leaves comprehensions/genexprs as their raw `.0` lambda form)
 
 Each result is validated with ast.parse. A JSON report is emitted.
+
+Config via env: REPO_ROOT (default: cwd), PYCDC (path to a patched
+zrax/pycdc binary; see tools/pycdc-3.9-opcodes.patch).
 """
 import ast, json, os, subprocess, sys, re
 
 ROOT = os.environ.get("REPO_ROOT", os.getcwd())
-PYCDC = os.environ.get("PYCDC", "pycdc")  # path to a built zrax/pycdc binary
+PYCDC = os.environ.get("PYCDC", "pycdc")
 OUT = os.path.join(ROOT, "decompiled")
 
 # ---- string/comment mask so paren scanning ignores quotes and comments ----
@@ -192,7 +197,7 @@ def fix_imports(src):
     src = re.sub(r"(?m)^(\s*)from\s+import\s+", r"\1from . import ", src)
     return src
 
-_LAMBDA0 = re.compile(r"lambda\s+\.0\s*=\s*None\s*:")
+_LAMBDA0 = re.compile(r"lambda\s+\.0\s*(?:=\s*None\s*)?:")
 
 def fix_comprehensions(src):
     """pycdc renders comprehensions/generators as the raw CPython form

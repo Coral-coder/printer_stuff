@@ -13,14 +13,12 @@ class FieldHelper:
     
     def __init__(self, all_fields, signed_fields, field_formatters, registers = ([], { }, None)):
         self.all_fields = all_fields
-        self.signed_fields = (lambda .0: pass# WARNING: Decompyle incomplete
-)(signed_fields)
+        self.signed_fields = { sf: 1 for sf in (signed_fields) }
         self.field_formatters = field_formatters
         self.registers = registers
         if self.registers is None:
             self.registers = collections.OrderedDict()
-        self.field_to_register = (lambda .0: pass# WARNING: Decompyle incomplete
-)(self.all_fields.items())
+        self.field_to_register = { f: r for r, fields in (self.all_fields.items()) for f in fields }
 
     
     def lookup_register(self, field_name, default = (None,)):

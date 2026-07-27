@@ -50,7 +50,7 @@ class GCodeButton:
             return {
                 'state': 'PRESSED' }
         return {
-            None: 'RELEASED' }
+            **'RELEASED' }
 
 
 

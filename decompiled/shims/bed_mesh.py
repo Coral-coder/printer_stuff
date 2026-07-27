@@ -65,7 +65,7 @@ def parse_config_pair(config, option, default, minval, maxval = (None, None)):
 def parse_gcmd_pair(gcmd, name, minval, maxval = (None, None)):
     
     try:
-        pair = (lambda .0: [ int(v.strip()) for v in .0 ])(gcmd.get(name).split(','))
+        pair = [ int(v.strip()) for v in (gcmd.get(name).split(',')) ]
     finally:
         pass
     raise gcmd.error("Unable to parse parameter '%s'" % (name,))
@@ -86,7 +86,7 @@ def parse_gcmd_pair(gcmd, name, minval, maxval = (None, None)):
 def parse_gcmd_coord(gcmd, name):
     
     try:
-        (v1, v2) = (lambda .0: [ float(v.strip()) for v in .0 ])(gcmd.get(name).split(','))
+        (v1, v2) = [ float(v.strip()) for v in (gcmd.get(name).split(',')) ]
     finally:
         pass
     raise gcmd.error("Unable to parse parameter '%s'" % (name,))

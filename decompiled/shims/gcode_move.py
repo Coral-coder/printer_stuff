@@ -170,7 +170,7 @@ class GCodeMove:
 
     
     def _get_gcode_position(self):
-        p = (lambda .0: [ lp - bp for lp, bp in .0 ])(zip(self.last_position, self.base_position))
+        p = [ lp - bp for lp, bp in (zip(self.last_position, self.base_position)) ]
         p[3] /= self.extrude_factor
         return p
 
@@ -185,14 +185,10 @@ class GCodeMove:
     
     def get_status(self, eventtime = (None,)):
         move_position = self._get_gcode_position()
-    # WARNING: Decompyle incomplete
-
-    
-    def reset_last_position(self):
-        if self.is_printer_ready:
-            self.last_position = self.position_with_transform()
-
-    
-    def auto_protect_coordinate_system(self):
-        gcode = self.printer.lookup_object('gcode')
-        (bx, by, bz) = self.
+        return {
+            'speed_factor': self._get_gcode_speed_override(),
+            'speed': self._get_gcode_speed(),
+            'extrude_factor': self.extrude_factor,
+            'absolute_coordinates': self.absolute_coord,
+            'absolute_extrude': self.absolute_extrude,
+            'homing
