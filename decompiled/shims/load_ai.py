@@ -11,7 +11,7 @@
 # File: load_ai.pyc (Python 3.9)
 
 import logging
-import http.client as http
+import http.client
 from email.mime.base import MIMEBase
 from email.encoders import encode_base64
 import os
@@ -60,25 +60,17 @@ class LoadAI:
         try:
             with open(json_file, 'r') as file:
                 data = json.load(file)
-        except Exception:
-            e = None
-            
-            try:
-                logging.error(f'''Error opening or reading the JSON file: {e}''')
-            finally:
-                e = None
-                del e
-                return None
-                e = None
-                del e
-                values = { }
-                for key in keys:
-                    if 'ai_control' in data and key in data['ai_control']:
-                        values[key] = data['ai_control'][key]
-                        continue
-                    logging.warning(f'''Key \'{key}\' not found in \'ai_control\'''')
-                    values[key] = None
-                return values
+        except Exception as e:
+            logging.error(f'''Error opening or reading the JSON file: {e}''')
+            return None
+        values = { }
+        for key in keys:
+            if 'ai_control' in data and key in data['ai_control']:
+                values[key] = data['ai_control'][key]
+                continue
+            logging.warning(f'''Key \'{key}\' not found in \'ai_control\'''')
+            values[key] = None
+        return values
 
 
 
@@ -92,17 +84,8 @@ class LoadAI:
                 'on'], capture_output=True, text=True)
             logging.info(result_capture.stdout)
             logging.info(result_capture.stderr)
-        except Exception:
-            e = None
-            
-            try:
-                logging.info(f'''Error: {e}''')
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+        except Exception as e:
+            logging.info(f'''Error: {e}''')
 
 
 
@@ -116,17 +99,8 @@ class LoadAI:
                 'off'], capture_output=True, text=True)
             logging.info(result_capture.stdout)
             logging.info(result_capture.stderr)
-        except Exception:
-            e = None
-            
-            try:
-                logging.info(f'''Error: {e}''')
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+        except Exception as e:
+            logging.info(f'''Error: {e}''')
 
 
 
@@ -140,19 +114,10 @@ class LoadAI:
                 '1'], capture_output=True, text=True)
             logging.info(result_capture.stdout)
             logging.info(result_capture.stderr)
-        return None
-        except Exception:
-            e = None
-            
-            try:
-                logging.info(f'''Error: {e}''')
-            finally:
-                e = None
-                del e
-                return None
-                e = None
-                del e
-                return None
+            return result_capture.stdout
+        except Exception as e:
+            logging.info(f'''Error: {e}''')
+            return None
 
 
 
@@ -163,17 +128,8 @@ class LoadAI:
         try:
             subprocess.run(command, shell=True, check=True)
             print('Files removed successfully.')
-        except subprocess.CalledProcessError:
-            e = None
-            
-            try:
-                print(f'''Error occurred: {e}''')
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+        except subprocess.CalledProcessError as e:
+            print(f'''Error occurred: {e}''')
 
 
 
@@ -212,31 +168,18 @@ class LoadAI:
                     active_intervals.append((y1, y2))
                     active_intervals.sort()
                     logging.info(f'''Added interval: {(y1, y2)}, active_intervals={active_intervals}''')
-                    continue
-                if typ == CLOSE:
-                    
+                elif typ == CLOSE:
+
                     try:
                         active_intervals.remove((y1, y2))
                         logging.info(f'''Removed interval: {(y1, y2)}, active_intervals={active_intervals}''')
-                    continue
                     except ValueError:
                         logging.warning(f'''Warning: Interval {(y1, y2)} not found in {active_intervals}''')
-                        continue
-
-                return None
-                except Exception:
-                    e = None
-                    
-                    try:
-                        logging.error(f'''An error occurred in calculate_overlap_area: {e}''')
-                        logging.exception('Exception details:')
-                    finally:
-                        e = None
-                        del e
-                        return 0
-                        e = None
-                        del e
-                        return None
+            return total_area
+        except Exception as e:
+            logging.error(f'''An error occurred in calculate_overlap_area: {e}''')
+            logging.exception('Exception details:')
+            return 0
 
 
 
@@ -274,13 +217,13 @@ class LoadAI:
                         're_obj_rect_height': float(match.group(7)) }
                     if ai_result['re_prob'] > max_re_prob:
                         max_re_prob = ai_result['re_prob']
-                rectangles.append((ai_result['re_obj_rect_x'], ai_result['re_obj_rect_y'], ai_result['re_obj_rect_x'] + ai_result['re_obj_rect_width'], ai_result['re_obj_rect_y'] + ai_result['re_obj_rect_height']))
-                del ai_result['re_obj_rect_x']
-                del ai_result['re_obj_rect_y']
-                del ai_result['re_obj_rect_width']
-                del ai_result['re_obj_rect_height']
-                re_prob = ai_result['re_prob']
-                ai_results.append(ai_result)
+                    rectangles.append((ai_result['re_obj_rect_x'], ai_result['re_obj_rect_y'], ai_result['re_obj_rect_x'] + ai_result['re_obj_rect_width'], ai_result['re_obj_rect_y'] + ai_result['re_obj_rect_height']))
+                    del ai_result['re_obj_rect_x']
+                    del ai_result['re_obj_rect_y']
+                    del ai_result['re_obj_rect_width']
+                    del ai_result['re_obj_rect_height']
+                    re_prob = ai_result['re_prob']
+                    ai_results.append(ai_result)
             ai_results = json.dumps(ai_results)
             total_area = self.calculate_overlap_area(rectangles)
             if output_width and output_height:
@@ -382,26 +325,18 @@ class LoadAI:
             self.ai_capture()
             self.reactor.pause(self.reactor.monotonic() + 2)
             filename = self.find_latest_photo()
-            if not filename or os.path.exists(filename):
+            if not filename or not os.path.exists(filename):
                 self.gcode.respond_info('LOAD_AI_DEAL photo error, filename is %s' % filename)
-        return None
-        files = {
-            'file': filename }
-        response = self.send_post_request(files)
-        self.gcode.respond_info('LOAD_AI_DEAL:%s' % response)
-        logging.info('files:%s', files)
-        self.remove_files(filename)
-        except Exception:
-            e = None
-            
-            try:
-                logging.exception(e)
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            return None
+                return None
+            files = {
+                'file': filename }
+            response = self.send_post_request(files)
+            logging.info('LOAD_AI_DEAL:%s' % response)
+            self.gcode.respond_info('LOAD_AI_DEAL:%s' % response)
+            logging.info('files:%s', files)
+            self.remove_files(filename)
+        except Exception as e:
+            logging.exception(e)
 
 
 
@@ -419,25 +354,11 @@ class LoadAI:
                 else:
                     logging.error('No error output captured.')
             logging.info(f'''Command \'{cmd}\' returned output: {self.result.strip()}''')
-        except subprocess.CalledProcessError:
-            e = None
-            
-            try:
-                logging.error(f'''Command \'{e.cmd}\' returned non-zero exit status {e.returncode}''')
-                logging.error(f'''Error output: {e.stderr.strip() if e.stderr else 'No error output captured.'}''')
-            e = None
-            del e
-            except Exception:
-                e = None
-                
-                try:
-                    logging.error(f'''An unexpected error occurred: {str(e)}''')
-                finally:
-                    e = None
-                    del e
-                e = None
-                del e
-                return None
+        except subprocess.CalledProcessError as e:
+            logging.error(f'''Command \'{e.cmd}\' returned non-zero exit status {e.returncode}''')
+            logging.error(f'''Error output: {e.stderr.strip() if e.stderr else 'No error output captured.'}''')
+        except Exception as e:
+            logging.error(f'''An unexpected error occurred: {str(e)}''')
 
 
 
@@ -465,11 +386,11 @@ class LoadAI:
             background_thread.start()
             for _ in range(100):
                 if self.result:
-                    pass
-                else:
-                    self.reactor.pause(self.reactor.monotonic() + 0.1)
+                    break
+                self.reactor.pause(self.reactor.monotonic() + 0.1)
+            else:
                 logging.info('run cmd_LOAD_AI_DETECT_WASTE failed: timeout')
-            return None
+                return None
             if self.stderr:
                 json_output['stderr'] = self.stderr
             else:
@@ -484,22 +405,13 @@ class LoadAI:
             json_output['stdout'] = self.result
             json_output_str = json.dumps(json_output, indent=4)
             logging.info(json_output_str)
-        return None
-        except Exception:
-            e = None
-            
-            try:
-                json_output['stderr'] = str(e)
-                self.cx_ai_engine_status = json_output
-                json_output_str = json.dumps(json_output, indent=4)
-                logging.info(json_output_str)
-            finally:
-                e = None
-                del e
-                return None
-                e = None
-                del e
-                return None
+            return self.result
+        except Exception as e:
+            json_output['stderr'] = str(e)
+            self.cx_ai_engine_status = json_output
+            json_output_str = json.dumps(json_output, indent=4)
+            logging.info(json_output_str)
+            return None
 
 
 
@@ -563,13 +475,10 @@ class LoadAI:
                 if file.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp')):
                     file_path = os.path.join(root, file)
                     mtime = os.path.getmtime(file_path)
-                    if not latest_photo_mtime is None:
-                        if mtime > latest_photo_mtime:
-                            latest_photo_path = file_path
-                            latest_photo_mtime = mtime
-                            continue
-                            continue
-                            return latest_photo_path
+                    if latest_photo_mtime is None or mtime > latest_photo_mtime:
+                        latest_photo_path = file_path
+                        latest_photo_mtime = mtime
+        return latest_photo_path
 
     
     def cmd_LOAD_AI_GET_STATUS(self, gcmd):
