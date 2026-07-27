@@ -178,10 +178,8 @@ FieldFormatters.update({
     'sel_a': (lambda v: '%d(%s)' % (v, [
 'TMC222x',
 'TMC220x'][v])),
-    's2vsa': (lambda v: if v:
-'1(LowSideShort_A!)'''),
-    's2vsb': (lambda v: if v:
-'1(LowSideShort_B!)''') })
+    's2vsa': (lambda v: '1(LowSideShort_A!)' if v else ''),
+    's2vsb': (lambda v: '1(LowSideShort_B!)' if v else '') })
 
 class TMC2208:
     

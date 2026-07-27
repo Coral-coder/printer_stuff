@@ -58,15 +58,16 @@ class PrinterOutputPin:
         systime = self.reactor.monotonic()
         for heater in self.heaters.heaters.values():
             eventtime = self.reactor.monotonic()
-            if (heater.name == 'heater_bed' or heater.check_busy(eventtime) or self.ispweron == False) and heater.target_temp != 0:
-                self.set_poewon(0)
-                self.ispweron = True
-                continue
-                if self.ispweron == True:
+            if heater.name == 'heater_bed':
+                if heater.check_busy(eventtime):
+                    if self.ispweron == False and heater.target_temp != 0:
+                        self.set_poewon(0)
+                        self.ispweron = True
+                elif self.ispweron == True:
                     self.ispweron = False
                     self.set_poewon(1)
                     return systime + 10
-                return systime + 3
+        return systime + 3
 
     
     def get_status(self, eventtime):
@@ -75,7 +76,7 @@ class PrinterOutputPin:
 
     
     def _set_pin(self, print_time, value, cycle_time, is_resend = False):
-        if not value == self.last_value and cycle_time == self.last_cycle_time and is_resend:
+        if value == self.last_value and cycle_time == self.last_cycle_time and not is_resend:
             return None
         print_time = max(print_time, self.last_print_time + PIN_MIN_TIME)
         if self.is_pwm:
@@ -98,7 +99,7 @@ class PrinterOutputPin:
         value = gcmd.get_float('VALUE', minval=0.0, maxval=self.scale)
         value /= self.scale
         cycle_time = gcmd.get_float('CYCLE_TIME', self.default_cycle_time, above=0.0, maxval=MAX_SCHEDULE_TIME)
-        if self.is_pwm and value not in (0.0, 1.0):
+        if not self.is_pwm and value not in (0.0, 1.0):
             raise gcmd.error('Invalid pin value')
         toolhead = self.printer.lookup_object('toolhead')
         if sync:

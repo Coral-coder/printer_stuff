@@ -20,41 +20,21 @@ class PIDCalibrate:
         target = gcmd.get_float('TARGET')
         write_file = gcmd.get_int('WRITE_FILE', 0)
         pheaters = self.printer.lookup_object('heaters')
-        
         try:
             heater = pheaters.lookup_heater(heater_name)
-        except self.printer.config_error:
-            e = None
-            
-            try:
-                raise gcmd.error(str(e))
-            finally:
-                e = None
-                del e
-            e = None
-            del e
-            calibrate = ControlAutoTune(heater, target)
-            old_control = heater.set_control(calibrate)
-            
-            try:
-                pheaters.set_temperature(heater, target, True)
-            except self.printer.command_error:
-                e = None
-                
-                try:
-                    heater.set_control(old_control)
-                    raise 
-                finally:
-                    e = None
-                    del e
-                e = None
-                del e
-                if write_file:
-                    calibrate.write_file('/tmp/heattest.txt')
-
-
-
-
+        except self.printer.config_error as e:
+            raise gcmd.error(str(e))
+        self.printer.lookup_object('toolhead').get_last_move_time()
+        calibrate = ControlAutoTune(heater, target)
+        old_control = heater.set_control(calibrate)
+        try:
+            pheaters.set_temperature(heater, target, True)
+        except self.printer.command_error as e:
+            heater.set_control(old_control)
+            raise
+        heater.set_control(old_control)
+        if write_file:
+            calibrate.write_file('/tmp/heattest.txt')
         if calibrate.check_busy(0.0, 0.0, 0.0):
             raise gcmd.error('{"code": "key7", "msg": "pid_calibrate interrupted"}')
         (Kp, Ki, Kd) = calibrate.calc_final_pid()
@@ -113,7 +93,7 @@ class ControlAutoTune:
             self.heating = False
             self.check_peaks()
             self.heater.alter_target(self.calibrate_temp - TUNE_PID_DELTA)
-        elif self.heating and temp <= target_temp:
+        elif not self.heating and temp <= target_temp:
             self.heating = True
             self.check_peaks()
             self.heater.alter_target(self.calibrate_temp)
@@ -122,11 +102,11 @@ class ControlAutoTune:
             if temp < self.peak:
                 self.peak = temp
                 self.peak_time = read_time
-            else:
-                self.set_pwm(read_time, 0.0)
-                if temp > self.peak:
-                    self.peak = temp
-                    self.peak_time = read_time
+        else:
+            self.set_pwm(read_time, 0.0)
+            if temp > self.peak:
+                self.peak = temp
+                self.peak_time = read_time
 
     
     def check_busy(self, eventtime, smoothed_temp, target_temp):

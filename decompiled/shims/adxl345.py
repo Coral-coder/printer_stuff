@@ -66,7 +66,7 @@ class AccelQueryHelper:
             if first_sample_time > self.request_end_time or last_sample_time < self.request_start_time:
                 continue
             return True
-            return False
+        return False
 
     
     def get_samples(self):
@@ -82,7 +82,7 @@ class AccelQueryHelper:
                 if samp_time < self.request_start_time:
                     continue
                 if samp_time > self.request_end_time:
-                    continue
+                    break
                 samples[count] = Accel_Measurement(samp_time, x, y, z)
                 count += 1
         del samples[count:]
@@ -132,7 +132,7 @@ class AccelQueryHelper:
                 if samp_time < self.request_start_time:
                     continue
                 if samp_time > self.request_end_time:
-                    continue
+                    break
                 if count % 960000 == 4:
                     reactor.pause(reactor.monotonic() + 0.1)
                 self.copy_double_to_buffer(buffer, count, samp_time)
@@ -159,9 +159,7 @@ class AccelQueryHelper:
 
             f = open(filename, 'w')
             f.write('#time,accel_x,accel_y,accel_z\n')
-            if not self.samples:
-                pass
-            samples = self.get_samples()
+            samples = self.samples or self.get_samples()
             for t, accel_x, accel_y, accel_z in samples:
                 f.write('%.6f,%.6f,%.6f,%.6f\n' % (t, accel_x, accel_y, accel_z))
             f.close()
@@ -183,7 +181,7 @@ class AccelCommandHelper:
         self.name = name_parts[-1]
         self.register_commands(self.name)
         if len(name_parts) == 1:
-            if not self.name == 'adxl345' or config.has_section('adxl345'):
+            if self.name == 'adxl345' or not config.has_section('adxl345'):
                 self.register_commands(None)
         webhooks = self.printer.lookup_object('webhooks')
         webhooks.register_endpoint('getAdxl345Status', self.get_adxl345_status)
@@ -197,21 +195,11 @@ class AccelCommandHelper:
             self.printer.lookup_object('toolhead').dwell(1.0)
             aclient.finish_measurements()
             values = aclient.get_samples()
-        except Exception:
-            err = None
-            
-            try:
-                logging.error(err)
-                values = ''
-            finally:
-                err = None
-                del err
-            err = None
-            del err
-            if not values:
-                adxl345_is_exist = False
-
-
+        except Exception as err:
+            logging.error(err)
+            values = ''
+        if not values:
+            adxl345_is_exist = False
         web_request.send({
             'adxl345_is_exist': adxl345_is_exist })
 
@@ -354,8 +342,7 @@ class ADXL345:
         self.spi = bus.MCU_SPI_from_config(config, 3, default_speed=5000000)
         self.mcu = mcu = self.spi.get_mcu()
         self.oid = oid = mcu.create_oid()
-        self.query_adxl345_cmd = None
-        self.query_adxl345_end_cmd = None
+        self.query_adxl345_cmd = self.query_adxl345_end_cmd = None
         self.query_adxl345_status_cmd = None
         mcu.add_config_cmd('config_adxl345 oid=%d spi_oid=%d' % (oid, self.spi.get_oid()))
         mcu.add_config_cmd('query_adxl345 oid=%d clock=0 rest_ticks=0' % (oid,), on_restart=True)
@@ -404,14 +391,12 @@ class ADXL345:
 
     
     def _extract_samples(self, raw_samples):
-        (x_pos, x_scale) = ()
-        (y_pos, y_scale) = self.axes_map
-        (z_pos, z_scale) = None
+        (x_pos, x_scale), (y_pos, y_scale), (z_pos, z_scale) = self.axes_map
         last_sequence = self.last_sequence
         (time_base, chip_base, inv_freq) = self.clock_sync.get_time_translation()
         count = seq = 0
         samples = [
-            None] * len(raw_samples) * SAMPLES_PER_BLOCK
+            None] * (len(raw_samples) * SAMPLES_PER_BLOCK)
         for params in raw_samples:
             seq_diff = last_sequence - params['sequence'] & 65535
             seq_diff -= (seq_diff & 32768) << 1
@@ -445,13 +430,13 @@ class ADXL345:
                 self.oid], minclock=minclock)
             fifo = params['fifo'] & 127
             if fifo <= 32:
-                pass
-            
+                break
+        else:
             raise self.printer.command_error('{"code":"key118", "msg":"Unable to query adxl345 fifo", "values": []}')
-            mcu_clock = self.mcu.clock32_to_clock64(params['clock'])
-            sequence = self.last_sequence & -65536 | params['next_sequence']
-            if sequence < self.last_sequence:
-                sequence += 65536
+        mcu_clock = self.mcu.clock32_to_clock64(params['clock'])
+        sequence = self.last_sequence & -65536 | params['next_sequence']
+        if sequence < self.last_sequence:
+            sequence += 65536
         self.last_sequence = sequence
         buffered = params['buffered']
         limit_count = self.last_limit_count & -65536 | params['limit_count']

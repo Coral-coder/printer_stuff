@@ -54,8 +54,8 @@ def measurements_to_distances(measured_params, delta_params):
     outer_center = MeasureOuterRadius * scale
     start_pos = [ (ax * outer_center, ay * outer_center) for ax, ay in (xy_angles) ]
     shifted_angles = xy_angles[2:] + xy_angles[:2]
-    first_pos = [ (ax * inner_ridge + spx, ay * inner_ridge + spy, 0.0) for ax, ay in (zip(shifted_angles, start_pos)) ]
-    second_pos = [ (ax * outer_ridge + spx, ay * outer_ridge + spy, 0.0) for ax, ay in (zip(shifted_angles, start_pos)) ]
+    first_pos = [ (ax * inner_ridge + spx, ay * inner_ridge + spy, 0.0) for (ax, ay), (spx, spy) in (zip(shifted_angles, start_pos)) ]
+    second_pos = [ (ax * outer_ridge + spx, ay * outer_ridge + spy, 0.0) for (ax, ay), (spx, spy) in (zip(shifted_angles, start_pos)) ]
     outer_positions = [ (od, dp.calc_stable_position(fp), dp.calc_stable_position(sp)) for od, fp, sp in (zip(outer_dists, first_pos, second_pos)) ]
     return center_positions + outer_positions
 
@@ -85,33 +85,29 @@ class DeltaCalibrate:
         for i in range(999):
             height = config.getfloat('height%d' % (i,), None)
             if height is None:
-                pass
-            else:
-                height_pos = load_config_stable(config, 'height%d_pos' % (i,))
-                self.last_probe_positions.append((height, height_pos))
-            self.manual_heights = []
-            for i in range(999):
-                height = config.getfloat('manual_height%d' % (i,), None)
-                if height is None:
-                    pass
-                else:
-                    height_pos = load_config_stable(config, 'manual_height%d_pos' % (i,))
-                    self.manual_heights.append((height, height_pos))
-                self.delta_analyze_entry = {
-                    'SCALE': (1.0,) }
-                self.last_distances = []
-                for i in range(999):
-                    dist = config.getfloat('distance%d' % (i,), None)
-                    if dist is None:
-                        pass
-                    else:
-                        distance_pos1 = load_config_stable(config, 'distance%d_pos1' % (i,))
-                        distance_pos2 = load_config_stable(config, 'distance%d_pos2' % (i,))
-                        self.last_distances.append((dist, distance_pos1, distance_pos2))
-                    self.gcode = self.printer.lookup_object('gcode')
-                    self.gcode.register_command('DELTA_CALIBRATE', self.cmd_DELTA_CALIBRATE, desc=self.cmd_DELTA_CALIBRATE_help)
-                    self.gcode.register_command('DELTA_ANALYZE', self.cmd_DELTA_ANALYZE, desc=self.cmd_DELTA_ANALYZE_help)
-                    return None
+                break
+            height_pos = load_config_stable(config, 'height%d_pos' % (i,))
+            self.last_probe_positions.append((height, height_pos))
+        self.manual_heights = []
+        for i in range(999):
+            height = config.getfloat('manual_height%d' % (i,), None)
+            if height is None:
+                break
+            height_pos = load_config_stable(config, 'manual_height%d_pos' % (i,))
+            self.manual_heights.append((height, height_pos))
+        self.delta_analyze_entry = {
+            'SCALE': (1.0,) }
+        self.last_distances = []
+        for i in range(999):
+            dist = config.getfloat('distance%d' % (i,), None)
+            if dist is None:
+                break
+            distance_pos1 = load_config_stable(config, 'distance%d_pos1' % (i,))
+            distance_pos2 = load_config_stable(config, 'distance%d_pos2' % (i,))
+            self.last_distances.append((dist, distance_pos1, distance_pos2))
+        self.gcode = self.printer.lookup_object('gcode')
+        self.gcode.register_command('DELTA_CALIBRATE', self.cmd_DELTA_CALIBRATE, desc=self.cmd_DELTA_CALIBRATE_help)
+        self.gcode.register_command('DELTA_ANALYZE', self.cmd_DELTA_ANALYZE, desc=self.cmd_DELTA_ANALYZE_help)
 
     
     def handle_connect(self):
@@ -125,13 +121,13 @@ class DeltaCalibrate:
         delta_params.save_state(configfile)
         section = 'delta_calibrate'
         configfile.remove_section(section)
-        for z_offset, spos in enumerate(probe_positions):
+        for i, (z_offset, spos) in enumerate(probe_positions):
             configfile.set(section, 'height%d' % (i,), z_offset)
             configfile.set(section, 'height%d_pos' % (i,), '%.3f,%.3f,%.3f' % tuple(spos))
-        for z_offset, spos in enumerate(self.manual_heights):
+        for i, (z_offset, spos) in enumerate(self.manual_heights):
             configfile.set(section, 'manual_height%d' % (i,), z_offset)
             configfile.set(section, 'manual_height%d_pos' % (i,), '%.3f,%.3f,%.3f' % tuple(spos))
-        for dist, spos1, spos2 in enumerate(distances):
+        for i, (dist, spos1, spos2) in enumerate(distances):
             configfile.set(section, 'distance%d' % (i,), dist)
             configfile.set(section, 'distance%d_pos1' % (i,), '%.3f,%.3f,%.3f' % tuple(spos1))
             configfile.set(section, 'distance%d_pos2' % (i,), '%.3f,%.3f,%.3f' % tuple(spos2))
@@ -170,7 +166,7 @@ class DeltaCalibrate:
                     (x2, y2, z2) = getpos(stable_pos2)
                     d = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
                     total_error += (d - dist) ** 2
-            return None
+                return total_error
             except ValueError:
                 return 9999999999999.9
 

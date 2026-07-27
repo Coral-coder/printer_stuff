@@ -188,32 +188,20 @@ SignedFields = [
     'cur_b',
     'sgt']
 FieldFormatters = {
-    'i_scale_analog': (lambda v: if v:
-'1(ExtVREF)'),
-    'shaft': (lambda v: if v:
-'1(Reverse)'),
-    'reset': (lambda v: if v:
-'1(Reset)'),
-    'drv_err': (lambda v: if v:
-'1(ErrorShutdown!)'),
-    'uv_cp': (lambda v: if v:
-'1(Undervoltage!)'),
+    'i_scale_analog': (lambda v: '1(ExtVREF)' if v else ''),
+    'shaft': (lambda v: '1(Reverse)' if v else ''),
+    'reset': (lambda v: '1(Reset)' if v else ''),
+    'drv_err': (lambda v: '1(ErrorShutdown!)' if v else ''),
+    'uv_cp': (lambda v: '1(Undervoltage!)' if v else ''),
     'version': (lambda v: '%#x' % v),
     'mres': (lambda v: '%d(%dusteps)' % (v, 256 >> v)),
-    'otpw': (lambda v: if v:
-'1(OvertempWarning!)'),
-    'ot': (lambda v: if v:
-'1(OvertempError!)'),
-    's2ga': (lambda v: if v:
-'1(ShortToGND_A!)'),
-    's2gb': (lambda v: if v:
-'1(ShortToGND_B!)'),
-    'ola': (lambda v: if v:
-'1(OpenLoad_A!)'),
-    'olb': (lambda v: if v:
-'1(OpenLoad_B!)'),
-    'cs_actual': (lambda v: if v:
-'%d' % v) }
+    'otpw': (lambda v: '1(OvertempWarning!)' if v else ''),
+    'ot': (lambda v: '1(OvertempError!)' if v else ''),
+    's2ga': (lambda v: '1(ShortToGND_A!)' if v else ''),
+    's2gb': (lambda v: '1(ShortToGND_B!)' if v else ''),
+    'ola': (lambda v: '1(OpenLoad_A!)' if v else ''),
+    'olb': (lambda v: '1(OpenLoad_B!)' if v else ''),
+    'cs_actual': (lambda v: '%d' % v if v else '0(Reset?)') }
 MAX_CURRENT = 2.0
 
 class TMCCurrentHelper:
@@ -288,7 +276,7 @@ class TMCCurrentHelper:
 
 class MCU_TMC_SPI_chain:
     
-    def __init__(self, config, chain_len = (1,)):
+    def __init__(self, config, chain_len = 1):
         self.printer = config.get_printer()
         self.chain_len = chain_len
         self.mutex = self.printer.get_reactor().mutex()
@@ -301,8 +289,8 @@ class MCU_TMC_SPI_chain:
     
     def _build_cmd(self, data, chain_pos):
         return [
-            0] * (self.chain_len - chain_pos) * 5 + data + [
-            0] * (chain_pos - 1) * 5
+            0] * ((self.chain_len - chain_pos) * 5) + data + [
+            0] * ((chain_pos - 1) * 5)
 
     
     def reg_read(self, reg, chain_pos):
@@ -315,13 +303,13 @@ class MCU_TMC_SPI_chain:
         self.spi.spi_send(cmd)
         if self.printer.get_start_args().get('debugoutput') is not None:
             return 0
-        params = None.spi.spi_transfer(cmd)
+        params = self.spi.spi_transfer(cmd)
         pr = bytearray(params['response'])
         pr = pr[(self.chain_len - chain_pos) * 5:((self.chain_len - chain_pos) + 1) * 5]
         return pr[1] << 24 | pr[2] << 16 | pr[3] << 8 | pr[4]
 
     
-    def reg_write(self, reg, val, chain_pos, print_time = (None,)):
+    def reg_write(self, reg, val, chain_pos, print_time = None):
         minclock = 0
         if print_time is not None:
             minclock = self.spi.get_mcu().print_time_to_clock(print_time)
@@ -334,7 +322,7 @@ class MCU_TMC_SPI_chain:
         if self.printer.get_start_args().get('debugoutput') is not None:
             self.spi.spi_send(self._build_cmd(data, chain_pos), minclock)
             return val
-        write_cmd = None._build_cmd(data, chain_pos)
+        write_cmd = self._build_cmd(data, chain_pos)
         dummy_read = self._build_cmd([
             0,
             0,
@@ -352,7 +340,7 @@ def lookup_tmc_spi_chain(config):
     chain_len = config.getint('chain_length', None, minval=2)
     if chain_len is None:
         return (MCU_TMC_SPI_chain(config, 1), 1)
-    ppins = None.get_printer().lookup_object('pins')
+    ppins = config.get_printer().lookup_object('pins')
     cs_pin_params = ppins.lookup_pin(config.get('cs_pin'), share_type='tmc_spi_cs')
     tmc_spi = cs_pin_params.get('class')
     if tmc_spi is None:
@@ -385,26 +373,16 @@ class MCU_TMC_SPI:
         reg = self.name_to_reg[reg_name]
         with self.mutex:
             read = self.tmc_spi.reg_read(reg, self.chain_pos)
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         return read
 
-    
-    def set_register(self, reg_name, val, print_time = (None,)):
+
+    def set_register(self, reg_name, val, print_time = None):
         reg = self.name_to_reg[reg_name]
         with self.mutex:
             for retry in range(5):
                 v = self.tmc_spi.reg_write(reg, val, self.chain_pos, print_time)
                 if v == val:
-                    pass
-                None(None, None, None)
-                return None
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
+                    return
         raise self.printer.command_error("Unable to write tmc spi '%s' register %s" % (self.name, reg_name))
 
 
