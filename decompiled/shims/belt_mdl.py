@@ -156,7 +156,7 @@ class BELT_MDL:
         self.gcode.respond_info('times:%s' % movetimes)
         if movetimes > 200:
             return 0
-        aimpull = None.target_tension - self.mdl.current_tension
+        aimpull = self.target_tension - self.mdl.current_tension
         aimpull = abs(aimpull)
         aimpull = 10 if aimpull > 10 else aimpull
         aimmove = int(aimpull) + 2
@@ -176,7 +176,7 @@ class BELT_MDL:
             self.get_adc()
             self.adc_to_num(self.mdl.current_place_adc)
             return 1
-        if None.target_tension * (1 - self.mdl.mistake) > self.mdl.current_tension:
+        if self.target_tension * (1 - self.mdl.mistake) > self.mdl.current_tension:
             self.set_move(1, aimmove)
             self.mdl.current_place = self.mdl.current_place + aimmove
             self.get_adc()
@@ -269,11 +269,11 @@ class BELT_MDL:
         if redata[0] == 0:
             self.gcode.respond_info('reset:start error')
             return redata
-        if None[1] != self.sta.read_version_resp:
+        if redata[1] != self.sta.read_version_resp:
             self.gcode.respond_info('reset:comfun error')
             redata = (0, -5, 0)
             return redata
-        if None[1] == self.sta.read_version_resp:
+        if redata[1] == self.sta.read_version_resp:
             self.mdl.halversion = redata[2][:2]
             self.mdl.softversion = redata[2][2:]
             self.gcode.respond_info('halversion:%s' % self.mdl.halversion)
@@ -288,11 +288,11 @@ class BELT_MDL:
         if redata[0] == 0:
             self.gcode.respond_info('reset:start error')
             return redata
-        if None[1] != self.sta.read_flash_resp:
+        if redata[1] != self.sta.read_flash_resp:
             self.gcode.respond_info('reset:comfun error')
             redata = (0, -5, 0)
             return redata
-        if None[1] == self.sta.read_flash_resp:
+        if redata[1] == self.sta.read_flash_resp:
             return redata
 
     
@@ -300,7 +300,7 @@ class BELT_MDL:
         flash_buf = self.Get_flash(3)
         if flash_buf[0] == 0:
             return None
-        if None[0] == 1:
+        if flash_buf[0] == 1:
             flash_data_num = flash_buf[2][0]
             flash_data0 = flash_buf[2][1:5]
             flash_data1 = flash_buf[2][5:9]
@@ -331,11 +331,11 @@ class BELT_MDL:
         if redata[0] == 0:
             self.gcode.respond_info('reset:start error')
             return redata
-        if None[1] != self.sta.write_flash_resp:
+        if redata[1] != self.sta.write_flash_resp:
             self.gcode.respond_info('reset:comfun error')
             redata = (0, -5, 0)
             return redata
-        if None[1] == self.sta.write_flash_resp:
+        if redata[1] == self.sta.write_flash_resp:
             return redata
 
     
@@ -353,7 +353,7 @@ class BELT_MDL:
         self.gcode.respond_info('flash_data:%s' % flash_buf[2])
         if flash_buf[0] == 0:
             return None
-        if None[0] == 1:
+        if flash_buf[0] == 1:
             flash_data_num = flash_buf[2][0]
             flash_data0 = flash_buf[2][1:5]
             flash_data1 = flash_buf[2][5:9]
@@ -363,7 +363,7 @@ class BELT_MDL:
             flash_data_num2 = bytes_to_int(flash_data2)
             if (self.mdl.current_place == flash_data_num0) | (self.mdl.idl_adc == flash_data_num1) | (self.mdl.full_adc == flash_data_num2):
                 return 1
-            return None
+            return -1
 
     
     def get_adc_buf(self):
@@ -373,11 +373,11 @@ class BELT_MDL:
         if redata[0] == 0:
             self.gcode.respond_info('reset:start error')
             return redata
-        if None[1] != self.sta.read_adc_resp:
+        if redata[1] != self.sta.read_adc_resp:
             self.gcode.respond_info('reset:comfun error')
             redata = (0, -5, 0)
             return redata
-        if None[1] == self.sta.read_adc_resp:
+        if redata[1] == self.sta.read_adc_resp:
             return redata
 
     
@@ -386,7 +386,7 @@ class BELT_MDL:
         self.gcode.respond_info('adc_buf:%s' % adc_buf[2])
         if adc_buf[0] == 0:
             return None
-        if None[0] == 1:
+        if adc_buf[0] == 1:
             adc_num = bytes_to_int(adc_buf[2])
             self.mdl.current_place_adc = adc_num
             self.gcode.respond_info('adc_num:%s' % adc_num)
@@ -403,11 +403,11 @@ class BELT_MDL:
         if redata[0] == 0:
             self.gcode.respond_info('reset:start error')
             return redata
-        if None[1] != self.sta.move_slider_resp:
+        if redata[1] != self.sta.move_slider_resp:
             self.gcode.respond_info('reset:comfun error')
             redata = (0, -5, 0)
             return redata
-        if None[1] == self.sta.move_slider_resp:
+        if redata[1] == self.sta.move_slider_resp:
             return redata
 
     
@@ -422,7 +422,7 @@ class BELT_MDL:
             self.gcode.respond_info('move_buf:%s' % move_buf[2])
             if move_buf[0] == 0:
                 return None
-            if None[0] == 1:
+            if move_buf[0] == 1:
                 move_num_buf = move_buf[2][1:]
                 move_num = bytes_to_int(move_num_buf)
                 self.gcode.respond_info('move_num:%s' % move_num)
@@ -461,7 +461,7 @@ class BELT_MDL:
     def adc_to_num(self, adc_data):
         if (self.mdl.slope == 0) & (self.mdl.intercept == 0):
             return None
-        adc_num = None * self.mdl.slope + self.mdl.intercept
+        adc_num = adc_data * self.mdl.slope + self.mdl.intercept
         self.mdl.current_tension = adc_num
         self.gcode.respond_info('pull_num:%s' % adc_num)
         if (adc_num > 600) | (adc_num < -300):
@@ -500,16 +500,16 @@ class BELT_MDL:
             if self.name == 'mdly':
                 raise self.printer.command_error('{"code":"key713", "msg":"Communication abnormality of belt automatic tensioning module 485: \'%s\'", "values": []}' % self.name)
             return (0, -1, 0)
-        if None(rec_data) < 3:
+        if len(rec_data) < 3:
             self.gcode.respond_info('reset: <3')
             return (0, -2, 0)
-        if None[0] != self.com.head:
+        if rec_data[0] != self.com.head:
             self.gcode.respond_info('reset: head error')
             return (0, -3, 0)
-        if None[1] != self.com.addr:
+        if rec_data[1] != self.com.addr:
             self.gcode.respond_info('reset: head error')
             return (0, -4, 0)
-        leng = None[2]
+        leng = rec_data[2]
         sen_fun = rec_data[4]
         sen_data = rec_data[5:(leng - 3) + 5]
         return (1, sen_fun, sen_data)

@@ -22,10 +22,10 @@ class HomingOverride:
         if self.config.has_section('motor_control') and self.config.getsection('motor_control').getint('switch') == 1 and self.printer.lookup_object('motor_control').is_ready == False:
             self.gcode.respond_info('The motor parameters are initializing, Please try again later...')
             return None
-        if None.in_script:
+        if self.in_script:
             self.prev_G28(gcmd)
             return None
-        no_axis = None
+        no_axis = True
         for axis in 'XYZ':
             if gcmd.get(axis, None) is not None:
                 no_axis = False
@@ -41,7 +41,7 @@ class HomingOverride:
                         if not override:
                             self.prev_G28(gcmd)
                             return None
-                        toolhead = None.printer.lookup_object('toolhead')
+                        toolhead = self.printer.lookup_object('toolhead')
                         pos = toolhead.get_position()
                         homing_axes = []
                         for axis, loc in enumerate(self.start_pos):

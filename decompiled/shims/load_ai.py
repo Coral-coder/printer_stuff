@@ -304,7 +304,7 @@ class LoadAI:
         if self.t_command_count < 2:
             self.t_command_count += 1
             return None
-        self.t_command_count = None
+        self.t_command_count = 0
         if int(self.ai_waste_switch) == 1:
             self.nozzle_cam_power_on()
             self.box_action.go_to_extrude_pos()
@@ -550,3 +550,86 @@ class LoadAI:
 
     
     def find_latest_photo(self):
+        '''
+        查找指定目录中最新的照片文件。
+
+        :param directory: 包含照片的目录路径
+        :return: 最新照片文件的完整路径，如果没有找到照片则返回None
+        '''
+        latest_photo_path = None
+        latest_photo_mtime = None
+        for root, dirs, files in os.walk(self.pic_dir):
+            for file in files:
+                if file.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp')):
+                    file_path = os.path.join(root, file)
+                    mtime = os.path.getmtime(file_path)
+                    if not latest_photo_mtime is None:
+                        if mtime > latest_photo_mtime:
+                            latest_photo_path = file_path
+                            latest_photo_mtime = mtime
+                            continue
+                            continue
+                            return latest_photo_path
+
+    
+    def cmd_LOAD_AI_GET_STATUS(self, gcmd):
+        detection_results = [
+            [
+                0,
+                0,
+                0.931467,
+                1.0,
+                0.0,
+                4.0,
+                4.0],
+            [
+                1,
+                0,
+                0.831467,
+                3.0,
+                1.0,
+                3.0,
+                4.0],
+            [
+                2,
+                0,
+                0.731467,
+                0.0,
+                3.0,
+                7.0,
+                3.0]]
+        cnt = len(detection_results)
+        detection_results_str = '\n'.join(for result in (detection_results):
+'\t'.join(map(str, result)))
+        self.cx_ai_engine_status = {
+            'ai_switch': 1,
+            'ai_waste_switch': 1,
+            'command_type': 'ai_engine',
+            'command': f'''ai_engine 1 5 --user_data_dir={base_dir}''',
+            'command_description': 'waste',
+            'stderr': '',
+            'ai_results': f'''cam_type=1\nmode=5\ndebug=0\nuser_data_dir={base_dir}\ngcode_path=\nz_height=0.000000\nParseParamFile model_str_=F008\nParseParamFile sys_version_=1.1.0.15\nthe pid is alive...!\nflag = 0\ninput = {base_dir}/ai_image/sub_capture.bmp\nAI_upload_mode = 1\n{{"reqId":"1722419562737","dn":"00000000000000","code":"key609","data":"0.000000|1722419562.736825|/usr/data/ai_image/ai_property/F008-waste-2024_7_31_17_52_42.jpg\\n"}}\noutput width: 1600, height: 1200\noutput = {base_dir}/ai_image/sub_processed_ai_waste_mode.jpg\nai detection completed, cnt = {cnt}\nnum / re_label / re_prob / re_obj_rect_x / re_obj_rect_y / re_obj_rect_width / re_obj_rect_height\n{detection_results_str}''',
+            'max_re_prob': 0.0,
+            'normalized_total_area': 0.0,
+            'output_width': 0,
+            'output_height': 0 }
+        result_stdout = self.cx_ai_engine_status['ai_results']
+        ai_results = self.process_waste_ai_detect_result(result_stdout)
+        if ai_results is not None:
+            self.cx_ai_engine_status['ai_results'] = ai_results['ai_results']
+            self.cx_ai_engine_status['max_re_prob'] = ai_results['max_re_prob']
+            self.cx_ai_engine_status['normalized_total_area'] = ai_results['normalized_total_area']
+            self.cx_ai_engine_status['output_width'] = ai_results['output_width']
+            self.cx_ai_engine_status['output_height'] = ai_results['output_height']
+        json_output_str = json.dumps(self.cx_ai_engine_status, indent=4)
+        logging.info(json_output_str)
+
+    
+    def get_status(self, eventtime):
+        return self.cx_ai_engine_status
+
+
+
+def load_config(config):
+    return LoadAI(config)
+

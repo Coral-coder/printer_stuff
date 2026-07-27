@@ -230,7 +230,7 @@ class DeltaCalibrate:
             self.add_manual_height(mheight)
             return None
         args = {
-            'CENTER_DISTS': None,
+            'CENTER_DISTS': 6,
             'CENTER_PILLAR_WIDTHS': 3,
             'OUTER_DISTS': 6,
             'OUTER_PILLAR_WIDTHS': 6,

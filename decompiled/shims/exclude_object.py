@@ -53,7 +53,7 @@ class ExcludeObject:
             if tuning_tower.is_active():
                 logging.info('The ExcludeObject move transform is not being loaded due to Tuning tower being Active')
                 return None
-            self.next_transform = None.gcode_move.set_move_transform(self, force=True)
+            self.next_transform = self.gcode_move.set_move_transform(self, force=True)
             self.extrusion_offsets = { }
             self.max_position_extruded = 0
             self.max_position_excluded = 0
@@ -79,7 +79,7 @@ class ExcludeObject:
             if tuning_tower.is_active():
                 logging.error('The Exclude Object move transform was not unregistered because it is not at the head of the transform chain.')
                 return None
-            None.gcode_move.set_move_transform(self.next_transform, force=True)
+            self.gcode_move.set_move_transform(self.next_transform, force=True)
             self.next_transform = None
             self.gcode_move.reset_last_position()
 
@@ -206,7 +206,7 @@ obj['name'] == name):
         if self.current_object == None and self.next_transform:
             gcmd.respond_info('EXCLUDE_OBJECT_END called, but no object is currently active')
             return None
-        name = None.get('NAME', default=None)
+        name = gcmd.get('NAME', default=None)
         if name != None and name.upper() != self.current_object:
             gcmd.respond_info('EXCLUDE_OBJECT_END NAME=%s does not match the current object NAME=%s' % (name.upper(), self.current_object))
         self.current_object = None
@@ -220,7 +220,7 @@ obj['name'] == name):
         if name == self.current_object:
             self.gcode.respond_info('Forbidden EXCLUDE_OBJECT current_print_object:%s' % self.current_object)
             return None
-        if None:
+        if reset:
             if name:
                 self._unexclude_object(name)
             else:

@@ -17,7 +17,7 @@ def calc_move_time(dist, speed, accel):
         dist = -dist
     if not accel or dist:
         return (axis_r, 0.0, dist / speed, speed)
-    max_cruise_v2 = None * accel
+    max_cruise_v2 = dist * accel
     if max_cruise_v2 < speed ** 2:
         speed = math.sqrt(max_cruise_v2)
     accel_t = speed / accel
@@ -127,7 +127,7 @@ class ForceMove:
             gcode = self.printer.lookup_object('gcode')
             gcode.respond_info('The motor parameters are initializing, Please try again later...')
             return None
-        stepper = None._lookup_stepper(gcmd)
+        stepper = self._lookup_stepper(gcmd)
         distance = gcmd.get_float('DISTANCE')
         speed = gcmd.get_float('VELOCITY', above=0.0)
         accel = gcmd.get_float('ACCEL', 0.0, minval=0.0)

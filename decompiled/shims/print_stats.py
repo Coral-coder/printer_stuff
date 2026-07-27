@@ -122,7 +122,7 @@ class PrintStats:
     def _note_finish(self, state, error_message = ('',)):
         if self.print_start_time is None:
             return None
-        self.state = None
+        self.state = state
         self.error_message = error_message
         eventtime = self.reactor.monotonic()
         self.total_duration = eventtime - self.print_start_time

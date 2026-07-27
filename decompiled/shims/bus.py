@@ -9,8 +9,8 @@ def resolve_bus_name(mcu, param, bus):
     if enums is None:
         if bus is None:
             return 0
-        return None
-    ppins = None.get_printer().lookup_object('pins')
+        return bus
+    ppins = mcu.get_printer().lookup_object('pins')
     mcu_name = mcu.get_name()
     if bus is None:
         rev_enums = { v: k for k, v in (enums.items()) }
@@ -79,7 +79,7 @@ class MCU_SPI:
             data_msg = ''.join([ '%02x' % (x,) for x in (data) ])
             self.mcu.add_config_cmd('spi_send oid=%d data=%s' % (self.oid, data_msg), is_init=True)
             return None
-        None.spi_send_cmd.send([
+        self.spi_send_cmd.send([
             self.oid,
             data], minclock=minclock, reqclock=reqclock)
 
@@ -177,7 +177,7 @@ class MCU_I2C:
             data_msg = ''.join([ '%02x' % (x,) for x in (data) ])
             self.mcu.add_config_cmd('i2c_write oid=%d data=%s' % (self.oid, data_msg), is_init=True)
             return None
-        None.i2c_write_cmd.send([
+        self.i2c_write_cmd.send([
             self.oid,
             data], minclock=minclock, reqclock=reqclock)
 
@@ -253,7 +253,7 @@ class MCU_bus_digital_out:
         if self.update_pin_cmd is None:
             self.mcu.add_config_cmd('update_digital_out oid=%c value=%c' % (self.oid, not (not value)))
             return None
-        None.update_pin_cmd.send([
+        self.update_pin_cmd.send([
             self.oid,
             not (not value)], minclock=minclock, reqclock=reqclock)
 

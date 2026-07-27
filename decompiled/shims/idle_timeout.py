@@ -60,27 +60,27 @@ class IdleTimeout:
         idle_time = est_print_time - print_time
         if lookahead_empty or idle_time < 1.0:
             return eventtime + self.idle_timeout
-        if None < self.idle_timeout:
+        if idle_time < self.idle_timeout:
             return eventtime + self.idle_timeout - idle_time
-        if None.gcode.get_mutex().test():
+        if self.gcode.get_mutex().test():
             return eventtime + 1.0
-        return None.transition_idle_state(eventtime)
+        return self.transition_idle_state(eventtime)
 
     
     def timeout_handler(self, eventtime):
         if self.printer.is_shutdown():
             return self.reactor.NEVER
-        if None.state == 'Ready':
+        if self.state == 'Ready':
             return self.check_idle_timeout(eventtime)
-        (print_time, est_print_time, lookahead_empty) = None.toolhead.check_busy(eventtime)
+        (print_time, est_print_time, lookahead_empty) = self.toolhead.check_busy(eventtime)
         buffer_time = min(2.0, print_time - est_print_time)
         if not lookahead_empty:
             return eventtime + READY_TIMEOUT + max(0.0, buffer_time)
-        if None > -READY_TIMEOUT:
+        if buffer_time > -READY_TIMEOUT:
             return eventtime + READY_TIMEOUT + buffer_time
-        if None.gcode.get_mutex().test():
+        if self.gcode.get_mutex().test():
             return eventtime + READY_TIMEOUT
-        self.state = None
+        self.state = 'Ready'
         self.printer.send_event('idle_timeout:ready', est_print_time + PIN_MIN_TIME)
         return eventtime + self.idle_timeout
 
@@ -88,7 +88,7 @@ class IdleTimeout:
     def handle_sync_print_time(self, curtime, print_time, est_print_time):
         if self.state == 'Printing':
             return None
-        self.state = None
+        self.state = 'Printing'
         self.last_print_start_systime = curtime
         check_time = READY_TIMEOUT + print_time - est_print_time
         self.reactor.update_timer(self.timeout_timer, curtime + check_time)

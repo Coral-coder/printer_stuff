@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/output_pin.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: output_pin.pyc (Python 3.9)
 
@@ -64,3 +55,77 @@ class PrinterOutputPin:
 
     
     def checkpwm(self, eventtime):
+        systime = self.reactor.monotonic()
+        for heater in self.heaters.heaters.values():
+            eventtime = self.reactor.monotonic()
+            if (heater.name == 'heater_bed' or heater.check_busy(eventtime) or self.ispweron == False) and heater.target_temp != 0:
+                self.set_poewon(0)
+                self.ispweron = True
+                continue
+                if self.ispweron == True:
+                    self.ispweron = False
+                    self.set_poewon(1)
+                    return systime + 10
+                return systime + 3
+
+    
+    def get_status(self, eventtime):
+        return {
+            'value': self.last_value }
+
+    
+    def _set_pin(self, print_time, value, cycle_time, is_resend = (False,)):
+        if not value == self.last_value and cycle_time == self.last_cycle_time and is_resend:
+            return None
+        print_time = max(print_time, self.last_print_time + PIN_MIN_TIME)
+        if self.is_pwm:
+            self.mcu_pin.set_pwm(print_time, value, cycle_time)
+        else:
+            self.mcu_pin.set_digital(print_time, value)
+            pin_name = self.config.get_name().split()[1]
+            if pin_name.startswith('motor_'):
+                logging.info('_set_pin pin_name=%s value=%s' % (pin_name, value))
+        self.last_value = value
+        self.last_cycle_time = cycle_time
+        self.last_print_time = print_time
+        if self.resend_interval and self.resend_timer is None:
+            self.resend_timer = self.reactor.register_timer(self._resend_current_val, self.reactor.NOW)
+
+    cmd_SET_PIN_help = 'Set the value of an output pin'
+    
+    def cmd_SET_PIN(self, gcmd):
+        sync = gcmd.get_int('SYNC', 1, minval=0, maxval=1)
+        value = gcmd.get_float('VALUE', minval=0.0, maxval=self.scale)
+        value /= self.scale
+        cycle_time = gcmd.get_float('CYCLE_TIME', self.default_cycle_time, above=0.0, maxval=MAX_SCHEDULE_TIME)
+        if self.is_pwm and value not in (0.0, 1.0):
+            raise gcmd.error('Invalid pin value')
+        toolhead = self.printer.lookup_object('toolhead')
+        if sync:
+            logging.info('SET_PIN sync=1')
+            systime = self.reactor.monotonic()
+            print_time = self.mcu_pin.get_mcu().estimated_print_time(systime)
+            self._set_pin(print_time + 0.1, value, cycle_time)
+        else:
+            logging.info('SET_PIN sync=0')
+            None((lambda print_time = None: self._set_pin(print_time, value, cycle_time)))
+
+    
+    def _resend_current_val(self, eventtime):
+        if self.last_value == self.shutdown_value:
+            self.reactor.unregister_timer(self.resend_timer)
+            self.resend_timer = None
+            return self.reactor.NEVER
+        systime = self.reactor.monotonic()
+        print_time = self.mcu_pin.get_mcu().estimated_print_time(systime)
+        time_diff = self.last_print_time + self.resend_interval - print_time
+        if time_diff > 0.0:
+            return systime + time_diff
+        self._set_pin(print_time + PIN_MIN_TIME, self.last_value, self.last_cycle_time, True)
+        return systime + self.resend_interval
+
+
+
+def load_config_prefix(config):
+    return PrinterOutputPin(config)
+

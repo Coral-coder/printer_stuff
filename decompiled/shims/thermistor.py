@@ -36,7 +36,7 @@ class Thermistor:
             logging.warn('Using thermistor beta %.3f in heater %s', beta, name)
             self.setup_coefficients_beta(t1, r1, beta)
             return None
-        self.c2 = (None - self.c3 * ln3_r12) / ln_r12
+        self.c2 = (inv_t12 - self.c3 * ln3_r12) / ln_r12
         self.c1 = inv_t1 - self.c2 * ln_r1 - self.c3 * ln3_r1
 
     
@@ -59,7 +59,7 @@ class Thermistor:
     def calc_adc(self, temp):
         if temp <= KELVIN_TO_CELSIUS:
             return 1.0
-        inv_t = None / (temp - KELVIN_TO_CELSIUS)
+        inv_t = 1.0 / (temp - KELVIN_TO_CELSIUS)
         if self.c3:
             y = (self.c1 - inv_t) / (2.0 * self.c3)
             x = math.sqrt((self.c2 / (3.0 * self.c3)) ** 3 + y ** 2)
@@ -95,7 +95,7 @@ class CustomThermistor:
                 'r1': r1,
                 'beta': beta }
             return None
-        t2 = None.getfloat('temperature2', minval=KELVIN_TO_CELSIUS)
+        t2 = config.getfloat('temperature2', minval=KELVIN_TO_CELSIUS)
         r2 = config.getfloat('resistance2', minval=0.0)
         t3 = config.getfloat('temperature3', minval=KELVIN_TO_CELSIUS)
         r3 = config.getfloat('resistance3', minval=0.0)

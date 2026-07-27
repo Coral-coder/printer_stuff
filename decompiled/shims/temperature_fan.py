@@ -57,7 +57,7 @@ class TemperatureFan:
             value = 0.0
         if (read_time < self.next_speed_time or self.last_speed_value) and abs(value - self.last_speed_value) < 0.05:
             return None
-        speed_time = None + self.speed_delay
+        speed_time = read_time + self.speed_delay
         self.next_speed_time = speed_time + 0.75 * MAX_FAN_TIME
         self.last_speed_value = value
         if self.temperature_fan_switch == 1:

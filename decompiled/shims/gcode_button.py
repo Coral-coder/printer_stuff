@@ -48,7 +48,7 @@ class GCodeButton:
             return {
                 'state': 'PRESSED' }
         return {
-            **'RELEASED' }
+            'state': 'RELEASED' }
 
 
 

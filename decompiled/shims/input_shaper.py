@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/input_shaper.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: input_shaper.pyc (Python 3.9)
 
@@ -107,7 +98,7 @@ class AxisInputShaper:
     def enable_shaping(self):
         if self.saved is None:
             return None
-        (self.n, self.A, self.T) = None.saved
+        (self.n, self.A, self.T) = self.saved
         self.saved = None
 
     
@@ -156,3 +147,55 @@ class InputShaper:
 
     
     def _update_input_shaping(self, error = (None,)):
+        self.toolhead.flush_step_generation()
+        new_delay = max([ s.get_step_generation_window() for s in (self.shapers) ])
+        self.toolhead.note_step_generation_scan_time(new_delay, old_delay=self.old_delay)
+        failed = []
+        for sk in self.stepper_kinematics:
+            for shaper in self.shapers:
+                if shaper in failed:
+                    continue
+                if not shaper.set_shaper_kinematics(sk):
+                    failed.append(shaper)
+                    continue
+                    continue
+                    if failed:
+                        if not error:
+                            pass
+                        error = self.printer.command_error
+                        raise error('{"code":"key25", "msg":"Failed to configure shaper(s) %s with given parameters", "values": ["%s"]}' % (', '.join([ s.get_name() for s in (failed) ]), ', '.join([ s.get_name() for s in (failed) ])))
+                    return None
+
+    
+    def disable_shaping(self):
+        for shaper in self.shapers:
+            shaper.disable_shaping()
+        self._update_input_shaping()
+
+    
+    def enable_shaping(self):
+        for shaper in self.shapers:
+            shaper.enable_shaping()
+        self._update_input_shaping()
+
+    cmd_SET_INPUT_SHAPER_help = 'Set cartesian parameters for input shaper'
+    
+    def cmd_SET_INPUT_SHAPER(self, gcmd):
+        updated = False
+        for shaper in self.shapers:
+            updated |= shaper.update(gcmd)
+        if updated:
+            self._update_input_shaping()
+        for shaper in self.shapers:
+            shaper.report(gcmd)
+
+    cmd_UPDATE_INPUT_SHAPER_help = 'cmd_UPDATE_INPUT_SHAPER parameters for input shaper'
+    
+    def cmd_UPDATE_INPUT_SHAPER(self, gcmd):
+        self.connect()
+
+
+
+def load_config(config):
+    return InputShaper(config)
+

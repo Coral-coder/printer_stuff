@@ -37,24 +37,54 @@ def log_to_stderr(msg = None):
 def _regex_find_floats(pattern = None, data = None, strict = None):
     fptrn = '\\d+\\.\\d*' if strict else '\\d+\\.?\\d*'
     matches = re.findall(pattern, data)
-# WARNING: Decompyle incomplete
+    if matches:
+        
+        try:
+            pass
+        return None
+        except Exception:
+            pass
+
+        return []
 
 
 def _regex_find_ints(pattern = None, data = None):
     matches = re.findall(pattern, data)
-# WARNING: Decompyle incomplete
+    if matches:
+        
+        try:
+            pass
+        return None
+        except Exception:
+            pass
+
+        return []
 
 
 def _regex_find_first(pattern = None, data = None):
     match = re.search(pattern, data)
     val = None
-# WARNING: Decompyle incomplete
+    if match:
+        
+        try:
+            val = float(match.group(1))
+        except Exception:
+            return None
+
+        return val
 
 
 def _regex_find_int(pattern = None, data = None):
     match = re.search(pattern, data)
     val = None
-# WARNING: Decompyle incomplete
+    if match:
+        
+        try:
+            val = int(match.group(1))
+        except Exception:
+            return None
+
+        return val
 
 
 def _regex_find_string(pattern = None, data = None):
@@ -66,7 +96,55 @@ def _regex_find_string(pattern = None, data = None):
 def get_print_file_metadata(file_path):
     result = { }
     count = 3000
-# WARNING: Decompyle incomplete
+    
+    try:
+        with open(file_path, 'r') as f:
+            if count:
+                count -= 1
+                line = f.readline()
+                if not line.startswith(';'):
+                    continue
+                if re.findall('; ?MINX.*?(\\d+\\.?\\d*)', line):
+                    result['MINX'] = float(re.findall('; ?MINX.*?(\\d+\\.?\\d*)', line)[0].strip())
+                if re.findall('; ?MINY.*?(\\d+\\.?\\d*)', line):
+                    result['MINY'] = float(re.findall('; ?MINY.*?(\\d+\\.?\\d*)', line)[0].strip())
+                if re.findall('; ?MINZ.*?(\\d+\\.?\\d*)', line):
+                    result['MINZ'] = float(re.findall('; ?MINZ.*?(\\d+\\.?\\d*)', line)[0].strip())
+                if re.findall('; ?MAXX.*?(\\d+\\.?\\d*)', line):
+                    result['MAXX'] = float(re.findall('; ?MAXX.*?(\\d+\\.?\\d*)', line)[0].strip())
+                if re.findall('; ?MAXY.*?(\\d+\\.?\\d*)', line):
+                    result['MAXY'] = float(re.findall('; ?MAXY.*?(\\d+\\.?\\d*)', line)[0].strip())
+                if re.findall('; ?MAXZ.*?(\\d+\\.?\\d*)', line):
+                    result['MAXZ'] = float(re.findall('; ?MAXZ.*?(\\d+\\.?\\d*)', line)[0].strip())
+                if re.findall(';Machine Height:(.*)\\n', line):
+                    result['MachineHeight'] = float(re.findall(';Machine Height:(.*)\\n', line)[0].strip())
+                if re.findall(';Machine Width:(.*)\\n', line):
+                    result['MachineWidth'] = float(re.findall(';Machine Width:(.*)\\n', line)[0].strip())
+                if re.findall(';Machine Depth:(.*)\\n', line):
+                    result['MachineDepth'] = float(re.findall(';Machine Depth:(.*)\\n', line)[0].strip())
+                if re.findall(';Material Name:(.*)\\n', line):
+                    result['MaterialName'] = str(re.findall(';Material Name:(.*)\\n', line)[0].strip())
+                if re.findall(';Material Type:(.*)\\n', line):
+                    result['MaterialType'] = str(re.findall(';Material Type:(.*)\\n', line)[0].strip())
+                if re.findall('; multicolor_method = (.*)\\n', line):
+                    result['multicolor_method'] = int(re.findall('; multicolor_method = (.*)\\n', line)[0].strip())
+                None(None, None, None)
+            elif not None:
+                pass
+    except Exception:
+        err = None
+        
+        try:
+            print(err)
+        finally:
+            err = None
+            del err
+            return None
+            err = None
+            del err
+            return result
+
+
 
 
 class BaseSlicer(object):
@@ -112,7 +190,7 @@ class BaseSlicer(object):
                 log_to_stderr('Legacy object processing detected.  This is not compatible with official versions of Klipper.')
             return False
         patterns = [
-            None]
+            '\\nM486']
         if pattern is not None:
             patterns.append(pattern)
         for regex in patterns:
@@ -134,7 +212,7 @@ class BaseSlicer(object):
         m = re.search('\\n[MG]\\d+\\s.*\\n', self.header_data)
         if m is None:
             return None
-        return None.start()
+        return m.start()
 
     
     def parse_gcode_end_byte(self = None):
@@ -142,7 +220,7 @@ class BaseSlicer(object):
         m = re.search('\\n.*\\s\\d+[MG]\\n', rev_data)
         if m is None:
             return None
-        return None.size - m.start()
+        return self.size - m.start()
 
     
     def parse_first_layer_height(self = None):
@@ -270,8 +348,8 @@ class PrusaSlicer(BaseSlicer):
         if pct is not None:
             if self.layer_height is None:
                 return None
-            return None((pct / 1e+02) * self.layer_height, 6)
-        return None('; first_layer_height = (\\d+\\.?\\d*)', self.footer_data)
+            return round((pct / 1e+02) * self.layer_height, 6)
+        return _regex_find_first('; first_layer_height = (\\d+\\.?\\d*)', self.footer_data)
 
     
     def parse_model_info(self):
@@ -285,7 +363,16 @@ class PrusaSlicer(BaseSlicer):
     
     def parse_object_height(self = None):
         matches = re.findall(';BEFORE_LAYER_CHANGE\\n(?:.*\\n)?;(\\d+\\.?\\d*)', self.footer_data)
-    # WARNING: Decompyle incomplete
+        if matches:
+            
+            try:
+                matches = [ float(m) for m in (matches) ]
+            except Exception:
+                pass
+            except:
+                return max(matches)
+
+            return self._parse_max_float('G1\\sZ\\d+\\.\\d*\\sF', self.footer_data)
 
     
     def parse_filament_total(self = None):
@@ -308,14 +395,23 @@ class PrusaSlicer(BaseSlicer):
         time_match = re.search(';\\sestimated\\sprinting\\stime.*', self.footer_data)
         if not time_match:
             return None
-        total_time = None
+        total_time = 0
         time_group = time_match.group()
         time_patterns = [
             ('(\\d+)d', 86400),
             ('(\\d+)h', 3600),
             ('(\\d+)m', 60),
             ('(\\d+)s', 1)]
-    # WARNING: Decompyle incomplete
+        
+        try:
+            for pattern, multiplier in time_patterns:
+                t = re.search(pattern, time_group)
+                if t:
+                    total_time += int(t.group(1)) * multiplier
+            except Exception:
+                return None
+            return round(total_time, 2)
+
 
     
     def parse_first_layer_extr_temp(self = None):
@@ -520,44 +616,70 @@ class Simplify3D(BaseSlicer):
         time_match = re.search(';\\s+Build (t|T)ime:.*', self.footer_data)
         if not time_match:
             return None
-        total_time = None
+        total_time = 0
         time_group = time_match.group()
         time_patterns = [
             ('(\\d+)\\shours?', 3600),
             ('(\\d+)\\smin', 60),
             ('(\\d+)\\ssec', 1)]
-    # WARNING: Decompyle incomplete
+        
+        try:
+            for pattern, multiplier in time_patterns:
+                t = re.search(pattern, time_group)
+                if t:
+                    total_time += int(t.group(1)) * multiplier
+            except Exception:
+                return None
+            return round(total_time, 2)
+
 
     
     def _get_temp_items(self = None, pattern = None):
         match = re.search(pattern, self.header_data)
         if match is None:
             return []
-        return None.group().split(',')[1:]
+        return match.group().split(',')[1:]
 
     
     def _get_first_layer_temp(self = None, heater = None):
         heaters = self._get_temp_items('temperatureName.*')
         temps = self._get_temp_items('temperatureSetpointTemperatures.*')
-    # WARNING: Decompyle incomplete
+        for h, temp in zip(heaters, temps):
+            if h == heater:
+                
+                try:
+                    pass
+                return None
+                except Exception:
+                    return None
+
+                continue
+                return None
 
     
     def _get_first_layer_temp_v5(self = None, heater_type = None):
         pattern = f''';\\s+temperatureController,.+?;\\s+temperatureType,{heater_type}.+?;\\s+temperatureSetpoints,\\d+\\|(\\d+)'''
         match = re.search(pattern, self.header_data, re.MULTILINE | re.DOTALL)
-    # WARNING: Decompyle incomplete
+        if match is not None:
+            
+            try:
+                pass
+            return None
+            except Exception:
+                return None
+
 
     
     def parse_first_layer_extr_temp(self = None):
         if self._is_v5:
             return self._get_first_layer_temp_v5('extruder')
-        return None._get_first_layer_temp('Extruder 1')
+        return self._get_first_layer_temp('Extruder 1')
 
     
     def parse_first_layer_bed_temp(self = None):
         if self._is_v5:
             return self._get_first_layer_temp_v5('platform')
-        return None._get_first_layer_temp('Heated Bed')
+        return self._get_first_layer_temp('Heated Bed')
 
     
     def parse_nozzle_diameter(self = None):
@@ -812,14 +934,13 @@ class KiriMoto(BaseSlicer):
         matches = re.findall(';; --- layer (\\d+) \\(.+', self.footer_data)
         if not matches:
             return None
-        :
-            matches = re.findall(';; --- layer (\\d+) \\(.+', self.footer_data)
-            if not matches:
-                return None
-            
-            return int(matches[-1]) + 1
-        return int(matches[-1]) + 1
-    # WARNING: Decompyle incomplete
+        
+        try:
+            pass
+        return None
+        except Exception:
+            return None
+
 
     
     def parse_estimated_time(self = None):
@@ -883,7 +1004,18 @@ class Creality(BaseSlicer):
     
     def parse_object_height(self = None):
         matches = re.findall(';MAXZ:(\\d+\\.?\\d*)', self.header_data)
-    # WARNING: Decompyle incomplete
+        if matches:
+            
+            try:
+                matches = [ float(m) for m in (matches) ]
+            except Exception:
+                pass
+
+            return max(matches)
+        max_z_height = _regex_find_first('; max_z_height: (\\d+\\.\\d*)', self.header_data)
+        if max_z_height:
+            return max_z_height
+        return self._parse_max_float('G1\\sZ\\d+\\.\\d*\\sF', self.footer_data)
 
     
     def parse_layer_count(self = None):
@@ -1026,8 +1158,63 @@ SUPPORTED_DATA = [
     'uuid']
 
 def process_objects(file_path = None, slicer = None, name = None):
-    pass
-# WARNING: Decompyle incomplete
+    
+    try:
+        preprocess_slicer = preprocess_slicer
+        preprocess_cura = preprocess_cura
+        preprocess_ideamaker = preprocess_ideamaker
+        preprocess_m486 = preprocess_m486
+        import preprocess_cancellation
+    except ImportError:
+        log_to_stderr("Module 'preprocess-cancellation' failed to load")
+        return False
+
+    fname = os.path.basename(file_path)
+    log_to_stderr(f'''Performing Object Processing on file: {fname}, sliced by {name}''')
+    with tempfile.TemporaryDirectory() as tmp_dir_name:
+        tmp_file = os.path.join(tmp_dir_name, fname)
+        with open(file_path, 'r') as in_file:
+            with open(tmp_file, 'w') as out_file:
+                
+                try:
+                    if slicer.has_m486_objects:
+                        processor = preprocess_m486
+                    elif isinstance(slicer, PrusaSlicer):
+                        processor = preprocess_slicer
+                    elif isinstance(slicer, Cura):
+                        processor = preprocess_cura
+                    elif isinstance(slicer, IdeaMaker):
+                        processor = preprocess_ideamaker
+                    else:
+                        log_to_stderr(f'''Object Processing Failed, slicer {name}not supported''')
+                None(None, None, None)
+                None(None, None, None)
+                return False
+                for line in processor(in_file):
+                    out_file.write(line)
+                except Exception:
+                    e = None
+                    
+                    try:
+                        log_to_stderr(f'''Object processing failed: {e}''')
+                    finally:
+                        e = None
+                        del e
+                        None(None, None, None)
+                        None(None, None, None)
+                        None(None, None, None)
+                        return False
+                        e = None
+                        del e
+                        None(None, None, None)
+                    if not None:
+                        pass
+
+
+        if os.path.islink(file_path):
+            file_path = os.path.realpath(file_path)
+        shutil.move(tmp_file, file_path)
+    return True
 
 
 def get_slicer(file_path = None):
@@ -1053,10 +1240,6 @@ def get_slicer(file_path = None):
             else:
                 footer_data = header_data
         slicer.set_data(header_data, footer_data, size)
-        None(None, None, None)
-    with None:
-        if not None:
-            pass
     if ident is None:
         ident = {
             'slicer': 'unknown' }
@@ -1097,7 +1280,37 @@ def extract_ufp(ufp_path = None, dest_path = None):
     thumb_name = os.path.splitext(os.path.basename(dest_path))[0] + '.png'
     dest_thumb_dir = os.path.join(os.path.dirname(dest_path), '.thumbs')
     dest_thumb_path = os.path.join(dest_thumb_dir, thumb_name)
-# WARNING: Decompyle incomplete
+    
+    try:
+        with tempfile.TemporaryDirectory() as tmp_dir_name:
+            tmp_thumb_path = ''
+            with zipfile.ZipFile(ufp_path) as zf:
+                tmp_model_path = zf.extract(UFP_MODEL_PATH, path=tmp_dir_name)
+                if UFP_THUMB_PATH in zf.namelist():
+                    tmp_thumb_path = zf.extract(UFP_THUMB_PATH, path=tmp_dir_name)
+                None(None, None, None)
+            if not None:
+                pass
+            if os.path.islink(dest_path):
+                dest_path = os.path.realpath(dest_path)
+            shutil.move(tmp_model_path, dest_path)
+            if tmp_thumb_path:
+                if not os.path.exists(dest_thumb_dir):
+                    os.mkdir(dest_thumb_dir)
+                shutil.move(tmp_thumb_path, dest_thumb_path)
+            None(None, None, None)
+        if not None:
+            pass
+    except Exception:
+        log_to_stderr(traceback.format_exc())
+        sys.exit(-1)
+
+    
+    try:
+        os.remove(ufp_path)
+    except Exception:
+        log_to_stderr(f'''Error removing ufp file: {ufp_path}''')
+
 
 
 def main(path = None, filename = None, ufp = None, check_objects = {
@@ -1113,7 +1326,26 @@ def main(path = None, filename = None, ufp = None, check_objects = {
     if not os.path.isfile(file_path):
         log_to_stderr(f'''File Not Found: {file_path}''')
         sys.exit(-1)
-# WARNING: Decompyle incomplete
+    
+    try:
+        metadata = extract_metadata(file_path, check_objects)
+    except Exception:
+        log_to_stderr(traceback.format_exc())
+        sys.exit(-1)
+
+    fd = sys.stdout.fileno()
+    data = json.dumps({
+        'file': filename,
+        'metadata': metadata }).encode()
+    if data:
+        
+        try:
+            ret = os.write(fd, data)
+        except OSError:
+            continue
+
+        data = data[ret:]
+        continue
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='GCode Metadata Extraction Utility')

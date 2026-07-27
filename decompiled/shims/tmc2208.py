@@ -179,9 +179,9 @@ FieldFormatters.update({
 'TMC222x',
 'TMC220x'][v])),
     's2vsa': (lambda v: if v:
-'1(LowSideShort_A!)'),
+'1(LowSideShort_A!)'''),
     's2vsb': (lambda v: if v:
-'1(LowSideShort_B!)') })
+'1(LowSideShort_B!)''') })
 
 class TMC2208:
     

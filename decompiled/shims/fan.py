@@ -41,7 +41,7 @@ class Fan:
         value = max(0.0, min(self.max_power, value * self.max_power))
         if value == self.last_fan_value:
             return None
-        print_time = None(self.last_fan_time + FAN_MIN_TIME, print_time)
+        print_time = max(self.last_fan_time + FAN_MIN_TIME, print_time)
         if self.enable_pin:
             if value > 0 and self.last_fan_value == 0:
                 self.enable_pin.set_digital(print_time, 1)

@@ -94,7 +94,7 @@ def capture(end_print, frame = (False, 15)):
         background_thread.start()
         logging.info('background_thread capture 0 1')
         return None
-    if None._h264_encoder_flag == 'NO_H264_ENCODER' and end_print == False:
+    if system_info_instance._h264_encoder_flag == 'NO_H264_ENCODER' and end_print == False:
         subprocess.Popen([
             python_path,
             cmd_path])
@@ -352,11 +352,11 @@ class VirtualSD:
             if result['machine_wear_parts_replacement']['cut']['cur_value'] < max_value:
                 result['machine_wear_parts_replacement']['cut']['cur_value'] += 1
             return result
-        if None:
+        if update_filament_used:
             if result['machine_wear_parts_replacement']['nozzle']['cur_value'] < max_value:
                 result['machine_wear_parts_replacement']['nozzle']['cur_value'] += filament_used
             return result
-        if None['calibrate']['shaper_calibrate']['cur_value'] < max_value:
+        if result['calibrate']['shaper_calibrate']['cur_value'] < max_value:
             result['calibrate']['shaper_calibrate']['cur_value'] += interval
         if result['calibrate']['belt_tensioning']['cur_value'] < max_value:
             result['calibrate']['belt_tensioning']['cur_value'] += interval
@@ -374,7 +374,7 @@ class VirtualSD:
             result['machine_wear_parts_replacement']['air_filter']['cur_value'] += interval
         if not self.check_cfs_enable():
             return result
-        if None['cfs_wear_parts_replacement']['cfs_teflon_tube']['cur_value'] < max_value:
+        if result['cfs_wear_parts_replacement']['cfs_teflon_tube']['cur_value'] < max_value:
             result['cfs_wear_parts_replacement']['cfs_teflon_tube']['cur_value'] += interval
         if result['cfs_wear_parts_replacement']['cfs_desiccant']['cur_value'] < max_value:
             result['cfs_wear_parts_replacement']['cfs_desiccant']['cur_value'] += interval
@@ -525,7 +525,7 @@ class VirtualSD:
     def stats(self, eventtime):
         if self.work_timer is None:
             return (False, '')
-        return (None, 'sd_pos=%d' % (self.file_position,))
+        return (True, 'sd_pos=%d' % (self.file_position,))
 
     
     def get_file_list(self, check_subdirs = (False,)):
@@ -541,7 +541,7 @@ class VirtualSD:
                     size = os.path.getsize(full_path)
                     flist.append((r_path, size))
             return sorted(flist, key=(lambda f: f[0].lower()))
-        dname = None.sdcard_dirname
+        dname = self.sdcard_dirname
         
         try:
             filenames = os.listdir(self.sdcard_dirname)
@@ -575,7 +575,7 @@ class VirtualSD:
     def progress(self):
         if self.file_size:
             return float(self.file_position) / self.file_size
-        return None
+        return 0.0
 
     
     def is_active(self):
@@ -678,7 +678,7 @@ class VirtualSD:
         if self.config.has_section('motor_control') and self.config.getsection('motor_control').getint('switch') == 1 and self.printer.lookup_object('motor_control').is_ready == False:
             self.gcode.respond_info('The motor parameters are initializing, Please try again later...')
             return None
-        if None.config.has_section('prtouch_v3') and self.bed_mesh_calibate_state == False and gcmd.get('ISCONTINUEPRINT', False) == False and self.forced_leveling:
+        if self.config.has_section('prtouch_v3') and self.bed_mesh_calibate_state == False and gcmd.get('ISCONTINUEPRINT', False) == False and self.forced_leveling:
             self.run_bed_mesh_calibate = True
         self.end_print_state = False
         self.layer_key = ''
@@ -712,14 +712,14 @@ class VirtualSD:
         if filename is None:
             logging.warning('Invalid FILENAME parameter')
             return None
-        if None[0] == '/':
+        if filename[0] == '/':
             filename = filename[1:]
         self.load_gcode_metadata(str(filename))
         flush_para = self.get_gcode_flush_para()
         if flush_para is None:
             logging.warning('Error in getting flushing parameters')
             return None
-        None.gcode.respond_info('shwo gcode flush para: %s' % flush_para)
+        self.gcode.respond_info('shwo gcode flush para: %s' % flush_para)
 
     
     def load_gcode_metadata(self, file_path = ('',)):
@@ -913,7 +913,7 @@ class VirtualSD:
         if self.current_file is None:
             gcmd.respond_raw('Not SD printing.')
             return None
-        None.respond_raw('SD printing byte %d/%d' % (self.file_position, self.file_size))
+        gcmd.respond_raw('SD printing byte %d/%d' % (self.file_position, self.file_size))
 
     
     def get_file_position(self):
@@ -929,3 +929,957 @@ class VirtualSD:
 
     
     def tail_read(self, f):
+        cur_pos = f.tell()
+        buf = ''
+        
+        try:
+            b = str(f.read(1))
+        except UnicodeDecodeError:
+            err = None
+            
+            try:
+                logging.error('UnicodeDecodeError err:%s' % str(err))
+                cur_pos -= 1
+                if cur_pos < 0:
+                    f.seek(0)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            continue
+            err = None
+            del err
+            err = None
+            del err
+            buf = b + buf
+            cur_pos -= 1
+            if cur_pos < 0:
+                f.seek(0)
+            else:
+                f.seek(cur_pos)
+                if b.startswith('\n') or b.startswith('\r'):
+                    buf = '\n'
+                if not buf.startswith('G1'):
+                    if buf.startswith('G0') and buf.endswith('\n') or ';' in buf:
+                        buf = buf.split(';')[0] + '\n'
+                    
+                    return buf
+
+
+
+    
+    def check_Tn(self, file_path):
+        READ_SIZE = 524288
+        header_data = ''
+        result = 0
+        count = 5
+        with open(file_path, 'r') as f:
+            if count > 0:
+                count -= 1
+                header_data = f.read(int(READ_SIZE))
+                pattern_T = '(?m)^\\s*T(\\d+)\\s*$'
+                pattern_G = '(?m)^\\s*G1'
+                value_G = re.findall(pattern_G, header_data)
+                if len(value_G) <= 1:
+                    continue
+                value_T = re.findall(pattern_T, header_data)
+                if len(value_T) == 1 and result == 0:
+                    result = 1
+                elif len(value_T) > 1 and result >= 0:
+                    result = 2
+                
+            None(None, None, None)
+        if not None:
+            pass
+        return result
+
+    
+    def getXYZET(self, file_path, file_position):
+        Tn = self.check_Tn(file_path)
+        result = {
+            'X': 0,
+            'Y': 0,
+            'Z': 0,
+            'E': 0,
+            'T': '' }
+        save_flag = {
+            'X': 0,
+            'Y': 0,
+            'Z': 0,
+            'E': 0 }
+        if self.gcode_metadata['metadata']['model_info']['multicolor_method'] == 1:
+            result['M'] = ''
+        
+        try:
+            import io
+            with io.open(file_path, 'r', encoding='utf-8') as f:
+                f.seek(file_position)
+                cur_pos = f.tell()
+                if cur_pos <= 0:
+                    pass
+                else:
+                    line = self.tail_read(f)
+                    line_list = line.split(' ')
+                    if result['E'] and 'E' in line:
+                        for obj in line_list:
+                            if obj.startswith('E'):
+                                ret = obj[1:].split('\r')[0]
+                                ret = ret.split('\n')[0]
+                                if ret.startswith('.'):
+                                    result['E'] = float('0' + ret.strip(' '))
+                                else:
+                                    result['E'] = float(ret.strip(' '))
+                            save_flag['E'] = 1
+                    if save_flag['X'] and save_flag['Y'] and 'X' in line and 'Y' in line:
+                        for obj in line_list:
+                            if obj.startswith('X'):
+                                logging.info('power_loss getXYZET X:%s' % obj)
+                                result['X'] = float(obj.split('\r')[0][1:])
+                                save_flag['X'] = 1
+                            if obj.startswith('Y'):
+                                logging.info('power_loss getXYZET Y:%s' % obj)
+                                result['Y'] = float(obj.split('\r')[0][1:])
+                                save_flag['Y'] = 1
+                                continue
+                                if save_flag['Z'] and 'Z' in line:
+                                    for obj in line_list:
+                                        if obj.startswith('Z'):
+                                            logging.info('power_loss getXYZET Z:%s' % obj)
+                                            result['Z'] = float(obj.split('\r')[0][1:])
+                                            save_flag['Z'] = 1
+                                            continue
+                                            if save_flag['X'] and save_flag['Y'] and save_flag['Z'] and save_flag['E']:
+                                                pass
+                                            else:
+                                                self.reactor.pause(self.reactor.monotonic() + 0.001)
+                                        None(None, None, None)
+                                    if not None:
+                                        pass
+            if Tn >= 1:
+                READ_SIZE = 524288
+                pattern = '(?m)^\\s*T(\\d+)\\s*$'
+                pattern_M = '(?m)^\\s*M8200\\s*L\\s*I(\\d+)\\s*$'
+                with io.open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    if file_position > 0:
+                        pos = max(file_position - READ_SIZE, 0)
+                        read_size = min(READ_SIZE, file_position)
+                        f.seek(pos)
+                        header_data = f.read(read_size)
+                        values = re.findall(pattern, header_data)
+                        if values:
+                            result['T'] = 'T%s' % values[-1]
+                            logging.info('power_loss get XYZET T:%s' % str(result))
+                        if self.gcode_metadata['metadata']['model_info']['multicolor_method'] == 1 and result['M'] == '':
+                            values_M = re.findall(pattern_M, header_data)
+                            if values_M:
+                                result['M'] = 'T%s' % values_M[-1]
+                                logging.info('power_loss get XYZET M:%s' % str(result['M']))
+                        if not result['T'] or self.gcode_metadata['metadata']['model_info']['multicolor_method'] == 0:
+                            if result['M']:
+                                pass
+                            else:
+                                file_position = pos
+                                if pos == 0:
+                                    logging.info('read the file without finding a match')
+                                else:
+                                    self.reactor.pause(self.reactor.monotonic() + 0.001)
+                            None(None, None, None)
+                        elif not None:
+                            pass
+            else:
+                result['T'] = 'T0'
+                logging.info('power_loss get XYZET T:%s' % str(result))
+            logging.info('power_loss get Tn: %s, get XYZET:%s' % (Tn, str(result)))
+        except UnicodeDecodeError:
+            err = None
+            
+            try:
+                logging.exception(err)
+                err_msg = '{"code": "key572", "msg": "File UnicodeDecodeError"}'
+                self.gcode.respond_info(err_msg)
+                raise self.printer.command_error(err_msg)
+            err = None
+            del err
+            except Exception:
+                err = None
+                
+                try:
+                    logging.exception(err)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                return result
+
+
+
+
+    
+    def get_print_temperature(self, file_path):
+        bed = 50
+        extruder = 202.0
+        chamber_heater = 0
+        if os.path.exists(self.gcode.last_temperature_info):
+            
+            try:
+                with open(self.gcode.last_temperature_info, 'r') as f:
+                    result = f.read()
+                    if len(result) > 0:
+                        result = json.loads(result)
+                        bed = float(result.get('bed', 0))
+                        extruder = float(result.get('extruder', 201.0))
+                        chamber_heater = float(result.get('chamber_heater', 0))
+                    None(None, None, None)
+                if not None:
+                    pass
+            except Exception:
+                err = None
+                
+                try:
+                    logging.error('get_print_temperature: %s' % err)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                return (bed, extruder, chamber_heater)
+
+
+
+    
+    def record_layer(self, layer):
+        '''
+        record current print file layer
+        '''
+        with open(self.gcode_layer_path, 'w') as f:
+            f.write(json.dumps({
+                'layer': layer }))
+            f.flush()
+
+    
+    def get_layer(self):
+        '''
+        get last print file layer
+        '''
+        layer = 0
+        if os.path.exists(self.gcode_layer_path):
+            
+            try:
+                with open(self.gcode_layer_path, 'r') as f:
+                    layer = int(json.loads(f.read()).get('layer'))
+            except Exception:
+                err = None
+                
+                try:
+                    logging.error(err)
+                    os.remove(self.gcode_layer_path)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                return layer
+
+
+
+    
+    def get_print_file_metadata(self, filename, filepath = ('',)):
+        check_output = check_output
+        import subprocess
+        if not filepath:
+            filepath = os.path.join(base_dir, 'printer_data/gcodes')
+        result = { }
+        python_env = '/usr/share/klippy-env/bin/python3'
+        cmd = "%s /usr/share/klipper/klippy/extras/metadata.py -f '%s' -p %s" % (python_env, filename, filepath)
+        
+        try:
+            result = json.loads(check_output(cmd, shell=True).decode('utf-8'))
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return result
+
+
+
+    
+    def get_file_layer_count(self, filename, metadata_info = (None,)):
+        filename = filename.split('/')[-1]
+        import math
+        layer_count = 0
+        if metadata_info:
+            result = metadata_info
+        else:
+            result = self.get_print_file_metadata(filename, get_layer_count=True)
+        if not result:
+            return layer_count
+        
+        try:
+            layer_count = result.get('metadata').get('layer_count', 0)
+            first_layer_height = result.get('metadata').get('first_layer_height', 0)
+            object_height = result.get('metadata').get('object_height', 0)
+            layer_height = result.get('metadata').get('layer_height', 0)
+            if layer_count and object_height > 0 and layer_height > 0:
+                layer_count = math.ceil((object_height - first_layer_height) / layer_height + 1)
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return layer_count
+
+
+
+    
+    def get_gcode_flush_para(self):
+        flush_para = None
+        
+        try:
+            flush_para = self.gcode_metadata.get('metadata').get('flush_para', None)
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return flush_para
+
+
+
+    
+    def resume_print_speed(self):
+        if self.slow_print == True:
+            self.slow_print = False
+            self.slow_count = 0
+            
+            try:
+                speed_mode_path = self.speed_mode_path
+                speed_mode = -1
+                value = -1
+                if os.path.exists(speed_mode_path):
+                    with open(speed_mode_path, 'r') as f:
+                        result = json.loads(f.read())
+                        speed_mode = result.get('speed_mode', -1)
+                        value = result.get('value', -1)
+                if speed_mode != -1:
+                    speed_cmd = ''
+                    if speed_mode == 1 and value != -1:
+                        speed_cmd = 'M220 S%s' % value
+                    elif speed_mode == 2:
+                        speed_cmd = 'Qmode'
+                    if speed_cmd:
+                        self.gcode.run_script_from_command(speed_cmd)
+                        self.gcode.run_script_from_command('M400')
+                        logging.info('power_loss slow_print speed_mode:%s Resume' % speed_cmd)
+                else:
+                    except Exception:
+                        err = None
+                        
+                        try:
+                            logging.error('resume_print_speed err:%s' % err)
+                        finally:
+                            err = None
+                            del err
+                        err = None
+                        del err
+                        return None
+
+
+
+    
+    def resume_flow_rate(self):
+        
+        try:
+            value = -1
+            if os.path.exists(self.flow_rate_path):
+                with open(self.flow_rate_path, 'r') as f:
+                    result = json.loads(f.read())
+                    value = result.get('value', -1)
+            speed_cmd = ''
+            if value != -1:
+                speed_cmd = 'M221 S%s' % value
+            if speed_cmd:
+                self.gcode.run_script_from_command(speed_cmd)
+                self.gcode.run_script_from_command('M400')
+                logging.info('power_loss slow_print resume_flow_rate:%s Resume' % speed_cmd)
+        except Exception:
+            err = None
+            
+            try:
+                logging.error('resume_flow_rate err:%s' % err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return None
+
+
+
+    
+    def get_delay_photography_info(self):
+        delay_photography_switch = 1
+        location = 0
+        frame = 15
+        interval = 1
+        power_loss_switch = False
+        
+        try:
+            if os.path.exists(self.user_print_refer_path):
+                with open(self.user_print_refer_path, 'r') as f:
+                    data = json.loads(f.read())
+                    delay_photography_switch = data.get('delay_image', { }).get('switch', 1)
+                    location = data.get('delay_image', { }).get('location', 0)
+                    frame = data.get('delay_image', { }).get('frame', 15)
+                    interval = data.get('delay_image', { }).get('interval', 1)
+                    power_loss_switch = data.get('power_loss', { }).get('switch', False)
+        except Exception:
+            err = None
+            
+            try:
+                logging.error(err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            return (delay_photography_switch, location, frame, interval, power_loss_switch)
+
+
+
+    
+    def check_same_file_name(self, power_loss_switch, bl24c16f):
+        if self.is_continue_print and os.path.exists(self.print_file_name_path):
+            with open(self.print_file_name_path, 'r') as f:
+                result = json.loads(f.read())
+                if result.get('file_path', '') == self.current_file.name:
+                    pass
+                None(None, None, None)
+                return True
+                os.remove(self.print_file_name_path)
+                if os.path.exists(self.gcode.exclude_object_info):
+                    os.remove(self.gcode.exclude_object_info)
+                if power_loss_switch and bl24c16f:
+                    bl24c16f.setEepromDisable()
+                None(None, None, None)
+            if not None:
+                pass
+        return False
+
+    
+    def restore_print(self, eventtime):
+        self.reactor.unregister_timer(self.restore_print_timer)
+        logging.info('hys: print_info: %s, XYZET: %s' % (self.print_info, self.XYZET))
+        gcode_move = self.printer.lookup_object('gcode_move', None)
+        gcode_move.cmd_CX_RESTORE_GCODE_STATE(self.print_info, self.print_file_name_path, self.XYZET)
+        if self.must_pause_work is True:
+            logging.info('hys: power_loss end do_resume false')
+            self.restore_err = True
+            self.restore_print_timer = None
+            return self.reactor.NEVER
+        logging.info('hys: power_loss end do_resume success')
+        self.restore_err = False
+        self.print_stats.power_loss = 0
+        if self.layer > 1 and self.XYZET.get('T') == '':
+            self.slow_print = True
+            self.slow_count = self.layer + 1
+            self.speed_factor = gcode_move.speed_factor
+            self.gcode.run_script_from_command('M220 S20')
+            logging.info('power_loss slow_print M220 S20 SET')
+        self.gcode.run_script_from_command('SET_PIN PIN=extruder_fan VALUE=1')
+        self.is_continue_print = False
+        self.restore_print_timer = None
+        return self.reactor.NEVER
+
+    
+    def get_restore_info(self, power_loss_switch, bl24c16f, eepromState):
+        print_info = None
+        XYZET = None
+        if power_loss_switch and self.is_continue_print and self.do_resume_status and self.check_same_file_name(power_loss_switch, bl24c16f) and bl24c16f:
+            eepromState = bl24c16f.checkEepromFirstEnable() if power_loss_switch and bl24c16f else True
+            if not eepromState:
+                with self.gcode.mutex:
+                    
+                    try:
+                        self.print_stats.note_start(info_path=self.print_file_name_path)
+                        logging.info('power_loss start do_resume...')
+                        logging.info('power_loss start print, filename:%s' % self.current_file.name)
+                        pos = bl24c16f.eepromReadHeader()
+                        logging.info('power_loss pos:%s' % pos)
+                        print_info = bl24c16f.eepromReadBody(pos)
+                        logging.info('power_loss print_info:%s' % str(print_info))
+                        self.file_position = int(print_info.get('file_position', 0))
+                        logging.info('power_loss file_position:%s' % self.file_position)
+                        self.layer = self.get_layer()
+                        gcode = self.printer.lookup_object('gcode')
+                        temperature = self.get_print_temperature(self.current_file.name)
+                        gcode.run_script_from_command('M140 S%s' % temperature[0])
+                        gcode.run_script_from_command('M109 S%s' % temperature[1])
+                        gcode.run_script_from_command('M141 S%s' % temperature[2]) if temperature[2] > 0 else None
+                        XYZET = self.getXYZET(self.current_file.name, self.file_position)
+                        logging.info('power_loss XYZET:%s, file_position:%s  ' % (str(XYZET), self.file_position))
+                        if XYZET.get('Z') == 0:
+                            logging.error('power_loss gcode Z == 0 err')
+                            call = call
+                            import subprocess
+                            if os.path.exists(self.print_file_name_path):
+                                os.remove(self.print_file_name_path)
+                            if os.path.exists(self.gcode.exclude_object_info):
+                                os.remove(self.gcode.exclude_object_info)
+                            call('sync', shell=True)
+                            
+                            try:
+                                power_loss_switch = False
+                                if os.path.exists(self.user_print_refer_path):
+                                    with open(self.user_print_refer_path, 'r') as f:
+                                        data = json.loads(f.read())
+                                        power_loss_switch = data.get('power_loss', { }).get('switch', False)
+                                bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
+                                if power_loss_switch and bl24c16f:
+                                    bl24c16f.setEepromDisable()
+                            except Exception:
+                                err = None
+                                
+                                try:
+                                    logging.error('power_loss gcode Z == 0: %s' % err)
+                                finally:
+                                    err = None
+                                    del err
+                                err = None
+                                del err
+                                error_message = 'power_loss gcode Z == 0, stop print'
+                                raise 
+                                except Exception:
+                                    err = None
+                                    
+                                    try:
+                                        self.print_stats.power_loss = 0
+                                        logging.error(err)
+                                    finally:
+                                        err = None
+                                        del err
+                                    err = None
+                                    del err
+                                    if not None:
+                                        pass
+
+
+
+                    except:
+                        self.gcode.run_script('G90')
+
+                self.gcode.run_script('G90')
+                return (eepromState, print_info, XYZET)
+
+    
+    def record_power_loss_info(self, power_loss_switch, bl24c16f, eepromState, gcode_move, start_time, end_time, interval_start_time, interval_end_time):
+        
+        try:
+            state = False
+            if self.layer > 2 and self.layer > self.last_layer and gcode_move.last_position[2] > 1.0:
+                state = True
+            elif self.layer == 0 and gcode_move.last_position[2] > 1.0 and end_time - start_time > 5:
+                state = True
+            if state == True and self.printer.lookup_object('box', None) and self.printer.lookup_object('box').box_state.need_update_power_loss_info == False:
+                state = False
+            if power_loss_switch and bl24c16f:
+                if (self.layer > 6 or self.count_G1 > 18) and gcode_move.last_position[2] > 1.0 and state and self.file_position > 0:
+                    logging.info('record_power_loss_info to eeprom layer:%s last_position[2]:%s' % (self.layer, gcode_move.last_position[2]))
+                    self.last_layer = self.layer
+                    start_time = end_time
+                    base_position_e = round(list(gcode_move.base_position)[-1], 2)
+                    pos = bl24c16f.eepromReadHeader()
+                    if eepromState:
+                        self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=1')
+                        self.gcode.run_script('EEPROM_WRITE_INT ADDR=%s VAL=%s' % (pos * 8, int(self.file_position)))
+                        self.gcode.run_script('EEPROM_WRITE_FLOAT ADDR=%s VAL=%s' % (pos * 8 + 4, base_position_e))
+                        self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=0 VAL=%d' % pos)
+                        eepromState = False
+                    elif self.eepromWriteCount < 256:
+                        self.gcode.run_script('EEPROM_WRITE_INT ADDR=%s VAL=%s' % (pos * 8, int(self.file_position)))
+                        self.gcode.run_script('EEPROM_WRITE_FLOAT ADDR=%s VAL=%s' % (pos * 8 + 4, base_position_e))
+                    else:
+                        self.eepromWriteCount = 1
+                        pos += 1
+                        if pos == 256:
+                            pos = 1
+                        self.gcode.run_script('EEPROM_WRITE_INT ADDR=%s VAL=%s' % (pos * 8, int(self.file_position)))
+                        self.gcode.run_script('EEPROM_WRITE_FLOAT ADDR=%s VAL=%s' % (pos * 8 + 4, base_position_e))
+                        self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=0 VAL=%d' % pos)
+                    self.eepromWriteCount += 1
+            else:
+                except Exception:
+                    err = None
+                    
+                    try:
+                        logging.error('EEPROM_WRITE ERROR:%s' % str(err))
+                    finally:
+                        err = None
+                        del err
+                    err = None
+                    del err
+                    if power_loss_switch and bl24c16f and self.count_G1 == 19:
+                        gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name, fan_state=self.fan_state, filament_used=self.print_stats.filament_used, last_print_duration=self.print_stats.print_duration)
+
+            if power_loss_switch and bl24c16f:
+                if (self.layer > 6 or gcode_move.last_position[2] > 3) and self.current_file and interval_end_time - interval_start_time > 15:
+                    interval_start_time = interval_end_time
+                    gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name, fan_state=self.fan_state, filament_used=self.print_stats.filament_used, last_print_duration=self.print_stats.print_duration)
+            return (start_time, end_time, interval_start_time, interval_end_time)
+
+
+    
+    def judge_line_starts_with(self, line, power_loss_switch, bl24c16f):
+        if not power_loss_switch:
+            return line
+        if line.startswith('M106'):
+            M106_line = line.strip('\r').strip('\n')
+            if M106_line.startswith('M106 S'):
+                self.fan_state['M106 S'] = M106_line
+            elif M106_line.startswith('M106 P0'):
+                self.fan_state['M106 P0'] = M106_line
+            elif M106_line.startswith('M106 P1'):
+                self.fan_state['M106 P1'] = M106_line
+            elif M106_line.startswith('M106 P2'):
+                self.fan_state['M106 P2'] = M106_line
+            elif line.startswith('END_PRINT'):
+                self.end_print_state = True
+                if os.path.exists(self.print_file_name_path):
+                    os.remove(self.print_file_name_path)
+                if os.path.exists(self.gcode.exclude_object_info):
+                    os.remove(self.gcode.exclude_object_info)
+                if power_loss_switch and bl24c16f:
+                    self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+                elif line.startswith('M600'):
+                    line = 'PAUSE'
+        return line
+
+    
+    def record_layer_info(self, line, power_loss_switch):
+        if not power_loss_switch:
+            return None
+        if line.startswith(';'):
+            if self.layer_key and line.startswith(self.layer_key):
+                self.layer += 1
+                self.record_layer(self.layer)
+                self.reactor.pause(self.reactor.monotonic() + 0.001)
+                return None
+            for layer_key in LAYER_KEYS:
+                if line.startswith(layer_key):
+                    self.layer += 1
+                    self.record_layer(self.layer)
+                    self.reactor.pause(self.reactor.monotonic() + 0.001)
+                    if not self.layer_key:
+                        self.layer_key = layer_key
+                self
+            continue
+
+    
+    def first_floor_pause(self, line, toolhead):
+        if self.print_first_layer and self.count_G1 >= 20:
+            for layer_key in LAYER_KEYS:
+                if line.startswith(layer_key):
+                    logging.info('print_first_layer layer_key:%s' % layer_key)
+                    (X, Y, Z, E) = toolhead.get_position()
+                    self.gcode.run_script('FIRST_FLOOR_PAUSE')
+                    self.first_layer_stop = True
+                    continue
+                    return None
+
+    
+    def check_end_print(self, line, power_loss_switch, delay_photography_switch, frame):
+        if not power_loss_switch:
+            return None
+        if line.startswith('END_PRINT') and delay_photography_switch and os.path.exists('/tmp/camera_main'):
+            self.printer.send_event('v_sd:update_filament_used')
+            self.gcode.run_script('END_PRINT_POINT_WITHOUT_LIFTING')
+            self.gcode.run_script('M400')
+            capture(end_print=True, frame=frame)
+            self.reactor.pause(self.reactor.monotonic() + 1.2)
+
+    
+    def ignore_t_code(self, line):
+        stripped = line.lstrip()
+        if self.gcode_metadata['metadata']['model_info']['multicolor_method'] and bool(re.match('^T\\d', stripped, re.IGNORECASE)):
+            logging.info(f'''T ignore code: {line}''')
+            return True
+
+    
+    def ignore_M8200_code(self, line, ignore):
+        stripped = line.lstrip()
+        if ignore:
+            if bool(re.match('^M8200\\s*O\\s*', stripped, re.IGNORECASE)):
+                logging.info('hys: catpure M8200 O, end ignore line[%s]' % line)
+                ignore = False
+            return (True, ignore)
+        if self.gcode_metadata['metadata']['model_info']['multicolor_method'] and self.printer.lookup_object('box', None) and self.printer.lookup_object('box').box_action.box_state.Tn_data['enable'] == 0 and bool(re.match('^M8200\\s*P\\s*', stripped, re.IGNORECASE)):
+            ignore = True
+            logging.info('hys: catpure M8200 P, start ignore line[%s]' % line)
+            return (True, ignore)
+        return (False, ignore)
+
+    
+    def work_handler(self, eventtime):
+        logging.info('work_handler start print, filename:%s' % self.current_file.name)
+        self.gcode.run_script_from_command('CLEAR_PAUSE')
+        self.count_line = 0
+        self.count_G1 = 0
+        self.eepromWriteCount = 1
+        gcode_move = self.printer.lookup_object('gcode_move', None)
+        (delay_photography_switch, location, frame, interval, power_loss_switch) = self.get_delay_photography_info()
+        bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects and power_loss_switch else None
+        eepromState = True
+        
+        try:
+            if self.restore_err is False:
+                (eepromState, self.print_info, self.XYZET) = self.get_restore_info(power_loss_switch, bl24c16f, eepromState)
+        except Exception:
+            err = None
+            
+            try:
+                self.print_stats.power_loss = 0
+                logging.exception('work_handler RESTORE_GCODE_STATE error: %s' % err)
+            finally:
+                err = None
+                del err
+            err = None
+            del err
+            if power_loss_switch and bl24c16f and self.current_file and self.is_continue_print is False:
+                gcode_move.recordPrintFileName(self.print_file_name_path, self.current_file.name)
+
+
+        logging.info('Starting SD card print (position %d)', self.file_position)
+        self.reactor.unregister_timer(self.work_timer)
+        
+        try:
+            self.current_file.seek(self.file_position)
+        except:
+            logging.exception('virtual_sdcard seek')
+            self.work_timer = None
+            return None
+
+        self.print_stats.note_start()
+        gcode_mutex = self.gcode.get_mutex()
+        partial_input = ''
+        lines = []
+        error_message = None
+        if self.run_bed_mesh_calibate:
+            self.run_bed_mesh_calibate = False
+            cmd = "BED_MESH_CALIBRATE_START_PRINT GCODE_FILE='%s'" % self.current_file.name
+            
+            try:
+                custom_macro = self.printer.lookup_object('custom_macro')
+                heater_bed = self.printer.lookup_object('heater_bed').heater
+                target_temp = heater_bed.target_temp
+                default_bed_temp = custom_macro.default_bed_temp
+                if target_temp > default_bed_temp:
+                    cmd += ' BED_TEMP=%s' % target_temp
+            except Exception:
+                err = None
+                
+                try:
+                    logging.exception('run_bed_mesh_calibate error: %s' % err)
+                finally:
+                    err = None
+                    del err
+                err = None
+                del err
+                toolhead = self.printer.lookup_object('toolhead')
+                pause_resume = self.printer.lookup_object('pause_resume')
+                toolhead.extrude_below_min_temp_err_is_report = False
+                start_time = interval_start_time = self.reactor.monotonic()
+                self.last_layer = self.layer
+                if not self.must_pause_work:
+                    if not self.is_continue_print and self.restore_print_timer:
+                        
+                        try:
+                            self.gcode.check_cancel_running()
+                        except self.gcode.cancel_error:
+                            e = None
+                            
+                            try:
+                                self.is_continue_print = False
+                                self.restore_print_timer = None
+                                logging.warning('should be canceled, skip restore print')
+                            finally:
+                                e = None
+                                del e
+                                continue
+                                e = None
+                                del e
+                            e = None
+                            del e
+                            self.restore_print_timer = self.reactor.register_timer(self.restore_print, self.reactor.NOW)
+                            if self.restore_print_timer:
+                                self.reactor.pause(self.reactor.monotonic() + 0.5)
+                                continue
+
+
+                    if not lines:
+                        
+                        try:
+                            data = self.current_file.read(8192)
+                        except UnicodeDecodeError:
+                            err = None
+                            
+                            try:
+                                logging.exception(err)
+                                self.gcode._respond_error('{"code": "key571", "msg": "File UnicodeDecodeError"}')
+                                self.gcode.run_script('CANCEL_PRINT')
+                            err = None
+                            del err
+                            except:
+                                err = None
+                                del err
+                                logging.exception('virtual_sdcard read')
+                            except:
+                                pass
+
+                            if not data:
+                                self.current_file.close()
+                                self.current_file = None
+                                logging.info('Finished SD card print')
+                                self.gcode.respond_raw('Done printing file')
+                                if os.path.exists(self.print_file_name_path):
+                                    os.remove(self.print_file_name_path)
+                                if os.path.exists(self.gcode.exclude_object_info):
+                                    os.remove(self.gcode.exclude_object_info)
+                                if power_loss_switch and bl24c16f:
+                                    self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+                                self.first_layer_stop = False
+                                self.print_first_layer = False
+                                self.count_M204 = 0
+                                self.layer = 0
+                                self.layer_count = 0
+                                self.fan_state = { }
+                                self.update_print_history_info(only_update_status=True, state='completed')
+                                self.reactor.pause(self.reactor.monotonic() + 0.3)
+                            else:
+                                lines = data.split('\n')
+                                lines[0] = partial_input + lines[0]
+                                partial_input = lines.pop()
+                                lines.reverse()
+                                self.reactor.pause(self.reactor.NOW)
+                            if gcode_mutex.test():
+                                self.reactor.pause(self.reactor.monotonic() + 0.05)
+                                continue
+
+                    self.cmd_from_sd = True
+                    line = lines.pop()
+                    next_file_position = self.file_position + len(line.encode('utf-8')) + 1
+                    self.next_file_position = next_file_position
+                    end_time = interval_end_time = self.reactor.monotonic()
+                    (ret, self.ignore_M) = self.ignore_M8200_code(line, self.ignore_M)
+                    if ret:
+                        self.file_position = self.next_file_position
+                        continue
+                    if power_loss_switch and self.count_line % 4999 == 0:
+                        self.update_print_history_info()
+                    
+                    try:
+                        (start_time, end_time, interval_start_time, interval_end_time) = self.record_power_loss_info(power_loss_switch, bl24c16f, eepromState, gcode_move, start_time, end_time, interval_start_time, interval_end_time)
+                        line = self.judge_line_starts_with(line, power_loss_switch, bl24c16f)
+                        self.record_layer_info(line, power_loss_switch)
+                        self.first_floor_pause(line, toolhead)
+                        if self.slow_print == True and self.layer > 0 and self.slow_count < self.layer:
+                            self.resume_print_speed()
+                        self.check_end_print(line, power_loss_switch, delay_photography_switch, frame)
+                        if self.ignore_t_code(line):
+                            pass
+                    continue
+                    if self.is_move_out_of_range_in_printing and pause_resume.pause_start == False:
+                        self.is_move_out_of_range_in_printing = False
+                        self.gcode.run_script_from_command('PAUSE')
+                        self.is_move_out_of_range_in_printing = False
+                    else:
+                        self.gcode.run_script(line)
+
+                    if power_loss_switch:
+                        self.count_line += 1
+                    if self.count_G1 < 20 and line.startswith('G1'):
+                        self.count_G1 += 1
+                else:
+                    except self.gcode.error:
+                        self
+                        e = self
+                        
+                        try:
+                            error_message = str(e)
+                            
+                            try:
+                                self.gcode.run_script(self.on_error_gcode.render())
+                            except:
+                                logging.exception('virtual_sdcard on_error')
+
+                            self.layer = 0
+                            self.layer_count = 0
+                            self.resume_print_speed()
+                        finally:
+                            e = None
+                            del e
+                        e = None
+                        del e
+                        e = None
+                        del e
+                        logging.exception('virtual_sdcard dispatch')
+                        self.layer = 0
+                        self.layer_count = 0
+                        self.resume_print_speed()
+                        self.cmd_from_sd = False
+                        self.file_position = self.next_file_position
+                        if self.next_file_position != next_file_position:
+                            
+                            try:
+                                self.current_file.seek(self.file_position)
+                            except:
+                                logging.exception('virtual_sdcard seek')
+                                self.work_timer = None
+                                return None
+
+                            lines = []
+                            partial_input = ''
+                            continue
+                            logging.info('Exiting SD card print (position %d)', self.file_position)
+                            self.count_line = 0
+                            self.count_G1 = 0
+                            self.do_resume_status = False
+                            self.eepromWriteCount = 1
+                            self.work_timer = None
+                            self.cmd_from_sd = False
+                            toolhead.extrude_below_min_temp_err_is_report = False
+                            if error_message is not None:
+                                self.print_stats.note_error(error_message)
+                            elif self.current_file is not None:
+                                if self.is_cancel:
+                                    self.print_stats.note_cancel()
+                                else:
+                                    self.print_stats.note_pause()
+                            else:
+                                self.print_stats.note_complete()
+
+
+
+        return self.reactor.NEVER
+
+
+
+def load_config(config):
+    return VirtualSD(config)
+

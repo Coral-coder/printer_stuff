@@ -28,7 +28,7 @@ class HeaterCheck:
     def handle_connect(self):
         if self.printer.get_start_args().get('debugoutput') is not None:
             return None
-        pheaters = None.printer.lookup_object('heaters')
+        pheaters = self.printer.lookup_object('heaters')
         self.heater = pheaters.lookup_heater(self.heater_name)
         logging.info('Starting heater checks for %s', self.heater_name)
         reactor = self.printer.get_reactor()
@@ -51,15 +51,14 @@ class HeaterCheck:
                 self.error = 0.0
             self.last_target = target
             return eventtime + 1.0
-        if None.heater_name == 'chamber_heater' and target > 40 and self.heater.last_pwm_value == 0:
+        if self.heater_name == 'chamber_heater' and target > 40 and self.heater.last_pwm_value == 0:
             if temp <= target + self.hysteresis:
                 self.error = 0.0
             return eventtime + 1.0
-        None.error += target - self.hysteresis - temp
+        self.error += target - self.hysteresis - temp
         if not self.approaching_target:
             if target != self.last_target:
                 logging.info('Heater %s approaching new target of %.3f', self.heater_name, target)
-                self.approaching_target = self.starting_approach = True
                 self.goal_temp = temp + self.heating_gain
                 self.goal_systime = eventtime + self.check_gain_time
             elif self.error >= self.max_error:

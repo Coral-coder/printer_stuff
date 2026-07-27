@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/skew_correction.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: skew_correction.pyc (Python 3.9)
 
@@ -118,3 +109,64 @@ class PrinterSkew:
     cmd_SET_SKEW_help = 'Set skew based on lengths of measured object'
     
     def cmd_SET_SKEW(self, gcmd):
+        if gcmd.get_int('CLEAR', 0):
+            self._update_skew(0.0, 0.0, 0.0)
+            return None
+        planes = [
+            'XY',
+            'XZ',
+            'YZ']
+        for plane in planes:
+            lengths = gcmd.get(plane, None)
+            if lengths is not None:
+                
+                try:
+                    lengths = lengths.strip().split(',', 2)
+                    lengths = [ float(l.strip()) for l in (lengths) ]
+                    if len(lengths) != 3:
+                        raise Exception
+                except Exception:
+                    raise gcmd.error('{"code": "key315", "msg": "skew_correction: improperly formatted entry for plane [%s]\n%s", "values":["%s", "%s"]}' % (plane, gcmd.get_commandline(), plane, gcmd.get_commandline()))
+
+                factor = plane.lower() + '_factor'
+                setattr(self, factor, calc_skew_factor(*lengths))
+                continue
+                return None
+
+    cmd_SKEW_PROFILE_help = 'Profile management for skew_correction'
+    
+    def cmd_SKEW_PROFILE(self, gcmd):
+        if gcmd.get('LOAD', None) is not None:
+            name = gcmd.get('LOAD')
+            prof = self.skew_profiles.get(name)
+            if prof is None:
+                gcmd.respond_info('skew_correction:  Load failed, unknown profile [%s]' % name)
+                return None
+            self._update_skew(prof['xy_skew'], prof['xz_skew'], prof['yz_skew'])
+        elif gcmd.get('SAVE', None) is not None:
+            name = gcmd.get('SAVE')
+            configfile = self.printer.lookup_object('configfile')
+            cfg_name = self.name + ' ' + name
+            configfile.set(cfg_name, 'xy_skew', self.xy_factor)
+            configfile.set(cfg_name, 'xz_skew', self.xz_factor)
+            configfile.set(cfg_name, 'yz_skew', self.yz_factor)
+            self.skew_profiles[name] = {
+                'xy_skew': self.xy_factor,
+                'xz_skew': self.xz_factor,
+                'yz_skew': self.yz_factor }
+            gcmd.respond_info('Skew Correction state has been saved to profile [%s]\nfor the current session.  The SAVE_CONFIG command will\nupdate the printer config file and restart the printer.' % name)
+        elif gcmd.get('REMOVE', None) is not None:
+            name = gcmd.get('REMOVE')
+            if name in self.skew_profiles:
+                configfile = self.printer.lookup_object('configfile')
+                configfile.remove_section('skew_correction ' + name)
+                del self.skew_profiles[name]
+                gcmd.respond_info('Profile [%s] removed from storage for this session.\nThe SAVE_CONFIG command will update the printer\nconfiguration and restart the printer' % name)
+            else:
+                gcmd.respond_info('skew_correction: No profile named [%s] to remove' % name)
+
+
+
+def load_config(config):
+    return PrinterSkew(config)
+

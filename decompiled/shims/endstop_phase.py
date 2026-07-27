@@ -96,7 +96,7 @@ class EndstopPhase:
     def align_endstop(self, rail):
         if self.endstop_align_zero or self.endstop_phase is None:
             return 0.0
-        microsteps = None.phases // 4
+        microsteps = self.phases // 4
         half_microsteps = microsteps // 2
         phase_offset = ((self.endstop_phase + half_microsteps) % microsteps - half_microsteps) * self.step_dist
         full_step = microsteps * self.step_dist
@@ -110,7 +110,7 @@ class EndstopPhase:
             logging.info('Setting %s endstop phase to %d', self.name, phase)
             self.endstop_phase = phase
             return 0.0
-        delta = (None - self.endstop_phase) % self.phases
+        delta = (phase - self.endstop_phase) % self.phases
         if delta >= self.phases - self.endstop_phase_accuracy:
             delta -= self.phases
         elif delta > self.endstop_phase_accuracy:
@@ -156,7 +156,7 @@ class EndstopPhases:
             self.tracking[stepper_name] = phase_calc
         if phase_calc.phase_history is None:
             return None
-        if None:
+        if is_primary:
             phase_calc.is_primary = True
         if phase_calc.stats_only:
             phase_calc.calc_phase(stepper, trig_mcu_pos)
@@ -178,13 +178,13 @@ class EndstopPhases:
         if stepper_name is None:
             self.report_stats()
             return None
-        phase_calc = None.tracking.get(stepper_name)
+        phase_calc = self.tracking.get(stepper_name)
         if phase_calc is None or phase_calc.phase_history is None:
             raise gcmd.error('Stats not available for stepper %s' % (stepper_name,))
         (endstop_phase, phases) = self.generate_stats(stepper_name, phase_calc)
         if not phase_calc.is_primary:
             return None
-        configfile = None.printer.lookup_object('configfile')
+        configfile = self.printer.lookup_object('configfile')
         section = 'endstop_phase %s' % (stepper_name,)
         configfile.remove_section(section)
         configfile.set(section, 'trigger_phase', '%s/%s' % (endstop_phase, phases))
@@ -216,7 +216,7 @@ class EndstopPhases:
         if not self.tracking:
             self.gcode.respond_info('No steppers found. (Be sure to home at least once.)')
             return None
-        for stepper_name in None(self.tracking.keys()):
+        for stepper_name in sorted(self.tracking.keys()):
             phase_calc = self.tracking[stepper_name]
             if not phase_calc is None or phase_calc.is_primary:
                 continue

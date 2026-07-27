@@ -46,7 +46,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
+    "none_calls": 1,
     "unsupported": false,
     "warn": "Warning: block stack is not empty!",
     "lines": 558
@@ -74,8 +74,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 179
+    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 617
   },
   {
     "pyc": "proprietary/shims/base_info.pyc",
@@ -111,7 +111,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": true,
     "warn": "Unsupported opcode: LOAD_ASSERTION_ERROR (101)",
     "lines": 538
@@ -172,14 +172,14 @@
     "pyc": "proprietary/shims/buttons.pyc",
     "out": "decompiled/shims/buttons.py",
     "engine": "patched",
-    "raw_parses": false,
-    "repaired_parses": false,
+    "raw_parses": true,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 67
+    "warn": "Warning: block stack is not empty!",
+    "lines": 253
   },
   {
     "pyc": "proprietary/shims/controller_fan.pyc",
@@ -237,14 +237,14 @@
     "pyc": "proprietary/shims/dirzctl.pyc",
     "out": "decompiled/shims/dirzctl.py",
     "engine": "patched",
-    "raw_parses": false,
-    "repaired_parses": false,
+    "raw_parses": true,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 33
+    "warn": "Warning: block stack is not empty!",
+    "lines": 107
   },
   {
     "pyc": "proprietary/shims/display_status.pyc",
@@ -293,7 +293,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 2,
+    "none_calls": 1,
     "unsupported": false,
     "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: block stack is not empty!",
     "lines": 243
@@ -332,7 +332,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
     "lines": 125
@@ -410,7 +410,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
     "lines": 153
@@ -473,12 +473,12 @@
     "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
-    "used_repaired": false,
+    "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 52
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarni",
+    "lines": 316
   },
   {
     "pyc": "proprietary/shims/gcode_move.pyc",
@@ -516,8 +516,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 141
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 199
   },
   {
     "pyc": "proprietary/shims/heater_fan.pyc",
@@ -548,15 +548,15 @@
   {
     "pyc": "proprietary/shims/heaters.pyc",
     "out": "decompiled/shims/heaters.py",
-    "engine": "orig",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 7,
+    "none_calls": 1,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 427
+    "warn": "Warning: block stack is not empty!",
+    "lines": 597
   },
   {
     "pyc": "proprietary/shims/homing.pyc",
@@ -568,8 +568,8 @@
     "kw_tuples_remaining": 0,
     "none_calls": 3,
     "unsupported": false,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 229
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 621
   },
   {
     "pyc": "proprietary/shims/homing_heaters.pyc",
@@ -579,10 +579,10 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 2,
+    "none_calls": 3,
     "unsupported": false,
-    "warn": "Error decompyling /home/user/printer_stuff/proprietary/shims/homing_heaters.pyc: std::bad_cast",
-    "lines": 38
+    "warn": "",
+    "lines": 64
   },
   {
     "pyc": "proprietary/shims/homing_override.pyc",
@@ -628,13 +628,13 @@
     "out": "decompiled/shims/input_shaper.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 150
+    "warn": "Warning: block stack is not empty!",
+    "lines": 202
   },
   {
     "pyc": "proprietary/shims/io_remap.pyc",
@@ -673,7 +673,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWar",
-    "lines": 544
+    "lines": 627
   },
   {
     "pyc": "proprietary/shims/manual_probe.pyc",
@@ -704,15 +704,15 @@
   {
     "pyc": "proprietary/shims/metadata.pyc",
     "out": "decompiled/shims/metadata.py",
-    "engine": "orig",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 3,
-    "unsupported": true,
-    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH ",
-    "lines": 1120
+    "none_calls": 9,
+    "unsupported": false,
+    "warn": "Warning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack",
+    "lines": 1352
   },
   {
     "pyc": "proprietary/shims/motion_report.pyc",
@@ -720,12 +720,12 @@
     "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
-    "used_repaired": false,
+    "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "[empty output -- decompiler crash/segfault]",
-    "lines": 1
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!",
+    "lines": 403
   },
   {
     "pyc": "proprietary/shims/motor_control.pyc",
@@ -748,7 +748,7 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 2,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
     "lines": 565
@@ -771,26 +771,26 @@
     "out": "decompiled/shims/neopixel.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 1,
     "unsupported": false,
-    "warn": "Warning: block stack is not empty!\nError decompyling /home/user/printer_stuff/proprietary/shims/neopixel.pyc: std::bad_cast",
-    "lines": 67
+    "warn": "Warning: block stack is not empty!",
+    "lines": 118
   },
   {
     "pyc": "proprietary/shims/output_pin.pyc",
     "out": "decompiled/shims/output_pin.py",
     "engine": "patched",
-    "raw_parses": false,
-    "repaired_parses": false,
+    "raw_parses": true,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 2,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 58
+    "warn": "Warning: block stack is not empty!",
+    "lines": 132
   },
   {
     "pyc": "proprietary/shims/pause_resume.pyc",
@@ -829,7 +829,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "",
-    "lines": 181
+    "lines": 182
   },
   {
     "pyc": "proprietary/shims/print_stats.pyc",
@@ -854,21 +854,21 @@
     "kw_tuples_remaining": 0,
     "none_calls": 1,
     "unsupported": false,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 369
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!",
+    "lines": 537
   },
   {
     "pyc": "proprietary/shims/prtouch.pyc",
     "out": "decompiled/shims/prtouch.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Warning: block stack is not empty!\nWarning: block stack is not empty!\nError decompyling /home/user/printer_stuff/proprietary/shims/prtouch.pyc: std::bad_cast",
-    "lines": 246
+    "warn": "Warning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 964
   },
   {
     "pyc": "proprietary/shims/prtouch_v2.pyc",
@@ -951,15 +951,15 @@
   {
     "pyc": "proprietary/shims/replicape.pyc",
     "out": "decompiled/shims/replicape.py",
-    "engine": "orig",
+    "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
-    "unsupported": true,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: MAP_ADD (188)",
-    "lines": 292
+    "none_calls": 0,
+    "unsupported": false,
+    "warn": "",
+    "lines": 291
   },
   {
     "pyc": "proprietary/shims/resonance_tester.pyc",
@@ -972,7 +972,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 374
+    "lines": 375
   },
   {
     "pyc": "proprietary/shims/respond.pyc",
@@ -1008,7 +1008,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "",
     "lines": 73
@@ -1034,10 +1034,10 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 2,
+    "none_calls": 3,
     "unsupported": false,
-    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 355
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is empty, something wrong might have happened\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 496
   },
   {
     "pyc": "proprietary/shims/shaper_defs.pyc",
@@ -1057,13 +1057,13 @@
     "out": "decompiled/shims/skew_correction.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "Error decompyling /home/user/printer_stuff/proprietary/shims/skew_correction.pyc: std::bad_cast",
-    "lines": 112
+    "warn": "Warning: block stack is not empty!",
+    "lines": 173
   },
   {
     "pyc": "proprietary/shims/smart_effector.pyc",
@@ -1174,13 +1174,13 @@
     "out": "decompiled/shims/tmc.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 66
+    "warn": "Warning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 383
   },
   {
     "pyc": "proprietary/shims/tmc2130.pyc",
@@ -1239,13 +1239,13 @@
     "out": "decompiled/shims/tmc_uart.py",
     "engine": "patched",
     "raw_parses": false,
-    "repaired_parses": false,
+    "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 0,
+    "none_calls": 1,
     "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 39
+    "warn": "Warning: block stack is not empty!\nWarning: block stack is not empty!",
+    "lines": 271
   },
   {
     "pyc": "proprietary/shims/tool.pyc",
@@ -1297,7 +1297,7 @@
     "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
-    "lines": 119
+    "lines": 118
   },
   {
     "pyc": "proprietary/shims/virtual_sdcard.pyc",
@@ -1307,10 +1307,10 @@
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 7,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWar",
-    "lines": 923
+    "lines": 1877
   },
   {
     "pyc": "proprietary/shims/z_align.pyc",
@@ -1346,7 +1346,7 @@
     "repaired_parses": true,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 1,
+    "none_calls": 0,
     "unsupported": false,
     "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!",
     "lines": 294
@@ -1361,7 +1361,7 @@
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": true,
-    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nPycBuffer::getByte(): Unexpected end of stream",
-    "lines": 179
+    "warn": "Unsupported Node type: 12\nUnsupported Node type: 12\nUnsupported Node type: 12\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!\nWarning: Stack history is not empty!\nWarning: block stack is not empty!",
+    "lines": 617
   }
 ]

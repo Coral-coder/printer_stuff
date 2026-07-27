@@ -73,7 +73,7 @@ class AccelQueryHelper:
         raw_samples = self._get_raw_samples()
         if not raw_samples:
             return self.samples
-        total = None([ len(m['params']['data']) for m in (raw_samples) ])
+        total = sum([ len(m['params']['data']) for m in (raw_samples) ])
         count = 0
         self.samples = samples = [
             None] * total
@@ -119,7 +119,7 @@ class AccelQueryHelper:
         raw_samples = self._get_raw_samples()
         if not raw_samples:
             return self.samples
-        total = None([ len(m['params']['data']) for m in (raw_samples) ])
+        total = sum([ len(m['params']['data']) for m in (raw_samples) ])
         count = 0
         shm_size = 32 * total
         shm = shared_memory.SharedMemory(name='psm_samples', create=True, size=shm_size)
@@ -230,7 +230,7 @@ class AccelCommandHelper:
             self.bg_client = self.chip.start_internal_client()
             gcmd.respond_info('accelerometer measurements started')
             return None
-        name = None.get('NAME', time.strftime('%Y%m%d_%H%M%S'))
+        name = gcmd.get('NAME', time.strftime('%Y%m%d_%H%M%S'))
         if not name.replace('-', '').replace('_', '').isalnum():
             raise gcmd.error('{"code":"key64", "msg":"Invalid adxl345 NAME parameter", "values": []}')
         bg_client = self.bg_client
@@ -309,7 +309,7 @@ class ClockSyncRegression:
         inv_chip_freq = self.mcu_clock_variance / self.chip_clock_covariance
         if not self.last_chip_clock:
             return (self.mcu_clock_avg, self.chip_clock_avg, inv_chip_freq)
-        s_chip_clock = None.last_chip_clock + self.chip_clock_smooth
+        s_chip_clock = self.last_chip_clock + self.chip_clock_smooth
         scdiff = s_chip_clock - self.chip_clock_avg
         s_mcu_clock = self.mcu_clock_avg + scdiff * inv_chip_freq
         mdiff = s_mcu_clock - self.last_exp_mcu_clock
@@ -462,7 +462,7 @@ class ADXL345:
         if duration > self.max_query_duration:
             self.max_query_duration = max(2 * self.max_query_duration, self.mcu.seconds_to_clock(5e-06))
             return None
-        self.max_query_duration = None * duration
+        self.max_query_duration = 2 * duration
         msg_count = sequence * SAMPLES_PER_BLOCK + buffered // BYTES_PER_SAMPLE + fifo
         chip_clock = msg_count + 1
         self.clock_sync.update(mcu_clock + duration // 2, chip_clock)
@@ -471,7 +471,7 @@ class ADXL345:
     def _start_measurements(self):
         if self.is_measuring():
             return None
-        dev_id = None.read_reg(REG_DEVID)
+        dev_id = self.read_reg(REG_DEVID)
         if dev_id != ADXL345_DEV_ID:
             raise self.printer.command_error('{"code":"key119", "msg": "Invalid adxl345 id (got %x vs %x).This is generally indicative of connection problems(e.g. faulty wiring) or a faulty adxl345 chip.", "values": ["%x", "%x"]}' % (dev_id, ADXL345_DEV_ID, dev_id, ADXL345_DEV_ID))
         self.set_reg(REG_POWER_CTL, 0)
@@ -502,7 +502,7 @@ class ADXL345:
     def _finish_measurements(self):
         if not self.is_measuring():
             return None
-        params = None.query_adxl345_end_cmd.send([
+        params = self.query_adxl345_end_cmd.send([
             self.oid,
             0,
             0])
@@ -519,11 +519,11 @@ class ADXL345:
             self.raw_samples = []
         if not raw_samples:
             return { }
-        samples = None._extract_samples(raw_samples)
+        samples = self._extract_samples(raw_samples)
         if not samples:
             return { }
         return {
-            'data': None,
+            'data': samples,
             'errors': self.last_error_count,
             'overflows': self.last_limit_count }
 

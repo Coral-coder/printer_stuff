@@ -89,7 +89,7 @@ class HX711S:
             if (params['vd'] != 0 or params['it'] > 20) and self.index_dirty == 0:
                 self.index_dirty = 1
                 return None
-        None.index_dirty -= 1 if self.index_dirty == 1 else 0
+        self.index_dirty -= 1 if self.index_dirty == 1 else 0
         self.all_params.append(params)
         for i in range(self.s_count):
             self.all_vals[i].append(params['v%d' % i] - self.base_avgs[i])

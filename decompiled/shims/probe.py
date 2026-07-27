@@ -114,7 +114,7 @@ class PrinterProbe:
     def get_lift_speed(self, gcmd = (None,)):
         if gcmd is not None:
             return gcmd.get_float('LIFT_SPEED', self.lift_speed, above=0.0)
-        return None.lift_speed
+        return self.lift_speed
 
     
     def get_offsets(self):
@@ -180,7 +180,7 @@ class PrinterProbe:
         middle = len(positions) // 2
         if len(positions) & 1 == 1:
             return z_sorted[middle]
-        return None._calc_mean(z_sorted[middle - 1:middle + 1])
+        return self._calc_mean(z_sorted[middle - 1:middle + 1])
 
     
     def run_probe(self, gcmd):
@@ -221,7 +221,7 @@ class PrinterProbe:
                     self.multi_probe_end()
         if samples_result == 'median':
             return self._calc_median(positions)
-        return None._calc_mean(positions)
+        return self._calc_mean(positions)
 
     cmd_PROBE_help = 'Probe Z-height at current XY position'
     
@@ -287,7 +287,7 @@ class PrinterProbe:
     def probe_calibrate_finalize(self, kin_pos):
         if kin_pos is None:
             return None
-        z_offset = None.probe_calibrate_z - kin_pos[2]
+        z_offset = self.probe_calibrate_z - kin_pos[2]
         self.gcode.respond_info('%s: z_offset: %.3f\nThe SAVE_CONFIG command will update the printer config file\nwith the above and restart the printer.' % (self.name, z_offset))
         configfile = self.printer.lookup_object('configfile')
         configfile.set(self.name, 'z_offset', '%.3f' % (z_offset,))
@@ -375,3 +375,171 @@ class ProbeEndstopWrapper:
 
     
     def _handle_mcu_identify(self):
+        kin = self.printer.lookup_object('toolhead').get_kinematics()
+        for stepper in kin.get_steppers():
+            if stepper.is_active_axis('z'):
+                self.add_stepper(stepper)
+                continue
+                return None
+
+    
+    def raise_probe(self):
+        toolhead = self.printer.lookup_object('toolhead')
+        start_pos = toolhead.get_position()
+        self.deactivate_gcode.run_gcode_from_command()
+        if toolhead.get_position()[:3] != start_pos[:3]:
+            raise self.printer.command_error('Toolhead moved during probe activate_gcode script')
+
+    
+    def lower_probe(self):
+        toolhead = self.printer.lookup_object('toolhead')
+        start_pos = toolhead.get_position()
+        self.activate_gcode.run_gcode_from_command()
+        if toolhead.get_position()[:3] != start_pos[:3]:
+            raise self.printer.command_error('Toolhead moved during probe deactivate_gcode script')
+
+    
+    def multi_probe_begin(self):
+        if self.stow_on_each_sample:
+            return None
+        self.multi = 'FIRST'
+
+    
+    def multi_probe_end(self):
+        if self.stow_on_each_sample:
+            return None
+        self.raise_probe()
+        self.multi = 'OFF'
+
+    
+    def probe_prepare(self, hmove):
+        if self.multi == 'OFF' or self.multi == 'FIRST':
+            self.lower_probe()
+            if self.multi == 'FIRST':
+                self.multi = 'ON'
+
+    
+    def probe_finish(self, hmove):
+        if self.multi == 'OFF':
+            self.raise_probe()
+
+    
+    def get_position_endstop(self):
+        return self.position_endstop
+
+
+
+class ProbePointsHelper:
+    
+    def __init__(self, config, finalize_callback, default_points = (None,)):
+        self.printer = config.get_printer()
+        self.finalize_callback = finalize_callback
+        self.probe_points = default_points
+        self.name = config.get_name()
+        self.gcode = self.printer.lookup_object('gcode')
+        if default_points is None or config.get('points', None) is not None:
+            self.probe_points = config.getlists('points', seps=(',', '\n'), parser=float, count=2)
+        self.horizontal_move_z = config.getfloat('horizontal_move_z', 5.0)
+        self.speed = config.getfloat('speed', 5e+01, above=0.0)
+        self.use_offsets = False
+        self.lift_speed = self.speed
+        self.probe_offsets = (0.0, 0.0, 0.0)
+        self.results = []
+        self.probe_type = ''
+        if config.has_section('prtouch_v2'):
+            self.probe_type = 'prtouch_v2'
+        elif config.has_section('bltouch'):
+            self.probe_type = 'bltouch'
+
+    
+    def minimum_points(self, n):
+        if len(self.probe_points) < n:
+            raise self.printer.config_error('{"code":"key98", "msg": "Need at least %d probe points for %s", "values": [%d, "%s"]}' % (n, self.name, n, self.name))
+
+    
+    def update_probe_points(self, points, min_points):
+        self.probe_points = points
+        self.minimum_points(min_points)
+
+    
+    def use_xy_offsets(self, use_offsets):
+        self.use_offsets = use_offsets
+
+    
+    def get_lift_speed(self):
+        return self.lift_speed
+
+    
+    def _move_next(self):
+        toolhead = self.printer.lookup_object('toolhead')
+        speed = self.lift_speed
+        if not self.results:
+            speed = self.speed
+        if self.probe_type != 'prtouch_v2':
+            toolhead.manual_move([
+                None,
+                None,
+                self.horizontal_move_z], speed)
+        if len(self.results) >= len(self.probe_points):
+            toolhead.get_last_move_time()
+            res = self.finalize_callback(self.probe_offsets, self.results)
+            if res != 'retry':
+                return True
+            self.results = []
+        nextpos = list(self.probe_points[len(self.results)])
+        if self.use_offsets:
+            nextpos[0] -= self.probe_offsets[0]
+            nextpos[1] -= self.probe_offsets[1]
+        if self.probe_type == 'prtouch_v2':
+            self.printer.lookup_object('probe').mcu_probe.run_to_next(nextpos)
+        else:
+            toolhead.manual_move(nextpos, self.speed)
+        return False
+
+    
+    def start_probe(self, gcmd):
+        manual_probe.verify_no_manual_probe(self.printer)
+        probe = self.printer.lookup_object('probe', None)
+        method = gcmd.get('METHOD', 'automatic').lower()
+        self.results = []
+        if probe is None or method != 'automatic':
+            self.lift_speed = self.speed
+            self.probe_offsets = (0.0, 0.0, 0.0)
+            self._manual_probe_start()
+            return None
+        self.lift_speed = probe.get_lift_speed(gcmd)
+        self.probe_offsets = probe.get_offsets()
+        if self.horizontal_move_z < self.probe_offsets[2]:
+            raise gcmd.error('{"code": "key15", "msg": "horizontal_move_z can\'t be less than probe\'s z_offset"}')
+        probe.multi_probe_begin()
+        done = self._move_next()
+        wait_time = gcmd.get_float('WAITTIME', default=0)
+        if wait_time != 0:
+            logging.info('Z_TILT_ADJUST wait_time: %s' % wait_time)
+            self.printer.get_reactor().pause(self.printer.get_reactor().monotonic() + wait_time)
+        if done:
+            pass
+        else:
+            pos = probe.run_probe(gcmd)
+            self.results.append(pos)
+        probe.multi_probe_end()
+
+    
+    def _manual_probe_start(self):
+        done = self._move_next()
+        if not done:
+            gcmd = self.gcode.create_gcode_command('', '', { })
+            manual_probe.ManualProbeHelper(self.printer, gcmd, self._manual_probe_finalize)
+
+    
+    def _manual_probe_finalize(self, kin_pos):
+        if kin_pos is None:
+            return None
+        self.results.append(kin_pos)
+        self._manual_probe_start()
+
+
+
+def load_config(config):
+    return PrinterProbe(config, ProbeEndstopWrapper(config))
+

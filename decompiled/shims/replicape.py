@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/replicape.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: replicape.pyc (Python 3.9)
 
@@ -76,7 +67,7 @@ class pca9685_pwm:
         if self._is_static:
             self._mcu.add_config_cmd('set_pca9685_out bus=%d addr=%d channel=%d cycle_ticks=%d value=%d' % (self._bus, self._address, self._channel, cycle_ticks, self._start_value * self._pwm_max))
             return None
-        None._mcu.request_move_queue_slot()
+        self._mcu.request_move_queue_slot()
         self._oid = self._mcu.create_oid()
         self._mcu.add_config_cmd('config_pca9685 oid=%d bus=%d addr=%d channel=%d cycle_ticks=%d value=%d default_value=%d max_duration=%d' % (self._oid, self._bus, self._address, self._channel, cycle_ticks, self._start_value * self._pwm_max, self._shutdown_value * self._pwm_max, self._mcu.seconds_to_clock(self._max_duration)))
         cmd_queue = self._mcu.alloc_command_queue()
@@ -145,9 +136,9 @@ class servo_pwm:
             try:
                 pwmdev = os.listdir('/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/')
                 pwmchip = [ pc for pc in (pwmdev) if pc.startswith('pwmchip') ][0]
-            finally:
-                pass
-            raise pins.error('{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}')
+            except:
+                raise pins.error('{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}')
+
             (pwm_pin, resv1, resv2) = SERVO_PINS[config_name]
             pin_params = dict(pin_params)
             pin_params['pin'] = pwmchip + pwm_pin
@@ -163,7 +154,6 @@ class servo_pwm:
             pin_resolver.reserve_pin(resv1, config_name)
             pin_resolver.reserve_pin(resv2, config_name)
             return None
-
 
     
     def setup_cycle_time(self, cycle_time, hardware_pwm = (False,)):
@@ -232,7 +222,7 @@ class Replicape:
             cur = config.getfloat(prefix + 'current', above=0.0, maxval=REPLICAPE_MAX_CURRENT)
             self.stepper_dacs[channel] = cur / REPLICAPE_MAX_CURRENT
             self.pins[prefix + 'enable'] = (ReplicapeDACEnable, channel)
-        self.enabled_channels = pass# WARNING: Decompyle incomplete
+        self.enabled_channels = { ch: False for cl, ch in (self.pins.values()) }
         self.sr_disabled = list(reversed(shift_registers))
         if [ i for i in ((0, 1, 2)) if 11 + i in self.stepper_dacs ]:
             shift_registers[0] &= -2
@@ -260,7 +250,7 @@ class Replicape:
         is_enable = not (not value)
         if self.enabled_channels[channel] == is_enable:
             return None
-        self.enabled_channels[channel] = None
+        self.enabled_channels[channel] = is_enable
         on_channels = [ 1 for c, e in (self.enabled_channels.items()) if e ]
         if not on_channels:
             self.mcu_pwm_enable.set_digital(print_time, 0)
@@ -275,7 +265,7 @@ class Replicape:
             sr = self.sr_enabled
         else:
             return None
-        print_time = None(print_time, self.last_stepper_time + PIN_MIN_TIME)
+        print_time = max(print_time, self.last_stepper_time + PIN_MIN_TIME)
         clock = self.host_mcu.print_time_to_clock(print_time)
         self.sr_spi.spi_send(sr, minclock=clock, reqclock=clock)
 
@@ -285,13 +275,13 @@ class Replicape:
         if pin in self.pins:
             (pclass, channel) = self.pins[pin]
             return pclass(self, channel, pin_type, pin_params)
-        if None in self.servo_pins:
+        if pin in self.servo_pins:
             index = self.servo_pins[pin]
             self.sr_enabled[index] |= 1
             self.sr_disabled[index] |= 1
             self.sr_spi.spi_send(self.sr_disabled)
             return servo_pwm(self, pin_params)
-        raise None.error('Unknown replicape pin %s' % (pin,))
+        raise pins.error('Unknown replicape pin %s' % (pin,))
 
 
 

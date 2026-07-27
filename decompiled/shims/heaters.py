@@ -107,7 +107,7 @@ class Heater:
             value = 0.0
         if (read_time < self.next_pwm_time or self.last_pwm_value) and abs(value - self.last_pwm_value) < 0.05:
             return None
-        pwm_time = None + self.pwm_delay
+        pwm_time = read_time + self.pwm_delay
         self.next_pwm_time = pwm_time + 0.75 * MAX_HEAT_TIME
         self.last_pwm_value = value
         self.mcu_pwm.set_pwm(pwm_time, value)
@@ -124,10 +124,6 @@ class Heater:
             self.smoothed_temp += temp_diff * adj_time
             self.can_extrude = self.smoothed_temp >= self.min_extrude_temp
             self.info_array[0] = self.can_extrude
-            self(None, None, None)
-        with None:
-            if not None:
-                pass
 
     
     def get_pwm_delay(self):
@@ -150,10 +146,6 @@ class Heater:
                 raise self.printer.command_error('{"code":"key340", "msg":"Heaters %s Requested temperature (%.1f) out of range (%.1f:%.1f)", "values":["%s", %.1f, %.1f, %.1f]}' % (self.name, degrees, self.min_temp, self.max_temp, self.name, degrees, self.min_temp, self.max_temp))
         with self.lock:
             self.target_temp = degrees
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
 
     
     def get_temp(self, eventtime):
@@ -163,20 +155,13 @@ class Heater:
                 pass
             None(None, None, None)
             return None
-            None(None, None, None)
-            return (self.smoothed_temp, self.target_temp)
-            with None:
-                if not None:
-                    pass
+        (self.smoothed_temp, self.target_temp)
 
     
     def check_busy(self, eventtime):
         with self.lock:
-            None(None, None, None)
-            return self.control.check_busy(eventtime, self.smoothed_temp, self.target_temp)
-            with None:
-                if not None:
-                    pass
+            pass
+        self.control.check_busy(eventtime, self.smoothed_temp, self.target_temp)
 
     
     def set_control(self, control):
@@ -184,10 +169,6 @@ class Heater:
             old_control = self.control
             self.control = control
             self.target_temp = 0.0
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         return old_control
 
     
@@ -202,10 +183,6 @@ class Heater:
             target_temp = self.target_temp
             last_temp = self.last_temp
             last_pwm_value = self.last_pwm_value
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         if not target_temp:
             pass
         is_active = last_temp > 5e+01
@@ -217,10 +194,6 @@ class Heater:
             target_temp = self.target_temp
             smoothed_temp = self.smoothed_temp
             last_pwm_value = self.last_pwm_value
-            None(None, None, None)
-        with None:
-            if not None:
-                pass
         return {
             'temperature': round(smoothed_temp, 2),
             'target': target_temp,
@@ -433,3 +406,200 @@ class PrinterHeaters:
 
     
     def _handle_breakheater(self, web_request):
+        reactor = self.printer.get_reactor()
+        for heater in self.heaters.values():
+            eventtime = reactor.monotonic()
+            if heater.check_busy(eventtime):
+                self.can_break = True
+                continue
+                return None
+
+    
+    def load_config(self, config):
+        self.have_load_sensors = True
+        pconfig = self.printer.lookup_object('configfile')
+        dir_name = os.path.dirname(__file__)
+        filename = os.path.join(dir_name, 'temperature_sensors.cfg')
+        
+        try:
+            dconfig = pconfig.read_config(filename)
+        except Exception:
+            raise config.config_error("Cannot load config '%s'" % (filename,))
+
+        for c in dconfig.get_prefix_sections(''):
+            self.printer.load_object(dconfig, c.get_name())
+
+    
+    def add_sensor_factory(self, sensor_type, sensor_factory):
+        self.sensor_factories[sensor_type] = sensor_factory
+
+    
+    def setup_heater(self, config, gcode_id = (None,)):
+        heater_name = config.get_name().split()[-1]
+        if heater_name in self.heaters:
+            raise config.error('Heater %s already registered' % (heater_name,))
+        sensor = self.setup_sensor(config)
+        self.heaters[heater_name] = heater = Heater(config, sensor)
+        self.register_sensor(config, heater, gcode_id)
+        self.available_heaters.append(config.get_name())
+        return heater
+
+    
+    def get_all_heaters(self):
+        return self.available_heaters
+
+    
+    def lookup_heater(self, heater_name):
+        if heater_name not in self.heaters:
+            raise self.printer.config_error("Unknown heater '%s'" % (heater_name,))
+        return self.heaters[heater_name]
+
+    
+    def setup_sensor(self, config):
+        if not self.have_load_sensors:
+            self.load_config(config)
+        sensor_type = config.get('sensor_type')
+        if sensor_type not in self.sensor_factories:
+            raise self.printer.config_error("Unknown temperature sensor '%s'" % (sensor_type,))
+        if sensor_type == 'NTC 100K beta 3950':
+            config.deprecate('sensor_type', 'NTC 100K beta 3950')
+        return self.sensor_factories[sensor_type](config)
+
+    
+    def register_sensor(self, config, psensor, gcode_id = (None,)):
+        self.available_sensors.append(config.get_name())
+        if gcode_id is None:
+            gcode_id = config.get('gcode_id', None)
+            if gcode_id is None:
+                return None
+        if gcode_id in self.gcode_id_to_sensor:
+            raise self.printer.config_error('G-Code sensor id %s already registered' % (gcode_id,))
+        self.gcode_id_to_sensor[gcode_id] = psensor
+
+    
+    def get_status(self, eventtime):
+        return {
+            'available_heaters': self.available_heaters,
+            'available_sensors': self.available_sensors,
+            'extruder_temperature_wait': self.extruder_temperature_wait,
+            'bed_temperature_wait': self.bed_temperature_wait }
+
+    
+    def turn_off_all_heaters(self, print_time = (0.0,)):
+        for heater in self.heaters.values():
+            heater.set_temp(0.0)
+
+    cmd_TURN_OFF_HEATERS_help = 'Turn off all heaters'
+    
+    def cmd_TURN_OFF_HEATERS(self, gcmd):
+        self.turn_off_all_heaters()
+
+    
+    def _handle_ready(self):
+        self.has_started = True
+
+    
+    def _get_temp(self, eventtime):
+        out = []
+        if self.has_started:
+            for gcode_id, sensor in sorted(self.gcode_id_to_sensor.items()):
+                (cur, target) = sensor.get_temp(eventtime)
+                out.append('%s:%.1f /%.1f' % (gcode_id, cur, target))
+        if not out:
+            return 'T:0'
+        return ' '.join(out)
+
+    
+    def cmd_M105(self, gcmd):
+        reactor = self.printer.get_reactor()
+        msg = self._get_temp(reactor.monotonic())
+        did_ack = gcmd.ack(msg)
+        if not did_ack:
+            gcmd.respond_raw(msg)
+
+    
+    def _wait_for_temperature(self, heater):
+        if self.printer.get_start_args().get('debugoutput') is not None:
+            return None
+        toolhead = self.printer.lookup_object('toolhead')
+        gcode = self.printer.lookup_object('gcode')
+        reactor = self.printer.get_reactor()
+        eventtime = reactor.monotonic()
+        self.can_break_flag = 1
+        self.can_break = False
+        if 'heater_bed' in heater.name:
+            self.bed_temperature_wait = True
+        else:
+            self.extruder_temperature_wait = True
+        if self.printer.is_shutdown() and heater.check_busy(eventtime):
+            if self.can_break:
+                self.can_break_flag = 2
+                self.can_break = False
+            else:
+                print_time = toolhead.get_last_move_time()
+                gcode.respond_raw(self._get_temp(eventtime))
+                gcode.check_cancel_running()
+                eventtime = reactor.pause(eventtime + 1.0)
+        if self.can_break_flag != 2:
+            self.can_break_flag = 3
+        if 'heater_bed' in heater.name:
+            self.bed_temperature_wait = False
+        else:
+            self.extruder_temperature_wait = False
+
+    
+    def set_temperature(self, heater, temp, wait = (False,)):
+        toolhead = self.printer.lookup_object('toolhead')
+        toolhead.register_lookahead_callback((lambda pt: pass))
+        if self.config.has_section('gcode_macro product_param'):
+            product_param = self.printer.lookup_object('gcode_macro product_param')
+            if heater.name == 'extruder' and temp > product_param.variables['nozzle_temp']:
+                temp = product_param.variables['nozzle_temp']
+            elif heater.name == 'heater_bed' and temp > product_param.variables['bed_temp']:
+                temp = product_param.variables['bed_temp']
+            elif heater.name == 'chamber_heater' and temp > product_param.variables['chamber_temp']:
+                temp = product_param.variables['chamber_temp']
+        heater.set_temp(temp)
+        if wait and temp:
+            if 'heater_bed' in heater.name:
+                reactor = self.printer.get_reactor()
+                eventtime = reactor.monotonic()
+                (current_temp, target_temp) = heater.get_temp(eventtime)
+                if current_temp >= temp:
+                    return None
+            self._wait_for_temperature(heater)
+
+    cmd_TEMPERATURE_WAIT_help = 'Wait for a temperature on a sensor'
+    
+    def cmd_TEMPERATURE_WAIT(self, gcmd):
+        sensor_name = gcmd.get('SENSOR')
+        if sensor_name not in self.available_sensors:
+            raise gcmd.error("Unknown sensor '%s'" % (sensor_name,))
+        min_temp = gcmd.get_float('MINIMUM', float('-inf'))
+        max_temp = gcmd.get_float('MAXIMUM', float('inf'), above=min_temp)
+        if min_temp == float('-inf') and max_temp == float('inf'):
+            raise gcmd.error("Error on 'TEMPERATURE_WAIT': missing MINIMUM or MAXIMUM.")
+        if self.printer.get_start_args().get('debugoutput') is not None:
+            return None
+        if sensor_name in self.heaters:
+            sensor = self.heaters[sensor_name]
+        else:
+            sensor = self.printer.lookup_object(sensor_name)
+        toolhead = self.printer.lookup_object('toolhead')
+        reactor = self.printer.get_reactor()
+        eventtime = reactor.monotonic()
+        if not self.printer.is_shutdown() and self.can_break:
+            (temp, target) = sensor.get_temp(eventtime)
+            if temp >= min_temp and temp <= max_temp:
+                return None
+            print_time = toolhead.get_last_move_time()
+            gcmd.respond_raw(self._get_temp(eventtime))
+            gcmd.check_cancel_running()
+            eventtime = reactor.pause(eventtime + 1.0)
+            continue
+
+
+
+def load_config(config):
+    return PrinterHeaters(config)
+

@@ -34,8 +34,9 @@ class TestAxis:
     def matches(self, chip_axis):
         if self._vib_dir[0] and 'x' in chip_axis:
             return True
-        if None._vib_dir[1] and 'y' in chip_axis:
+        if self._vib_dir[1] and 'y' in chip_axis:
             return True
+        return False
 
     
     def get_name(self):
@@ -50,10 +51,10 @@ class TestAxis:
 def _parse_axis(gcmd, raw_axis):
     if raw_axis is None:
         return None
-    raw_axis = None.lower()
+    raw_axis = raw_axis.lower()
     if raw_axis in ('x', 'y'):
         return TestAxis(axis=raw_axis)
-    dirs = None.split(',')
+    dirs = raw_axis.split(',')
     if len(dirs) != 2:
         raise gcmd.error('{"code": "key304", "msg": "Invalid format of axiss \'%s\'", "values":["%s"]}' % (raw_axis, raw_axis))
     

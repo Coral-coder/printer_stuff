@@ -132,6 +132,7 @@ class ControlAutoTune:
     def check_busy(self, eventtime, smoothed_temp, target_temp):
         if self.heating or len(self.peaks) < 12:
             return True
+        return False
 
     
     def check_peaks(self):
@@ -142,7 +143,7 @@ class ControlAutoTune:
             self.peak = -9999999.0
         if len(self.peaks) < 4:
             return None
-        None.calc_pid(len(self.peaks) - 1)
+        self.calc_pid(len(self.peaks) - 1)
 
     
     def calc_pid(self, pos):

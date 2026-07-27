@@ -52,7 +52,7 @@ class ManualProbe:
     def z_endstop_finalize(self, kin_pos):
         if kin_pos is None:
             return None
-        z_pos = None.z_position_endstop - kin_pos[2]
+        z_pos = self.z_position_endstop - kin_pos[2]
         self.gcode.respond_info('stepper_z: position_endstop: %.3f\nThe SAVE_CONFIG command will update the printer config file\nwith the above and restart the printer.' % (z_pos,))
         configfile = self.printer.lookup_object('configfile')
         configfile.set('stepper_z', 'position_endstop', '%.3f' % (z_pos,))
@@ -139,7 +139,7 @@ class ManualProbeHelper:
         toolhead_pos = self.toolhead.get_position()
         if toolhead_pos == self.last_toolhead_pos:
             return self.last_kinematics_pos
-        None.toolhead.flush_step_generation()
+        self.toolhead.flush_step_generation()
         kin = self.toolhead.get_kinematics()
         kin_spos = { s.get_name(): s.get_commanded_position() for s in (kin.get_steppers()) }
         kin_pos = kin.calc_position(kin_spos)
@@ -213,7 +213,7 @@ class ManualProbeHelper:
             gcmd.respond_info('Manual probe failed! Use TESTZ commands to position the\nnozzle prior to running ACCEPT.')
             self.finalize(False)
             return None
-        None.finalize(True)
+        self.finalize(True)
 
     cmd_ABORT_help = 'Abort manual Z probing tool'
     

@@ -30,13 +30,13 @@ def setup_enable_pin(printer, pin):
         enable = StepperEnablePin(None, 9999)
         enable.is_dedicated = False
         return enable
-    ppins = None.lookup_object('pins')
+    ppins = printer.lookup_object('pins')
     pin_params = ppins.lookup_pin(pin, can_invert=True, share_type='stepper_enable')
     enable = pin_params.get('class')
     if enable is not None:
         enable.is_dedicated = False
         return enable
-    mcu_enable = None['chip'].setup_pin('digital_out', pin_params)
+    mcu_enable = pin_params['chip'].setup_pin('digital_out', pin_params)
     mcu_enable.setup_max_duration(0.0)
     enable = pin_params['class'] = StepperEnablePin(mcu_enable, 0)
     return enable
@@ -144,7 +144,7 @@ class PrinterStepperEnable:
         if stepper_name not in self.enable_lines:
             gcmd.respond_info('SET_STEPPER_ENABLE: Invalid stepper "%s"' % (stepper_name,))
             return None
-        stepper_enable = None.get_int('ENABLE', 1)
+        stepper_enable = gcmd.get_int('ENABLE', 1)
         self.motor_debug_enable(stepper_name, stepper_enable)
 
     

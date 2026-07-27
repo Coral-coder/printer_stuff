@@ -77,7 +77,7 @@ class FilamentWidthSensor:
                 self.filament_array = []
         if self.is_active:
             return eventtime + 1
-        return None.reactor.NEVER
+        return self.reactor.NEVER
 
     
     def cmd_M407(self, gcmd):

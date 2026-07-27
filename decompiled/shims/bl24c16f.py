@@ -48,7 +48,7 @@ class EEPROMCommandHelper:
         gcmd.respond_info('EEPROM_IS_USED val:%s state:%s' % (int.from_bytes(val, 'little'), state))
         if int.from_bytes(val, 'little') != 255:
             return False
-        return None
+        return True
 
     
     def cmd_EEPROM_POS(self, gcmd):
@@ -255,7 +255,7 @@ class BL24C16F:
         val = self.read_reg(1, 1)
         if int.from_bytes(val, 'little') != 255:
             return False
-        return None
+        return True
 
     
     def eepromReadHeader(self):

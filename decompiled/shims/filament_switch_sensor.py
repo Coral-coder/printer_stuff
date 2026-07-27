@@ -63,11 +63,11 @@ class RunoutHelper:
     def note_filament_present(self, is_filament_present):
         if is_filament_present == self.filament_present:
             return None
-        self.filament_present = None
+        self.filament_present = is_filament_present
         eventtime = self.reactor.monotonic()
         if not eventtime < self.min_event_systime or self.sensor_enabled:
             return None
-        idle_timeout = None.printer.lookup_object('idle_timeout')
+        idle_timeout = self.printer.lookup_object('idle_timeout')
         print_stats = self.printer.lookup_object('print_stats')
         is_printing = print_stats.state == 'printing'
         if (is_filament_present or is_printing) and self.insert_gcode is not None:

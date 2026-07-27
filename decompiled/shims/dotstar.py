@@ -31,7 +31,7 @@ class PrinterDotstar:
     def update_leds(self, led_state, print_time):
         if led_state == self.prev_data:
             return None
-        self.prev_data = None
+        self.prev_data = led_state
         data = [
             0] * (len(led_state) + 2) * 4
         for red, green, blue, white in enumerate(led_state):

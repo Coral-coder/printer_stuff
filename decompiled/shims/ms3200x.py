@@ -208,7 +208,7 @@ class MS32008:
             self.i2c.i2c_write(payload)
             self.gcode.respond_info(f'''[DEBUG] _i2c_write_reg: pyload={payload}''')
             return None
-        raise None('I2C write function not found on bus object')
+        raise MS32008Error('I2C write function not found on bus object')
 
     
     def _i2c_read_reg(self, reg, count):
@@ -347,9 +347,9 @@ class MS32008:
     def _ch_base(self, ch):
         if ch in ('A', 'CHA', 'a'):
             return 16
-        if None in ('B', 'CHB', 'b'):
+        if ch in ('B', 'CHB', 'b'):
             return 32
-        raise None("Unknown channel '{}'".format(ch))
+        raise MS32008Error("Unknown channel '{}'".format(ch))
 
     
     def set_ch_pd_out(self = None, ch = None, enable = None):
@@ -543,22 +543,22 @@ class MS32008:
             self.set_ch_current(ch, cur)
             gcmd.respond_info('CURRENT set')
             return None
-        if None.has('PPS'):
+        if gcmd.has('PPS'):
             pps = gcmd.get_int('PPS')
             self.set_ch_pps(ch, pps)
             gcmd.respond_info('PPS set')
             return None
-        if None.has('STEP'):
+        if gcmd.has('STEP'):
             s = gcmd.get_int('STEP')
             self.set_ch_stepnum(ch, s)
             gcmd.respond_info('STEPNUM set')
             return None
-        if None.has('DIR'):
+        if gcmd.has('DIR'):
             d = gcmd.get('DIR')
             self.set_ch_dir(ch, d.upper() == 'CW')
             gcmd.respond_info('DIR set')
             return None
-        raise None.error('No known parameter provided')
+        raise gcmd.error('No known parameter provided')
 
     
     def gcmd_dc(self, gcmd):

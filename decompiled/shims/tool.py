@@ -25,7 +25,7 @@ def send(msg, data = ({ },)):
     time_str = datetime.now().strftime('%Y%m%d')
     if time_str < '20250101':
         return None
-    pipeFilePath = None.path.join(base_dir, 'creality/gui/config/pipe-' + time_str + '.json')
+    pipeFilePath = os.path.join(base_dir, 'creality/gui/config/pipe-' + time_str + '.json')
     
     try:
         os.makedirs(os.path.dirname(pipeFilePath), exist_ok=True)

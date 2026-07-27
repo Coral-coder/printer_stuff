@@ -204,7 +204,7 @@ class PauseResume:
         if self.is_paused:
             gcmd.respond_info('{"code":"key211", "msg": "Print already paused", "values": []}')
             return None
-        None.send_pause_command()
+        self.send_pause_command()
         self.gcode.run_script_from_command('SAVE_GCODE_STATE NAME=PAUSE_STATE')
         self.is_paused = True
 
@@ -223,12 +223,12 @@ class PauseResume:
     def cmd_RESUME(self, gcmd):
         if not self.is_paused:
             return gcmd.warning('{"code": "key16", "msg": "Print is not paused, resume aborted"}')
-        if None.resume_err == True:
+        if self.resume_err == True:
             logging.info('resume_err is True')
             self.reactor.pause(self.reactor.monotonic() + 0.5)
             self.resume_err = False
             return None
-        velocity = None.get_float('VELOCITY', self.recover_velocity)
+        velocity = gcmd.get_float('VELOCITY', self.recover_velocity)
         self.gcode.run_script_from_command('RESTORE_GCODE_STATE NAME=PAUSE_STATE MOVE=1 MOVE_SPEED=%.4f' % velocity)
         self.send_resume_command()
         self.is_paused = False

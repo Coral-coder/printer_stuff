@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/dirzctl.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: dirzctl.pyc (Python 3.9)
 
@@ -39,3 +30,77 @@ class DirZCtl:
 
     
     def _handle_mcu_identify(self):
+        self.hx711s = self.printer.lookup_object('hx711s')
+        self.steppers = []
+        self.toolhead = self.printer.lookup_object('toolhead')
+        for stepper in self.toolhead.get_kinematics().get_steppers():
+            if stepper.is_active_axis('z'):
+                self.steppers.append(stepper)
+                continue
+                self.mcu_freq = self.mcu.get_constant_float('CLOCK_FREQ')
+                self.is_shutdown = False
+                self.is_timeout = False
+                return None
+
+    
+    def _build_config(self):
+        self.mcu.add_config_cmd('config_dirzctl oid=%d z_count=%d' % (self.oid, len(self.steppers)))
+        for i in range(len(self.steppers)):
+            (dir_pin, step_pin, ivt_dir, ivt_step) = self.steppers[i].get_pin_info()
+            self.mcu.add_config_cmd('add_dirzctl oid=%d index=%d dir_pin=%s step_pin=%s dir_invert=%d step_invert=%d' % (self.oid, i, dir_pin, step_pin, ivt_dir, ivt_step))
+        self.run_cmd = self.mcu.lookup_command('run_dirzctl oid=%c direct=%c step_us=%u step_cnt=%u', cq=None)
+
+    
+    def _handle_shutdown(self):
+        self.is_shutdown = True
+
+    
+    def _handle_disconnect(self):
+        self.is_timeout = True
+
+    
+    def _handle_debug_dirzctl(self, params):
+        self.printer.lookup_object('prtouch').pnt_msg(str(params))
+
+    
+    def _handle_result_dirzctl(self, params):
+        self.all_params.append(params)
+
+    
+    def get_params(self):
+        return (self.all_params, self.all_params[0]['tick'] if len(self.all_params) > 0 else 0)
+
+    
+    def check_and_run(self, direct, step_us, step_cnt, wait_finish, is_ck_con = (True, False)):
+        if self.is_shutdown and self.is_timeout:
+            pass
+        if step_cnt != 0:
+            self.all_params = []
+        self.run_cmd.send([
+            self.oid,
+            direct,
+            step_us,
+            step_cnt])
+        t_start = time.time()
+        if self.is_shutdown and self.is_timeout and wait_finish and time.time() - t_start < 1.5e+06 * step_us * step_cnt and len(self.all_params) != 2:
+            self.hx711s.delay_s(0.05)
+            continue
+
+    
+    def send_heart_beat(self):
+        pass
+
+    cmd_DIRZCTL_help = 'Test DIRZCTL.'
+    
+    def cmd_DIRZCTL(self, gcmd):
+        index = gcmd.get_int('INDEX', len(self.steppers), minval=0, maxval=len(self.steppers))
+        direct = gcmd.get_int('DIRECT', 1, minval=0, maxval=1)
+        step_us = gcmd.get_int('STEP_US', 1500, minval=4, maxval=100000)
+        step_cnt = gcmd.get_int('STEP_CNT', 256, minval=0, maxval=10000)
+        self.check_and_run(direct, step_us, step_cnt, False, False)
+
+
+
+def load_config(config):
+    return DirZCtl(config)
+

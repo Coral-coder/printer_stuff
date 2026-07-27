@@ -35,8 +35,8 @@ def within(coord, min_c, max_c, tol = (0.0,)):
     elif coord[0] >= min_c[0] - tol:
         if coord[1] >= coord[1]:
             return coord[1] >= min_c[1] - tol
-        coord[1] >= coord[1]
-    return coord[1]
+        max_c[1] + tol
+    return coord[1] >= coord[1]
 
 
 def constrain(val, min_val, max_val):
@@ -209,4 +209,4 @@ class BedMesh:
             self.fade_target = 0.0
         self.z_mesh = mesh
         if self.z_mesh is not None:
-            self.splitter.initializ
+            self.splitter.ini

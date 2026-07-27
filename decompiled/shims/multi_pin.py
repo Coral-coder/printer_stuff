@@ -26,7 +26,7 @@ class PrinterMultiPin:
             if pin is None:
                 raise ppins.error('{"code":"key40", "msg":"multi_pin %s not configured", "values": ["%s"]}' % (pin_name, pin_name))
             return pin.setup_pin(pin_type, pin_params)
-        if None.pin_type is not None:
+        if self.pin_type is not None:
             raise ppins.error("Can't setup multi_pin %s twice" % (pin_name,))
         self.pin_type = pin_type
         invert = ''

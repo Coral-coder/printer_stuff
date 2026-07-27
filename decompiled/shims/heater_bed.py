@@ -147,3 +147,61 @@ class PrinterHeaterBed:
 
         
         def power_220v_calibration():
+            low_power = 0
+            high_power = 1
+            stop_calibrate = False
+            for retry_count in range(self.power_calibration_retry_times):
+                if stop_calibrate:
+                    pass
+                else:
+                    gcode_obj.respond_info('Start power calibration')
+                    calibrate_times = self.power_calibration_max_calibrate_times + 1
+                    if calibrate_times = calibrate_times - 1:
+                        gcode_obj.respond_info(f'''calibrate_times:{calibrate_times}''')
+                        max_power = (low_power + high_power) / 2
+                        slope = get_heater_slope(self.power_calibration_start_temp, self.power_calibration_end_temp, max_power)
+                        if slope < self.power_calibration_heating_slope_low:
+                            gcode_obj.respond_info(f'''max_power:{max_power},slope:{slope} < heating_slope_low:{self.power_calibration_heating_slope_low}''')
+                            low_power = max_power
+                        elif slope > self.power_calibration_heating_slope_high:
+                            gcode_obj.respond_info(f'''max_power:{max_power},slope:{slope} > heating_slope_high:{self.power_calibration_heating_slope_high}''')
+                            high_power = max_power
+                        else:
+                            gcode_obj.respond_info(f'''max_power:{max_power}, slope:{slope} 0.45-0.67''')
+                            gcode_obj.respond_info('power calibration success')
+                            configfile.set('heater_bed', 'max_power', f'''{max_power:.6f}''')
+                            gcode_obj.run_script_from_command('CXSAVE_CONFIG')
+                            stop_calibrate = True
+                        if calibrate_times == 1:
+                            gcode_obj.respond_info('power calibration fail')
+                            gcode_obj.respond_info(f'''max_power:{max_power}, slope:{slope}''')
+                            gcode_obj.respond_info(f'''low_power:{low_power}, high_power:{high_power}''')
+                            continue
+                            continue
+                            return None
+
+        gcode_obj = self.printer.lookup_object('gcode')
+        reactor_obj = self.printer.get_reactor()
+        configfile = self.printer.lookup_object('configfile')
+        finish_temp = gcmd.get_float('S', 0)
+        if not if_power_is_220v() or self.power_calibration_enable:
+            configfile.set('heater_bed', 'max_power', f'''{self.heater.max_power:.6f}''')
+            set_temperature(finish_temp, self.heater.max_power, True)
+            if self.heater.control.__class__.__name__ == 'ControlPID':
+                raw_pid = for k, v in (self.pid.items()):
+passcontinuek[v[int(self.heater.max_power)]]
+                (lambda Kp = None, Ki = None, Kd = None: (setattr(self.heater.control, 'Kp', Kp), setattr(self.heater.control, 'Ki', Ki), setattr(self.heater.control, 'Kd', Kd)))(**{ k: v / 255.0 for k, v in (raw_pid.items()) })
+                configfile.set('heater_bed', 'control', 'pid')
+                configfile.set('heater_bed', 'pid_kp', f'''{raw_pid['Kp']:.6f}''')
+                configfile.set('heater_bed', 'pid_ki', f'''{raw_pid['Ki']:.6f}''')
+                configfile.set('heater_bed', 'pid_kd', f'''{raw_pid['Kd']:.6f}''')
+            gcode_obj.run_script_from_command('CXSAVE_CONFIG')
+            return None
+        power_220v_calibration()
+        set_temperature(finish_temp, self.heater.max_power, True)
+
+
+
+def load_config(config):
+    return PrinterHeaterBed(config)
+

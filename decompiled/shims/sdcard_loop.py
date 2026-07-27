@@ -37,16 +37,16 @@ class SDCardLoop:
     def loop_begin(self, count):
         if not self.sdcard.is_cmd_from_sd():
             return False
-        None.loop_stack.append((count, self.sdcard.get_file_position()))
+        self.loop_stack.append((count, self.sdcard.get_file_position()))
         return True
 
     
     def loop_end(self):
         if not self.sdcard.is_cmd_from_sd():
             return False
-        if None(self.loop_stack) == 0:
+        if len(self.loop_stack) == 0:
             return True
-        (count, position) = None.loop_stack.pop()
+        (count, position) = self.loop_stack.pop()
         if count == 0:
             self.sdcard.set_file_position(position)
             self.loop_stack.append((0, position))
@@ -61,7 +61,7 @@ class SDCardLoop:
     def loop_desist(self):
         if self.sdcard.is_cmd_from_sd():
             return False
-        None.info('Desisting existing SD loops')
+        logging.info('Desisting existing SD loops')
         self.loop_stack = []
         return True
 

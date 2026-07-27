@@ -150,7 +150,7 @@ class GCodeMove:
     def _handle_shutdown(self):
         if not self.is_printer_ready:
             return None
-        self.is_printer_ready = None
+        self.is_printer_ready = False
         logging.info('gcode state: absolute_coord=%s absolute_extrude=%s base_position=%s last_position=%s homing_position=%s speed_factor=%s extrude_factor=%s speed=%s', self.absolute_coord, self.absolute_extrude, self.base_position, self.last_position, self.homing_position, self.speed_factor, self.extrude_factor, self.speed)
 
     
@@ -216,7 +216,7 @@ class GCodeMove:
         (px, py, pz) = self.last_position[:3]
         if bx == 0.0 and by == 0.0 and bz == 0.0:
             return False
-        None.info('Coordinate pollution detected, auto recovering: physical=(%.3f, %.3f, %.3f)', px, py, pz)
+        logging.info('Coordinate pollution detected, auto recovering: physical=(%.3f, %.3f, %.3f)', px, py, pz)
         gcode_speed = self._get_gcode_speed()
         toolhead = self.printer.lookup_object('toolhead')
         (min_z, max_z) = toolhead.kin.limits[2]
@@ -296,7 +296,7 @@ class GCodeMove:
                         if print_stats.state == 'printing' and self.printer.lookup_object('pause_resume').pause_start == False and self.printer.lookup_object('virtual_sdcard').is_move_out_of_range_in_printing == False:
                             self.printer.lookup_object('virtual_sdcard').is_move_out_of_range_in_printing = True
                     return None
-                if not None.absolute_coord:
+                if not self.absolute_coord:
                     self.last_position[2] += float(part[1:])
                 else:
                     self.last_position[2] = float(part[1:]) + self.base_position[2]
@@ -503,4 +503,4 @@ class GCodeMove:
             self.move_with_transform(self.last_position, speed)
 
     
-    def recordPrintFileName(self, path, file_n
+    def recordPrintFileName(self, path, fi

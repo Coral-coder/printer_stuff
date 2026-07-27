@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/neopixel.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: neopixel.pyc (Python 3.9)
 
@@ -73,4 +64,54 @@ class PrinterNeoPixel:
         new_data = self.color_data
         if new_data == old_data:
             return None
-        diffs = (lambda 
+        diffs = [ [
+i,
+1] for n, o in (enumerate(zip(new_data, old_data))) if n != o ]
+        for i in range(len(diffs) - 2, -1, -1):
+            (pos, count) = diffs[i]
+            (nextpos, nextcount) = diffs[i + 1]
+            if pos + 5 >= nextpos and nextcount < 16:
+                diffs[i][1] = nextcount + (nextpos - pos)
+                del diffs[i + 1]
+                continue
+                ucmd = self.neopixel_update_cmd.send
+                for pos, count in diffs:
+                    ucmd([
+                        self.oid,
+                        pos,
+                        new_data[pos:pos + count]], reqclock=BACKGROUND_PRIORITY_CLOCK)
+                old_data[:] = new_data
+                minclock = 0
+                if print_time is not None:
+                    minclock = self.mcu.print_time_to_clock(print_time)
+        scmd = self.neopixel_send_cmd.send
+        if self.printer.get_start_args().get('debugoutput') is not None:
+            return None
+        for i in range(8):
+            params = scmd([
+                self.oid], minclock=minclock, reqclock=BACKGROUND_PRIORITY_CLOCK)
+            if params['success']:
+                pass
+            
+            logging.info('Neopixel update did not succeed')
+            return None
+
+    
+    def update_leds(self, led_state, print_time):
+        
+        def reactor_bgfunc(eventtime = None):
+            with self.mutex:
+                self.update_color_data(led_state)
+                self.send_data(print_time)
+
+        self.printer.get_reactor().register_callback(reactor_bgfunc)
+
+    
+    def get_status(self, eventtime = (None,)):
+        return self.led_helper.get_status(eventtime)
+
+
+
+def load_config_prefix(config):
+    return PrinterNeoPixel(config)
+

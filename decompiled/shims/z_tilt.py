@@ -148,17 +148,17 @@ class RetryHelper:
     def check_retry(self, z_positions):
         if self.max_retries == 0:
             return None
-        error = None(max(z_positions) - min(z_positions), 6)
+        error = round(max(z_positions) - min(z_positions), 6)
         self.gcode.respond_info('Retries: %d/%d %s: %0.6f tolerance: %0.6f' % (self.current_retry, self.max_retries, self.value_label, error, self.retry_tolerance))
         if self.check_increase(error):
             err_msg = '{"code":"key349", "msg":"Retries aborting: %s is increasing. %s", "values":[]}' % (self.value_label, self.error_msg_extra)
             return self.gcode.warning(err_msg)
-        if None <= self.retry_tolerance:
+        if error <= self.retry_tolerance:
             toolhead = self.printer.lookup_object('toolhead')
             if toolhead.G29_flag == True:
                 self.write_z_adjustment()
             return 'done'
-        None.current_retry += 1
+        self.current_retry += 1
         if self.current_retry > self.max_retries:
             err_msg = '{"code":"key350", "msg":"Too many retries", "values":[]}'
             raise self.gcode.error(err_msg)

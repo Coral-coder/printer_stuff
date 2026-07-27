@@ -473,32 +473,32 @@ SignedFields = [
     'pwm_scale_auto']
 FieldFormatters = {
     'shaft': (lambda v: if v:
-'1(Reverse)'),
+'1(Reverse)'''),
     'reset': (lambda v: if v:
-'1(Reset)'),
+'1(Reset)'''),
     'drv_err': (lambda v: if v:
-'1(ErrorShutdown!)'),
+'1(ErrorShutdown!)'''),
     'uv_cp': (lambda v: if v:
-'1(Undervoltage!)'),
+'1(Undervoltage!)'''),
     'mres': (lambda v: '%d(%dusteps)' % (v, 256 >> v)),
     'otpw': (lambda v: if v:
-'1(OvertempWarning!)'),
+'1(OvertempWarning!)'''),
     'ot': (lambda v: if v:
-'1(OvertempError!)'),
+'1(OvertempError!)'''),
     's2ga': (lambda v: if v:
-'1(ShortToGND_A!)'),
+'1(ShortToGND_A!)'''),
     's2gb': (lambda v: if v:
-'1(ShortToGND_B!)'),
+'1(ShortToGND_B!)'''),
     'ola': (lambda v: if v:
-'1(OpenLoad_A!)'),
+'1(OpenLoad_A!)'''),
     'olb': (lambda v: if v:
-'1(OpenLoad_B!)'),
+'1(OpenLoad_B!)'''),
     'cs_actual': (lambda v: if v:
-'%d' % v),
+'%d' % v'0(Reset?)'),
     's2vsa': (lambda v: if v:
-'1(ShortToSupply_A!)'),
+'1(ShortToSupply_A!)'''),
     's2vsb': (lambda v: if v:
-'1(ShortToSupply_B!)') }
+'1(ShortToSupply_B!)''') }
 MAX_CURRENT = 4.24
 
 class TMC2262CurrentHelper:

@@ -17,7 +17,7 @@ class RCTFilter:
         out_vals = []
         if len(vals) < 3:
             return vals
-        for i in None(len(vals) - 2):
+        for i in range(len(vals) - 2):
             tmp = [
                 math.fabs(vals[i]),
                 math.fabs(vals[i + 1]),

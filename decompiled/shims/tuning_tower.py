@@ -74,7 +74,7 @@ class TuningTower:
             z = max(0.0, z - self.skip)
         if self.step_height:
             return self.start + self.step_delta * math.floor(z / self.step_height)
-        if None.band:
+        if self.band:
             z = (math.floor(z / self.band) + 0.5) * self.band
         return self.start + z * self.factor
 
