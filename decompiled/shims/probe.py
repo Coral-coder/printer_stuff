@@ -21,31 +21,31 @@ class PrinterProbe:
         self.printer = config.get_printer()
         self.name = config.get_name()
         self.mcu_probe = mcu_probe
-        self.speed = config.getfloat('speed', 5, above=0)
-        self.lift_speed = config.getfloat('lift_speed', self.speed, above=0)
-        self.x_offset = config.getfloat('x_offset', 0)
-        self.y_offset = config.getfloat('y_offset', 0)
+        self.speed = config.getfloat('speed', 5.0, above=0.0)
+        self.lift_speed = config.getfloat('lift_speed', self.speed, above=0.0)
+        self.x_offset = config.getfloat('x_offset', 0.0)
+        self.y_offset = config.getfloat('y_offset', 0.0)
         self.z_offset = config.getfloat('z_offset')
         self.z_offset_calibrate = 0
         self.z_offset_change_flag = False
-        self.probe_calibrate_z = 0
+        self.probe_calibrate_z = 0.0
         self.multi_probe_pending = False
         self.last_state = False
-        self.last_z_result = 0
+        self.last_z_result = 0.0
         self.gcode_move = self.printer.load_object(config, 'gcode_move')
         if config.has_section('stepper_z'):
             zconfig = config.getsection('stepper_z')
-            self.z_position = zconfig.getfloat('position_min', 0, note_valid=False)
+            self.z_position = zconfig.getfloat('position_min', 0.0, note_valid=False)
         else:
             pconfig = config.getsection('printer')
-            self.z_position = pconfig.getfloat('minimum_z_position', 0, note_valid=False)
+            self.z_position = pconfig.getfloat('minimum_z_position', 0.0, note_valid=False)
         self.sample_count = config.getint('samples', 1, minval=1)
-        self.sample_retract_dist = config.getfloat('sample_retract_dist', 2, above=0)
+        self.sample_retract_dist = config.getfloat('sample_retract_dist', 2.0, above=0.0)
         atypes = {
             'median': 'median',
             'average': 'average' }
         self.samples_result = config.getchoice('samples_result', atypes, 'average')
-        self.samples_tolerance = config.getfloat('samples_tolerance', 0.1, minval=0)
+        self.samples_tolerance = config.getfloat('samples_tolerance', 0.1, minval=0.0)
         self.samples_retries = config.getint('samples_tolerance_retries', 0, minval=0)
         self.printer.lookup_object('pins').register_chip('probe', self)
         self.printer.register_event_handler('homing:homing_move_begin', self._handle_homing_move_begin)
@@ -113,7 +113,7 @@ class PrinterProbe:
     
     def get_lift_speed(self, gcmd = (None,)):
         if gcmd is not None:
-            return gcmd.get_float('LIFT_SPEED', self.lift_speed, above=0)
+            return gcmd.get_float('LIFT_SPEED', self.lift_speed, above=0.0)
         return None.lift_speed
 
     
@@ -184,14 +184,14 @@ class PrinterProbe:
 
     
     def run_probe(self, gcmd):
-        speed = gcmd.get_float('PROBE_SPEED', self.speed, above=0)
+        speed = gcmd.get_float('PROBE_SPEED', self.speed, above=0.0)
         lift_speed = self.get_lift_speed(gcmd)
         sample_count = gcmd.get_int('SAMPLES', self.sample_count, minval=1)
-        sample_retract_dist = gcmd.get_float('SAMPLE_RETRACT_DIST', self.sample_retract_dist, above=0)
-        samples_tolerance = gcmd.get_float('SAMPLES_TOLERANCE', self.samples_tolerance, minval=0)
+        sample_retract_dist = gcmd.get_float('SAMPLE_RETRACT_DIST', self.sample_retract_dist, above=0.0)
+        samples_tolerance = gcmd.get_float('SAMPLES_TOLERANCE', self.samples_tolerance, minval=0.0)
         samples_retries = gcmd.get_int('SAMPLES_TOLERANCE_RETRIES', self.samples_retries, minval=0)
         samples_result = gcmd.get('SAMPLES_RESULT', self.samples_result)
-        zmax_dist = gcmd.get_float('ZMAX_DIST', None, above=0)
+        zmax_dist = gcmd.get_float('ZMAX_DIST', None, above=0.0)
         must_notify_multi_probe = not (self.multi_probe_pending)
         if must_notify_multi_probe:
             self.multi_probe_begin()
@@ -251,10 +251,10 @@ class PrinterProbe:
     cmd_PROBE_ACCURACY_help = 'Probe Z-height accuracy at current XY position'
     
     def cmd_PROBE_ACCURACY(self, gcmd):
-        speed = gcmd.get_float('PROBE_SPEED', self.speed, above=0)
+        speed = gcmd.get_float('PROBE_SPEED', self.speed, above=0.0)
         lift_speed = self.get_lift_speed(gcmd)
         sample_count = gcmd.get_int('SAMPLES', 10, minval=1)
-        sample_retract_dist = gcmd.get_float('SAMPLE_RETRACT_DIST', self.sample_retract_dist, above=0)
+        sample_retract_dist = gcmd.get_float('SAMPLE_RETRACT_DIST', self.sample_retract_dist, above=0.0)
         toolhead = self.printer.lookup_object('toolhead')
         pos = toolhead.get_position()
         gcmd.respond_info('PROBE_ACCURACY at X:%.3f Y:%.3f Z:%.3f (samples=%d retract=%.3f speed=%.1f lift_speed=%.1f)\n' % (pos[0], pos[1], pos[2], sample_count, sample_retract_dist, speed, lift_speed))
@@ -277,5 +277,4 @@ class PrinterProbe:
         median = self._calc_median(positions)[2]
         deviation_sum = 0
         for i in range(len(positions)):
-            deviation_sum += pow(positions[i][2] - avg_value, 2)
-        sigma = (deviation_su
+            deviation_sum += pow(positions[i][2] - avg_v

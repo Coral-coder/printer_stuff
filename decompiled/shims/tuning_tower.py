@@ -3,7 +3,7 @@
 
 import math
 import logging
-CANCEL_Z_DELTA = 2
+CANCEL_Z_DELTA = 2.0
 
 class TuningTower:
     
@@ -11,11 +11,11 @@ class TuningTower:
         self.printer = config.get_printer()
         self.normal_transform = None
         self.last_position = [
-            0,
-            0,
-            0,
-            0]
-        self.last_z = self.start = self.factor = self.band = 0
+            0.0,
+            0.0,
+            0.0,
+            0.0]
+        self.last_z = self.start = self.factor = self.band = 0.0
         self.last_command_value = None
         self.command_fmt = ''
         self.gcode_move = self.printer.load_object(config, 'gcode_move')
@@ -29,16 +29,16 @@ class TuningTower:
             self.end_test()
         command = gcmd.get('COMMAND')
         parameter = gcmd.get('PARAMETER')
-        self.start = gcmd.get_float('START', 0)
-        self.factor = gcmd.get_float('FACTOR', 0)
-        self.band = gcmd.get_float('BAND', 0, minval=0)
-        self.step_delta = gcmd.get_float('STEP_DELTA', 0)
-        self.step_height = gcmd.get_float('STEP_HEIGHT', 0, minval=0)
-        self.skip = gcmd.get_float('SKIP', 0, minval=0)
+        self.start = gcmd.get_float('START', 0.0)
+        self.factor = gcmd.get_float('FACTOR', 0.0)
+        self.band = gcmd.get_float('BAND', 0.0, minval=0.0)
+        self.step_delta = gcmd.get_float('STEP_DELTA', 0.0)
+        self.step_height = gcmd.get_float('STEP_HEIGHT', 0.0, minval=0.0)
+        self.skip = gcmd.get_float('SKIP', 0.0, minval=0.0)
         if self.factor:
             if self.step_height or self.step_delta:
                 raise gcmd.error('Cannot specify both FACTOR and STEP_DELTA/STEP_HEIGHT')
-        if self.step_delta != 0 != self.step_height != 0:
+        if self.step_delta != 0.0 != self.step_height != 0.0:
             raise gcmd.error('Must specify both STEP_DELTA and STEP_HEIGHT')
         if self.gcode.is_traditional_gcode(command):
             self.command_fmt = '%s %s%%.9f' % (command, parameter)
@@ -46,7 +46,7 @@ class TuningTower:
             self.command_fmt = '%s %s=%%.9f' % (command, parameter)
         nt = self.gcode_move.set_move_transform(self, force=True)
         self.normal_transform = nt
-        self.last_z = -1e+08
+        self.last_z = -99999999.9
         self.last_command_value = None
         self.get_position()
         message_parts = []
@@ -71,7 +71,7 @@ class TuningTower:
     
     def calc_value(self, z):
         if self.skip:
-            z = max(0, z - self.skip)
+            z = max(0.0, z - self.skip)
         if self.step_height:
             return self.start + self.step_delta * math.floor(z / self.step_height)
         if None.band:

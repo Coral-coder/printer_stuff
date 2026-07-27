@@ -10,7 +10,7 @@ class MCU_scaled_adc:
     
     def __init__(self, main, pin_params):
         self._main = main
-        self._last_state = (0, 0)
+        self._last_state = (0.0, 0.0)
         self._mcu_adc = main.mcu.setup_pin('adc', pin_params)
         query_adc = main.printer.lookup_object('query_adc')
         qname = main.name + ':' + pin_params['pin']
@@ -43,12 +43,12 @@ class PrinterADCScaled:
     def __init__(self, config):
         self.printer = config.get_printer()
         self.name = config.get_name().split()[1]
-        self.last_vref = (0, 0)
-        self.last_vssa = (0, 0)
+        self.last_vref = (0.0, 0.0)
+        self.last_vssa = (0.0, 0.0)
         self.mcu_vref = self._config_pin(config, 'vref', self.vref_callback)
         self.mcu_vssa = self._config_pin(config, 'vssa', self.vssa_callback)
-        smooth_time = config.getfloat('smooth_time', 2, above=0)
-        self.inv_smooth_time = 1 / smooth_time
+        smooth_time = config.getfloat('smooth_time', 2.0, above=0.0)
+        self.inv_smooth_time = 1.0 / smooth_time
         self.mcu = self.mcu_vref.get_mcu()
         if self.mcu is not self.mcu_vssa.get_mcu():
             raise config.error('{"code":"key188", "msg": "vref and vssa must be on same mcu", "values": []}')
@@ -61,7 +61,7 @@ class PrinterADCScaled:
         ppins = self.printer.lookup_object('pins')
         mcu_adc = ppins.setup_pin('adc', pin_name)
         mcu_adc.setup_adc_callback(REPORT_TIME, callback)
-        mcu_adc.setup_minmax(SAMPLE_TIME, SAMPLE_COUNT, minval=0, maxval=1, range_check_count=RANGE_CHECK_COUNT)
+        mcu_adc.setup_minmax(SAMPLE_TIME, SAMPLE_COUNT, minval=0.0, maxval=1.0, range_check_count=RANGE_CHECK_COUNT)
         query_adc = config.get_printer().load_object(config, 'query_adc')
         query_adc.register_adc(self.name + ':' + name, mcu_adc)
         return mcu_adc
@@ -77,7 +77,7 @@ class PrinterADCScaled:
         (last_time, last_value) = last
         time_diff = read_time - last_time
         value_diff = read_value - last_value
-        adj_time = min(time_diff * self.inv_smooth_time, 1)
+        adj_time = min(time_diff * self.inv_smooth_time, 1.0)
         smoothed_value = last_value + value_diff * adj_time
         return (read_time, smoothed_value)
 

@@ -216,8 +216,8 @@ probe.pyc (Python 3.9)
                         26      LOAD_FAST                       1: config
                         28      LOAD_ATTR                       5: getfloat
                         30      LOAD_CONST                      1: 'speed'
-                        32      LOAD_CONST                      2: 5
-                        34      LOAD_CONST                      3: 0
+                        32      LOAD_CONST                      2: 5.0
+                        34      LOAD_CONST                      3: 0.0
                         36      LOAD_CONST                      4: ('above',)
                         38      CALL_FUNCTION_KW                3
                         40      LOAD_FAST                       0: self
@@ -227,7 +227,7 @@ probe.pyc (Python 3.9)
                         48      LOAD_CONST                      5: 'lift_speed'
                         50      LOAD_FAST                       0: self
                         52      LOAD_ATTR                       6: speed
-                        54      LOAD_CONST                      3: 0
+                        54      LOAD_CONST                      3: 0.0
                         56      LOAD_CONST                      4: ('above',)
                         58      CALL_FUNCTION_KW                3
                         60      LOAD_FAST                       0: self
@@ -235,14 +235,14 @@ probe.pyc (Python 3.9)
                         64      LOAD_FAST                       1: config
                         66      LOAD_METHOD                     5: getfloat
                         68      LOAD_CONST                      6: 'x_offset'
-                        70      LOAD_CONST                      3: 0
+                        70      LOAD_CONST                      3: 0.0
                         72      CALL_METHOD                     2
                         74      LOAD_FAST                       0: self
                         76      STORE_ATTR                      8: x_offset
                         78      LOAD_FAST                       1: config
                         80      LOAD_METHOD                     5: getfloat
                         82      LOAD_CONST                      7: 'y_offset'
-                        84      LOAD_CONST                      3: 0
+                        84      LOAD_CONST                      3: 0.0
                         86      CALL_METHOD                     2
                         88      LOAD_FAST                       0: self
                         90      STORE_ATTR                      9: y_offset
@@ -258,7 +258,7 @@ probe.pyc (Python 3.9)
                         110     LOAD_CONST                      10: False
                         112     LOAD_FAST                       0: self
                         114     STORE_ATTR                      12: z_offset_change_flag
-                        116     LOAD_CONST                      3: 0
+                        116     LOAD_CONST                      3: 0.0
                         118     LOAD_FAST                       0: self
                         120     STORE_ATTR                      13: probe_calibrate_z
                         122     LOAD_CONST                      10: False
@@ -267,7 +267,7 @@ probe.pyc (Python 3.9)
                         128     LOAD_CONST                      10: False
                         130     LOAD_FAST                       0: self
                         132     STORE_ATTR                      15: last_state
-                        134     LOAD_CONST                      3: 0
+                        134     LOAD_CONST                      3: 0.0
                         136     LOAD_FAST                       0: self
                         138     STORE_ATTR                      16: last_z_result
                         140     LOAD_FAST                       0: self
@@ -291,7 +291,7 @@ probe.pyc (Python 3.9)
                         176     LOAD_FAST                       3: zconfig
                         178     LOAD_ATTR                       5: getfloat
                         180     LOAD_CONST                      13: 'position_min'
-                        182     LOAD_CONST                      3: 0
+                        182     LOAD_CONST                      3: 0.0
                         184     LOAD_CONST                      10: False
                         186     LOAD_CONST                      14: ('note_valid',)
                         188     CALL_FUNCTION_KW                3
@@ -306,7 +306,7 @@ probe.pyc (Python 3.9)
                         206     LOAD_FAST                       4: pconfig
                         208     LOAD_ATTR                       5: getfloat
                         210     LOAD_CONST                      16: 'minimum_z_position'
-                        212     LOAD_CONST                      3: 0
+                        212     LOAD_CONST                      3: 0.0
                         214     LOAD_CONST                      10: False
                         216     LOAD_CONST                      14: ('note_valid',)
                         218     CALL_FUNCTION_KW                3
@@ -324,8 +324,8 @@ probe.pyc (Python 3.9)
                         242     LOAD_FAST                       1: config
                         244     LOAD_ATTR                       5: getfloat
                         246     LOAD_CONST                      20: 'sample_retract_dist'
-                        248     LOAD_CONST                      21: 2
-                        250     LOAD_CONST                      3: 0
+                        248     LOAD_CONST                      21: 2.0
+                        250     LOAD_CONST                      3: 0.0
                         252     LOAD_CONST                      4: ('above',)
                         254     CALL_FUNCTION_KW                3
                         256     LOAD_FAST                       0: self
@@ -347,7 +347,7 @@ probe.pyc (Python 3.9)
                         288     LOAD_ATTR                       5: getfloat
                         290     LOAD_CONST                      26: 'samples_tolerance'
                         292     LOAD_CONST                      27: 0.1
-                        294     LOAD_CONST                      3: 0
+                        294     LOAD_CONST                      3: 0.0
                         296     LOAD_CONST                      19: ('minval',)
                         298     CALL_FUNCTION_KW                3
                         300     LOAD_FAST                       0: self
@@ -913,7 +913,7 @@ probe.pyc (Python 3.9)
                         12      LOAD_CONST                      1: 'LIFT_SPEED'
                         14      LOAD_FAST                       0: self
                         16      LOAD_ATTR                       1: lift_speed
-                        18      LOAD_CONST                      2: 0
+                        18      LOAD_CONST                      2: 0.0
                         20      LOAD_CONST                      3: ('above',)
                         22      CALL_FUNCTION_KW                3
                         24      RETURN_VALUE                    
@@ -1584,7 +1584,7 @@ probe.pyc (Python 3.9)
                         4       LOAD_CONST                      1: 'PROBE_SPEED'
                         6       LOAD_FAST                       0: self
                         8       LOAD_ATTR                       1: speed
-                        10      LOAD_CONST                      2: 0
+                        10      LOAD_CONST                      2: 0.0
                         12      LOAD_CONST                      3: ('above',)
                         14      CALL_FUNCTION_KW                3
                         16      STORE_FAST                      2: speed
@@ -1607,7 +1607,7 @@ probe.pyc (Python 3.9)
                         50      LOAD_CONST                      7: 'SAMPLE_RETRACT_DIST'
                         52      LOAD_FAST                       0: self
                         54      LOAD_ATTR                       5: sample_retract_dist
-                        56      LOAD_CONST                      2: 0
+                        56      LOAD_CONST                      2: 0.0
                         58      LOAD_CONST                      3: ('above',)
                         60      CALL_FUNCTION_KW                3
                         62      STORE_FAST                      5: sample_retract_dist
@@ -1616,7 +1616,7 @@ probe.pyc (Python 3.9)
                         68      LOAD_CONST                      8: 'SAMPLES_TOLERANCE'
                         70      LOAD_FAST                       0: self
                         72      LOAD_ATTR                       6: samples_tolerance
-                        74      LOAD_CONST                      2: 0
+                        74      LOAD_CONST                      2: 0.0
                         76      LOAD_CONST                      6: ('minval',)
                         78      CALL_FUNCTION_KW                3
                         80      STORE_FAST                      6: samples_tolerance
@@ -1640,7 +1640,7 @@ probe.pyc (Python 3.9)
                         116     LOAD_ATTR                       0: get_float
                         118     LOAD_CONST                      12: 'ZMAX_DIST'
                         120     LOAD_CONST                      0: None
-                        122     LOAD_CONST                      2: 0
+                        122     LOAD_CONST                      2: 0.0
                         124     LOAD_CONST                      3: ('above',)
                         126     CALL_FUNCTION_KW                3
                         128     STORE_FAST                      9: zmax_dist
@@ -2113,7 +2113,7 @@ probe.pyc (Python 3.9)
                         4       LOAD_CONST                      1: 'PROBE_SPEED'
                         6       LOAD_FAST                       0: self
                         8       LOAD_ATTR                       1: speed
-                        10      LOAD_CONST                      2: 0
+                        10      LOAD_CONST                      2: 0.0
                         12      LOAD_CONST                      3: ('above',)
                         14      CALL_FUNCTION_KW                3
                         16      STORE_FAST                      2: speed
@@ -2135,7 +2135,7 @@ probe.pyc (Python 3.9)
                         48      LOAD_CONST                      8: 'SAMPLE_RETRACT_DIST'
                         50      LOAD_FAST                       0: self
                         52      LOAD_ATTR                       4: sample_retract_dist
-                        54      LOAD_CONST                      2: 0
+                        54      LOAD_CONST                      2: 0.0
                         56      LOAD_CONST                      3: ('above',)
                         58      CALL_FUNCTION_KW                3
                         60      STORE_FAST                      5: sample_retract_dist
@@ -2266,7 +2266,7 @@ probe.pyc (Python 3.9)
                         310     BINARY_SUBSCR                   
                         312     LOAD_FAST                       13: avg_value
                         314     BINARY_SUBTRACT                 
-                        316     LOAD_CONST                      16: 2
+                        316     LOAD_CONST                      16: 2.0
                         318     CALL_FUNCTION                   2
                         320     INPLACE_ADD                     
                         322     STORE_FAST                      15: deviation_sum
@@ -2447,7 +2447,7 @@ probe.pyc (Python 3.9)
                         44      LOAD_CONST                      1: 2
                         46      DUP_TOP_TWO                     
                         48      BINARY_SUBSCR                   
-                        50      LOAD_CONST                      2: 5
+                        50      LOAD_CONST                      2: 5.0
                         52      INPLACE_ADD                     
                         54      ROT_THREE                       
                         56      STORE_SUBSCR                    
@@ -3661,15 +3661,15 @@ probe.pyc (Python 3.9)
                         90      LOAD_FAST                       1: config
                         92      LOAD_METHOD                     11: getfloat
                         94      LOAD_CONST                      6: 'horizontal_move_z'
-                        96      LOAD_CONST                      7: 5
+                        96      LOAD_CONST                      7: 5.0
                         98      CALL_METHOD                     2
                         100     LOAD_FAST                       0: self
                         102     STORE_ATTR                      12: horizontal_move_z
                         104     LOAD_FAST                       1: config
                         106     LOAD_ATTR                       11: getfloat
                         108     LOAD_CONST                      8: 'speed'
-                        110     LOAD_CONST                      9: 50
-                        112     LOAD_CONST                      10: 0
+                        110     LOAD_CONST                      9: 5e+01
+                        112     LOAD_CONST                      10: 0.0
                         114     LOAD_CONST                      11: ('above',)
                         116     CALL_FUNCTION_KW                3
                         118     LOAD_FAST                       0: self
@@ -3681,7 +3681,7 @@ probe.pyc (Python 3.9)
                         130     LOAD_ATTR                       13: speed
                         132     LOAD_FAST                       0: self
                         134     STORE_ATTR                      15: lift_speed
-                        136     LOAD_CONST                      13: (0, 0, 0)
+                        136     LOAD_CONST                      13: (0.0, 0.0, 0.0)
                         138     LOAD_FAST                       0: self
                         140     STORE_ATTR                      16: probe_offsets
                         142     BUILD_LIST                      0
@@ -4106,7 +4106,7 @@ probe.pyc (Python 3.9)
                         66      LOAD_ATTR                       7: speed
                         68      LOAD_FAST                       0: self
                         70      STORE_ATTR                      8: lift_speed
-                        72      LOAD_CONST                      4: (0, 0, 0)
+                        72      LOAD_CONST                      4: (0.0, 0.0, 0.0)
                         74      LOAD_FAST                       0: self
                         76      STORE_ATTR                      9: probe_offsets
                         78      LOAD_FAST                       0: self

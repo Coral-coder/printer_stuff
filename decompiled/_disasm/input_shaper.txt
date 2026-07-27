@@ -177,8 +177,8 @@ input_shaper.pyc (Python 3.9)
                         96      BINARY_ADD                      
                         98      LOAD_GLOBAL                     1: shaper_defs
                         100     LOAD_ATTR                       8: DEFAULT_DAMPING_RATIO
-                        102     LOAD_CONST                      8: 0
-                        104     LOAD_CONST                      9: 1
+                        102     LOAD_CONST                      8: 0.0
+                        104     LOAD_CONST                      9: 1.0
                         106     LOAD_CONST                      10: ('minval', 'maxval')
                         108     CALL_FUNCTION_KW                4
                         110     LOAD_FAST                       0: self
@@ -188,8 +188,8 @@ input_shaper.pyc (Python 3.9)
                         118     LOAD_CONST                      11: 'shaper_freq_'
                         120     LOAD_FAST                       1: axis
                         122     BINARY_ADD                      
-                        124     LOAD_CONST                      8: 0
-                        126     LOAD_CONST                      8: 0
+                        124     LOAD_CONST                      8: 0.0
+                        126     LOAD_CONST                      8: 0.0
                         128     LOAD_CONST                      12: ('minval',)
                         130     CALL_FUNCTION_KW                3
                         132     LOAD_FAST                       0: self
@@ -253,8 +253,8 @@ input_shaper.pyc (Python 3.9)
                         18      BINARY_ADD                      
                         20      LOAD_FAST                       0: self
                         22      LOAD_ATTR                       3: damping_ratio
-                        24      LOAD_CONST                      2: 0
-                        26      LOAD_CONST                      3: 1
+                        24      LOAD_CONST                      2: 0.0
+                        26      LOAD_CONST                      3: 1.0
                         28      LOAD_CONST                      4: ('minval', 'maxval')
                         30      CALL_FUNCTION_KW                4
                         32      LOAD_FAST                       0: self
@@ -266,7 +266,7 @@ input_shaper.pyc (Python 3.9)
                         44      BINARY_ADD                      
                         46      LOAD_FAST                       0: self
                         48      LOAD_ATTR                       4: shaper_freq
-                        50      LOAD_CONST                      2: 0
+                        50      LOAD_CONST                      2: 0.0
                         52      LOAD_CONST                      6: ('minval',)
                         54      CALL_FUNCTION_KW                3
                         56      LOAD_FAST                       0: self
@@ -1285,7 +1285,7 @@ input_shaper.pyc (Python 3.9)
                         132     CALL_METHOD                     1
                         134     POP_TOP                         
                         136     JUMP_ABSOLUTE                   48
-                        138     LOAD_CONST                      3: 0
+                        138     LOAD_CONST                      3: 0.0
                         140     LOAD_FAST                       0: self
                         142     STORE_ATTR                      15: old_delay
                         144     LOAD_FAST                       0: self

@@ -23,14 +23,14 @@ class InputShaperParams:
         self.shaper_type = config.get('shaper_type_' + axis, shaper_type)
         if self.shaper_type not in self.shapers:
             raise config.error('{"code":"key24", "msg":"Unsupported shaper type: %s", "values": ["%s"]}' % (self.shaper_type, self.shaper_type))
-        self.damping_ratio = config.getfloat('damping_ratio_' + axis, shaper_defs.DEFAULT_DAMPING_RATIO, minval=0, maxval=1)
-        self.shaper_freq = config.getfloat('shaper_freq_' + axis, 0, minval=0)
+        self.damping_ratio = config.getfloat('damping_ratio_' + axis, shaper_defs.DEFAULT_DAMPING_RATIO, minval=0.0, maxval=1.0)
+        self.shaper_freq = config.getfloat('shaper_freq_' + axis, 0.0, minval=0.0)
 
     
     def update(self, gcmd):
         axis = self.axis.upper()
-        self.damping_ratio = gcmd.get_float('DAMPING_RATIO_' + axis, self.damping_ratio, minval=0, maxval=1)
-        self.shaper_freq = gcmd.get_float('SHAPER_FREQ_' + axis, self.shaper_freq, minval=0)
+        self.damping_ratio = gcmd.get_float('DAMPING_RATIO_' + axis, self.damping_ratio, minval=0.0, maxval=1.0)
+        self.shaper_freq = gcmd.get_float('SHAPER_FREQ_' + axis, self.shaper_freq, minval=0.0)
         shaper_type = gcmd.get('SHAPER_TYPE', None)
         if shaper_type is None:
             shaper_type = gcmd.get('SHAPER_TYPE_' + axis, self.shaper_type)
@@ -151,7 +151,7 @@ class InputShaper:
                 continue
             self.stepper_kinematics.append(sk)
             self.orig_stepper_kinematics.append(orig_sk)
-        self.old_delay = 0
+        self.old_delay = 0.0
         self._update_input_shaping(error=self.printer.config_error)
 
     

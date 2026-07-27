@@ -49,9 +49,9 @@
   },
   {
     "module": "shims/bed_mesh.py",
-    "compiled": false,
-    "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/bed_mesh.py\", line 221\n    self.splitter.initialize(mesh.info_array_ad"
+    "compiled": true,
+    "match": 14.8,
+    "note": ""
   },
   {
     "module": "shims/belt_mdl.py",
@@ -609,7 +609,7 @@
     "module": "shims/virtual_sdcard.py",
     "compiled": false,
     "match": null,
-    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/virtual_sdcard.py\", line 207\n    \n    ^\nSyntaxError: unexpected EOF wh"
+    "note": "compile-failed: PyCompileError:   File \"/home/user/printer_stuff/decompiled/shims/virtual_sdcard.py\", line 206\n    obj.variables = r\n                   "
   },
   {
     "module": "shims/z_align.py",

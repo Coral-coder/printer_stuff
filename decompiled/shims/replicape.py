@@ -33,13 +33,13 @@ class pca9685_pwm:
         self._bus = REPLICAPE_PCA9685_BUS
         self._address = REPLICAPE_PCA9685_ADDRESS
         self._cycle_time = REPLICAPE_PCA9685_CYCLE_TIME
-        self._max_duration = 2
+        self._max_duration = 2.0
         self._oid = None
         self._invert = pin_params['invert']
         self._start_value = self._shutdown_value = float(self._invert)
         self._is_static = False
         self._last_clock = 0
-        self._pwm_max = 0
+        self._pwm_max = 0.0
         self._set_cmd = None
 
     
@@ -62,10 +62,10 @@ class pca9685_pwm:
         if is_static and start_value != shutdown_value:
             raise pins.error('{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}')
         if self._invert:
-            start_value = 1 - start_value
-            shutdown_value = 1 - shutdown_value
-        self._start_value = max(0, min(1, start_value))
-        self._shutdown_value = max(0, min(1, shutdown_value))
+            start_value = 1.0 - start_value
+            shutdown_value = 1.0 - shutdown_value
+        self._start_value = max(0.0, min(1.0, start_value))
+        self._shutdown_value = max(0.0, min(1.0, shutdown_value))
         self._is_static = is_static
         self._replicape.note_pwm_start_value(self._channel, self._start_value, self._shutdown_value)
 
@@ -86,8 +86,8 @@ class pca9685_pwm:
     def set_pwm(self, print_time, value, cycle_time = (None,)):
         clock = self._mcu.print_time_to_clock(print_time)
         if self._invert:
-            value = 1 - value
-        value = int(max(0, min(1, value)) * self._pwm_max + 0.5)
+            value = 1.0 - value
+        value = int(max(0.0, min(1.0, value)) * self._pwm_max + 0.5)
         self._replicape.note_pwm_enable(print_time, self._channel, value)
         self._set_cmd.send([
             self._oid,
@@ -98,9 +98,9 @@ class pca9685_pwm:
     
     def set_digital(self, print_time, value):
         if value:
-            self.set_pwm(print_time, 1)
+            self.set_pwm(print_time, 1.0)
         else:
-            self.set_pwm(print_time, 0)
+            self.set_pwm(print_time, 0.0)
 
 
 
@@ -128,7 +128,7 @@ class ReplicapeDACEnable:
         if value:
             self.pwm.set_pwm(print_time, self.value)
         else:
-            self.pwm.set_pwm(print_time, 0)
+            self.pwm.set_pwm(print_time, 0.0)
 
 
 SERVO_PINS = {
@@ -194,7 +194,7 @@ class Replicape:
         self.host_mcu = mcu.get_printer_mcu(printer, config.get('host_mcu'))
         enable_pin = config.get('enable_pin', '!gpio0_20')
         self.mcu_pwm_enable = ppins.setup_pin('digital_out', enable_pin)
-        self.mcu_pwm_enable.setup_max_duration(0)
+        self.mcu_pwm_enable.setup_max_duration(0.0)
         self.mcu_pwm_start_value = self.mcu_pwm_shutdown_value = False
         self.pins = {
             'power_e': (pca9685_pwm, 5),
@@ -207,7 +207,7 @@ class Replicape:
         self.servo_pins = {
             'servo0': 3,
             'servo1': 2 }
-        self.last_stepper_time = 0
+        self.last_stepper_time = 0.0
         self.stepper_dacs = { }
         shift_registers = [
             1,
@@ -229,7 +229,7 @@ class Replicape:
                 sc |= 2
             shift_registers[port] = sc
             channel = port + 11
-            cur = config.getfloat(prefix + 'current', above=0, maxval=REPLICAPE_MAX_CURRENT)
+            cur = config.getfloat(prefix + 'current', above=0.0, maxval=REPLICAPE_MAX_CURRENT)
             self.stepper_dacs[channel] = cur / REPLICAPE_MAX_CURRENT
             self.pins[prefix + 'enable'] = (ReplicapeDACEnable, channel)
         self.enabled_channels = pass# WARNING: Decompyle incomplete

@@ -194,7 +194,7 @@ class AccelCommandHelper:
         
         try:
             aclient = self.chip.start_internal_client()
-            self.printer.lookup_object('toolhead').dwell(1)
+            self.printer.lookup_object('toolhead').dwell(1.0)
             aclient.finish_measurements()
             values = aclient.get_samples()
         except Exception:
@@ -247,7 +247,7 @@ class AccelCommandHelper:
     
     def cmd_ACCELEROMETER_QUERY(self, gcmd):
         aclient = self.chip.start_internal_client()
-        self.printer.lookup_object('toolhead').dwell(1)
+        self.printer.lookup_object('toolhead').dwell(1.0)
         aclient.finish_measurements()
         values = aclient.get_samples()
         if not values:
@@ -277,26 +277,26 @@ class ClockSyncRegression:
         self.mcu = mcu
         self.chip_clock_smooth = chip_clock_smooth
         self.decay = decay
-        self.last_chip_clock = self.last_exp_mcu_clock = 0
-        self.mcu_clock_avg = self.mcu_clock_variance = 0
-        self.chip_clock_avg = self.chip_clock_covariance = 0
+        self.last_chip_clock = self.last_exp_mcu_clock = 0.0
+        self.mcu_clock_avg = self.mcu_clock_variance = 0.0
+        self.chip_clock_avg = self.chip_clock_covariance = 0.0
 
     
     def reset(self, mcu_clock, chip_clock):
         self.mcu_clock_avg = self.last_mcu_clock = mcu_clock
         self.chip_clock_avg = chip_clock
-        self.mcu_clock_variance = self.chip_clock_covariance = 0
-        self.last_chip_clock = self.last_exp_mcu_clock = 0
+        self.mcu_clock_variance = self.chip_clock_covariance = 0.0
+        self.last_chip_clock = self.last_exp_mcu_clock = 0.0
 
     
     def update(self, mcu_clock, chip_clock):
         decay = self.decay
         diff_mcu_clock = mcu_clock - self.mcu_clock_avg
         self.mcu_clock_avg += decay * diff_mcu_clock
-        self.mcu_clock_variance = (1 - decay) * (self.mcu_clock_variance + diff_mcu_clock ** 2 * decay)
+        self.mcu_clock_variance = (1.0 - decay) * (self.mcu_clock_variance + diff_mcu_clock ** 2 * decay)
         diff_chip_clock = chip_clock - self.chip_clock_avg
         self.chip_clock_avg += decay * diff_chip_clock
-        self.chip_clock_covariance = (1 - decay) * (self.chip_clock_covariance + diff_mcu_clock * diff_chip_clock * decay)
+        self.chip_clock_covariance = (1.0 - decay) * (self.chip_clock_covariance + diff_mcu_clock * diff_chip_clock * decay)
 
     
     def set_last_chip_clock(self, chip_clock):
@@ -492,7 +492,7 @@ class ADXL345:
         systime = self.printer.get_reactor().monotonic()
         print_time = self.mcu.estimated_print_time(systime) + MIN_MSG_TIME
         reqclock = self.mcu.print_time_to_clock(print_time)
-        rest_ticks = self.mcu.seconds_to_clock(4 / self.data_rate)
+        rest_ticks = self.mcu.seconds_to_clock(4.0 / self.data_rate)
         self.query_rate = self.data_rate
         self.query_adxl345_cmd.send([
             self.oid,

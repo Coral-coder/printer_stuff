@@ -11,7 +11,7 @@ class EncoderSensor:
         self.printer = config.get_printer()
         switch_pin = config.get('switch_pin')
         self.extruder_name = config.get('extruder')
-        self.detection_length = config.getfloat('detection_length', 7, above=0)
+        self.detection_length = config.getfloat('detection_length', 7.0, above=0.0)
         buttons = self.printer.load_object(config, 'buttons')
         buttons.register_buttons([
             switch_pin], self.encoder_event)

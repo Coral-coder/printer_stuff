@@ -71,7 +71,7 @@ class HomingMove:
         move_d = math.sqrt(sum([ d * d for d in (axes_d[:3]) ]))
         move_t = move_d / speed
         max_steps = None([ abs(s.calc_position_from_coord(startpos) - s.calc_position_from_coord(movepos)) / s.get_step_dist() for s in (mcu_endstop.get_steppers()) ])
-        if max_steps <= 0:
+        if max_steps <= 0.0:
             return 0.001
         return None / max_steps
 
@@ -89,7 +89,7 @@ class HomingMove:
     def handle_force_stop(self):
         toolhead = self.printer.lookup_object('toolhead')
         toolhead._handle_shutdown()
-        toolhead.reactor.pause(toolhead.reactor.monotonic() + 1)
+        toolhead.reactor.pause(toolhead.reactor.monotonic() + 1.0)
         gcode = self.printer.lookup_object('gcode')
         gcode.run_script_from_command('MOTOR_CHECK_PROTECTION_AFTER_HOME DATA=11')
         gcode.run_script_from_command('MOTOR_STALL_MODE DATA=2')
@@ -135,9 +135,9 @@ class HomingMove:
 
         for mcu_endstop, name in self.endstops:
             trigger_time = mcu_endstop.home_wait(move_end_print_time)
-            if trigger_time > 0:
+            if trigger_time > 0.0:
                 trigger_times[name] = trigger_time
-            elif trigger_time < 0 and error is None:
+            elif trigger_time < 0.0 and error is None:
                 error = '{"code":"key21", "msg":"Communication timeout during homing %s", "values": ["%s"]}' % (name, name)
                 logging.info('Communication timeout during homing %s, set MOTOR_STALL_MODE DATA=2' % name)
                 self.handle_force_stop()

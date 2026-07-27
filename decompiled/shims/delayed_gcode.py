@@ -12,7 +12,7 @@ class DelayedGcode:
         self.gcode = self.printer.lookup_object('gcode')
         gcode_macro = self.printer.load_object(config, 'gcode_macro')
         self.timer_gcode = gcode_macro.load_template(config, 'gcode')
-        self.duration = config.getfloat('initial_duration', 0, minval=0)
+        self.duration = config.getfloat('initial_duration', 0.0, minval=0.0)
         self.timer_handler = None
         self.inside_timer = self.repeat = False
         self.printer.register_event_handler('klippy:ready', self._handle_ready)
@@ -43,9 +43,9 @@ class DelayedGcode:
     cmd_UPDATE_DELAYED_GCODE_help = 'Update the duration of a delayed_gcode'
     
     def cmd_UPDATE_DELAYED_GCODE(self, gcmd):
-        self.duration = gcmd.get_float('DURATION', minval=0)
+        self.duration = gcmd.get_float('DURATION', minval=0.0)
         if self.inside_timer:
-            self.repeat = self.duration != 0
+            self.repeat = self.duration != 0.0
         else:
             waketime = self.reactor.NEVER
             if self.duration:

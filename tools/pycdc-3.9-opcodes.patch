@@ -276,3 +276,28 @@ index f837152..1d52aab 100644
                  first = false;
              }
              cur_indent--;
+diff --git a/bytecode.cpp b/bytecode.cpp
+index 6bee279..d8a9564 100644
+--- a/bytecode.cpp
++++ b/bytecode.cpp
+@@ -259,7 +259,19 @@ void print_const(std::ostream& pyc_output, PycRef<PycObject> obj, PycModule* mod
+                     pyc_output << "float('inf')";
+                 }
+             } else {
+-                formatted_print(pyc_output, "%g", value);
++                /* Mimic Python's float repr: the shortest %.*g that round-trips,
++                 * and always carrying a '.'/'e' so it recompiles to a float and
++                 * not an int (0.0 must not become 0). */
++                char fbuf[40];
++                for (int prec = 1; prec <= 17; ++prec) {
++                    snprintf(fbuf, sizeof(fbuf), "%.*g", prec, value);
++                    if (strtod(fbuf, nullptr) == value)
++                        break;
++                }
++                std::string fs(fbuf);
++                if (fs.find_first_of(".eEnN") == std::string::npos)
++                    fs += ".0";
++                pyc_output << fs;
+             }
+         }
+         break;

@@ -955,13 +955,13 @@ print_stats.pyc (Python 3.9)
                         12      LOAD_CONST                      2: 'standby'
                         14      LOAD_FAST                       0: self
                         16      STORE_ATTR                      2: state
-                        18      LOAD_CONST                      3: 0
+                        18      LOAD_CONST                      3: 0.0
                         20      DUP_TOP                         
                         22      LOAD_FAST                       0: self
                         24      STORE_ATTR                      3: prev_pause_duration
                         26      LOAD_FAST                       0: self
                         28      STORE_ATTR                      4: last_epos
-                        30      LOAD_CONST                      3: 0
+                        30      LOAD_CONST                      3: 0.0
                         32      DUP_TOP                         
                         34      LOAD_FAST                       0: self
                         36      STORE_ATTR                      5: filament_used
@@ -973,7 +973,7 @@ print_stats.pyc (Python 3.9)
                         48      STORE_ATTR                      7: print_start_time
                         50      LOAD_FAST                       0: self
                         52      STORE_ATTR                      8: last_pause_time
-                        54      LOAD_CONST                      3: 0
+                        54      LOAD_CONST                      3: 0.0
                         56      LOAD_FAST                       0: self
                         58      STORE_ATTR                      9: init_duration
                         60      LOAD_CONST                      0: None

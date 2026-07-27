@@ -224,7 +224,7 @@ gcode_move.pyc (Python 3.9)
                                 )
                             [Disassembly]
                                 0       BUILD_LIST                      0
-                                2       LOAD_CONST                      1: (0, 0, 0, 0)
+                                2       LOAD_CONST                      1: (0.0, 0.0, 0.0, 0.0)
                                 4       LIST_EXTEND                     1
                                 6       RETURN_VALUE                    
                         'GCodeMove.__init__.<locals>.<lambda>'
@@ -253,7 +253,7 @@ gcode_move.pyc (Python 3.9)
                         32      LOAD_FAST                       2: PRINTER_PARAM
                         34      LOAD_METHOD                     4: getfloat
                         36      LOAD_CONST                      3: 'variable_z_safe_g28'
-                        38      LOAD_CONST                      4: 0
+                        38      LOAD_CONST                      4: 0.0
                         40      CALL_METHOD                     2
                         42      LOAD_FAST                       0: self
                         44      STORE_ATTR                      1: variable_safe_z
@@ -413,27 +413,27 @@ gcode_move.pyc (Python 3.9)
                         352     LOAD_FAST                       0: self
                         354     STORE_ATTR                      27: absolute_extrude
                         356     BUILD_LIST                      0
-                        358     LOAD_CONST                      24: (0, 0, 0, 0)
+                        358     LOAD_CONST                      24: (0.0, 0.0, 0.0, 0.0)
                         360     LIST_EXTEND                     1
                         362     LOAD_FAST                       0: self
                         364     STORE_ATTR                      28: base_position
                         366     BUILD_LIST                      0
-                        368     LOAD_CONST                      24: (0, 0, 0, 0)
+                        368     LOAD_CONST                      24: (0.0, 0.0, 0.0, 0.0)
                         370     LIST_EXTEND                     1
                         372     LOAD_FAST                       0: self
                         374     STORE_ATTR                      29: last_position
                         376     BUILD_LIST                      0
-                        378     LOAD_CONST                      24: (0, 0, 0, 0)
+                        378     LOAD_CONST                      24: (0.0, 0.0, 0.0, 0.0)
                         380     LIST_EXTEND                     1
                         382     LOAD_FAST                       0: self
                         384     STORE_ATTR                      30: homing_position
-                        386     LOAD_CONST                      25: 25
+                        386     LOAD_CONST                      25: 25.0
                         388     LOAD_FAST                       0: self
                         390     STORE_ATTR                      31: speed
-                        392     LOAD_CONST                      26: 0.0166667
+                        392     LOAD_CONST                      26: 0.016666666666666666
                         394     LOAD_FAST                       0: self
                         396     STORE_ATTR                      32: speed_factor
-                        398     LOAD_CONST                      27: 1
+                        398     LOAD_CONST                      27: 1.0
                         400     LOAD_FAST                       0: self
                         402     STORE_ATTR                      33: extrude_factor
                         404     BUILD_MAP                       0
@@ -527,13 +527,13 @@ gcode_move.pyc (Python 3.9)
                         -1
                         'toolhead'
                     [Disassembly]
-                        0       LOAD_CONST                      1: 1
+                        0       LOAD_CONST                      1: 1.0
                         2       STORE_FAST                      2: min_x
-                        4       LOAD_CONST                      2: -1
+                        4       LOAD_CONST                      2: -1.0
                         6       STORE_FAST                      3: max_x
-                        8       LOAD_CONST                      1: 1
+                        8       LOAD_CONST                      1: 1.0
                         10      STORE_FAST                      4: min_y
-                        12      LOAD_CONST                      2: -1
+                        12      LOAD_CONST                      2: -1.0
                         14      STORE_FAST                      5: max_y
                         16      LOAD_FAST                       0: self
                         18      LOAD_ATTR                       0: printer
@@ -1081,7 +1081,7 @@ gcode_move.pyc (Python 3.9)
                         2       LOAD_METHOD                     0: reset_last_position
                         4       CALL_METHOD                     0
                         6       POP_TOP                         
-                        8       LOAD_CONST                      1: 1
+                        8       LOAD_CONST                      1: 1.0
                         10      LOAD_FAST                       0: self
                         12      STORE_ATTR                      1: extrude_factor
                         14      LOAD_FAST                       0: self
@@ -1338,7 +1338,7 @@ gcode_move.pyc (Python 3.9)
                     [Disassembly]
                         0       LOAD_FAST                       0: self
                         2       LOAD_ATTR                       0: speed_factor
-                        4       LOAD_CONST                      1: 60
+                        4       LOAD_CONST                      1: 6e+01
                         6       BINARY_MULTIPLY                 
                         8       RETURN_VALUE                    
                 'GCodeMove._get_gcode_speed_override'
@@ -1542,15 +1542,15 @@ gcode_move.pyc (Python 3.9)
                         48      STORE_FAST                      6: py
                         50      STORE_FAST                      7: pz
                         52      LOAD_FAST                       2: bx
-                        54      LOAD_CONST                      3: 0
+                        54      LOAD_CONST                      3: 0.0
                         56      COMPARE_OP                      2 (==)
                         58      POP_JUMP_IF_FALSE               80
                         60      LOAD_FAST                       3: by
-                        62      LOAD_CONST                      3: 0
+                        62      LOAD_CONST                      3: 0.0
                         64      COMPARE_OP                      2 (==)
                         66      POP_JUMP_IF_FALSE               80
                         68      LOAD_FAST                       4: bz
-                        70      LOAD_CONST                      3: 0
+                        70      LOAD_CONST                      3: 0.0
                         72      COMPARE_OP                      2 (==)
                         74      POP_JUMP_IF_FALSE               80
                         76      LOAD_CONST                      4: False
@@ -1589,7 +1589,7 @@ gcode_move.pyc (Python 3.9)
                         142     LOAD_CONST                      7: 2
                         144     BINARY_SUBSCR                   
                         146     STORE_FAST                      13: current_physical_z
-                        148     LOAD_CONST                      8: 5
+                        148     LOAD_CONST                      8: 5.0
                         150     STORE_FAST                      14: z_lift_height
                         152     LOAD_FAST                       10: min_z
                         154     LOAD_FAST                       11: max_z
@@ -1604,7 +1604,7 @@ gcode_move.pyc (Python 3.9)
                         172     COMPARE_OP                      4 (>)
                         174     POP_JUMP_IF_FALSE               206
                         176     LOAD_GLOBAL                     10: max
-                        178     LOAD_CONST                      3: 0
+                        178     LOAD_CONST                      3: 0.0
                         180     LOAD_FAST                       11: max_z
                         182     LOAD_FAST                       13: current_physical_z
                         184     BINARY_SUBTRACT                 
@@ -1613,10 +1613,10 @@ gcode_move.pyc (Python 3.9)
                         190     CALL_FUNCTION                   2
                         192     STORE_FAST                      14: z_lift_height
                         194     LOAD_FAST                       14: z_lift_height
-                        196     LOAD_CONST                      10: 1
+                        196     LOAD_CONST                      10: 1.0
                         198     COMPARE_OP                      0 (<)
                         200     POP_JUMP_IF_FALSE               206
-                        202     LOAD_CONST                      3: 0
+                        202     LOAD_CONST                      3: 0.0
                         204     STORE_FAST                      14: z_lift_height
                         206     LOAD_FAST                       1: gcode
                         208     LOAD_METHOD                     11: run_script_from_command
@@ -2218,7 +2218,7 @@ gcode_move.pyc (Python 3.9)
                         758     CALL_FUNCTION                   1
                         760     STORE_FAST                      10: gcode_speed
                         762     LOAD_FAST                       10: gcode_speed
-                        764     LOAD_CONST                      27: 0
+                        764     LOAD_CONST                      27: 0.0
                         766     COMPARE_OP                      1 (<=)
                         768     POP_JUMP_IF_FALSE               788
                         772     LOAD_GLOBAL                     20: Exception
@@ -2496,7 +2496,7 @@ gcode_move.pyc (Python 3.9)
                         316     CALL_FUNCTION                   1
                         318     STORE_FAST                      9: gcode_speed
                         320     LOAD_FAST                       9: gcode_speed
-                        322     LOAD_CONST                      14: 0
+                        322     LOAD_CONST                      14: 0.0
                         324     COMPARE_OP                      1 (<=)
                         326     POP_JUMP_IF_FALSE               356
                         330     LOAD_FAST                       1: gcmd
@@ -2942,11 +2942,11 @@ gcode_move.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_ATTR                       0: get_float
                         4       LOAD_CONST                      1: 'S'
-                        6       LOAD_CONST                      2: 100
-                        8       LOAD_CONST                      3: 0
+                        6       LOAD_CONST                      2: 1e+02
+                        8       LOAD_CONST                      3: 0.0
                         10      LOAD_CONST                      4: ('above',)
                         12      CALL_FUNCTION_KW                3
-                        14      LOAD_CONST                      5: 6000
+                        14      LOAD_CONST                      5: 6e+03
                         16      BINARY_TRUE_DIVIDE              
                         18      STORE_FAST                      2: value
                         20      LOAD_FAST                       0: self
@@ -2976,8 +2976,8 @@ gcode_move.pyc (Python 3.9)
                         68      LOAD_FAST                       1: gcmd
                         70      LOAD_ATTR                       0: get_float
                         72      LOAD_CONST                      1: 'S'
-                        74      LOAD_CONST                      2: 100
-                        76      LOAD_CONST                      3: 0
+                        74      LOAD_CONST                      2: 1e+02
+                        76      LOAD_CONST                      3: 0.0
                         78      LOAD_CONST                      4: ('above',)
                         80      CALL_FUNCTION_KW                3
                         82      CALL_FUNCTION                   1
@@ -3136,11 +3136,11 @@ gcode_move.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_ATTR                       0: get_float
                         4       LOAD_CONST                      1: 'S'
-                        6       LOAD_CONST                      2: 100
-                        8       LOAD_CONST                      3: 0
+                        6       LOAD_CONST                      2: 1e+02
+                        8       LOAD_CONST                      3: 0.0
                         10      LOAD_CONST                      4: ('above',)
                         12      CALL_FUNCTION_KW                3
-                        14      LOAD_CONST                      2: 100
+                        14      LOAD_CONST                      2: 1e+02
                         16      BINARY_TRUE_DIVIDE              
                         18      STORE_FAST                      2: new_extrude_factor
                         20      LOAD_FAST                       0: self
@@ -3187,8 +3187,8 @@ gcode_move.pyc (Python 3.9)
                         102     LOAD_FAST                       1: gcmd
                         104     LOAD_ATTR                       0: get_float
                         106     LOAD_CONST                      1: 'S'
-                        108     LOAD_CONST                      2: 100
-                        110     LOAD_CONST                      3: 0
+                        108     LOAD_CONST                      2: 1e+02
+                        110     LOAD_CONST                      3: 0.0
                         112     LOAD_CONST                      4: ('above',)
                         114     CALL_FUNCTION_KW                3
                         116     CALL_FUNCTION                   1
@@ -3326,7 +3326,7 @@ gcode_move.pyc (Python 3.9)
                         )
                     [Disassembly]
                         0       BUILD_LIST                      0
-                        2       LOAD_CONST                      1: (0, 0, 0, 0)
+                        2       LOAD_CONST                      1: (0.0, 0.0, 0.0, 0.0)
                         4       LIST_EXTEND                     1
                         6       STORE_FAST                      2: move_delta
                         8       LOAD_GLOBAL                     0: enumerate
@@ -3404,7 +3404,7 @@ gcode_move.pyc (Python 3.9)
                         152     LOAD_CONST                      6: 'MOVE_SPEED'
                         154     LOAD_FAST                       0: self
                         156     LOAD_ATTR                       5: speed
-                        158     LOAD_CONST                      7: 0
+                        158     LOAD_CONST                      7: 0.0
                         160     LOAD_CONST                      8: ('above',)
                         162     CALL_FUNCTION_KW                3
                         164     STORE_FAST                      7: speed
@@ -4135,18 +4135,18 @@ gcode_move.pyc (Python 3.9)
                         58      STORE_FAST                      8: square_corner_velocity
                         60      LOAD_CONST                      3: True
                         62      LOAD_CONST                      4: 0
-                        64      LOAD_CONST                      5: 1
-                        66      LOAD_CONST                      6: 0.0166667
+                        64      LOAD_CONST                      5: 1.0
+                        66      LOAD_CONST                      6: 0.016666666666666666
                         68      BUILD_LIST                      0
-                        70      LOAD_CONST                      7: (0, 0, 0, 0)
+                        70      LOAD_CONST                      7: (0.0, 0.0, 0.0, 0.0)
                         72      LIST_EXTEND                     1
                         74      BUILD_LIST                      0
-                        76      LOAD_CONST                      7: (0, 0, 0, 0)
+                        76      LOAD_CONST                      7: (0.0, 0.0, 0.0, 0.0)
                         78      LIST_EXTEND                     1
-                        80      LOAD_CONST                      8: 25
+                        80      LOAD_CONST                      8: 25.0
                         82      LOAD_CONST                      9: ''
                         84      BUILD_LIST                      0
-                        86      LOAD_CONST                      10: (0, 0, 0, -0)
+                        86      LOAD_CONST                      10: (0.0, 0.0, 0.0, -0.0)
                         88      LIST_EXTEND                     1
                         90      LOAD_CONST                      3: True
                         92      BUILD_MAP                       0
@@ -4179,9 +4179,9 @@ gcode_move.pyc (Python 3.9)
                         146     LOAD_FAST                       9: state
                         148     LOAD_CONST                      13: 'file_position'
                         150     STORE_SUBSCR                    
-                        152     LOAD_CONST                      14: 0
-                        154     LOAD_CONST                      14: 0
-                        156     LOAD_CONST                      14: 0
+                        152     LOAD_CONST                      14: 0.0
+                        154     LOAD_CONST                      14: 0.0
+                        156     LOAD_CONST                      14: 0.0
                         158     LOAD_FAST                       1: print_info
                         160     LOAD_METHOD                     8: get
                         162     LOAD_CONST                      15: 'base_position_e'
@@ -4403,7 +4403,7 @@ gcode_move.pyc (Python 3.9)
                         596     BINARY_SUBTRACT                 
                         598     LOAD_CONST                      43: 0.7
                         600     BINARY_SUBTRACT                 
-                        602     LOAD_CONST                      44: 5
+                        602     LOAD_CONST                      44: 5.0
                         604     BINARY_ADD                      
                         606     STORE_FAST                      15: e_diff
                         608     LOAD_FAST                       0: self
@@ -5730,7 +5730,7 @@ gcode_move.pyc (Python 3.9)
                         184     LOAD_CONST                      15: 'MOVE_SPEED'
                         186     LOAD_FAST                       0: self
                         188     LOAD_ATTR                       8: speed
-                        190     LOAD_CONST                      16: 0
+                        190     LOAD_CONST                      16: 0.0
                         192     LOAD_CONST                      17: ('above',)
                         194     CALL_FUNCTION_KW                3
                         196     STORE_FAST                      5: speed

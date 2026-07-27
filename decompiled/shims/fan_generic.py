@@ -8,7 +8,7 @@ class PrinterFanGeneric:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.fan = fan.Fan(config, default_shutdown_speed=0)
+        self.fan = fan.Fan(config, default_shutdown_speed=0.0)
         self.fan_name = config.get_name().split()[-1]
         gcode = self.printer.lookup_object('gcode')
         gcode.register_mux_command('SET_FAN_SPEED', 'FAN', self.fan_name, self.cmd_SET_FAN_SPEED, desc=self.cmd_SET_FAN_SPEED_help)
@@ -19,7 +19,7 @@ class PrinterFanGeneric:
 
     
     def cmd_SET_FAN_SPEED(self, gcmd):
-        speed = gcmd.get_float('SPEED', 0)
+        speed = gcmd.get_float('SPEED', 0.0)
         self.fan.set_speed_from_command(speed)
 
 

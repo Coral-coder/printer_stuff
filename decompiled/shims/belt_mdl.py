@@ -248,7 +248,7 @@ class BELT_MDL:
     
     def cmd_BELT_MDL_SET(self, gcmd):
         self.config_addr()
-        self.target_tension = gcmd.get_int('MDL_N', 140)
+        self.target_tension = gcmd.get_int('MDL_N', 1.4e+02)
         self.set_tension()
         self.gcode.respond_info('MDL_NAME: %s' % (self.name,))
 

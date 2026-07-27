@@ -1,13 +1,13 @@
 # Source Generated with Decompyle++
 # File: display_status.pyc (Python 3.9)
 
-M73_TIMEOUT = 5
+M73_TIMEOUT = 5.0
 
 class DisplayStatus:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.expire_progress = 0
+        self.expire_progress = 0.0
         self.progress = None
         self.message = None
         gcode = self.printer.lookup_object('gcode')
@@ -25,7 +25,7 @@ class DisplayStatus:
                 self.progress = None
                 progress = None
         if progress is None:
-            progress = 0
+            progress = 0.0
             sdcard = self.printer.lookup_object('virtual_sdcard', None)
             if sdcard is not None:
                 progress = sdcard.get_status(eventtime)['progress']
@@ -37,8 +37,8 @@ class DisplayStatus:
     def cmd_M73(self, gcmd):
         progress = gcmd.get_float('P', None)
         if progress is not None:
-            progress = progress / 100
-            self.progress = min(1, max(0, progress))
+            progress = progress / 1e+02
+            self.progress = min(1.0, max(0.0, progress))
             curtime = self.printer.get_reactor().monotonic()
             self.expire_progress = curtime + M73_TIMEOUT
 

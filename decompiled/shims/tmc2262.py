@@ -519,13 +519,13 @@ class TMC2262CurrentHelper:
             2: 54000,
             3: 72000 }
         CRS_values = {
-            3: 1,
+            3: 1.0,
             2: 0.75,
             1: 0.5,
             0: 0.25 }
-        self.IFS_current_RMS = float(CRS_values[self.current_range_scale] * Kifs_values[self.current_range]) / Rref / math.sqrt(2)
-        run_current = config.getfloat('run_current', above=0, maxval=self.IFS_current_RMS)
-        hold_current = config.getfloat('hold_current', self.IFS_current_RMS, above=0, maxval=self.IFS_current_RMS)
+        self.IFS_current_RMS = float(CRS_values[self.current_range_scale] * Kifs_values[self.current_range]) / Rref / math.sqrt(2.0)
+        run_current = config.getfloat('run_current', above=0.0, maxval=self.IFS_current_RMS)
+        hold_current = config.getfloat('hold_current', self.IFS_current_RMS, above=0.0, maxval=self.IFS_current_RMS)
         self.req_hold_current = hold_current
         (irun, ihold) = self._calc_current(run_current, hold_current)
         self.fields.set_field('ihold', ihold)
@@ -636,7 +636,7 @@ class TMC2262:
         set_config_field(config, 'cur_i', 137)
         set_config_field(config, 'angle_p', 200)
         set_config_field(config, 'angle_i', 50)
-        coil_induct = config.getint('coil_induct', 0)
+        coil_induct = config.getint('coil_induct', 0.0)
         if coil_induct:
             set_config_field(config, 'coil_induct', coil_induct)
 

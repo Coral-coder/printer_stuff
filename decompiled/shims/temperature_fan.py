@@ -3,9 +3,9 @@
 
 from . import fan
 KELVIN_TO_CELSIUS = -273.15
-MAX_FAN_TIME = 5
-AMBIENT_TEMP = 25
-PID_PARAM_BASE = 255
+MAX_FAN_TIME = 5.0
+AMBIENT_TEMP = 25.0
+PID_PARAM_BASE = 255.0
 
 class TemperatureFan:
     
@@ -13,7 +13,7 @@ class TemperatureFan:
         self.name = config.get_name().split()[1]
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
-        self.fan = fan.Fan(config, default_shutdown_speed=1)
+        self.fan = fan.Fan(config, default_shutdown_speed=1.0)
         self.min_temp = config.getfloat('min_temp', minval=KELVIN_TO_CELSIUS)
         self.max_temp = config.getfloat('max_temp', above=self.min_temp)
         pheaters = self.printer.load_object(config, 'heaters')
@@ -22,21 +22,21 @@ class TemperatureFan:
         self.sensor.setup_callback(self.temperature_callback)
         pheaters.register_sensor(config, self)
         self.speed_delay = self.sensor.get_report_time_delta()
-        self.max_speed_conf = config.getfloat('max_speed', 1, above=0, maxval=1)
+        self.max_speed_conf = config.getfloat('max_speed', 1.0, above=0.0, maxval=1.0)
         self.max_speed = self.max_speed_conf
-        self.min_speed_conf = config.getfloat('min_speed', 0.3, minval=0, maxval=1)
+        self.min_speed_conf = config.getfloat('min_speed', 0.3, minval=0.0, maxval=1.0)
         self.min_speed = self.min_speed_conf
-        self.last_temp = 0
-        self.last_temp_time = 0
-        self.target_temp_conf = config.getfloat('target_temp', 40 if self.max_temp > 40 else self.max_temp, minval=self.min_temp, maxval=self.max_temp)
+        self.last_temp = 0.0
+        self.last_temp_time = 0.0
+        self.target_temp_conf = config.getfloat('target_temp', 4e+01 if self.max_temp > 4e+01 else self.max_temp, minval=self.min_temp, maxval=self.max_temp)
         self.target_temp = self.target_temp_conf
         algos = {
             'watermark': ControlBangBang,
             'pid': ControlPID }
         algo = config.getchoice('control', algos)
         self.control = algo(self, config)
-        self.next_speed_time = 0
-        self.last_speed_value = 0
+        self.next_speed_time = 0.0
+        self.last_speed_value = 0.0
         gcode = self.printer.lookup_object('gcode')
         gcode.register_mux_command('SET_TEMPERATURE_FAN_TARGET', 'TEMPERATURE_FAN', self.name, self.cmd_SET_TEMPERATURE_FAN_TARGET, desc=self.cmd_SET_TEMPERATURE_FAN_TARGET_help)
         gcode.register_mux_command('SET_TEMPERATURE_FAN_SWITCH', 'TEMPERATURE_FAN', self.name, self.cmd_SET_TEMPERATURE_FAN_SWITCH, desc=self.cmd_SET_TEMPERATURE_FAN_SWITCH_help)
@@ -49,12 +49,12 @@ class TemperatureFan:
 
     
     def set_speed(self, read_time, value):
-        if value <= 0:
-            value = 0
+        if value <= 0.0:
+            value = 0.0
         elif value < self.min_speed:
             value = self.min_speed
-        if self.target_temp <= 0:
-            value = 0
+        if self.target_temp <= 0.0:
+            value = 0.0
         if (read_time < self.next_speed_time or self.last_speed_value) and abs(value - self.last_speed_value) < 0.05:
             return None
         speed_time = None + self.speed_delay
@@ -116,14 +116,14 @@ class TemperatureFan:
     
     def set_min_speed(self, speed):
         if speed:
-            if speed < 0 or speed > 1:
+            if speed < 0.0 or speed > 1.0:
                 raise self.printer.command_error('Requested min speed (%.1f) out of range (0.0 : 1.0)' % speed)
         self.min_speed = speed
 
     
     def set_max_speed(self, speed):
         if speed:
-            if speed < 0 or speed > 1:
+            if speed < 0.0 or speed > 1.0:
                 raise self.printer.command_error('Requested max speed (%.1f) out of range (0.0 : 1.0)' % speed)
         self.max_speed = speed
 
@@ -133,7 +133,7 @@ class ControlBangBang:
     
     def __init__(self, temperature_fan, config):
         self.temperature_fan = temperature_fan
-        self.max_delta = config.getfloat('max_delta', 2, above=0)
+        self.max_delta = config.getfloat('max_delta', 2.0, above=0.0)
         self.heating = False
 
     
@@ -144,12 +144,12 @@ class ControlBangBang:
         elif self.heating and temp <= target_temp - self.max_delta:
             self.heating = True
         if self.heating:
-            self.temperature_fan.set_speed(read_time, 0)
+            self.temperature_fan.set_speed(read_time, 0.0)
         else:
             self.temperature_fan.set_speed(read_time, self.temperature_fan.get_max_speed())
 
 
-PID_SETTLE_DELTA = 1
+PID_SETTLE_DELTA = 1.0
 PID_SETTLE_SLOPE = 0.1
 
 class ControlPID:
@@ -159,14 +159,14 @@ class ControlPID:
         self.Kp = config.getfloat('pid_Kp') / PID_PARAM_BASE
         self.Ki = config.getfloat('pid_Ki') / PID_PARAM_BASE
         self.Kd = config.getfloat('pid_Kd') / PID_PARAM_BASE
-        self.min_deriv_time = config.getfloat('pid_deriv_time', 2, above=0)
-        self.temp_integ_max = 0
+        self.min_deriv_time = config.getfloat('pid_deriv_time', 2.0, above=0.0)
+        self.temp_integ_max = 0.0
         if self.Ki:
             self.temp_integ_max = self.temperature_fan.get_max_speed() / self.Ki
         self.prev_temp = AMBIENT_TEMP
-        self.prev_temp_time = 0
-        self.prev_temp_deriv = 0
-        self.prev_temp_integ = 0
+        self.prev_temp_time = 0.0
+        self.prev_temp_deriv = 0.0
+        self.prev_temp_integ = 0.0
 
     
     def temperature_callback(self, read_time, temp):
@@ -179,9 +179,9 @@ class ControlPID:
             temp_deriv = (self.prev_temp_deriv * (self.min_deriv_time - time_diff) + temp_diff) / self.min_deriv_time
         temp_err = target_temp - temp
         temp_integ = self.prev_temp_integ + temp_err * time_diff
-        temp_integ = max(0, min(self.temp_integ_max, temp_integ))
+        temp_integ = max(0.0, min(self.temp_integ_max, temp_integ))
         co = self.Kp * temp_err + self.Ki * temp_integ - self.Kd * temp_deriv
-        bounded_co = max(0, min(self.temperature_fan.get_max_speed(), co))
+        bounded_co = max(0.0, min(self.temperature_fan.get_max_speed(), co))
         self.temperature_fan.set_speed(read_time, max(self.temperature_fan.get_min_speed(), self.temperature_fan.get_max_speed() - bounded_co))
         self.prev_temp = temp
         self.prev_temp_time = read_time

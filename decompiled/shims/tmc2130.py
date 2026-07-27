@@ -214,7 +214,7 @@ FieldFormatters = {
 '1(OpenLoad_B!)'),
     'cs_actual': (lambda v: if v:
 '%d' % v) }
-MAX_CURRENT = 2
+MAX_CURRENT = 2.0
 
 class TMCCurrentHelper:
     
@@ -223,10 +223,10 @@ class TMCCurrentHelper:
         self.name = config.get_name().split()[-1]
         self.mcu_tmc = mcu_tmc
         self.fields = mcu_tmc.get_fields()
-        run_current = config.getfloat('run_current', above=0, maxval=MAX_CURRENT)
-        hold_current = config.getfloat('hold_current', MAX_CURRENT, above=0, maxval=MAX_CURRENT)
+        run_current = config.getfloat('run_current', above=0.0, maxval=MAX_CURRENT)
+        hold_current = config.getfloat('hold_current', MAX_CURRENT, above=0.0, maxval=MAX_CURRENT)
         self.req_hold_current = hold_current
-        self.sense_resistor = config.getfloat('sense_resistor', 0.11, above=0)
+        self.sense_resistor = config.getfloat('sense_resistor', 0.11, above=0.0)
         (vsense, irun, ihold) = self._calc_current(run_current, hold_current)
         self.fields.set_field('vsense', vsense)
         self.fields.set_field('ihold', ihold)
@@ -238,7 +238,7 @@ class TMCCurrentHelper:
         vref = 0.32
         if vsense:
             vref = 0.18
-        cs = int(32 * sense_resistor * current * math.sqrt(2) / vref + 0.5) - 1
+        cs = int(32.0 * sense_resistor * current * math.sqrt(2.0) / vref + 0.5) - 1
         return max(0, min(31, cs))
 
     
@@ -247,7 +247,7 @@ class TMCCurrentHelper:
         vref = 0.32
         if vsense:
             vref = 0.18
-        return (cs + 1) * vref / (32 * sense_resistor * math.sqrt(2))
+        return (cs + 1) * vref / (32.0 * sense_resistor * math.sqrt(2.0))
 
     
     def _calc_current(self, run_current, hold_current):

@@ -80,7 +80,7 @@ class EndstopPhase:
                 raise config.error('{"code":"key157", "msg": "Invalid trigger_phase \'%s\'", "values": ["%s"]}' % (trigger_phase, trigger_phase))
             self.endstop_phase = self.phase_calc.convert_phase(p, ps)
         self.endstop_align_zero = config.getboolean('endstop_align_zero', False)
-        self.endstop_accuracy = config.getfloat('endstop_accuracy', None, above=0)
+        self.endstop_accuracy = config.getfloat('endstop_accuracy', None, above=0.0)
         if self.endstop_accuracy is None:
             self.endstop_phase_accuracy = self.phases // 2 - 1
         elif self.endstop_phase is not None:
@@ -95,7 +95,7 @@ class EndstopPhase:
     
     def align_endstop(self, rail):
         if self.endstop_align_zero or self.endstop_phase is None:
-            return 0
+            return 0.0
         microsteps = None.phases // 4
         half_microsteps = microsteps // 2
         phase_offset = ((self.endstop_phase + half_microsteps) % microsteps - half_microsteps) * self.step_dist
@@ -109,7 +109,7 @@ class EndstopPhase:
         if self.endstop_phase is None:
             logging.info('Setting %s endstop phase to %d', self.name, phase)
             self.endstop_phase = phase
-            return 0
+            return 0.0
         delta = (None - self.endstop_phase) % self.phases
         if delta >= self.phases - self.endstop_phase_accuracy:
             delta -= self.phases

@@ -607,7 +607,7 @@ endstop_phase.pyc (Python 3.9)
                         256     LOAD_ATTR                       24: getfloat
                         258     LOAD_CONST                      15: 'endstop_accuracy'
                         260     LOAD_CONST                      0: None
-                        262     LOAD_CONST                      16: 0
+                        262     LOAD_CONST                      16: 0.0
                         264     LOAD_CONST                      17: ('above',)
                         266     CALL_FUNCTION_KW                3
                         268     LOAD_FAST                       0: self
@@ -736,7 +736,7 @@ endstop_phase.pyc (Python 3.9)
                         10      LOAD_CONST                      0: None
                         12      IS_OP                           0 (is)
                         14      POP_JUMP_IF_FALSE               20
-                        16      LOAD_CONST                      1: 0
+                        16      LOAD_CONST                      1: 0.0
                         18      RETURN_VALUE                    
                         20      LOAD_FAST                       0: self
                         22      LOAD_ATTR                       2: phases
@@ -842,7 +842,7 @@ endstop_phase.pyc (Python 3.9)
                         40      LOAD_FAST                       3: phase
                         42      LOAD_FAST                       0: self
                         44      STORE_ATTR                      2: endstop_phase
-                        46      LOAD_CONST                      2: 0
+                        46      LOAD_CONST                      2: 0.0
                         48      RETURN_VALUE                    
                         50      LOAD_FAST                       3: phase
                         52      LOAD_FAST                       0: self

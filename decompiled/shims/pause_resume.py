@@ -11,7 +11,7 @@ class PauseResume:
         self.printer = config.get_printer()
         self.reactor = self.printer.get_reactor()
         self.gcode = self.printer.lookup_object('gcode')
-        self.recover_velocity = config.getfloat('recover_velocity', 50)
+        self.recover_velocity = config.getfloat('recover_velocity', 5e+01)
         self.v_sd = None
         self.is_paused = False
         self.sd_paused = False

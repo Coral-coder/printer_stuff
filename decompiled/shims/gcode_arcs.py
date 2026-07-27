@@ -14,10 +14,10 @@ class ArcSupport:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.accuracy = config.getfloat('resolution', 0.012, above=0)
-        self.mm_per_arc_segment = config.getfloat('max_mm_per_arc_segment', 1, above=0)
-        self.min_mm_per_arc_segment = config.getfloat('min_mm_per_arc_segment', 0.1, above=0)
-        self.n_arc_revise = config.getfloat('n_arc_revise', 25, above=0)
+        self.accuracy = config.getfloat('resolution', 0.012, above=0.0)
+        self.mm_per_arc_segment = config.getfloat('max_mm_per_arc_segment', 1.0, above=0.0)
+        self.min_mm_per_arc_segment = config.getfloat('min_mm_per_arc_segment', 0.1, above=0.0)
+        self.n_arc_revise = config.getfloat('n_arc_revise', 25.0, above=0.0)
         self.gcode_move = self.printer.load_object(config, 'gcode_move')
         self.gcode = self.printer.lookup_object('gcode')
         self.gcode.register_command('G2', self.cmd_G2)
@@ -61,16 +61,16 @@ class ArcSupport:
             gcmd.get_float('Z', currentPos[2])]
         if gcmd.get_float('R', None) is not None:
             raise gcmd.error('G2/G3 does not support R moves')
-        I = gcmd.get_float('I', 0)
-        J = gcmd.get_float('J', 0)
+        I = gcmd.get_float('I', 0.0)
+        J = gcmd.get_float('J', 0.0)
         asPlanar = (I, J)
         axes = (X_AXIS, Y_AXIS, Z_AXIS)
         if self.plane == ARC_PLANE_X_Z:
-            K = gcmd.get_float('K', 0)
+            K = gcmd.get_float('K', 0.0)
             asPlanar = (I, K)
             axes = (X_AXIS, Z_AXIS, Y_AXIS)
         elif self.plane == ARC_PLANE_Y_Z:
-            K = gcmd.get_float('K', 0)
+            K = gcmd.get_float('K', 0.0)
             asPlanar = (J, K)
             axes = (Y_AXIS, Z_AXIS, X_AXIS)
         if not asPlanar[0] and asPlanar[1]:
@@ -86,12 +86,12 @@ class ArcSupport:
         rt_Alpha = targetPos[alpha_axis] - center_P
         rt_Beta = targetPos[beta_axis] - center_Q
         angular_travel = math.atan2(r_P * rt_Beta - r_Q * rt_Alpha, r_P * rt_Alpha + r_Q * rt_Beta)
-        if angular_travel < 0:
-            angular_travel += 2 * math.pi
+        if angular_travel < 0.0:
+            angular_travel += 2.0 * math.pi
         if clockwise:
-            angular_travel -= 2 * math.pi
-        if angular_travel == 0 and currentPos[alpha_axis] == targetPos[alpha_axis] and currentPos[beta_axis] == targetPos[beta_axis]:
-            angular_travel = 2 * math.pi
+            angular_travel -= 2.0 * math.pi
+        if angular_travel == 0.0 and currentPos[alpha_axis] == targetPos[alpha_axis] and currentPos[beta_axis] == targetPos[beta_axis]:
+            angular_travel = 2.0 * math.pi
         abs_angle_arc = abs(angular_travel)
         circle_factor = abs_angle_arc / (2 * math.pi)
         linear_travel = targetPos[helical_axis] - currentPos[helical_axis]
@@ -114,7 +114,7 @@ class ArcSupport:
                 segments = max(1, math.floor(mm_of_travel / self.min_mm_per_arc_segment))
         asE = gcmd.get_float('E', None)
         asF = gcmd.get_float('F', None)
-        e_per_move = e_base = 0
+        e_per_move = e_base = 0.0
         if asE is not None:
             if absolut_extrude:
                 e_base = currentPos[3]
@@ -122,7 +122,7 @@ class ArcSupport:
         theta_per_segment = angular_travel / segments
         linear_per_segment = linear_travel / segments
         theta_per_segment_sqr = theta_per_segment * theta_per_segment
-        sin_T = theta_per_segment - theta_per_segment_sqr * theta_per_segment / 6
+        sin_T = theta_per_segment - theta_per_segment_sqr * theta_per_segment / 6.0
         cos_T = 1 - 0.5 * theta_per_segment_sqr
         correct_count = 0
         if self.n_arc_revise:

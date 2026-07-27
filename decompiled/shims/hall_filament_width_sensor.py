@@ -14,18 +14,18 @@ class HallFilamentWidthSensor:
         self.pin1 = config.get('adc1')
         self.pin2 = config.get('adc2')
         self.dia1 = config.getfloat('Cal_dia1', 1.5)
-        self.dia2 = config.getfloat('Cal_dia2', 2)
+        self.dia2 = config.getfloat('Cal_dia2', 2.0)
         self.rawdia1 = config.getint('Raw_dia1', 9500)
         self.rawdia2 = config.getint('Raw_dia2', 10500)
         self.MEASUREMENT_INTERVAL_MM = config.getint('measurement_interval', 10)
         self.nominal_filament_dia = config.getfloat('default_nominal_filament_diameter', above=1)
-        self.measurement_delay = config.getfloat('measurement_delay', above=0)
+        self.measurement_delay = config.getfloat('measurement_delay', above=0.0)
         self.measurement_max_difference = config.getfloat('max_difference', 0.2)
         self.max_diameter = self.nominal_filament_dia + self.measurement_max_difference
         self.min_diameter = self.nominal_filament_dia - self.measurement_max_difference
         self.diameter = self.nominal_filament_dia
         self.is_active = config.getboolean('enable', False)
-        self.runout_dia = config.getfloat('min_diameter', 1)
+        self.runout_dia = config.getfloat('min_diameter', 1.0)
         self.is_log = config.getboolean('logging', False)
         self.use_current_dia_while_delay = config.getboolean('use_current_dia_while_delay', False)
         self.filament_array = []
@@ -68,7 +68,7 @@ class HallFilamentWidthSensor:
     def adc2_callback(self, read_time, read_value):
         self.lastFilamentWidthReading2 = round(read_value * 10000)
         diameter_new = round(((self.dia2 - self.dia1) / (self.rawdia2 - self.rawdia1)) * (self.lastFilamentWidthReading + self.lastFilamentWidthReading2 - self.rawdia1) + self.dia1, 2)
-        self.diameter = (5 * self.diameter + diameter_new) / 6
+        self.diameter = (5.0 * self.diameter + diameter_new) / 6
 
     
     def update_filament_array(self, last_epos):

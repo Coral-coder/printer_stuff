@@ -25,7 +25,7 @@ class TestAxis:
         else:
             self._name = axis
         if vib_dir is None:
-            self._vib_dir = (1, 0) if axis == 'x' else (0, 1)
+            self._vib_dir = (1.0, 0.0) if axis == 'x' else (0.0, 1.0)
         else:
             s = math.sqrt(sum([ d * d for d in (vib_dir) ]))
             self._vib_dir = [ d / s for d in (vib_dir) ]
@@ -71,10 +71,10 @@ class VibrationPulseTest:
     def __init__(self, config):
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
-        self.min_freq = config.getfloat('min_freq', 5, minval=1)
-        self.max_freq = config.getfloat('max_freq', 133.333, minval=self.min_freq, maxval=200)
-        self.accel_per_hz = config.getfloat('accel_per_hz', 75, above=0)
-        self.hz_per_sec = config.getfloat('hz_per_sec', 1, minval=0.1, maxval=2)
+        self.min_freq = config.getfloat('min_freq', 5.0, minval=1.0)
+        self.max_freq = config.getfloat('max_freq', 133.33333333333334, minval=self.min_freq, maxval=2e+02)
+        self.accel_per_hz = config.getfloat('accel_per_hz', 75.0, above=0.0)
+        self.hz_per_sec = config.getfloat('hz_per_sec', 1.0, minval=0.1, maxval=2.0)
         self.probe_points = config.getlists('probe_points', seps=(',', '\n'), parser=float, count=3)
         self.low_mem = config.getboolean('low_mem', True)
 
@@ -84,15 +84,15 @@ class VibrationPulseTest:
 
     
     def prepare_test(self, gcmd):
-        self.freq_start = gcmd.get_float('FREQ_START', self.min_freq, minval=1)
-        self.freq_end = gcmd.get_float('FREQ_END', self.max_freq, minval=self.freq_start, maxval=200)
-        self.hz_per_sec = gcmd.get_float('HZ_PER_SEC', self.hz_per_sec, above=0, maxval=2)
+        self.freq_start = gcmd.get_float('FREQ_START', self.min_freq, minval=1.0)
+        self.freq_end = gcmd.get_float('FREQ_END', self.max_freq, minval=self.freq_start, maxval=2e+02)
+        self.hz_per_sec = gcmd.get_float('HZ_PER_SEC', self.hz_per_sec, above=0.0, maxval=2.0)
 
     
     def run_test(self, axis, gcmd):
         toolhead = self.printer.lookup_object('toolhead')
         (X, Y, Z, E) = toolhead.get_position()
-        sign = 1
+        sign = 1.0
         freq = self.freq_start
         systime = self.printer.get_reactor().monotonic()
         toolhead_info = toolhead.get_status(systime)
@@ -132,7 +132,7 @@ class VibrationPulseTest:
                     E], max_v)
                 sign = -sign
                 old_freq = freq
-                freq += 2 * t_seg * self.hz_per_sec
+                freq += 2.0 * t_seg * self.hz_per_sec
                 if math.floor(freq) > math.floor(old_freq):
                     gcmd.respond_info('Testing frequency %.0f Hz' % (freq,))
                 self.gcode.run_script_from_command('SET_VELOCITY_LIMIT ACCEL=%.3f ACCEL_TO_DECEL=%.3f' % (old_max_accel, old_max_accel_to_decel))
@@ -153,7 +153,7 @@ class ResonanceTester:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.move_speed = config.getfloat('move_speed', 50, above=0)
+        self.move_speed = config.getfloat('move_speed', 5e+01, above=0.0)
         self.test = VibrationPulseTest(config)
         if not config.get('accel_chip_x', None):
             self.accel_chip_names = [
@@ -338,7 +338,7 @@ class ResonanceTester:
     cmd_MEASURE_AXES_NOISE_help = 'Measures noise of all enabled accelerometer chips'
     
     def cmd_MEASURE_AXES_NOISE(self, gcmd):
-        meas_time = gcmd.get_float('MEAS_TIME', 2)
+        meas_time = gcmd.get_float('MEAS_TIME', 2.0)
         raw_values = [ (chip_axis, chip.start_internal_client()) for chip_axis, chip in (self.accel_chips) ]
         self.printer.lookup_object('toolhead').dwell(meas_time)
         for chip_axis, aclient in raw_values:

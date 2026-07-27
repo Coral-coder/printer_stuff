@@ -178,9 +178,9 @@ resonance_tester.pyc (Python 3.9)
                         48      LOAD_CONST                      4: 'x'
                         50      COMPARE_OP                      2 (==)
                         52      POP_JUMP_IF_FALSE               58
-                        54      LOAD_CONST                      5: (1, 0)
+                        54      LOAD_CONST                      5: (1.0, 0.0)
                         56      JUMP_FORWARD                    2 (to 60)
-                        58      LOAD_CONST                      6: (0, 1)
+                        58      LOAD_CONST                      6: (0.0, 1.0)
                         60      LOAD_FAST                       0: self
                         62      STORE_ATTR                      1: _vib_dir
                         64      JUMP_FORWARD                    44 (to 110)
@@ -576,8 +576,8 @@ resonance_tester.pyc (Python 3.9)
                         24      LOAD_FAST                       1: config
                         26      LOAD_ATTR                       4: getfloat
                         28      LOAD_CONST                      2: 'min_freq'
-                        30      LOAD_CONST                      3: 5
-                        32      LOAD_CONST                      4: 1
+                        30      LOAD_CONST                      3: 5.0
+                        32      LOAD_CONST                      4: 1.0
                         34      LOAD_CONST                      5: ('minval',)
                         36      CALL_FUNCTION_KW                3
                         38      LOAD_FAST                       0: self
@@ -585,10 +585,10 @@ resonance_tester.pyc (Python 3.9)
                         42      LOAD_FAST                       1: config
                         44      LOAD_ATTR                       4: getfloat
                         46      LOAD_CONST                      6: 'max_freq'
-                        48      LOAD_CONST                      7: 133.333
+                        48      LOAD_CONST                      7: 133.33333333333334
                         50      LOAD_FAST                       0: self
                         52      LOAD_ATTR                       5: min_freq
-                        54      LOAD_CONST                      8: 200
+                        54      LOAD_CONST                      8: 2e+02
                         56      LOAD_CONST                      9: ('minval', 'maxval')
                         58      CALL_FUNCTION_KW                4
                         60      LOAD_FAST                       0: self
@@ -596,8 +596,8 @@ resonance_tester.pyc (Python 3.9)
                         64      LOAD_FAST                       1: config
                         66      LOAD_ATTR                       4: getfloat
                         68      LOAD_CONST                      10: 'accel_per_hz'
-                        70      LOAD_CONST                      11: 75
-                        72      LOAD_CONST                      12: 0
+                        70      LOAD_CONST                      11: 75.0
+                        72      LOAD_CONST                      12: 0.0
                         74      LOAD_CONST                      13: ('above',)
                         76      CALL_FUNCTION_KW                3
                         78      LOAD_FAST                       0: self
@@ -605,9 +605,9 @@ resonance_tester.pyc (Python 3.9)
                         82      LOAD_FAST                       1: config
                         84      LOAD_ATTR                       4: getfloat
                         86      LOAD_CONST                      14: 'hz_per_sec'
-                        88      LOAD_CONST                      4: 1
+                        88      LOAD_CONST                      4: 1.0
                         90      LOAD_CONST                      15: 0.1
-                        92      LOAD_CONST                      16: 2
+                        92      LOAD_CONST                      16: 2.0
                         94      LOAD_CONST                      9: ('minval', 'maxval')
                         96      CALL_FUNCTION_KW                4
                         98      LOAD_FAST                       0: self
@@ -701,7 +701,7 @@ resonance_tester.pyc (Python 3.9)
                         4       LOAD_CONST                      1: 'FREQ_START'
                         6       LOAD_FAST                       0: self
                         8       LOAD_ATTR                       1: min_freq
-                        10      LOAD_CONST                      2: 1
+                        10      LOAD_CONST                      2: 1.0
                         12      LOAD_CONST                      3: ('minval',)
                         14      CALL_FUNCTION_KW                3
                         16      LOAD_FAST                       0: self
@@ -713,7 +713,7 @@ resonance_tester.pyc (Python 3.9)
                         28      LOAD_ATTR                       3: max_freq
                         30      LOAD_FAST                       0: self
                         32      LOAD_ATTR                       2: freq_start
-                        34      LOAD_CONST                      5: 200
+                        34      LOAD_CONST                      5: 2e+02
                         36      LOAD_CONST                      6: ('minval', 'maxval')
                         38      CALL_FUNCTION_KW                4
                         40      LOAD_FAST                       0: self
@@ -723,8 +723,8 @@ resonance_tester.pyc (Python 3.9)
                         48      LOAD_CONST                      7: 'HZ_PER_SEC'
                         50      LOAD_FAST                       0: self
                         52      LOAD_ATTR                       5: hz_per_sec
-                        54      LOAD_CONST                      8: 0
-                        56      LOAD_CONST                      9: 2
+                        54      LOAD_CONST                      8: 0.0
+                        56      LOAD_CONST                      9: 2.0
                         58      LOAD_CONST                      10: ('above', 'maxval')
                         60      CALL_FUNCTION_KW                4
                         62      LOAD_FAST                       0: self
@@ -828,7 +828,7 @@ resonance_tester.pyc (Python 3.9)
                         22      STORE_FAST                      5: Y
                         24      STORE_FAST                      6: Z
                         26      STORE_FAST                      7: E
-                        28      LOAD_CONST                      2: 1
+                        28      LOAD_CONST                      2: 1.0
                         30      STORE_FAST                      8: sign
                         32      LOAD_FAST                       0: self
                         34      LOAD_ATTR                       3: freq_start
@@ -998,7 +998,7 @@ resonance_tester.pyc (Python 3.9)
                         366     LOAD_FAST                       9: freq
                         368     STORE_FAST                      24: old_freq
                         370     LOAD_FAST                       9: freq
-                        372     LOAD_CONST                      17: 2
+                        372     LOAD_CONST                      17: 2.0
                         374     LOAD_FAST                       16: t_seg
                         376     BINARY_MULTIPLY                 
                         378     LOAD_FAST                       0: self
@@ -1206,8 +1206,8 @@ resonance_tester.pyc (Python 3.9)
                         10      LOAD_FAST                       1: config
                         12      LOAD_ATTR                       2: getfloat
                         14      LOAD_CONST                      1: 'move_speed'
-                        16      LOAD_CONST                      2: 50
-                        18      LOAD_CONST                      3: 0
+                        16      LOAD_CONST                      2: 5e+01
+                        18      LOAD_CONST                      3: 0.0
                         20      LOAD_CONST                      4: ('above',)
                         22      CALL_FUNCTION_KW                3
                         24      LOAD_FAST                       0: self
@@ -2660,7 +2660,7 @@ resonance_tester.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_METHOD                     0: get_float
                         4       LOAD_CONST                      1: 'MEAS_TIME'
-                        6       LOAD_CONST                      2: 2
+                        6       LOAD_CONST                      2: 2.0
                         8       CALL_METHOD                     2
                         10      STORE_FAST                      2: meas_time
                         12      LOAD_CONST                      3: <CODE> <listcomp>

@@ -65,7 +65,7 @@ class PrinterNeoPixel:
     def update_color_data(self, led_state):
         color_data = self.color_data
         for lidx, cidx in self.color_map:
-            color_data[cdidx] = int(led_state[lidx][cidx] * 255 + 0.5)
+            color_data[cdidx] = int(led_state[lidx][cidx] * 255.0 + 0.5)
 
     
     def send_data(self, print_time = (None,)):

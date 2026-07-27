@@ -1002,8 +1002,8 @@ z_tilt.pyc (Python 3.9)
                         44      LOAD_FAST                       1: config
                         46      LOAD_ATTR                       6: getfloat
                         48      LOAD_CONST                      5: 'retry_tolerance'
-                        50      LOAD_CONST                      6: 0
-                        52      LOAD_CONST                      6: 0
+                        50      LOAD_CONST                      6: 0.0
+                        52      LOAD_CONST                      6: 0.0
                         54      LOAD_CONST                      7: ('above',)
                         56      CALL_FUNCTION_KW                3
                         58      LOAD_FAST                       0: self
@@ -1070,8 +1070,8 @@ z_tilt.pyc (Python 3.9)
                         26      LOAD_CONST                      5: 'RETRY_TOLERANCE'
                         28      LOAD_FAST                       0: self
                         30      LOAD_ATTR                       4: default_retry_tolerance
-                        32      LOAD_CONST                      6: 0
-                        34      LOAD_CONST                      7: 1
+                        32      LOAD_CONST                      6: 0.0
+                        34      LOAD_CONST                      7: 1.0
                         36      LOAD_CONST                      4: ('minval', 'maxval')
                         38      CALL_FUNCTION_KW                4
                         40      LOAD_FAST                       0: self
@@ -2054,7 +2054,7 @@ z_tilt.pyc (Python 3.9)
                                 0
                                 2
                             [Disassembly]
-                                0       LOAD_CONST                      1: 0
+                                0       LOAD_CONST                      1: 0.0
                                 2       STORE_FAST                      1: total_error
                                 4       LOAD_DEREF                      1: positions
                                 6       GET_ITER                        
@@ -2158,8 +2158,8 @@ z_tilt.pyc (Python 3.9)
                         14      LOAD_DEREF                      1: positions
                         16      CALL_METHOD                     2
                         18      POP_TOP                         
-                        20      LOAD_CONST                      3: 0
-                        22      LOAD_CONST                      3: 0
+                        20      LOAD_CONST                      3: 0.0
+                        22      LOAD_CONST                      3: 0.0
                         24      LOAD_FAST                       3: z_offset
                         26      LOAD_CONST                      4: ('x_adjust', 'y_adjust', 'z_adjust')
                         28      BUILD_CONST_KEY_MAP             3

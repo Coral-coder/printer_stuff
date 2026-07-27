@@ -52,7 +52,7 @@ class FrequencyCounter:
         self._callback = None
         self._last_time = None
         self._last_count = None
-        self._freq = 0
+        self._freq = 0.0
         self._counter = MCU_counter(printer, pin, sample_time, poll_time)
         self._counter.setup_callback(self._counter_callback)
 
@@ -68,7 +68,7 @@ class FrequencyCounter:
                 self._freq = delta_count / delta_time
             else:
                 self._last_time = time
-                self._freq = 0
+                self._freq = 0.0
             if self._callback is not None:
                 self._callback(time, self._freq)
         self._last_count = count

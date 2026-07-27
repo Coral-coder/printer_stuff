@@ -4,19 +4,19 @@
 import math
 import logging
 import chelper
-BUZZ_DISTANCE = 1
+BUZZ_DISTANCE = 1.0
 BUZZ_VELOCITY = BUZZ_DISTANCE / 0.25
-BUZZ_RADIANS_DISTANCE = math.radians(1)
+BUZZ_RADIANS_DISTANCE = math.radians(1.0)
 BUZZ_RADIANS_VELOCITY = BUZZ_RADIANS_DISTANCE / 0.25
 STALL_TIME = 0.1
 
 def calc_move_time(dist, speed, accel):
-    axis_r = 1
-    if dist < 0:
-        axis_r = -1
+    axis_r = 1.0
+    if dist < 0.0:
+        axis_r = -1.0
         dist = -dist
     if not accel or dist:
-        return (axis_r, 0, dist / speed, speed)
+        return (axis_r, 0.0, dist / speed, speed)
     max_cruise_v2 = None * accel
     if max_cruise_v2 < speed ** 2:
         speed = math.sqrt(max_cruise_v2)
@@ -77,15 +77,15 @@ class ForceMove:
             toolhead.dwell(STALL_TIME)
 
     
-    def manual_move(self, stepper, dist, speed, accel = (0,)):
+    def manual_move(self, stepper, dist, speed, accel = (0.0,)):
         toolhead = self.printer.lookup_object('toolhead')
         toolhead.flush_step_generation()
         prev_sk = stepper.set_stepper_kinematics(self.stepper_kinematics)
         prev_trapq = stepper.set_trapq(self.trapq)
-        stepper.set_position((0, 0, 0))
+        stepper.set_position((0.0, 0.0, 0.0))
         (axis_r, accel_t, cruise_t, cruise_v) = calc_move_time(dist, speed, accel)
         print_time = toolhead.get_last_move_time()
-        self.trapq_append(self.trapq, print_time, accel_t, cruise_t, accel_t, 0, 0, 0, axis_r, 0, 0, 0, cruise_v, accel)
+        self.trapq_append(self.trapq, print_time, accel_t, cruise_t, accel_t, 0.0, 0.0, 0.0, axis_r, 0.0, 0.0, 0.0, cruise_v, accel)
         print_time = print_time + accel_t + cruise_t + accel_t
         stepper.generate_steps(print_time)
         self.trapq_finalize_moves(self.trapq, print_time + 99999.9)
@@ -129,8 +129,8 @@ class ForceMove:
             return None
         stepper = None._lookup_stepper(gcmd)
         distance = gcmd.get_float('DISTANCE')
-        speed = gcmd.get_float('VELOCITY', above=0)
-        accel = gcmd.get_float('ACCEL', 0, minval=0)
+        speed = gcmd.get_float('VELOCITY', above=0.0)
+        accel = gcmd.get_float('ACCEL', 0.0, minval=0.0)
         logging.info('FORCE_MOVE %s distance=%.3f velocity=%.3f accel=%.3f', stepper.get_name(), distance, speed, accel)
         self._force_enable(stepper)
         self.manual_move(stepper, distance, speed, accel)

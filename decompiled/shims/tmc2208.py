@@ -226,8 +226,8 @@ class TMC2208:
 
     
     def cmd_TMC2208_STEALTHCHOP(self, gcmd):
-        velocity = gcmd.get_float('VAL', 0)
-        stepper = gcmd.get('STEPPER', 0)
+        velocity = gcmd.get_float('VAL', 0.0)
+        stepper = gcmd.get('STEPPER', 0.0)
         threshold = TMCStealthchopCal(self.config, self.mcu_tmc, self.mcu_freq, velocity)
         en_spreadcycle = 0 if threshold > 0 else 1
         self.gcode.run_script_from_command('SET_TMC_FIELD STEPPER=%s FIELD=en_spreadcycle VALUE=%d' % (stepper, en_spreadcycle))

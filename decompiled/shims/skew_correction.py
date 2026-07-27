@@ -13,7 +13,7 @@
 import math
 
 def calc_skew_factor(ac, bd, ad):
-    side = math.sqrt(2 * ac * ac + 2 * bd * bd - 4 * ad * ad) / 2
+    side = math.sqrt(2 * ac * ac + 2 * bd * bd - 4 * ad * ad) / 2.0
     return math.tan(math.pi / 2 - math.acos((ac * ac - side * side - ad * ad) / (2 * side * ad)))
 
 
@@ -23,9 +23,9 @@ class PrinterSkew:
         self.printer = config.get_printer()
         self.name = config.get_name()
         self.toolhead = None
-        self.xy_factor = 0
-        self.xz_factor = 0
-        self.yz_factor = 0
+        self.xy_factor = 0.0
+        self.xz_factor = 0.0
+        self.yz_factor = 0.0
         self.skew_profiles = { }
         self._load_storage(config)
         self.printer.register_event_handler('klippy:connect', self._handle_connect)
@@ -109,9 +109,9 @@ class PrinterSkew:
     cmd_CALC_MEASURED_SKEW_help = 'Calculate skew from measured print'
     
     def cmd_CALC_MEASURED_SKEW(self, gcmd):
-        ac = gcmd.get_float('AC', above=0)
-        bd = gcmd.get_float('BD', above=0)
-        ad = gcmd.get_float('AD', above=0)
+        ac = gcmd.get_float('AC', above=0.0)
+        bd = gcmd.get_float('BD', above=0.0)
+        ad = gcmd.get_float('AD', above=0.0)
         factor = calc_skew_factor(ac, bd, ad)
         gcmd.respond_info('Calculated Skew: %.6f radians, %.2f degrees' % (factor, math.degrees(factor)))
 

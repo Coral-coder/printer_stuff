@@ -123,14 +123,14 @@ class RetryHelper:
         self.printer = config.get_printer()
         self.gcode = config.get_printer().lookup_object('gcode')
         self.default_max_retries = config.getint('retries', 0, minval=0)
-        self.default_retry_tolerance = config.getfloat('retry_tolerance', 0, above=0)
+        self.default_retry_tolerance = config.getfloat('retry_tolerance', 0.0, above=0.0)
         self.value_label = 'Probed points range'
         self.error_msg_extra = error_msg_extra
 
     
     def start(self, gcmd):
         self.max_retries = gcmd.get_int('RETRIES', self.default_max_retries, minval=0, maxval=30)
-        self.retry_tolerance = gcmd.get_float('RETRY_TOLERANCE', self.default_retry_tolerance, minval=0, maxval=1)
+        self.retry_tolerance = gcmd.get_float('RETRY_TOLERANCE', self.default_retry_tolerance, minval=0.0, maxval=1.0)
         self.current_retry = 0
         self.previous = None
         self.increasing = 0
@@ -262,8 +262,8 @@ class ZTilt:
         z_offset = offsets[2]
         logging.info('Calculating bed tilt with: %s', positions)
         params = {
-            'x_adjust': 0,
-            'y_adjust': 0,
+            'x_adjust': 0.0,
+            'y_adjust': 0.0,
             'z_adjust': z_offset }
         
         def adjusted_height(pos, params):
@@ -272,7 +272,7 @@ class ZTilt:
 
         
         def errorfunc(params = None):
-            total_error = 0
+            total_error = 0.0
             for pos in positions:
                 total_error += adjusted_height(pos, params) ** 2
             return total_error

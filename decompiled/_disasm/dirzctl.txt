@@ -237,7 +237,7 @@ dirzctl.pyc (Python 3.9)
                         226     CALL_FUNCTION_KW                4
                         228     LOAD_FAST                       0: self
                         230     STORE_ATTR                      27: step_base
-                        232     LOAD_CONST                      16: 0
+                        232     LOAD_CONST                      16: 0.0
                         234     LOAD_FAST                       0: self
                         236     STORE_ATTR                      28: last_send_heart
                         238     LOAD_CONST                      17: True

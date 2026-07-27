@@ -37,9 +37,9 @@ class PrinterDotstar:
         for red, green, blue, white in enumerate(led_state):
             idx = (i + 1) * 4
             data[idx] = 255
-            data[idx + 1] = int(blue * 255 + 0.5)
-            data[idx + 2] = int(green * 255 + 0.5)
-            data[idx + 3] = int(red * 255 + 0.5)
+            data[idx + 1] = int(blue * 255.0 + 0.5)
+            data[idx + 2] = int(green * 255.0 + 0.5)
+            data[idx + 3] = int(red * 255.0 + 0.5)
         data[-4] = data[-3] = data[-2] = data[-1] = 255
         minclock = 0
         if print_time is not None:

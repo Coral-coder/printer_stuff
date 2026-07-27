@@ -753,13 +753,13 @@ tmc2208.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_METHOD                     0: get_float
                         4       LOAD_CONST                      1: 'VAL'
-                        6       LOAD_CONST                      2: 0
+                        6       LOAD_CONST                      2: 0.0
                         8       CALL_METHOD                     2
                         10      STORE_FAST                      2: velocity
                         12      LOAD_FAST                       1: gcmd
                         14      LOAD_METHOD                     1: get
                         16      LOAD_CONST                      3: 'STEPPER'
-                        18      LOAD_CONST                      2: 0
+                        18      LOAD_CONST                      2: 0.0
                         20      CALL_METHOD                     2
                         22      STORE_FAST                      3: stepper
                         24      LOAD_GLOBAL                     2: TMCStealthchopCal

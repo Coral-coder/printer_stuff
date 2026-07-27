@@ -3874,7 +3874,7 @@ auto_addr_wrapper.pyc (Python 3.9)
                         78      LOAD_ATTR                       8: reactor
                         80      LOAD_METHOD                     10: monotonic
                         82      CALL_METHOD                     0
-                        84      LOAD_CONST                      2: 3
+                        84      LOAD_CONST                      2: 3.0
                         86      BINARY_ADD                      
                         88      CALL_METHOD                     1
                         90      POP_TOP                         
@@ -4020,7 +4020,7 @@ auto_addr_wrapper.pyc (Python 3.9)
                         'loader check'
                         True
                     [Disassembly]
-                        0       LOAD_CONST                      1: 2
+                        0       LOAD_CONST                      1: 2.0
                         2       STORE_FAST                      2: time_interval
                         4       LOAD_FAST                       0: self
                         6       LOAD_ATTR                       0: print_stats
@@ -4129,7 +4129,7 @@ auto_addr_wrapper.pyc (Python 3.9)
                         'loader check'
                         True
                     [Disassembly]
-                        0       LOAD_CONST                      1: 1
+                        0       LOAD_CONST                      1: 1.0
                         2       STORE_FAST                      2: time_interval
                         4       LOAD_FAST                       0: self
                         6       LOAD_ATTR                       0: print_stats
@@ -4475,7 +4475,7 @@ auto_addr_wrapper.pyc (Python 3.9)
         154     STORE_NAME                      34: TIMEOUT_SHORT_TIME
         156     LOAD_CONST                      21: 0.1
         158     STORE_NAME                      35: TIMEOUT_MEDIUM_TIME
-        160     LOAD_CONST                      22: 1
+        160     LOAD_CONST                      22: 1.0
         162     STORE_NAME                      36: TIMEOUT_LONG_TIME
         164     LOAD_NAME                       15: CMD_GET_SLAVE_INFO
         166     LOAD_NAME                       36: TIMEOUT_LONG_TIME

@@ -1428,7 +1428,7 @@ lis2dw.pyc (Python 3.9)
                         184     LOAD_FAST                       0: self
                         186     LOAD_ATTR                       16: mcu
                         188     LOAD_METHOD                     20: seconds_to_clock
-                        190     LOAD_CONST                      6: 4
+                        190     LOAD_CONST                      6: 4.0
                         192     LOAD_FAST                       0: self
                         194     LOAD_ATTR                       21: data_rate
                         196     BINARY_TRUE_DIVIDE              

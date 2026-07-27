@@ -156,11 +156,11 @@ class PrintStats:
     def reset(self):
         self.filename = self.error_message = ''
         self.state = 'standby'
-        self.prev_pause_duration = self.last_epos = 0
-        self.filament_used = self.total_duration = 0
+        self.prev_pause_duration = self.last_epos = 0.0
+        self.filament_used = self.total_duration = 0.0
         self.print_start_time = None
         self.last_pause_time = None
-        self.init_duration = 0
+        self.init_duration = 0.0
         self.info_total_layer = None
         self.info_current_layer = None
 

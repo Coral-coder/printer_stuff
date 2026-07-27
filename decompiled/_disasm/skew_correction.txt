@@ -67,7 +67,7 @@ skew_correction.pyc (Python 3.9)
                 34      BINARY_MULTIPLY                 
                 36      BINARY_SUBTRACT                 
                 38      CALL_METHOD                     1
-                40      LOAD_CONST                      3: 2
+                40      LOAD_CONST                      3: 2.0
                 42      BINARY_TRUE_DIVIDE              
                 44      STORE_FAST                      3: side
                 46      LOAD_GLOBAL                     0: math
@@ -199,13 +199,13 @@ skew_correction.pyc (Python 3.9)
                         20      LOAD_CONST                      0: None
                         22      LOAD_FAST                       0: self
                         24      STORE_ATTR                      4: toolhead
-                        26      LOAD_CONST                      1: 0
+                        26      LOAD_CONST                      1: 0.0
                         28      LOAD_FAST                       0: self
                         30      STORE_ATTR                      5: xy_factor
-                        32      LOAD_CONST                      1: 0
+                        32      LOAD_CONST                      1: 0.0
                         34      LOAD_FAST                       0: self
                         36      STORE_ATTR                      6: xz_factor
-                        38      LOAD_CONST                      1: 0
+                        38      LOAD_CONST                      1: 0.0
                         40      LOAD_FAST                       0: self
                         42      STORE_ATTR                      7: yz_factor
                         44      BUILD_MAP                       0
@@ -829,21 +829,21 @@ skew_correction.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_ATTR                       0: get_float
                         4       LOAD_CONST                      1: 'AC'
-                        6       LOAD_CONST                      2: 0
+                        6       LOAD_CONST                      2: 0.0
                         8       LOAD_CONST                      3: ('above',)
                         10      CALL_FUNCTION_KW                2
                         12      STORE_FAST                      2: ac
                         14      LOAD_FAST                       1: gcmd
                         16      LOAD_ATTR                       0: get_float
                         18      LOAD_CONST                      4: 'BD'
-                        20      LOAD_CONST                      2: 0
+                        20      LOAD_CONST                      2: 0.0
                         22      LOAD_CONST                      3: ('above',)
                         24      CALL_FUNCTION_KW                2
                         26      STORE_FAST                      3: bd
                         28      LOAD_FAST                       1: gcmd
                         30      LOAD_ATTR                       0: get_float
                         32      LOAD_CONST                      5: 'AD'
-                        34      LOAD_CONST                      2: 0
+                        34      LOAD_CONST                      2: 0.0
                         36      LOAD_CONST                      3: ('above',)
                         38      CALL_FUNCTION_KW                2
                         40      STORE_FAST                      4: ad
@@ -956,9 +956,9 @@ skew_correction.pyc (Python 3.9)
                         10      POP_JUMP_IF_FALSE               30
                         12      LOAD_FAST                       0: self
                         14      LOAD_METHOD                     1: _update_skew
-                        16      LOAD_CONST                      3: 0
-                        18      LOAD_CONST                      3: 0
-                        20      LOAD_CONST                      3: 0
+                        16      LOAD_CONST                      3: 0.0
+                        18      LOAD_CONST                      3: 0.0
+                        20      LOAD_CONST                      3: 0.0
                         22      CALL_METHOD                     3
                         24      POP_TOP                         
                         26      LOAD_CONST                      0: None

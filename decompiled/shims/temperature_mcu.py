@@ -18,15 +18,15 @@ class PrinterTemperatureMCU:
         self.adc1 = None
         self.temp2 = None
         self.adc2 = None
-        self.min_temp = self.max_temp = 0
+        self.min_temp = self.max_temp = 0.0
         self.debug_read_cmd = None
         mcu_name = config.get('sensor_mcu', 'mcu')
         self.temp1 = config.getfloat('sensor_temperature1', None)
         if self.temp1 is not None:
-            self.adc1 = config.getfloat('sensor_adc1', minval=0, maxval=1)
+            self.adc1 = config.getfloat('sensor_adc1', minval=0.0, maxval=1.0)
             self.temp2 = config.getfloat('sensor_temperature2', None)
             if self.temp2 is not None:
-                self.adc2 = config.getfloat('sensor_adc2', minval=0, maxval=1)
+                self.adc2 = config.getfloat('sensor_adc2', minval=0.0, maxval=1.0)
         ppins = config.get_printer().lookup_object('pins')
         self.mcu_adc = ppins.setup_pin('adc', '%s:ADC_TEMPERATURE' % (mcu_name,))
         self.mcu_adc.setup_adc_callback(REPORT_TIME, self.adc_callback)
@@ -107,23 +107,23 @@ class PrinterTemperatureMCU:
 
     
     def config_rp2040(self):
-        self.slope = -1917.49
-        self.base_temperature = self.calc_base(27, 0.213939)
+        self.slope = -1917.4898314933175
+        self.base_temperature = self.calc_base(27.0, 0.21393939393939393)
 
     
     def config_sam3(self):
-        self.slope = 1245.28
-        self.base_temperature = self.calc_base(27, 0.242424)
+        self.slope = 1245.2830188679245
+        self.base_temperature = self.calc_base(27.0, 0.24242424242424246)
 
     
     def config_sam4(self):
-        self.slope = 702.128
-        self.base_temperature = self.calc_base(27, 0.436364)
+        self.slope = 702.127659574468
+        self.base_temperature = self.calc_base(27.0, 0.4363636363636364)
 
     
     def config_same70(self):
-        self.slope = 1416.31
-        self.base_temperature = self.calc_base(25, 0.218182)
+        self.slope = 1416.3090128755364
+        self.base_temperature = self.calc_base(25.0, 0.2181818181818182)
 
     
     def config_samd21(self, addr = (8413232,)):
@@ -131,12 +131,12 @@ class PrinterTemperatureMCU:
         def get1v(val):
             if val & 128:
                 val = 256 - val
-            return 1 - val / 1000
+            return 1.0 - val / 1e+03
 
         cal1 = self.read32(addr)
         cal2 = self.read32(addr + 4)
-        room_temp = (cal1 >> 0 & 255) + (cal1 >> 8 & 15) / 10
-        hot_temp = (cal1 >> 12 & 255) + (cal1 >> 20 & 15) / 10
+        room_temp = (cal1 >> 0 & 255) + (cal1 >> 8 & 15) / 1e+01
+        hot_temp = (cal1 >> 12 & 255) + (cal1 >> 20 & 15) / 1e+01
         room_1v = get1v(cal1 >> 24 & 255)
         hot_1v = get1v(cal2 >> 0 & 255)
         room_adc = (cal2 >> 8 & 4095) * room_1v / 13513.5
@@ -150,20 +150,20 @@ class PrinterTemperatureMCU:
 
     
     def config_stm32f1(self):
-        self.slope = -767.442
-        self.base_temperature = self.calc_base(25, 0.433333)
+        self.slope = -767.4418604651163
+        self.base_temperature = self.calc_base(25.0, 0.43333333333333335)
 
     
     def config_stm32f2(self):
-        self.slope = 1320
-        self.base_temperature = self.calc_base(25, 0.230303)
+        self.slope = 1.32e+03
+        self.base_temperature = self.calc_base(25.0, 0.23030303030303031)
 
     
     def config_stm32f4(self, addr1, addr2 = (536836652, 536836654)):
-        cal_adc_30 = self.read16(addr1) / 4095
-        cal_adc_110 = self.read16(addr2) / 4095
-        self.slope = 80 / (cal_adc_110 - cal_adc_30)
-        self.base_temperature = self.calc_base(30, cal_adc_30)
+        cal_adc_30 = self.read16(addr1) / 4095.0
+        cal_adc_110 = self.read16(addr2) / 4095.0
+        self.slope = 8e+01 / (cal_adc_110 - cal_adc_30)
+        self.base_temperature = self.calc_base(3e+01, cal_adc_30)
 
     
     def config_stm32f0x2(self):
@@ -171,35 +171,35 @@ class PrinterTemperatureMCU:
 
     
     def config_stm32f070(self):
-        self.slope = -767.442
-        cal_adc_30 = self.read16(536868792) / 4095
-        self.base_temperature = self.calc_base(30, cal_adc_30)
+        self.slope = -767.4418604651163
+        cal_adc_30 = self.read16(536868792) / 4095.0
+        self.base_temperature = self.calc_base(3e+01, cal_adc_30)
 
     
     def config_stm32g0(self):
-        cal_adc_30 = self.read16(536835496) * 3 / 13513.5
-        cal_adc_130 = self.read16(536835530) * 3 / 13513.5
-        self.slope = 100 / (cal_adc_130 - cal_adc_30)
-        self.base_temperature = self.calc_base(30, cal_adc_30)
+        cal_adc_30 = self.read16(536835496) * 3.0 / 13513.5
+        cal_adc_130 = self.read16(536835530) * 3.0 / 13513.5
+        self.slope = 1e+02 / (cal_adc_130 - cal_adc_30)
+        self.base_temperature = self.calc_base(3e+01, cal_adc_30)
 
     
     def config_stm32h723(self):
-        cal_adc_30 = self.read16(535947296) / 4095
-        cal_adc_130 = self.read16(535947328) / 4095
-        self.slope = 100 / (cal_adc_130 - cal_adc_30)
-        self.base_temperature = self.calc_base(30, cal_adc_30)
+        cal_adc_30 = self.read16(535947296) / 4095.0
+        cal_adc_130 = self.read16(535947328) / 4095.0
+        self.slope = 1e+02 / (cal_adc_130 - cal_adc_30)
+        self.base_temperature = self.calc_base(3e+01, cal_adc_30)
 
     
     def config_stm32h7(self):
-        cal_adc_30 = self.read16(535947296) / 65535
-        cal_adc_110 = self.read16(535947328) / 65535
-        self.slope = 80 / (cal_adc_110 - cal_adc_30)
-        self.base_temperature = self.calc_base(30, cal_adc_30)
+        cal_adc_30 = self.read16(535947296) / 65535.0
+        cal_adc_110 = self.read16(535947328) / 65535.0
+        self.slope = 8e+01 / (cal_adc_110 - cal_adc_30)
+        self.base_temperature = self.calc_base(3e+01, cal_adc_30)
 
     
     def config_gd32f303xe(self):
-        self.slope = -804.878
-        self.base_temperature = self.calc_base(25, 0.439394)
+        self.slope = -804.8780487804877
+        self.base_temperature = self.calc_base(25.0, 0.4393939393939394)
 
     
     def read16(self, addr):

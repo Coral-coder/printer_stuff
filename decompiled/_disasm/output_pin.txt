@@ -181,7 +181,7 @@ output_pin.pyc (Python 3.9)
                         70      LOAD_ATTR                       9: getfloat
                         72      LOAD_CONST                      5: 'cycle_time'
                         74      LOAD_CONST                      6: 0.1
-                        76      LOAD_CONST                      7: 0
+                        76      LOAD_CONST                      7: 0.0
                         78      LOAD_GLOBAL                     10: MAX_SCHEDULE_TIME
                         80      LOAD_CONST                      8: ('above', 'maxval')
                         82      CALL_FUNCTION_KW                4
@@ -202,8 +202,8 @@ output_pin.pyc (Python 3.9)
                         112     LOAD_FAST                       1: config
                         114     LOAD_ATTR                       9: getfloat
                         116     LOAD_CONST                      10: 'scale'
-                        118     LOAD_CONST                      11: 1
-                        120     LOAD_CONST                      7: 0
+                        118     LOAD_CONST                      11: 1.0
+                        120     LOAD_CONST                      7: 0.0
                         122     LOAD_CONST                      12: ('above',)
                         124     CALL_FUNCTION_KW                3
                         126     LOAD_FAST                       0: self
@@ -225,23 +225,23 @@ output_pin.pyc (Python 3.9)
                         158     CALL_METHOD                     2
                         160     LOAD_FAST                       0: self
                         162     STORE_ATTR                      8: mcu_pin
-                        164     LOAD_CONST                      11: 1
+                        164     LOAD_CONST                      11: 1.0
                         166     LOAD_FAST                       0: self
                         168     STORE_ATTR                      12: scale
-                        170     LOAD_CONST                      7: 0
+                        170     LOAD_CONST                      7: 0.0
                         172     DUP_TOP                         
                         174     LOAD_FAST                       0: self
                         176     STORE_ATTR                      13: last_cycle_time
                         178     LOAD_FAST                       0: self
                         180     STORE_ATTR                      14: default_cycle_time
-                        182     LOAD_CONST                      7: 0
+                        182     LOAD_CONST                      7: 0.0
                         184     LOAD_FAST                       0: self
                         186     STORE_ATTR                      15: last_print_time
                         188     LOAD_FAST                       1: config
                         190     LOAD_ATTR                       9: getfloat
                         192     LOAD_CONST                      14: 'static_value'
                         194     LOAD_CONST                      0: None
-                        196     LOAD_CONST                      7: 0
+                        196     LOAD_CONST                      7: 0.0
                         198     LOAD_FAST                       0: self
                         200     LOAD_ATTR                       12: scale
                         202     LOAD_CONST                      15: ('minval', 'maxval')
@@ -256,7 +256,7 @@ output_pin.pyc (Python 3.9)
                         220     LOAD_CONST                      0: None
                         222     LOAD_FAST                       0: self
                         224     STORE_ATTR                      18: resend_timer
-                        226     LOAD_CONST                      7: 0
+                        226     LOAD_CONST                      7: 0.0
                         228     LOAD_FAST                       0: self
                         230     STORE_ATTR                      19: resend_interval
                         232     LOAD_FAST                       5: static_value
@@ -266,7 +266,7 @@ output_pin.pyc (Python 3.9)
                         242     LOAD_FAST                       0: self
                         244     LOAD_ATTR                       8: mcu_pin
                         246     LOAD_METHOD                     20: setup_max_duration
-                        248     LOAD_CONST                      7: 0
+                        248     LOAD_CONST                      7: 0.0
                         250     CALL_METHOD                     1
                         252     POP_TOP                         
                         254     LOAD_FAST                       5: static_value
@@ -289,7 +289,7 @@ output_pin.pyc (Python 3.9)
                         288     LOAD_FAST                       1: config
                         290     LOAD_ATTR                       9: getfloat
                         292     LOAD_CONST                      17: 'maximum_mcu_duration'
-                        294     LOAD_CONST                      7: 0
+                        294     LOAD_CONST                      7: 0.0
                         296     LOAD_CONST                      18: 0.5
                         298     LOAD_GLOBAL                     10: MAX_SCHEDULE_TIME
                         300     LOAD_CONST                      15: ('minval', 'maxval')
@@ -311,8 +311,8 @@ output_pin.pyc (Python 3.9)
                         334     LOAD_FAST                       1: config
                         336     LOAD_ATTR                       9: getfloat
                         338     LOAD_CONST                      19: 'value'
-                        340     LOAD_CONST                      7: 0
-                        342     LOAD_CONST                      7: 0
+                        340     LOAD_CONST                      7: 0.0
+                        342     LOAD_CONST                      7: 0.0
                         344     LOAD_FAST                       0: self
                         346     LOAD_ATTR                       12: scale
                         348     LOAD_CONST                      15: ('minval', 'maxval')
@@ -325,8 +325,8 @@ output_pin.pyc (Python 3.9)
                         362     LOAD_FAST                       1: config
                         364     LOAD_ATTR                       9: getfloat
                         366     LOAD_CONST                      20: 'shutdown_value'
-                        368     LOAD_CONST                      7: 0
-                        370     LOAD_CONST                      7: 0
+                        368     LOAD_CONST                      7: 0.0
+                        370     LOAD_CONST                      7: 0.0
                         372     LOAD_FAST                       0: self
                         374     LOAD_ATTR                       12: scale
                         376     LOAD_CONST                      15: ('minval', 'maxval')
@@ -851,7 +851,7 @@ output_pin.pyc (Python 3.9)
                         18      LOAD_FAST                       1: gcmd
                         20      LOAD_ATTR                       1: get_float
                         22      LOAD_CONST                      5: 'VALUE'
-                        24      LOAD_CONST                      6: 0
+                        24      LOAD_CONST                      6: 0.0
                         26      LOAD_DEREF                      1: self
                         28      LOAD_ATTR                       2: scale
                         30      LOAD_CONST                      4: ('minval', 'maxval')
@@ -867,7 +867,7 @@ output_pin.pyc (Python 3.9)
                         50      LOAD_CONST                      7: 'CYCLE_TIME'
                         52      LOAD_DEREF                      1: self
                         54      LOAD_ATTR                       3: default_cycle_time
-                        56      LOAD_CONST                      6: 0
+                        56      LOAD_CONST                      6: 0.0
                         58      LOAD_GLOBAL                     4: MAX_SCHEDULE_TIME
                         60      LOAD_CONST                      8: ('above', 'maxval')
                         62      CALL_FUNCTION_KW                4
@@ -876,7 +876,7 @@ output_pin.pyc (Python 3.9)
                         68      LOAD_ATTR                       5: is_pwm
                         70      POP_JUMP_IF_TRUE                90
                         72      LOAD_DEREF                      2: value
-                        74      LOAD_CONST                      9: (0, 1)
+                        74      LOAD_CONST                      9: (0.0, 1.0)
                         76      CONTAINS_OP                     1 (not in)
                         78      POP_JUMP_IF_FALSE               90
                         80      LOAD_FAST                       1: gcmd
@@ -1019,7 +1019,7 @@ output_pin.pyc (Python 3.9)
                         78      BINARY_SUBTRACT                 
                         80      STORE_FAST                      4: time_diff
                         82      LOAD_FAST                       4: time_diff
-                        84      LOAD_CONST                      1: 0
+                        84      LOAD_CONST                      1: 0.0
                         86      COMPARE_OP                      4 (>)
                         88      POP_JUMP_IF_FALSE               98
                         90      LOAD_FAST                       2: systime
@@ -1117,7 +1117,7 @@ output_pin.pyc (Python 3.9)
         6       LOAD_NAME                       0: PIN_MIN_TIME
         8       BINARY_ADD                      
         10      STORE_NAME                      1: RESEND_HOST_TIME
-        12      LOAD_CONST                      2: 5
+        12      LOAD_CONST                      2: 5.0
         14      STORE_NAME                      2: MAX_SCHEDULE_TIME
         16      LOAD_CONST                      3: 0
         18      LOAD_CONST                      4: None

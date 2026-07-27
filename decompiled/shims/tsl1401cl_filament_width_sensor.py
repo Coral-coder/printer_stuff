@@ -12,9 +12,9 @@ class FilamentWidthSensor:
         self.printer = config.get_printer()
         self.reactor = self.printer.get_reactor()
         self.pin = config.get('pin')
-        self.nominal_filament_dia = config.getfloat('default_nominal_filament_diameter', above=1)
-        self.measurement_delay = config.getfloat('measurement_delay', above=0)
-        self.measurement_max_difference = config.getfloat('max_difference', above=0)
+        self.nominal_filament_dia = config.getfloat('default_nominal_filament_diameter', above=1.0)
+        self.measurement_delay = config.getfloat('measurement_delay', above=0.0)
+        self.measurement_max_difference = config.getfloat('max_difference', above=0.0)
         self.max_diameter = self.nominal_filament_dia + self.measurement_max_difference
         self.min_diameter = self.nominal_filament_dia - self.measurement_max_difference
         self.is_active = True

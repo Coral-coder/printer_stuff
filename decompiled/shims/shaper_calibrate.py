@@ -23,10 +23,10 @@ import shlex
 from multiprocessing import shared_memory
 shaper_defs = importlib.import_module('.shaper_defs', 'extras')
 from base_info import base_dir
-MIN_FREQ = 5
-MAX_FREQ = 200
+MIN_FREQ = 5.0
+MAX_FREQ = 2e+02
 WINDOW_T_SEC = 0.5
-MAX_SHAPER_FREQ = 150
+MAX_SHAPER_FREQ = 1.5e+02
 TEST_DAMPING_RATIOS = [
     0.075,
     0.1,
@@ -90,7 +90,7 @@ class CalibrationData:
         for psd, other_psd in zip(self._psd_list, other._psd_list):
             other_normalized = other.data_sets * np.interp(self.freq_bins, other.freq_bins, other_psd)
             psd *= self.data_sets
-            psd[:] = (psd + other_normalized) * (1 / joined_data_sets)
+            psd[:] = (psd + other_normalized) * (1.0 / joined_data_sets)
         self.data_sets = joined_data_sets
 
     
@@ -101,7 +101,7 @@ class CalibrationData:
     def normalize_to_frequencies(self):
         for psd in self._psd_list:
             psd /= self.freq_bins + 0.1
-            psd[self.freq_bins < MIN_FREQ] = 0
+            psd[self.freq_bins < MIN_FREQ] = 0.0
 
     
     def get_psd(self, axis = ('all',)):
@@ -191,7 +191,7 @@ class ShaperCalibrate:
         gcode = self.printer.lookup_object('gcode')
         eventtime = last_report_time = reactor.monotonic()
         if calc_proc.is_alive():
-            if eventtime > last_report_time + 5:
+            if eventtime > last_report_time + 5.0:
                 last_report_time = eventtime
                 gcode.respond_info('Wait for calculations..', log=False)
             eventtime = reactor.pause(eventtime + 0.1)
@@ -214,17 +214,17 @@ class ShaperCalibrate:
     
     def _psd(self, x, fs, nfft):
         np = self.numpy
-        window = np.kaiser(nfft, 6)
-        scale = 1 / (window ** 2).sum()
+        window = np.kaiser(nfft, 6.0)
+        scale = 1.0 / (window ** 2).sum()
         overlap = nfft // 2
         x = self._split_into_windows(x, nfft, overlap)
         x = window[(:, None)] * (x - np.mean(x, axis=0))
         result = np.fft.rfft(x, n=nfft, axis=0)
         result = np.conjugate(result) * result
         result *= scale / fs
-        result[(1:-1, :)] *= 2
+        result[(1:-1, :)] *= 2.0
         psd = result.real.mean(axis=-1)
-        freqs = np.fft.rfftfreq(nfft, 1 / fs)
+        freqs = np.fft.rfftfreq(nfft, 1.0 / fs)
         return (freqs, psd)
 
     
@@ -271,7 +271,7 @@ class ShaperCalibrate:
         gcode = self.printer.lookup_object('gcode')
         eventtime = last_report_time = reactor.monotonic()
         if calc_proc.is_alive():
-            if eventtime > last_report_time + 5:
+            if eventtime > last_report_time + 5.0:
                 last_report_time = eventtime
                 gcode.respond_info('Wait for calculations..')
             eventtime = reactor.pause(eventtime + 0.1)
@@ -326,10 +326,10 @@ class ShaperCalibrate:
         np = self.numpy
         A = np.array(shaper[0])
         T = np.array(shaper[1])
-        inv_D = 1 / A.sum()
-        omega = 2 * math.pi * test_freqs
+        inv_D = 1.0 / A.sum()
+        omega = 2.0 * math.pi * test_freqs
         damping = test_damping_ratio * omega
-        omega_d = omega * math.sqrt(1 - test_damping_ratio ** 2)
+        omega_d = omega * math.sqrt(1.0 - test_damping_ratio ** 2)
         W = A * np.exp(np.outer(-damping, T[-1] - T))
         S = W * np.sin(np.outer(omega_d, T))
         C = W * np.cos(np.outer(omega_d, T))
@@ -344,18 +344,18 @@ class ShaperCalibrate:
         return (remaining_vibrations / all_vibrations, vals)
 
     
-    def _get_shaper_smoothing(self, shaper, accel, scv = (5000, 5)):
+    def _get_shaper_smoothing(self, shaper, accel, scv = (5000, 5.0)):
         half_accel = accel * 0.5
         (A, T) = shaper
-        inv_D = 1 / sum(A)
+        inv_D = 1.0 / sum(A)
         n = len(T)
         ts = None([ A[i] * T[i] for i in (range(n)) ]) * inv_D
-        offset_90 = offset_180 = 0
+        offset_90 = offset_180 = 0.0
         for i in range(n):
             if T[i] >= ts:
                 offset_90 += A[i] * (scv + half_accel * (T[i] - ts)) * (T[i] - ts)
             offset_180 += A[i] * half_accel * (T[i] - ts) ** 2
-        offset_90 *= inv_D * math.sqrt(2)
+        offset_90 *= inv_D * math.sqrt(2.0)
         offset_180 *= inv_D
         return max(offset_90, offset_180)
 

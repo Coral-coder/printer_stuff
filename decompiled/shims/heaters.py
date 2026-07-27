@@ -15,9 +15,9 @@ import logging
 import threading
 import numpy as np
 KELVIN_TO_CELSIUS = -273.15
-MAX_HEAT_TIME = 5
-AMBIENT_TEMP = 25
-PID_PARAM_BASE = 255
+MAX_HEAT_TIME = 5.0
+AMBIENT_TEMP = 25.0
+PID_PARAM_BASE = 255.0
 
 class Heater:
     
@@ -36,19 +36,19 @@ class Heater:
         self.sensor.setup_callback(self.temperature_callback)
         self.pwm_delay = self.sensor.get_report_time_delta()
         self.verify_heater = config.getboolean('verify_heater', True)
-        self.min_extrude_temp = config.getfloat('min_extrude_temp', 170, minval=self.min_temp, maxval=self.max_temp)
+        self.min_extrude_temp = config.getfloat('min_extrude_temp', 1.7e+02, minval=self.min_temp, maxval=self.max_temp)
         is_fileoutput = self.printer.get_start_args().get('debugoutput') is not None
-        if not self.min_extrude_temp <= 0:
+        if not self.min_extrude_temp <= 0.0:
             pass
         self.can_extrude = is_fileoutput
-        self.max_power = config.getfloat('max_power', 1, above=0, maxval=1)
-        self.smooth_time = config.getfloat('smooth_time', 1, above=0)
-        self.inv_smooth_time = 1 / self.smooth_time
+        self.max_power = config.getfloat('max_power', 1.0, above=0.0, maxval=1.0)
+        self.smooth_time = config.getfloat('smooth_time', 1.0, above=0.0)
+        self.inv_smooth_time = 1.0 / self.smooth_time
         self.lock = threading.Lock()
-        self.last_temp = self.smoothed_temp = self.target_temp = 0
-        self.last_temp_time = 0
-        self.next_pwm_time = 0
-        self.last_pwm_value = 0
+        self.last_temp = self.smoothed_temp = self.target_temp = 0.0
+        self.last_temp_time = 0.0
+        self.next_pwm_time = 0.0
+        self.last_pwm_value = 0.0
         algos = {
             'watermark': ControlBangBang,
             'pid': ControlPID }
@@ -57,7 +57,7 @@ class Heater:
         heater_pin = config.get('heater_pin')
         ppins = self.printer.lookup_object('pins')
         self.mcu_pwm = ppins.setup_pin('pwm', heater_pin)
-        pwm_cycle_time = config.getfloat('pwm_cycle_time', 0.1, above=0, maxval=self.pwm_delay)
+        pwm_cycle_time = config.getfloat('pwm_cycle_time', 0.1, above=0.0, maxval=self.pwm_delay)
         self.mcu_pwm.setup_cycle_time(pwm_cycle_time)
         self.mcu_pwm.setup_max_duration(MAX_HEAT_TIME)
         if self.verify_heater:
@@ -69,7 +69,7 @@ class Heater:
         self.start_heating_seconds = 0
         if self.name == 'chamber_heater':
             self.stop_heating = False
-            self.target_temp = 0
+            self.target_temp = 0.0
             self.printer.register_event_handler('klippy:ready', self.register_chamber_heater_timer)
 
     
@@ -87,7 +87,7 @@ class Heater:
             fan_feedback = self.printer.lookup_object('fan_feedback')
             if self.control.heating and self.last_pwm_value > 0 and self.target_temp and fan_feedback.cx_fan_status.get('fan0_speed', 0) == 0:
                 for _ in range(15):
-                    self.printer.get_reactor().pause(self.printer.get_reactor().monotonic() + 1)
+                    self.printer.get_reactor().pause(self.printer.get_reactor().monotonic() + 1.0)
                     if self.control.heating and self.last_pwm_value > 0 and self.target_temp and fan_feedback.cx_fan_status.get('fan0_speed', 0) == 0:
                         num += 1
                         continue
@@ -99,12 +99,12 @@ class Heater:
                         ptc_fan_last_speed = self.printer.lookup_object('heater_fan chamber_fan').last_speed
                     gcode._respond_error('{"code":"key519", "msg":"PTC fan_speed is 0, turn off PTC heaters, ptc_fan_last_speed:%s", "values":[]}' % ptc_fan_last_speed)
                     gcode.run_script_from_command('M141 S0')
-        return eventtime + 1
+        return eventtime + 1.0
 
     
     def set_pwm(self, read_time, value):
-        if self.target_temp <= 0:
-            value = 0
+        if self.target_temp <= 0.0:
+            value = 0.0
         if (read_time < self.next_pwm_time or self.last_pwm_value) and abs(value - self.last_pwm_value) < 0.05:
             return None
         pwm_time = None + self.pwm_delay
@@ -120,7 +120,7 @@ class Heater:
             self.last_temp_time = read_time
             self.control.temperature_update(read_time, temp, self.target_temp)
             temp_diff = temp - self.smoothed_temp
-            adj_time = min(time_diff * self.inv_smooth_time, 1)
+            adj_time = min(time_diff * self.inv_smooth_time, 1.0)
             self.smoothed_temp += temp_diff * adj_time
             self.can_extrude = self.smoothed_temp >= self.min_extrude_temp
             self.info_array[0] = self.can_extrude
@@ -157,7 +157,7 @@ class Heater:
 
     
     def get_temp(self, eventtime):
-        print_time = self.mcu_pwm.get_mcu().estimated_print_time(eventtime) - 5
+        print_time = self.mcu_pwm.get_mcu().estimated_print_time(eventtime) - 5.0
         with self.lock:
             if self.last_temp_time < print_time:
                 pass
@@ -183,7 +183,7 @@ class Heater:
         with self.lock:
             old_control = self.control
             self.control = control
-            self.target_temp = 0
+            self.target_temp = 0.0
             None(None, None, None)
         with None:
             if not None:
@@ -208,7 +208,7 @@ class Heater:
                 pass
         if not target_temp:
             pass
-        is_active = last_temp > 50
+        is_active = last_temp > 5e+01
         return (is_active, '%s: target=%.0f temp=%.1f pwm=%.3f' % (self.name, target_temp, last_temp, last_pwm_value))
 
     
@@ -229,7 +229,7 @@ class Heater:
     cmd_SET_HEATER_TEMPERATURE_help = 'Sets a heater temperature'
     
     def cmd_SET_HEATER_TEMPERATURE(self, gcmd):
-        temp = gcmd.get_float('TARGET', 0)
+        temp = gcmd.get_float('TARGET', 0.0)
         wait = True if gcmd.get_int('WAIT', 0) == 1 else False
         if self.name == 'chamber_heater':
             self.target_temp = temp
@@ -247,22 +247,22 @@ class ControlBangBang:
         self.printer = config.get_printer()
         self.heater = heater
         self.heater_max_power = heater.get_max_power()
-        self.max_delta = config.getfloat('max_delta', 2, above=0)
+        self.max_delta = config.getfloat('max_delta', 2.0, above=0.0)
         self.heating = False
         self.long_temp = False
-        self.old_temp = 0
+        self.old_temp = 0.0
         self.cnt_temp = 0
         self.prev_temp = AMBIENT_TEMP
-        self.temp_coff = 1
+        self.temp_coff = 1.0
         self.diff_tempa = 0
         self.diff_tempb = 0
         self.count = 0
 
     
     def temperature_update(self, read_time, temp, target_temp):
-        if temp + 5 < target_temp:
+        if temp + 5.0 < target_temp:
             self.long_temp = True
-            self.old_temp = 0
+            self.old_temp = 0.0
             self.cnt_temp = 0
         if target_temp >= 20 and target_temp <= 120:
             if temp + 0.7 > target_temp:
@@ -271,15 +271,15 @@ class ControlBangBang:
                 if self.old_temp <= 0.01 or self.old_temp < temp:
                     self.old_temp = temp
                     self.cnt_temp = 0
-                    self.diff_tempa = 16.1 + 1.029 * (target_temp - 20)
-                    self.diff_tempb = 16.3 + 1.032 * (target_temp - 20)
+                    self.diff_tempa = 16.1 + 1.029 * (target_temp - 2e+01)
+                    self.diff_tempb = 16.3 + 1.032 * (target_temp - 2e+01)
                 elif self.old_temp > temp:
                     self.cnt_temp = self.cnt_temp + 1
                     if self.cnt_temp > 10:
                         self.long_temp = False
                     else:
-                        self.diff_tempa = 19.1 + 1.006 * (target_temp - 20)
-                        self.diff_tempb = 19.3 + 1.009 * (target_temp - 20)
+                        self.diff_tempa = 19.1 + 1.006 * (target_temp - 2e+01)
+                        self.diff_tempb = 19.3 + 1.009 * (target_temp - 2e+01)
             if self.heating and temp >= self.diff_tempb:
                 self.heating = False
             elif self.heating and temp <= self.diff_tempa:
@@ -321,7 +321,7 @@ class ControlPID:
         self.Kp_ht = config.getfloat('pid_Kp_high_temp', default=config.getfloat('pid_Kp')) / PID_PARAM_BASE
         self.Ki_ht = config.getfloat('pid_Ki_high_temp', default=config.getfloat('pid_Ki')) / PID_PARAM_BASE
         self.Kd_ht = config.getfloat('pid_Kd_high_temp', default=config.getfloat('pid_Kd')) / PID_PARAM_BASE
-        self.max_delta = config.getfloat('max_delta', 2, above=0)
+        self.max_delta = config.getfloat('max_delta', 2.0, above=0.0)
         self.pid_calibrate_Kp = None
         self.pid_calibrate_Ki = None
         self.pid_calibrate_Kd = None
@@ -329,13 +329,13 @@ class ControlPID:
         self.pid_calibrate_Ki_ht = None
         self.pid_calibrate_Kd_ht = None
         self.min_deriv_time = heater.get_smooth_time()
-        self.temp_integ_max = 0
+        self.temp_integ_max = 0.0
         if self.Ki:
             self.temp_integ_max = self.heater_max_power / self.Ki
         self.prev_temp = AMBIENT_TEMP
-        self.prev_temp_time = 0
-        self.prev_temp_deriv = 0
-        self.prev_temp_integ = 0
+        self.prev_temp_time = 0.0
+        self.prev_temp_deriv = 0.0
+        self.prev_temp_integ = 0.0
         self.heating = False
         self.heater_bed_state = 0
 
@@ -372,9 +372,9 @@ class ControlPID:
             temp_deriv = (self.prev_temp_deriv * (self.min_deriv_time - time_diff) + temp_diff) / self.min_deriv_time
         temp_err = target_temp - temp
         temp_integ = self.prev_temp_integ + temp_err * time_diff
-        temp_integ = max(0, min(self.temp_integ_max, temp_integ))
+        temp_integ = max(0.0, min(self.temp_integ_max, temp_integ))
         co = self.Kp * temp_err + self.Ki * temp_integ - self.Kd * temp_deriv
-        bounded_co = max(0, min(self.heater_max_power, co))
+        bounded_co = max(0.0, min(self.heater_max_power, co))
         self.heater.set_pwm(read_time, bounded_co)
         self.prev_temp = temp
         self.prev_temp_time = read_time

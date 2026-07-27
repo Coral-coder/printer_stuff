@@ -1483,7 +1483,7 @@ load_ai.pyc (Python 3.9)
                         460     POP_JUMP_IF_FALSE               468
                         464     LOAD_FAST                       13: max_re_prob
                         466     JUMP_FORWARD                    2 (to 470)
-                        468     LOAD_CONST                      24: 0
+                        468     LOAD_CONST                      24: 0.0
                         470     LOAD_FAST                       19: normalized_total_area
                         472     LOAD_FAST                       9: output_width
                         474     LOAD_FAST                       10: output_height
@@ -2018,8 +2018,8 @@ load_ai.pyc (Python 3.9)
                         96      LOAD_CONST                      8: ''
                         98      LOAD_CONST                      8: ''
                         100     LOAD_CONST                      8: ''
-                        102     LOAD_CONST                      9: 0
-                        104     LOAD_CONST                      9: 0
+                        102     LOAD_CONST                      9: 0.0
+                        104     LOAD_CONST                      9: 0.0
                         106     LOAD_CONST                      3: 0
                         108     LOAD_CONST                      3: 0
                         110     LOAD_CONST                      10: ('ai_switch', 'ai_waste_switch', 'command_type', 'command', 'command_description', 'stderr', 'ai_results', 'max_re_prob', 'normalized_total_area', 'output_width', 'output_height')
@@ -2491,8 +2491,8 @@ load_ai.pyc (Python 3.9)
                         22      LOAD_CONST                      3: 'waste'
                         24      LOAD_CONST                      4: ''
                         26      BUILD_LIST                      0
-                        28      LOAD_CONST                      5: 0
-                        30      LOAD_CONST                      5: 0
+                        28      LOAD_CONST                      5: 0.0
+                        30      LOAD_CONST                      5: 0.0
                         32      LOAD_CONST                      6: 0
                         34      LOAD_CONST                      6: 0
                         36      LOAD_CONST                      7: ('ai_switch', 'ai_waste_switch', 'command_type', 'command', 'command_description', 'stderr', 'ai_results', 'max_re_prob', 'normalized_total_area', 'output_width', 'output_height')
@@ -3289,13 +3289,13 @@ load_ai.pyc (Python 3.9)
                         )
                     [Disassembly]
                         0       BUILD_LIST                      0
-                        2       LOAD_CONST                      1: (0, 0, 0.931467, 1, 0, 4, 4)
+                        2       LOAD_CONST                      1: (0, 0, 0.931467, 1.0, 0.0, 4.0, 4.0)
                         4       LIST_EXTEND                     1
                         6       BUILD_LIST                      0
-                        8       LOAD_CONST                      2: (1, 0, 0.831467, 3, 1, 3, 4)
+                        8       LOAD_CONST                      2: (1, 0, 0.831467, 3.0, 1.0, 3.0, 4.0)
                         10      LIST_EXTEND                     1
                         12      BUILD_LIST                      0
-                        14      LOAD_CONST                      3: (2, 0, 0.731467, 0, 3, 7, 3)
+                        14      LOAD_CONST                      3: (2, 0, 0.731467, 0.0, 3.0, 7.0, 3.0)
                         16      LIST_EXTEND                     1
                         18      BUILD_LIST                      3
                         20      STORE_FAST                      2: detection_results
@@ -3338,8 +3338,8 @@ load_ai.pyc (Python 3.9)
                         94      LOAD_FAST                       4: detection_results_str
                         96      FORMAT_VALUE                    0 (FVC_NONE)
                         98      BUILD_STRING                    10
-                        100     LOAD_CONST                      17: 0
-                        102     LOAD_CONST                      17: 0
+                        100     LOAD_CONST                      17: 0.0
+                        102     LOAD_CONST                      17: 0.0
                         104     LOAD_CONST                      18: 0
                         106     LOAD_CONST                      18: 0
                         108     LOAD_CONST                      19: ('ai_switch', 'ai_waste_switch', 'command_type', 'command', 'command_description', 'stderr', 'ai_results', 'max_re_prob', 'normalized_total_area', 'output_width', 'output_height')

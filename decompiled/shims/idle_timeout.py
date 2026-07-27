@@ -15,16 +15,16 @@ class IdleTimeout:
         self.toolhead = None
         self.timeout_timer = None
         self.printer.register_event_handler('klippy:ready', self.handle_ready)
-        self.idle_timeout = config.getfloat('timeout', 600, above=0)
+        self.idle_timeout = config.getfloat('timeout', 6e+02, above=0.0)
         gcode_macro = self.printer.load_object(config, 'gcode_macro')
         self.idle_gcode = gcode_macro.load_template(config, 'gcode', DEFAULT_IDLE_GCODE)
         self.gcode.register_command('SET_IDLE_TIMEOUT', self.cmd_SET_IDLE_TIMEOUT, desc=self.cmd_SET_IDLE_TIMEOUT_help)
         self.state = 'Idle'
-        self.last_print_start_systime = 0
+        self.last_print_start_systime = 0.0
 
     
     def get_status(self, eventtime):
-        printing_time = 0
+        printing_time = 0.0
         if self.state == 'Printing':
             printing_time = eventtime - self.last_print_start_systime
         return {
@@ -58,12 +58,12 @@ class IdleTimeout:
     def check_idle_timeout(self, eventtime):
         (print_time, est_print_time, lookahead_empty) = self.toolhead.check_busy(eventtime)
         idle_time = est_print_time - print_time
-        if lookahead_empty or idle_time < 1:
+        if lookahead_empty or idle_time < 1.0:
             return eventtime + self.idle_timeout
         if None < self.idle_timeout:
             return eventtime + self.idle_timeout - idle_time
         if None.gcode.get_mutex().test():
-            return eventtime + 1
+            return eventtime + 1.0
         return None.transition_idle_state(eventtime)
 
     
@@ -73,9 +73,9 @@ class IdleTimeout:
         if None.state == 'Ready':
             return self.check_idle_timeout(eventtime)
         (print_time, est_print_time, lookahead_empty) = None.toolhead.check_busy(eventtime)
-        buffer_time = min(2, print_time - est_print_time)
+        buffer_time = min(2.0, print_time - est_print_time)
         if not lookahead_empty:
-            return eventtime + READY_TIMEOUT + max(0, buffer_time)
+            return eventtime + READY_TIMEOUT + max(0.0, buffer_time)
         if None > -READY_TIMEOUT:
             return eventtime + READY_TIMEOUT + buffer_time
         if None.gcode.get_mutex().test():
@@ -97,7 +97,7 @@ class IdleTimeout:
     cmd_SET_IDLE_TIMEOUT_help = 'Set the idle timeout in seconds'
     
     def cmd_SET_IDLE_TIMEOUT(self, gcmd):
-        timeout = gcmd.get_float('TIMEOUT', self.idle_timeout, above=0)
+        timeout = gcmd.get_float('TIMEOUT', self.idle_timeout, above=0.0)
         self.idle_timeout = timeout
         gcmd.respond_info('idle_timeout: Timeout set to %.2f s' % (timeout,))
         if self.state == 'Ready':

@@ -11,16 +11,16 @@ class ManualStepper:
         self.printer = config.get_printer()
         if config.get('endstop_pin', None) is not None:
             self.can_home = True
-            self.rail = stepper.PrinterRail(config, need_position_minmax=False, default_position_endstop=0)
+            self.rail = stepper.PrinterRail(config, need_position_minmax=False, default_position_endstop=0.0)
             self.steppers = self.rail.get_steppers()
         else:
             self.can_home = False
             self.rail = stepper.PrinterStepper(config)
             self.steppers = [
                 self.rail]
-        self.velocity = config.getfloat('velocity', 5, above=0)
-        self.accel = self.homing_accel = config.getfloat('accel', 0, minval=0)
-        self.next_cmd_time = 0
+        self.velocity = config.getfloat('velocity', 5.0, above=0.0)
+        self.accel = self.homing_accel = config.getfloat('accel', 0.0, minval=0.0)
+        self.next_cmd_time = 0.0
         (ffi_main, ffi_lib) = chelper.get_ffi()
         self.trapq = ffi_main.gc(ffi_lib.trapq_alloc(), ffi_lib.trapq_free)
         self.trapq_append = ffi_lib.trapq_append
@@ -58,8 +58,8 @@ class ManualStepper:
     def do_set_position(self, setpos):
         self.rail.set_position([
             setpos,
-            0,
-            0])
+            0.0,
+            0.0])
 
     
     def do_move(self, movepos, speed, accel, sync = (True,)):
@@ -67,7 +67,7 @@ class ManualStepper:
         cp = self.rail.get_commanded_position()
         dist = movepos - cp
         (axis_r, accel_t, cruise_t, cruise_v) = force_move.calc_move_time(dist, speed, accel)
-        self.trapq_append(self.trapq, self.next_cmd_time, accel_t, cruise_t, accel_t, cp, 0, 0, axis_r, 0, 0, 0, cruise_v, accel)
+        self.trapq_append(self.trapq, self.next_cmd_time, accel_t, cruise_t, accel_t, cp, 0.0, 0.0, axis_r, 0.0, 0.0, 0.0, cruise_v, accel)
         self.next_cmd_time = self.next_cmd_time + accel_t + cruise_t + accel_t
         self.rail.generate_steps(self.next_cmd_time)
         self.trapq_finalize_moves(self.trapq, self.next_cmd_time + 99999.9)
@@ -83,9 +83,9 @@ class ManualStepper:
         self.homing_accel = accel
         pos = [
             movepos,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0]
         endstops = self.rail.get_endstops()
         phoming = self.printer.lookup_object('homing')
         phoming.manual_home(self, endstops, pos, speed, triggered, check_trigger)
@@ -99,8 +99,8 @@ class ManualStepper:
         setpos = gcmd.get_float('SET_POSITION', None)
         if setpos is not None:
             self.do_set_position(setpos)
-        speed = gcmd.get_float('SPEED', self.velocity, above=0)
-        accel = gcmd.get_float('ACCEL', self.accel, minval=0)
+        speed = gcmd.get_float('SPEED', self.velocity, above=0.0)
+        accel = gcmd.get_float('ACCEL', self.accel, minval=0.0)
         homing_move = gcmd.get_int('STOP_ON_ENDSTOP', 0)
         if homing_move:
             movepos = gcmd.get_float('MOVE')
@@ -120,9 +120,9 @@ class ManualStepper:
     def get_position(self):
         return [
             self.rail.get_commanded_position(),
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0]
 
     
     def set_position(self, newpos, homing_axes = ((),)):
@@ -135,7 +135,7 @@ class ManualStepper:
 
     
     def dwell(self, delay):
-        self.next_cmd_time += max(0, delay)
+        self.next_cmd_time += max(0.0, delay)
 
     
     def drip_move(self, newpos, speed, drip_completion):
@@ -153,8 +153,8 @@ class ManualStepper:
     def calc_position(self, stepper_positions):
         return [
             stepper_positions[self.rail.get_name()],
-            0,
-            0]
+            0.0,
+            0.0]
 
 
 

@@ -403,7 +403,7 @@ prtouch.pyc (Python 3.9)
                         372     LOAD_FAST                       1: config
                         374     LOAD_ATTR                       5: getfloat
                         376     LOAD_CONST                      48: 'fix_z_offset'
-                        378     LOAD_CONST                      49: 0
+                        378     LOAD_CONST                      49: 0.0
                         380     LOAD_CONST                      33: -1
                         382     LOAD_CONST                      34: 1
                         384     LOAD_CONST                      5: ('default', 'minval', 'maxval')
@@ -436,7 +436,7 @@ prtouch.pyc (Python 3.9)
                         438     LOAD_FAST                       1: config
                         440     LOAD_ATTR                       5: getfloat
                         442     LOAD_CONST                      53: 'g28_sta0_speed'
-                        444     LOAD_CONST                      54: 2
+                        444     LOAD_CONST                      54: 2.0
                         446     LOAD_CONST                      55: 0.1
                         448     LOAD_CONST                      3: 10
                         450     LOAD_CONST                      5: ('default', 'minval', 'maxval')
@@ -466,7 +466,7 @@ prtouch.pyc (Python 3.9)
                         498     LOAD_FAST                       1: config
                         500     LOAD_ATTR                       5: getfloat
                         502     LOAD_CONST                      59: 'g29_speed'
-                        504     LOAD_CONST                      54: 2
+                        504     LOAD_CONST                      54: 2.0
                         506     LOAD_CONST                      55: 0.1
                         508     LOAD_CONST                      3: 10
                         510     LOAD_CONST                      5: ('default', 'minval', 'maxval')
@@ -630,7 +630,7 @@ prtouch.pyc (Python 3.9)
                         826     LOAD_FAST                       1: config
                         828     LOAD_ATTR                       5: getfloat
                         830     LOAD_CONST                      87: 'self_z_offset'
-                        832     LOAD_CONST                      49: 0
+                        832     LOAD_CONST                      49: 0.0
                         834     LOAD_CONST                      88: -2
                         836     LOAD_CONST                      26: 2
                         838     LOAD_CONST                      5: ('default', 'minval', 'maxval')
@@ -735,11 +735,11 @@ prtouch.pyc (Python 3.9)
                         0       LOAD_CONST                      1: 0
                         2       LOAD_FAST                       0: self
                         4       STORE_ATTR                      0: out_index
-                        6       LOAD_CONST                      2: 0
+                        6       LOAD_CONST                      2: 0.0
                         8       LOAD_FAST                       0: self
                         10      STORE_ATTR                      1: out_val_mm
                         12      BUILD_LIST                      0
-                        14      LOAD_CONST                      3: (0, 0, 0)
+                        14      LOAD_CONST                      3: (0.0, 0.0, 0.0)
                         16      LIST_EXTEND                     1
                         18      LOAD_CONST                      4: 4
                         20      BINARY_MULTIPLY                 
@@ -1273,7 +1273,7 @@ prtouch.pyc (Python 3.9)
                         46      LOAD_FAST                       0: self
                         48      LOAD_ATTR                       6: cfg
                         50      LOAD_ATTR                       7: bed_max_err
-                        52      LOAD_CONST                      1: 1
+                        52      LOAD_CONST                      1: 1.0
                         54      BINARY_ADD                      
                         56      BUILD_LIST                      3
                         58      LOAD_FAST                       1: min_x
@@ -1281,7 +1281,7 @@ prtouch.pyc (Python 3.9)
                         62      LOAD_FAST                       0: self
                         64      LOAD_ATTR                       6: cfg
                         66      LOAD_ATTR                       7: bed_max_err
-                        68      LOAD_CONST                      1: 1
+                        68      LOAD_CONST                      1: 1.0
                         70      BINARY_ADD                      
                         72      BUILD_LIST                      3
                         74      LOAD_FAST                       3: max_x
@@ -1289,7 +1289,7 @@ prtouch.pyc (Python 3.9)
                         78      LOAD_FAST                       0: self
                         80      LOAD_ATTR                       6: cfg
                         82      LOAD_ATTR                       7: bed_max_err
-                        84      LOAD_CONST                      1: 1
+                        84      LOAD_CONST                      1: 1.0
                         86      BINARY_ADD                      
                         88      BUILD_LIST                      3
                         90      LOAD_FAST                       3: max_x
@@ -1297,7 +1297,7 @@ prtouch.pyc (Python 3.9)
                         94      LOAD_FAST                       0: self
                         96      LOAD_ATTR                       6: cfg
                         98      LOAD_ATTR                       7: bed_max_err
-                        100     LOAD_CONST                      1: 1
+                        100     LOAD_CONST                      1: 1.0
                         102     BINARY_ADD                      
                         104     BUILD_LIST                      3
                         106     BUILD_LIST                      4
@@ -1305,40 +1305,40 @@ prtouch.pyc (Python 3.9)
                         110     LOAD_ATTR                       8: val
                         112     STORE_ATTR                      9: rdy_pos
                         114     LOAD_FAST                       1: min_x
-                        116     LOAD_CONST                      1: 1
+                        116     LOAD_CONST                      1: 1.0
                         118     BINARY_ADD                      
                         120     LOAD_FAST                       2: min_y
-                        122     LOAD_CONST                      1: 1
+                        122     LOAD_CONST                      1: 1.0
                         124     BINARY_ADD                      
                         126     LOAD_FAST                       0: self
                         128     LOAD_ATTR                       6: cfg
                         130     LOAD_ATTR                       10: z_gap_00
                         132     BUILD_LIST                      3
                         134     LOAD_FAST                       1: min_x
-                        136     LOAD_CONST                      1: 1
+                        136     LOAD_CONST                      1: 1.0
                         138     BINARY_ADD                      
                         140     LOAD_FAST                       4: max_y
-                        142     LOAD_CONST                      1: 1
+                        142     LOAD_CONST                      1: 1.0
                         144     BINARY_SUBTRACT                 
                         146     LOAD_FAST                       0: self
                         148     LOAD_ATTR                       6: cfg
                         150     LOAD_ATTR                       11: z_gap_01
                         152     BUILD_LIST                      3
                         154     LOAD_FAST                       3: max_x
-                        156     LOAD_CONST                      1: 1
+                        156     LOAD_CONST                      1: 1.0
                         158     BINARY_SUBTRACT                 
                         160     LOAD_FAST                       4: max_y
-                        162     LOAD_CONST                      1: 1
+                        162     LOAD_CONST                      1: 1.0
                         164     BINARY_SUBTRACT                 
                         166     LOAD_FAST                       0: self
                         168     LOAD_ATTR                       6: cfg
                         170     LOAD_ATTR                       12: z_gap_11
                         172     BUILD_LIST                      3
                         174     LOAD_FAST                       3: max_x
-                        176     LOAD_CONST                      1: 1
+                        176     LOAD_CONST                      1: 1.0
                         178     BINARY_SUBTRACT                 
                         180     LOAD_FAST                       2: min_y
-                        182     LOAD_CONST                      1: 1
+                        182     LOAD_CONST                      1: 1.0
                         184     BINARY_ADD                      
                         186     LOAD_FAST                       0: self
                         188     LOAD_ATTR                       6: cfg
@@ -2578,7 +2578,7 @@ prtouch.pyc (Python 3.9)
                         844     LOAD_ATTR                       6: pi_count
                         846     LOAD_FAST                       9: i
                         848     BINARY_SUBTRACT                 
-                        850     LOAD_CONST                      16: 1
+                        850     LOAD_CONST                      16: 1.0
                         852     BINARY_MULTIPLY                 
                         854     LOAD_FAST                       0: self
                         856     LOAD_ATTR                       5: cfg
@@ -4818,7 +4818,7 @@ prtouch.pyc (Python 3.9)
                         1166    LOAD_CONST                      2: 0
                         1168    CALL_FUNCTION                   1
                         1170    STORE_FAST                      26: v_cnt
-                        1172    LOAD_CONST                      23: 0
+                        1172    LOAD_CONST                      23: 0.0
                         1174    STORE_FAST                      27: v_gap
                         1176    LOAD_GLOBAL                     21: range
                         1178    LOAD_GLOBAL                     2: int
@@ -5040,7 +5040,7 @@ prtouch.pyc (Python 3.9)
                         160     LOAD_FAST                       0: self
                         162     LOAD_ATTR                       5: cfg
                         164     LOAD_ATTR                       15: bed_max_err
-                        166     LOAD_CONST                      4: 1
+                        166     LOAD_CONST                      4: 1.0
                         168     BINARY_ADD                      
                         170     LOAD_FAST                       4: now_pos
                         172     LOAD_CONST                      2: 3
@@ -5173,7 +5173,7 @@ prtouch.pyc (Python 3.9)
                         78      LOAD_FAST                       0: self
                         80      LOAD_ATTR                       11: cfg
                         82      LOAD_ATTR                       12: bed_max_err
-                        84      LOAD_CONST                      2: 1
+                        84      LOAD_CONST                      2: 1.0
                         86      BINARY_ADD                      
                         88      BUILD_LIST                      3
                         90      LOAD_FAST                       1: min_x
@@ -5181,7 +5181,7 @@ prtouch.pyc (Python 3.9)
                         94      LOAD_FAST                       0: self
                         96      LOAD_ATTR                       11: cfg
                         98      LOAD_ATTR                       12: bed_max_err
-                        100     LOAD_CONST                      2: 1
+                        100     LOAD_CONST                      2: 1.0
                         102     BINARY_ADD                      
                         104     BUILD_LIST                      3
                         106     LOAD_FAST                       3: max_x
@@ -5189,7 +5189,7 @@ prtouch.pyc (Python 3.9)
                         110     LOAD_FAST                       0: self
                         112     LOAD_ATTR                       11: cfg
                         114     LOAD_ATTR                       12: bed_max_err
-                        116     LOAD_CONST                      2: 1
+                        116     LOAD_CONST                      2: 1.0
                         118     BINARY_ADD                      
                         120     BUILD_LIST                      3
                         122     LOAD_FAST                       3: max_x
@@ -5197,7 +5197,7 @@ prtouch.pyc (Python 3.9)
                         126     LOAD_FAST                       0: self
                         128     LOAD_ATTR                       11: cfg
                         130     LOAD_ATTR                       12: bed_max_err
-                        132     LOAD_CONST                      2: 1
+                        132     LOAD_CONST                      2: 1.0
                         134     BINARY_ADD                      
                         136     BUILD_LIST                      3
                         138     BUILD_LIST                      4
@@ -5501,81 +5501,81 @@ prtouch.pyc (Python 3.9)
                         32      LOAD_FAST                       2: min_x
                         34      LOAD_GLOBAL                     5: random
                         36      LOAD_METHOD                     6: uniform
-                        38      LOAD_CONST                      1: 2
-                        40      LOAD_CONST                      2: 5
+                        38      LOAD_CONST                      1: 2.0
+                        40      LOAD_CONST                      2: 5.0
                         42      CALL_METHOD                     2
                         44      BINARY_ADD                      
                         46      LOAD_FAST                       3: min_y
                         48      LOAD_GLOBAL                     5: random
                         50      LOAD_METHOD                     6: uniform
-                        52      LOAD_CONST                      1: 2
-                        54      LOAD_CONST                      2: 5
+                        52      LOAD_CONST                      1: 2.0
+                        54      LOAD_CONST                      2: 5.0
                         56      CALL_METHOD                     2
                         58      BINARY_ADD                      
                         60      LOAD_FAST                       0: self
                         62      LOAD_ATTR                       7: cfg
                         64      LOAD_ATTR                       8: bed_max_err
-                        66      LOAD_CONST                      3: 1
+                        66      LOAD_CONST                      3: 1.0
                         68      BINARY_ADD                      
                         70      BUILD_LIST                      3
                         72      LOAD_FAST                       2: min_x
                         74      LOAD_GLOBAL                     5: random
                         76      LOAD_METHOD                     6: uniform
-                        78      LOAD_CONST                      1: 2
-                        80      LOAD_CONST                      2: 5
+                        78      LOAD_CONST                      1: 2.0
+                        80      LOAD_CONST                      2: 5.0
                         82      CALL_METHOD                     2
                         84      BINARY_ADD                      
                         86      LOAD_FAST                       5: max_y
                         88      LOAD_GLOBAL                     5: random
                         90      LOAD_METHOD                     6: uniform
-                        92      LOAD_CONST                      1: 2
-                        94      LOAD_CONST                      2: 5
+                        92      LOAD_CONST                      1: 2.0
+                        94      LOAD_CONST                      2: 5.0
                         96      CALL_METHOD                     2
                         98      BINARY_SUBTRACT                 
                         100     LOAD_FAST                       0: self
                         102     LOAD_ATTR                       7: cfg
                         104     LOAD_ATTR                       8: bed_max_err
-                        106     LOAD_CONST                      3: 1
+                        106     LOAD_CONST                      3: 1.0
                         108     BINARY_ADD                      
                         110     BUILD_LIST                      3
                         112     LOAD_FAST                       4: max_x
                         114     LOAD_GLOBAL                     5: random
                         116     LOAD_METHOD                     6: uniform
-                        118     LOAD_CONST                      1: 2
-                        120     LOAD_CONST                      2: 5
+                        118     LOAD_CONST                      1: 2.0
+                        120     LOAD_CONST                      2: 5.0
                         122     CALL_METHOD                     2
                         124     BINARY_SUBTRACT                 
                         126     LOAD_FAST                       5: max_y
                         128     LOAD_GLOBAL                     5: random
                         130     LOAD_METHOD                     6: uniform
-                        132     LOAD_CONST                      1: 2
-                        134     LOAD_CONST                      2: 5
+                        132     LOAD_CONST                      1: 2.0
+                        134     LOAD_CONST                      2: 5.0
                         136     CALL_METHOD                     2
                         138     BINARY_SUBTRACT                 
                         140     LOAD_FAST                       0: self
                         142     LOAD_ATTR                       7: cfg
                         144     LOAD_ATTR                       8: bed_max_err
-                        146     LOAD_CONST                      3: 1
+                        146     LOAD_CONST                      3: 1.0
                         148     BINARY_ADD                      
                         150     BUILD_LIST                      3
                         152     LOAD_FAST                       4: max_x
                         154     LOAD_GLOBAL                     5: random
                         156     LOAD_METHOD                     6: uniform
-                        158     LOAD_CONST                      1: 2
-                        160     LOAD_CONST                      2: 5
+                        158     LOAD_CONST                      1: 2.0
+                        160     LOAD_CONST                      2: 5.0
                         162     CALL_METHOD                     2
                         164     BINARY_SUBTRACT                 
                         166     LOAD_FAST                       3: min_y
                         168     LOAD_GLOBAL                     5: random
                         170     LOAD_METHOD                     6: uniform
-                        172     LOAD_CONST                      1: 2
-                        174     LOAD_CONST                      2: 5
+                        172     LOAD_CONST                      1: 2.0
+                        174     LOAD_CONST                      2: 5.0
                         176     CALL_METHOD                     2
                         178     BINARY_ADD                      
                         180     LOAD_FAST                       0: self
                         182     LOAD_ATTR                       7: cfg
                         184     LOAD_ATTR                       8: bed_max_err
-                        186     LOAD_CONST                      3: 1
+                        186     LOAD_CONST                      3: 1.0
                         188     BINARY_ADD                      
                         190     BUILD_LIST                      3
                         192     BUILD_LIST                      4
@@ -5661,7 +5661,7 @@ prtouch.pyc (Python 3.9)
                         356     LOAD_FAST                       0: self
                         358     LOAD_ATTR                       7: cfg
                         360     LOAD_ATTR                       8: bed_max_err
-                        362     LOAD_CONST                      3: 1
+                        362     LOAD_CONST                      3: 1.0
                         364     BINARY_ADD                      
                         366     LOAD_FAST                       0: self
                         368     LOAD_ATTR                       0: obj
@@ -7640,8 +7640,8 @@ prtouch.pyc (Python 3.9)
                         954     BINARY_SUBSCR                   
                         956     LOAD_GLOBAL                     11: random
                         958     LOAD_METHOD                     15: uniform
-                        960     LOAD_CONST                      20: -1
-                        962     LOAD_CONST                      21: 1
+                        960     LOAD_CONST                      20: -1.0
+                        962     LOAD_CONST                      21: 1.0
                         964     CALL_METHOD                     2
                         966     BINARY_ADD                      
                         968     LOAD_FAST                       2: now_pos
@@ -7649,8 +7649,8 @@ prtouch.pyc (Python 3.9)
                         972     BINARY_SUBSCR                   
                         974     LOAD_GLOBAL                     11: random
                         976     LOAD_METHOD                     15: uniform
-                        978     LOAD_CONST                      20: -1
-                        980     LOAD_CONST                      21: 1
+                        978     LOAD_CONST                      20: -1.0
+                        980     LOAD_CONST                      21: 1.0
                         982     CALL_METHOD                     2
                         984     BINARY_ADD                      
                         986     LOAD_CONST                      4: 2
@@ -7734,7 +7734,7 @@ prtouch.pyc (Python 3.9)
                         1144    BINARY_SUBSCR                   
                         1146    BINARY_SUBTRACT                 
                         1148    CALL_METHOD                     1
-                        1150    LOAD_CONST                      24: 5
+                        1150    LOAD_CONST                      24: 5.0
                         1152    COMPARE_OP                      4 (>)
                         1154    POP_JUMP_IF_FALSE               1172
                         1158    LOAD_FAST                       0: self
@@ -8139,7 +8139,7 @@ prtouch.pyc (Python 3.9)
                         474     CALL_METHOD                     1
                         476     POP_TOP                         
                         478     LOAD_FAST                       4: home_z
-                        480     LOAD_CONST                      12: 1
+                        480     LOAD_CONST                      12: 1.0
                         482     COMPARE_OP                      4 (>)
                         484     POP_JUMP_IF_FALSE               502
                         488     LOAD_FAST                       0: self
@@ -8234,7 +8234,7 @@ prtouch.pyc (Python 3.9)
                         60      LOAD_FAST                       1: gcmd
                         62      LOAD_METHOD                     3: get_float
                         64      LOAD_CONST                      7: 'SPEED'
-                        66      LOAD_CONST                      8: 1
+                        66      LOAD_CONST                      8: 1.0
                         68      CALL_METHOD                     2
                         70      STORE_FAST                      6: speed
                         72      LOAD_FAST                       1: gcmd
@@ -8429,7 +8429,7 @@ prtouch.pyc (Python 3.9)
                         68      LOAD_FAST                       0: self
                         70      LOAD_ATTR                       5: cfg
                         72      LOAD_ATTR                       6: bed_max_err
-                        74      LOAD_CONST                      5: 1
+                        74      LOAD_CONST                      5: 1.0
                         76      BINARY_ADD                      
                         78      BUILD_LIST                      3
                         80      LOAD_FAST                       0: self
@@ -8461,7 +8461,7 @@ prtouch.pyc (Python 3.9)
                         132     LOAD_FAST                       0: self
                         134     LOAD_ATTR                       5: cfg
                         136     LOAD_ATTR                       6: bed_max_err
-                        138     LOAD_CONST                      5: 1
+                        138     LOAD_CONST                      5: 1.0
                         140     BINARY_ADD                      
                         142     BUILD_LIST                      3
                         144     LOAD_FAST                       0: self

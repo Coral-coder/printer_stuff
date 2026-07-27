@@ -164,9 +164,9 @@ controller_fan.pyc (Python 3.9)
                         104     LOAD_FAST                       1: config
                         106     LOAD_ATTR                       12: getfloat
                         108     LOAD_CONST                      6: 'fan_speed'
-                        110     LOAD_CONST                      7: 1
-                        112     LOAD_CONST                      8: 0
-                        114     LOAD_CONST                      7: 1
+                        110     LOAD_CONST                      7: 1.0
+                        112     LOAD_CONST                      8: 0.0
+                        114     LOAD_CONST                      7: 1.0
                         116     LOAD_CONST                      9: ('default', 'minval', 'maxval')
                         118     CALL_FUNCTION_KW                4
                         120     LOAD_FAST                       0: self
@@ -176,8 +176,8 @@ controller_fan.pyc (Python 3.9)
                         128     LOAD_CONST                      10: 'idle_speed'
                         130     LOAD_FAST                       0: self
                         132     LOAD_ATTR                       13: fan_speed
-                        134     LOAD_CONST                      8: 0
-                        136     LOAD_CONST                      7: 1
+                        134     LOAD_CONST                      8: 0.0
+                        136     LOAD_CONST                      7: 1.0
                         138     LOAD_CONST                      9: ('default', 'minval', 'maxval')
                         140     CALL_FUNCTION_KW                4
                         142     LOAD_FAST                       0: self
@@ -202,7 +202,7 @@ controller_fan.pyc (Python 3.9)
                         180     LOAD_ATTR                       16: idle_timeout
                         182     LOAD_FAST                       0: self
                         184     STORE_ATTR                      18: last_on
-                        186     LOAD_CONST                      8: 0
+                        186     LOAD_CONST                      8: 0.0
                         188     LOAD_FAST                       0: self
                         190     STORE_ATTR                      19: last_speed
                         192     LOAD_CONST                      0: None
@@ -490,7 +490,7 @@ controller_fan.pyc (Python 3.9)
                         1
                         1
                     [Disassembly]
-                        0       LOAD_CONST                      1: 0
+                        0       LOAD_CONST                      1: 0.0
                         2       STORE_FAST                      2: speed
                         4       LOAD_CONST                      2: False
                         6       STORE_FAST                      3: active
@@ -585,7 +585,7 @@ controller_fan.pyc (Python 3.9)
                         184     CALL_METHOD                     2
                         186     POP_TOP                         
                         188     LOAD_FAST                       1: eventtime
-                        190     LOAD_CONST                      6: 1
+                        190     LOAD_CONST                      6: 1.0
                         192     BINARY_ADD                      
                         194     RETURN_VALUE                    
                 'ControllerFan.callback'

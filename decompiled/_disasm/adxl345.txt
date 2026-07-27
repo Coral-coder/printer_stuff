@@ -1317,7 +1317,7 @@ adxl345.pyc (Python 3.9)
                         22      LOAD_CONST                      2: 'toolhead'
                         24      CALL_METHOD                     1
                         26      LOAD_METHOD                     4: dwell
-                        28      LOAD_CONST                      3: 1
+                        28      LOAD_CONST                      3: 1.0
                         30      CALL_METHOD                     1
                         32      POP_TOP                         
                         34      LOAD_FAST                       3: aclient
@@ -1654,7 +1654,7 @@ adxl345.pyc (Python 3.9)
                         16      LOAD_CONST                      1: 'toolhead'
                         18      CALL_METHOD                     1
                         20      LOAD_METHOD                     4: dwell
-                        22      LOAD_CONST                      2: 1
+                        22      LOAD_CONST                      2: 1.0
                         24      CALL_METHOD                     1
                         26      POP_TOP                         
                         28      LOAD_FAST                       2: aclient
@@ -2005,19 +2005,19 @@ adxl345.pyc (Python 3.9)
                         12      LOAD_FAST                       3: decay
                         14      LOAD_FAST                       0: self
                         16      STORE_ATTR                      2: decay
-                        18      LOAD_CONST                      1: 0
+                        18      LOAD_CONST                      1: 0.0
                         20      DUP_TOP                         
                         22      LOAD_FAST                       0: self
                         24      STORE_ATTR                      3: last_chip_clock
                         26      LOAD_FAST                       0: self
                         28      STORE_ATTR                      4: last_exp_mcu_clock
-                        30      LOAD_CONST                      1: 0
+                        30      LOAD_CONST                      1: 0.0
                         32      DUP_TOP                         
                         34      LOAD_FAST                       0: self
                         36      STORE_ATTR                      5: mcu_clock_avg
                         38      LOAD_FAST                       0: self
                         40      STORE_ATTR                      6: mcu_clock_variance
-                        42      LOAD_CONST                      1: 0
+                        42      LOAD_CONST                      1: 0.0
                         44      DUP_TOP                         
                         46      LOAD_FAST                       0: self
                         48      STORE_ATTR                      7: chip_clock_avg
@@ -2062,13 +2062,13 @@ adxl345.pyc (Python 3.9)
                         12      LOAD_FAST                       2: chip_clock
                         14      LOAD_FAST                       0: self
                         16      STORE_ATTR                      2: chip_clock_avg
-                        18      LOAD_CONST                      1: 0
+                        18      LOAD_CONST                      1: 0.0
                         20      DUP_TOP                         
                         22      LOAD_FAST                       0: self
                         24      STORE_ATTR                      3: mcu_clock_variance
                         26      LOAD_FAST                       0: self
                         28      STORE_ATTR                      4: chip_clock_covariance
-                        30      LOAD_CONST                      1: 0
+                        30      LOAD_CONST                      1: 0.0
                         32      DUP_TOP                         
                         34      LOAD_FAST                       0: self
                         36      STORE_ATTR                      5: last_chip_clock
@@ -2123,7 +2123,7 @@ adxl345.pyc (Python 3.9)
                         28      INPLACE_ADD                     
                         30      ROT_TWO                         
                         32      STORE_ATTR                      1: mcu_clock_avg
-                        34      LOAD_CONST                      1: 1
+                        34      LOAD_CONST                      1: 1.0
                         36      LOAD_FAST                       3: decay
                         38      BINARY_SUBTRACT                 
                         40      LOAD_FAST                       0: self
@@ -2151,7 +2151,7 @@ adxl345.pyc (Python 3.9)
                         84      INPLACE_ADD                     
                         86      ROT_TWO                         
                         88      STORE_ATTR                      3: chip_clock_avg
-                        90      LOAD_CONST                      1: 1
+                        90      LOAD_CONST                      1: 1.0
                         92      LOAD_FAST                       3: decay
                         94      BINARY_SUBTRACT                 
                         96      LOAD_FAST                       0: self
@@ -3797,7 +3797,7 @@ adxl345.pyc (Python 3.9)
                         206     LOAD_FAST                       0: self
                         208     LOAD_ATTR                       18: mcu
                         210     LOAD_METHOD                     22: seconds_to_clock
-                        212     LOAD_CONST                      4: 4
+                        212     LOAD_CONST                      4: 4.0
                         214     LOAD_FAST                       0: self
                         216     LOAD_ATTR                       12: data_rate
                         218     BINARY_TRUE_DIVIDE              

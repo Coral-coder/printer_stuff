@@ -12,15 +12,15 @@ class HeaterCheck:
         self.printer.register_event_handler('klippy:shutdown', self.handle_shutdown)
         self.heater_name = config.get_name().split()[1]
         self.heater = None
-        self.hysteresis = config.getfloat('hysteresis', 5, minval=0)
-        self.max_error = config.getfloat('max_error', 120, minval=0)
-        self.heating_gain = config.getfloat('heating_gain', 2, above=0)
-        default_gain_time = 20
+        self.hysteresis = config.getfloat('hysteresis', 5.0, minval=0.0)
+        self.max_error = config.getfloat('max_error', 1.2e+02, minval=0.0)
+        self.heating_gain = config.getfloat('heating_gain', 2.0, above=0.0)
+        default_gain_time = 2e+01
         if self.heater_name == 'heater_bed':
-            default_gain_time = 60
-        self.check_gain_time = config.getfloat('check_gain_time', default_gain_time, minval=1)
+            default_gain_time = 6e+01
+        self.check_gain_time = config.getfloat('check_gain_time', default_gain_time, minval=1.0)
         self.approaching_target = self.starting_approach = False
-        self.last_target = self.goal_temp = self.error = 0
+        self.last_target = self.goal_temp = self.error = 0.0
         self.goal_systime = self.printer.get_reactor().NEVER
         self.check_timer = None
 
@@ -43,18 +43,18 @@ class HeaterCheck:
     
     def check_event(self, eventtime):
         (temp, target) = self.heater.get_temp(eventtime)
-        if temp >= target - self.hysteresis or target <= 0:
+        if temp >= target - self.hysteresis or target <= 0.0:
             if self.approaching_target and target:
                 logging.info('Heater %s within range of %.3f', self.heater_name, target)
             self.approaching_target = self.starting_approach = False
             if temp <= target + self.hysteresis:
-                self.error = 0
+                self.error = 0.0
             self.last_target = target
-            return eventtime + 1
+            return eventtime + 1.0
         if None.heater_name == 'chamber_heater' and target > 40 and self.heater.last_pwm_value == 0:
             if temp <= target + self.hysteresis:
-                self.error = 0
-            return eventtime + 1
+                self.error = 0.0
+            return eventtime + 1.0
         None.error += target - self.hysteresis - temp
         if not self.approaching_target:
             if target != self.last_target:
@@ -67,7 +67,7 @@ class HeaterCheck:
                 return self.heater_fault()
             elif temp >= self.goal_temp:
                 self.starting_approach = False
-                self.error = 0
+                self.error = 0.0
                 self.goal_temp = temp + self.heating_gain
                 self.goal_systime = eventtime + self.check_gain_time
             elif eventtime >= self.goal_systime:
@@ -76,7 +76,7 @@ class HeaterCheck:
             elif self.starting_approach:
                 self.goal_temp = min(self.goal_temp, temp + self.heating_gain)
         self.last_target = target
-        return eventtime + 1
+        return eventtime + 1.0
 
     
     def heater_fault(self):

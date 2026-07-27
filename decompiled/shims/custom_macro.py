@@ -27,9 +27,9 @@ class CUSTOM_MACRO:
         self.gcode.register_command('CX_PRINT_DRAW_ONE_LINE', self.cmd_CX_PRINT_DRAW_ONE_LINE, desc=self.cmd_CX_PRINT_DRAW_ONE_LINE_help)
         self.gcode.register_command('CX_ROUGH_G28', self.cmd_CX_ROUGH_G28, desc=self.cmd_CX_ROUGH_G28_help)
         self.gcode.register_command('CX_NOZZLE_CLEAR', self.cmd_CX_NOZZLE_CLEAR, desc=self.cmd_CX_NOZZLE_CLEAR_help)
-        self.default_extruder_temp = config.getfloat('default_extruder_temp', default=240)
-        self.default_bed_temp = config.getfloat('default_bed_temp', default=50)
-        self.g28_ext_temp = config.getfloat('g28_ext_temp', default=140)
+        self.default_extruder_temp = config.getfloat('default_extruder_temp', default=2.4e+02)
+        self.default_bed_temp = config.getfloat('default_bed_temp', default=5e+01)
+        self.g28_ext_temp = config.getfloat('g28_ext_temp', default=1.4e+02)
         self.nozzle_clear = config.getboolean('nozzle_clear', True)
         self.calibration = config.getint('calibration', default=0)
         self.leveling_calibration = 0
@@ -81,4 +81,4 @@ class CUSTOM_MACRO:
             self.gcode.run_script_from_command('SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=5')
             self.gcode.run_script_from_command('M204 S12000')
             self.gcode.run_script_from_command('G21')
-            self.gcode.run_script_from_command('SET_VELOCITY_LIMIT AC
+            self.gcode.run_script_from_command('SET_VELOCI

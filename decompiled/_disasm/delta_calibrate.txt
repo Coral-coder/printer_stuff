@@ -223,7 +223,7 @@ delta_calibrate.pyc (Python 3.9)
                         18      LOAD_FAST                       2: ay
                         20      LOAD_DEREF                      0: inner_ridge
                         22      BINARY_MULTIPLY                 
-                        24      LOAD_CONST                      0: 0
+                        24      LOAD_CONST                      0: 0.0
                         26      BUILD_TUPLE                     3
                         28      LIST_APPEND                     2
                         30      JUMP_ABSOLUTE                   4
@@ -260,7 +260,7 @@ delta_calibrate.pyc (Python 3.9)
                         18      LOAD_FAST                       2: ay
                         20      LOAD_DEREF                      0: outer_ridge
                         22      BINARY_MULTIPLY                 
-                        24      LOAD_CONST                      0: 0
+                        24      LOAD_CONST                      0: 0.0
                         26      BUILD_TUPLE                     3
                         28      LIST_APPEND                     2
                         30      JUMP_ABSOLUTE                   4
@@ -383,7 +383,7 @@ delta_calibrate.pyc (Python 3.9)
                         34      BINARY_MULTIPLY                 
                         36      LOAD_FAST                       4: spy
                         38      BINARY_ADD                      
-                        40      LOAD_CONST                      0: 0
+                        40      LOAD_CONST                      0: 0.0
                         42      BUILD_TUPLE                     3
                         44      LIST_APPEND                     2
                         46      JUMP_ABSOLUTE                   4
@@ -430,7 +430,7 @@ delta_calibrate.pyc (Python 3.9)
                         34      BINARY_MULTIPLY                 
                         36      LOAD_FAST                       4: spy
                         38      BINARY_ADD                      
-                        40      LOAD_CONST                      0: 0
+                        40      LOAD_CONST                      0: 0.0
                         42      BUILD_TUPLE                     3
                         44      LIST_APPEND                     2
                         46      JUMP_ABSOLUTE                   4
@@ -812,11 +812,11 @@ delta_calibrate.pyc (Python 3.9)
                         26      LOAD_FAST                       1: config
                         28      LOAD_ATTR                       4: getfloat
                         30      LOAD_CONST                      2: 'radius'
-                        32      LOAD_CONST                      3: 0
+                        32      LOAD_CONST                      3: 0.0
                         34      LOAD_CONST                      4: ('above',)
                         36      CALL_FUNCTION_KW                2
                         38      STORE_FAST                      2: radius
-                        40      LOAD_CONST                      5: (0, 0)
+                        40      LOAD_CONST                      5: (0.0, 0.0)
                         42      BUILD_LIST                      1
                         44      STORE_FAST                      3: points
                         46      BUILD_LIST                      0
@@ -831,8 +831,8 @@ delta_calibrate.pyc (Python 3.9)
                         64      STORE_FAST                      5: i
                         66      LOAD_GLOBAL                     6: math
                         68      LOAD_METHOD                     7: radians
-                        70      LOAD_CONST                      8: 90
-                        72      LOAD_CONST                      9: 60
+                        70      LOAD_CONST                      8: 9e+01
+                        72      LOAD_CONST                      9: 6e+01
                         74      LOAD_FAST                       5: i
                         76      BINARY_MULTIPLY                 
                         78      BINARY_ADD                      
@@ -961,7 +961,7 @@ delta_calibrate.pyc (Python 3.9)
                         328     POP_TOP                         
                         330     JUMP_ABSOLUTE                   260
                         334     LOAD_CONST                      17: 'SCALE'
-                        336     LOAD_CONST                      18: (1,)
+                        336     LOAD_CONST                      18: (1.0,)
                         338     BUILD_MAP                       1
                         340     LOAD_FAST                       0: self
                         342     STORE_ATTR                      19: delta_analyze_entry
@@ -1504,7 +1504,7 @@ delta_calibrate.pyc (Python 3.9)
                                 12      LOAD_FAST                       1: delta_params
                                 14      LOAD_ATTR                       1: get_position_from_stable
                                 16      STORE_FAST                      2: getpos
-                                18      LOAD_CONST                      1: 0
+                                18      LOAD_CONST                      1: 0.0
                                 20      STORE_FAST                      3: total_error
                                 22      LOAD_DEREF                      1: height_positions
                                 24      GET_ITER                        
@@ -1593,7 +1593,7 @@ delta_calibrate.pyc (Python 3.9)
                                 190     POP_TOP                         
                                 192     POP_TOP                         
                                 194     POP_EXCEPT                      
-                                196     LOAD_CONST                      3: 1e+13
+                                196     LOAD_CONST                      3: 9999999999999.9
                                 198     RETURN_VALUE                    
                                 200     RERAISE                         
                                 202     LOAD_CONST                      0: None
@@ -1639,7 +1639,7 @@ delta_calibrate.pyc (Python 3.9)
                         62      LOAD_FAST                       6: params
                         64      CALL_METHOD                     4
                         66      POP_TOP                         
-                        68      LOAD_CONST                      3: 1
+                        68      LOAD_CONST                      3: 1.0
                         70      STORE_DEREF                     3: z_weight
                         72      LOAD_DEREF                      0: distances
                         74      POP_JUMP_IF_FALSE               96
@@ -2368,7 +2368,7 @@ delta_calibrate.pyc (Python 3.9)
         48      MAKE_FUNCTION                   0
         50      STORE_NAME                      6: load_config_stable
         52      BUILD_LIST                      0
-        54      LOAD_CONST                      6: (210, 270, 330, 30, 90, 150)
+        54      LOAD_CONST                      6: (2.1e+02, 2.7e+02, 3.3e+02, 3e+01, 9e+01, 1.5e+02)
         56      LIST_EXTEND                     1
         58      STORE_NAME                      7: MeasureAngles
         60      LOAD_CONST                      7: 65

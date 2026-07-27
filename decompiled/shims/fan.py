@@ -6,27 +6,27 @@ FAN_MIN_TIME = 0.1
 
 class Fan:
     
-    def __init__(self, config, default_shutdown_speed = (0,)):
+    def __init__(self, config, default_shutdown_speed = (0.0,)):
         self.printer = config.get_printer()
-        self.last_fan_value = 0
-        self.last_fan_time = 0
-        self.max_power = config.getfloat('max_power', 1, above=0, maxval=1)
-        self.kick_start_time = config.getfloat('kick_start_time', 0.1, minval=0)
-        self.off_below = config.getfloat('off_below', default=0, minval=0, maxval=1)
-        cycle_time = config.getfloat('cycle_time', 0.01, above=0)
+        self.last_fan_value = 0.0
+        self.last_fan_time = 0.0
+        self.max_power = config.getfloat('max_power', 1.0, above=0.0, maxval=1.0)
+        self.kick_start_time = config.getfloat('kick_start_time', 0.1, minval=0.0)
+        self.off_below = config.getfloat('off_below', default=0.0, minval=0.0, maxval=1.0)
+        cycle_time = config.getfloat('cycle_time', 0.01, above=0.0)
         hardware_pwm = config.getboolean('hardware_pwm', False)
-        shutdown_speed = config.getfloat('shutdown_speed', default_shutdown_speed, minval=0, maxval=1)
+        shutdown_speed = config.getfloat('shutdown_speed', default_shutdown_speed, minval=0.0, maxval=1.0)
         ppins = self.printer.lookup_object('pins')
         self.mcu_fan = ppins.setup_pin('pwm', config.get('pin'))
-        self.mcu_fan.setup_max_duration(0)
+        self.mcu_fan.setup_max_duration(0.0)
         self.mcu_fan.setup_cycle_time(cycle_time, hardware_pwm)
-        shutdown_power = max(0, min(self.max_power, shutdown_speed))
-        self.mcu_fan.setup_start_value(0, shutdown_power)
+        shutdown_power = max(0.0, min(self.max_power, shutdown_speed))
+        self.mcu_fan.setup_start_value(0.0, shutdown_power)
         self.enable_pin = None
         enable_pin = config.get('enable_pin', None)
         if enable_pin is not None:
             self.enable_pin = ppins.setup_pin('digital_out', enable_pin)
-            self.enable_pin.setup_max_duration(0)
+            self.enable_pin.setup_max_duration(0.0)
         self.tachometer = FanTachometer(config)
         self.printer.register_event_handler('gcode:request_restart', self._handle_request_restart)
 
@@ -37,8 +37,8 @@ class Fan:
     
     def set_speed(self, print_time, value):
         if value < self.off_below:
-            value = 0
-        value = max(0, min(self.max_power, value * self.max_power))
+            value = 0.0
+        value = max(0.0, min(self.max_power, value * self.max_power))
         if value == self.last_fan_value:
             return None
         print_time = None(self.last_fan_time + FAN_MIN_TIME, print_time)
@@ -62,7 +62,7 @@ class Fan:
 
     
     def _handle_request_restart(self, print_time):
-        self.set_speed(print_time, 0)
+        self.set_speed(print_time, 0.0)
 
     
     def get_status(self, eventtime):
@@ -81,14 +81,14 @@ class FanTachometer:
         pin = config.get('tachometer_pin', None)
         if pin is not None:
             self.ppr = config.getint('tachometer_ppr', 2, minval=1)
-            poll_time = config.getfloat('tachometer_poll_interval', 0.0015, above=0)
-            sample_time = 1
+            poll_time = config.getfloat('tachometer_poll_interval', 0.0015, above=0.0)
+            sample_time = 1.0
             self._freq_counter = pulse_counter.FrequencyCounter(printer, pin, sample_time, poll_time)
 
     
     def get_status(self, eventtime):
         if self._freq_counter is not None:
-            rpm = self._freq_counter.get_frequency() * 30 / self.ppr
+            rpm = self._freq_counter.get_frequency() * 3e+01 / self.ppr
         else:
             rpm = None
         return {
@@ -110,12 +110,12 @@ class PrinterFan:
 
     
     def cmd_M106(self, gcmd):
-        value = gcmd.get_float('S', 255, minval=0) / 255
+        value = gcmd.get_float('S', 255.0, minval=0.0) / 255.0
         self.fan.set_speed_from_command(value)
 
     
     def cmd_M107(self, gcmd):
-        self.fan.set_speed_from_command(0)
+        self.fan.set_speed_from_command(0.0)
 
 
 

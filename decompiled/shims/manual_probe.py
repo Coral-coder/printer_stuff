@@ -121,7 +121,7 @@ class ManualProbeHelper:
         self.gcode = self.printer.lookup_object('gcode')
         self.toolhead = self.printer.lookup_object('toolhead')
         self.manual_probe = self.printer.lookup_object('manual_probe')
-        self.speed = gcmd.get_float('SPEED', 5)
+        self.speed = gcmd.get_float('SPEED', 5.0)
         self.past_positions = []
         self.last_toolhead_pos = None
         self.last_kinematics_pos = None
@@ -231,18 +231,18 @@ class ManualProbeHelper:
             pp.insert(insert_pos, z_pos)
         req = gcmd.get('Z')
         if req in ('+', '++'):
-            check_z = 1e+13
+            check_z = 9999999999999.9
             if insert_pos < len(self.past_positions) - 1:
                 check_z = self.past_positions[insert_pos + 1]
             if req == '+':
-                check_z = (check_z + z_pos) / 2
+                check_z = (check_z + z_pos) / 2.0
             next_z_pos = min(check_z, z_pos + BISECT_MAX)
         elif req in ('-', '--'):
-            check_z = -1e+13
+            check_z = -9999999999999.9
             if insert_pos > 0:
                 check_z = self.past_positions[insert_pos - 1]
             if req == '-':
-                check_z = (check_z + z_pos) / 2
+                check_z = (check_z + z_pos) / 2.0
             next_z_pos = max(check_z, z_pos - BISECT_MAX)
         else:
             next_z_pos = z_pos + gcmd.get_float('Z')

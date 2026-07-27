@@ -46,7 +46,7 @@ class HX711S:
         self.filter = None
         self.query_cmd = None
         self.mcu_freq = 72000000
-        self.last_send_heart = 0
+        self.last_send_heart = 0.0
         self.is_shutdown = True
         self.is_timeout = True
 
@@ -220,7 +220,7 @@ class HX711S:
     def cmd_READ_HX711(self, gcmd):
         cnt = gcmd.get_int('C', 1, minval=1, maxval=9999)
         self.query_start(cnt, cnt, False, False, False)
-        self.delay_s(1)
+        self.delay_s(1.0)
         self.base_avgs = [
             0,
             0,

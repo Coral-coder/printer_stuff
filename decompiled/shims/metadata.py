@@ -270,7 +270,7 @@ class PrusaSlicer(BaseSlicer):
         if pct is not None:
             if self.layer_height is None:
                 return None
-            return None((pct / 100) * self.layer_height, 6)
+            return None((pct / 1e+02) * self.layer_height, 6)
         return None('; first_layer_height = (\\d+\\.?\\d*)', self.footer_data)
 
     
@@ -674,7 +674,7 @@ class IdeaMaker(BaseSlicer):
 
     
     def parse_filament_weight_total(self = None):
-        pi = 3.14159
+        pi = 3.141592653589793
         length = _regex_find_floats(';Material.\\d\\sUsed:.*', self.footer_data, strict=True)
         diameter = _regex_find_floats(';Filament\\sDiameter\\s.\\d:.*', self.header_data, strict=True)
         density = _regex_find_floats(';Filament\\sDensity\\s.\\d:.*', self.header_data, strict=True)

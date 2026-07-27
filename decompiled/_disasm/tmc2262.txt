@@ -1179,7 +1179,7 @@ tmc2262.pyc (Python 3.9)
                         126     LOAD_CONST                      15: (0, 1, 2, 3)
                         128     BUILD_CONST_KEY_MAP             4
                         130     STORE_FAST                      4: Kifs_values
-                        132     LOAD_CONST                      16: 1
+                        132     LOAD_CONST                      16: 1.0
                         134     LOAD_CONST                      17: 0.75
                         136     LOAD_CONST                      18: 0.5
                         138     LOAD_CONST                      19: 0.25
@@ -1201,7 +1201,7 @@ tmc2262.pyc (Python 3.9)
                         170     BINARY_TRUE_DIVIDE              
                         172     LOAD_GLOBAL                     12: math
                         174     LOAD_METHOD                     13: sqrt
-                        176     LOAD_CONST                      21: 2
+                        176     LOAD_CONST                      21: 2.0
                         178     CALL_METHOD                     1
                         180     BINARY_TRUE_DIVIDE              
                         182     LOAD_FAST                       0: self
@@ -1209,7 +1209,7 @@ tmc2262.pyc (Python 3.9)
                         186     LOAD_FAST                       1: config
                         188     LOAD_ATTR                       15: getfloat
                         190     LOAD_CONST                      22: 'run_current'
-                        192     LOAD_CONST                      23: 0
+                        192     LOAD_CONST                      23: 0.0
                         194     LOAD_FAST                       0: self
                         196     LOAD_ATTR                       14: IFS_current_RMS
                         198     LOAD_CONST                      24: ('above', 'maxval')
@@ -1220,7 +1220,7 @@ tmc2262.pyc (Python 3.9)
                         208     LOAD_CONST                      25: 'hold_current'
                         210     LOAD_FAST                       0: self
                         212     LOAD_ATTR                       14: IFS_current_RMS
-                        214     LOAD_CONST                      23: 0
+                        214     LOAD_CONST                      23: 0.0
                         216     LOAD_FAST                       0: self
                         218     LOAD_ATTR                       14: IFS_current_RMS
                         220     LOAD_CONST                      24: ('above', 'maxval')
@@ -2165,7 +2165,7 @@ tmc2262.pyc (Python 3.9)
                         602     LOAD_FAST                       1: config
                         604     LOAD_METHOD                     25: getint
                         606     LOAD_CONST                      49: 'coil_induct'
-                        608     LOAD_CONST                      50: 0
+                        608     LOAD_CONST                      50: 0.0
                         610     CALL_METHOD                     2
                         612     STORE_FAST                      6: coil_induct
                         614     LOAD_FAST                       6: coil_induct

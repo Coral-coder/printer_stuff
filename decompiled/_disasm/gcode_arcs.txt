@@ -120,7 +120,7 @@ gcode_arcs.pyc (Python 3.9)
                         12      LOAD_ATTR                       2: getfloat
                         14      LOAD_CONST                      1: 'resolution'
                         16      LOAD_CONST                      2: 0.012
-                        18      LOAD_CONST                      3: 0
+                        18      LOAD_CONST                      3: 0.0
                         20      LOAD_CONST                      4: ('above',)
                         22      CALL_FUNCTION_KW                3
                         24      LOAD_FAST                       0: self
@@ -128,8 +128,8 @@ gcode_arcs.pyc (Python 3.9)
                         28      LOAD_FAST                       1: config
                         30      LOAD_ATTR                       2: getfloat
                         32      LOAD_CONST                      5: 'max_mm_per_arc_segment'
-                        34      LOAD_CONST                      6: 1
-                        36      LOAD_CONST                      3: 0
+                        34      LOAD_CONST                      6: 1.0
+                        36      LOAD_CONST                      3: 0.0
                         38      LOAD_CONST                      4: ('above',)
                         40      CALL_FUNCTION_KW                3
                         42      LOAD_FAST                       0: self
@@ -138,7 +138,7 @@ gcode_arcs.pyc (Python 3.9)
                         48      LOAD_ATTR                       2: getfloat
                         50      LOAD_CONST                      7: 'min_mm_per_arc_segment'
                         52      LOAD_CONST                      8: 0.1
-                        54      LOAD_CONST                      3: 0
+                        54      LOAD_CONST                      3: 0.0
                         56      LOAD_CONST                      4: ('above',)
                         58      CALL_FUNCTION_KW                3
                         60      LOAD_FAST                       0: self
@@ -146,8 +146,8 @@ gcode_arcs.pyc (Python 3.9)
                         64      LOAD_FAST                       1: config
                         66      LOAD_ATTR                       2: getfloat
                         68      LOAD_CONST                      9: 'n_arc_revise'
-                        70      LOAD_CONST                      10: 25
-                        72      LOAD_CONST                      3: 0
+                        70      LOAD_CONST                      10: 25.0
+                        72      LOAD_CONST                      3: 0.0
                         74      LOAD_CONST                      4: ('above',)
                         76      CALL_FUNCTION_KW                3
                         78      LOAD_FAST                       0: self
@@ -471,13 +471,13 @@ gcode_arcs.pyc (Python 3.9)
                         116     LOAD_FAST                       1: gcmd
                         118     LOAD_METHOD                     3: get_float
                         120     LOAD_CONST                      13: 'I'
-                        122     LOAD_CONST                      14: 0
+                        122     LOAD_CONST                      14: 0.0
                         124     CALL_METHOD                     2
                         126     STORE_FAST                      7: I
                         128     LOAD_FAST                       1: gcmd
                         130     LOAD_METHOD                     3: get_float
                         132     LOAD_CONST                      15: 'J'
-                        134     LOAD_CONST                      14: 0
+                        134     LOAD_CONST                      14: 0.0
                         136     CALL_METHOD                     2
                         138     STORE_FAST                      8: J
                         140     LOAD_FAST                       7: I
@@ -497,7 +497,7 @@ gcode_arcs.pyc (Python 3.9)
                         168     LOAD_FAST                       1: gcmd
                         170     LOAD_METHOD                     3: get_float
                         172     LOAD_CONST                      16: 'K'
-                        174     LOAD_CONST                      14: 0
+                        174     LOAD_CONST                      14: 0.0
                         176     CALL_METHOD                     2
                         178     STORE_FAST                      11: K
                         180     LOAD_FAST                       7: I
@@ -518,7 +518,7 @@ gcode_arcs.pyc (Python 3.9)
                         210     LOAD_FAST                       1: gcmd
                         212     LOAD_METHOD                     3: get_float
                         214     LOAD_CONST                      16: 'K'
-                        216     LOAD_CONST                      14: 0
+                        216     LOAD_CONST                      14: 0.0
                         218     CALL_METHOD                     2
                         220     STORE_FAST                      11: K
                         222     LOAD_FAST                       8: J
@@ -720,11 +720,11 @@ gcode_arcs.pyc (Python 3.9)
                         100     CALL_METHOD                     2
                         102     STORE_FAST                      16: angular_travel
                         104     LOAD_FAST                       16: angular_travel
-                        106     LOAD_CONST                      3: 0
+                        106     LOAD_CONST                      3: 0.0
                         108     COMPARE_OP                      0 (<)
                         110     POP_JUMP_IF_FALSE               126
                         112     LOAD_FAST                       16: angular_travel
-                        114     LOAD_CONST                      4: 2
+                        114     LOAD_CONST                      4: 2.0
                         116     LOAD_GLOBAL                     0: math
                         118     LOAD_ATTR                       2: pi
                         120     BINARY_MULTIPLY                 
@@ -733,14 +733,14 @@ gcode_arcs.pyc (Python 3.9)
                         126     LOAD_FAST                       4: clockwise
                         128     POP_JUMP_IF_FALSE               144
                         130     LOAD_FAST                       16: angular_travel
-                        132     LOAD_CONST                      4: 2
+                        132     LOAD_CONST                      4: 2.0
                         134     LOAD_GLOBAL                     0: math
                         136     LOAD_ATTR                       2: pi
                         138     BINARY_MULTIPLY                 
                         140     INPLACE_SUBTRACT                
                         142     STORE_FAST                      16: angular_travel
                         144     LOAD_FAST                       16: angular_travel
-                        146     LOAD_CONST                      3: 0
+                        146     LOAD_CONST                      3: 0.0
                         148     COMPARE_OP                      2 (==)
                         150     POP_JUMP_IF_FALSE               194
                         152     LOAD_FAST                       1: currentPos
@@ -759,7 +759,7 @@ gcode_arcs.pyc (Python 3.9)
                         178     BINARY_SUBSCR                   
                         180     COMPARE_OP                      2 (==)
                         182     POP_JUMP_IF_FALSE               194
-                        184     LOAD_CONST                      4: 2
+                        184     LOAD_CONST                      4: 2.0
                         186     LOAD_GLOBAL                     0: math
                         188     LOAD_ATTR                       2: pi
                         190     BINARY_MULTIPLY                 
@@ -890,7 +890,7 @@ gcode_arcs.pyc (Python 3.9)
                         446     LOAD_CONST                      0: None
                         448     CALL_METHOD                     2
                         450     STORE_FAST                      28: asF
-                        452     LOAD_CONST                      3: 0
+                        452     LOAD_CONST                      3: 0.0
                         454     DUP_TOP                         
                         456     STORE_FAST                      29: e_per_move
                         458     STORE_FAST                      30: e_base
@@ -926,7 +926,7 @@ gcode_arcs.pyc (Python 3.9)
                         522     LOAD_FAST                       33: theta_per_segment_sqr
                         524     LOAD_FAST                       31: theta_per_segment
                         526     BINARY_MULTIPLY                 
-                        528     LOAD_CONST                      10: 6
+                        528     LOAD_CONST                      10: 6.0
                         530     BINARY_TRUE_DIVIDE              
                         532     BINARY_SUBTRACT                 
                         534     STORE_FAST                      34: sin_T

@@ -24,12 +24,12 @@ class ControllerFan:
         self.printer.load_object(config, 'heaters')
         self.heaters = []
         self.fan = fan.Fan(config)
-        self.fan_speed = config.getfloat('fan_speed', default=1, minval=0, maxval=1)
-        self.idle_speed = config.getfloat('idle_speed', default=self.fan_speed, minval=0, maxval=1)
+        self.fan_speed = config.getfloat('fan_speed', default=1.0, minval=0.0, maxval=1.0)
+        self.idle_speed = config.getfloat('idle_speed', default=self.fan_speed, minval=0.0, maxval=1.0)
         self.idle_timeout = config.getint('idle_timeout', default=30, minval=0)
         self.heater_names = config.getlist('heater', ('extruder',))
         self.last_on = self.idle_timeout
-        self.last_speed = 0
+        self.last_speed = 0.0
 
     
     def handle_connect(self):
@@ -54,7 +54,7 @@ x in all_steppers):
 
     
     def callback(self, eventtime):
-        speed = 0
+        speed = 0.0
         active = False
         for name in self.stepper_names:
             active |= self.stepper_enable.lookup_enable(name).is_motor_enabled()
@@ -74,7 +74,7 @@ x in all_steppers):
             curtime = self.printer.get_reactor().monotonic()
             print_time = self.fan.get_mcu().estimated_print_time(curtime)
             self.fan.set_speed(print_time + PIN_MIN_TIME, speed)
-        return eventtime + 1
+        return eventtime + 1.0
 
 
 

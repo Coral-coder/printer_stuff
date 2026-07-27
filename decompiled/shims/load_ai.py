@@ -295,7 +295,7 @@ class LoadAI:
                 normalized_total_area = 0
             result_dict = {
                 'ai_results': ai_results,
-                'max_re_prob': max_re_prob if normalized_total_area > 0.35 else 0,
+                'max_re_prob': max_re_prob if normalized_total_area > 0.35 else 0.0,
                 'normalized_total_area': normalized_total_area,
                 'output_width': output_width,
                 'output_height': output_height }
@@ -373,8 +373,8 @@ class LoadAI:
             'command_description': '',
             'stderr': '',
             'ai_results': '',
-            'max_re_prob': 0,
-            'normalized_total_area': 0,
+            'max_re_prob': 0.0,
+            'normalized_total_area': 0.0,
             'output_width': 0,
             'output_height': 0 }
         logging.info('LOAD_AI_SET_AI_CONTROL_PREFER:%s' % self.cx_ai_engine_status)
@@ -457,8 +457,8 @@ class LoadAI:
             'command_description': 'waste',
             'stderr': '',
             'ai_results': [],
-            'max_re_prob': 0,
-            'normalized_total_area': 0,
+            'max_re_prob': 0.0,
+            'normalized_total_area': 0.0,
             'output_width': 0,
             'output_height': 0 }
         

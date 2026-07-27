@@ -62,7 +62,7 @@ class LinearInterpolate:
             self.slopes.append((gain, offset))
         if not self.keys:
             raise ValueError('{"code":"key27", "msg":"need at least two samples", "values": []}')
-        self.keys.append(1e+13)
+        self.keys.append(9999999999999.0)
         self.slopes.append(self.slopes[-1])
 
     
@@ -87,12 +87,12 @@ class LinearInterpolate:
 class LinearVoltage:
     
     def __init__(self, config, params):
-        adc_voltage = config.getfloat('adc_voltage', 5, above=0)
-        voltage_offset = config.getfloat('voltage_offset', 0)
+        adc_voltage = config.getfloat('adc_voltage', 5.0, above=0.0)
+        voltage_offset = config.getfloat('voltage_offset', 0.0)
         samples = []
         for temp, volt in params:
             adc = (volt - voltage_offset) / adc_voltage
-            if adc < 0 or adc > 1:
+            if adc < 0.0 or adc > 1.0:
                 logging.warn('Ignoring adc sample %.3f/%.3f in heater %s', temp, volt, config.get_name())
                 continue
             samples.append((adc, temp))
@@ -141,7 +141,7 @@ class CustomLinearVoltage:
 class LinearResistance:
     
     def __init__(self, config, samples):
-        self.pullup = config.getfloat('pullup_resistor', 4700, above=0)
+        self.pullup = config.getfloat('pullup_resistor', 4.7e+03, above=0.0)
         
         try:
             self.li = LinearInterpolate([ (r, t) for t, r in (samples) ])
@@ -162,7 +162,7 @@ class LinearResistance:
     
     def calc_temp(self, adc):
         adc = max(1e-05, min(0.99999, adc))
-        r = self.pullup * adc / (1 - adc)
+        r = self.pullup * adc / (1.0 - adc)
         return self.li.interpolate(r)
 
     
@@ -193,66 +193,66 @@ class CustomLinearResistance:
 
 
 AD595 = [
-    (0, 0.0027),
-    (10, 0.101),
-    (20, 0.2),
-    (25, 0.25),
-    (30, 0.3),
-    (40, 0.401),
-    (50, 0.503),
-    (60, 0.605),
-    (80, 0.81),
-    (100, 1.015),
-    (120, 1.219),
-    (140, 1.42),
-    (160, 1.62),
-    (180, 1.817),
-    (200, 2.015),
-    (220, 2.213),
-    (240, 2.413),
-    (260, 2.614),
-    (280, 2.817),
-    (300, 3.022),
-    (320, 3.227),
-    (340, 3.434),
-    (360, 3.641),
-    (380, 3.849),
-    (400, 4.057),
-    (420, 4.266),
-    (440, 4.476),
-    (460, 4.686),
-    (480, 4.896)]
+    (0.0, 0.0027),
+    (1e+01, 0.101),
+    (2e+01, 0.2),
+    (25.0, 0.25),
+    (3e+01, 0.3),
+    (4e+01, 0.401),
+    (5e+01, 0.503),
+    (6e+01, 0.605),
+    (8e+01, 0.81),
+    (1e+02, 1.015),
+    (1.2e+02, 1.219),
+    (1.4e+02, 1.42),
+    (1.6e+02, 1.62),
+    (1.8e+02, 1.817),
+    (2e+02, 2.015),
+    (2.2e+02, 2.213),
+    (2.4e+02, 2.413),
+    (2.6e+02, 2.614),
+    (2.8e+02, 2.817),
+    (3e+02, 3.022),
+    (3.2e+02, 3.227),
+    (3.4e+02, 3.434),
+    (3.6e+02, 3.641),
+    (3.8e+02, 3.849),
+    (4e+02, 4.057),
+    (4.2e+02, 4.266),
+    (4.4e+02, 4.476),
+    (4.6e+02, 4.686),
+    (4.8e+02, 4.896)]
 AD597 = [
-    (0, 0),
-    (10, 0.097),
-    (20, 0.196),
-    (25, 0.245),
-    (30, 0.295),
-    (40, 0.395),
-    (50, 0.496),
-    (60, 0.598),
-    (80, 0.802),
-    (100, 1.005),
-    (120, 1.207),
-    (140, 1.407),
-    (160, 1.605),
-    (180, 1.801),
-    (200, 1.997),
-    (220, 2.194),
-    (240, 2.392),
-    (260, 2.592),
-    (280, 2.794),
-    (300, 2.996),
-    (320, 3.201),
-    (340, 3.406),
-    (360, 3.611),
-    (380, 3.817),
-    (400, 4.024),
-    (420, 4.232),
-    (440, 4.44),
-    (460, 4.649),
-    (480, 4.857),
-    (500, 5.066)]
+    (0.0, 0.0),
+    (1e+01, 0.097),
+    (2e+01, 0.196),
+    (25.0, 0.245),
+    (3e+01, 0.295),
+    (4e+01, 0.395),
+    (5e+01, 0.496),
+    (6e+01, 0.598),
+    (8e+01, 0.802),
+    (1e+02, 1.005),
+    (1.2e+02, 1.207),
+    (1.4e+02, 1.407),
+    (1.6e+02, 1.605),
+    (1.8e+02, 1.801),
+    (2e+02, 1.997),
+    (2.2e+02, 2.194),
+    (2.4e+02, 2.392),
+    (2.6e+02, 2.592),
+    (2.8e+02, 2.794),
+    (3e+02, 2.996),
+    (3.2e+02, 3.201),
+    (3.4e+02, 3.406),
+    (3.6e+02, 3.611),
+    (3.8e+02, 3.817),
+    (4e+02, 4.024),
+    (4.2e+02, 4.232),
+    (4.4e+02, 4.44),
+    (4.6e+02, 4.649),
+    (4.8e+02, 4.857),
+    (5e+02, 5.066)]
 AD8494 = [
     (-180, -0.714),
     (-160, -0.658),
@@ -568,13 +568,13 @@ AD8497 = [
     (1360, 6.671),
     (1380, 6.754)]
 
-def calc_pt100(base = (100,)):
+def calc_pt100(base = (1e+02,)):
     (A, B) = (0.0039083, -5.775e-07)
-    return [ (float(t), base * (1 + A * t + B * t * t)) for t in (range(0, 500, 10)) ]
+    return [ (float(t), base * (1.0 + A * t + B * t * t)) for t in (range(0, 500, 10)) ]
 
 
 def calc_ina826_pt100():
-    return [ (t, 50 * r / (4400 + r)) for t, r in (calc_pt100()) ]
+    return [ (t, 5e+01 * r / (4.4e+03 + r)) for t, r in (calc_pt100()) ]
 
 DefaultVoltageSensors = [
     ('AD595', AD595),
@@ -585,7 +585,7 @@ DefaultVoltageSensors = [
     ('AD8497', AD8497),
     ('PT100 INA826', calc_ina826_pt100())]
 DefaultResistanceSensors = [
-    ('PT1000', calc_pt100(1000))]
+    ('PT1000', calc_pt100(1e+03))]
 
 def load_config(config):
     pheaters = config.get_printer().load_object(config, 'heaters')

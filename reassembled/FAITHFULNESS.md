@@ -6,8 +6,8 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 
 - faithful (>=99.5%): **35**
 - high (90-99.5%): **28**
-- partial (<90%): **4**
-- broken (won't recompile under 3.9 / empty): **38**
+- partial (<90%): **5**
+- broken (won't recompile under 3.9 / empty): **37**
 
 | module | category | bytecode match | note |
 |--------|----------|---------------:|------|
@@ -76,10 +76,10 @@ source round-trips to essentially the same bytecode (a proof of correctness).
 | `shims/photograph.py` | high | 93.0% |  |
 | `shims/pause_resume.py` | partial | 87.8% |  |
 | `shims/verify_heater.py` | partial | 86.7% |  |
+| `shims/bed_mesh.py` | partial | 14.8% |  |
 | `shims/base_info.py` | partial | 2.2% |  |
 | `shims/motion_report.py` | partial | 0.2% |  |
 | `shims/auto_addr_wrapper.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
-| `shims/bed_mesh.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/belt_mdl.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |
 | `shims/buttons.py` | broken | — | compile-failed: PyCompileError: Sorry: IndentationError: expected an i |
 | `shims/controller_fan.py` | broken | — | compile-failed: PyCompileError:   File "/home/user/printer_stuff/decom |

@@ -25,10 +25,10 @@ class QueryADC:
             return None
         (value, timestamp) = None.adc[name].get_last_value()
         msg = 'ADC object "%s" has value %.6f (timestamp %.3f)' % (name, value, timestamp)
-        pullup = gcmd.get_float('PULLUP', None, above=0)
+        pullup = gcmd.get_float('PULLUP', None, above=0.0)
         if pullup is not None:
             v = max(1e-05, min(0.99999, value))
-            r = pullup * v / (1 - v)
+            r = pullup * v / (1.0 - v)
             msg += '\n resistance %.3f (with %.0f pullup)' % (r, pullup)
         gcmd.respond_info(msg)
 

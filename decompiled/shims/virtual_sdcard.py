@@ -99,7 +99,7 @@ def capture(end_print, frame = (False, 15)):
             python_path,
             cmd_path])
     elif system_info_instance._h264_encoder_flag == 'H264_ENCODER' and end_print == True:
-        interval_time = 1 / frame
+        interval_time = 1.0 / frame
         start_time = 1
         if start_time > 0:
             run_cmd('capture 0')
@@ -165,8 +165,8 @@ class VirtualSD:
         self.XYZET = None
         self.slow_print = False
         self.slow_count = 0
-        self.speed_factor = 0.0166667
-        self.run_dis = 0
+        self.speed_factor = 0.016666666666666666
+        self.run_dis = 0.0
         self.print_id = ''
         self.cur_print_data = { }
         self.gcode_metadata = None
@@ -203,5 +203,4 @@ class VirtualSD:
                     result = json.loads(f.read())
                     result = self.maintenance_item_add_threshold(result)
                     result = self.maintenance_item_add_timeout(result)
-                    obj.variables = result
-         
+                    obj.variables = r

@@ -147,7 +147,7 @@ quad_gantry_level.pyc (Python 3.9)
                         42      LOAD_FAST                       1: config
                         44      LOAD_METHOD                     5: getfloat
                         46      LOAD_CONST                      6: 'horizontal_move_z'
-                        48      LOAD_CONST                      7: 5
+                        48      LOAD_CONST                      7: 5.0
                         50      CALL_METHOD                     2
                         52      LOAD_FAST                       0: self
                         54      STORE_ATTR                      7: horizontal_move_z

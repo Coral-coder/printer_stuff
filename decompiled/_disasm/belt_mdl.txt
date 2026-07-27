@@ -1839,7 +1839,7 @@ belt_mdl.pyc (Python 3.9)
                         8       LOAD_FAST                       1: gcmd
                         10      LOAD_METHOD                     1: get_int
                         12      LOAD_CONST                      1: 'MDL_N'
-                        14      LOAD_CONST                      2: 140
+                        14      LOAD_CONST                      2: 1.4e+02
                         16      CALL_METHOD                     2
                         18      LOAD_FAST                       0: self
                         20      STORE_ATTR                      2: target_tension

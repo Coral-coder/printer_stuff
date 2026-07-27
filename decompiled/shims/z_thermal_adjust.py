@@ -12,12 +12,12 @@ class ZThermalAdjuster:
         self.lock = threading.Lock()
         self.config = config
         self.temp_coeff = config.getfloat('temp_coeff', minval=-1, maxval=1, default=0)
-        self.off_above_z = config.getfloat('z_adjust_off_above', 1e+08)
-        self.max_z_adjust_mm = config.getfloat('max_z_adjustment', 1e+08)
+        self.off_above_z = config.getfloat('z_adjust_off_above', 99999999.0)
+        self.max_z_adjust_mm = config.getfloat('max_z_adjustment', 99999999.0)
         self.printer.register_event_handler('klippy:connect', self.handle_connect)
         self.printer.register_event_handler('homing:home_rails_end', self.handle_homing_move_end)
-        self.smooth_time = config.getfloat('smooth_time', 2, above=0)
-        self.inv_smooth_time = 1 / self.smooth_time
+        self.smooth_time = config.getfloat('smooth_time', 2.0, above=0.0)
+        self.inv_smooth_time = 1.0 / self.smooth_time
         self.min_temp = config.getfloat('min_temp', minval=KELVIN_TO_CELSIUS)
         self.max_temp = config.getfloat('max_temp', above=self.min_temp)
         pheaters = self.printer.load_object(config, 'heaters')
@@ -25,20 +25,20 @@ class ZThermalAdjuster:
         self.sensor.setup_minmax(self.min_temp, self.max_temp)
         self.sensor.setup_callback(self.temperature_callback)
         pheaters.register_sensor(config, self)
-        self.last_temp = 0
-        self.measured_min = self.measured_max = 0
-        self.smoothed_temp = 0
-        self.last_temp_time = 0
-        self.ref_temperature = 0
+        self.last_temp = 0.0
+        self.measured_min = self.measured_max = 0.0
+        self.smoothed_temp = 0.0
+        self.last_temp_time = 0.0
+        self.ref_temperature = 0.0
         self.ref_temp_override = False
-        self.z_adjust_mm = 0
-        self.last_z_adjust_mm = 0
+        self.z_adjust_mm = 0.0
+        self.last_z_adjust_mm = 0.0
         self.adjust_enable = True
         self.last_position = [
-            0,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0,
+            0.0]
         self.next_transform = None
         self.gcode.register_command('SET_Z_THERMAL_ADJUST', self.cmd_SET_Z_THERMAL_ADJUST, desc=self.cmd_SET_Z_THERMAL_ADJUST_help)
 
@@ -69,7 +69,7 @@ class ZThermalAdjuster:
         if 2 in homing_state.get_axes():
             self.ref_temperature = self.smoothed_temp
             self.ref_temp_override = False
-            self.z_adjust_mm = 0
+            self.z_adjust_mm = 0.0
 
     
     def calc_adjust(self, pos):
@@ -129,7 +129,7 @@ class ZThermalAdjuster:
             self.last_temp = temp
             self.last_temp_time = read_time
             temp_diff = temp - self.smoothed_temp
-            adj_time = min(time_diff * self.inv_smooth_time, 1)
+            adj_time = min(time_diff * self.inv_smooth_time, 1.0)
             self.smoothed_temp += temp_diff * adj_time
             self.measured_min = min(self.measured_min, self.smoothed_temp)
             self.measured_max = max(self.measured_max, self.smoothed_temp)
@@ -140,7 +140,7 @@ class ZThermalAdjuster:
 
     
     def get_temp(self, eventtime):
-        return (self.smoothed_temp, 0)
+        return (self.smoothed_temp, 0.0)
 
     
     def stats(self, eventtime):

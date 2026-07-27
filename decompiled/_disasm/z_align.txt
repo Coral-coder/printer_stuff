@@ -1180,7 +1180,7 @@ z_align.pyc (Python 3.9)
                         128     LOAD_CONST                      9: 1
                         130     STORE_FAST                      9: enable
                         132     LOAD_GLOBAL                     12: int
-                        134     LOAD_CONST                      11: 288000
+                        134     LOAD_CONST                      11: 2.88e+05
                         136     CALL_FUNCTION                   1
                         138     STORE_FAST                      10: maxDist
                         140     LOAD_FAST                       0: self
@@ -1317,7 +1317,7 @@ z_align.pyc (Python 3.9)
                         414     LOAD_FAST                       13: reactor
                         416     LOAD_METHOD                     21: monotonic
                         418     CALL_METHOD                     0
-                        420     LOAD_CONST                      21: 1
+                        420     LOAD_CONST                      21: 1.0
                         422     BINARY_ADD                      
                         424     CALL_METHOD                     1
                         426     POP_TOP                         
@@ -1623,7 +1623,7 @@ z_align.pyc (Python 3.9)
                                 84      LOAD_DEREF                      3: reactor
                                 86      LOAD_METHOD                     5: monotonic
                                 88      CALL_METHOD                     0
-                                90      LOAD_CONST                      3: 1
+                                90      LOAD_CONST                      3: 1.0
                                 92      BINARY_ADD                      
                                 94      CALL_METHOD                     1
                                 96      POP_TOP                         
@@ -1741,7 +1741,7 @@ z_align.pyc (Python 3.9)
                                 326     LOAD_DEREF                      3: reactor
                                 328     LOAD_METHOD                     5: monotonic
                                 330     CALL_METHOD                     0
-                                332     LOAD_CONST                      12: 5
+                                332     LOAD_CONST                      12: 5.0
                                 334     BINARY_ADD                      
                                 336     CALL_METHOD                     1
                                 338     POP_TOP                         

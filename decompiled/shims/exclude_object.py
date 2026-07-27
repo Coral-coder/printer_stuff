@@ -23,15 +23,15 @@ class ExcludeObject:
         self.printer.register_event_handler('virtual_sdcard:reset_file', self._reset_file)
         self.next_transform = None
         self.last_position_extruded = [
-            0,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0,
+            0.0]
         self.last_position_excluded = [
-            0,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0,
+            0.0]
         self._reset_state()
         self.gcode.register_command('EXCLUDE_OBJECT_START', self.cmd_EXCLUDE_OBJECT_START, desc=self.cmd_EXCLUDE_OBJECT_START_help)
         self.gcode.register_command('EXCLUDE_OBJECT_END', self.cmd_EXCLUDE_OBJECT_END, desc=self.cmd_EXCLUDE_OBJECT_END_help)
@@ -60,10 +60,10 @@ class ExcludeObject:
             self.extruder_adj = 0
             self.initial_extrusion_moves = 5
             self.last_position = [
-                0,
-                0,
-                0,
-                0]
+                0.0,
+                0.0,
+                0.0,
+                0.0]
             self.get_position()
             self.last_position_extruded[:] = self.last_position
             self.last_position_excluded[:] = self.last_position
@@ -100,10 +100,10 @@ class ExcludeObject:
         offset = self.extrusion_offsets.get(self.toolhead.get_extruder().get_name())
         if offset is None:
             offset = [
-                0,
-                0,
-                0,
-                0]
+                0.0,
+                0.0,
+                0.0,
+                0.0]
             self.extrusion_offsets[self.toolhead.get_extruder().get_name()] = offset
         return offset
 

@@ -1,9 +1,9 @@
 # Decompilation status
 
 - Modules: **105**
-- Clean (ast-valid, no known defects): **55**
+- Clean (ast-valid, no known defects): **56**
 - Ast-valid but flagged (`None(...)` dropped builtin -- see disasm): **13**
-- Partial (did not fully round-trip -- see disasm): **37**
+- Partial (did not fully round-trip -- see disasm): **36**
 
 | module | status | lines |
 |--------|--------|-------|
@@ -18,19 +18,18 @@
 | `ms3200x.pyc` | partial | 565 |
 | `neopixel.pyc` | partial | 67 |
 | `output_pin.pyc` | partial | 58 |
-| `probe.pyc` | partial | 272 |
+| `probe.pyc` | partial | 271 |
 | `replicape.pyc` | partial | 292 |
 | `shaper_calibrate.pyc` | partial | 355 |
 | `tmc2130.pyc` | partial | 434 |
 | `auto_addr_wrapper.pyc` | partial | 179 |
 | `base_info.pyc` | partial | 1 |
-| `bed_mesh.pyc` | partial | 212 |
 | `buttons.pyc` | partial | 67 |
 | `custom_macro.pyc` | partial | 75 |
 | `delta_calibrate.pyc` | partial | 254 |
 | `dirzctl.pyc` | partial | 33 |
 | `gcode_macro.pyc` | partial | 52 |
-| `gcode_move.pyc` | partial | 374 |
+| `gcode_move.pyc` | partial | 369 |
 | `heater_bed.pyc` | partial | 141 |
 | `motion_report.pyc` | partial | 1 |
 | `prtouch.pyc` | partial | 246 |
@@ -41,7 +40,7 @@
 | `tmc2262.pyc` | partial | 639 |
 | `tmc_uart.pyc` | partial | 39 |
 | `tool.pyc` | partial | 16 |
-| `virtual_sdcard.pyc` | partial | 198 |
+| `virtual_sdcard.pyc` | partial | 197 |
 | `z_align.pyc` | partial | 173 |
 | `auto_addr_wrapper.pyc` | partial | 179 |
 | `adxl345.pyc` | flagged (7x None-call) | 574 |
@@ -61,6 +60,7 @@
 | `adc_scaled.pyc` | clean | 97 |
 | `adc_temperature.pyc` | clean | 610 |
 | `auto_addr.pyc` | clean | 10 |
+| `bed_mesh.pyc` | clean | 212 |
 | `bl24c16f.pyc` | clean | 282 |
 | `board_pins.pyc` | clean | 32 |
 | `box.pyc` | clean | 9 |

@@ -139,18 +139,18 @@ fan.pyc (Python 3.9)
                         4       CALL_METHOD                     0
                         6       LOAD_FAST                       0: self
                         8       STORE_ATTR                      1: printer
-                        10      LOAD_CONST                      1: 0
+                        10      LOAD_CONST                      1: 0.0
                         12      LOAD_FAST                       0: self
                         14      STORE_ATTR                      2: last_fan_value
-                        16      LOAD_CONST                      1: 0
+                        16      LOAD_CONST                      1: 0.0
                         18      LOAD_FAST                       0: self
                         20      STORE_ATTR                      3: last_fan_time
                         22      LOAD_FAST                       1: config
                         24      LOAD_ATTR                       4: getfloat
                         26      LOAD_CONST                      2: 'max_power'
-                        28      LOAD_CONST                      3: 1
-                        30      LOAD_CONST                      1: 0
-                        32      LOAD_CONST                      3: 1
+                        28      LOAD_CONST                      3: 1.0
+                        30      LOAD_CONST                      1: 0.0
+                        32      LOAD_CONST                      3: 1.0
                         34      LOAD_CONST                      4: ('above', 'maxval')
                         36      CALL_FUNCTION_KW                4
                         38      LOAD_FAST                       0: self
@@ -159,7 +159,7 @@ fan.pyc (Python 3.9)
                         44      LOAD_ATTR                       4: getfloat
                         46      LOAD_CONST                      5: 'kick_start_time'
                         48      LOAD_CONST                      6: 0.1
-                        50      LOAD_CONST                      1: 0
+                        50      LOAD_CONST                      1: 0.0
                         52      LOAD_CONST                      7: ('minval',)
                         54      CALL_FUNCTION_KW                3
                         56      LOAD_FAST                       0: self
@@ -167,9 +167,9 @@ fan.pyc (Python 3.9)
                         60      LOAD_FAST                       1: config
                         62      LOAD_ATTR                       4: getfloat
                         64      LOAD_CONST                      8: 'off_below'
-                        66      LOAD_CONST                      1: 0
-                        68      LOAD_CONST                      1: 0
-                        70      LOAD_CONST                      3: 1
+                        66      LOAD_CONST                      1: 0.0
+                        68      LOAD_CONST                      1: 0.0
+                        70      LOAD_CONST                      3: 1.0
                         72      LOAD_CONST                      9: ('default', 'minval', 'maxval')
                         74      CALL_FUNCTION_KW                4
                         76      LOAD_FAST                       0: self
@@ -178,7 +178,7 @@ fan.pyc (Python 3.9)
                         82      LOAD_ATTR                       4: getfloat
                         84      LOAD_CONST                      10: 'cycle_time'
                         86      LOAD_CONST                      11: 0.01
-                        88      LOAD_CONST                      1: 0
+                        88      LOAD_CONST                      1: 0.0
                         90      LOAD_CONST                      12: ('above',)
                         92      CALL_FUNCTION_KW                3
                         94      STORE_FAST                      3: cycle_time
@@ -192,8 +192,8 @@ fan.pyc (Python 3.9)
                         110     LOAD_ATTR                       4: getfloat
                         112     LOAD_CONST                      15: 'shutdown_speed'
                         114     LOAD_FAST                       2: default_shutdown_speed
-                        116     LOAD_CONST                      1: 0
-                        118     LOAD_CONST                      3: 1
+                        116     LOAD_CONST                      1: 0.0
+                        118     LOAD_CONST                      3: 1.0
                         120     LOAD_CONST                      16: ('minval', 'maxval')
                         122     CALL_FUNCTION_KW                4
                         124     STORE_FAST                      5: shutdown_speed
@@ -216,7 +216,7 @@ fan.pyc (Python 3.9)
                         158     LOAD_FAST                       0: self
                         160     LOAD_ATTR                       12: mcu_fan
                         162     LOAD_METHOD                     13: setup_max_duration
-                        164     LOAD_CONST                      1: 0
+                        164     LOAD_CONST                      1: 0.0
                         166     CALL_METHOD                     1
                         168     POP_TOP                         
                         170     LOAD_FAST                       0: self
@@ -227,7 +227,7 @@ fan.pyc (Python 3.9)
                         180     CALL_METHOD                     2
                         182     POP_TOP                         
                         184     LOAD_GLOBAL                     15: max
-                        186     LOAD_CONST                      1: 0
+                        186     LOAD_CONST                      1: 0.0
                         188     LOAD_GLOBAL                     16: min
                         190     LOAD_FAST                       0: self
                         192     LOAD_ATTR                       5: max_power
@@ -238,7 +238,7 @@ fan.pyc (Python 3.9)
                         202     LOAD_FAST                       0: self
                         204     LOAD_ATTR                       12: mcu_fan
                         206     LOAD_METHOD                     17: setup_start_value
-                        208     LOAD_CONST                      1: 0
+                        208     LOAD_CONST                      1: 0.0
                         210     LOAD_FAST                       7: shutdown_power
                         212     CALL_METHOD                     2
                         214     POP_TOP                         
@@ -265,7 +265,7 @@ fan.pyc (Python 3.9)
                         258     LOAD_FAST                       0: self
                         260     LOAD_ATTR                       18: enable_pin
                         262     LOAD_METHOD                     13: setup_max_duration
-                        264     LOAD_CONST                      1: 0
+                        264     LOAD_CONST                      1: 0.0
                         266     CALL_METHOD                     1
                         268     POP_TOP                         
                         270     LOAD_GLOBAL                     19: FanTachometer
@@ -349,10 +349,10 @@ fan.pyc (Python 3.9)
                         4       LOAD_ATTR                       0: off_below
                         6       COMPARE_OP                      0 (<)
                         8       POP_JUMP_IF_FALSE               14
-                        10      LOAD_CONST                      1: 0
+                        10      LOAD_CONST                      1: 0.0
                         12      STORE_FAST                      2: value
                         14      LOAD_GLOBAL                     1: max
-                        16      LOAD_CONST                      1: 0
+                        16      LOAD_CONST                      1: 0.0
                         18      LOAD_GLOBAL                     2: min
                         20      LOAD_FAST                       0: self
                         22      LOAD_ATTR                       3: max_power
@@ -526,7 +526,7 @@ fan.pyc (Python 3.9)
                         0       LOAD_FAST                       0: self
                         2       LOAD_METHOD                     0: set_speed
                         4       LOAD_FAST                       1: print_time
-                        6       LOAD_CONST                      1: 0
+                        6       LOAD_CONST                      1: 0.0
                         8       CALL_METHOD                     2
                         10      POP_TOP                         
                         12      LOAD_CONST                      0: None
@@ -583,7 +583,7 @@ fan.pyc (Python 3.9)
                 2       STORE_NAME                      1: __module__
                 4       LOAD_CONST                      0: 'Fan'
                 6       STORE_NAME                      2: __qualname__
-                8       LOAD_CONST                      15: (0,)
+                8       LOAD_CONST                      15: (0.0,)
                 10      LOAD_CONST                      2: <CODE> __init__
                 12      LOAD_CONST                      3: 'Fan.__init__'
                 14      MAKE_FUNCTION                   1
@@ -705,11 +705,11 @@ fan.pyc (Python 3.9)
                         54      LOAD_ATTR                       5: getfloat
                         56      LOAD_CONST                      6: 'tachometer_poll_interval'
                         58      LOAD_CONST                      7: 0.0015
-                        60      LOAD_CONST                      8: 0
+                        60      LOAD_CONST                      8: 0.0
                         62      LOAD_CONST                      9: ('above',)
                         64      CALL_FUNCTION_KW                3
                         66      STORE_FAST                      4: poll_time
-                        68      LOAD_CONST                      10: 1
+                        68      LOAD_CONST                      10: 1.0
                         70      STORE_FAST                      5: sample_time
                         72      LOAD_GLOBAL                     6: pulse_counter
                         74      LOAD_METHOD                     7: FrequencyCounter
@@ -756,7 +756,7 @@ fan.pyc (Python 3.9)
                         12      LOAD_ATTR                       0: _freq_counter
                         14      LOAD_METHOD                     1: get_frequency
                         16      CALL_METHOD                     0
-                        18      LOAD_CONST                      1: 30
+                        18      LOAD_CONST                      1: 3e+01
                         20      BINARY_MULTIPLY                 
                         22      LOAD_FAST                       0: self
                         24      LOAD_ATTR                       2: ppr
@@ -925,11 +925,11 @@ fan.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_ATTR                       0: get_float
                         4       LOAD_CONST                      1: 'S'
-                        6       LOAD_CONST                      2: 255
-                        8       LOAD_CONST                      3: 0
+                        6       LOAD_CONST                      2: 255.0
+                        8       LOAD_CONST                      3: 0.0
                         10      LOAD_CONST                      4: ('minval',)
                         12      CALL_FUNCTION_KW                3
-                        14      LOAD_CONST                      2: 255
+                        14      LOAD_CONST                      2: 255.0
                         16      BINARY_TRUE_DIVIDE              
                         18      STORE_FAST                      2: value
                         20      LOAD_FAST                       0: self
@@ -965,7 +965,7 @@ fan.pyc (Python 3.9)
                         0       LOAD_FAST                       0: self
                         2       LOAD_ATTR                       0: fan
                         4       LOAD_METHOD                     1: set_speed_from_command
-                        6       LOAD_CONST                      1: 0
+                        6       LOAD_CONST                      1: 0.0
                         8       CALL_METHOD                     1
                         10      POP_TOP                         
                         12      LOAD_CONST                      0: None

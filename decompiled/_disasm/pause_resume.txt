@@ -162,7 +162,7 @@ pause_resume.pyc (Python 3.9)
                         36      LOAD_FAST                       1: config
                         38      LOAD_METHOD                     6: getfloat
                         40      LOAD_CONST                      2: 'recover_velocity'
-                        42      LOAD_CONST                      3: 50
+                        42      LOAD_CONST                      3: 5e+01
                         44      CALL_METHOD                     2
                         46      LOAD_FAST                       0: self
                         48      STORE_ATTR                      7: recover_velocity

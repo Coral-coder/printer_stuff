@@ -19,7 +19,7 @@ class GCodeMove:
         self.variable_safe_z = 0
         if config.has_section('gcode_macro PRINTER_PARAM'):
             PRINTER_PARAM = config.getsection('gcode_macro PRINTER_PARAM')
-            self.variable_safe_z = PRINTER_PARAM.getfloat('variable_z_safe_g28', 0)
+            self.variable_safe_z = PRINTER_PARAM.getfloat('variable_z_safe_g28', 0.0)
         self.printer = printer = config.get_printer()
         printer.register_event_handler('klippy:ready', self._handle_ready)
         printer.register_event_handler('klippy:shutdown', self._handle_shutdown)
@@ -57,32 +57,32 @@ class GCodeMove:
         self.Coord = gcode.Coord
         self.absolute_coord = self.absolute_extrude = True
         self.base_position = [
-            0,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0,
+            0.0]
         self.last_position = [
-            0,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0,
+            0.0]
         self.homing_position = [
-            0,
-            0,
-            0,
-            0]
-        self.speed = 25
-        self.speed_factor = 0.0166667
-        self.extrude_factor = 1
+            0.0,
+            0.0,
+            0.0,
+            0.0]
+        self.speed = 25.0
+        self.speed_factor = 0.016666666666666666
+        self.extrude_factor = 1.0
         self.saved_states = { }
         self.move_transform = None
         self.move_with_transform = None
         
         self.position_with_transform = lambda : [
-0,
-0,
-0,
-0]
+0.0,
+0.0,
+0.0,
+0.0]
         gcode.register_command('RESET_HOME_AXES_XY', self.cmd_reset_home_axes_xy, desc=self.cmd_RESET_HOME_AXES_XY_help)
         gcode.register_command('SET_LIMITS', self.cmd_set_limits, desc=self.cmd_SET_LIMITS_help)
         gcode.register_command('RESTORE_LIMITS', self.cmd_restore_limits, desc=self.cmd_RESTORE_LIMITS_help)
@@ -92,10 +92,10 @@ class GCodeMove:
     cmd_RESET_HOME_AXES_XY_help = 'reset_home_axes'
     
     def cmd_reset_home_axes_xy(self, gcmd):
-        min_x = 1
-        max_x = -1
-        min_y = 1
-        max_y = -1
+        min_x = 1.0
+        max_x = -1.0
+        min_y = 1.0
+        max_y = -1.0
         self.printer.lookup_object('toolhead').kin.set_limits(min_x, max_x, min_y, max_y)
 
     
@@ -156,7 +156,7 @@ class GCodeMove:
     
     def _handle_activate_extruder(self):
         self.reset_last_position()
-        self.extrude_factor = 1
+        self.extrude_factor = 1.0
         self.base_position[3] = self.last_position[3]
 
     
@@ -189,7 +189,7 @@ class GCodeMove:
 
     
     def _get_gcode_speed_override(self):
-        return self.speed_factor * 60
+        return self.speed_factor * 6e+01
 
     
     def get_status(self, eventtime = (None,)):
@@ -214,7 +214,7 @@ class GCodeMove:
         gcode = self.printer.lookup_object('gcode')
         (bx, by, bz) = self.base_position[:3]
         (px, py, pz) = self.last_position[:3]
-        if bx == 0 and by == 0 and bz == 0:
+        if bx == 0.0 and by == 0.0 and bz == 0.0:
             return False
         None.info('Coordinate pollution detected, auto recovering: physical=(%.3f, %.3f, %.3f)', px, py, pz)
         gcode_speed = self._get_gcode_speed()
@@ -222,13 +222,13 @@ class GCodeMove:
         (min_z, max_z) = toolhead.kin.limits[2]
         current_pos = toolhead.get_position()
         current_physical_z = current_pos[2]
-        z_lift_height = 5
+        z_lift_height = 5.0
         if min_z <= max_z:
             lift_target_z = current_physical_z + z_lift_height
             if lift_target_z > max_z:
-                z_lift_height = max(0, max_z - current_physical_z - 0.1)
-                if z_lift_height < 1:
-                    z_lift_height = 0
+                z_lift_height = max(0.0, max_z - current_physical_z - 0.1)
+                if z_lift_height < 1.0:
+                    z_lift_height = 0.0
         gcode.run_script_from_command('G91')
         if z_lift_height > 0.01:
             gcode.run_script_from_command(f'''G1 Z{z_lift_height:.5f} F3000''')
@@ -303,7 +303,7 @@ class GCodeMove:
             if not part[0] == 'F':
                 if part[0] == 'f':
                     gcode_speed = float(part[1:])
-                    if gcode_speed <= 0:
+                    if gcode_speed <= 0.0:
                         raise Exception('{"code":"key272": "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (line, line))
                     self.speed = gcode_speed * self.speed_factor
             else:
@@ -349,7 +349,7 @@ class GCodeMove:
                     self.last_position[3] = v + self.base_position[3]
             if 'F' in params:
                 gcode_speed = float(params['F'])
-                if gcode_speed <= 0:
+                if gcode_speed <= 0.0:
                     raise gcmd.error('{"code":"key272": "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
                 self.speed = gcode_speed * self.speed_factor
         except ValueError:
@@ -375,9 +375,4 @@ class GCodeMove:
         pass
 
     
-    def cmd_M82(self, gcmd):
-        self.absolute_extrude = True
-
-    
-    def cmd_M83(self, gcmd):
- 
+    def cmd_M82(self, 

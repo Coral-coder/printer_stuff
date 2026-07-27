@@ -365,7 +365,7 @@ shaper_calibrate.pyc (Python 3.9)
                         74      LOAD_FAST                       4: psd
                         76      LOAD_FAST                       6: other_normalized
                         78      BINARY_ADD                      
-                        80      LOAD_CONST                      1: 1
+                        80      LOAD_CONST                      1: 1.0
                         82      LOAD_FAST                       3: joined_data_sets
                         84      BINARY_TRUE_DIVIDE              
                         86      BINARY_MULTIPLY                 
@@ -441,7 +441,7 @@ shaper_calibrate.pyc (Python 3.9)
                         18      BINARY_ADD                      
                         20      INPLACE_TRUE_DIVIDE             
                         22      STORE_FAST                      1: psd
-                        24      LOAD_CONST                      2: 0
+                        24      LOAD_CONST                      2: 0.0
                         26      LOAD_FAST                       1: psd
                         28      LOAD_FAST                       0: self
                         30      LOAD_ATTR                       1: freq_bins
@@ -1036,7 +1036,7 @@ shaper_calibrate.pyc (Python 3.9)
                         124     POP_JUMP_IF_FALSE               172
                         126     LOAD_FAST                       8: eventtime
                         128     LOAD_FAST                       9: last_report_time
-                        130     LOAD_CONST                      7: 5
+                        130     LOAD_CONST                      7: 5.0
                         132     BINARY_ADD                      
                         134     COMPARE_OP                      4 (>)
                         136     POP_JUMP_IF_FALSE               156
@@ -1221,10 +1221,10 @@ shaper_calibrate.pyc (Python 3.9)
                         6       LOAD_FAST                       4: np
                         8       LOAD_METHOD                     1: kaiser
                         10      LOAD_FAST                       3: nfft
-                        12      LOAD_CONST                      1: 6
+                        12      LOAD_CONST                      1: 6.0
                         14      CALL_METHOD                     2
                         16      STORE_FAST                      5: window
-                        18      LOAD_CONST                      2: 1
+                        18      LOAD_CONST                      2: 1.0
                         20      LOAD_FAST                       5: window
                         22      LOAD_CONST                      3: 2
                         24      BINARY_POWER                    
@@ -1292,7 +1292,7 @@ shaper_calibrate.pyc (Python 3.9)
                         148     BUILD_TUPLE                     2
                         150     DUP_TOP_TWO                     
                         152     BINARY_SUBSCR                   
-                        154     LOAD_CONST                      9: 2
+                        154     LOAD_CONST                      9: 2.0
                         156     INPLACE_MULTIPLY                
                         158     ROT_THREE                       
                         160     STORE_SUBSCR                    
@@ -1307,7 +1307,7 @@ shaper_calibrate.pyc (Python 3.9)
                         178     LOAD_ATTR                       5: fft
                         180     LOAD_METHOD                     9: rfftfreq
                         182     LOAD_FAST                       3: nfft
-                        184     LOAD_CONST                      2: 1
+                        184     LOAD_CONST                      2: 1.0
                         186     LOAD_FAST                       2: fs
                         188     BINARY_TRUE_DIVIDE              
                         190     CALL_METHOD                     2
@@ -1664,7 +1664,7 @@ shaper_calibrate.pyc (Python 3.9)
                         108     POP_JUMP_IF_FALSE               152
                         110     LOAD_FAST                       8: eventtime
                         112     LOAD_FAST                       9: last_report_time
-                        114     LOAD_CONST                      5: 5
+                        114     LOAD_CONST                      5: 5.0
                         116     BINARY_ADD                      
                         118     COMPARE_OP                      4 (>)
                         120     POP_JUMP_IF_FALSE               136
@@ -2030,13 +2030,13 @@ shaper_calibrate.pyc (Python 3.9)
                         30      ROT_TWO                         
                         32      STORE_FAST                      5: A
                         34      STORE_FAST                      6: T
-                        36      LOAD_CONST                      3: 1
+                        36      LOAD_CONST                      3: 1.0
                         38      LOAD_FAST                       5: A
                         40      LOAD_METHOD                     2: sum
                         42      CALL_METHOD                     0
                         44      BINARY_TRUE_DIVIDE              
                         46      STORE_FAST                      7: inv_D
-                        48      LOAD_CONST                      4: 2
+                        48      LOAD_CONST                      4: 2.0
                         50      LOAD_GLOBAL                     3: math
                         52      LOAD_ATTR                       4: pi
                         54      BINARY_MULTIPLY                 
@@ -2050,7 +2050,7 @@ shaper_calibrate.pyc (Python 3.9)
                         70      LOAD_FAST                       8: omega
                         72      LOAD_GLOBAL                     3: math
                         74      LOAD_METHOD                     5: sqrt
-                        76      LOAD_CONST                      3: 1
+                        76      LOAD_CONST                      3: 1.0
                         78      LOAD_FAST                       2: test_damping_ratio
                         80      LOAD_CONST                      5: 2
                         82      BINARY_POWER                    
@@ -2280,7 +2280,7 @@ shaper_calibrate.pyc (Python 3.9)
                         10      UNPACK_SEQUENCE                 2
                         12      STORE_DEREF                     0: A
                         14      STORE_DEREF                     1: T
-                        16      LOAD_CONST                      2: 1
+                        16      LOAD_CONST                      2: 1.0
                         18      LOAD_GLOBAL                     0: sum
                         20      LOAD_DEREF                      0: A
                         22      CALL_FUNCTION                   1
@@ -2306,7 +2306,7 @@ shaper_calibrate.pyc (Python 3.9)
                         62      LOAD_FAST                       5: inv_D
                         64      BINARY_MULTIPLY                 
                         66      STORE_FAST                      7: ts
-                        68      LOAD_CONST                      5: 0
+                        68      LOAD_CONST                      5: 0.0
                         70      DUP_TOP                         
                         72      STORE_FAST                      8: offset_90
                         74      STORE_FAST                      9: offset_180
@@ -2365,7 +2365,7 @@ shaper_calibrate.pyc (Python 3.9)
                         180     LOAD_FAST                       5: inv_D
                         182     LOAD_GLOBAL                     3: math
                         184     LOAD_METHOD                     4: sqrt
-                        186     LOAD_CONST                      7: 2
+                        186     LOAD_CONST                      7: 2.0
                         188     CALL_METHOD                     1
                         190     BINARY_MULTIPLY                 
                         192     INPLACE_MULTIPLY                
@@ -2498,7 +2498,7 @@ shaper_calibrate.pyc (Python 3.9)
                         74      GET_ITER                        
                         76      FOR_ITER                        222 (to 300)
                         78      STORE_FAST                      10: test_freq
-                        80      LOAD_CONST                      3: 0
+                        80      LOAD_CONST                      3: 0.0
                         82      STORE_FAST                      11: shaper_vibrations
                         84      LOAD_FAST                       4: np
                         86      LOAD_ATTR                       7: zeros
@@ -2663,7 +2663,7 @@ shaper_calibrate.pyc (Python 3.9)
                         2
                         1e-08
                     [Disassembly]
-                        0       LOAD_CONST                      1: 1
+                        0       LOAD_CONST                      1: 1.0
                         2       DUP_TOP                         
                         4       STORE_FAST                      2: left
                         6       STORE_FAST                      3: right
@@ -2687,7 +2687,7 @@ shaper_calibrate.pyc (Python 3.9)
                         42      CALL_FUNCTION                   1
                         44      POP_JUMP_IF_FALSE               56
                         46      LOAD_FAST                       3: right
-                        48      LOAD_CONST                      3: 2
+                        48      LOAD_CONST                      3: 2.0
                         50      INPLACE_MULTIPLY                
                         52      STORE_FAST                      3: right
                         54      JUMP_ABSOLUTE                   38
@@ -2868,7 +2868,7 @@ shaper_calibrate.pyc (Python 3.9)
                         70      LOAD_ATTR                       6: freq
                         72      LOAD_FAST                       7: shaper
                         74      LOAD_ATTR                       7: vibrs
-                        76      LOAD_CONST                      2: 100
+                        76      LOAD_CONST                      2: 1e+02
                         78      BINARY_MULTIPLY                 
                         80      LOAD_FAST                       7: shaper
                         82      LOAD_ATTR                       8: smoothing
@@ -2883,10 +2883,10 @@ shaper_calibrate.pyc (Python 3.9)
                         100     LOAD_GLOBAL                     9: round
                         102     LOAD_FAST                       7: shaper
                         104     LOAD_ATTR                       10: max_accel
-                        106     LOAD_CONST                      2: 100
+                        106     LOAD_CONST                      2: 1e+02
                         108     BINARY_TRUE_DIVIDE              
                         110     CALL_FUNCTION                   1
-                        112     LOAD_CONST                      2: 100
+                        112     LOAD_CONST                      2: 1e+02
                         114     BINARY_MULTIPLY                 
                         116     BUILD_TUPLE                     2
                         118     BINARY_MODULO                   
@@ -3379,7 +3379,7 @@ shaper_calibrate.pyc (Python 3.9)
                 98      LOAD_CONST                      24: 'ShaperCalibrate._estimate_remaining_vibrations'
                 100     MAKE_FUNCTION                   0
                 102     STORE_NAME                      14: _estimate_remaining_vibrations
-                104     LOAD_CONST                      44: (5000, 5)
+                104     LOAD_CONST                      44: (5000, 5.0)
                 106     LOAD_CONST                      27: <CODE> _get_shaper_smoothing
                 108     LOAD_CONST                      28: 'ShaperCalibrate._get_shaper_smoothing'
                 110     MAKE_FUNCTION                   1
@@ -3476,13 +3476,13 @@ shaper_calibrate.pyc (Python 3.9)
         110     IMPORT_FROM                     14: base_dir
         112     STORE_NAME                      14: base_dir
         114     POP_TOP                         
-        116     LOAD_CONST                      7: 5
+        116     LOAD_CONST                      7: 5.0
         118     STORE_NAME                      15: MIN_FREQ
-        120     LOAD_CONST                      8: 200
+        120     LOAD_CONST                      8: 2e+02
         122     STORE_NAME                      16: MAX_FREQ
         124     LOAD_CONST                      9: 0.5
         126     STORE_NAME                      17: WINDOW_T_SEC
-        128     LOAD_CONST                      10: 150
+        128     LOAD_CONST                      10: 1.5e+02
         130     STORE_NAME                      18: MAX_SHAPER_FREQ
         132     BUILD_LIST                      0
         134     LOAD_CONST                      11: (0.075, 0.1, 0.15)

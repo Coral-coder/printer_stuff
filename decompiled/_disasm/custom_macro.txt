@@ -208,7 +208,7 @@ custom_macro.pyc (Python 3.9)
                         164     LOAD_FAST                       1: config
                         166     LOAD_ATTR                       20: getfloat
                         168     LOAD_CONST                      8: 'default_extruder_temp'
-                        170     LOAD_CONST                      9: 240
+                        170     LOAD_CONST                      9: 2.4e+02
                         172     LOAD_CONST                      10: ('default',)
                         174     CALL_FUNCTION_KW                2
                         176     LOAD_FAST                       0: self
@@ -216,7 +216,7 @@ custom_macro.pyc (Python 3.9)
                         180     LOAD_FAST                       1: config
                         182     LOAD_ATTR                       20: getfloat
                         184     LOAD_CONST                      11: 'default_bed_temp'
-                        186     LOAD_CONST                      12: 50
+                        186     LOAD_CONST                      12: 5e+01
                         188     LOAD_CONST                      10: ('default',)
                         190     CALL_FUNCTION_KW                2
                         192     LOAD_FAST                       0: self
@@ -224,7 +224,7 @@ custom_macro.pyc (Python 3.9)
                         196     LOAD_FAST                       1: config
                         198     LOAD_ATTR                       20: getfloat
                         200     LOAD_CONST                      13: 'g28_ext_temp'
-                        202     LOAD_CONST                      14: 140
+                        202     LOAD_CONST                      14: 1.4e+02
                         204     LOAD_CONST                      10: ('default',)
                         206     CALL_FUNCTION_KW                2
                         208     LOAD_FAST                       0: self
@@ -739,8 +739,8 @@ custom_macro.pyc (Python 3.9)
                         4       LOAD_CONST                      1: 'EXTRUDER_TEMP'
                         6       LOAD_FAST                       0: self
                         8       LOAD_ATTR                       1: default_extruder_temp
-                        10      LOAD_CONST                      2: 180
-                        12      LOAD_CONST                      3: 320
+                        10      LOAD_CONST                      2: 1.8e+02
+                        12      LOAD_CONST                      3: 3.2e+02
                         14      LOAD_CONST                      4: ('default', 'minval', 'maxval')
                         16      CALL_FUNCTION_KW                4
                         18      LOAD_FAST                       0: self
@@ -753,10 +753,10 @@ custom_macro.pyc (Python 3.9)
                         32      STORE_ATTR                      3: g28_ext_temp
                         34      LOAD_FAST                       0: self
                         36      LOAD_ATTR                       3: g28_ext_temp
-                        38      LOAD_CONST                      2: 180
+                        38      LOAD_CONST                      2: 1.8e+02
                         40      COMPARE_OP                      4 (>)
                         42      POP_JUMP_IF_FALSE               50
-                        44      LOAD_CONST                      2: 180
+                        44      LOAD_CONST                      2: 1.8e+02
                         46      LOAD_FAST                       0: self
                         48      STORE_ATTR                      3: g28_ext_temp
                         50      SETUP_FINALLY                   18 (to 70)
@@ -799,8 +799,8 @@ custom_macro.pyc (Python 3.9)
                         124     LOAD_CONST                      9: 'BED_TEMP'
                         126     LOAD_FAST                       0: self
                         128     LOAD_ATTR                       9: default_bed_temp
-                        130     LOAD_CONST                      10: 0
-                        132     LOAD_CONST                      11: 130
+                        130     LOAD_CONST                      10: 0.0
+                        132     LOAD_CONST                      11: 1.3e+02
                         134     LOAD_CONST                      4: ('default', 'minval', 'maxval')
                         136     CALL_FUNCTION_KW                4
                         138     LOAD_FAST                       0: self

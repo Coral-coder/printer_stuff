@@ -212,7 +212,7 @@ heater_bed.pyc (Python 3.9)
                         126     LOAD_FAST                       1: config
                         128     LOAD_ATTR                       13: getfloat
                         130     LOAD_CONST                      8: 'max_temp'
-                        132     LOAD_CONST                      9: 0
+                        132     LOAD_CONST                      9: 0.0
                         134     LOAD_CONST                      10: ('above',)
                         136     CALL_FUNCTION_KW                2
                         138     LOAD_FAST                       0: self
@@ -396,19 +396,19 @@ heater_bed.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_METHOD                     0: get_float
                         4       LOAD_CONST                      1: 'S'
-                        6       LOAD_CONST                      2: 0
+                        6       LOAD_CONST                      2: 0.0
                         8       CALL_METHOD                     2
                         10      STORE_FAST                      3: temp
                         12      LOAD_FAST                       3: temp
                         14      LOAD_FAST                       0: self
                         16      LOAD_ATTR                       1: max_temp
-                        18      LOAD_CONST                      3: 15
+                        18      LOAD_CONST                      3: 15.0
                         20      BINARY_SUBTRACT                 
                         22      COMPARE_OP                      4 (>)
                         24      POP_JUMP_IF_FALSE               36
                         26      LOAD_FAST                       0: self
                         28      LOAD_ATTR                       1: max_temp
-                        30      LOAD_CONST                      3: 15
+                        30      LOAD_CONST                      3: 15.0
                         32      BINARY_SUBTRACT                 
                         34      STORE_FAST                      3: temp
                         36      LOAD_FAST                       0: self
@@ -1375,7 +1375,7 @@ heater_bed.pyc (Python 3.9)
                                 10      STORE_FAST                      2: v
                                 12      LOAD_FAST                       1: k
                                 14      LOAD_FAST                       2: v
-                                16      LOAD_CONST                      0: 255
+                                16      LOAD_CONST                      0: 255.0
                                 18      BINARY_TRUE_DIVIDE              
                                 20      MAP_ADD                         2
                                 22      JUMP_ABSOLUTE                   4

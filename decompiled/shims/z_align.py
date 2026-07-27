@@ -136,7 +136,7 @@ passcontinue1[0]
         step_distance = rotation_distance / subdivision
         quickSpeedTicks = int((1 / self.quickSpeed / step_distance) * mcu_freq / 2)
         enable = 1
-        maxDist = int(288000)
+        maxDist = int(2.88e+05)
         self.filterCnt
         self.gcode.run_script_from_command('M84')
         self.gcode.run_script_from_command('G28')
@@ -166,7 +166,7 @@ passcontinue1[0]
         if usetime > self.timeout:
             self.gcode.respond_info('finetuning_status 30s timeout')
         else:
-            reactor.pause(reactor.monotonic() + 1)
+            reactor.pause(reactor.monotonic() + 1.0)
         self.gcode.respond_info('finetuning_status result: %s+%s=%s' % (cur_z_pos, steps * 0.0025 / 2, steps * 0.0025 / 2 + 5))
         toolhead = self.printer.lookup_object('toolhead')
         now_pos = toolhead.get_position()
@@ -179,4 +179,3 @@ passcontinue1[0]
         self.gcode.run_script_from_command(gcmd)
         self.gcode.run_script_from_command('G28 Z')
 
-    

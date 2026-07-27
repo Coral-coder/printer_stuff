@@ -20,8 +20,8 @@ class RunoutHelper:
             self.runout_gcode = gcode_macro.load_template(config, 'runout_gcode', '')
         if config.get('insert_gcode', None) is not None:
             self.insert_gcode = gcode_macro.load_template(config, 'insert_gcode')
-        self.pause_delay = config.getfloat('pause_delay', 0.5, above=0)
-        self.event_delay = config.getfloat('event_delay', 3, above=0)
+        self.pause_delay = config.getfloat('pause_delay', 0.5, above=0.0)
+        self.event_delay = config.getfloat('event_delay', 3.0, above=0.0)
         self.min_event_systime = self.reactor.NEVER
         self.filament_present = False
         self.sensor_enabled = True
@@ -31,7 +31,7 @@ class RunoutHelper:
 
     
     def _handle_ready(self):
-        self.min_event_systime = self.reactor.monotonic() + 2
+        self.min_event_systime = self.reactor.monotonic() + 2.0
 
     
     def _runout_event_handler(self, eventtime):

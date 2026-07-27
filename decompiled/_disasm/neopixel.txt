@@ -554,7 +554,7 @@ neopixel.pyc (Python 3.9)
                         30      BINARY_SUBSCR                   
                         32      LOAD_FAST                       5: cidx
                         34      BINARY_SUBSCR                   
-                        36      LOAD_CONST                      1: 255
+                        36      LOAD_CONST                      1: 255.0
                         38      BINARY_MULTIPLY                 
                         40      LOAD_CONST                      2: 0.5
                         42      BINARY_ADD                      

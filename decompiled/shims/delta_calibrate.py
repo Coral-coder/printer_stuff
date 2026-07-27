@@ -20,12 +20,12 @@ def load_config_stable(config, option):
     return config.getfloatlist(option, count=3)
 
 MeasureAngles = [
-    210,
-    270,
-    330,
-    30,
-    90,
-    150]
+    2.1e+02,
+    2.7e+02,
+    3.3e+02,
+    3e+01,
+    9e+01,
+    1.5e+02]
 MeasureOuterRadius = 65
 MeasureRidgeRadius = 4.5
 MEASURE_WEIGHT = 0.5
@@ -47,15 +47,15 @@ def measurements_to_distances(measured_params, delta_params):
     obj_angles = list(map(math.radians, MeasureAngles))
     xy_angles = list(zip(map(math.cos, obj_angles), map(math.sin, obj_angles)))
     inner_ridge = MeasureRidgeRadius * scale
-    inner_pos = [ (ax * inner_ridge, ay * inner_ridge, 0) for ax, ay in (xy_angles) ]
+    inner_pos = [ (ax * inner_ridge, ay * inner_ridge, 0.0) for ax, ay in (xy_angles) ]
     outer_ridge = (MeasureOuterRadius + MeasureRidgeRadius) * scale
-    outer_pos = [ (ax * outer_ridge, ay * outer_ridge, 0) for ax, ay in (xy_angles) ]
+    outer_pos = [ (ax * outer_ridge, ay * outer_ridge, 0.0) for ax, ay in (xy_angles) ]
     center_positions = [ (cd, dp.calc_stable_position(ip), dp.calc_stable_position(op)) for cd, ip, op in (zip(center_dists, inner_pos, outer_pos)) ]
     outer_center = MeasureOuterRadius * scale
     start_pos = [ (ax * outer_center, ay * outer_center) for ax, ay in (xy_angles) ]
     shifted_angles = xy_angles[2:] + xy_angles[:2]
-    first_pos = [ (ax * inner_ridge + spx, ay * inner_ridge + spy, 0) for ax, ay in (zip(shifted_angles, start_pos)) ]
-    second_pos = [ (ax * outer_ridge + spx, ay * outer_ridge + spy, 0) for ax, ay in (zip(shifted_angles, start_pos)) ]
+    first_pos = [ (ax * inner_ridge + spx, ay * inner_ridge + spy, 0.0) for ax, ay in (zip(shifted_angles, start_pos)) ]
+    second_pos = [ (ax * outer_ridge + spx, ay * outer_ridge + spy, 0.0) for ax, ay in (zip(shifted_angles, start_pos)) ]
     outer_positions = [ (od, dp.calc_stable_position(fp), dp.calc_stable_position(sp)) for od, fp, sp in (zip(outer_dists, first_pos, second_pos)) ]
     return center_positions + outer_positions
 
@@ -65,9 +65,9 @@ class DeltaCalibrate:
     def __init__(self, config):
         self.printer = config.get_printer()
         self.printer.register_event_handler('klippy:connect', self.handle_connect)
-        radius = config.getfloat('radius', above=0)
+        radius = config.getfloat('radius', above=0.0)
         points = [
-            (0, 0)]
+            (0.0, 0.0)]
         scatter = [
             0.95,
             0.9,
@@ -76,7 +76,7 @@ class DeltaCalibrate:
             0.75,
             0.8]
         for i in range(6):
-            r = math.radians(90 + 60 * i)
+            r = math.radians(9e+01 + 6e+01 * i)
             dist = radius * scatter[i]
             points.append((math.cos(r) * dist, math.sin(r) * dist))
         self.probe_helper = probe.ProbePointsHelper(config, self.probe_finalize, default_points=points)
@@ -98,7 +98,7 @@ class DeltaCalibrate:
                     height_pos = load_config_stable(config, 'manual_height%d_pos' % (i,))
                     self.manual_heights.append((height, height_pos))
                 self.delta_analyze_entry = {
-                    'SCALE': (1,) }
+                    'SCALE': (1.0,) }
                 self.last_distances = []
                 for i in range(999):
                     dist = config.getfloat('distance%d' % (i,), None)
@@ -151,7 +151,7 @@ class DeltaCalibrate:
         orig_delta_params = odp = kin.get_calibration()
         (adj_params, params) = odp.coordinate_descent_params(distances)
         logging.info('Calculating delta_calibrate with:\n%s\n%s\nInitial delta_calibrate parameters: %s', height_positions, distances, params)
-        z_weight = 1
+        z_weight = 1.0
         if distances:
             z_weight = len(distances) / (MEASURE_WEIGHT * len(probe_positions))
         
@@ -160,7 +160,7 @@ class DeltaCalibrate:
             try:
                 delta_params = orig_delta_params.new_calibration(params)
                 getpos = delta_params.get_position_from_stable
-                total_error = 0
+                total_error = 0.0
                 for z_offset, stable_pos in height_positions:
                     (x, y, z) = getpos(stable_pos)
                     total_error += (z - z_offset) ** 2
@@ -172,7 +172,7 @@ class DeltaCalibrate:
                     total_error += (d - dist) ** 2
             return None
             except ValueError:
-                return 1e+13
+                return 9999999999999.9
 
 
         new_params = mathutil.background_coordinate_descent(self.printer, adj_params, params, delta_errorfunc)

@@ -55,7 +55,7 @@ class PIDCalibrate:
 
 
 
-        if calibrate.check_busy(0, 0, 0):
+        if calibrate.check_busy(0.0, 0.0, 0.0):
             raise gcmd.error('{"code": "key7", "msg": "pid_calibrate interrupted"}')
         (Kp, Ki, Kd) = calibrate.calc_final_pid()
         logging.info('Autotune: final: Kp=%f Ki=%f Kd=%f', Kp, Ki, Kd)
@@ -63,7 +63,7 @@ class PIDCalibrate:
         Kp_name = 'pid_Kp'
         Ki_name = 'pid_Ki'
         Kd_name = 'pid_Kd'
-        PID_PARAM_BASE = 255
+        PID_PARAM_BASE = 255.0
         high_temp_value = self.config.getsection('extruder').getint('high_temp_value', default=280)
         if heater_name == 'extruder' and target > high_temp_value:
             Kp_name = 'pid_Kp_high_temp'
@@ -83,7 +83,7 @@ class PIDCalibrate:
         configfile.set(heater_name, Kd_name, '%.3f' % (Kd,))
 
 
-TUNE_PID_DELTA = 5
+TUNE_PID_DELTA = 5.0
 
 class ControlAutoTune:
     
@@ -92,10 +92,10 @@ class ControlAutoTune:
         self.heater_max_power = heater.get_max_power()
         self.calibrate_temp = target
         self.heating = False
-        self.peak = 0
-        self.peak_time = 0
+        self.peak = 0.0
+        self.peak_time = 0.0
         self.peaks = []
-        self.last_pwm = 0
+        self.last_pwm = 0.0
         self.pwm_samples = []
         self.temp_samples = []
 
@@ -123,7 +123,7 @@ class ControlAutoTune:
                 self.peak = temp
                 self.peak_time = read_time
             else:
-                self.set_pwm(read_time, 0)
+                self.set_pwm(read_time, 0.0)
                 if temp > self.peak:
                     self.peak = temp
                     self.peak_time = read_time
@@ -137,9 +137,9 @@ class ControlAutoTune:
     def check_peaks(self):
         self.peaks.append((self.peak, self.peak_time))
         if self.heating:
-            self.peak = 1e+07
+            self.peak = 9999999.0
         else:
-            self.peak = -1e+07
+            self.peak = -9999999.0
         if len(self.peaks) < 4:
             return None
         None.calc_pid(len(self.peaks) - 1)
@@ -149,7 +149,7 @@ class ControlAutoTune:
         temp_diff = self.peaks[pos][0] - self.peaks[pos - 1][0]
         time_diff = self.peaks[pos][1] - self.peaks[pos - 2][1]
         amplitude = 0.5 * abs(temp_diff)
-        Ku = 4 * self.heater_max_power / (math.pi * amplitude)
+        Ku = 4.0 * self.heater_max_power / (math.pi * amplitude)
         Tu = time_diff
         Ti = 0.5 * Tu
         Td = 0.125 * Tu

@@ -107,7 +107,7 @@ class EEPROMCommandHelper:
     
     def cmd_EEPROM_DEBUG_WRITE_FLOAT(self, gcmd):
         addr = gcmd.get('ADDR', minval=0, maxval=2047, parser=(lambda x: int(x, 0)))
-        val = gcmd.get_float('VAL', 0)
+        val = gcmd.get_float('VAL', 0.0)
         gcmd.respond_info('EEPROM_DEBUG_WRITE_FLOAT : val = %f' % val)
         bs = struct.pack('f', val)
         data = int.from_bytes(bs, byteorder='little')
@@ -156,7 +156,7 @@ class EEPROMCommandHelper:
     
     def cmd_EEPROM_WRITE_FLOAT(self, gcmd):
         addr = gcmd.get('ADDR', minval=0, maxval=2047, parser=(lambda x: int(x, 0)))
-        val = gcmd.get_float('VAL', 0)
+        val = gcmd.get_float('VAL', 0.0)
         bs = struct.pack('f', val)
         data = int.from_bytes(bs, byteorder='little')
         vals = [

@@ -6,10 +6,10 @@ class FirmwareRetraction:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.retract_length = config.getfloat('retract_length', 0, minval=0)
-        self.retract_speed = config.getfloat('retract_speed', 20, minval=1)
-        self.unretract_extra_length = config.getfloat('unretract_extra_length', 0, minval=0)
-        self.unretract_speed = config.getfloat('unretract_speed', 10, minval=1)
+        self.retract_length = config.getfloat('retract_length', 0.0, minval=0.0)
+        self.retract_speed = config.getfloat('retract_speed', 2e+01, minval=1)
+        self.unretract_extra_length = config.getfloat('unretract_extra_length', 0.0, minval=0.0)
+        self.unretract_speed = config.getfloat('unretract_speed', 1e+01, minval=1)
         self.unretract_length = self.retract_length + self.unretract_extra_length
         self.is_retracted = False
         self.gcode = self.printer.lookup_object('gcode')
@@ -29,9 +29,9 @@ class FirmwareRetraction:
     cmd_SET_RETRACTION_help = 'Set firmware retraction parameters'
     
     def cmd_SET_RETRACTION(self, gcmd):
-        self.retract_length = gcmd.get_float('RETRACT_LENGTH', self.retract_length, minval=0)
+        self.retract_length = gcmd.get_float('RETRACT_LENGTH', self.retract_length, minval=0.0)
         self.retract_speed = gcmd.get_float('RETRACT_SPEED', self.retract_speed, minval=1)
-        self.unretract_extra_length = gcmd.get_float('UNRETRACT_EXTRA_LENGTH', self.unretract_extra_length, minval=0)
+        self.unretract_extra_length = gcmd.get_float('UNRETRACT_EXTRA_LENGTH', self.unretract_extra_length, minval=0.0)
         self.unretract_speed = gcmd.get_float('UNRETRACT_SPEED', self.unretract_speed, minval=1)
         self.unretract_length = self.retract_length + self.unretract_extra_length
         self.is_retracted = False

@@ -3,7 +3,7 @@
 
 import logging
 from . import probe
-BITS_PER_SECOND = 1000
+BITS_PER_SECOND = 1e+03
 
 class ControlPinHelper:
     
@@ -25,7 +25,7 @@ class ControlPinHelper:
 
     
     def write_bits(self, start_time, bit_stream):
-        bit_step = 1 / BITS_PER_SECOND
+        bit_step = 1.0 / BITS_PER_SECOND
         last_value = self._start_value
         bit_time = start_time
         for b in bit_stream:
@@ -54,8 +54,8 @@ class SmartEffectorEndstopWrapper:
     def __init__(self, config):
         self.printer = config.get_printer()
         self.gcode = self.printer.lookup_object('gcode')
-        self.probe_accel = config.getfloat('probe_accel', 0, minval=0)
-        self.recovery_time = config.getfloat('recovery_time', 0.4, minval=0)
+        self.probe_accel = config.getfloat('probe_accel', 0.0, minval=0.0)
+        self.recovery_time = config.getfloat('recovery_time', 0.4, minval=0.0)
         self.probe_wrapper = probe.ProbeEndstopWrapper(config)
         self.get_mcu = self.probe_wrapper.get_mcu
         self.add_stepper = self.probe_wrapper.add_stepper
@@ -137,8 +137,8 @@ class SmartEffectorEndstopWrapper:
                 respond_info.append('sensitivity: %d' % (sensitivity,))
             else:
                 raise gcmd.error('control_pin must be set in [smart_effector] for sensitivity programming')
-        self.probe_accel = gcmd.get_float('ACCEL', self.probe_accel, minval=0)
-        self.recovery_time = gcmd.get_float('RECOVERY_TIME', self.recovery_time, minval=0)
+        self.probe_accel = gcmd.get_float('ACCEL', self.probe_accel, minval=0.0)
+        self.recovery_time = gcmd.get_float('RECOVERY_TIME', self.recovery_time, minval=0.0)
         if self.probe_accel:
             respond_info.append('probing accelartion: %.3f' % (self.probe_accel,))
         else:

@@ -39,13 +39,13 @@ class PRTouchCFG:
         self.bed_max_err = config.getint('bed_max_err', default=2, minval=2, maxval=10)
         self.max_z = config.getsection('stepper_z').getfloat('position_max', default=300, minval=100, maxval=500)
         self.g29_xy_speed = config.getfloat('g29_xy_speed', default=150, minval=10, maxval=1000)
-        self.fix_z_offset = config.getfloat('fix_z_offset', default=0, minval=-1, maxval=1)
+        self.fix_z_offset = config.getfloat('fix_z_offset', default=0.0, minval=-1, maxval=1)
         self.max_dis_bef_g28 = config.getfloat('max_dis_bef_g28', default=10, minval=0, maxval=50)
         self.dead_zone_bef_g28 = config.getfloat('dead_zone_bef_g28', default=self.max_dis_bef_g28 / 2, minval=0, maxval=50)
-        self.g28_sta0_speed = config.getfloat('g28_sta0_speed', default=2, minval=0.1, maxval=10)
+        self.g28_sta0_speed = config.getfloat('g28_sta0_speed', default=2.0, minval=0.1, maxval=10)
         self.g28_sta1_speed = config.getfloat('g28_sta1_speed', default=2.5, minval=0.1, maxval=10)
         self.g29_rdy_speed = config.getfloat('g29_rdy_speed', default=2.5, minval=0.1, maxval=10)
-        self.g29_speed = config.getfloat('g29_speed', default=2, minval=0.1, maxval=10)
+        self.g29_speed = config.getfloat('g29_speed', default=2.0, minval=0.1, maxval=10)
         self.show_msg = config.getboolean('show_msg', default=False)
         self.best_above_z = config.getfloat('best_above_z', default=1.5, minval=0.5, maxval=10)
         self.g28_wait_cool_down = config.getboolean('g28_wait_cool_down', default=False)
@@ -62,7 +62,7 @@ class PRTouchCFG:
         self.z_gap_11 = config.getfloat('z_gap_11', default=0, minval=-1, maxval=1)
         self.check_bed_mesh_max_err = config.getfloat('check_bed_mesh_max_err', default=0.2, minval=0.01, maxval=1)
         self.tri_wave_ip = config.get('tri_wave_ip', None)
-        self.self_z_offset = config.getfloat('self_z_offset', default=0, minval=-2, maxval=2)
+        self.self_z_offset = config.getfloat('self_z_offset', default=0.0, minval=-2, maxval=2)
         self.stored_profs = config.get_prefix_sections('prtouch')
         self.stored_profs = self.stored_profs[1] if len(self.stored_profs) == 2 and self.need_measure_gap else None
 
@@ -72,12 +72,12 @@ class PRTouchVAL:
     
     def __init__(self, config):
         self.out_index = 0
-        self.out_val_mm = 0
+        self.out_val_mm = 0.0
         self.rdy_pos = [
             [
-                0,
-                0,
-                0] * 4]
+                0.0,
+                0.0,
+                0.0] * 4]
         self.gap_pos = None
         self.g29_cnt = int(0)
         self.re_probe_cnt = 0
@@ -138,35 +138,35 @@ class PRTouchEndstopWrapper:
             [
                 min_x,
                 min_y,
-                self.cfg.bed_max_err + 1],
+                self.cfg.bed_max_err + 1.0],
             [
                 min_x,
                 max_y,
-                self.cfg.bed_max_err + 1],
+                self.cfg.bed_max_err + 1.0],
             [
                 max_x,
                 max_y,
-                self.cfg.bed_max_err + 1],
+                self.cfg.bed_max_err + 1.0],
             [
                 max_x,
                 min_y,
-                self.cfg.bed_max_err + 1]]
+                self.cfg.bed_max_err + 1.0]]
         self.val.gap_pos = [
             [
-                min_x + 1,
-                min_y + 1,
+                min_x + 1.0,
+                min_y + 1.0,
                 self.cfg.z_gap_00],
             [
-                min_x + 1,
-                max_y - 1,
+                min_x + 1.0,
+                max_y - 1.0,
                 self.cfg.z_gap_01],
             [
-                max_x - 1,
-                max_y - 1,
+                max_x - 1.0,
+                max_y - 1.0,
                 self.cfg.z_gap_11],
             [
-                max_x - 1,
-                min_y + 1,
+                max_x - 1.0,
+                min_y + 1.0,
                 self.cfg.z_gap_10]]
         if self.cfg.clr_noz_start_x <= 0 and self.cfg.clr_noz_start_y <= 0 and self.cfg.clr_noz_len_x <= 0 or self.cfg.clr_noz_len_y <= 0:
             self.cfg.clr_noz_start_x = (max_x - min_x) * 1 / 3 + min_x

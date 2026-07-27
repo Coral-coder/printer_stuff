@@ -9,8 +9,8 @@ class PrinterSysStats:
     
     def __init__(self, config):
         printer = config.get_printer()
-        self.last_process_time = self.total_process_time = 0
-        self.last_load_avg = 0
+        self.last_process_time = self.total_process_time = 0.0
+        self.last_load_avg = 0.0
         self.last_mem_avail = 0
         self.mem_file = None
         
@@ -32,7 +32,7 @@ class PrinterSysStats:
         ptime = time.process_time()
         pdiff = ptime - self.last_process_time
         self.last_process_time = ptime
-        if pdiff > 0:
+        if pdiff > 0.0:
             self.total_process_time += pdiff
         self.last_load_avg = os.getloadavg()[0]
         msg = 'sysload=%.2f cputime=%.3f' % (self.last_load_avg, self.total_process_time)
@@ -83,7 +83,7 @@ class PrinterStats:
         stats = [ cb(eventtime) for cb in (self.stats_cb) ]
         if max([ s[0] for s in (stats) ]):
             logging.info('Stats %.1f: %s', eventtime, ' '.join([ s[1] for s in (stats) ]))
-        return eventtime + 3
+        return eventtime + 3.0
 
 
 

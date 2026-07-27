@@ -11,11 +11,11 @@ class PrinterHeaterFan:
         self.printer.load_object(config, 'heaters')
         self.printer.register_event_handler('klippy:ready', self.handle_ready)
         self.heater_names = config.getlist('heater', ('extruder',))
-        self.heater_temp = config.getfloat('heater_temp', 50)
+        self.heater_temp = config.getfloat('heater_temp', 5e+01)
         self.heaters = []
-        self.fan = fan.Fan(config, default_shutdown_speed=1)
-        self.fan_speed = config.getfloat('fan_speed', 1, minval=0, maxval=1)
-        self.last_speed = 0
+        self.fan = fan.Fan(config, default_shutdown_speed=1.0)
+        self.fan_speed = config.getfloat('fan_speed', 1.0, minval=0.0, maxval=1.0)
+        self.last_speed = 0.0
         self.is_ptc_fan = config.getint('is_ptc_fan', 0)
 
     
@@ -31,7 +31,7 @@ class PrinterHeaterFan:
 
     
     def callback(self, eventtime):
-        speed = 0
+        speed = 0.0
         for heater in self.heaters:
             (current_temp, target_temp) = heater.get_temp(eventtime)
             if not target_temp:
@@ -52,7 +52,7 @@ class PrinterHeaterFan:
             curtime = self.printer.get_reactor().monotonic()
             print_time = self.fan.get_mcu().estimated_print_time(curtime)
             self.fan.set_speed(print_time + PIN_MIN_TIME, speed)
-        return eventtime + 1
+        return eventtime + 1.0
 
 
 

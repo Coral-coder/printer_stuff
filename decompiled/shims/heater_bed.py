@@ -24,7 +24,7 @@ class PrinterHeaterBed:
         gcode.register_command('M190', self.cmd_M190)
         gcode.register_command('BED_HEADER_SET_HEARER_POWER_MAX', self.cmd_BED_HEADER_SET_HEARER_POWER_MAX)
         gcode.register_command('BED_HEADER_POWER_CALIBRATION', self.cmd_BED_HEADER_POWER_CALIBRATION)
-        self.max_temp = config.getfloat('max_temp', above=0)
+        self.max_temp = config.getfloat('max_temp', above=0.0)
         self.heater_bed_state = 0
         self.last_pwm_value = 0
         self.power_calibration_enable = config.getboolean('power_calibration_enable', 0)
@@ -54,9 +54,9 @@ class PrinterHeaterBed:
 
     
     def cmd_M140(self, gcmd, wait = (False,)):
-        temp = gcmd.get_float('S', 0)
-        if temp > self.max_temp - 15:
-            temp = self.max_temp - 15
+        temp = gcmd.get_float('S', 0.0)
+        if temp > self.max_temp - 15.0:
+            temp = self.max_temp - 15.0
         pheaters = self.printer.lookup_object('heaters')
         pheaters.set_temperature(self.heater, temp, wait)
 

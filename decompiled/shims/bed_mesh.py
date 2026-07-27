@@ -1,12 +1,3 @@
-# =====================================================================
-# PARTIAL DECOMPILATION -- this module did not fully round-trip.
-# The 3.9 bytecode uses control flow the decompiler could not fully
-# reconstruct (e.g. try/except/else with returns, or a generator with a
-# dropped builtin rendered as `None(...)`). The code below is best-effort
-# and will not import as-is. Ground-truth disassembly for repair:
-#     decompiled/_disasm/bed_mesh.txt
-# =====================================================================
-
 # Source Generated with Decompyle++
 # File: bed_mesh.pyc (Python 3.9)
 
@@ -34,11 +25,11 @@ class BedMeshError(Exception):
     pass
 
 
-def isclose(a, b, rel_tol, abs_tol = (1e-09, 0)):
+def isclose(a, b, rel_tol, abs_tol = (1e-09, 0.0)):
     return abs(a - b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
 
 
-def within(coord, min_c, max_c, tol = (0,)):
+def within(coord, min_c, max_c, tol = (0.0,)):
     if coord[0] >= coord[0]:
         pass
     elif coord[0] >= min_c[0] - tol:
@@ -53,7 +44,7 @@ def constrain(val, min_val, max_val):
 
 
 def lerp(t, v0, v1):
-    return (1 - t) * v0 + t * v1
+    return (1.0 - t) * v0 + t * v1
 
 
 def parse_config_pair(config, option, default, minval, maxval = (None, None)):
@@ -106,31 +97,31 @@ class BedMesh:
     
     def __init__(self, config):
         self._move_array = [
-            0] * 13
+            0.0] * 13
         self.move_array = np.array(self._move_array, dtype=np.float64)
         self.move_array_addr_int = self.move_array.ctypes.data
         self.printer = config.get_printer()
         self.printer.register_event_handler('klippy:connect', self.handle_connect)
         self.last_position = [
-            0,
-            0,
-            0,
-            0]
+            0.0,
+            0.0,
+            0.0,
+            0.0]
         self.bmc = BedMeshCalibrate(config, self)
         self.z_mesh = None
         self.z_mesh_bak = None
         self.toolhead = None
-        self.horizontal_move_z = config.getfloat('horizontal_move_z', 5)
-        self._BedMesh__fade_start = config.getfloat('fade_start', 1)
-        self._BedMesh__fade_end = config.getfloat('fade_end', 0)
+        self.horizontal_move_z = config.getfloat('horizontal_move_z', 5.0)
+        self._BedMesh__fade_start = config.getfloat('fade_start', 1.0)
+        self._BedMesh__fade_end = config.getfloat('fade_end', 0.0)
         self._BedMesh__fade_dist = self._BedMesh__fade_end - self._BedMesh__fade_start
-        if self._BedMesh__fade_dist <= 0:
+        if self._BedMesh__fade_dist <= 0.0:
             self._BedMesh__fade_start = self._BedMesh__fade_end = self.FADE_DISABLE
         self.log_fade_complete = False
         self.base_fade_target = config.getfloat('fade_target', None)
-        self.fade_target = 0
+        self.fade_target = 0.0
         self.gcode = self.printer.lookup_object('gcode')
-        self.splitter = mymovie.PyMoveSplitter(config.getfloat('split_delta_z', 0.025, minval=0.01), config.getfloat('move_check_distance', 5, minval=1))
+        self.splitter = mymovie.PyMoveSplitter(config.getfloat('split_delta_z', 0.025, minval=0.01), config.getfloat('move_check_distance', 5.0, minval=1.0))
         self.pmgr = ProfileManager(config, self)
         self.save_profile = self.pmgr.save_profile
         self.load_profile = self.pmgr.load_profile
@@ -204,18 +195,18 @@ class BedMesh:
                     pass
                 else:
                     min_z
-                if self.fade_target != 0:
+                if self.fade_target != 0.0:
                     err_target = self.fade_target
                     self.z_mesh = None
-                    self.fade_target = 0
+                    self.fade_target = 0.0
                     raise self.gcode.error('bed_mesh: ERROR, fade_target lies outside of mesh z range\nmin: %.4f, max: %.4f, fade_target: %.4f' % (min_z, max_z, err_target))
             (min_z, max_z) = mesh.get_z_range()
             if self._BedMesh__fade_dist <= max(abs(min_z), abs(max_z)):
                 self.z_mesh = None
-                self.fade_target = 0
+                self.fade_target = 0.0
                 raise self.gcode.error('bed_mesh:  Mesh extends outside of the fade range, please see the fade_start and fade_end options inexample-extras.cfg. fade distance: %.2f mesh min: %.4fmesh max: %.4f' % (self._BedMesh__fade_dist, min_z, max_z))
         else:
-            self.fade_target = 0
+            self.fade_target = 0.0
         self.z_mesh = mesh
         if self.z_mesh is not None:
-            self.splitter.initialize(mesh.info_array_addr_int, self.fade_
+            self.splitter.initializ

@@ -41,7 +41,7 @@ class RCHFilter:
         out_vals = [
             0]
         rc = 0.5 / math.pi / self.cut_frq_hz
-        coff = rc / (rc + 1 / self.acq_frq_hz)
+        coff = rc / (rc + 1.0 / self.acq_frq_hz)
         for i in range(1, len(vals)):
             out_vals.append(((vals[i] - vals[i - 1]) + out_vals[-1]) * coff)
         return out_vals
@@ -66,10 +66,10 @@ class RCLFilter:
 class Filter:
     
     def __init__(self, config):
-        self.hft_hz = config.getfloat('hft_hz', default=5, minval=0.1, maxval=10)
-        self.lft_k1 = config.getfloat('lft_k1', default=0.8, minval=0, maxval=1)
-        self.lft_k1_oft = config.getfloat('lft_k1_oft', default=0.8, minval=0, maxval=1)
-        self.lft_k1_cal = config.getfloat('lft_k1_cal', default=0.8, minval=0, maxval=1)
+        self.hft_hz = config.getfloat('hft_hz', default=5, minval=0.1, maxval=1e+01)
+        self.lft_k1 = config.getfloat('lft_k1', default=0.8, minval=0.0, maxval=1.0)
+        self.lft_k1_oft = config.getfloat('lft_k1_oft', default=0.8, minval=0.0, maxval=1.0)
+        self.lft_k1_cal = config.getfloat('lft_k1_cal', default=0.8, minval=0.0, maxval=1.0)
 
     
     def get_tft(self):

@@ -301,7 +301,7 @@ filter.pyc (Python 3.9)
                         20      STORE_FAST                      3: rc
                         22      LOAD_FAST                       3: rc
                         24      LOAD_FAST                       3: rc
-                        26      LOAD_CONST                      3: 1
+                        26      LOAD_CONST                      3: 1.0
                         28      LOAD_FAST                       0: self
                         30      LOAD_ATTR                       3: acq_frq_hz
                         32      BINARY_TRUE_DIVIDE              
@@ -550,7 +550,7 @@ filter.pyc (Python 3.9)
                         4       LOAD_CONST                      1: 'hft_hz'
                         6       LOAD_CONST                      2: 5
                         8       LOAD_CONST                      3: 0.1
-                        10      LOAD_CONST                      4: 10
+                        10      LOAD_CONST                      4: 1e+01
                         12      LOAD_CONST                      5: ('default', 'minval', 'maxval')
                         14      CALL_FUNCTION_KW                4
                         16      LOAD_FAST                       0: self
@@ -559,8 +559,8 @@ filter.pyc (Python 3.9)
                         22      LOAD_ATTR                       0: getfloat
                         24      LOAD_CONST                      6: 'lft_k1'
                         26      LOAD_CONST                      7: 0.8
-                        28      LOAD_CONST                      8: 0
-                        30      LOAD_CONST                      9: 1
+                        28      LOAD_CONST                      8: 0.0
+                        30      LOAD_CONST                      9: 1.0
                         32      LOAD_CONST                      5: ('default', 'minval', 'maxval')
                         34      CALL_FUNCTION_KW                4
                         36      LOAD_FAST                       0: self
@@ -569,8 +569,8 @@ filter.pyc (Python 3.9)
                         42      LOAD_ATTR                       0: getfloat
                         44      LOAD_CONST                      10: 'lft_k1_oft'
                         46      LOAD_CONST                      7: 0.8
-                        48      LOAD_CONST                      8: 0
-                        50      LOAD_CONST                      9: 1
+                        48      LOAD_CONST                      8: 0.0
+                        50      LOAD_CONST                      9: 1.0
                         52      LOAD_CONST                      5: ('default', 'minval', 'maxval')
                         54      CALL_FUNCTION_KW                4
                         56      LOAD_FAST                       0: self
@@ -579,8 +579,8 @@ filter.pyc (Python 3.9)
                         62      LOAD_ATTR                       0: getfloat
                         64      LOAD_CONST                      11: 'lft_k1_cal'
                         66      LOAD_CONST                      7: 0.8
-                        68      LOAD_CONST                      8: 0
-                        70      LOAD_CONST                      9: 1
+                        68      LOAD_CONST                      8: 0.0
+                        70      LOAD_CONST                      9: 1.0
                         72      LOAD_CONST                      5: ('default', 'minval', 'maxval')
                         74      CALL_FUNCTION_KW                4
                         76      LOAD_FAST                       0: self

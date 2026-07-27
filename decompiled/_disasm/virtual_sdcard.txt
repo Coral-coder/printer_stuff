@@ -294,7 +294,7 @@ virtual_sdcard.pyc (Python 3.9)
                 138     LOAD_CONST                      8: True
                 140     COMPARE_OP                      2 (==)
                 142     POP_JUMP_IF_FALSE               194
-                144     LOAD_CONST                      14: 1
+                144     LOAD_CONST                      14: 1.0
                 146     LOAD_FAST                       1: frame
                 148     BINARY_TRUE_DIVIDE              
                 150     STORE_FAST                      7: interval_time
@@ -863,10 +863,10 @@ virtual_sdcard.pyc (Python 3.9)
                         576     LOAD_CONST                      5: 0
                         578     LOAD_FAST                       0: self
                         580     STORE_ATTR                      66: slow_count
-                        582     LOAD_CONST                      30: 0.0166667
+                        582     LOAD_CONST                      30: 0.016666666666666666
                         584     LOAD_FAST                       0: self
                         586     STORE_ATTR                      67: speed_factor
-                        588     LOAD_CONST                      31: 0
+                        588     LOAD_CONST                      31: 0.0
                         590     LOAD_FAST                       0: self
                         592     STORE_ATTR                      68: run_dis
                         594     LOAD_CONST                      12: ''
@@ -1629,7 +1629,7 @@ virtual_sdcard.pyc (Python 3.9)
                         176     RERAISE                         
                         178     RERAISE                         
                         180     LOAD_FAST                       1: eventtime
-                        182     LOAD_CONST                      5: 60
+                        182     LOAD_CONST                      5: 6e+01
                         184     BINARY_ADD                      
                         186     RETURN_VALUE                    
                 'VirtualSD.update_maintenance_item_timer'
@@ -3864,7 +3864,7 @@ virtual_sdcard.pyc (Python 3.9)
                         16      LOAD_ATTR                       0: file_size
                         18      BINARY_TRUE_DIVIDE              
                         20      RETURN_VALUE                    
-                        22      LOAD_CONST                      1: 0
+                        22      LOAD_CONST                      1: 0.0
                         24      RETURN_VALUE                    
                         26      LOAD_CONST                      0: None
                         28      RETURN_VALUE                    
@@ -4120,7 +4120,7 @@ virtual_sdcard.pyc (Python 3.9)
                         136     LOAD_CONST                      5: False
                         138     LOAD_FAST                       0: self
                         140     STORE_ATTR                      5: is_cancel
-                        142     LOAD_CONST                      6: 0
+                        142     LOAD_CONST                      6: 0.0
                         144     DUP_TOP                         
                         146     LOAD_FAST                       0: self
                         148     STORE_ATTR                      19: file_position
@@ -4417,7 +4417,7 @@ virtual_sdcard.pyc (Python 3.9)
                         28      LOAD_CONST                      0: None
                         30      LOAD_FAST                       0: self
                         32      STORE_ATTR                      0: current_file
-                        34      LOAD_CONST                      1: 0
+                        34      LOAD_CONST                      1: 0.0
                         36      DUP_TOP                         
                         38      LOAD_FAST                       0: self
                         40      STORE_ATTR                      3: file_position
@@ -7148,7 +7148,7 @@ virtual_sdcard.pyc (Python 3.9)
                     [Disassembly]
                         0       LOAD_CONST                      1: 50
                         2       STORE_FAST                      2: bed
-                        4       LOAD_CONST                      2: 202
+                        4       LOAD_CONST                      2: 202.0
                         6       STORE_FAST                      3: extruder
                         8       LOAD_CONST                      3: 0
                         10      STORE_FAST                      4: chamber_heater
@@ -7196,7 +7196,7 @@ virtual_sdcard.pyc (Python 3.9)
                         94      LOAD_FAST                       6: result
                         96      LOAD_METHOD                     11: get
                         98      LOAD_CONST                      6: 'extruder'
-                        100     LOAD_CONST                      7: 201
+                        100     LOAD_CONST                      7: 201.0
                         102     CALL_METHOD                     2
                         104     CALL_FUNCTION                   1
                         106     STORE_FAST                      3: extruder
@@ -9247,7 +9247,7 @@ virtual_sdcard.pyc (Python 3.9)
                         32      LOAD_ATTR                       2: last_position
                         34      LOAD_CONST                      2: 2
                         36      BINARY_SUBSCR                   
-                        38      LOAD_CONST                      3: 1
+                        38      LOAD_CONST                      3: 1.0
                         40      COMPARE_OP                      4 (>)
                         42      POP_JUMP_IF_FALSE               50
                         44      LOAD_CONST                      4: True
@@ -9262,7 +9262,7 @@ virtual_sdcard.pyc (Python 3.9)
                         62      LOAD_ATTR                       2: last_position
                         64      LOAD_CONST                      2: 2
                         66      BINARY_SUBSCR                   
-                        68      LOAD_CONST                      3: 1
+                        68      LOAD_CONST                      3: 1.0
                         70      COMPARE_OP                      4 (>)
                         72      POP_JUMP_IF_FALSE               90
                         74      LOAD_FAST                       6: end_time
@@ -9314,7 +9314,7 @@ virtual_sdcard.pyc (Python 3.9)
                         172     LOAD_ATTR                       2: last_position
                         174     LOAD_CONST                      2: 2
                         176     BINARY_SUBSCR                   
-                        178     LOAD_CONST                      3: 1
+                        178     LOAD_CONST                      3: 1.0
                         180     COMPARE_OP                      4 (>)
                         182     POP_JUMP_IF_FALSE               556
                         186     LOAD_FAST                       9: state

@@ -7,8 +7,8 @@ class FanFeedback:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.print_delay_time = config.getfloat('print_delay_time', 3)
-        self.current_delay_time = config.getfloat('current_delay_time', 2)
+        self.print_delay_time = config.getfloat('print_delay_time', 3.0)
+        self.current_delay_time = config.getfloat('current_delay_time', 2.0)
         ppins = self.printer.lookup_object('pins')
         self.params = []
         fan0_pin_sensor_pin = config.getlist('fan0_pin', None)
@@ -57,7 +57,7 @@ class FanFeedback:
     
     def handle_ready(self):
         reactor = self.printer.get_reactor()
-        reactor.register_timer(self.cx_fan_status_update_event, reactor.monotonic() + 1)
+        reactor.register_timer(self.cx_fan_status_update_event, reactor.monotonic() + 1.0)
 
     
     def delay_s(self, delay_s):

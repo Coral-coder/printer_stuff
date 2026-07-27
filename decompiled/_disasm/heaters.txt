@@ -298,7 +298,7 @@ heaters.pyc (Python 3.9)
                         176     LOAD_FAST                       1: config
                         178     LOAD_ATTR                       15: getfloat
                         180     LOAD_CONST                      11: 'min_extrude_temp'
-                        182     LOAD_CONST                      12: 170
+                        182     LOAD_CONST                      12: 1.7e+02
                         184     LOAD_FAST                       0: self
                         186     LOAD_ATTR                       17: min_temp
                         188     LOAD_FAST                       0: self
@@ -319,7 +319,7 @@ heaters.pyc (Python 3.9)
                         218     STORE_FAST                      3: is_fileoutput
                         220     LOAD_FAST                       0: self
                         222     LOAD_ATTR                       26: min_extrude_temp
-                        224     LOAD_CONST                      15: 0
+                        224     LOAD_CONST                      15: 0.0
                         226     COMPARE_OP                      1 (<=)
                         228     JUMP_IF_TRUE_OR_POP             232
                         230     LOAD_FAST                       3: is_fileoutput
@@ -328,9 +328,9 @@ heaters.pyc (Python 3.9)
                         236     LOAD_FAST                       1: config
                         238     LOAD_ATTR                       15: getfloat
                         240     LOAD_CONST                      16: 'max_power'
-                        242     LOAD_CONST                      17: 1
-                        244     LOAD_CONST                      15: 0
-                        246     LOAD_CONST                      17: 1
+                        242     LOAD_CONST                      17: 1.0
+                        244     LOAD_CONST                      15: 0.0
+                        246     LOAD_CONST                      17: 1.0
                         248     LOAD_CONST                      18: ('above', 'maxval')
                         250     CALL_FUNCTION_KW                4
                         252     LOAD_FAST                       0: self
@@ -338,13 +338,13 @@ heaters.pyc (Python 3.9)
                         256     LOAD_FAST                       1: config
                         258     LOAD_ATTR                       15: getfloat
                         260     LOAD_CONST                      19: 'smooth_time'
-                        262     LOAD_CONST                      17: 1
-                        264     LOAD_CONST                      15: 0
+                        262     LOAD_CONST                      17: 1.0
+                        264     LOAD_CONST                      15: 0.0
                         266     LOAD_CONST                      8: ('above',)
                         268     CALL_FUNCTION_KW                3
                         270     LOAD_FAST                       0: self
                         272     STORE_ATTR                      31: smooth_time
-                        274     LOAD_CONST                      17: 1
+                        274     LOAD_CONST                      17: 1.0
                         276     LOAD_FAST                       0: self
                         278     LOAD_ATTR                       31: smooth_time
                         280     BINARY_TRUE_DIVIDE              
@@ -355,7 +355,7 @@ heaters.pyc (Python 3.9)
                         290     CALL_METHOD                     0
                         292     LOAD_FAST                       0: self
                         294     STORE_ATTR                      35: lock
-                        296     LOAD_CONST                      15: 0
+                        296     LOAD_CONST                      15: 0.0
                         298     DUP_TOP                         
                         300     LOAD_FAST                       0: self
                         302     STORE_ATTR                      36: last_temp
@@ -364,13 +364,13 @@ heaters.pyc (Python 3.9)
                         308     STORE_ATTR                      37: smoothed_temp
                         310     LOAD_FAST                       0: self
                         312     STORE_ATTR                      38: target_temp
-                        314     LOAD_CONST                      15: 0
+                        314     LOAD_CONST                      15: 0.0
                         316     LOAD_FAST                       0: self
                         318     STORE_ATTR                      39: last_temp_time
-                        320     LOAD_CONST                      15: 0
+                        320     LOAD_CONST                      15: 0.0
                         322     LOAD_FAST                       0: self
                         324     STORE_ATTR                      40: next_pwm_time
-                        326     LOAD_CONST                      15: 0
+                        326     LOAD_CONST                      15: 0.0
                         328     LOAD_FAST                       0: self
                         330     STORE_ATTR                      41: last_pwm_value
                         332     LOAD_GLOBAL                     42: ControlBangBang
@@ -412,7 +412,7 @@ heaters.pyc (Python 3.9)
                         404     LOAD_ATTR                       15: getfloat
                         406     LOAD_CONST                      25: 'pwm_cycle_time'
                         408     LOAD_CONST                      26: 0.1
-                        410     LOAD_CONST                      15: 0
+                        410     LOAD_CONST                      15: 0.0
                         412     LOAD_FAST                       0: self
                         414     LOAD_ATTR                       23: pwm_delay
                         416     LOAD_CONST                      18: ('above', 'maxval')
@@ -487,7 +487,7 @@ heaters.pyc (Python 3.9)
                         558     LOAD_CONST                      34: False
                         560     LOAD_FAST                       0: self
                         562     STORE_ATTR                      57: stop_heating
-                        564     LOAD_CONST                      15: 0
+                        564     LOAD_CONST                      15: 0.0
                         566     LOAD_FAST                       0: self
                         568     STORE_ATTR                      38: target_temp
                         570     LOAD_FAST                       0: self
@@ -662,7 +662,7 @@ heaters.pyc (Python 3.9)
                         114     CALL_METHOD                     0
                         116     LOAD_METHOD                     13: monotonic
                         118     CALL_METHOD                     0
-                        120     LOAD_CONST                      6: 1
+                        120     LOAD_CONST                      6: 1.0
                         122     BINARY_ADD                      
                         124     CALL_METHOD                     1
                         126     POP_TOP                         
@@ -730,7 +730,7 @@ heaters.pyc (Python 3.9)
                         250     CALL_METHOD                     1
                         252     POP_TOP                         
                         254     LOAD_FAST                       1: eventtime
-                        256     LOAD_CONST                      6: 1
+                        256     LOAD_CONST                      6: 1.0
                         258     BINARY_ADD                      
                         260     RETURN_VALUE                    
                 'Heater._handle_check_chamber_heater'
@@ -767,10 +767,10 @@ heaters.pyc (Python 3.9)
                     [Disassembly]
                         0       LOAD_FAST                       0: self
                         2       LOAD_ATTR                       0: target_temp
-                        4       LOAD_CONST                      1: 0
+                        4       LOAD_CONST                      1: 0.0
                         6       COMPARE_OP                      1 (<=)
                         8       POP_JUMP_IF_FALSE               14
-                        10      LOAD_CONST                      1: 0
+                        10      LOAD_CONST                      1: 0.0
                         12      STORE_FAST                      2: value
                         14      LOAD_FAST                       1: read_time
                         16      LOAD_FAST                       0: self
@@ -886,7 +886,7 @@ heaters.pyc (Python 3.9)
                         62      LOAD_FAST                       0: self
                         64      LOAD_ATTR                       8: inv_smooth_time
                         66      BINARY_MULTIPLY                 
-                        68      LOAD_CONST                      1: 1
+                        68      LOAD_CONST                      1: 1.0
                         70      CALL_FUNCTION                   2
                         72      STORE_FAST                      5: adj_time
                         74      LOAD_FAST                       0: self
@@ -1137,7 +1137,7 @@ heaters.pyc (Python 3.9)
                         8       LOAD_METHOD                     2: estimated_print_time
                         10      LOAD_FAST                       1: eventtime
                         12      CALL_METHOD                     1
-                        14      LOAD_CONST                      1: 5
+                        14      LOAD_CONST                      1: 5.0
                         16      BINARY_SUBTRACT                 
                         18      STORE_FAST                      2: print_time
                         20      LOAD_FAST                       0: self
@@ -1149,7 +1149,7 @@ heaters.pyc (Python 3.9)
                         32      LOAD_FAST                       2: print_time
                         34      COMPARE_OP                      0 (<)
                         36      POP_JUMP_IF_FALSE               62
-                        38      LOAD_CONST                      2: 0
+                        38      LOAD_CONST                      2: 0.0
                         40      LOAD_FAST                       0: self
                         42      LOAD_ATTR                       5: target_temp
                         44      BUILD_TUPLE                     2
@@ -1273,7 +1273,7 @@ heaters.pyc (Python 3.9)
                         14      LOAD_FAST                       1: control
                         16      LOAD_FAST                       0: self
                         18      STORE_ATTR                      1: control
-                        20      LOAD_CONST                      1: 0
+                        20      LOAD_CONST                      1: 0.0
                         22      LOAD_FAST                       0: self
                         24      STORE_ATTR                      2: target_temp
                         26      POP_BLOCK                       
@@ -1395,7 +1395,7 @@ heaters.pyc (Python 3.9)
                         56      LOAD_FAST                       2: target_temp
                         58      JUMP_IF_TRUE_OR_POP             66
                         60      LOAD_FAST                       3: last_temp
-                        62      LOAD_CONST                      1: 50
+                        62      LOAD_CONST                      1: 5e+01
                         64      COMPARE_OP                      4 (>)
                         66      STORE_FAST                      5: is_active
                         68      LOAD_FAST                       5: is_active
@@ -1526,7 +1526,7 @@ heaters.pyc (Python 3.9)
                         0       LOAD_FAST                       1: gcmd
                         2       LOAD_METHOD                     0: get_float
                         4       LOAD_CONST                      1: 'TARGET'
-                        6       LOAD_CONST                      2: 0
+                        6       LOAD_CONST                      2: 0.0
                         8       CALL_METHOD                     2
                         10      STORE_FAST                      2: temp
                         12      LOAD_FAST                       1: gcmd
@@ -1735,8 +1735,8 @@ heaters.pyc (Python 3.9)
                         32      LOAD_FAST                       2: config
                         34      LOAD_ATTR                       6: getfloat
                         36      LOAD_CONST                      1: 'max_delta'
-                        38      LOAD_CONST                      2: 2
-                        40      LOAD_CONST                      3: 0
+                        38      LOAD_CONST                      2: 2.0
+                        40      LOAD_CONST                      3: 0.0
                         42      LOAD_CONST                      4: ('above',)
                         44      CALL_FUNCTION_KW                3
                         46      LOAD_FAST                       0: self
@@ -1747,7 +1747,7 @@ heaters.pyc (Python 3.9)
                         56      LOAD_CONST                      5: False
                         58      LOAD_FAST                       0: self
                         60      STORE_ATTR                      9: long_temp
-                        62      LOAD_CONST                      3: 0
+                        62      LOAD_CONST                      3: 0.0
                         64      LOAD_FAST                       0: self
                         66      STORE_ATTR                      10: old_temp
                         68      LOAD_CONST                      6: 0
@@ -1756,7 +1756,7 @@ heaters.pyc (Python 3.9)
                         74      LOAD_GLOBAL                     12: AMBIENT_TEMP
                         76      LOAD_FAST                       0: self
                         78      STORE_ATTR                      13: prev_temp
-                        80      LOAD_CONST                      7: 1
+                        80      LOAD_CONST                      7: 1.0
                         82      LOAD_FAST                       0: self
                         84      STORE_ATTR                      14: temp_coff
                         86      LOAD_CONST                      6: 0
@@ -1855,7 +1855,7 @@ heaters.pyc (Python 3.9)
                         200
                     [Disassembly]
                         0       LOAD_FAST                       2: temp
-                        2       LOAD_CONST                      1: 5
+                        2       LOAD_CONST                      1: 5.0
                         4       BINARY_ADD                      
                         6       LOAD_FAST                       3: target_temp
                         8       COMPARE_OP                      0 (<)
@@ -1863,7 +1863,7 @@ heaters.pyc (Python 3.9)
                         12      LOAD_CONST                      2: True
                         14      LOAD_FAST                       0: self
                         16      STORE_ATTR                      0: long_temp
-                        18      LOAD_CONST                      3: 0
+                        18      LOAD_CONST                      3: 0.0
                         20      LOAD_FAST                       0: self
                         22      STORE_ATTR                      1: old_temp
                         24      LOAD_CONST                      4: 0
@@ -1908,7 +1908,7 @@ heaters.pyc (Python 3.9)
                         106     LOAD_CONST                      10: 16.1
                         108     LOAD_CONST                      11: 1.029
                         110     LOAD_FAST                       3: target_temp
-                        112     LOAD_CONST                      12: 20
+                        112     LOAD_CONST                      12: 2e+01
                         114     BINARY_SUBTRACT                 
                         116     BINARY_MULTIPLY                 
                         118     BINARY_ADD                      
@@ -1917,7 +1917,7 @@ heaters.pyc (Python 3.9)
                         124     LOAD_CONST                      13: 16.3
                         126     LOAD_CONST                      14: 1.032
                         128     LOAD_FAST                       3: target_temp
-                        130     LOAD_CONST                      12: 20
+                        130     LOAD_CONST                      12: 2e+01
                         132     BINARY_SUBTRACT                 
                         134     BINARY_MULTIPLY                 
                         136     BINARY_ADD                      
@@ -1947,7 +1947,7 @@ heaters.pyc (Python 3.9)
                         184     LOAD_CONST                      17: 19.1
                         186     LOAD_CONST                      18: 1.006
                         188     LOAD_FAST                       3: target_temp
-                        190     LOAD_CONST                      12: 20
+                        190     LOAD_CONST                      12: 2e+01
                         192     BINARY_SUBTRACT                 
                         194     BINARY_MULTIPLY                 
                         196     BINARY_ADD                      
@@ -1956,7 +1956,7 @@ heaters.pyc (Python 3.9)
                         202     LOAD_CONST                      19: 19.3
                         204     LOAD_CONST                      20: 1.009
                         206     LOAD_FAST                       3: target_temp
-                        208     LOAD_CONST                      12: 20
+                        208     LOAD_CONST                      12: 2e+01
                         210     BINARY_SUBTRACT                 
                         212     BINARY_MULTIPLY                 
                         214     BINARY_ADD                      
@@ -2091,7 +2091,7 @@ heaters.pyc (Python 3.9)
                         506     LOAD_ATTR                       17: prev_temp
                         508     LOAD_FAST                       3: target_temp
                         510     BINARY_SUBTRACT                 
-                        512     LOAD_CONST                      25: 3
+                        512     LOAD_CONST                      25: 3.0
                         514     COMPARE_OP                      4 (>)
                         516     POP_JUMP_IF_FALSE               534
                         520     LOAD_CONST                      26: 0.3
@@ -2105,7 +2105,7 @@ heaters.pyc (Python 3.9)
                         536     LOAD_ATTR                       17: prev_temp
                         538     LOAD_FAST                       3: target_temp
                         540     BINARY_SUBTRACT                 
-                        542     LOAD_CONST                      27: 2
+                        542     LOAD_CONST                      27: 2.0
                         544     COMPARE_OP                      4 (>)
                         546     POP_JUMP_IF_FALSE               564
                         550     LOAD_CONST                      28: 0.5
@@ -2133,7 +2133,7 @@ heaters.pyc (Python 3.9)
                         596     LOAD_ATTR                       17: prev_temp
                         598     LOAD_FAST                       3: target_temp
                         600     BINARY_SUBTRACT                 
-                        602     LOAD_CONST                      31: 1
+                        602     LOAD_CONST                      31: 1.0
                         604     COMPARE_OP                      4 (>)
                         606     POP_JUMP_IF_FALSE               624
                         610     LOAD_CONST                      32: 0.8
@@ -2160,7 +2160,7 @@ heaters.pyc (Python 3.9)
                         654     LOAD_FAST                       3: target_temp
                         656     COMPARE_OP                      0 (<)
                         658     POP_JUMP_IF_FALSE               668
-                        662     LOAD_CONST                      31: 1
+                        662     LOAD_CONST                      31: 1.0
                         664     LOAD_FAST                       0: self
                         666     STORE_ATTR                      18: temp_coff
                         668     LOAD_FAST                       0: self
@@ -2174,13 +2174,13 @@ heaters.pyc (Python 3.9)
                         686     JUMP_FORWARD                    18 (to 706)
                         688     LOAD_FAST                       0: self
                         690     LOAD_ATTR                       18: temp_coff
-                        692     LOAD_CONST                      31: 1
+                        692     LOAD_CONST                      31: 1.0
                         694     COMPARE_OP                      4 (>)
                         696     POP_JUMP_IF_FALSE               706
-                        700     LOAD_CONST                      31: 1
+                        700     LOAD_CONST                      31: 1.0
                         702     LOAD_FAST                       0: self
                         704     STORE_ATTR                      18: temp_coff
-                        706     LOAD_CONST                      3: 0
+                        706     LOAD_CONST                      3: 0.0
                         708     LOAD_FAST                       0: self
                         710     STORE_ATTR                      17: prev_temp
                         712     LOAD_FAST                       0: self
@@ -2218,7 +2218,7 @@ heaters.pyc (Python 3.9)
                         782     LOAD_CONST                      4: 0
                         784     COMPARE_OP                      2 (==)
                         786     POP_JUMP_IF_FALSE               798
-                        790     LOAD_CONST                      31: 1
+                        790     LOAD_CONST                      31: 1.0
                         792     LOAD_FAST                       0: self
                         794     STORE_ATTR                      18: temp_coff
                         796     JUMP_FORWARD                    58 (to 856)
@@ -2273,7 +2273,7 @@ heaters.pyc (Python 3.9)
                         904     LOAD_ATTR                       13: heater
                         906     LOAD_METHOD                     22: set_pwm
                         908     LOAD_FAST                       1: read_time
-                        910     LOAD_CONST                      3: 0
+                        910     LOAD_CONST                      3: 0.0
                         912     CALL_METHOD                     2
                         914     POP_TOP                         
                         916     LOAD_FAST                       3: target_temp
@@ -2289,10 +2289,10 @@ heaters.pyc (Python 3.9)
                         940     LOAD_FAST                       0: self
                         942     STORE_ATTR                      17: prev_temp
                         944     JUMP_FORWARD                    12 (to 958)
-                        946     LOAD_CONST                      3: 0
+                        946     LOAD_CONST                      3: 0.0
                         948     LOAD_FAST                       0: self
                         950     STORE_ATTR                      17: prev_temp
-                        952     LOAD_CONST                      31: 1
+                        952     LOAD_CONST                      31: 1.0
                         954     LOAD_FAST                       0: self
                         956     STORE_ATTR                      18: temp_coff
                         958     LOAD_FAST                       6: is_chamber_heater
@@ -2542,8 +2542,8 @@ heaters.pyc (Python 3.9)
                         180     LOAD_FAST                       2: config
                         182     LOAD_ATTR                       7: getfloat
                         184     LOAD_CONST                      11: 'max_delta'
-                        186     LOAD_CONST                      12: 2
-                        188     LOAD_CONST                      13: 0
+                        186     LOAD_CONST                      12: 2.0
+                        188     LOAD_CONST                      13: 0.0
                         190     LOAD_CONST                      14: ('above',)
                         192     CALL_FUNCTION_KW                3
                         194     LOAD_FAST                       0: self
@@ -2571,7 +2571,7 @@ heaters.pyc (Python 3.9)
                         238     CALL_METHOD                     0
                         240     LOAD_FAST                       0: self
                         242     STORE_ATTR                      25: min_deriv_time
-                        244     LOAD_CONST                      13: 0
+                        244     LOAD_CONST                      13: 0.0
                         246     LOAD_FAST                       0: self
                         248     STORE_ATTR                      26: temp_integ_max
                         250     LOAD_FAST                       0: self
@@ -2587,13 +2587,13 @@ heaters.pyc (Python 3.9)
                         272     LOAD_GLOBAL                     27: AMBIENT_TEMP
                         274     LOAD_FAST                       0: self
                         276     STORE_ATTR                      28: prev_temp
-                        278     LOAD_CONST                      13: 0
+                        278     LOAD_CONST                      13: 0.0
                         280     LOAD_FAST                       0: self
                         282     STORE_ATTR                      29: prev_temp_time
-                        284     LOAD_CONST                      13: 0
+                        284     LOAD_CONST                      13: 0.0
                         286     LOAD_FAST                       0: self
                         288     STORE_ATTR                      30: prev_temp_deriv
-                        290     LOAD_CONST                      13: 0
+                        290     LOAD_CONST                      13: 0.0
                         292     LOAD_FAST                       0: self
                         294     STORE_ATTR                      31: prev_temp_integ
                         296     LOAD_CONST                      15: False
@@ -2855,7 +2855,7 @@ heaters.pyc (Python 3.9)
                         84      BINARY_ADD                      
                         86      STORE_FAST                      8: temp_integ
                         88      LOAD_GLOBAL                     5: max
-                        90      LOAD_CONST                      1: 0
+                        90      LOAD_CONST                      1: 0.0
                         92      LOAD_GLOBAL                     6: min
                         94      LOAD_FAST                       0: self
                         96      LOAD_ATTR                       7: temp_integ_max
@@ -2879,7 +2879,7 @@ heaters.pyc (Python 3.9)
                         132     BINARY_SUBTRACT                 
                         134     STORE_FAST                      9: co
                         136     LOAD_GLOBAL                     5: max
-                        138     LOAD_CONST                      1: 0
+                        138     LOAD_CONST                      1: 0.0
                         140     LOAD_GLOBAL                     6: min
                         142     LOAD_FAST                       0: self
                         144     LOAD_ATTR                       11: heater_max_power
@@ -3832,7 +3832,7 @@ heaters.pyc (Python 3.9)
                         12      STORE_FAST                      2: heater
                         14      LOAD_FAST                       2: heater
                         16      LOAD_METHOD                     2: set_temp
-                        18      LOAD_CONST                      1: 0
+                        18      LOAD_CONST                      1: 0.0
                         20      CALL_METHOD                     1
                         22      POP_TOP                         
                         24      JUMP_ABSOLUTE                   10
@@ -4163,7 +4163,7 @@ heaters.pyc (Python 3.9)
                         174     LOAD_FAST                       4: reactor
                         176     LOAD_METHOD                     17: pause
                         178     LOAD_FAST                       5: eventtime
-                        180     LOAD_CONST                      9: 1
+                        180     LOAD_CONST                      9: 1.0
                         182     BINARY_ADD                      
                         184     CALL_METHOD                     1
                         186     STORE_FAST                      5: eventtime
@@ -4582,7 +4582,7 @@ heaters.pyc (Python 3.9)
                         280     LOAD_FAST                       7: reactor
                         282     LOAD_METHOD                     18: pause
                         284     LOAD_FAST                       8: eventtime
-                        286     LOAD_CONST                      11: 1
+                        286     LOAD_CONST                      11: 1.0
                         288     BINARY_ADD                      
                         290     CALL_METHOD                     1
                         292     STORE_FAST                      8: eventtime
@@ -4649,7 +4649,7 @@ heaters.pyc (Python 3.9)
                 86      LOAD_CONST                      21: 'PrinterHeaters.get_status'
                 88      MAKE_FUNCTION                   0
                 90      STORE_NAME                      12: get_status
-                92      LOAD_CONST                      44: (0,)
+                92      LOAD_CONST                      44: (0.0,)
                 94      LOAD_CONST                      23: <CODE> turn_off_all_heaters
                 96      LOAD_CONST                      24: 'PrinterHeaters.turn_off_all_heaters'
                 98      MAKE_FUNCTION                   1
@@ -4732,11 +4732,11 @@ heaters.pyc (Python 3.9)
         30      STORE_NAME                      4: np
         32      LOAD_CONST                      2: -273.15
         34      STORE_NAME                      5: KELVIN_TO_CELSIUS
-        36      LOAD_CONST                      3: 5
+        36      LOAD_CONST                      3: 5.0
         38      STORE_NAME                      6: MAX_HEAT_TIME
-        40      LOAD_CONST                      4: 25
+        40      LOAD_CONST                      4: 25.0
         42      STORE_NAME                      7: AMBIENT_TEMP
-        44      LOAD_CONST                      5: 255
+        44      LOAD_CONST                      5: 255.0
         46      STORE_NAME                      8: PID_PARAM_BASE
         48      LOAD_BUILD_CLASS                
         50      LOAD_CONST                      6: <CODE> Heater

@@ -2393,7 +2393,7 @@ metadata.pyc (Python 3.9)
                         32      RETURN_VALUE                    
                         34      LOAD_GLOBAL                     3: round
                         36      LOAD_FAST                       1: pct
-                        38      LOAD_CONST                      2: 100
+                        38      LOAD_CONST                      2: 1e+02
                         40      BINARY_TRUE_DIVIDE              
                         42      LOAD_FAST                       0: self
                         44      LOAD_ATTR                       2: layer_height
@@ -5964,7 +5964,7 @@ metadata.pyc (Python 3.9)
                                 50      RETURN_VALUE                    
                         'IdeaMaker.parse_filament_weight_total.<locals>.<listcomp>'
                     [Disassembly]
-                        0       LOAD_CONST                      1: 3.14159
+                        0       LOAD_CONST                      1: 3.141592653589793
                         2       STORE_DEREF                     3: pi
                         4       LOAD_GLOBAL                     0: _regex_find_floats
                         6       LOAD_CONST                      2: ';Material.\\d\\sUsed:.*'

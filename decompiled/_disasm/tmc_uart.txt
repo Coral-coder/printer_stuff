@@ -953,7 +953,7 @@ tmc_uart.pyc (Python 3.9)
                         46      LOAD_FAST                       0: self
                         48      LOAD_ATTR                       1: mcu
                         50      LOAD_METHOD                     6: seconds_to_clock
-                        52      LOAD_CONST                      5: 1
+                        52      LOAD_CONST                      5: 1.0
                         54      LOAD_FAST                       1: baud
                         56      BINARY_TRUE_DIVIDE              
                         58      CALL_METHOD                     1

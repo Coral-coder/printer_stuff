@@ -719,10 +719,10 @@ buttons.pyc (Python 3.9)
                         40      LOAD_FAST                       2: pin
                         42      LOAD_FAST                       0: self
                         44      STORE_ATTR                      7: pin
-                        46      LOAD_CONST                      2: 1e+12
+                        46      LOAD_CONST                      2: 999999999999.9
                         48      LOAD_FAST                       0: self
                         50      STORE_ATTR                      8: min_value
-                        52      LOAD_CONST                      3: 0
+                        52      LOAD_CONST                      3: 0.0
                         54      LOAD_FAST                       0: self
                         56      STORE_ATTR                      9: max_value
                         58      LOAD_FAST                       1: printer
@@ -879,7 +879,7 @@ buttons.pyc (Python 3.9)
                         18      LOAD_ATTR                       2: pullup
                         20      LOAD_FAST                       3: adc
                         22      BINARY_MULTIPLY                 
-                        24      LOAD_CONST                      3: 1
+                        24      LOAD_CONST                      3: 1.0
                         26      LOAD_FAST                       3: adc
                         28      BINARY_SUBTRACT                 
                         30      BINARY_TRUE_DIVIDE              

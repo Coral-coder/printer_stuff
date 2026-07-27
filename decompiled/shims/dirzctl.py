@@ -33,7 +33,7 @@ class DirZCtl:
         self.hx711s = None
         self.mcu_freq = 72000000
         self.step_base = config.getfloat('step_base', default=2, minval=1, maxval=6)
-        self.last_send_heart = 0
+        self.last_send_heart = 0.0
         self.is_shutdown = True
         self.is_timeout = True
 

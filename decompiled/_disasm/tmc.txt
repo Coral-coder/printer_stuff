@@ -1424,7 +1424,7 @@ tmc.pyc (Python 3.9)
                         104     RERAISE                         
                         106     RERAISE                         
                         108     LOAD_FAST                       1: eventtime
-                        110     LOAD_CONST                      1: 1
+                        110     LOAD_CONST                      1: 1.0
                         112     BINARY_ADD                      
                         114     RETURN_VALUE                    
                 'TMCErrorCheck._do_periodic_check'
@@ -1559,7 +1559,7 @@ tmc.pyc (Python 3.9)
                         84      LOAD_FAST                       0: self
                         86      LOAD_ATTR                       10: _do_periodic_check
                         88      LOAD_FAST                       3: curtime
-                        90      LOAD_CONST                      3: 1
+                        90      LOAD_CONST                      3: 1.0
                         92      BINARY_ADD                      
                         94      CALL_METHOD                     2
                         96      LOAD_FAST                       0: self
@@ -2718,7 +2718,7 @@ tmc.pyc (Python 3.9)
                         24      LOAD_ATTR                       2: get_float
                         26      LOAD_CONST                      1: 'CURRENT'
                         28      LOAD_CONST                      0: None
-                        30      LOAD_CONST                      2: 0
+                        30      LOAD_CONST                      2: 0.0
                         32      LOAD_FAST                       6: max_cur
                         34      LOAD_CONST                      3: ('minval', 'maxval')
                         36      CALL_FUNCTION_KW                4
@@ -2727,7 +2727,7 @@ tmc.pyc (Python 3.9)
                         42      LOAD_ATTR                       2: get_float
                         44      LOAD_CONST                      4: 'HOLDCURRENT'
                         46      LOAD_CONST                      0: None
-                        48      LOAD_CONST                      2: 0
+                        48      LOAD_CONST                      2: 0.0
                         50      LOAD_FAST                       6: max_cur
                         52      LOAD_CONST                      5: ('above', 'maxval')
                         54      CALL_FUNCTION_KW                4
@@ -5034,8 +5034,8 @@ tmc.pyc (Python 3.9)
                 12      LOAD_FAST                       0: config
                 14      LOAD_ATTR                       1: getfloat
                 16      LOAD_CONST                      2: 'stealthchop_threshold'
-                18      LOAD_CONST                      3: 0
-                20      LOAD_CONST                      3: 0
+                18      LOAD_CONST                      3: 0.0
+                20      LOAD_CONST                      3: 0.0
                 22      LOAD_CONST                      4: ('minval',)
                 24      CALL_FUNCTION_KW                3
                 26      STORE_FAST                      5: velocity
@@ -5202,7 +5202,7 @@ tmc.pyc (Python 3.9)
                 10      LOAD_ATTR                       1: getfloat
                 12      LOAD_CONST                      1: 'coolstep_threshold'
                 14      LOAD_CONST                      0: None
-                16      LOAD_CONST                      2: 0
+                16      LOAD_CONST                      2: 0.0
                 18      LOAD_CONST                      3: ('minval',)
                 20      CALL_FUNCTION_KW                3
                 22      STORE_FAST                      4: velocity

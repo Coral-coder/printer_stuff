@@ -528,7 +528,7 @@ homing_heaters.pyc (Python 3.9)
                         58      STORE_SUBSCR                    
                         60      LOAD_FAST                       3: heater
                         62      LOAD_METHOD                     7: set_temp
-                        64      LOAD_CONST                      3: 0
+                        64      LOAD_CONST                      3: 0.0
                         66      CALL_METHOD                     1
                         68      POP_TOP                         
                         70      JUMP_ABSOLUTE                   24
