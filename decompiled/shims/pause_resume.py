@@ -71,8 +71,7 @@ class PauseResume:
 
     
     def _check_power_loss_state_request(self, web_request):
-        call = call
-        import subprocess
+        from subprocess import call
         response = {
             'file_state': False,
             'eeprom_state': False }
@@ -85,28 +84,18 @@ class PauseResume:
                     if len(data) == 0:
                         logging.error('%s f.read()==None read fail!!!' % self.v_sd.print_file_name_path)
                     response['file_state'] = True if json.loads(data) else False
-            except Exception:
-                err = None
-                
-                try:
-                    os.remove(self.v_sd.print_file_name_path)
-                    bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
-                    if bl24c16f:
-                        self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
-                    logging.exception(err)
-                finally:
-                    err = None
-                    del err
-                err = None
-                del err
-                power_loss_switch = False
-                if os.path.exists(self.v_sd.user_print_refer_path):
-                    with open(self.v_sd.user_print_refer_path, 'r') as f:
-                        data = json.loads(f.read())
-                        logging.info('[user_print_refer_path] POWER_LOSS_DATA: \n %s', data)
-                        power_loss_switch = data.get('power_loss', { }).get('switch', False)
-
-
+            except Exception as err:
+                os.remove(self.v_sd.print_file_name_path)
+                bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
+                if bl24c16f:
+                    self.gcode.run_script('EEPROM_WRITE_BYTE ADDR=1 VAL=255')
+                logging.exception(err)
+        power_loss_switch = False
+        if os.path.exists(self.v_sd.user_print_refer_path):
+            with open(self.v_sd.user_print_refer_path, 'r') as f:
+                data = json.loads(f.read())
+                logging.info('[user_print_refer_path] POWER_LOSS_DATA: \n %s', data)
+                power_loss_switch = data.get('power_loss', { }).get('switch', False)
         bl24c16f = self.printer.lookup_object('bl24c16f') if 'bl24c16f' in self.printer.objects else None
         eepromState = bl24c16f.checkEepromFirstEnable() if power_loss_switch and bl24c16f else True
         self.gcode.run_script('EEPROM_DEBUG_READ ADDR=0 SIZE=56')
@@ -132,8 +121,7 @@ class PauseResume:
         self.printer.send_event('v_sd:cancel_power_loss_update_filament_used')
         reactor = self.printer.get_reactor()
         reactor.pause(reactor.monotonic() + 0.2)
-        call = call
-        import subprocess
+        from subprocess import call
         if os.path.exists(self.v_sd.print_file_name_path):
             os.remove(self.v_sd.print_file_name_path)
         if os.path.exists(self.gcode.exclude_object_info):
@@ -183,9 +171,7 @@ class PauseResume:
 
     
     def is_sd_active(self):
-        if self.v_sd is not None:
-            pass
-        return self.v_sd.is_active()
+        return self.v_sd is not None and self.v_sd.is_active()
 
     
     def send_pause_command(self):

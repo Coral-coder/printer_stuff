@@ -12,12 +12,8 @@ class PrinterTemperatureMCU:
     
     def __init__(self, config):
         self.printer = config.get_printer()
-        self.base_temperature = None
-        self.slope = None
-        self.temp1 = None
-        self.adc1 = None
-        self.temp2 = None
-        self.adc2 = None
+        self.base_temperature = self.slope = None
+        self.temp1 = self.adc1 = self.temp2 = self.adc2 = None
         self.min_temp = self.max_temp = 0.0
         self.debug_read_cmd = None
         mcu_name = config.get('sensor_mcu', 'mcu')
@@ -92,12 +88,12 @@ class PrinterTemperatureMCU:
         for name, func in cfg_funcs:
             if self.mcu_type.startswith(name):
                 func()
-            
-            logging.info("mcu_temperature '%s' nominal base=%.6f slope=%.6f", mcu.get_name(), self.base_temperature, self.slope)
-            if self.temp1 is not None:
-                if self.temp2 is not None:
-                    self.slope = (self.temp2 - self.temp1) / (self.adc2 - self.adc1)
-                self.base_temperature = self.calc_base(self.temp1, self.adc1)
+                break
+        logging.info("mcu_temperature '%s' nominal base=%.6f slope=%.6f", mcu.get_name(), self.base_temperature, self.slope)
+        if self.temp1 is not None:
+            if self.temp2 is not None:
+                self.slope = (self.temp2 - self.temp1) / (self.adc2 - self.adc1)
+            self.base_temperature = self.calc_base(self.temp1, self.adc1)
         adc_range = [ self.calc_adc(t) for t in ((self.min_temp, self.max_temp)) ]
         self.mcu_adc.setup_minmax(SAMPLE_TIME, SAMPLE_COUNT, minval=min(adc_range), maxval=max(adc_range), range_check_count=RANGE_CHECK_COUNT)
 

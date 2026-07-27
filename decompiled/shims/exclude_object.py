@@ -149,14 +149,12 @@ class ExcludeObject:
     
     def _move_from_excluded_region(self, newpos, speed):
         self.in_excluded_region = False
-        self.extruder_adj = self.max_position_excluded - self.last_position_excluded[3] - self.max_position_extruded - self.last_position_extruded[3]
+        self.extruder_adj = self.max_position_excluded - self.last_position_excluded[3] - (self.max_position_extruded - self.last_position_extruded[3])
         self._normal_move(newpos, speed)
 
     
     def _test_in_excluded_region(self):
-        if self.current_object in self.excluded_objects:
-            pass
-        return self.initial_extrusion_moves == 0
+        return self.current_object in self.excluded_objects and self.initial_extrusion_moves == 0
 
     
     def get_status(self, eventtime = None):
@@ -215,8 +213,9 @@ class ExcludeObject:
                 self._unexclude_object(name)
             else:
                 self.excluded_objects = []
-        elif name or name.upper() not in self.excluded_objects:
-            self._exclude_object(name.upper())
+        elif name:
+            if name.upper() not in self.excluded_objects:
+                self._exclude_object(name.upper())
         elif current:
             if not self.current_object:
                 gcmd.respond_error('There is no current object to cancel')
@@ -241,35 +240,18 @@ class ExcludeObject:
                 'name': name.upper() }
             obj.update(parameters)
             if center != None:
-                
                 try:
                     obj['center'] = json.loads('[%s]' % center)
-                except Exception:
-                    err = None
-                    
-                    try:
-                        logging.exception(err)
-                    finally:
-                        err = None
-                        del err
-                    err = None
-                    del err
-                    if polygon != None:
-                        
-                        try:
-                            obj['polygon'] = json.loads(polygon)
-                        except Exception:
-                            err = None
-                            
-                            try:
-                                logging.exception(err)
-                            finally:
-                                err = None
-                                del err
-                            err = None
-                            del err
-                            self._list_objects(gcmd)
-                            return None
+                except Exception as err:
+                    logging.exception(err)
+            if polygon != None:
+                try:
+                    obj['polygon'] = json.loads(polygon)
+                except Exception as err:
+                    logging.exception(err)
+            self._add_object_definition(obj)
+        else:
+            self._list_objects(gcmd)
 
 
 
