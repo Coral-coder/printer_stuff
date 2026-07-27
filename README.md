@@ -65,12 +65,38 @@ Upstream Klipper source was evaluated as a shortcut for the stock modules but re
 the printer runs an older fork (upstream `master` matched the original bytecode only
 ~50–66%), so the on-device decompilation is the more faithful basis.
 
-### Native artifacts (not decompilable)
+### Compiled binaries → source (`reconstructed/`)
 
-The Cython `.so`, the C helper, and the MCU `.bin` firmware are machine code and cannot
-be turned back into faithful source. Their type, size, exported symbols and embedded
-identifiers (which document the API surface — command names, class/method names) are
-catalogued in [`proprietary/NATIVE_ARTIFACTS.md`](proprietary/NATIVE_ARTIFACTS.md).
+The Cython `.so`, the C helper, and the MCU `.bin` firmware are ARM machine code. They
+were disassembled and **decompiled to C with Ghidra** (headless), giving genuine,
+functionally-faithful recovered source under `reconstructed/`:
+
+- [`reconstructed/chelper/`](reconstructed/chelper) — `c_helper.so` = open-source Klipper
+  `chelper` (symbol-mapped to its upstream GPL translation units) **+** Creality's
+  proprietary `serial_485`, recovered from the unstripped `serial_485_queue.o` and paired
+  with the shipped header.
+- [`reconstructed/so/`](reconstructed/so) — the 7 Cython `klippy/extras/*_wrapper.py`
+  modules (box / filament_rack / motor_control / serial_485 / prtouch v1-v3) plus the C++
+  `mymovie`, each decompiled to C. Faithful but C-API-level (see fidelity note).
+- [`reconstructed/fw/`](reconstructed/fw) — the GD32 Cortex-M firmware (Klipper MCU images
+  + the RT-Thread CFS app), decompiled to C, with vector-table analysis
+  (`tools/fw_analyze.py`).
+
+Symbol/identifier inventory: [`proprietary/NATIVE_ARTIFACTS.md`](proprietary/NATIVE_ARTIFACTS.md).
+
+**Fidelity ceiling (honest):** decompiling *stripped* machine code yields faithful but
+unlabeled C (`FUN_...` names, no types) — the Ghidra output is the ground truth of what
+each binary does, not clean maintainable source. Where the artifact was built from
+open-source origins (Klipper `chelper`, Klipper MCU firmware, RT-Thread), those upstream
+trees are identified so a byte-faithful rebuild is possible; the genuinely proprietary
+parts (Cython wrappers, `serial_485`) are recovered as decompiled C.
+
+### Reassembly
+
+`tools/rebuild.sh` + [`BUILD.md`](BUILD.md) rebuild every layer from the recovered source:
+Python → 3.9 `.pyc` (verified against originals), C → ARM `.so`/`.o`
+(`arm-linux-gnueabihf-gcc`), Cython `.py` → `.cpython-39.so`, and firmware from the
+identified source trees (`arm-none-eabi-gcc`).
 
 ## Method
 
