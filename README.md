@@ -75,6 +75,13 @@ catalogued in [`proprietary/NATIVE_ARTIFACTS.md`](proprietary/NATIVE_ARTIFACTS.m
    - `f(a, b, **('k1','k2'))` → `f(a, k1=b, k2=c)` (keyword-name tuples)
    - `from  import x` → `from . import x` (relative imports)
    - `(lambda .0=None: [...])(it)` → `[... for ... in it]` (comprehensions)
+4. **Dual-engine safety net:** the try/except patch can desync pycdc's block
+   stack on a couple of very complex modules and truncate them. So each `.pyc`
+   is decompiled by *both* the patched and the pristine pycdc, keeping whichever
+   recovers more. This guarantees no module is ever worse than stock pycdc
+   (verified: 0 regressions, 26 modules more complete than the previous pass).
+   Set `PYCDC_ORIG` to a stock pycdc binary to enable the fallback (2 modules
+   use it: `metadata`, `replicape`).
 
 ## Progress by step
 

@@ -14,10 +14,12 @@
 | `homing_heaters.pyc` | partial | 38 |
 | `input_shaper.pyc` | partial | 150 |
 | `load_ai.pyc` | partial | 553 |
+| `metadata.pyc` | partial | 1120 |
 | `ms3200x.pyc` | partial | 565 |
 | `neopixel.pyc` | partial | 67 |
 | `output_pin.pyc` | partial | 58 |
 | `probe.pyc` | partial | 272 |
+| `replicape.pyc` | partial | 292 |
 | `shaper_calibrate.pyc` | partial | 355 |
 | `tmc2130.pyc` | partial | 434 |
 | `auto_addr_wrapper.pyc` | partial | 179 |
@@ -29,9 +31,7 @@
 | `gcode_macro.pyc` | partial | 52 |
 | `gcode_move.pyc` | partial | 374 |
 | `heater_bed.pyc` | partial | 141 |
-| `metadata.pyc` | partial | 29 |
 | `prtouch.pyc` | partial | 246 |
-| `replicape.pyc` | partial | 132 |
 | `resonance_tester.pyc` | partial | 374 |
 | `skew_correction.pyc` | partial | 112 |
 | `tmc.pyc` | partial | 66 |

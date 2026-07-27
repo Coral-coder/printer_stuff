@@ -17,7 +17,8 @@ zrax/pycdc binary; see tools/pycdc-3.9-opcodes.patch).
 import ast, json, os, subprocess, sys, re
 
 ROOT = os.environ.get("REPO_ROOT", os.getcwd())
-PYCDC = os.environ.get("PYCDC", "pycdc")
+PYCDC = os.environ.get("PYCDC", "pycdc")            # patched pycdc (3.9 opcodes)
+PYCDC_ORIG = os.environ.get("PYCDC_ORIG", "")       # pristine pycdc, optional fallback
 PYCDAS = os.environ.get("PYCDAS", "pycdas")
 OUT = os.path.join(ROOT, "decompiled")
 
@@ -268,21 +269,19 @@ def main():
     report = []
     for pyc in pycs:
         rel = os.path.relpath(pyc, ROOT)
-        proc = subprocess.run([PYCDC, pyc], capture_output=True, text=True, timeout=120)
-        raw = proc.stdout
-        warn = proc.stderr.strip()
-        try:
-            repaired = fix_imports(fix_kwargs(fix_comprehensions(raw)))
-        except Exception as e:
-            repaired = raw
-            warn = (warn + f"\n[repair-exception] {e}").strip()
-        # validate
-        raw_ok = _parses(raw)
-        rep_ok = _parses(repaired)
-        final = repaired if rep_ok or not raw_ok else raw
-        # if repair broke a file that raw could parse, prefer raw
-        if raw_ok and not rep_ok:
-            final = raw
+        # The patched pycdc adds 3.9 try/except support but can desync the
+        # block stack on complex control flow and truncate a module. Run the
+        # pristine pycdc too and keep whichever recovers more, so no module
+        # ever regresses relative to stock pycdc.
+        cands = [_candidate(pyc, PYCDC)]
+        if PYCDC_ORIG and PYCDC_ORIG != PYCDC:
+            cands.append(_candidate(pyc, PYCDC_ORIG))
+        best = cands[0]
+        engine = "patched"
+        if len(cands) > 1 and _is_better(cands[1], cands[0]):
+            best, engine = cands[1], "orig"
+        raw, warn = best["raw"], best["warn"]
+        raw_ok, rep_ok, final = best["raw_ok"], best["rep_ok"], best["final"]
         out_rel = os.path.relpath(pyc, os.path.join(ROOT, "proprietary"))
         out_rel = out_rel[:-1]  # .pyc -> .py
         out_path = os.path.join(OUT, out_rel)
@@ -309,9 +308,10 @@ def main():
         report.append({
             "pyc": rel,
             "out": os.path.relpath(out_path, ROOT),
+            "engine": engine,
             "raw_parses": raw_ok,
             "repaired_parses": rep_ok,
-            "used_repaired": final is repaired,
+            "used_repaired": final != raw,
             "kw_tuples_remaining": final.count("**('") + final.count('**("'),
             "none_calls": none_calls,
             "unsupported": ("Unsupported" in warn) or ("unsupported" in warn),
@@ -360,6 +360,34 @@ def _write_status(report):
         lines.append(row(r))
     with open(os.path.join(OUT, "STATUS.md"), "w") as fh:
         fh.write("\n".join(lines) + "\n")
+
+def _content_lines(s):
+    return sum(1 for l in s.splitlines()
+               if l.strip() and not l.strip().startswith("#"))
+
+def _candidate(pyc, engine):
+    proc = subprocess.run([engine, pyc], capture_output=True, text=True, timeout=120)
+    raw, warn = proc.stdout, proc.stderr.strip()
+    try:
+        repaired = fix_imports(fix_kwargs(fix_comprehensions(raw)))
+    except Exception as e:
+        repaired = raw
+        warn = (warn + f"\n[repair-exception] {e}").strip()
+    raw_ok, rep_ok = _parses(raw), _parses(repaired)
+    final = repaired if (rep_ok or not raw_ok) else raw
+    if raw_ok and not rep_ok:
+        final = raw
+    return {"raw": raw, "warn": warn, "raw_ok": raw_ok, "rep_ok": rep_ok,
+            "final": final, "lines": _content_lines(final)}
+
+def _is_better(a, b):
+    """Is candidate a strictly better than b? Prefer more recovered content;
+    when within a small margin prefer the ast-valid one, else keep b."""
+    if abs(a["lines"] - b["lines"]) <= 3:
+        if a["rep_ok"] != b["rep_ok"]:
+            return a["rep_ok"]
+        return False
+    return a["lines"] > b["lines"]
 
 def _parses(s):
     try:

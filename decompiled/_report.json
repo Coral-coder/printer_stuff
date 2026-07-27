@@ -2,9 +2,10 @@
   {
     "pyc": "proprietary/shims/__init__.pyc",
     "out": "decompiled/shims/__init__.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -14,6 +15,7 @@
   {
     "pyc": "proprietary/shims/adc_scaled.pyc",
     "out": "decompiled/shims/adc_scaled.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -26,6 +28,7 @@
   {
     "pyc": "proprietary/shims/adc_temperature.pyc",
     "out": "decompiled/shims/adc_temperature.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -38,6 +41,7 @@
   {
     "pyc": "proprietary/shims/adxl345.pyc",
     "out": "decompiled/shims/adxl345.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -50,6 +54,7 @@
   {
     "pyc": "proprietary/shims/auto_addr.pyc",
     "out": "decompiled/shims/auto_addr.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -62,6 +67,7 @@
   {
     "pyc": "proprietary/shims/auto_addr_wrapper.pyc",
     "out": "decompiled/shims/auto_addr_wrapper.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -74,9 +80,10 @@
   {
     "pyc": "proprietary/shims/base_info.pyc",
     "out": "decompiled/shims/base_info.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -86,6 +93,7 @@
   {
     "pyc": "proprietary/shims/bed_mesh.pyc",
     "out": "decompiled/shims/bed_mesh.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -98,6 +106,7 @@
   {
     "pyc": "proprietary/shims/belt_mdl.pyc",
     "out": "decompiled/shims/belt_mdl.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -110,6 +119,7 @@
   {
     "pyc": "proprietary/shims/bl24c16f.pyc",
     "out": "decompiled/shims/bl24c16f.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -122,6 +132,7 @@
   {
     "pyc": "proprietary/shims/board_pins.pyc",
     "out": "decompiled/shims/board_pins.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -134,9 +145,10 @@
   {
     "pyc": "proprietary/shims/box.pyc",
     "out": "decompiled/shims/box.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -146,6 +158,7 @@
   {
     "pyc": "proprietary/shims/bus.pyc",
     "out": "decompiled/shims/bus.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -158,6 +171,7 @@
   {
     "pyc": "proprietary/shims/buttons.pyc",
     "out": "decompiled/shims/buttons.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -170,6 +184,7 @@
   {
     "pyc": "proprietary/shims/controller_fan.pyc",
     "out": "decompiled/shims/controller_fan.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -182,6 +197,7 @@
   {
     "pyc": "proprietary/shims/custom_macro.pyc",
     "out": "decompiled/shims/custom_macro.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -194,6 +210,7 @@
   {
     "pyc": "proprietary/shims/delayed_gcode.pyc",
     "out": "decompiled/shims/delayed_gcode.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -206,6 +223,7 @@
   {
     "pyc": "proprietary/shims/delta_calibrate.pyc",
     "out": "decompiled/shims/delta_calibrate.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -218,6 +236,7 @@
   {
     "pyc": "proprietary/shims/dirzctl.pyc",
     "out": "decompiled/shims/dirzctl.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -230,6 +249,7 @@
   {
     "pyc": "proprietary/shims/display_status.pyc",
     "out": "decompiled/shims/display_status.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -242,6 +262,7 @@
   {
     "pyc": "proprietary/shims/dotstar.pyc",
     "out": "decompiled/shims/dotstar.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -254,9 +275,10 @@
   {
     "pyc": "proprietary/shims/duplicate_pin_override.pyc",
     "out": "decompiled/shims/duplicate_pin_override.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -266,6 +288,7 @@
   {
     "pyc": "proprietary/shims/endstop_phase.pyc",
     "out": "decompiled/shims/endstop_phase.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -278,6 +301,7 @@
   {
     "pyc": "proprietary/shims/exclude_object.pyc",
     "out": "decompiled/shims/exclude_object.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -290,9 +314,10 @@
   {
     "pyc": "proprietary/shims/extruder_stepper.pyc",
     "out": "decompiled/shims/extruder_stepper.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -302,6 +327,7 @@
   {
     "pyc": "proprietary/shims/fan.pyc",
     "out": "decompiled/shims/fan.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -314,6 +340,7 @@
   {
     "pyc": "proprietary/shims/fan_feedback.pyc",
     "out": "decompiled/shims/fan_feedback.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -326,6 +353,7 @@
   {
     "pyc": "proprietary/shims/fan_generic.pyc",
     "out": "decompiled/shims/fan_generic.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -338,6 +366,7 @@
   {
     "pyc": "proprietary/shims/filament_motion_sensor.pyc",
     "out": "decompiled/shims/filament_motion_sensor.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -350,9 +379,10 @@
   {
     "pyc": "proprietary/shims/filament_rack.pyc",
     "out": "decompiled/shims/filament_rack.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -362,6 +392,7 @@
   {
     "pyc": "proprietary/shims/filament_switch_sensor.pyc",
     "out": "decompiled/shims/filament_switch_sensor.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -374,6 +405,7 @@
   {
     "pyc": "proprietary/shims/filter.pyc",
     "out": "decompiled/shims/filter.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -386,6 +418,7 @@
   {
     "pyc": "proprietary/shims/firmware_retraction.pyc",
     "out": "decompiled/shims/firmware_retraction.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -398,6 +431,7 @@
   {
     "pyc": "proprietary/shims/force_move.pyc",
     "out": "decompiled/shims/force_move.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -410,6 +444,7 @@
   {
     "pyc": "proprietary/shims/gcode_arcs.pyc",
     "out": "decompiled/shims/gcode_arcs.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -422,6 +457,7 @@
   {
     "pyc": "proprietary/shims/gcode_button.pyc",
     "out": "decompiled/shims/gcode_button.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -434,9 +470,10 @@
   {
     "pyc": "proprietary/shims/gcode_macro.pyc",
     "out": "decompiled/shims/gcode_macro.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -446,6 +483,7 @@
   {
     "pyc": "proprietary/shims/gcode_move.pyc",
     "out": "decompiled/shims/gcode_move.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -458,6 +496,7 @@
   {
     "pyc": "proprietary/shims/hall_filament_width_sensor.pyc",
     "out": "decompiled/shims/hall_filament_width_sensor.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -470,6 +509,7 @@
   {
     "pyc": "proprietary/shims/heater_bed.pyc",
     "out": "decompiled/shims/heater_bed.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -482,6 +522,7 @@
   {
     "pyc": "proprietary/shims/heater_fan.pyc",
     "out": "decompiled/shims/heater_fan.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -494,9 +535,10 @@
   {
     "pyc": "proprietary/shims/heater_generic.pyc",
     "out": "decompiled/shims/heater_generic.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -506,6 +548,7 @@
   {
     "pyc": "proprietary/shims/heaters.pyc",
     "out": "decompiled/shims/heaters.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -518,6 +561,7 @@
   {
     "pyc": "proprietary/shims/homing.pyc",
     "out": "decompiled/shims/homing.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -530,6 +574,7 @@
   {
     "pyc": "proprietary/shims/homing_heaters.pyc",
     "out": "decompiled/shims/homing_heaters.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -542,6 +587,7 @@
   {
     "pyc": "proprietary/shims/homing_override.pyc",
     "out": "decompiled/shims/homing_override.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -554,6 +600,7 @@
   {
     "pyc": "proprietary/shims/hx711s.pyc",
     "out": "decompiled/shims/hx711s.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -566,6 +613,7 @@
   {
     "pyc": "proprietary/shims/idle_timeout.pyc",
     "out": "decompiled/shims/idle_timeout.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -578,6 +626,7 @@
   {
     "pyc": "proprietary/shims/input_shaper.pyc",
     "out": "decompiled/shims/input_shaper.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -590,6 +639,7 @@
   {
     "pyc": "proprietary/shims/io_remap.pyc",
     "out": "decompiled/shims/io_remap.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -602,6 +652,7 @@
   {
     "pyc": "proprietary/shims/lis2dw.pyc",
     "out": "decompiled/shims/lis2dw.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -614,6 +665,7 @@
   {
     "pyc": "proprietary/shims/load_ai.pyc",
     "out": "decompiled/shims/load_ai.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -626,6 +678,7 @@
   {
     "pyc": "proprietary/shims/manual_probe.pyc",
     "out": "decompiled/shims/manual_probe.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -638,6 +691,7 @@
   {
     "pyc": "proprietary/shims/manual_stepper.pyc",
     "out": "decompiled/shims/manual_stepper.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -650,21 +704,23 @@
   {
     "pyc": "proprietary/shims/metadata.pyc",
     "out": "decompiled/shims/metadata.py",
+    "engine": "orig",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 0,
-    "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 29
+    "none_calls": 3,
+    "unsupported": true,
+    "warn": "Unsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nWarning: block stack is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH (210)\nUnsupported opcode: JUMP_IF_NOT_EXC_MATCH ",
+    "lines": 1120
   },
   {
     "pyc": "proprietary/shims/motion_report.pyc",
     "out": "decompiled/shims/motion_report.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -674,6 +730,7 @@
   {
     "pyc": "proprietary/shims/motor_control.pyc",
     "out": "decompiled/shims/motor_control.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -686,6 +743,7 @@
   {
     "pyc": "proprietary/shims/ms3200x.pyc",
     "out": "decompiled/shims/ms3200x.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -698,6 +756,7 @@
   {
     "pyc": "proprietary/shims/multi_pin.pyc",
     "out": "decompiled/shims/multi_pin.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -710,6 +769,7 @@
   {
     "pyc": "proprietary/shims/neopixel.pyc",
     "out": "decompiled/shims/neopixel.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -722,6 +782,7 @@
   {
     "pyc": "proprietary/shims/output_pin.pyc",
     "out": "decompiled/shims/output_pin.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -734,6 +795,7 @@
   {
     "pyc": "proprietary/shims/pause_resume.pyc",
     "out": "decompiled/shims/pause_resume.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -746,6 +808,7 @@
   {
     "pyc": "proprietary/shims/photograph.pyc",
     "out": "decompiled/shims/photograph.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -758,6 +821,7 @@
   {
     "pyc": "proprietary/shims/pid_calibrate.pyc",
     "out": "decompiled/shims/pid_calibrate.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -770,6 +834,7 @@
   {
     "pyc": "proprietary/shims/print_stats.pyc",
     "out": "decompiled/shims/print_stats.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -782,6 +847,7 @@
   {
     "pyc": "proprietary/shims/probe.pyc",
     "out": "decompiled/shims/probe.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -794,6 +860,7 @@
   {
     "pyc": "proprietary/shims/prtouch.pyc",
     "out": "decompiled/shims/prtouch.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -806,6 +873,7 @@
   {
     "pyc": "proprietary/shims/prtouch_v2.pyc",
     "out": "decompiled/shims/prtouch_v2.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -818,6 +886,7 @@
   {
     "pyc": "proprietary/shims/prtouch_v3.pyc",
     "out": "decompiled/shims/prtouch_v3.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -830,6 +899,7 @@
   {
     "pyc": "proprietary/shims/pulse_counter.pyc",
     "out": "decompiled/shims/pulse_counter.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -842,6 +912,7 @@
   {
     "pyc": "proprietary/shims/quad_gantry_level.pyc",
     "out": "decompiled/shims/quad_gantry_level.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -854,6 +925,7 @@
   {
     "pyc": "proprietary/shims/query_adc.pyc",
     "out": "decompiled/shims/query_adc.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -866,6 +938,7 @@
   {
     "pyc": "proprietary/shims/query_endstops.pyc",
     "out": "decompiled/shims/query_endstops.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -878,18 +951,20 @@
   {
     "pyc": "proprietary/shims/replicape.pyc",
     "out": "decompiled/shims/replicape.py",
+    "engine": "orig",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
     "kw_tuples_remaining": 0,
-    "none_calls": 0,
-    "unsupported": false,
-    "warn": "PycBuffer::getByte(): Unexpected end of stream",
-    "lines": 132
+    "none_calls": 1,
+    "unsupported": true,
+    "warn": "Warning: Stack history is not empty!\nWarning: block stack is not empty!\nUnsupported opcode: MAP_ADD (188)",
+    "lines": 292
   },
   {
     "pyc": "proprietary/shims/resonance_tester.pyc",
     "out": "decompiled/shims/resonance_tester.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -902,6 +977,7 @@
   {
     "pyc": "proprietary/shims/respond.pyc",
     "out": "decompiled/shims/respond.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -914,9 +990,10 @@
   {
     "pyc": "proprietary/shims/save_variables.pyc",
     "out": "decompiled/shims/save_variables.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -926,6 +1003,7 @@
   {
     "pyc": "proprietary/shims/sdcard_loop.pyc",
     "out": "decompiled/shims/sdcard_loop.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -938,9 +1016,10 @@
   {
     "pyc": "proprietary/shims/serial_485.pyc",
     "out": "decompiled/shims/serial_485.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -950,6 +1029,7 @@
   {
     "pyc": "proprietary/shims/shaper_calibrate.pyc",
     "out": "decompiled/shims/shaper_calibrate.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -962,6 +1042,7 @@
   {
     "pyc": "proprietary/shims/shaper_defs.pyc",
     "out": "decompiled/shims/shaper_defs.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -974,6 +1055,7 @@
   {
     "pyc": "proprietary/shims/skew_correction.pyc",
     "out": "decompiled/shims/skew_correction.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -986,6 +1068,7 @@
   {
     "pyc": "proprietary/shims/smart_effector.pyc",
     "out": "decompiled/shims/smart_effector.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -998,9 +1081,10 @@
   {
     "pyc": "proprietary/shims/static_digital_output.pyc",
     "out": "decompiled/shims/static_digital_output.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -1010,6 +1094,7 @@
   {
     "pyc": "proprietary/shims/statistics_ext.pyc",
     "out": "decompiled/shims/statistics_ext.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1022,6 +1107,7 @@
   {
     "pyc": "proprietary/shims/stepper_enable.pyc",
     "out": "decompiled/shims/stepper_enable.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1034,6 +1120,7 @@
   {
     "pyc": "proprietary/shims/temperature_fan.pyc",
     "out": "decompiled/shims/temperature_fan.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1046,6 +1133,7 @@
   {
     "pyc": "proprietary/shims/temperature_mcu.pyc",
     "out": "decompiled/shims/temperature_mcu.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1058,6 +1146,7 @@
   {
     "pyc": "proprietary/shims/temperature_sensor.pyc",
     "out": "decompiled/shims/temperature_sensor.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1070,6 +1159,7 @@
   {
     "pyc": "proprietary/shims/thermistor.pyc",
     "out": "decompiled/shims/thermistor.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1082,6 +1172,7 @@
   {
     "pyc": "proprietary/shims/tmc.pyc",
     "out": "decompiled/shims/tmc.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1094,6 +1185,7 @@
   {
     "pyc": "proprietary/shims/tmc2130.pyc",
     "out": "decompiled/shims/tmc2130.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1106,6 +1198,7 @@
   {
     "pyc": "proprietary/shims/tmc2208.pyc",
     "out": "decompiled/shims/tmc2208.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1118,6 +1211,7 @@
   {
     "pyc": "proprietary/shims/tmc2209.pyc",
     "out": "decompiled/shims/tmc2209.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1130,6 +1224,7 @@
   {
     "pyc": "proprietary/shims/tmc2262.pyc",
     "out": "decompiled/shims/tmc2262.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1142,6 +1237,7 @@
   {
     "pyc": "proprietary/shims/tmc_uart.pyc",
     "out": "decompiled/shims/tmc_uart.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1154,9 +1250,10 @@
   {
     "pyc": "proprietary/shims/tool.pyc",
     "out": "decompiled/shims/tool.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
-    "used_repaired": true,
+    "used_repaired": false,
     "kw_tuples_remaining": 0,
     "none_calls": 0,
     "unsupported": false,
@@ -1166,6 +1263,7 @@
   {
     "pyc": "proprietary/shims/tsl1401cl_filament_width_sensor.pyc",
     "out": "decompiled/shims/tsl1401cl_filament_width_sensor.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1178,6 +1276,7 @@
   {
     "pyc": "proprietary/shims/tuning_tower.pyc",
     "out": "decompiled/shims/tuning_tower.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1190,6 +1289,7 @@
   {
     "pyc": "proprietary/shims/verify_heater.pyc",
     "out": "decompiled/shims/verify_heater.py",
+    "engine": "patched",
     "raw_parses": true,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1202,6 +1302,7 @@
   {
     "pyc": "proprietary/shims/virtual_sdcard.pyc",
     "out": "decompiled/shims/virtual_sdcard.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1214,6 +1315,7 @@
   {
     "pyc": "proprietary/shims/z_align.pyc",
     "out": "decompiled/shims/z_align.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
@@ -1226,6 +1328,7 @@
   {
     "pyc": "proprietary/shims/z_thermal_adjust.pyc",
     "out": "decompiled/shims/z_thermal_adjust.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1238,6 +1341,7 @@
   {
     "pyc": "proprietary/shims/z_tilt.pyc",
     "out": "decompiled/shims/z_tilt.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": true,
     "used_repaired": true,
@@ -1250,6 +1354,7 @@
   {
     "pyc": "proprietary/so/auto_addr_wrapper.pyc",
     "out": "decompiled/so/auto_addr_wrapper.py",
+    "engine": "patched",
     "raw_parses": false,
     "repaired_parses": false,
     "used_repaired": true,
