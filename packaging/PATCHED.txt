@@ -1,0 +1,33 @@
+Bug-fixed host modules in this build (31):
+
+  adxl345
+  auto_addr_wrapper
+  bed_mesh
+  belt_mdl
+  bl24c16f
+  bus
+  custom_macro
+  dirzctl
+  fan_feedback
+  gcode_arcs
+  gcode_move
+  heater_bed
+  heater_fan
+  homing
+  hx711s
+  input_shaper
+  load_ai
+  metadata
+  ms3200x
+  pause_resume
+  probe
+  prtouch
+  prtouch_v2
+  replicape
+  shaper_calibrate
+  stepper_enable
+  temperature_mcu
+  tmc2262
+  virtual_sdcard
+  z_align
+  z_tilt

@@ -102,8 +102,9 @@ class PrinterStepperEnable:
 
     
     def motor_off(self):
-        vsd = self.printer.lookup_object('virtual_sdcard')
-        vsd.bed_mesh_calibate_state = False
+        vsd = self.printer.lookup_object('virtual_sdcard', None)
+        if vsd is not None:
+            vsd.bed_mesh_calibate_state = False
         if self.config.has_section('z_align'):
             z_align = self.printer.lookup_object('z_align')
             z_align.is_already_zodwn = False

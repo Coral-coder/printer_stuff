@@ -88,7 +88,7 @@ def get_print_file_metadata(file_path):
     count = 3000
     
     try:
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', errors='replace') as f:
             while count:
                 count -= 1
                 line = f.readline()
@@ -414,10 +414,16 @@ class PrusaSlicer(BaseSlicer):
         flush_volumes_matrix = None
         flush_multiplier_match = re.search('; flush_multiplier\\s*=\\s*([\\d.]+)', self.footer_data)
         if flush_multiplier_match:
-            flush_multiplier = float(flush_multiplier_match.group(1))
+            try:
+                flush_multiplier = float(flush_multiplier_match.group(1))
+            except Exception:
+                return None
         flush_volumes_matrix_match = re.search('; flush_volumes_matrix\\s*=\\s*([^;]+)', self.footer_data)
         if flush_volumes_matrix_match:
-            flush_volumes_matrix = [ int(x) for x in (flush_volumes_matrix_match.group(1).strip().split(',')) ]
+            try:
+                flush_volumes_matrix = [ int(float(x)) for x in (flush_volumes_matrix_match.group(1).strip().split(',')) ]
+            except Exception:
+                return None
         if flush_multiplier is not None or flush_volumes_matrix is not None:
             return {
                 'flush_multiplier': flush_multiplier,
@@ -1207,6 +1213,7 @@ def extract_metadata(file_path: str, check_objects: bool) -> Dict[str, Any]:
             result = func()
             if result is not None:
                 metadata[key] = result
+    metadata.setdefault('model_info', {})
     if metadata.get('filament_type'):
         metadata['model_info']['MaterialType'] = metadata.get('filament_type')
     if metadata.get('filament_name'):

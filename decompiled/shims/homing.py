@@ -54,7 +54,8 @@ class HomingMove:
         if toolhead is None:
             toolhead = printer.lookup_object('toolhead')
         self.prtouch_v3 = self.printer.lookup_object('prtouch_v3') if self.printer.objects.get('prtouch_v3') else None
-        self.prtouch_v3.z_full_movement_flag = False
+        if self.prtouch_v3 is not None:
+            self.prtouch_v3.z_full_movement_flag = False
         self.toolhead = toolhead
         self.stepper_positions = []
 
@@ -113,7 +114,7 @@ class HomingMove:
         try:
             self.toolhead.drip_move(movepos, speed, all_endstop_trigger)
         except self.printer.command_error as e:
-            error = '{"code":"key20", "msg":"Error during homing move: %s", "values": [%s]}' % (str(e), str(e))
+            error = json.dumps({'code': 'key20', 'msg': 'Error during homing move: %s' % str(e), 'values': [str(e)]})
             logging.info('No trigger on %s after full movement, set MOTOR_STALL_MODE DATA=2' % name)
             self.handle_force_stop()
         trigger_times = { }
@@ -133,7 +134,8 @@ class HomingMove:
                 error = '{"code":"key22", "msg":"No trigger on %s after full movement", "values": ["%s"]}' % (name, name)
                 if name == 'z':
                     error = None
-                    self.prtouch_v3.z_full_movement_flag = True
+                    if self.prtouch_v3 is not None:
+                        self.prtouch_v3.z_full_movement_flag = True
                     logging.info('No trigger on z after full movement, set MOTOR_STALL_MODE DATA=2')
                     gcode = self.printer.lookup_object('gcode')
                     gcode.run_script_from_command('MOTOR_STALL_MODE DATA=2')
@@ -164,7 +166,10 @@ class HomingMove:
             if error is None:
                 error = str(e)
         if error is not None:
-            error_data = json.loads(error.replace("'", '"'))
+            try:
+                error_data = json.loads(error.replace("'", '"'))
+            except ValueError:
+                raise self.printer.command_error(error)
             if error_data.get('values') == 'probe':
                 gcode = self.printer.lookup_object('gcode')
                 gcode.run_script_from_command('Z_FAIL_PROTECT_HOTBED')
@@ -268,7 +273,8 @@ class Homing:
             hmove = HomingMove(self.printer, endstops)
             hmove.homing_move(homepos, hi.second_homing_speed)
             if hmove.check_no_movement() is not None and rails[0].get_name() == 'stepper_z':
-                hmove.prtouch_v3.z_full_movement_flag = True
+                if hmove.prtouch_v3 is not None:
+                    hmove.prtouch_v3.z_full_movement_flag = True
                 self.printer.send_event('homing:homing_move_end', hmove)
             _homez_info = self.get_step(endstops)
             if _homez_info is not None:

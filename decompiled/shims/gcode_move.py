@@ -299,10 +299,10 @@ class GCodeMove:
                 elif part[0] == 'F' or part[0] == 'f':
                     gcode_speed = float(part[1:])
                     if gcode_speed <= 0.0:
-                        raise Exception('{"code":"key272": "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (line, line))
+                        raise Exception('{"code":"key272", "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (line, line))
                     self.speed = gcode_speed * self.speed_factor
         except ValueError as e:
-            raise Exception('{"code":"key273": "msg":"Unable to parse move \'%s\'", "values":["%s"]}' % (line, line))
+            raise Exception('{"code":"key273", "msg":"Unable to parse move \'%s\'", "values":["%s"]}' % (line, line))
         self.move_with_transform(self.last_position, self.speed)
 
 
@@ -336,10 +336,10 @@ class GCodeMove:
             if 'F' in params:
                 gcode_speed = float(params['F'])
                 if gcode_speed <= 0.0:
-                    raise gcmd.error('{"code":"key272": "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
+                    raise gcmd.error('{"code":"key272", "msg":"Invalid speed in \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
                 self.speed = gcode_speed * self.speed_factor
         except ValueError as e:
-            raise gcmd.error('{"code":"key273": "msg":"Unable to parse move \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
+            raise gcmd.error('{"code":"key273", "msg":"Unable to parse move \'%s\'", "values":["%s"]}' % (gcmd.get_commandline(), gcmd.get_commandline()))
         self.move_with_transform(self.last_position, self.speed)
 
 
@@ -794,7 +794,7 @@ class GCodeMove:
     def cmd_GET_POSITION(self, gcmd):
         toolhead = self.printer.lookup_object('toolhead', None)
         if toolhead is None:
-            raise gcmd.error('{"code": "key283", "msg": ""Printer not ready"}')
+            raise gcmd.error('{"code": "key283", "msg": "Printer not ready"}')
         kin = toolhead.get_kinematics()
         steppers = kin.get_steppers()
         mcu_pos = ' '.join([ '%s:%d' % (s.get_name(), s.get_mcu_position()) for s in steppers ])
@@ -813,7 +813,7 @@ class GCodeMove:
     def cmd_SET_POSITION(self, gcmd):
         toolhead = self.printer.lookup_object('toolhead', None)
         if toolhead is None:
-            raise gcmd.error('{"code": "key283", "msg": ""Printer not ready"}')
+            raise gcmd.error('{"code": "key283", "msg": "Printer not ready"}')
         position = toolhead.get_position()
         x = position[0]
         y = position[1]

@@ -69,8 +69,8 @@ class FanFeedback:
             eventtime = reactor.pause(eventtime + delay_s)
 
     
-    def _get_cx_fan_status(self):
-        return self.cx_fan_status
+    def _get_cx_fan_status(self, web_request):
+        web_request.send(self.cx_fan_status)
 
     
     def cx_fan_status_update_event(self, eventtime):

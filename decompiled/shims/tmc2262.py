@@ -439,7 +439,7 @@ Fields['COOLCONF'] = {
     'semin': 15,
     'seup': 96,
     'semax': 3840,
-    'sedn': 57344,
+    'sedn': 24576,
     'seimin': 32768,
     'sgt': 8323072,
     'thigh_sg_off': 8388608,

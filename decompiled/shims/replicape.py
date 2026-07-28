@@ -18,7 +18,7 @@ class pca9685_pwm:
         self._replicape = replicape
         self._channel = channel
         if pin_type not in ('digital_out', 'pwm'):
-            raise pins.error('{"code":"key276": "msg":"Pin type not supported on replicape", "values":[]}')
+            raise pins.error('{"code":"key276", "msg":"Pin type not supported on replicape", "values":[]}')
         self._mcu = replicape.host_mcu
         self._mcu.register_config_callback(self._build_config)
         self._bus = REPLICAPE_PCA9685_BUS
@@ -44,14 +44,14 @@ class pca9685_pwm:
     
     def setup_cycle_time(self, cycle_time, hardware_pwm = False):
         if hardware_pwm:
-            raise pins.error('{"code":"key216", "msg": "pca9685 does not support hardware_pwm parameter" "values": []}')
+            raise pins.error('{"code":"key216", "msg": "pca9685 does not support hardware_pwm parameter", "values": []}')
         if cycle_time != self._cycle_time:
             logging.info('Ignoring pca9685 cycle time of %.6f (using %.6f)', cycle_time, self._cycle_time)
 
     
     def setup_start_value(self, start_value, shutdown_value, is_static = False):
         if is_static and start_value != shutdown_value:
-            raise pins.error('{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}')
+            raise pins.error('{"code":"key277", "msg":"Static pin can not have shutdown value", "values":[]}')
         if self._invert:
             start_value = 1.0 - start_value
             shutdown_value = 1.0 - shutdown_value
@@ -99,9 +99,9 @@ class ReplicapeDACEnable:
     
     def __init__(self, replicape, channel, pin_type, pin_params):
         if pin_type != 'digital_out':
-            raise pins.error('{"code":"key277": "msg":"Static pin can not have shutdown value", "values":[]}')
+            raise pins.error('{"code":"key277", "msg":"Static pin can not have shutdown value", "values":[]}')
         if pin_params['invert']:
-            raise pins.error('{"code":"key278": "msg":"Replicape virtual enable pin can not be invertede", "values":[]}')
+            raise pins.error('{"code":"key278", "msg":"Replicape virtual enable pin can not be invertede", "values":[]}')
         self.mcu = replicape.host_mcu
         self.value = replicape.stepper_dacs[channel]
         self.pwm = pca9685_pwm(replicape, channel, pin_type, pin_params)
@@ -137,7 +137,7 @@ class servo_pwm:
                 pwmdev = os.listdir('/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/')
                 pwmchip = [ pc for pc in (pwmdev) if pc.startswith('pwmchip') ][0]
             except:
-                raise pins.error('{"code":"key279": "msg":"Replicape unable to determine pwmchip", "values":[]}')
+                raise pins.error('{"code":"key279", "msg":"Replicape unable to determine pwmchip", "values":[]}')
 
         (pwm_pin, resv1, resv2) = SERVO_PINS[config_name]
         pin_params = dict(pin_params)

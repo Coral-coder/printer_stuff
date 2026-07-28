@@ -504,7 +504,7 @@ class BELT_MDL:
             if self.name == 'mdly':
                 raise self.printer.command_error('{"code":"key713", "msg":"Communication abnormality of belt automatic tensioning module 485: \'%s\'", "values": []}' % self.name)
             return (0, -1, 0)
-        if len(rec_data) < 3:
+        if len(rec_data) < 5:
             self.gcode.respond_info('reset: <3')
             return (0, -2, 0)
         if rec_data[0] != self.com.head:

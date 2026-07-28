@@ -103,7 +103,7 @@ class ArcSupport:
             mm_of_travel = math.hypot(flat_mm, linear_travel)
         else:
             mm_of_travel = math.fabs(flat_mm)
-        real_segments = max(math.floor(mm_of_travel / self.mm_per_arc_segment), min_segments)
+        real_segments = max(1, math.floor(mm_of_travel / self.mm_per_arc_segment), min_segments)
         real_segments_mm = mm_of_travel / real_segments
         segments = 0
         if real_segments_mm > self.mm_per_arc_segment:

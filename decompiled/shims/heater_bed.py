@@ -66,7 +66,7 @@ class PrinterHeaterBed:
 
     
     def cmd_BED_HEADER_SET_HEARER_POWER_MAX(self, gcmd):
-        max_power = gcmd.get_float('S', 1)
+        max_power = gcmd.get_float('S', 1., above=0., maxval=1.)
         self.heater.max_power = max_power
         self.heater.control.heater_max_power = max_power
 
@@ -107,6 +107,8 @@ class PrinterHeaterBed:
             set_temperature(0, 1, False)
             sample_temps = sample_temps[1:]
             sample_times = sample_times[1:]
+            if len(sample_temps) < 2:
+                return 0.0
             import numpy as np
             x = np.array(sample_times)
             y = np.array(sample_temps)

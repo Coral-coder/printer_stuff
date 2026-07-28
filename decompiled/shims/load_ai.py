@@ -123,10 +123,9 @@ class LoadAI:
 
     
     def remove_files(self, file_path):
-        command = 'rm -rf ' + file_path
-        
+
         try:
-            subprocess.run(command, shell=True, check=True)
+            subprocess.run(['rm', '-rf', file_path], check=True)
             print('Files removed successfully.')
         except subprocess.CalledProcessError as e:
             print(f'''Error occurred: {e}''')
@@ -359,6 +358,8 @@ class LoadAI:
             logging.error(f'''Error output: {e.stderr.strip() if e.stderr else 'No error output captured.'}''')
         except Exception as e:
             logging.error(f'''An unexpected error occurred: {str(e)}''')
+        finally:
+            self.ai_done = True
 
 
 
@@ -382,10 +383,11 @@ class LoadAI:
         try:
             self.result = { }
             self.stderr = ''
+            self.ai_done = False
             background_thread = threading.Thread(target=self.ai_engine_capture, args=(cmd,))
             background_thread.start()
             for _ in range(100):
-                if self.result:
+                if self.ai_done:
                     break
                 self.reactor.pause(self.reactor.monotonic() + 0.1)
             else:
@@ -452,13 +454,15 @@ class LoadAI:
         headers = {
             'Content-Type': f'''multipart/form-data; boundary={boundary}''',
             'Content-Length': str(len(body)) }
-        conn.request('POST', path, body, headers)
-        response = conn.getresponse()
-        print(f'''Status: {response.status}, Reason: {response.reason}''')
-        resp_text = response.read().decode('utf-8')
-        print(resp_text)
-        conn.close()
-        return resp_text
+        try:
+            conn.request('POST', path, body, headers)
+            response = conn.getresponse()
+            print(f'''Status: {response.status}, Reason: {response.reason}''')
+            resp_text = response.read().decode('utf-8')
+            print(resp_text)
+            return resp_text
+        finally:
+            conn.close()
 
     
     def find_latest_photo(self):

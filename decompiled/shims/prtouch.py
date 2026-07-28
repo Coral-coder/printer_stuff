@@ -429,6 +429,8 @@ class PRTouchEndstopWrapper:
 
             max_val = max(p0_vals)
             min_val = min(p0_vals)
+            if max_val == min_val:
+                max_val += 1
             for i in range(len(p0_vals)):
                 p0_vals[i] = (p0_vals[i] - min_val) / (max_val - min_val)
             angle = math.atan((p0_vals[-1] - p0_vals[0]) / len(p0_vals))
@@ -443,6 +445,8 @@ class PRTouchEndstopWrapper:
             p1_vals = p1_vals[::-1]
             max_val = max(p1_vals)
             min_val = min(p1_vals)
+            if max_val == min_val:
+                max_val += 1
             for i in range(len(p1_vals)):
                 p1_vals[i] = (p1_vals[i] - min_val) / (max_val - min_val)
             angle = math.atan((p1_vals[-1] - p1_vals[0]) / len(p1_vals))
@@ -593,6 +597,8 @@ class PRTouchEndstopWrapper:
         vals_p = [x for x in hx711_vals]
         max_val = max(vals_p)
         min_val = min(vals_p)
+        if max_val == min_val:
+            max_val += 1
         for i in range(len(vals_p)):
             vals_p[i] = (vals_p[i] - min_val) / (max_val - min_val)
         angle = math.atan((vals_p[-1] - vals_p[0]) / len(vals_p))

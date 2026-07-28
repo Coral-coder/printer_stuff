@@ -91,6 +91,7 @@ def capture(end_print = False, frame = 15):
             python_path,
             cmd_path])
     elif system_info_instance._h264_encoder_flag == 'H264_ENCODER' and end_print == True:
+        frame = max(1, frame)
         interval_time = 1.0 / frame
         start_time = 1
         while start_time > 0:
@@ -1048,10 +1049,10 @@ class VirtualSD:
             filepath = os.path.join(base_dir, 'printer_data/gcodes')
         result = { }
         python_env = '/usr/share/klippy-env/bin/python3'
-        cmd = "%s /usr/share/klipper/klippy/extras/metadata.py -f '%s' -p %s" % (python_env, filename, filepath)
-        
+        cmd = [python_env, '/usr/share/klipper/klippy/extras/metadata.py', '-f', filename, '-p', filepath]
+
         try:
-            result = json.loads(check_output(cmd, shell=True).decode('utf-8'))
+            result = json.loads(check_output(cmd).decode('utf-8'))
         except Exception as err:
             logging.error(err)
         return result
@@ -1066,7 +1067,7 @@ class VirtualSD:
         if metadata_info:
             result = metadata_info
         else:
-            result = self.get_print_file_metadata(filename, get_layer_count=True)
+            result = self.get_print_file_metadata(filename)
         if not result:
             return layer_count
         

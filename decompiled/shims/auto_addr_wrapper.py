@@ -274,11 +274,18 @@ class AutoAddrWrapper:
         size = 0
         ack_data = None
         if function_code == CMD_SET_SLAVE_ADDR or function_code == CMD_GET_SLAVE_INFO or function_code == CMD_ONLINE_CHECK or function_code == CMD_GET_ADDR_TABLE:
+            if len(package.data) < 2:
+                self.dprintf('Error: short data, len: %d' % len(package.data))
+                return
             ack_data = FcAckData(package.data[0], package.data[1], package.data[2:])
         if ack_data is not None:
-            addr_manager_table = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].addr_manager_table
+            dev_index = ack_data.dev_type - DEV_TYPE_INDEX_OFFSET
+            if not self.is_dev_type_valid(ack_data.dev_type) or dev_index < 0 or dev_index >= len(dev_table_map_table):
+                self.dprintf('Error: invalid dev_type: %d' % ack_data.dev_type)
+                return
+            addr_manager_table = dev_table_map_table[dev_index].addr_manager_table
             uniid = ack_data.uniid
-            size = dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET].size
+            size = dev_table_map_table[dev_index].size
             for i in range(size):
                 if addr_manager_table[i].uniid == uniid:
                     addr_manager_table[i].mode = ack_data.mode
@@ -347,7 +354,10 @@ class AutoAddrWrapper:
             self.dprintf('unknown function code: %d' % function_code)
         if self.uniid_changed:
             self.uniid_changed = False
-            self.save_addr_table_uniids(dev_table_map_table[ack_data.dev_type - DEV_TYPE_INDEX_OFFSET])
+            if ack_data is not None:
+                dev_index = ack_data.dev_type - DEV_TYPE_INDEX_OFFSET
+                if self.is_dev_type_valid(ack_data.dev_type) and 0 <= dev_index < len(dev_table_map_table):
+                    self.save_addr_table_uniids(dev_table_map_table[dev_index])
 
     
     def dprintf(self, msg):
@@ -356,6 +366,9 @@ class AutoAddrWrapper:
 
     
     def data_handler(self, ret):
+        if ret is None or len(ret) < 6:
+            self.dprintf('Error: short frame, len: %s' % (len(ret) if ret is not None else 'None'))
+            return
         package = DataPackage(ret[0], ret[1], ret[2], ret[3], ret[4], [ b for b in (ret[5:-1]) ], ret[-1])
         if package.status == STATUS_OK:
             self.function_code_cb(package)
